@@ -10,3 +10,6 @@
 [submodule "projects/HOL4"]
 	path = projects/HOL4
 	url = https://github.com/seL4/HOL.git
+[submodule "nixpkgs"]
+	path = nixpkgs
+	url = https://github.com/NixOS/nixpkgs.git
