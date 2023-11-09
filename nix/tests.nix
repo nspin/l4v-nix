@@ -31,7 +31,7 @@ let
 
 in
 stdenv.mkDerivation {
-  name = "sel4-tests";
+  name = "tests";
 
   inherit src;
 
