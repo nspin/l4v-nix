@@ -66,9 +66,13 @@ stdenv.mkDerivation {
   '';
 
   buildPhase = ''
-    ./run_tests -j 1 --no-timeouts ${lib.optionalString verbose "-v"} ${lib.concatStringsSep " " testTargets}
+    ./run_tests \
+      -j $NIX_BUILD_CORES \
+      ${lib.optionalString verbose "-v"} \
+      ${lib.concatStringsSep " " testTargets}
   '';
-    # -j $NIX_BUILD_CORES
+    # --no-timeouts \
+    # -j 1 
 
   installPhase = ''
     echo SUCCESS
