@@ -5,7 +5,7 @@ let
   pythonOverrides = callPackage ./python-overrides.nix {};
 
 in {
-  this = lib.makeScope newScope (callPackage ./scope.nix {});
+  this = lib.makeScope newScope (callPackage ../scope {});
 
   python2 = super.python2.override {
     packageOverrides = pythonOverrides;

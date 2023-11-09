@@ -4,18 +4,30 @@
 , haskell, haskellPackages
 , rsync, git, perl, hostname, which, cmake, ninja, dtc, libxml2
 , isabelle, mlton
+, keepBuildTree
 
 , sources
 , initial-heaps
 , texlive-env
 , armv7Pkgs
-
-, verbose ? false
-, testTargets ? []
 }:
 
-let
+{ buildStandaloneCParser ? false
+, export ? false
 
+, testTargets ? null
+, verbose ? false
+, numJobs ? 1 # "$NIX_BUILD_CORES"
+, timeouts ? false
+, timeoutScale ? null
+}:
+
+# HACK
+assert timeoutScale == null;
+
+# TODO
+
+let
   src = runCommand "src" {} ''
     mkdir $out
     cp -r ${sources.l4v} $out/l4v
@@ -31,7 +43,7 @@ let
 
 in
 stdenv.mkDerivation {
-  name = "sel4-tests";
+  name = "tests";
 
   inherit src;
 
@@ -45,20 +57,29 @@ stdenv.mkDerivation {
     ghcWithPackages
     haskellPackages.cabal-install
 
+    # TODO remove
     # python2Packages.sel4-deps
+
     python3Packages.sel4-deps
 
     texlive-env
+
+    # TODO remove
+    keepBuildTree # HACK
   ];
 
   configurePhase = ''
-    export L4V_ARCH=ARM
+    export HOME=$(mktemp -d --suffix=-home)
+
+    export ISABELLE_HOME=$(./isabelle/bin/isabelle env sh -c 'echo $ISABELLE_HOME')
+
     export TOOLPREFIX=${armv7Pkgs.stdenv.cc.targetPrefix}
     export CROSS_COMPILER_PREFIX=${armv7Pkgs.stdenv.cc.targetPrefix}
-    export HOME=$NIX_BUILD_TOP/home
+    export L4V_ARCH=ARM
 
-    cp -r ${initial-heaps} $HOME
-    chmod -R +w $HOME
+    cp -r ${initial-heaps}/* $HOME/.isabelle --no-preserve=ownership,mode
+
+    # TODO remove
     mkdir -p $HOME/.cabal
     touch $HOME/.cabal/config
 
@@ -66,19 +87,27 @@ stdenv.mkDerivation {
   '';
 
   buildPhase = ''
-    ./run_tests -j 1 --no-timeouts ${lib.optionalString verbose "-v"} ${lib.concatStringsSep " " testTargets}
-  '';
-    # -j $NIX_BUILD_CORES
+    ${lib.optionalString (testTargets != null) ''
+      ./run_tests \
+        ${lib.optionalString verbose "-v"} \
+        ${lib.optionalString (!timeouts) "--no-timeouts"} \
+        ${lib.optionalString (timeoutScale != null) "--scale-timeouts ${toString timeoutScale}"} \
+        -j ${toString numJobs} \
+        ${lib.concatStringsSep " " testTargets}
+    ''}
 
-  installPhase = ''
-    echo SUCCESS
-    touch $out
-    false
+    ${lib.optionalString buildStandaloneCParser ''
+      make -C tools/c-parser/standalone-parser standalone-cparser
+    ''}
+
+    ${lib.optionalString export ''
+      make -C proof/ SimplExport
+    ''}
   '';
+
+  dontInstall = true;
+  dontFixup = true;
 }
 
 # NOTE:
 # RefineOrphanage depends on ./make_spec.sh having run
-
-# NIX_CFLAGS_COMPILE = [ "-Wno-unused-command-line-argument" ];
-# NIX_CFLAGS_LINK = [ "-Wno-unused-command-line-argument" "-lm" "-lffi" ];

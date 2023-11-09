@@ -10,6 +10,8 @@
 , texlive-env
 }:
 
+# TODO merge with tests.nix
+
 let
   versionFile = builtins.toFile "VERSION" "unknown";
 
@@ -38,10 +40,9 @@ stdenv.mkDerivation {
   '';
 
   configurePhase = ''
-    export HOME=$NIX_BUILD_TOP/home
+    export HOME=$(mktemp -d --suffix=-home)
 
-    cp -r ${initial-heaps} $HOME
-    chmod -R +w $HOME
+    cp -r ${initial-heaps}/* $HOME/.isabelle --no-preserve=ownership,mode
 
     ln -sf ${isabelle} isabelle
   '';
