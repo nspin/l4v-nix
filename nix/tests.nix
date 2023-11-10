@@ -16,6 +16,12 @@
 
 let
 
+  scaleTimeouts = "4";
+
+  j = "1";
+
+  # j = "$NIX_BUILD_CORES";
+
   src = runCommand "src" {} ''
     mkdir $out
     cp -r ${sources.l4v} $out/l4v
@@ -67,14 +73,12 @@ stdenv.mkDerivation {
 
   buildPhase = ''
     ./run_tests \
-      --scale-timeouts 4 \
-      -j 1 \
+      --scale-timeouts ${scaleTimeouts} \
+      -j ${j} \
       ${lib.optionalString verbose "-v"} \
       ${lib.concatStringsSep " " testTargets}
   '';
     # --no-timeouts \
-    # -j 1 
-    # -j $NIX_BUILD_CORES \
 
   installPhase = ''
     echo SUCCESS
