@@ -18,7 +18,8 @@ let
 
   scaleTimeouts = "4";
 
-  j = "1";
+  # j = "1";
+  j = "2";
 
   # j = "$NIX_BUILD_CORES";
 
