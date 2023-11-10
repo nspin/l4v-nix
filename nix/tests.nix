@@ -84,8 +84,7 @@ stdenv.mkDerivation {
 
   installPhase = ''
     echo SUCCESS
-    touch $out
-    false
+    cp -r $NIX_BUILD_TOP $out
   '';
 }
 
