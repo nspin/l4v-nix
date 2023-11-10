@@ -16,7 +16,8 @@
 
 let
 
-  scaleTimeouts = "4";
+  # scaleTimeouts = "4";
+  scaleTimeouts = "1.5";
 
   # j = "1";
   j = "2";
