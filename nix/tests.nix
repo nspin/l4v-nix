@@ -82,7 +82,6 @@ stdenv.mkDerivation {
       ${lib.optionalString verbose "-v"} \
       ${lib.concatStringsSep " " testTargets}
   '';
-    #  \
 
   installPhase = ''
     echo SUCCESS
