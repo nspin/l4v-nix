@@ -17,12 +17,14 @@
 let
 
   # scaleTimeouts = "4";
-  scaleTimeouts = "1.5";
+  # scaleTimeouts = "1.5";
+  # timeouts = "--scale-timeouts ${scaleTimeouts}";
 
-  # j = "1";
-  j = "2";
+  timeouts = "--no-timeouts";
 
-  # j = "$NIX_BUILD_CORES";
+  parallelism = "-j 1";
+  # parallelism = "-j 2";
+  # parallelism = "-j $NIX_BUILD_CORES";
 
   src = runCommand "src" {} ''
     mkdir $out
@@ -75,12 +77,12 @@ stdenv.mkDerivation {
 
   buildPhase = ''
     ./run_tests \
-      --scale-timeouts ${scaleTimeouts} \
-      -j ${j} \
+      ${timeouts} \
+      ${parallelism} \
       ${lib.optionalString verbose "-v"} \
       ${lib.concatStringsSep " " testTargets}
   '';
-    # --no-timeouts \
+    #  \
 
   installPhase = ''
     echo SUCCESS
