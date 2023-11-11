@@ -4,13 +4,11 @@ set -eu
 
 env=$(nix-build -A env)
 
-dockerfile=$(
-	printf \
-		"%s\n%s\n%s\n" \
-		"FROM scratch" \
-		"WORKDIR /tmp" \
-		"WORKDIR /x" \
-)
+dockerfile="
+	FROM scratch
+	WORKDIR /tmp
+	WORKDIR /x
+"
 
 image=$(echo -n "$dockerfile" | docker build -q -)
 
