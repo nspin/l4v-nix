@@ -17,7 +17,7 @@ run: build
 		$(call bind_mount_ro,/nix/var/nix/daemon-socket) \
 		-e NIX_REMOTE=daemon \
 		-e NIX_BUILD_SHELL=bash \
-		-e PATH=$(env)/bin \
 		-e NIX_SSL_CERT_FILE=$(env)/etc/ssl/certs/ca-bundle.crt \
+		-e PATH=$(env)/bin \
 		-it minimal \
 		$(env)/bin/bash
