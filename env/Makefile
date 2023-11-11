@@ -15,9 +15,9 @@ run: build
 		--mount type=bind,readonly,src=/nix/store,dst=/nix/store \
 		--mount type=bind,readonly,src=/nix/var/nix/db,dst=/nix/var/nix/db \
 		--mount type=bind,readonly,src=/nix/var/nix/daemon-socket,dst=/nix/var/nix/daemon-socket \
-		-e PATH=$(env)/bin \
 		-e NIX_REMOTE=daemon \
-		-e NIX_SSL_CERT_FILE=$(env)/etc/ssl/certs/ca-bundle.crt \
 		-e NIX_BUILD_SHELL=bash \
+		-e PATH=$(env)/bin \
+		-e NIX_SSL_CERT_FILE=$(env)/etc/ssl/certs/ca-bundle.crt \
 		-it minimal \
 		$(env)/bin/bash
