@@ -2,7 +2,9 @@
 
 set -eu -o pipefail
 
-env=$(nix-build -A env)
+here=$(dirname $0)
+
+env=$(nix-build $here -A env)
 
 image=$(
 	docker build -q - << EOF
@@ -23,6 +25,7 @@ docker run --rm -it \
 	-e NIX_REMOTE=daemon \
 	-e NIX_BUILD_SHELL=bash \
 	-e NIX_SSL_CERT_FILE=$env/etc/ssl/certs/ca-bundle.crt \
+	-e HOME=/x \
 	-e PATH=$env/bin \
 	$image \
 	"$@"

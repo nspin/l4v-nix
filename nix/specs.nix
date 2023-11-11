@@ -38,7 +38,7 @@ stdenv.mkDerivation {
   '';
 
   configurePhase = ''
-    export HOME=$NIX_BUILD_TOP/home
+    export HOME=$(tempdir -d --suffix=-home)
 
     cp -r ${initial-heaps} $HOME
     chmod -R +w $HOME

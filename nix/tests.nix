@@ -4,6 +4,7 @@
 , haskell, haskellPackages
 , rsync, git, perl, hostname, which, cmake, ninja, dtc, libxml2
 , isabelle, mlton
+, keepBuildTree
 
 , sources
 , initial-heaps
@@ -59,13 +60,16 @@ stdenv.mkDerivation {
     python3Packages.sel4-deps
 
     texlive-env
+
+    keepBuildTree # HACK
   ];
 
   configurePhase = ''
-    export L4V_ARCH=ARM
+    export HOME=$(tempdir -d --suffix=-home)
+
     export TOOLPREFIX=${armv7Pkgs.stdenv.cc.targetPrefix}
     export CROSS_COMPILER_PREFIX=${armv7Pkgs.stdenv.cc.targetPrefix}
-    export HOME=$NIX_BUILD_TOP/home
+    export L4V_ARCH=ARM
 
     cp -r ${initial-heaps} $HOME
     chmod -R +w $HOME
@@ -85,8 +89,9 @@ stdenv.mkDerivation {
 
   installPhase = ''
     echo SUCCESS
-    cp -r $NIX_BUILD_TOP $out
   '';
+
+  dontFixup = true;
 }
 
 # NOTE:
