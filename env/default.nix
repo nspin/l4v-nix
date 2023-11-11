@@ -13,10 +13,6 @@ let
     ];
   };
 
-  # image = pkgs.dockerTools.buildImage {
-  #   name = "minimal";
-  #   tag = "latest";
-  # }
 in {
   inherit env;
 }
