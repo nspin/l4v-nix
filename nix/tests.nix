@@ -31,9 +31,8 @@ let
     mkdir $out
     cp -r ${sources.l4v} $out/l4v
     cp -r ${sources.seL4} $out/seL4
-    cp -r ${isabelle} $out/isabelle
+    ln -s ${isabelle} $out/isabelle
   '';
-  # TODO return to ln -s for isabelle
 
   oldHaskellPackages = haskell.packages.ghc865;
 
