@@ -4,10 +4,6 @@ set -eu
 
 env=$(nix-build -A env)
 
-passthru() {
-	echo "--mount type=bind,readonly,src=$1,dst=$1"
-}
-
 dockerfile=$(
 	printf \
 		"%s\n%s\n%s\n" \
@@ -17,6 +13,10 @@ dockerfile=$(
 )
 
 image=$(echo -n "$dockerfile" | docker build -q -)
+
+passthru() {
+	echo "--mount type=bind,readonly,src=$1,dst=$1"
+}
 
 docker run --rm -it \
 	$(passthru /nix/store) \
