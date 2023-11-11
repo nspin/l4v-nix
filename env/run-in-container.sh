@@ -8,7 +8,15 @@ passthru() {
 	echo "--mount type=bind,readonly,src=$1,dst=$1"
 }
 
-image=$(printf "%s\n%s\n%s\n" "FROM scratch" "WORKDIR /tmp" "WORKDIR /x" | docker build -q -)
+dockerfile=$(
+	printf \
+		"%s\n%s\n%s\n" \
+		"FROM scratch" \
+		"WORKDIR /tmp" \
+		"WORKDIR /x" \
+)
+
+image=$(echo -n "$dockerfile" | docker build -q -)
 
 docker run --rm -it \
 	$(passthru /nix/store) \
