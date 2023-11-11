@@ -8,8 +8,8 @@ let
     paths = with pkgs; [
       nix
       cacert
-      bashInteractive
       busybox
+      bashInteractive
     ];
   };
 
