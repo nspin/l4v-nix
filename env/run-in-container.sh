@@ -4,14 +4,11 @@ set -eu -o pipefail
 
 here=$(dirname $0)
 
-env=$(nix-build $here -A env)
+env=$(nix-build $here -A env --no-out-link)
 
 image=$(
-	docker build -q - << EOF
-FROM scratch
-WORKDIR /tmp
-WORKDIR /x
-EOF
+	docker load < $(nix-build $here -A image --no-out-link) \
+		| sed -r 's/Loaded image: (.*)/\1/'
 )
 
 passthru() {
@@ -22,10 +19,6 @@ docker run --rm -it \
 	$(passthru /nix/store) \
 	$(passthru /nix/var/nix/db) \
 	$(passthru /nix/var/nix/daemon-socket) \
-	-e NIX_REMOTE=daemon \
-	-e NIX_BUILD_SHELL=bash \
-	-e NIX_SSL_CERT_FILE=$env/etc/ssl/certs/ca-bundle.crt \
-	-e HOME=/x \
-	-e PATH=$env/bin \
+	--mount type=bind,readonly,src=$env,dst=/env \
 	$image \
 	"$@"
