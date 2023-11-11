@@ -11,15 +11,15 @@ let
 
   etc = {
     passwd = ''
-      root:x:0:
-      nixbld:!:100:
-      nogroup:x:65534:
-    '';
-
-    group = ''
       root:x:0:0:Nix build user:/build:/noshell
       nixbld:x:1000:100:Nix build user:/build:/noshell
       nobody:x:65534:65534:Nobody:/:/noshell
+    '';
+
+    group = ''
+      root:x:0:
+      nixbld:!:100:
+      nogroup:x:65534:
     '';
 
     hosts = ''
@@ -44,7 +44,7 @@ let
     '';
 
     config = {
-      WorkingDir = "/x";
+      WorkingDir = "/build";
       Env = [
         "NIX_REMOTE=daemon"
         "NIX_BUILD_SHELL=bash"
