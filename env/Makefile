@@ -2,8 +2,8 @@ env := $(shell nix-build -A env)
 
 passthru = --mount  type=bind,readonly,src=$(1),dst=$(1)
 
-.PHONY: nothing
-nothing:
+.PHONY: default
+default: run
 
 .PHONY: build
 build:
