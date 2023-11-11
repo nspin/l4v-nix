@@ -65,6 +65,27 @@ let
     ];
   };
 
+  run = pkgs.writeShellApplication {
+    name = "run-in-container";
+    text =
+      let
+        ro = src: dst: "--mount type=bind,readonly,src=${src},dst=${dst}";
+        passthru = path: ro path path;
+      in ''
+        image=$(
+          docker load < ${image} | sed -r 's/Loaded image: (.*)/\1/'
+        )
+
+        docker run --rm -it \
+          ${passthru "/nix/store"} \
+          ${passthru "/nix/var/nix/db"} \
+          ${passthru "/nix/var/nix/daemon-socket"} \
+          ${ro env "/env"} \
+          "$image" \
+          "$@"
+      '';
+  };
+
 in {
-  inherit image env;
+  inherit image env run;
 }
