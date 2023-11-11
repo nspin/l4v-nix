@@ -65,7 +65,7 @@ stdenv.mkDerivation {
   ];
 
   configurePhase = ''
-    export HOME=$(tempdir -d --suffix=-home)
+    export HOME=$(mktemp -d --suffix=-home)
 
     export TOOLPREFIX=${armv7Pkgs.stdenv.cc.targetPrefix}
     export CROSS_COMPILER_PREFIX=${armv7Pkgs.stdenv.cc.targetPrefix}

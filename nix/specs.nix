@@ -38,7 +38,7 @@ stdenv.mkDerivation {
   '';
 
   configurePhase = ''
-    export HOME=$(tempdir -d --suffix=-home)
+    export HOME=$(mktemp -d --suffix=-home)
 
     cp -r ${initial-heaps} $HOME
     chmod -R +w $HOME
