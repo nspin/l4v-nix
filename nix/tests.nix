@@ -90,7 +90,7 @@ stdenv.mkDerivation {
   '';
 
   installPhase = ''
-    echo SUCCESS
+    cp -r $HOME $out/home
   '';
 
   dontFixup = true;
