@@ -4,13 +4,13 @@ set -eu
 
 env=$(nix-build -A env)
 
-dockerfile="
-	FROM scratch
-	WORKDIR /tmp
-	WORKDIR /x
-"
-
-image=$(echo -n "$dockerfile" | docker build -q -)
+image=$(
+	docker build -q - << EOF
+FROM scratch
+WORKDIR /tmp
+WORKDIR /x
+EOF
+)
 
 passthru() {
 	echo "--mount type=bind,readonly,src=$1,dst=$1"
