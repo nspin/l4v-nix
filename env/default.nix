@@ -34,8 +34,11 @@ let
     copyToRoot = pkgs.runCommand "root" {} ''
       mkdir $out
       cd $out
+
       mkdir tmp build bin etc
+
       ln -s /env/bin/bash bin/sh
+
       ${lib.concatStrings (lib.flip lib.mapAttrsToList etc (k: v: ''
         cp ${v} etc/${k}
       ''))}
