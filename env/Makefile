@@ -1,6 +1,6 @@
 env := $(shell nix-build -A env)
 
-# printf "%s\n%s\n" "FROM scratch" "WORKDIR /"
+bind_mount_ro = --mount  type=bind,readonly,src=$(1),dst=$(1)
 
 .PHONY: nothing
 nothing:
@@ -12,9 +12,9 @@ build:
 .PHONY: run
 run: build
 	docker run --rm \
-		--mount type=bind,readonly,src=/nix/store,dst=/nix/store \
-		--mount type=bind,readonly,src=/nix/var/nix/db,dst=/nix/var/nix/db \
-		--mount type=bind,readonly,src=/nix/var/nix/daemon-socket,dst=/nix/var/nix/daemon-socket \
+		$(call bind_mount_ro,/nix/store) \
+		$(call bind_mount_ro,/nix/var/nix/db) \
+		$(call bind_mount_ro,/nix/var/nix/daemon-socket) \
 		-e NIX_REMOTE=daemon \
 		-e NIX_BUILD_SHELL=bash \
 		-e PATH=$(env)/bin \
