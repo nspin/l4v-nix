@@ -40,7 +40,8 @@ self: with self; {
   tests = callPackage ./tests.nix {
     # verbose = true;
     testTargets = [
-      # "CParserTools"
+      "CRefine"
+      "SimplExportAndRefine"
     ];
   };
 
