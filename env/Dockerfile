@@ -1,3 +1,3 @@
 FROM scratch
 
-WORKDIR /
+WORKDIR /tmp

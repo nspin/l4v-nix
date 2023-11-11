@@ -12,6 +12,11 @@ let
       bashInteractive
     ];
   };
+
+  # image = pkgs.dockerTools.buildImage {
+  #   name = "minimal";
+  #   tag = "latest";
+  # }
 in {
   inherit env;
 }
