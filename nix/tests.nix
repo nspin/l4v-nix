@@ -67,6 +67,8 @@ stdenv.mkDerivation {
   configurePhase = ''
     export HOME=$(mktemp -d --suffix=-home)
 
+    export ISABELLE_HOME=$(./isabelle/bin/isabelle env sh -c 'echo $ISABELLE_HOME')
+
     export TOOLPREFIX=${armv7Pkgs.stdenv.cc.targetPrefix}
     export CROSS_COMPILER_PREFIX=${armv7Pkgs.stdenv.cc.targetPrefix}
     export L4V_ARCH=ARM
