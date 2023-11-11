@@ -6,4 +6,4 @@ here=$(dirname $0)
 
 run=$(nix-build $here -A run --no-out-link)
 
-exec $run/bin/run-in-container
+exec $run/bin/run-in-container "$@"

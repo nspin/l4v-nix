@@ -9,7 +9,7 @@ let
 
   inherit (pkgs) lib;
 
-  etc = {
+  etc = lib.mapAttrs builtins.toFile {
     passwd = ''
       root:x:0:0:Nix build user:/build:/noshell
       nixbld:x:1000:100:Nix build user:/build:/noshell
@@ -28,8 +28,6 @@ let
     '';
   };
 
-  etcFiles = lib.mapAttrs builtins.toFile etc;
-
   image = pkgs.dockerTools.buildImage {
     name = "minimal";
 
@@ -38,9 +36,9 @@ let
       cd $out
       mkdir tmp build bin etc
       ln -s /env/bin/bash bin/sh
-      cp ${etcFiles.passwd} etc/passwd
-      cp ${etcFiles.group} etc/group
-      cp ${etcFiles.hosts} etc/hosts
+      ${lib.concatStrings (lib.flip lib.mapAttrsToList etc (k: v: ''
+        cp ${v} etc/${k}
+      ''))}
     '';
 
     config = {
