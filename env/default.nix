@@ -6,10 +6,10 @@ let
   env = pkgs.buildEnv {
     name = "env";
     paths = with pkgs; [
-      busybox
+      bashInteractive
       nix
       cacert
-      bashInteractive
+      busybox
     ];
   };
 
