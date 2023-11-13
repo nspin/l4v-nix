@@ -10,6 +10,8 @@
 , texlive-env
 }:
 
+# TODO merge with tests.nix
+
 let
   versionFile = builtins.toFile "VERSION" "unknown";
 
