@@ -46,6 +46,10 @@ stdenv.mkDerivation {
     bin/build
   '';
 
+  installPhase = ''
+    cp -r . $out
+  '';
+
   # installPhase = ''
   #   # mkdir -p $out/bin
   #   # ln -st $out/bin bin/hol* bin/Holmake
