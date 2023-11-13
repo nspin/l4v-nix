@@ -86,9 +86,9 @@ let
     name = "run-in-container";
     text =
       let
-        sh = "${busybox-sandbox-shell}/bin/busybox";
         ro = src: dst: "--mount type=bind,readonly,src=${src},dst=${dst}";
         passthru = path: ro path path;
+        sh = "${busybox-sandbox-shell}/bin/busybox";
       in ''
         image=$(
           docker load < ${image} | sed -r 's/Loaded image: (.*)/\1/'
