@@ -9,16 +9,19 @@ let
 
   inherit (pkgs) lib;
 
+  uid = "1000";
+  gid = "100";
+
   etc = lib.mapAttrs builtins.toFile {
     passwd = ''
-      root:x:0:0:Nix build user:/build:/noshell
-      nixbld:x:1000:100:Nix build user:/build:/noshell
-      nobody:x:65534:65534:Nobody:/:/noshell
+      root:x:0:0::/build:/noshell
+      nixbld:x:${uid}:${gid}::/build:/noshell
+      nobody:x:65534:65534::/:/noshell
     '';
 
     group = ''
       root:x:0:
-      nixbld:!:100:
+      nixbld:!:${gid}:
       nogroup:x:65534:
     '';
 
@@ -45,12 +48,16 @@ let
     '';
 
     config = {
+      User = "${uid}:${gid}";
       WorkingDir = "/build";
       Env = [
         "NIX_REMOTE=daemon"
         "NIX_BUILD_SHELL=bash"
         "NIX_SSL_CERT_FILE=/env/etc/ssl/certs/ca-bundle.crt"
         "HOME=/homless-shelter"
+        "TMP=/tmp"
+        "TMPDIR=/tmp"
+        "TEMP=/tmp"
         "PATH=/env/bin"
       ];
     };
@@ -87,6 +94,34 @@ let
       '';
   };
 
+  probe =
+    with pkgs;
+    let
+      x = writeText "builder.sh" ''
+        ${findutils}/bin/find / \
+          -path '/proc' -prune \
+          -o -path '/dev' -prune \
+          -o -path '/nix/store' -prune \
+          -o -path '*'
+        
+        for f in passwd group hosts; do
+          echo
+          echo "$f:"
+          echo
+          ${coreutils}/bin/cat /etc/$f
+          echo
+        done
+
+        ${coreutils}/bin/env
+      '';
+    in derivation {
+      name = "probe";
+      system = builtins.currentSystem;
+      builder = "${bash}/bin/bash";
+      args = [ "-e" x ];
+    };
+
 in {
   inherit image env run;
+  inherit probe;
 }
