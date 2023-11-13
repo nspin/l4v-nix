@@ -31,6 +31,8 @@ self: with self; {
     };
   };
 
+  hol4 = callPackage ./hol4.nix {};
+
   isabelle-sha1 = callPackage ./isabelle-sha1.nix {};
 
   initial-heaps = callPackage ./initial-heaps.nix {};
