@@ -1,8 +1,7 @@
-{ stdenv, fetchFromGitHub
+{ stdenv
 , polyml
 , mlton
 , graphviz
-, experimentalKernel ? true
 
 , sources
 }:

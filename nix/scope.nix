@@ -8,10 +8,11 @@ self: with self; {
     seL4 = lib.cleanSource ../projects/seL4;
     l4v = lib.cleanSource ../projects/l4v;
     hol4 = lib.cleanSource ../projects/HOL4;
+    graph-refine = lib.cleanSource ../projects/graph-refine;
   };
 
   sources = {
-    inherit (rawSources) hol4;
+    inherit (rawSources) hol4 graph-refine;
     seL4 = callPackage ./sel4-source.nix {};
     l4v = callPackage ./l4v-source.nix {};
   };
@@ -49,6 +50,8 @@ self: with self; {
       "SimplExportAndRefine"
     ];
   };
+
+  bv = callPackage ./bv.nix {};
 
   all = [
     specs
