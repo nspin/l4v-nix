@@ -88,7 +88,8 @@ stdenv.mkDerivation {
   buildPhase =
     if justExport
     then ''
-      MAKEFILES= make -C proof/ SimplExport
+      make -C tools/c-parser/standalone-parser standalone-cparser
+      make -C proof/ SimplExport
     ''
     else ''
     ./run_tests \
