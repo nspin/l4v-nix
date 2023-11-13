@@ -18,8 +18,6 @@ stdenv.mkDerivation {
   ];
 
   buildCommand = ''
-    echo $PATH
-    false
     export HOME=$(mktemp -d)
     
     isabelle build -b ${lib.concatStringsSep " " sessions}
