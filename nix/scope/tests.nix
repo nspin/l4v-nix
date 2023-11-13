@@ -10,14 +10,16 @@
 , initial-heaps
 , texlive-env
 , armv7Pkgs
+}:
 
-, justExport ? false
+{ buildStandaloneCParser ? false
+, export ? false
 
 , numJobs ? 1 # "$NIX_BUILD_CORES"
 , timeouts ? false
 , timeoutScale ? null
 , verbose ? false
-, testTargets ? []
+, testTargets ? null
 }:
 
 # HACK
@@ -85,18 +87,22 @@ stdenv.mkDerivation {
     cd l4v
   '';
 
-  buildPhase =
-    if justExport
-    then ''
+  buildPhase = ''
+    ${lib.optionalString (testTargets != null) ''
+      ./run_tests \
+        ${lib.optionalString (!timeouts) "--no-timeouts"} \
+        -j ${toString numJobs} \
+        ${lib.optionalString verbose "-v"} \
+        ${lib.concatStringsSep " " testTargets}
+    ''}
+
+    ${lib.optionalString buildStandaloneCParser ''
       make -C tools/c-parser/standalone-parser standalone-cparser
+    ''}
+
+    ${lib.optionalString export ''
       make -C proof/ SimplExport
-    ''
-    else ''
-    ./run_tests \
-      ${lib.optionalString (!timeouts) "--no-timeouts"} \
-      -j ${toString numJobs} \
-      ${lib.optionalString verbose "-v"} \
-      ${lib.concatStringsSep " " testTargets}
+    ''}
   '';
 
   dontInstall = true;
