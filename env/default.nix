@@ -29,6 +29,12 @@ let
       127.0.0.1 localhost
       ::1 localhost
     '';
+
+    # HACK for convenience
+    inputrc = ''
+      set editing-mode vi
+      set show-mode-in-prompt on
+    '';
   };
 
   image = pkgs.dockerTools.buildImage {
@@ -38,9 +44,7 @@ let
       mkdir $out
       cd $out
 
-      mkdir bin etc tmp build
-
-      ln -s /env/bin/bash bin/sh
+      mkdir etc tmp build
 
       ${lib.concatStrings (lib.flip lib.mapAttrsToList etc (k: v: ''
         cp ${v} etc/${k}
@@ -83,6 +87,7 @@ let
     name = "run-in-container";
     text =
       let
+        sh = "${pkgs.busybox-sandbox-shell}/bin/busybox";
         ro = src: dst: "--mount type=bind,readonly,src=${src},dst=${dst}";
         passthru = path: ro path path;
       in ''
@@ -95,6 +100,7 @@ let
           ${passthru "/nix/var/nix/db"} \
           ${passthru "/nix/var/nix/daemon-socket"} \
           ${ro env "/env"} \
+          ${ro sh "/bin/sh"} \
           "$image" \
           "$@"
       '';
@@ -138,3 +144,6 @@ in {
   inherit image env run;
   inherit probe;
 }
+
+# NOTE
+# export out=$(pwd)/out && (set -e && genericBuild)
