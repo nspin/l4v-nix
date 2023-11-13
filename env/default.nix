@@ -38,7 +38,7 @@ let
       mkdir $out
       cd $out
 
-      mkdir tmp build bin etc
+      mkdir bin etc tmp build
 
       ln -s /env/bin/bash bin/sh
 
@@ -47,9 +47,10 @@ let
       ''))}
     '';
 
-    # HACK not quite right
-    extraCommands = ''
-      chmod a+w build tmp
+    runAsRoot = ''
+      chown nixbld:nixbld /build
+      chmod 0700 /build
+      chmod 0777 /tmp
     '';
 
     config = {
@@ -104,6 +105,10 @@ let
     let
       prune = [ "/proc" "/dev" "/nix/store" ];
       builderScript = writeText "builder.sh" ''
+        ${coreutils}/bin/ls -al /
+
+        echo
+
         ${findutils}/bin/find / -print -a \( ${
           lib.concatMapStringsSep " -o " (path: "-path ${path}") prune
         } \) -prune
@@ -118,7 +123,7 @@ let
           echo
         done
 
-        # ${coreutils}/bin/env
+        ${coreutils}/bin/env
       '';
     in derivation {
       name = "probe";
