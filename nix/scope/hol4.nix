@@ -20,6 +20,12 @@ stdenv.mkDerivation {
     keepBuildTree
   ];
 
+  unpackPhase = ''
+    dst=$NIX_BUILD_TOP/src/HOL4
+    mkdir -p $(dirname $dst)
+    cp -r $src $dst
+  '';
+
   postPatch = ''
     patchShebangs .
 
@@ -36,9 +42,10 @@ stdenv.mkDerivation {
     bin/build
   '';
 
-  # TODO fix: $bin -> bin
-  installPhase = ''
-    mkdir -p $out/bin
-    ln -st $out/bin $bin/hol* $bin/Holmake
-  '';
+  # installPhase = ''
+  #   # mkdir -p $out/bin
+  #   # ln -st $out/bin bin/hol* bin/Holmake
+  # '';
+
+  dontInstall = true;
 }
