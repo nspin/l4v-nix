@@ -20,16 +20,6 @@ stdenv.mkDerivation {
     keepBuildTree
   ];
 
-  # $HOLDIR hack
-  postUnpack = ''
-    old=$(pwd)
-    cd $NIX_BUILD_TOP
-    new=src/HOL4
-    mkdir -p $(dirname $new)
-    mv $old $new
-    cd $new
-  '';
-
   postPatch = ''
     patchShebangs .
 
@@ -39,6 +29,14 @@ stdenv.mkDerivation {
   '';
 
   configurePhase = ''
+    # $HOLDIR hack
+    old=$(pwd)
+    cd $NIX_BUILD_TOP
+    new=src/HOL4
+    mkdir -p $(dirname $new)
+    mv $old $new
+    cd $new
+
     poly < tools/smart-configure.sml
   '';
 
