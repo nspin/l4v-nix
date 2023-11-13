@@ -1,5 +1,8 @@
 { stdenv
+, rsync, git, perl, hostname, which, cmake, ninja, dtc, libxml2
+, polyml, mlton
 , python2Packages
+, keepBuildTree
 
 , sources
 , hol4
@@ -25,6 +28,8 @@ stdenv.mkDerivation {
     polyml mlton
     python2Packages.python
     armv7Pkgs.stdenv.cc
+
+    keepBuildTree # HACK
   ];
 
   postPatch = ''
@@ -43,12 +48,9 @@ stdenv.mkDerivation {
   '';
 
   buildPhase = ''
-    false
+    make StackBounds.txt
   '';
 
-  installPhase = ''
-    false
-  '';
-
+  dontInstall = true;
   dontFixup = true;
 }
