@@ -1,7 +1,7 @@
 let
   pkgs = import ../nixpkgs {
     overlays = [
-      (import ./overlay.nix)
+      (import ./overlay)
     ];
     config = {
       allowUnfree = true;

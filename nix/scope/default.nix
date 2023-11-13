@@ -5,10 +5,10 @@
 self: with self; {
 
   rawSources = {
-    seL4 = lib.cleanSource ../projects/seL4;
-    l4v = lib.cleanSource ../projects/l4v;
-    hol4 = lib.cleanSource ../projects/HOL4;
-    graph-refine = lib.cleanSource ../projects/graph-refine;
+    seL4 = lib.cleanSource ../../projects/seL4;
+    l4v = lib.cleanSource ../../projects/l4v;
+    hol4 = lib.cleanSource ../../projects/HOL4;
+    graph-refine = lib.cleanSource ../../projects/graph-refine;
   };
 
   sources = {
@@ -27,7 +27,7 @@ self: with self; {
     ;
   };
 
-  armv7Pkgs = import ../nixpkgs {
+  armv7Pkgs = import ../../nixpkgs {
     crossSystem = {
       system = "armv7l-linux";
       config = "armv7l-unknown-linux-gnueabi";
