@@ -14,7 +14,7 @@
 , initial-heaps
 , hol4
 , armv7Pkgs
-, export
+, bvInput
 }:
 
 let
@@ -23,7 +23,7 @@ let
     ln -s ${isabelle} $out/isabelle
     cp -r ${sources.seL4} $out/seL4
     cp -r ${sources.graph-refine} $out/graph-refine
-    cp -r ${export}/.build/src/l4v $out/l4v
+    cp -r ${bvInput}/.build/src/l4v $out/l4v
     cp -r ${hol4} $out/HOL4
   '';
     # cp -r ${sources.l4v} $out/l4v

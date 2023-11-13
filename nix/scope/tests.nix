@@ -91,7 +91,7 @@ stdenv.mkDerivation {
       ./run_tests \
         ${lib.optionalString verbose "-v"} \
         ${lib.optionalString (!timeouts) "--no-timeouts"} \
-        ${lib.optionalString (scaleTimeouts != null) "--scale-timeouts ${toString scaleTimeouts}"} \
+        ${lib.optionalString (timeoutScale != null) "--scale-timeouts ${toString timeoutScale}"} \
         -j ${toString numJobs} \
         ${lib.concatStringsSep " " testTargets}
     ''}
