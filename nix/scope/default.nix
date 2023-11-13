@@ -50,10 +50,15 @@ self: with self; {
     ];
   };
 
+  export = callPackage ./tests.nix {
+    justExport = true;
+  };
+
   bv = callPackage ./bv.nix {};
 
   all = [
     specs
+    export
     tests
     hol4
   ];
