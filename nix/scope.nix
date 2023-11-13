@@ -7,9 +7,11 @@ self: with self; {
   rawSources = {
     seL4 = lib.cleanSource ../projects/seL4;
     l4v = lib.cleanSource ../projects/l4v;
+    hol4 = lib.cleanSource ../projects/HOL4;
   };
 
   sources = {
+    inherit (rawSources) hol4;
     seL4 = callPackage ./sel4-source.nix {};
     l4v = callPackage ./l4v-source.nix {};
   };
