@@ -47,6 +47,11 @@ let
       ''))}
     '';
 
+    # HACK not quite right
+    extraCommands = ''
+      chmod a+w build tmp
+    '';
+
     config = {
       User = "${uid}:${gid}";
       WorkingDir = "/build";
