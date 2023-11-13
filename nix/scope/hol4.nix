@@ -4,6 +4,7 @@
 , graphviz
 , python3
 , perl
+, keepBuildTree
 
 , sources
 }:
@@ -16,6 +17,7 @@ stdenv.mkDerivation {
   buildInputs = [
     polyml mlton graphviz
     python3 perl
+    keepBuildTree
   ];
 
   postPatch = ''
@@ -35,10 +37,7 @@ stdenv.mkDerivation {
   '';
 
   installPhase = ''
-    dst=$out/src/hol4
-    mkdir -p $(dirname $dst)
-    cp -r . $dst
     mkdir -p $out/bin
-    ln -st $out/bin $dst/bin/hol*
+    ln -st $out/bin $bin/hol* $bin/Holmake
   '';
 }
