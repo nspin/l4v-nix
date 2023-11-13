@@ -77,16 +77,16 @@ let
         cmd=()
 
         for arg in "$@"; do
-            shift
-            case "$arg" in
-                --)
-                    cmd=("$@")
-                    break
-                    ;;
-                *)
-                    dockerArgs+=("$arg")
-                    ;;
-            esac
+          shift
+          case "$arg" in
+            --)
+              cmd=("$@")
+              break
+              ;;
+            *)
+              dockerArgs+=("$arg")
+              ;;
+          esac
         done
 
         if [ ''${#dockerArgs[@]} -eq 0 ]; then
