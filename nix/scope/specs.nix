@@ -40,7 +40,7 @@ stdenv.mkDerivation {
   configurePhase = ''
     export HOME=$(mktemp -d --suffix=-home)
 
-    cp -r ${initial-heaps} $HOME/.isabelle --no-preserve=ownership,mode
+    cp -r ${initial-heaps}/* $HOME/.isabelle --no-preserve=ownership,mode
 
     ln -sf ${isabelle} isabelle
   '';

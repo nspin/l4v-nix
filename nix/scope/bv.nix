@@ -52,8 +52,6 @@ stdenv.mkDerivation {
 
     export ISABELLE_HOME=$(./isabelle/bin/isabelle env sh -c 'echo $ISABELLE_HOME')
 
-    cp -r ${initial-heaps} $HOME/.isabelle --no-preserve=ownership,mode
-
     export TOOLPREFIX=${armv7Pkgs.stdenv.cc.targetPrefix}
     export CROSS_COMPILER_PREFIX=${armv7Pkgs.stdenv.cc.targetPrefix}
 
@@ -66,6 +64,8 @@ stdenv.mkDerivation {
     if [ -n "$IN_NIX_SHELL" ]; then
       export -p >shell-env.sh
     fi
+
+    cp -r ${initial-heaps}/* $HOME/.isabelle --no-preserve=ownership,mode
 
     cd graph-refine/seL4-example
   '';

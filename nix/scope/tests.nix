@@ -54,11 +54,14 @@ stdenv.mkDerivation {
     ghcWithPackages
     haskellPackages.cabal-install
 
+    # TODO remove
     # python2Packages.sel4-deps
+
     python3Packages.sel4-deps
 
     texlive-env
 
+    # TODO remove
     keepBuildTree # HACK
   ];
 
@@ -71,20 +74,25 @@ stdenv.mkDerivation {
     export CROSS_COMPILER_PREFIX=${armv7Pkgs.stdenv.cc.targetPrefix}
     export L4V_ARCH=ARM
 
-    cp -r ${initial-heaps} $HOME/.isabelle --no-preserve=ownership,mode
+    cp -r ${initial-heaps}/* $HOME/.isabelle --no-preserve=ownership,mode
 
+    # TODO remove
     mkdir -p $HOME/.cabal
     touch $HOME/.cabal/config
 
     cd l4v
   '';
 
+  # buildPhase = ''
+  #   ./run_tests \
+  #     ${lib.optionalString (!timeouts) "--no-timeouts"} \
+  #     -j ${toString numJobs} \
+  #     ${lib.optionalString verbose "-v"} \
+  #     ${lib.concatStringsSep " " testTargets}
+  # '';
+
   buildPhase = ''
-    ./run_tests \
-      ${lib.optionalString (!timeouts) "--no-timeouts"} \
-      -j ${toString numJobs} \
-      ${lib.optionalString verbose "-v"} \
-      ${lib.concatStringsSep " " testTargets}
+    MAKEFILES= make -C proof/ SimplExport
   '';
 
   dontInstall = true;
