@@ -20,10 +20,14 @@ stdenv.mkDerivation {
     keepBuildTree
   ];
 
-  unpackPhase = ''
-    dst=$NIX_BUILD_TOP/src/HOL4
-    mkdir -p $(dirname $dst)
-    cp -r $src $dst
+  # $HOLDIR hack
+  postUnpack = ''
+    old=$(pwd)
+    cd $NIX_BUILD_TOP
+    new=src/HOL4
+    mkdir -p $(dirname $new)
+    mv $old $new
+    cd $new
   '';
 
   postPatch = ''
