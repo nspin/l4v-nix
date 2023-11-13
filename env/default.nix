@@ -111,9 +111,10 @@ let
         echo
 
         for f in passwd group hosts; do
-          echo "$f:"
+          p=/etc/$f
+          echo "$p:"
           echo
-          ${coreutils}/bin/cat /etc/$f
+          ${coreutils}/bin/cat $p
           echo
         done
 
