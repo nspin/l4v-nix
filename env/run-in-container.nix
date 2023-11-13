@@ -89,18 +89,39 @@ let
         passthru = path: readonly path path;
         sh = "${busybox-sandbox-shell}/bin/busybox";
       in ''
+        dockerArgs=()
+        cmd=()
+
+        for arg in "$@"; do
+            shift
+            case "$arg" in
+                --)
+                    cmd=("$@")
+                    break
+                    ;;
+                *)
+                    dockerArgs+=("$arg")
+                    ;;
+            esac
+        done
+
+        if [ ''${#dockerArgs[@]} -eq 0 ]; then
+          dockerArgs=(--rm -it)
+        fi
+
         image=$(
           docker load < ${image} | sed -r 's/Loaded image: (.*)/\1/'
         )
 
-        docker run --rm -it \
+        exec docker run \
           ${passthru "/nix/store"} \
           ${passthru "/nix/var/nix/db"} \
           ${passthru "/nix/var/nix/daemon-socket"} \
           ${readonly sh "/bin/sh"} \
           ${readonly env "/env"} \
+          "''${dockerArgs[@]}" \
           "$image" \
-          "$@"
+          "''${cmd[@]}"
       '';
   };
 
