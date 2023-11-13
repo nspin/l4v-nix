@@ -1,4 +1,5 @@
 { lib
+, writeText
 , texlive
 }:
 
@@ -59,11 +60,11 @@ self: with self; {
 
   bv = callPackage ./bv.nix {};
 
-  all = [
+  all = writeText "all" (lib.concatMapStrings (x: "${x}\n") [
     specs
     tests
     bvInput
     hol4
     bv
-  ];
+  ]);
 }
