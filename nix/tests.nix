@@ -89,6 +89,7 @@ stdenv.mkDerivation {
       ${lib.concatStringsSep " " testTargets}
   '';
 
+  dontInstall = true;
   dontFixup = true;
 }
 
