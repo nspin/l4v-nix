@@ -63,6 +63,10 @@ stdenv.mkDerivation {
 
     export OBJDUMP=''${TOOLPREFIX}objdump
 
+    if [ -n "$IN_NIX_SHELL" ]; then
+      export -p >shell-env.sh
+    fi
+
     cd graph-refine/seL4-example
   '';
 
