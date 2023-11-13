@@ -40,7 +40,7 @@ stdenv.mkDerivation {
 
     texlive-env
 
-    keepBuildTree # HACK
+    # keepBuildTree # HACK
   ];
 
   postPatch = ''
