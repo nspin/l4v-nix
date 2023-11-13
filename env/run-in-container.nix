@@ -98,8 +98,8 @@ let
           ${passthru "/nix/store"} \
           ${passthru "/nix/var/nix/db"} \
           ${passthru "/nix/var/nix/daemon-socket"} \
-          ${ro env "/env"} \
           ${ro sh "/bin/sh"} \
+          ${ro env "/env"} \
           "$image" \
           "$@"
       '';
