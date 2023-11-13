@@ -11,9 +11,9 @@
 , texlive-env
 , armv7Pkgs
 
+, numJobs ? 1 # "$NIX_BUILD_CORES"
 , timeouts ? false
 , timeoutScale ? null
-, numJobs ? 1 # "$NIX_BUILD_CORES"
 , verbose ? false
 , testTargets ? []
 }:
