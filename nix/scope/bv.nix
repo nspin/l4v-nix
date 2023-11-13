@@ -12,18 +12,18 @@
 , initial-heaps
 , hol4
 , armv7Pkgs
-, tests
+, export
 }:
 
 let
   src = runCommand "src" {} ''
     mkdir $out
-    cp -r ${sources.l4v} $out/l4v
-    cp -r ${sources.seL4} $out/seL4
     cp -r ${sources.graph-refine} $out/graph-refine
+    cp -r ${sources.seL4} $out/seL4
+    cp -r ${export}/.build/src/l4v $out/l4v
     ln -s ${isabelle} $out/isabelle
   '';
-    # ln -s ${tests}/.build/src $out/l4v
+    # cp -r ${sources.l4v} $out/l4v
 
 in
 stdenv.mkDerivation {
