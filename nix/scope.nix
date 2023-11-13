@@ -48,6 +48,6 @@ self: with self; {
 
   all = [
     specs
-    # tests
+    tests
   ];
 }
