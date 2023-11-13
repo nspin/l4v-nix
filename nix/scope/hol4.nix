@@ -36,6 +36,7 @@ stdenv.mkDerivation {
     bin/build
   '';
 
+  # TODO fix: $bin -> bin
   installPhase = ''
     mkdir -p $out/bin
     ln -st $out/bin $bin/hol* $bin/Holmake

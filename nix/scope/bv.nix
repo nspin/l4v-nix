@@ -18,10 +18,11 @@
 let
   src = runCommand "src" {} ''
     mkdir $out
-    cp -r ${sources.graph-refine} $out/graph-refine
-    cp -r ${sources.seL4} $out/seL4
-    cp -r ${export}/.build/src/l4v $out/l4v
     ln -s ${isabelle} $out/isabelle
+    cp -r ${sources.seL4} $out/seL4
+    cp -r ${sources.graph-refine} $out/graph-refine
+    cp -r ${export}/.build/src/l4v $out/l4v
+    cp -r ${hol4}/.build/src $out/HOL
   '';
     # cp -r ${sources.l4v} $out/l4v
 
@@ -54,8 +55,6 @@ stdenv.mkDerivation {
 
     export TOOLPREFIX=${armv7Pkgs.stdenv.cc.targetPrefix}
     export CROSS_COMPILER_PREFIX=${armv7Pkgs.stdenv.cc.targetPrefix}
-
-    export HOL4_ROOT=${hol4}/src/hol4
 
     export L4V_ARCH=ARM
 
