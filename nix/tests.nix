@@ -73,8 +73,8 @@ stdenv.mkDerivation {
     export CROSS_COMPILER_PREFIX=${armv7Pkgs.stdenv.cc.targetPrefix}
     export L4V_ARCH=ARM
 
-    cp -r ${initial-heaps} $HOME
-    chmod -R +w $HOME
+    cp -r ${initial-heaps} $HOME/.isabelle --no-preserve=ownership,mode
+
     mkdir -p $HOME/.cabal
     touch $HOME/.cabal/config
 

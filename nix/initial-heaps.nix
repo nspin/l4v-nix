@@ -11,15 +11,17 @@ in
 stdenv.mkDerivation {
   name = "initial-heaps";
 
-  phases = [ "buildPhase" ];
-
   nativeBuildInputs = [
     isabelle
     hostname
     perl
   ];
 
-  buildPhase = ''
-    HOME=$out isabelle build -vb ${lib.concatStringsSep " " sessions}
+  buildCommand = ''
+    export HOME=$(mktemp -d)
+    
+    isabelle build -b ${lib.concatStringsSep " " sessions}
+
+    mv $HOME/.isabelle $out
   '';
 }
