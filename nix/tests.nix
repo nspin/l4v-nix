@@ -95,6 +95,3 @@ stdenv.mkDerivation {
 
 # NOTE:
 # RefineOrphanage depends on ./make_spec.sh having run
-
-# NIX_CFLAGS_COMPILE = [ "-Wno-unused-command-line-argument" ];
-# NIX_CFLAGS_LINK = [ "-Wno-unused-command-line-argument" "-lm" "-lffi" ];
