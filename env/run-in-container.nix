@@ -54,28 +54,12 @@ let
       chmod 0700 /build
       chmod 0777 /tmp
     '';
-
-    config = {
-      User = "${uid}:${gid}";
-      WorkingDir = "/build";
-      Env = [
-        "NIX_REMOTE=daemon"
-        "NIX_BUILD_SHELL=bash"
-        "NIX_SSL_CERT_FILE=/env/etc/ssl/certs/ca-bundle.crt"
-        "HOME=/homless-shelter"
-        "TMP=/tmp"
-        "TMPDIR=/tmp"
-        "TEMP=/tmp"
-        "PATH=/env/bin"
-      ];
-    };
   };
 
   env = buildEnv {
     name = "env";
     paths = [
       nix
-      cacert
       busybox
       bashInteractive
     ];
@@ -113,12 +97,23 @@ let
           docker load < ${image} | sed -r 's/Loaded image: (.*)/\1/'
         )
 
+        set -x
+
         exec docker run \
+          --user ${uid}:${gid} \
+          --workdir /build \
           ${passthru "/nix/store"} \
           ${passthru "/nix/var/nix/db"} \
           ${passthru "/nix/var/nix/daemon-socket"} \
           ${readonly sh "/bin/sh"} \
-          ${readonly env "/env"} \
+          -e NIX_REMOTE=daemon \
+          -e NIX_BUILD_SHELL=bash \
+          -e NIX_SSL_CERT_FILE=${cacert}/etc/ssl/certs/ca-bundle.crt \
+          -e HOME=/homless-shelter \
+          -e TMP=/tmp \
+          -e TMPDIR=/tmp \
+          -e TEMP=/tmp \
+          -e PATH=${env}/bin \
           "''${dockerArgs[@]}" \
           "$image" \
           "''${cmd[@]}"
