@@ -56,5 +56,6 @@ self: with self; {
   all = [
     specs
     tests
+    hol4
   ];
 }
