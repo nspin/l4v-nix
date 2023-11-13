@@ -118,7 +118,7 @@ let
         ${findutils}/bin/find / -print -a \( ${
           lib.concatMapStringsSep " -o " (path: "-path ${path}") prune
         } \) -prune
-        
+
         echo
 
         for f in passwd group hosts; do
