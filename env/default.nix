@@ -105,6 +105,8 @@ let
     let
       prune = [ "/proc" "/dev" "/nix/store" ];
       builderScript = writeText "builder.sh" ''
+        exec > $out
+
         ${coreutils}/bin/ls -al /
 
         echo
