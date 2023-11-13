@@ -2,6 +2,8 @@
 , polyml
 , mlton
 , graphviz
+, python3
+, perl
 
 , sources
 }:
@@ -13,9 +15,12 @@ stdenv.mkDerivation {
 
   buildInputs = [
     polyml mlton graphviz
+    python3 perl
   ];
 
   postPatch = ''
+    patchShebangs .
+
     substituteInPlace tools/Holmake/Holmake_types.sml \
       --replace '"/bin/mv"' '"mv"' \
       --replace '"/bin/cp"' '"cp"'
