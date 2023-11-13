@@ -42,7 +42,8 @@ stdenv.mkDerivation {
 
   buildPhase = ''
     bin/build
-    (cd examples/machine-code/graph && Holmake)
+    holdir=$(pwd)
+    (cd examples/machine-code/graph && $holdir/bin/Holmake)
   '';
 
   installPhase = ''
