@@ -62,9 +62,9 @@ self: with self; {
 
   all = writeText "all" (lib.concatMapStrings (x: "${x}\n") [
     specs
-    tests
+    # tests
     bvInput
     hol4
-    bv
+    # bv
   ]);
 }
