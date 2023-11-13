@@ -102,28 +102,28 @@ let
   probe =
     with pkgs;
     let
-      x = writeText "builder.sh" ''
-        ${findutils}/bin/find / \
-          -path '/proc' -prune \
-          -o -path '/dev' -prune \
-          -o -path '/nix/store' -prune \
-          -o -path '*'
+      prune = [ "/proc" "/dev" "/nix/store" ];
+      builderScript = writeText "builder.sh" ''
+        ${findutils}/bin/find / -print -a \( ${
+          lib.concatMapStringsSep " -o " (path: "-path ${path}") prune
+        } \) -prune
         
+        echo
+
         for f in passwd group hosts; do
-          echo
           echo "$f:"
           echo
           ${coreutils}/bin/cat /etc/$f
           echo
         done
 
-        ${coreutils}/bin/env
+        # ${coreutils}/bin/env
       '';
     in derivation {
       name = "probe";
       system = builtins.currentSystem;
       builder = "${bash}/bin/bash";
-      args = [ "-e" x ];
+      args = [ "-e" builderScript ];
     };
 
 in {
