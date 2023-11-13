@@ -93,6 +93,10 @@ let
           dockerArgs=(--rm -it)
         fi
 
+        if [ ''${#cmd[@]} -eq 0 ]; then
+          cmd=(bash)
+        fi
+
         image=$(
           docker load < ${image} | sed -r 's/Loaded image: (.*)/\1/'
         )
