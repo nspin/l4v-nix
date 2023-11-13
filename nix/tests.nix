@@ -11,22 +11,20 @@
 , texlive-env
 , armv7Pkgs
 
+, timeouts ? false
+, timeoutScale ? null
+, numJobs ? 1 # "$NIX_BUILD_CORES"
 , verbose ? false
 , testTargets ? []
 }:
 
+# HACK
+assert timeoutScale == null;
+
+# TODO
+# lib.optionalString (scaleTimeouts != null) "--scale-timeouts ${toString scaleTimeouts}";
+
 let
-
-  # scaleTimeouts = "4";
-  # scaleTimeouts = "1.5";
-  # timeouts = "--scale-timeouts ${scaleTimeouts}";
-
-  timeouts = "--no-timeouts";
-
-  parallelism = "-j 1";
-  # parallelism = "-j 2";
-  # parallelism = "-j $NIX_BUILD_CORES";
-
   src = runCommand "src" {} ''
     mkdir $out
     cp -r ${sources.l4v} $out/l4v
@@ -83,8 +81,8 @@ stdenv.mkDerivation {
 
   buildPhase = ''
     ./run_tests \
-      ${timeouts} \
-      ${parallelism} \
+      ${lib.optionalString (!timeouts) "--no-timeouts"} \
+      -j ${toString numJobs} \
       ${lib.optionalString verbose "-v"} \
       ${lib.concatStringsSep " " testTargets}
   '';
