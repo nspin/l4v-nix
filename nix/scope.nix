@@ -46,8 +46,9 @@ self: with self; {
     # verbose = true;
     testTargets = [
       # "CParserTools"
-      "CRefine"
-      "SimplExportAndRefine"
+      # "CRefine"
+      # "SimplExportAndRefine"
+      "CSpec"
     ];
   };
 
