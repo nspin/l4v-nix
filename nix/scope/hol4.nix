@@ -54,6 +54,4 @@ stdenv.mkDerivation {
   #   # mkdir -p $out/bin
   #   # ln -st $out/bin bin/hol* bin/Holmake
   # '';
-
-  dontInstall = true;
 }
