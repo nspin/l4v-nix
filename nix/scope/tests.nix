@@ -11,6 +11,8 @@
 , texlive-env
 , armv7Pkgs
 
+, justExport ? false
+
 , numJobs ? 1 # "$NIX_BUILD_CORES"
 , timeouts ? false
 , timeoutScale ? null
@@ -83,16 +85,17 @@ stdenv.mkDerivation {
     cd l4v
   '';
 
-  # buildPhase = ''
-  #   ./run_tests \
-  #     ${lib.optionalString (!timeouts) "--no-timeouts"} \
-  #     -j ${toString numJobs} \
-  #     ${lib.optionalString verbose "-v"} \
-  #     ${lib.concatStringsSep " " testTargets}
-  # '';
-
-  buildPhase = ''
-    MAKEFILES= make -C proof/ SimplExport
+  buildPhase =
+    if justExport
+    then ''
+      MAKEFILES= make -C proof/ SimplExport
+    ''
+    else ''
+    ./run_tests \
+      ${lib.optionalString (!timeouts) "--no-timeouts"} \
+      -j ${toString numJobs} \
+      ${lib.optionalString verbose "-v"} \
+      ${lib.concatStringsSep " " testTargets}
   '';
 
   dontInstall = true;
