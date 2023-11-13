@@ -70,12 +70,10 @@ stdenv.mkDerivation {
 
     cp -r ${initial-heaps}/* $HOME/.isabelle --no-preserve=ownership,mode
 
-    export HOLDIR=$(pwd)/HOL4
-    # ls $HOLDIR/examples/l3-machine-code/arm/decompiler
-    # false
+    # export HOLDIR=$(pwd)/HOL4
 
-    substituteInPlace $HOLDIR/examples/machine-code/graph/decompile.py \
-      --replace "call_input_output('Holmake','${""}','hol_output.txt')" "call_input_output('strace Holmake','${""}','hol_output.txt')"
+    # substituteInPlace $HOLDIR/examples/machine-code/graph/decompile.py \
+    #   --replace "call_input_output('Holmake','${""}','hol_output.txt')" "call_input_output('strace Holmake','${""}','hol_output.txt')"
 
     cd graph-refine/seL4-example
   '';
