@@ -89,10 +89,6 @@ stdenv.mkDerivation {
       ${lib.concatStringsSep " " testTargets}
   '';
 
-  installPhase = ''
-    cp -r $HOME $out/home
-  '';
-
   dontFixup = true;
 }
 
