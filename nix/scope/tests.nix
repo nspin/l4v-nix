@@ -15,18 +15,17 @@
 { buildStandaloneCParser ? false
 , export ? false
 
+, testTargets ? null
+, verbose ? false
 , numJobs ? 1 # "$NIX_BUILD_CORES"
 , timeouts ? false
 , timeoutScale ? null
-, verbose ? false
-, testTargets ? null
 }:
 
 # HACK
 assert timeoutScale == null;
 
 # TODO
-# lib.optionalString (scaleTimeouts != null) "--scale-timeouts ${toString scaleTimeouts}";
 
 let
   src = runCommand "src" {} ''
@@ -90,9 +89,10 @@ stdenv.mkDerivation {
   buildPhase = ''
     ${lib.optionalString (testTargets != null) ''
       ./run_tests \
-        ${lib.optionalString (!timeouts) "--no-timeouts"} \
-        -j ${toString numJobs} \
         ${lib.optionalString verbose "-v"} \
+        ${lib.optionalString (!timeouts) "--no-timeouts"} \
+        ${lib.optionalString (scaleTimeouts != null) "--scale-timeouts ${toString scaleTimeouts}"} \
+        -j ${toString numJobs} \
         ${lib.concatStringsSep " " testTargets}
     ''}
 

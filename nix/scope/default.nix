@@ -42,7 +42,9 @@ self: with self; {
 
   specs = callPackage ./specs.nix {};
 
-  tests = callPackage ./tests.nix {
+  mkTests = callPackage ./tests.nix {};
+
+  tests = mkTests {
     # verbose = true;
     testTargets = [
       "CRefine"
@@ -50,8 +52,9 @@ self: with self; {
     ];
   };
 
-  export = callPackage ./tests.nix {
-    justExport = true;
+  bvInput = mkTests {
+    buildStandaloneCParser = true;
+    export = true;
   };
 
   bv = callPackage ./bv.nix {};
