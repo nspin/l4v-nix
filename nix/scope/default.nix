@@ -61,8 +61,9 @@ self: with self; {
 
   all = [
     specs
-    export
     tests
+    bvInput
     hol4
+    bv
   ];
 }
