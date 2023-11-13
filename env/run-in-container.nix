@@ -86,8 +86,8 @@ let
     name = "run-in-container";
     text =
       let
-        ro = src: dst: "--mount type=bind,readonly,src=${src},dst=${dst}";
-        passthru = path: ro path path;
+        readonly = src: dst: "--mount type=bind,readonly,src=${src},dst=${dst}";
+        passthru = path: readonly path path;
         sh = "${busybox-sandbox-shell}/bin/busybox";
       in ''
         image=$(
@@ -98,8 +98,8 @@ let
           ${passthru "/nix/store"} \
           ${passthru "/nix/var/nix/db"} \
           ${passthru "/nix/var/nix/daemon-socket"} \
-          ${ro sh "/bin/sh"} \
-          ${ro env "/env"} \
+          ${readonly sh "/bin/sh"} \
+          ${readonly env "/env"} \
           "$image" \
           "$@"
       '';
