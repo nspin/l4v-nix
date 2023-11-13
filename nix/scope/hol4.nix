@@ -42,6 +42,7 @@ stdenv.mkDerivation {
 
   buildPhase = ''
     bin/build
+    (cd examples/machine-code/graph && Holmake)
   '';
 
   installPhase = ''
