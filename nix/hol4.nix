@@ -1,5 +1,7 @@
 { stdenv, fetchFromGitHub
-, polyml, graphviz
+, polyml
+, mlton
+, graphviz
 , experimentalKernel ? true
 
 , sources
@@ -11,7 +13,7 @@ stdenv.mkDerivation {
   src = sources.hol4;
 
   buildInputs = [
-    polyml graphviz
+    polyml mlton graphviz
   ];
 
   postPatch = ''
