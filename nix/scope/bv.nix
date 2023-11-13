@@ -7,6 +7,8 @@
 , isabelle
 , keepBuildTree
 
+, strace
+
 , sources
 , texlive-env
 , initial-heaps
@@ -39,6 +41,8 @@ stdenv.mkDerivation {
     python3Packages.sel4-deps
     armv7Pkgs.stdenv.cc
 
+    strace
+
     texlive-env
 
     # keepBuildTree # HACK
@@ -65,6 +69,10 @@ stdenv.mkDerivation {
     fi
 
     cp -r ${initial-heaps}/* $HOME/.isabelle --no-preserve=ownership,mode
+
+    export HOLDIR=$(pwd)/HOL4
+    # ls $HOLDIR/examples/l3-machine-code/arm/decompiler
+    # false
 
     cd graph-refine/seL4-example
   '';
