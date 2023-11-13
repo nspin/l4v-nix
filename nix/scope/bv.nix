@@ -70,11 +70,12 @@ stdenv.mkDerivation {
 
     cp -r ${initial-heaps}/* $HOME/.isabelle --no-preserve=ownership,mode
 
+    # HACK
     substituteInPlace \
       HOL4/examples/machine-code/graph/decompile.py \
-      --replace \
-        'sys.stdout.write(str)' \
-        's = str; sys.stdout.write(s); sys.stdout.write("\n"); sys.stdout.flush()'
+        --replace \
+          'sys.stdout.write(str)' \
+          's = str; sys.stdout.write(s); sys.stdout.write("\n"); sys.stdout.flush()'
 
     cd graph-refine/seL4-example
   '';
