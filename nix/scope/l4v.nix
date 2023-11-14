@@ -53,9 +53,6 @@ stdenv.mkDerivation {
     texliveEnv
 
     l4vConfig.targetCC
-
-    # TODO remove
-    keepBuildTree # HACK
   ];
 
   postPatch = ''
@@ -82,6 +79,12 @@ stdenv.mkDerivation {
         ${lib.optionalString (timeoutScale != null) "--scale-timeouts ${toString timeoutScale}"} \
         -j ${toString numJobs} \
         ${lib.concatStringsSep " " testTargets}
+
+      ${lib.optionalString (lib.elem "ASpec" testTargets) ''
+        cp -v \
+          $HOME/.isabelle/Isabelle2020/browser_info/Specifications/ASpec/document.pdf \
+          spec/abstract
+      ''}
     ''}
 
     ${lib.optionalString buildStandaloneCParser ''
@@ -93,7 +96,10 @@ stdenv.mkDerivation {
     ''}
   '';
 
-  dontInstall = true;
+  installPhase = ''
+    cp -r . $out
+  '';
+
   dontFixup = true;
 }
 

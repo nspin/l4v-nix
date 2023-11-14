@@ -49,11 +49,15 @@ self: with self; {
 
   hol4 = callPackage ./hol4.nix {};
 
-  l4vSpecs = callPackage ./l4v-specs.nix {};
-
   l4vWith = callPackage ./l4v.nix {};
 
-  l4vAllTests = l4vWith {
+  l4vSpec = l4vWith {
+    testTargets = [
+      "ASpec"
+    ];
+  };
+
+  l4vCoreTests = l4vWith {
     testTargets = [
       "CRefine"
       "SimplExportAndRefine"
@@ -80,11 +84,11 @@ self: with self; {
     hol4
     graphRefineInputs
     graphRefine
-    l4vSpecs
+    l4vSpec
   ]);
 
   all = writeText "all" (toString [
     cached
-    l4vAllTests
+    l4vCoreTests
   ]);
 }
