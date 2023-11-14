@@ -12,7 +12,7 @@ let
 
 in
 stdenv.mkDerivation {
-  name = "initial-heaps";
+  name = "isabelle-initial-heaps";
 
   nativeBuildInputs = [
     isabelle
