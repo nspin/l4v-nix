@@ -17,7 +17,7 @@ stdenv.mkDerivation {
   buildInputs = [
     polyml mlton graphviz
     python3 perl
-    keepBuildTree
+    keepBuildTree # TODO remove
   ];
 
   postPatch = ''
