@@ -10,20 +10,20 @@
 , graphRefineInputs
 }:
 
-stdenv.mkDerivation {
+stdenv.mkDerivation rec {
   name = "bv";
 
   src = graphRefineInputs;
-
-  sourceRoot = "${graphRefineInputs.name}/ARM-O1";
-
-  phases = [ "unpackPhase" "configurePhase" "buildPhase" "installPhase" ];
 
   nativeBuildInputs = [
     isabelle
     python2Packages.python
     python3Packages.python
   ];
+
+  prePatch = ''
+    cd ARM-O1
+  '';
 
   configurePhase = ''
     export HOME=$(mktemp -d --suffix=-home)
@@ -47,4 +47,6 @@ stdenv.mkDerivation {
   installPhase = ''
     cp -r . $out
   '';
+
+  dontFixup = true;
 }
