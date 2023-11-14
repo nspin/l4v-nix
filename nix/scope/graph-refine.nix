@@ -41,7 +41,7 @@ stdenv.mkDerivation {
     script="python ${sources.graphRefineNoSeL4}/graph-refine.py ."
 
     $script
-    $script trace-to:coverage.txt.partial coverage
+    $script trace-to:coverage.txt coverage
     $script trace-to:report.txt ${target}
   '';
 
