@@ -18,11 +18,11 @@ self: with self; {
     graphRefine = lib.cleanSource ../../projects/graph-refine;
     graphRefineNoSeL4 = lib.cleanSourceWith ({
       src = rawSources.graphRefine;
-      filter = type: path: builtins.match ".*/seL4-example/.*" path == null;
+      filter = path: type: builtins.match ".*/seL4-example/.*" path == null;
     });
     graphRefineJustSeL4 = lib.cleanSourceWith ({
       src = rawSources.graphRefine;
-      filter = type: path: path == toString rawSources.graphRefine || builtins.match "/seL4-example/" path != null;
+      filter = path: type: path == rawSources.graphRefine || builtins.match ".*/seL4-example($/.*)" path != null;
     });
   };
 
