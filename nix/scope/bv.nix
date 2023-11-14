@@ -68,18 +68,18 @@ stdenv.mkDerivation {
       export -p >shell-env.sh
     fi
 
-    # HACK
-    substituteInPlace \
-      HOL4/examples/machine-code/graph/decompile.py \
-        --replace \
-          'sys.stdout.write(str)' \
-          's = str; sys.stdout.write(s); sys.stdout.write("\n"); sys.stdout.flush()' \
-        --replace \
-          ' stdout=out, stderr=out,' \
-          '''
-
     cd graph-refine/seL4-example
   '';
+
+    # # HACK
+    # substituteInPlace \
+    #   HOL4/examples/machine-code/graph/decompile.py \
+    #     --replace \
+    #       'sys.stdout.write(str)' \
+    #       's = str; sys.stdout.write(s); sys.stdout.write("\n"); sys.stdout.flush()' \
+    #     --replace \
+    #       ' stdout=out, stderr=out,' \
+    #       '''
 
   buildPhase = ''
     make StackBounds
