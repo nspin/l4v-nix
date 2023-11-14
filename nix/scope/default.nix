@@ -22,7 +22,7 @@ self: with self; {
     });
     graphRefineJustSeL4 = lib.cleanSourceWith ({
       src = rawSources.graphRefine;
-      filter = path: type: path == rawSources.graphRefine || builtins.match ".*/seL4-example($/.*)" path != null;
+      filter = path: type: path == toString rawSources.graphRefine || builtins.match ".*/seL4-example($/.*)" path != null;
     });
   };
 
