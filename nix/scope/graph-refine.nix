@@ -7,10 +7,10 @@
 , graphRefineInputs
 , l4vConfig
 
-, all ? false
+, allFunctions ? false
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation {
   name = "graph-refine";
 
   src = graphRefineInputs;
@@ -42,7 +42,7 @@ stdenv.mkDerivation rec {
     $script
 	  $script trace-to:coverage.txt.partial coverage
     $script trace-to:demo-report.txt deps:Kernel_C.cancelAllIPC
-  '' + lib.optionalString all ''
+  '' + lib.optionalString allFunctions ''
     $script trace-to:report.txt all
   '';
 

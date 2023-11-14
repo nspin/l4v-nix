@@ -71,7 +71,7 @@ self: with self; {
 
   graphRefineInputs = callPackage ./graph-refine-inputs.nix {};
 
-  graphRefile = callPackage ./graph-refine.nix {};
+  graphRefine = callPackage ./graph-refine.nix {};
 
   cached = writeText "cached" (toString [
     isabelle
@@ -79,7 +79,7 @@ self: with self; {
     binaryVerificationInputs
     hol4
     graphRefineInputs
-    graphRefile
+    graphRefine
     l4vSpecs
   ]);
 
