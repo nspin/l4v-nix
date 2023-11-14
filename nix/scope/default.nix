@@ -4,14 +4,12 @@
 , isabelle
 }:
 
+{ l4vConfig
+}:
+
 self: with self; {
 
-  l4vConfig = {
-    arch = "ARM";
-    optLevel = "-O1";
-    targetPrefix = armv7Pkgs.stdenv.cc.targetPrefix;
-    targetCC = armv7Pkgs.stdenv.cc;
-  };
+  inherit l4vConfig;
 
   rawSources = {
     seL4 = lib.cleanSource ../../projects/seL4;
@@ -34,13 +32,6 @@ self: with self; {
       collection-bibtexextra
       ulem
     ;
-  };
-
-  armv7Pkgs = import ../../nixpkgs {
-    crossSystem = {
-      system = "armv7l-linux";
-      config = "armv7l-unknown-linux-gnueabi";
-    };
   };
 
   isabelle-sha1 = callPackage ./isabelle-sha1.nix {};

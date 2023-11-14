@@ -3,8 +3,34 @@ self: super: with self;
 let
   pythonOverrides = callPackage ./python-overrides.nix {};
 
+  mkThis = args: lib.makeScope newScope (callPackage ../scope {} args);
+
+  targetPkgsByL4vArch = {
+    "ARM" = armv7Pkgs;
+  };
+
+  mkL4vConfig = { arch, optLevel ? "-01" }:
+    let
+      targetPkgs = targetPkgsByL4vArch."${arch}";
+    in {
+      inherit arch optLevel;
+      targetPrefix = targetPkgs.stdenv.cc.targetPrefix;
+      targetCC = targetPkgs.stdenv.cc;
+    };
+
 in {
-  this = lib.makeScope newScope (callPackage ../scope {});
+  this = mkThis {
+    l4vConfig = mkL4vConfig {
+      arch = "ARM";
+    };
+  };
+
+  armv7Pkgs = import ../../nixpkgs {
+    crossSystem = {
+      system = "armv7l-linux";
+      config = "armv7l-unknown-linux-gnueabi";
+    };
+  };
 
   python2 = super.python2.override {
     packageOverrides = pythonOverrides;
