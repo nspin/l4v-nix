@@ -12,14 +12,14 @@
 , l4vConfig
 }:
 
-{ buildStandaloneCParser ? false
-, export ? false
-
-, testTargets ? null
+{ testTargets ? null
 , verbose ? false
 , numJobs ? 1
 , timeouts ? false
 , timeoutScale ? null
+
+, buildStandaloneCParser ? false
+, simplExport ? false
 }:
 
 let
@@ -91,7 +91,7 @@ stdenv.mkDerivation {
       make -C tools/c-parser/standalone-parser standalone-cparser
     ''}
 
-    ${lib.optionalString export ''
+    ${lib.optionalString simplExport ''
       make -C proof/ SimplExport
     ''}
   '';

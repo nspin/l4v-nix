@@ -70,7 +70,7 @@ self: with self; {
     #   "SimplExportAndRefine"
     # ];
     buildStandaloneCParser = true;
-    export = true;
+    simplExport = true;
   };
 
   graphRefineInputs = callPackage ./graph-refine-inputs.nix {};
