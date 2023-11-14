@@ -26,6 +26,7 @@ stdenv.mkDerivation {
         --replace '"/bin/cp"' '"cp"'
   '';
 
+  # TODO HOLDIR hack may not be necessary anymore
   configurePhase = ''
     # $HOLDIR hack
     holdir=$NIX_BUILD_TOP/src/HOL4
