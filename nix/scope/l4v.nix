@@ -43,7 +43,7 @@ let
 
 in
 stdenv.mkDerivation {
-  name = "tests";
+  name = "l4v";
 
   inherit src;
 
