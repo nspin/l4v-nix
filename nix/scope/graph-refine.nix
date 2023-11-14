@@ -11,8 +11,6 @@
 { target ? "all"
 }:
 
-assert !allFunctions -> (justFunction != null);
-
 stdenv.mkDerivation {
   name = "graph-refine";
 
