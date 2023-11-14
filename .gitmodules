@@ -6,7 +6,7 @@
 	url = https://github.com/coliasgroup/l4v.git
 [submodule "projects/graph-refine"]
 	path = projects/graph-refine
-	url = https://github.com/seL4/graph-refine.git
+	url = https://github.com/coliasgroup/graph-refine.git
 [submodule "projects/HOL4"]
 	path = projects/HOL4
 	url = https://github.com/seL4/HOL.git

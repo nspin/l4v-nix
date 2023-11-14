@@ -82,7 +82,11 @@ stdenv.mkDerivation {
     #       '''
 
   buildPhase = ''
-    make StackBounds
+    make diff graph-refine-inputs
+  '';
+
+  installPhase = ''
+    cp -r target $out
   '';
 
   dontInstall = true;
