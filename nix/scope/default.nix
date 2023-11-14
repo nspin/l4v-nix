@@ -15,11 +15,22 @@ self: with self; {
     seL4 = lib.cleanSource ../../projects/seL4;
     l4v = lib.cleanSource ../../projects/l4v;
     hol4 = lib.cleanSource ../../projects/HOL4;
-    graph-refine = lib.cleanSource ../../projects/graph-refine;
+    graphRefine = lib.cleanSource ../../projects/graph-refine;
+    graphRefineNoSeL4 = lib.cleanSourceWith ({
+      src = rawSources.graphRefine;
+      filter = type: path: builtins.match "/seL4-example/" == null;
+    });
+    graphRefineJustSeL4 = lib.cleanSourceWith ({
+      src = rawSources.graphRefine;
+      filter = type: path: path == toString graphRefine || builtins.match "/seL4-example/" != null;
+    });
   };
 
+  x = "${rawSources.graphRefineNoSeL4}";
+  y = "${rawSources.graphRefineJustSeL4}";
+
   sources = {
-    inherit (rawSources) hol4 graph-refine;
+    inherit (rawSources) hol4 graphRefine graphRefineNoSeL4 graphRefineJustSeL4;
     seL4 = callPackage ./sel4-source.nix {};
     l4v = callPackage ./l4v-source.nix {};
   };

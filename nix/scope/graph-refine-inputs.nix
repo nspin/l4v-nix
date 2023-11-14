@@ -17,7 +17,7 @@ let
     mkdir $out
     ln -s ${isabelle} $out/isabelle
     cp -r ${sources.seL4} $out/seL4
-    cp -r ${sources.graph-refine} $out/graph-refine
+    cp -r ${sources.graphRefineJustSeL4} $out/graph-refine
     cp -r ${hol4} $out/HOL4
     cp -r ${binaryVerificationInputs} $out/l4v
   '';

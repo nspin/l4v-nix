@@ -38,7 +38,7 @@ stdenv.mkDerivation {
   '';
 
   buildPhase = ''
-    script="python ${sources.graph-refine}/graph-refine.py ."
+    script="python ${sources.graphRefineNoSeL4}/graph-refine.py ."
 
     $script
 	  $script trace-to:coverage.txt.partial coverage
