@@ -26,7 +26,6 @@ let
     cp -r ${bvInput}/.build/src/l4v $out/l4v
     cp -r ${hol4} $out/HOL4
   '';
-    # cp -r ${sources.l4v} $out/l4v
 
 in
 stdenv.mkDerivation {
