@@ -6,9 +6,12 @@
 , sources
 , graphRefineInputs
 , l4vConfig
-
-, allFunctions ? false
 }:
+
+{ target ? "all"
+}:
+
+assert !allFunctions -> (justFunction != null);
 
 stdenv.mkDerivation {
   name = "graph-refine";
@@ -41,9 +44,7 @@ stdenv.mkDerivation {
 
     $script
 	  $script trace-to:coverage.txt.partial coverage
-    $script trace-to:demo-report.txt deps:Kernel_C.cancelAllIPC
-  '' + lib.optionalString allFunctions ''
-    $script trace-to:report.txt all
+    $script trace-to:report.txt ${target}
   '';
 
   installPhase = ''

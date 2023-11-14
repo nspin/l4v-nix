@@ -70,7 +70,15 @@ self: with self; {
 
   graphRefineInputs = callPackage ./graph-refine-inputs.nix {};
 
-  graphRefine = callPackage ./graph-refine.nix {};
+  graphRefineWith = callPackage ./graph-refine.nix {};
+
+  graphRefineDemo = graphRefineWith {
+    target = "deps:Kernel_C.cancelAllIPC";
+  };
+
+  graphRefine = graphRefineWith {
+    target = "all";
+  };
 
   cached = writeText "cached" (toString [
     isabelle
@@ -78,12 +86,13 @@ self: with self; {
     binaryVerificationInputs
     hol4
     graphRefineInputs
-    graphRefine
+    graphRefineDemo
     l4vSpec
   ]);
 
   all = writeText "all" (toString [
     cached
     l4vAllTests
+    graphRefine
   ]);
 }
