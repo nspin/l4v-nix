@@ -1,14 +1,17 @@
-{ stdenv
+{ lib, stdenv
 , python2Packages
 , python3Packages
 , isabelle
 
 , sources
 , graphRefineInputs
+, l4vConfig
+
+, all ? false
 }:
 
 stdenv.mkDerivation rec {
-  name = "bv";
+  name = "graph-refine";
 
   src = graphRefineInputs;
 
@@ -19,18 +22,18 @@ stdenv.mkDerivation rec {
   ];
 
   prePatch = ''
-    cd ARM-O1
+    cd ${l4vConfig.arch}-${l4vConfig.optLevel}
   '';
 
   configurePhase = ''
     export HOME=$(mktemp -d --suffix=-home)
 
-    export L4V_ARCH=ARM
+    export L4V_ARCH=${l4vConfig.arch}
 
-    f=.solverlist
+    solverlist=.solverlist
     cvc4=$(isabelle env bash -c 'echo $CVC4_SOLVER')
-    echo "CVC4: online: $cvc4 --incremental --lang smt --tlimit=5000" >> $f
-    echo "CVC4: offline: $cvc4 --lang smt" >> $f
+    echo "CVC4: online: $cvc4 --incremental --lang smt --tlimit=5000" >> $solverlist
+    echo "CVC4: offline: $cvc4 --lang smt" >> $solverlist
   '';
 
   buildPhase = ''
@@ -39,7 +42,8 @@ stdenv.mkDerivation rec {
     $script
 	  $script trace-to:coverage.txt.partial coverage
     $script trace-to:demo-report.txt deps:Kernel_C.cancelAllIPC
-    # $script trace-to:report.txt all
+  '' + lib.optionalString all ''
+    $script trace-to:report.txt all
   '';
 
   installPhase = ''

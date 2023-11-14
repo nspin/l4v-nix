@@ -6,6 +6,13 @@
 
 self: with self; {
 
+  l4vConfig = {
+    arch = "ARM";
+    optLevel = "O1";
+    targetPrefix = armv7Pkgs.stdenv.cc.targetPrefix;
+    targetCC = armv7Pkgs.stdenv.cc;
+  };
+
   rawSources = {
     seL4 = lib.cleanSource ../../projects/seL4;
     l4v = lib.cleanSource ../../projects/l4v;
