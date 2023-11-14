@@ -68,8 +68,6 @@ stdenv.mkDerivation {
       export -p >shell-env.sh
     fi
 
-    cp -r ${initial-heaps}/* $HOME/.isabelle --no-preserve=ownership,mode
-
     # HACK
     substituteInPlace \
       HOL4/examples/machine-code/graph/decompile.py \
