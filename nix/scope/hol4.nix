@@ -26,21 +26,13 @@ stdenv.mkDerivation {
         --replace '"/bin/cp"' '"cp"'
   '';
 
-  # TODO HOLDIR hack may not be necessary anymore
   configurePhase = ''
-    # $HOLDIR hack
-    holdir=$NIX_BUILD_TOP/src/HOL4
-    mkdir -p $(dirname $holdir)
-    old=$(pwd)
-    cd /
-    mv $old $holdir
-    cd $holdir
-
     poly < tools/smart-configure.sml
   '';
 
   buildPhase = ''
     bin/build
+    holdir=$(pwd)
     (cd examples/machine-code/graph && $holdir/bin/Holmake)
   '';
 
