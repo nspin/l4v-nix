@@ -40,8 +40,9 @@ stdenv.mkDerivation rec {
     script="python ${sources.graph-refine}/graph-refine.py ."
 
     $script
-	  $script trace-to:$@.partial coverage
+	  $script trace-to:coverage.txt.partial coverage
     $script trace-to:demo-report.txt deps:Kernel_C.cancelAllIPC
+    # $script trace-to:report.txt all
   '';
 
   installPhase = ''
