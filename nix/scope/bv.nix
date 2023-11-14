@@ -13,7 +13,9 @@
 stdenv.mkDerivation {
   name = "bv";
 
-  src = "${graphRefineInputs}/ARM-01";
+  src = graphRefineInputs;
+
+  sourceRoot = "${graphRefineInputs.name}/ARM-O1";
 
   phases = [ "unpackPhase" "configurePhase" "buildPhase" "installPhase" ];
 
