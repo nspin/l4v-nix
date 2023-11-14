@@ -48,6 +48,7 @@ stdenv.mkDerivation {
     export TOOLPREFIX=${l4vConfig.targetPrefix}
     export CROSS_COMPILER_PREFIX=${l4vConfig.targetPrefix}
     export L4V_ARCH=${l4vConfig.arch}
+    export CONFIG_OPTIMISATION_LEVEL=${l4vConfig.optLevel}
 
     export OBJDUMP=''${TOOLPREFIX}objdump
 

@@ -22,7 +22,7 @@ stdenv.mkDerivation {
   ];
 
   prePatch = ''
-    cd ${l4vConfig.arch}-${l4vConfig.optLevel}
+    cd ${l4vConfig.arch}${l4vConfig.optLevel}
   '';
 
   configurePhase = ''

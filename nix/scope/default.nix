@@ -8,7 +8,7 @@ self: with self; {
 
   l4vConfig = {
     arch = "ARM";
-    optLevel = "O1";
+    optLevel = "-O1";
     targetPrefix = armv7Pkgs.stdenv.cc.targetPrefix;
     targetCC = armv7Pkgs.stdenv.cc;
   };
