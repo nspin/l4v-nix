@@ -1,6 +1,7 @@
 { lib
 , writeText
 , texlive
+, isabelle
 }:
 
 self: with self; {
@@ -18,7 +19,7 @@ self: with self; {
     l4v = callPackage ./l4v-source.nix {};
   };
 
-  texlive-env = with texlive; combine {
+  texliveEnv = with texlive; combine {
     inherit
       collection-fontsrecommended
       collection-latexextra
@@ -35,38 +36,48 @@ self: with self; {
     };
   };
 
-  hol4 = callPackage ./hol4.nix {};
-
   isabelle-sha1 = callPackage ./isabelle-sha1.nix {};
 
-  initial-heaps = callPackage ./initial-heaps.nix {};
+  isabelleInitialHeaps = callPackage ./isabelle-initial-heaps.nix {};
 
-  specs = callPackage ./specs.nix {};
+  hol4 = callPackage ./hol4.nix {};
 
-  mkTests = callPackage ./tests.nix {};
+  l4vSpecs = callPackage ./l4v-specs.nix {};
 
-  tests = mkTests {
-    # verbose = true;
+  l4vWith = callPackage ./l4v.nix {};
+
+  l4vAllTests = l4vWith {
     testTargets = [
       "CRefine"
       "SimplExportAndRefine"
     ];
   };
 
-  bvInput = mkTests {
+  binaryVerificationInputs = l4vWith {
+    # testTargets = [
+    #   "CRefine"
+    #   "SimplExportAndRefine"
+    # ];
     buildStandaloneCParser = true;
     export = true;
   };
 
   graphRefineInputs = callPackage ./graph-refine-inputs.nix {};
 
-  bv = callPackage ./bv.nix {};
+  graphRefile = callPackage ./graph-refine.nix {};
 
-  all = writeText "all" (lib.concatMapStrings (x: "${x}\n") [
-    specs
-    tests
-    bvInput
+  cached = writeText "cached" (toString [
+    isabelle
+    isabelleInitialHeaps
+    binaryVerificationInputs
     hol4
-    bv
+    graphRefineInputs
+    graphRefile
+    l4vSpecs
+  ]);
+
+  all = writeText "all" (toString [
+    cached
+    l4vAllTests
   ]);
 }

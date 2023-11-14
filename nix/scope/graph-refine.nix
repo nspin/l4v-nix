@@ -1,7 +1,4 @@
 { stdenv
-, runCommand
-, rsync, git, perl, hostname, which, cmake, ninja, dtc, libxml2
-, polyml, mlton
 , python2Packages
 , python3Packages
 , isabelle

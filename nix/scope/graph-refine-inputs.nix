@@ -5,16 +5,14 @@
 , python2Packages
 , python3Packages
 , isabelle
-, keepBuildTree
 
 , strace
 
 , sources
-, texlive-env
-, initial-heaps
-, hol4
 , armv7Pkgs
-, bvInput
+, texliveEnv
+, hol4
+, binaryVerificationInputs
 }:
 
 let
@@ -23,7 +21,7 @@ let
     ln -s ${isabelle} $out/isabelle
     cp -r ${sources.seL4} $out/seL4
     cp -r ${sources.graph-refine} $out/graph-refine
-    cp -r ${bvInput}/.build/src/l4v $out/l4v
+    cp -r ${binaryVerificationInputs}/.build/src/l4v $out/l4v
     cp -r ${hol4} $out/HOL4
   '';
 
@@ -44,9 +42,7 @@ stdenv.mkDerivation {
 
     strace
 
-    texlive-env
-
-    # keepBuildTree # HACK
+    texliveEnv
   ];
 
   postPatch = ''

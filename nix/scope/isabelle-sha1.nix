@@ -10,11 +10,8 @@ stdenv.mkDerivation {
     sha256 = "sha256-4sxHzU/ixMAkSo67FiE6/ZqWJq9Nb9OMNhMoXH2bEy4=";
   };
 
-  buildPhase = (if stdenv.isDarwin then ''
-    LDFLAGS="-dynamic -undefined dynamic_lookup -lSystem"
-  '' else ''
+  buildPhase = ''
     LDFLAGS="-fPIC -shared"
-  '') + ''
     CFLAGS="-fPIC -I."
     $CC $CFLAGS -c sha1.c -o sha1.o
     $LD $LDFLAGS sha1.o -o libsha1.so

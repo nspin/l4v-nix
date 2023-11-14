@@ -7,8 +7,8 @@
 , keepBuildTree
 
 , sources
-, initial-heaps
-, texlive-env
+, isabelleInitialHeaps
+, texliveEnv
 , armv7Pkgs
 }:
 
@@ -62,7 +62,7 @@ stdenv.mkDerivation {
 
     python3Packages.sel4-deps
 
-    texlive-env
+    texliveEnv
 
     # TODO remove
     keepBuildTree # HACK
@@ -77,7 +77,7 @@ stdenv.mkDerivation {
     export CROSS_COMPILER_PREFIX=${armv7Pkgs.stdenv.cc.targetPrefix}
     export L4V_ARCH=ARM
 
-    cp -r ${initial-heaps}/* $HOME/.isabelle --no-preserve=ownership,mode
+    cp -r ${isabelleInitialHeaps}/* $HOME/.isabelle --no-preserve=ownership,mode
 
     # TODO remove
     mkdir -p $HOME/.cabal

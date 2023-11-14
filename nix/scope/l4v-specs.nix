@@ -1,13 +1,13 @@
 { lib, stdenv
 , buildPackages
-, python3Packages
 , rsync, git, hostname
+, python3Packages
 , perl
 , isabelle
 
 , sources
-, initial-heaps
-, texlive-env
+, isabelleInitialHeaps
+, texliveEnv
 }:
 
 # TODO merge with tests.nix
@@ -21,6 +21,7 @@ stdenv.mkDerivation {
 
   src = sources.l4v;
 
+  # TODO remove
   depsBuildBuild = [
     buildPackages.stdenv.cc
   ];
@@ -29,7 +30,7 @@ stdenv.mkDerivation {
     rsync git hostname
     perl
     python3Packages.sel4-deps
-    texlive-env
+    texliveEnv
   ];
 
   postPatch = ''
@@ -42,7 +43,7 @@ stdenv.mkDerivation {
   configurePhase = ''
     export HOME=$(mktemp -d --suffix=-home)
 
-    cp -r ${initial-heaps}/* $HOME/.isabelle --no-preserve=ownership,mode
+    cp -r ${isabelleInitialHeaps}/* $HOME/.isabelle --no-preserve=ownership,mode
 
     ln -sf ${isabelle} isabelle
   '';

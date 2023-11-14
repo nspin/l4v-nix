@@ -1,7 +1,6 @@
 self: super: with self;
 
 let
-
   pythonOverrides = callPackage ./python-overrides.nix {};
 
 in {

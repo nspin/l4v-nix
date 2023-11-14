@@ -1,4 +1,7 @@
-{ lib, stdenv, isabelle, hostname, perl }:
+{ lib, stdenv
+, hostname, perl
+, isabelle
+}:
 
 let
   sessions = [

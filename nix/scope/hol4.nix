@@ -1,9 +1,7 @@
 { stdenv
-, polyml
-, mlton
+, polyml, mlton
 , graphviz
-, python3
-, perl
+, python3, perl
 , keepBuildTree
 
 , sources
@@ -15,7 +13,8 @@ stdenv.mkDerivation {
   src = sources.hol4;
 
   buildInputs = [
-    polyml mlton graphviz
+    polyml mlton
+    graphviz
     python3 perl
     keepBuildTree # TODO remove
   ];

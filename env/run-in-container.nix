@@ -6,6 +6,11 @@
 , busybox, bashInteractive
 }:
 
+# NOTE
+# export out=$(pwd)/out && (set -e && genericBuild)
+
+# TODO: investigate issue with substituteInPlace
+
 let
   uid = "1000";
   gid = "100";
@@ -127,6 +132,3 @@ let
 in {
   inherit image env run;
 }
-
-# NOTE
-# export out=$(pwd)/out && (set -e && genericBuild)

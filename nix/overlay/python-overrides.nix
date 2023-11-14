@@ -3,7 +3,6 @@
 self: super: with self;
 
 {
-
   pyfdt = buildPythonPackage rec {
     pname = "pyfdt";
     version = "0.3";
@@ -96,5 +95,4 @@ self: super: with self;
       setuptools
     ];
   };
-
 }
