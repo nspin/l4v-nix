@@ -58,6 +58,8 @@ self: with self; {
     export = true;
   };
 
+  graphRefineInputs = callPackage ./graph-refine-inputs.nix {};
+
   bv = callPackage ./bv.nix {};
 
   all = writeText "all" (lib.concatMapStrings (x: "${x}\n") [

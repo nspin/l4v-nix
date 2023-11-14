@@ -29,6 +29,8 @@ let
 
 in
 stdenv.mkDerivation {
+
+  # TODO rename
   name = "bv";
 
   inherit src;
