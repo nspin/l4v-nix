@@ -59,27 +59,12 @@ stdenv.mkDerivation {
 
     export TOOLPREFIX=${armv7Pkgs.stdenv.cc.targetPrefix}
     export CROSS_COMPILER_PREFIX=${armv7Pkgs.stdenv.cc.targetPrefix}
-
     export L4V_ARCH=ARM
 
     export OBJDUMP=''${TOOLPREFIX}objdump
 
-    if [ -n "$IN_NIX_SHELL" ]; then
-      export -p >shell-env.sh
-    fi
-
     cd graph-refine/seL4-example
   '';
-
-    # # HACK
-    # substituteInPlace \
-    #   HOL4/examples/machine-code/graph/decompile.py \
-    #     --replace \
-    #       'sys.stdout.write(str)' \
-    #       's = str; sys.stdout.write(s); sys.stdout.write("\n"); sys.stdout.flush()' \
-    #     --replace \
-    #       ' stdout=out, stderr=out,' \
-    #       '''
 
   buildPhase = ''
     make diff graph-refine-inputs
@@ -89,6 +74,19 @@ stdenv.mkDerivation {
     cp -r target $out
   '';
 
-  dontInstall = true;
   dontFixup = true;
 }
+
+# if [ -n "$IN_NIX_SHELL" ]; then
+#   export -p >shell-env.sh
+# fi
+
+# # HACK
+# substituteInPlace \
+#   HOL4/examples/machine-code/graph/decompile.py \
+#     --replace \
+#       'sys.stdout.write(str)' \
+#       's = str; sys.stdout.write(s); sys.stdout.write("\n"); sys.stdout.flush()' \
+#     --replace \
+#       ' stdout=out, stderr=out,' \
+#       '''
