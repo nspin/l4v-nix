@@ -68,6 +68,9 @@ stdenv.mkDerivation {
     export CROSS_COMPILER_PREFIX=${l4vConfig.targetPrefix}
     export L4V_ARCH=${l4vConfig.arch}
 
+    mkdir -p $HOME/.cabal
+    touch $HOME/.cabal/config
+
     cp -r ${isabelleInitialHeaps}/* $HOME/.isabelle --no-preserve=ownership,mode
   '';
 
