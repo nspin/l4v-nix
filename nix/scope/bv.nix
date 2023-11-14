@@ -5,44 +5,44 @@
 , python2Packages
 , python3Packages
 , isabelle
-, keepBuildTree
 
 , sources
-, armv7Pkgs
 , graphRefineInputs
 }:
 
 stdenv.mkDerivation {
   name = "bv";
 
-  src = sources.graph-refine;
+  src = "${graphRefineInputs}/ARM-01";
+
+  phases = [ "unpackPhase" "configurePhase" "buildPhase" "installPhase" ];
 
   nativeBuildInputs = [
+    isabelle
     python2Packages.python
     python3Packages.python
-
-    # keepBuildTree # HACK
   ];
 
-  postPatch = ''
-    patchShebangs .
-  '';
-
   configurePhase = ''
+    export HOME=$(mktemp -d --suffix=-home)
+
     export L4V_ARCH=ARM
 
-    cd graph-refine/seL4-example
-
-    cp -r ${graphRefineInputs} target --no-preserve=owner,mode
+    f=.solverlist
+    cvc4=$(isabelle env bash -c 'echo $CVC4_SOLVER')
+    echo "CVC4: online: $cvc4 --incremental --lang smt --tlimit=5000" >> $f
+    echo "CVC4: offline: $cvc4 --lang smt" >> $f
   '';
 
   buildPhase = ''
-    make StackBounds coverage target/ARM-O1/demo-report.txt
+    script="python ${sources.graph-refine}/graph-refine.py ."
+
+    $script
+	  $script trace-to:$@.partial coverage
+    $script trace-to:demo-report.txt deps:Kernel_C.cancelAllIPC
   '';
 
   installPhase = ''
-    cp -r target $out
+    cp -r . $out
   '';
-
-  dontFixup = true;
 }
