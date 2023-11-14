@@ -26,9 +26,6 @@ self: with self; {
     });
   };
 
-  x = "${rawSources.graphRefineNoSeL4}";
-  y = "${rawSources.graphRefineJustSeL4}";
-
   sources = {
     inherit (rawSources) hol4 graphRefine graphRefineNoSeL4 graphRefineJustSeL4;
     seL4 = callPackage ./sel4-source.nix {};
