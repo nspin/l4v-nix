@@ -57,21 +57,25 @@ self: with self; {
     ];
   };
 
-  l4vCoreTests = l4vWith {
+  l4vAllTests = l4vWith {
+    testTargets = [];
+    buildStandaloneCParser = true;
+  };
+
+  fullBinaryVerificationInputs = l4vWith {
     testTargets = [
       "CRefine"
       "SimplExportAndRefine"
     ];
+    buildStandaloneCParser = true;
   };
 
-  binaryVerificationInputs = l4vWith {
-    # testTargets = [
-    #   "CRefine"
-    #   "SimplExportAndRefine"
-    # ];
+  minimalBinaryVerificationInputs = l4vWith {
     buildStandaloneCParser = true;
     simplExport = true;
   };
+
+  binaryVerificationInputs = minimalBinaryVerificationInputs;
 
   graphRefineInputs = callPackage ./graph-refine-inputs.nix {};
 
@@ -89,6 +93,6 @@ self: with self; {
 
   all = writeText "all" (toString [
     cached
-    l4vCoreTests
+    l4vAllTests
   ]);
 }
