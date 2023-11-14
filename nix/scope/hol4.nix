@@ -20,9 +20,10 @@ stdenv.mkDerivation {
   postPatch = ''
     patchShebangs .
 
-    substituteInPlace tools/Holmake/Holmake_types.sml \
-      --replace '"/bin/mv"' '"mv"' \
-      --replace '"/bin/cp"' '"cp"'
+    substituteInPlace \
+      tools/Holmake/Holmake_types.sml \
+        --replace '"/bin/mv"' '"mv"' \
+        --replace '"/bin/cp"' '"cp"'
   '';
 
   configurePhase = ''
