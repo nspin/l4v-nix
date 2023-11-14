@@ -6,13 +6,10 @@
 , python3Packages
 , isabelle
 
-, strace
-
 , sources
-, armv7Pkgs
-, texliveEnv
 , hol4
 , binaryVerificationInputs
+, l4vConfig
 }:
 
 let
@@ -20,16 +17,14 @@ let
     mkdir $out
     ln -s ${isabelle} $out/isabelle
     cp -r ${sources.seL4} $out/seL4
-    cp -r ${sources.graph-refine} $out/graph-refine
-    cp -r ${binaryVerificationInputs}/.build/src/l4v $out/l4v
+    cp -r ${sources.graphRefineJustSeL4} $out/graph-refine
     cp -r ${hol4} $out/HOL4
+    cp -r ${binaryVerificationInputs} $out/l4v
   '';
 
 in
 stdenv.mkDerivation {
-
-  # TODO rename
-  name = "bv";
+  name = "graph-refine-inputs";
 
   inherit src;
 
@@ -38,11 +33,7 @@ stdenv.mkDerivation {
     polyml mlton
     python2Packages.python
     python3Packages.sel4-deps
-    armv7Pkgs.stdenv.cc
-
-    strace
-
-    texliveEnv
+    l4vConfig.targetCC
   ];
 
   postPatch = ''
@@ -54,9 +45,10 @@ stdenv.mkDerivation {
 
     export ISABELLE_HOME=$(./isabelle/bin/isabelle env sh -c 'echo $ISABELLE_HOME')
 
-    export TOOLPREFIX=${armv7Pkgs.stdenv.cc.targetPrefix}
-    export CROSS_COMPILER_PREFIX=${armv7Pkgs.stdenv.cc.targetPrefix}
-    export L4V_ARCH=ARM
+    export TOOLPREFIX=${l4vConfig.targetPrefix}
+    export CROSS_COMPILER_PREFIX=${l4vConfig.targetPrefix}
+    export L4V_ARCH=${l4vConfig.arch}
+    export CONFIG_OPTIMISATION_LEVEL=${l4vConfig.optLevel}
 
     export OBJDUMP=''${TOOLPREFIX}objdump
 

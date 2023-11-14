@@ -2,7 +2,6 @@
 , polyml, mlton
 , graphviz
 , python3, perl
-, keepBuildTree
 
 , sources
 }:
@@ -16,32 +15,31 @@ stdenv.mkDerivation {
     polyml mlton
     graphviz
     python3 perl
-    keepBuildTree # TODO remove
   ];
 
   postPatch = ''
     patchShebangs .
 
-    substituteInPlace tools/Holmake/Holmake_types.sml \
-      --replace '"/bin/mv"' '"mv"' \
-      --replace '"/bin/cp"' '"cp"'
+    substituteInPlace \
+      tools/Holmake/Holmake_types.sml \
+        --replace '"/bin/mv"' '"mv"' \
+        --replace '"/bin/cp"' '"cp"'
   '';
 
   configurePhase = ''
     # $HOLDIR hack
+    holdir=$NIX_BUILD_TOP/src/HOL4
+    mkdir -p $(dirname $holdir)
     old=$(pwd)
-    cd $NIX_BUILD_TOP
-    new=src/HOL4
-    mkdir -p $(dirname $new)
-    mv $old $new
-    cd $new
+    cd /
+    mv $old $holdir
+    cd $holdir
 
     poly < tools/smart-configure.sml
   '';
 
   buildPhase = ''
     bin/build
-    holdir=$(pwd)
     (cd examples/machine-code/graph && $holdir/bin/Holmake)
   '';
 

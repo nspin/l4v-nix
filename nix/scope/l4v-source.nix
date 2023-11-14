@@ -29,7 +29,6 @@ stdenv.mkDerivation {
   '';
 
   installPhase = ''
-    mkdir $out
-    mv * $out
+    cp -r . $out
   '';
 }

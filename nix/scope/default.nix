@@ -4,17 +4,30 @@
 , isabelle
 }:
 
+{ l4vConfig
+}:
+
 self: with self; {
+
+  inherit l4vConfig;
 
   rawSources = {
     seL4 = lib.cleanSource ../../projects/seL4;
     l4v = lib.cleanSource ../../projects/l4v;
     hol4 = lib.cleanSource ../../projects/HOL4;
-    graph-refine = lib.cleanSource ../../projects/graph-refine;
+    graphRefine = lib.cleanSource ../../projects/graph-refine;
+    graphRefineNoSeL4 = lib.cleanSourceWith ({
+      src = rawSources.graphRefine;
+      filter = path: type: builtins.match ".*/seL4-example/.*" path == null;
+    });
+    graphRefineJustSeL4 = lib.cleanSourceWith ({
+      src = rawSources.graphRefine;
+      filter = path: type: builtins.match ".*/seL4-example(/.*)?" path != null;
+    });
   };
 
   sources = {
-    inherit (rawSources) hol4 graph-refine;
+    inherit (rawSources) hol4 graphRefine graphRefineNoSeL4 graphRefineJustSeL4;
     seL4 = callPackage ./sel4-source.nix {};
     l4v = callPackage ./l4v-source.nix {};
   };
@@ -29,42 +42,51 @@ self: with self; {
     ;
   };
 
-  armv7Pkgs = import ../../nixpkgs {
-    crossSystem = {
-      system = "armv7l-linux";
-      config = "armv7l-unknown-linux-gnueabi";
-    };
-  };
-
   isabelle-sha1 = callPackage ./isabelle-sha1.nix {};
 
   isabelleInitialHeaps = callPackage ./isabelle-initial-heaps.nix {};
 
   hol4 = callPackage ./hol4.nix {};
 
-  l4vSpecs = callPackage ./l4v-specs.nix {};
-
   l4vWith = callPackage ./l4v.nix {};
 
+  l4vSpec = l4vWith {
+    testTargets = [
+      "ASpec"
+    ];
+  };
+
   l4vAllTests = l4vWith {
+    testTargets = [];
+    buildStandaloneCParser = true;
+  };
+
+  fullBinaryVerificationInputs = l4vWith {
     testTargets = [
       "CRefine"
       "SimplExportAndRefine"
     ];
+    buildStandaloneCParser = true;
   };
 
-  binaryVerificationInputs = l4vWith {
-    # testTargets = [
-    #   "CRefine"
-    #   "SimplExportAndRefine"
-    # ];
+  minimalBinaryVerificationInputs = l4vWith {
     buildStandaloneCParser = true;
-    export = true;
+    simplExport = true;
   };
+
+  binaryVerificationInputs = minimalBinaryVerificationInputs;
 
   graphRefineInputs = callPackage ./graph-refine-inputs.nix {};
 
-  graphRefile = callPackage ./graph-refine.nix {};
+  graphRefineWith = callPackage ./graph-refine.nix {};
+
+  graphRefineDemo = graphRefineWith {
+    target = "deps:Kernel_C.cancelAllIPC";
+  };
+
+  graphRefine = graphRefineWith {
+    target = "all";
+  };
 
   cached = writeText "cached" (toString [
     isabelle
@@ -72,12 +94,13 @@ self: with self; {
     binaryVerificationInputs
     hol4
     graphRefineInputs
-    graphRefile
-    l4vSpecs
+    graphRefineDemo
+    l4vSpec
   ]);
 
   all = writeText "all" (toString [
     cached
     l4vAllTests
+    graphRefine
   ]);
 }

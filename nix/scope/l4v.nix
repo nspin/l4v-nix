@@ -1,6 +1,6 @@
-{ stdenv, lib
+{ lib, stdenv
 , runCommand
-, python2Packages, python3Packages
+, python3Packages
 , haskell, haskellPackages
 , rsync, git, perl, hostname, which, cmake, ninja, dtc, libxml2
 , isabelle, mlton
@@ -9,41 +9,34 @@
 , sources
 , isabelleInitialHeaps
 , texliveEnv
-, armv7Pkgs
+, l4vConfig
 }:
 
-{ buildStandaloneCParser ? false
-, export ? false
-
-, testTargets ? null
+{ testTargets ? null
 , verbose ? false
-, numJobs ? 1 # "$NIX_BUILD_CORES"
+, numJobs ? 1
 , timeouts ? false
 , timeoutScale ? null
+
+, buildStandaloneCParser ? false
+, simplExport ? false
 }:
-
-# HACK
-assert timeoutScale == null;
-
-# TODO
 
 let
   src = runCommand "src" {} ''
     mkdir $out
-    cp -r ${sources.l4v} $out/l4v
-    cp -r ${sources.seL4} $out/seL4
     ln -s ${isabelle} $out/isabelle
+    cp -r ${sources.seL4} $out/seL4
+    cp -r ${sources.l4v} $out/l4v
   '';
 
-  oldHaskellPackages = haskell.packages.ghc865;
-
-  ghcWithPackages = oldHaskellPackages.ghcWithPackages (p: with p; [
+  ghcWithPackages = haskell.packages.ghc865.ghcWithPackages (p: with p; [
     mtl_2_2_2
   ]);
 
 in
 stdenv.mkDerivation {
-  name = "tests";
+  name = "l4v";
 
   inherit src;
 
@@ -52,38 +45,33 @@ stdenv.mkDerivation {
 
     mlton
 
-    armv7Pkgs.stdenv.cc
-
     ghcWithPackages
     haskellPackages.cabal-install
-
-    # TODO remove
-    # python2Packages.sel4-deps
 
     python3Packages.sel4-deps
 
     texliveEnv
 
-    # TODO remove
-    keepBuildTree # HACK
+    l4vConfig.targetCC
   ];
+
+  postPatch = ''
+    cd l4v
+  '';
 
   configurePhase = ''
     export HOME=$(mktemp -d --suffix=-home)
 
     export ISABELLE_HOME=$(./isabelle/bin/isabelle env sh -c 'echo $ISABELLE_HOME')
 
-    export TOOLPREFIX=${armv7Pkgs.stdenv.cc.targetPrefix}
-    export CROSS_COMPILER_PREFIX=${armv7Pkgs.stdenv.cc.targetPrefix}
-    export L4V_ARCH=ARM
+    export TOOLPREFIX=${l4vConfig.targetPrefix}
+    export CROSS_COMPILER_PREFIX=${l4vConfig.targetPrefix}
+    export L4V_ARCH=${l4vConfig.arch}
 
-    cp -r ${isabelleInitialHeaps}/* $HOME/.isabelle --no-preserve=ownership,mode
-
-    # TODO remove
     mkdir -p $HOME/.cabal
     touch $HOME/.cabal/config
 
-    cd l4v
+    cp -r ${isabelleInitialHeaps}/* $HOME/.isabelle --no-preserve=ownership,mode
   '';
 
   buildPhase = ''
@@ -94,18 +82,27 @@ stdenv.mkDerivation {
         ${lib.optionalString (timeoutScale != null) "--scale-timeouts ${toString timeoutScale}"} \
         -j ${toString numJobs} \
         ${lib.concatStringsSep " " testTargets}
+
+      ${lib.optionalString (lib.elem "ASpec" testTargets) ''
+        cp -v \
+          $HOME/.isabelle/Isabelle2020/browser_info/Specifications/ASpec/document.pdf \
+          spec/abstract
+      ''}
     ''}
 
     ${lib.optionalString buildStandaloneCParser ''
       make -C tools/c-parser/standalone-parser standalone-cparser
     ''}
 
-    ${lib.optionalString export ''
+    ${lib.optionalString simplExport ''
       make -C proof/ SimplExport
     ''}
   '';
 
-  dontInstall = true;
+  installPhase = ''
+    cp -r . $out
+  '';
+
   dontFixup = true;
 }
 

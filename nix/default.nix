@@ -4,6 +4,6 @@ let
       (import ./overlay)
     ];
   };
-in pkgs.this // {
+in pkgs.this.default // {
   inherit pkgs;
 }
