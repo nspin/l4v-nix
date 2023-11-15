@@ -1,7 +1,8 @@
 { stdenv, lib, fetchpatch, fetchFromGitHub, gmp, libffi }:
 
 stdenv.mkDerivation rec {
-  name = "polyml";
+  pname = "polyml";
+  version = "5.8.1";
 
   src = fetchFromGitHub {
     owner = "seL4";

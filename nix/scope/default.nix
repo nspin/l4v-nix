@@ -3,6 +3,7 @@
 , texlive
 , mlton20180207
 , openjdk11
+, libffi_3_3
 , z3_4_8_5
 }:
 
@@ -65,7 +66,12 @@ self: with self; {
     # z3 = z3_4_8_5; # ideally z3_4_4_0
     z3 = oldNixpkgs.z3_4_4_0;
     polyml = polyml.overrideDerivation (attrs: {
-      configureFlags = [ "--enable-intinf-as-int" "--with-gmp" "--disable-shared" ];
+      configureFlags = [
+        "--enable-intinf-as-int"
+        "--with-gmp"
+        "--disable-shared"
+        # "--with-system-libffi"
+      ];
     });
   };
 
@@ -73,7 +79,9 @@ self: with self; {
 
   mlton = mlton20180207;
 
-  polyml = callPackage ./polyml.nix {};
+  polyml = callPackage ./polyml.nix {
+    libffi = libffi_3_3;
+  };
 
   hol4 = callPackage ./hol4.nix {};
 
