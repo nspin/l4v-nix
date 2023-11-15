@@ -7,6 +7,10 @@
 { l4vConfig
 }:
 
+let
+  bv = l4vConfig.arch == "ARM";
+
+in
 self: with self; {
 
   inherit l4vConfig;
@@ -56,17 +60,18 @@ self: with self; {
     ];
   };
 
-  l4vAllTests = l4vWith {
+  l4vAll = l4vWith {
     testTargets = [];
-    buildStandaloneCParser = true;
+    buildStandaloneCParser = bv;
   };
 
-  fullBinaryVerificationInputs = l4vWith {
+  cProofs = l4vWith {
     testTargets = [
       "CRefine"
+    ] ++ lib.optionals bv [
       "SimplExportAndRefine"
     ];
-    buildStandaloneCParser = true;
+    buildStandaloneCParser = bv;
   };
 
   minimalBinaryVerificationInputs = l4vWith {
@@ -80,12 +85,26 @@ self: with self; {
 
   graphRefineWith = callPackage ./graph-refine.nix {};
 
-  graphRefineDemo = graphRefineWith {
-    target = "deps:Kernel_C.cancelAllIPC";
-  };
-
-  graphRefine = graphRefineWith {
-    target = "all";
+  graphRefine = rec {
+    justStackBounds = graphRefineWith {};
+    coverage = graphRefineWith {
+      targetDir = justStackBounds;
+      commands = [
+        [ "trace-to:coverage.txt" "coverage" ]
+      ];
+    };
+    demo = graphRefineWith {
+      targetDir = justStackBounds;
+      commands = [
+        [ "trace-to:report.txt" "deps:Kernel_C.cancelAllIPC" ]
+      ];
+    };
+    all = graphRefineWith {
+      targetDir = justStackBounds;
+      args = [
+        [ "trace-to:report.txt" "all" ]
+      ];
+    };
   };
 
   cached = writeText "cached" (toString [
@@ -94,13 +113,15 @@ self: with self; {
     binaryVerificationInputs
     hol4
     graphRefineInputs
-    graphRefineDemo
+    graphRefine.justStackBounds
+    graphRefine.coverage
+    graphRefine.demo
     l4vSpec
   ]);
 
   all = writeText "all" (toString [
     cached
     l4vAllTests
-    graphRefine
+    graphRefine.all
   ]);
 }

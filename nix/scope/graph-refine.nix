@@ -1,6 +1,7 @@
 { lib, stdenv
-, python2Packages
-, python3Packages
+, runCommand
+, python2
+, python3
 , isabelle
 
 , sources
@@ -8,46 +9,48 @@
 , l4vConfig
 }:
 
-{ target ? "all"
+{ targetDir ? "${graphRefineInputs}/${l4vConfig.arch}${l4vConfig.optLevel}"
+, commands ? [ [] ]
 }:
 
+let
+  solverList = runCommand "solverlist" {
+    nativeBuildInputs = [
+      isabelle
+    ];
+  } ''
+    export HOME=$(mktemp -d --suffix=-home)
+
+    cvc4=$(isabelle env bash -c 'echo $CVC4_SOLVER')
+    cat > $out << EOF
+    CVC4: online: $cvc4 --incremental --lang smt --tlimit=5000
+    CVC4: offline: $cvc4 --lang smt
+    EOF
+  '';
+
+in
 stdenv.mkDerivation {
   name = "graph-refine";
 
-  src = graphRefineInputs;
-
   nativeBuildInputs = [
     isabelle
-    python2Packages.python
-    python3Packages.python
+    python2
+    python3
   ];
 
-  prePatch = ''
-    cd ${l4vConfig.arch}${l4vConfig.optLevel}
-  '';
+  buildCommand = ''
+    ln -s ${solverList} .solverlist
+    cp -r --no-preserve=owner,mode ${targetDir} target
+    cd target
 
-  configurePhase = ''
-    export HOME=$(mktemp -d --suffix=-home)
+    ${lib.flip lib.concatMapStrings commands (args: ''
+      python ${sources.graphRefineNoSeL4}/graph-refine.py . ${lib.concatStringsSep " " args}
+    '')}
 
-    export L4V_ARCH=${l4vConfig.arch}
-
-    solverlist=.solverlist
-    cvc4=$(isabelle env bash -c 'echo $CVC4_SOLVER')
-    echo "CVC4: online: $cvc4 --incremental --lang smt --tlimit=5000" >> $solverlist
-    echo "CVC4: offline: $cvc4 --lang smt" >> $solverlist
-  '';
-
-  buildPhase = ''
-    script="python ${sources.graphRefineNoSeL4}/graph-refine.py ."
-
-    $script
-    $script trace-to:coverage.txt coverage
-    $script trace-to:report.txt ${target}
-  '';
-
-  installPhase = ''
     cp -r . $out
   '';
 
-  dontFixup = true;
+  passthru = {
+    inherit solverList;
+  };
 }
