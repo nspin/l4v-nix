@@ -9,7 +9,7 @@ let
     "ARM" = armv7Pkgs;
   };
 
-  mkL4vConfig = { arch, optLevel ? "-01" }:
+  mkL4vConfig = { arch, optLevel ? "-O1" }:
     let
       targetPkgs = targetPkgsByL4vArch."${arch}";
     in {
