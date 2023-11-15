@@ -21,12 +21,9 @@ let
     "X64" = x64Pkgs;
   };
 
-  armv7Pkgs = import ../../nixpkgs {
-    crossSystem = {
-      system = "armv7l-linux";
-      config = "armv7l-unknown-linux-gnueabi";
-    };
-  };
+  armv7Pkgs = pkgsCross.arm-embedded;
+
+  riscv64Pkgs = pkgsCross.riscv64-embedded;
 
   x64Pkgs = self;
 
