@@ -3,6 +3,8 @@
 , rawSources
 }:
 
+# TODO use applyPatches
+
 stdenv.mkDerivation {
   name = "l4v-source";
 

@@ -1,10 +1,8 @@
-{ gcc49Stdenv, fetchFromGitHub, python2 }:
+{ stdenv, fetchFromGitHub, python2 }:
 
-gcc49Stdenv.mkDerivation rec {
+stdenv.mkDerivation rec {
   pname = "z3";
   version = "4.4.0";
-
-  nativeBuildInputs = [ python2 ];
 
   src = fetchFromGitHub {
     owner  = "Z3Prover";
@@ -12,6 +10,8 @@ gcc49Stdenv.mkDerivation rec {
     rev    = "z3-${version}";
     sha256 = "1xllvq9fcj4cz34biq2a9dn2sj33bdgrzyzkj26hqw70wkzv1kzx";
   };
+
+  nativeBuildInputs = [ python2 ];
 
   configurePhase = ''
     python scripts/mk_make.py --prefix=$out

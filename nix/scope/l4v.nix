@@ -4,7 +4,6 @@
 , haskell, haskellPackages
 , rsync, git, perl, hostname, which, cmake, ninja, dtc, libxml2
 , isabelle, mlton
-, keepBuildTree
 
 , sources
 , isabelleInitialHeaps
@@ -35,8 +34,6 @@ let
     cp -r ${sources.l4v} $out/l4v
   '';
 
-  ghcWithPackages = ghcWithPackagesForL4v;
-
 in
 stdenv.mkDerivation {
 
@@ -50,7 +47,7 @@ stdenv.mkDerivation {
 
     mlton
 
-    ghcWithPackages
+    ghcWithPackagesForL4v
     haskellPackages.cabal-install
 
     python3Packages.sel4-deps

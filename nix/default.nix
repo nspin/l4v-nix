@@ -5,7 +5,7 @@ let
     ];
     config = {
       permittedInsecurePackages = [
-        "python-2.7.18.7"
+        pkgs.python2.name
       ];
     };
   };

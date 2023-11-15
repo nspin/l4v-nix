@@ -14,6 +14,9 @@
 }:
 
 let
+  # TODO
+  # - use nixpkgs cvc4
+  # - try cvc5
   solverList = runCommand "solverlist" {
     nativeBuildInputs = [
       isabelle

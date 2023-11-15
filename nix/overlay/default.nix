@@ -56,4 +56,8 @@ in {
   pythonPackagesExtensions = super.pythonPackagesExtensions ++ [
     (callPackage ./python-overrides.nix {})
   ];
+
+  mlton = throw "fallthrough";
+  # polyml = throw "fallthrough"; # TODO
+  isabelle = throw "fallthrough";
 }

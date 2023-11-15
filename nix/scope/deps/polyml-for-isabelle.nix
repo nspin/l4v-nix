@@ -4,8 +4,6 @@ stdenv.mkDerivation rec {
   pname = "polyml";
   version = "5.8.1";
 
-  buildInputs = [ libffi gmp ];
-
   src = fetchFromGitHub {
     owner = "polyml";
     repo = "polyml";
@@ -20,10 +18,11 @@ stdenv.mkDerivation rec {
     })
   ];
 
+  buildInputs = [ libffi gmp ];
+
   configureFlags = [
     "--disable-shared"
     "--enable-intinf-as-int"
     "--with-gmp"
-    # "--with-system-libffi"
   ];
 }

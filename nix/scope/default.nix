@@ -1,5 +1,7 @@
 { lib
 , writeText
+, gcc49Stdenv
+, gcc9Stdenv
 , texlive
 , mlton20180207
 , libffi_3_3
@@ -18,6 +20,30 @@ self: with self; {
 
   inherit l4vConfig;
 
+
+  ### aggregate ###
+
+  cached = writeText "cached" (toString [
+    isabelle
+    isabelleInitialHeaps
+    binaryVerificationInputs
+    hol4
+    graphRefineInputs
+    graphRefine.justStackBounds
+    graphRefine.coverage
+    graphRefine.demo
+    l4vSpec
+  ]);
+
+  all = writeText "all" (toString [
+    cached
+    l4vAll
+    graphRefine.all
+  ]);
+
+
+  ### sources ###
+
   rawSources = {
     seL4 = lib.cleanSource ../../projects/seL4;
     l4v = lib.cleanSource ../../projects/l4v;
@@ -35,48 +61,12 @@ self: with self; {
 
   sources = {
     inherit (rawSources) hol4 graphRefine graphRefineNoSeL4 graphRefineJustSeL4;
-    seL4 = callPackage ./sel4-source.nix {};
-    l4v = callPackage ./l4v-source.nix {};
+    seL4 = callPackage ./patched-sel4-source.nix {};
+    l4v = callPackage ./patched-l4v-source.nix {};
   };
 
-  texliveEnv = with texlive; combine {
-    inherit
-      collection-fontsrecommended
-      collection-latexextra
-      collection-metapost
-      collection-bibtexextra
-      ulem
-    ;
-  };
 
-  mlton = mlton20180207;
-
-  polymlForHol4 = callPackage ./polyml-for-hol4.nix {
-    libffi = libffi_3_3;
-  };
-
-  polymlForIsabelle = callPackage ./polyml-for-isabelle.nix {
-    libffi = libffi_3_3;
-  };
-
-  z3ForIsabelle = callPackage ./z3-for-isabelle.nix {};
-
-  hol4 = callPackage ./hol4.nix {
-    polyml = polymlForHol4;
-  };
-
-  isabelle-sha1 = callPackage ./isabelle-sha1.nix {};
-
-  isabelle = callPackage ./isabelle.nix {
-    java = openjdk11;
-    polyml = polymlForIsabelle;
-    z3 = z3ForIsabelle;
-    # z3 = z3_4_8_5;
-  };
-
-  isabelleInitialHeaps = callPackage ./isabelle-initial-heaps.nix {};
-
-  ghcWithPackagesForL4v = callPackage  ./ghc-with-packages-for-l4v {};
+  ### tools and proofs ###
 
   l4vWith = callPackage ./l4v.nix {};
 
@@ -108,6 +98,11 @@ self: with self; {
   # binaryVerificationInputs = cProofs;
   binaryVerificationInputs = minimalBinaryVerificationInputs;
 
+  hol4 = callPackage ./hol4.nix {
+    stdenv = gcc9Stdenv;
+    polyml = polymlForHol4;
+  };
+
   graphRefineInputs = callPackage ./graph-refine-inputs.nix {
     # TODO
     # polyml = polymlForHol4;
@@ -137,21 +132,41 @@ self: with self; {
     };
   };
 
-  cached = writeText "cached" (toString [
-    isabelle
-    isabelleInitialHeaps
-    binaryVerificationInputs
-    hol4
-    graphRefineInputs
-    graphRefine.justStackBounds
-    graphRefine.coverage
-    graphRefine.demo
-    l4vSpec
-  ]);
 
-  all = writeText "all" (toString [
-    cached
-    l4vAll
-    graphRefine.all
-  ]);
+  ### deps ###
+
+  texliveEnv = with texlive; combine {
+    inherit
+      collection-fontsrecommended
+      collection-latexextra
+      collection-metapost
+      collection-bibtexextra
+      ulem
+    ;
+  };
+
+  ghcWithPackagesForL4v = callPackage  ./deps/ghc-with-packages-for-l4v {};
+
+  mlton = mlton20180207;
+
+  polymlForHol4 = callPackage ./deps/polyml-for-hol4.nix {
+    libffi = libffi_3_3;
+  };
+
+  polymlForIsabelle = callPackage ./deps/polyml-for-isabelle.nix {
+    libffi = libffi_3_3;
+  };
+
+  z3ForIsabelle = callPackage ./deps/z3-for-isabelle.nix {
+    stdenv = gcc49Stdenv;
+  };
+
+  isabelle = callPackage ./deps/isabelle.nix {
+    java = openjdk11;
+    polyml = polymlForIsabelle;
+    z3 = z3ForIsabelle;
+    # z3 = z3_4_8_5;
+  };
+
+  isabelleInitialHeaps = callPackage ./isabelle-initial-heaps.nix {};
 }
