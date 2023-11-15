@@ -13,18 +13,8 @@
 let
   bv = l4vConfig.arch == "ARM";
 
-  oldNixpkgsSource = builtins.fetchGit {
-    url = "https://github.com/NixOS/nixpkgs.git";
-    ref = "nixos-unstable";
-    rev = "d4b654cb468790e7ef204ade22aed9b0d9632a7b";
-  };
-
-  oldNixpkgs = import oldNixpkgsSource {};
-
 in
 self: with self; {
-
-  inherit oldNixpkgs;
 
   inherit l4vConfig;
 
@@ -82,7 +72,6 @@ self: with self; {
     polyml = polymlForIsabelle;
     z3 = z3ForIsabelle;
     # z3 = z3_4_8_5;
-    # z3 = oldNixpkgs.z3_4_4_0;
   };
 
   isabelleInitialHeaps = callPackage ./isabelle-initial-heaps.nix {};

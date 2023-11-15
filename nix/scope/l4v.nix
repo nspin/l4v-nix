@@ -11,7 +11,6 @@
 , texliveEnv
 , ghcWithPackagesForL4v
 , l4vConfig
-, oldNixpkgs
 }:
 
 { tests ? null
@@ -37,10 +36,6 @@ let
   '';
 
   ghcWithPackages = ghcWithPackagesForL4v;
-
-  # ghcWithPackages = oldNixpkgs.haskell.packages.ghc865.ghcWithPackages (p: with p; [
-  #   mtl_2_2_2
-  # ]);
 
 in
 stdenv.mkDerivation {
