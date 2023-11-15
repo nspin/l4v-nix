@@ -1,4 +1,4 @@
-{ stdenv
+{ gcc9Stdenv
 , graphviz
 , python3, perl
 
@@ -6,7 +6,7 @@
 , polyml, mlton
 }:
 
-stdenv.mkDerivation {
+gcc9Stdenv.mkDerivation {
   name = "hol4";
 
   src = sources.hol4;
