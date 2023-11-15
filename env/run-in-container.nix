@@ -82,6 +82,7 @@ let
         readonly = src: dst: "--mount type=bind,readonly,src=${src},dst=${dst}";
         passthru = path: readonly path path;
         sh = "${busybox-sandbox-shell}/bin/busybox";
+        env = "${coreutils}/bin/env";
       in ''
         dockerArgs=()
         cmd=()
@@ -118,6 +119,7 @@ let
           ${passthru "/nix/var/nix/db"} \
           ${passthru "/nix/var/nix/daemon-socket"} \
           ${readonly sh "/bin/sh"} \
+          ${readonly env "/usr/bin/env"} \
           -e NIX_REMOTE=daemon \
           -e NIX_BUILD_SHELL=bash \
           -e NIX_SSL_CERT_FILE=${cacert}/etc/ssl/certs/ca-bundle.crt \
