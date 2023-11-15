@@ -59,31 +59,30 @@ self: with self; {
     ;
   };
 
-  isabelle-sha1 = callPackage ./isabelle-sha1.nix {};
-
-  isabelle = callPackage ./isabelle.nix {
-    java = openjdk11;
-    # z3 = z3_4_8_5; # ideally z3_4_4_0
-    z3 = oldNixpkgs.z3_4_4_0;
-    polyml = polyml.overrideDerivation (attrs: {
-      configureFlags = [
-        "--enable-intinf-as-int"
-        "--with-gmp"
-        "--disable-shared"
-        "--with-system-libffi"
-      ];
-    });
-  };
-
-  isabelleInitialHeaps = callPackage ./isabelle-initial-heaps.nix {};
-
   mlton = mlton20180207;
 
-  polyml = callPackage ./polyml.nix {
+  polymlForHol4 = callPackage ./polyml-for-hol4.nix {
     libffi = libffi_3_3;
   };
 
-  hol4 = callPackage ./hol4.nix {};
+  polymlForIsabelle = callPackage ./polyml-for-isabelle.nix {
+    libffi = libffi_3_3;
+  };
+
+  hol4 = callPackage ./hol4.nix {
+    polyml = polymlForHol4;
+  };
+
+  isabelle-sha1 = callPackage ./isabelle-sha1.nix {};
+
+  isabelle = callPackage ./isabelle.nix {
+    polyml = polymlForIsabelle;
+    java = openjdk11;
+    # z3 = z3_4_8_5; # ideally z3_4_4_0
+    z3 = oldNixpkgs.z3_4_4_0;
+  };
+
+  isabelleInitialHeaps = callPackage ./isabelle-initial-heaps.nix {};
 
   l4vWith = callPackage ./l4v.nix {};
 
