@@ -15,12 +15,12 @@ let
     rev = "d4b654cb468790e7ef204ade22aed9b0d9632a7b";
   };
 
-  oldPkgs = import oldNixpkgsSource {};
+  oldNixpkgs = import oldNixpkgsSource {};
 
 in
 self: with self; {
 
-  inherit oldPkgs;
+  inherit oldNixpkgs;
 
   inherit l4vConfig;
 
@@ -57,7 +57,9 @@ self: with self; {
 
   isabelle-sha1 = callPackage ./isabelle-sha1.nix {};
 
-  isabelle = callPackage ./isabelle.nix {};
+  isabelle = callPackage ./isabelle.nix {
+    isabelleFromOldNixpkgs = oldNixpkgs.isabelle;
+  };
 
   isabelleInitialHeaps = callPackage ./isabelle-initial-heaps.nix {};
 

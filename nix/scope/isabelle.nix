@@ -1,9 +1,9 @@
-{ isabelleFromNixpkgs
+{ isabelleFromOldNixpkgs
 , coreutils
 , isabelle-sha1
 }:
 
-isabelleFromNixpkgs.overrideAttrs (attrs: {
+isabelleFromOldNixpkgs.overrideAttrs (attrs: {
   postPatch = attrs.postPatch + ''
     substituteInPlace \
       lib/Tools/env \
