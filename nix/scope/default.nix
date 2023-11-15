@@ -92,6 +92,7 @@ self: with self; {
     simplExport = true;
   };
 
+  # binaryVerificationInputs = cProofs;
   binaryVerificationInputs = minimalBinaryVerificationInputs;
 
   graphRefineInputs = callPackage ./graph-refine-inputs.nix {};
@@ -134,7 +135,7 @@ self: with self; {
 
   all = writeText "all" (toString [
     cached
-    l4vAllTests
+    l4vAll
     graphRefine.all
   ]);
 }

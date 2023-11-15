@@ -10,6 +10,7 @@
 , isabelleInitialHeaps
 , texliveEnv
 , l4vConfig
+, oldNixpkgs
 }:
 
 { testTargets ? null
@@ -30,7 +31,7 @@ let
     cp -r ${sources.l4v} $out/l4v
   '';
 
-  ghcWithPackages = haskell.packages.ghc865.ghcWithPackages (p: with p; [
+  ghcWithPackages = oldNixpkgs.haskell.packages.ghc865.ghcWithPackages (p: with p; [
     mtl_2_2_2
   ]);
 
