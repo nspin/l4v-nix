@@ -21,23 +21,25 @@ let
     };
 
 in {
-  this = mkThis {
-    l4vConfig = mkL4vConfig {
-      arch = "ARM";
-    };
-  };
+  this = rec {
+    default = arm;
 
-  # WIP
-  thisArmHyp = mkThis {
-    l4vConfig = mkL4vConfig {
-      arch = "ARM_HYP";
+    arm = mkThis {
+      l4vConfig = mkL4vConfig {
+        arch = "ARM";
+      };
     };
-  };
 
-  # WIP
-  thisX64 = mkThis {
-    l4vConfig = mkL4vConfig {
-      arch = "X64";
+    armHyp = mkThis {
+      l4vConfig = mkL4vConfig {
+        arch = "ARM_HYP";
+      };
+    };
+
+    x86 = mkThis {
+      l4vConfig = mkL4vConfig {
+        arch = "X64";
+      };
     };
   };
 
@@ -68,7 +70,7 @@ in {
         src/Pure/General/sha1.ML \
           --replace \
             '"$ML_HOME/" ^ (if ML_System.platform_is_windows then "sha1.dll" else "libsha1.so")' \
-            '"${this.isabelle-sha1}/lib/libsha1.so"'
+            '"${this.default.isabelle-sha1}/lib/libsha1.so"'
     '';
   });
 }
