@@ -2,8 +2,8 @@
 , writeText
 , texlive
 , mlton20180207
-, openjdk11
 , libffi_3_3
+, openjdk11
 , z3_4_8_5
 }:
 
