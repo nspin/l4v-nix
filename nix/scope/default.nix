@@ -78,9 +78,10 @@ self: with self; {
   isabelle-sha1 = callPackage ./isabelle-sha1.nix {};
 
   isabelle = callPackage ./isabelle.nix {
-    polyml = polymlForIsabelle;
     java = openjdk11;
-    z3 = z3_4_8_5; # ideally z3_4_4_0
+    polyml = polymlForIsabelle;
+    z3 = z3ForIsabelle;
+    # z3 = z3_4_8_5;
     # z3 = oldNixpkgs.z3_4_4_0;
   };
 
