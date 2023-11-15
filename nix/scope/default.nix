@@ -97,12 +97,6 @@ self: with self; {
     ];
   };
 
-  x = l4vWith {
-    tests = [
-      "HaskellKernel"
-    ];
-  };
-
   l4vAll = l4vWith {
     tests = [];
     buildStandaloneCParser = bv;
