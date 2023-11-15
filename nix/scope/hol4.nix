@@ -4,7 +4,6 @@
 
 , sources
 , polyml, mlton
-, oldNixpkgs
 }:
 
 stdenv.mkDerivation {
