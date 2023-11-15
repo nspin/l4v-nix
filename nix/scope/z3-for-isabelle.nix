@@ -1,6 +1,6 @@
-{ stdenv, fetchFromGitHub, python }:
+{ gcc49Stdenv, fetchFromGitHub, python2 }:
 
-stdenv.mkDerivation rec {
+gcc49Stdenv.mkDerivation rec {
   name = "z3-${version}";
   version = "4.4.0";
 
@@ -11,7 +11,7 @@ stdenv.mkDerivation rec {
     sha256 = "1xllvq9fcj4cz34biq2a9dn2sj33bdgrzyzkj26hqw70wkzv1kzx";
   };
 
-  buildInputs = [ python ];
+  buildInputs = [ python2 ];
   enableParallelBuilding = true;
 
   configurePhase = "python scripts/mk_make.py --prefix=$out && cd build";
@@ -19,15 +19,15 @@ stdenv.mkDerivation rec {
   # z3's install phase is stupid because it tries to calculate the
   # python package store location itself, meaning it'll attempt to
   # write files into the nix store, and fail.
-  soext = if stdenv.system == "x86_64-darwin" then ".dylib" else ".so";
+  soext = if gcc49Stdenv.system == "x86_64-darwin" then ".dylib" else ".so";
   installPhase = ''
-    mkdir -p $out/bin $out/lib/${python.libPrefix}/site-packages $out/include
+    mkdir -p $out/bin $out/lib/${python2.libPrefix}/site-packages $out/include
     cp ../src/api/z3*.h       $out/include
     cp ../src/api/c++/z3*.h   $out/include
     cp z3                     $out/bin
     cp libz3${soext}          $out/lib
-    cp libz3${soext}          $out/lib/${python.libPrefix}/site-packages
-    cp z3*.pyc                $out/lib/${python.libPrefix}/site-packages
-    cp ../src/api/python/*.py $out/lib/${python.libPrefix}/site-packages
+    cp libz3${soext}          $out/lib/${python2.libPrefix}/site-packages
+    cp z3*.pyc                $out/lib/${python2.libPrefix}/site-packages
+    cp ../src/api/python/*.py $out/lib/${python2.libPrefix}/site-packages
   '';
 }

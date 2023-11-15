@@ -23,7 +23,7 @@ stdenv.mkDerivation {
   buildCommand = ''
     export HOME=$(mktemp -d)
 
-    isabelle build -b ${lib.concatStringsSep " " sessions}
+    isabelle build -bv ${lib.concatStringsSep " " sessions}
 
     mv $HOME/.isabelle $out
   '';
