@@ -119,7 +119,10 @@ self: with self; {
   # binaryVerificationInputs = cProofs;
   binaryVerificationInputs = minimalBinaryVerificationInputs;
 
-  graphRefineInputs = callPackage ./graph-refine-inputs.nix {};
+  graphRefineInputs = callPackage ./graph-refine-inputs.nix {
+    # TODO
+    # polyml = polymlForHol4;
+  };
 
   graphRefineWith = callPackage ./graph-refine.nix {};
 
