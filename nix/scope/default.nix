@@ -2,6 +2,8 @@
 , writeText
 , texlive
 , mlton20180207
+, openjdk11
+, z3_4_8_5
 }:
 
 { l4vConfig
@@ -59,7 +61,11 @@ self: with self; {
   isabelle-sha1 = callPackage ./isabelle-sha1.nix {};
 
   isabelle = callPackage ./isabelle.nix {
-    isabelleFromOldNixpkgs = oldNixpkgs.isabelle;
+    java = openjdk11;
+    z3 = z3_4_8_5; # ideally 4_4_0
+    polyml = polyml.overrideDerivation (attrs: {
+      configureFlags = [ "--enable-intinf-as-int" "--with-gmp" "--disable-shared" ];
+    });
   };
 
   isabelleInitialHeaps = callPackage ./isabelle-initial-heaps.nix {};
