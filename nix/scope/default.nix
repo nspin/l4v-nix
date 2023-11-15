@@ -101,7 +101,7 @@ self: with self; {
     };
     all = graphRefineWith {
       targetDir = justStackBounds;
-      args = [
+      commands = [
         [ "trace-to:report.txt" "all" ]
       ];
     };
