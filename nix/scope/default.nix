@@ -9,8 +9,18 @@
 let
   bv = l4vConfig.arch == "ARM";
 
+  oldNixpkgsSource = builtins.fetchGit {
+    url = "https://github.com/NixOS/nixpkgs.git";
+    ref = "nixos-unstable";
+    rev = "85f1ba3e51676fa8cc604a3d863d729026a6b8eb";
+  };
+
+  oldPkgs = import oldNixpkgsSource {};
+
 in
 self: with self; {
+
+  inherit oldPkgs;
 
   inherit l4vConfig;
 
