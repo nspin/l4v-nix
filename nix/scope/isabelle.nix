@@ -74,4 +74,8 @@ stdenv.mkDerivation rec {
     cd $out/$dirname
     bin/isabelle install $out/bin
   '';
+
+  passthru = {
+    inherit polyml;
+  };
 }
