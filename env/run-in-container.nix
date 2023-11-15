@@ -17,15 +17,15 @@ let
 
   etc = lib.mapAttrs builtins.toFile {
     passwd = ''
-      root:x:0:0::/build:/noshell
-      nixbld:x:${uid}:${gid}::/build:/noshell
-      nobody:x:65534:65534::/:/noshell
+      root:!:0:0::/root:/bin/false
+      nixbld:!:${uid}:${gid}::/home/nixbld:/bin/false
+      nobody:!:65534:65534::/var/empty:/bin/false
     '';
 
     group = ''
-      root:x:0:
+      root:!:0:
       nixbld:!:${gid}:
-      nogroup:x:65534:
+      nogroup:!:65534:
     '';
 
     hosts = ''
