@@ -1,23 +1,40 @@
 { lib, stdenv
-, runCommand
+, runCommand, writeText
 , python2
-, python3
-, isabelle
+, cvc5
+, cvc4
 
 , sources
+, isabelle
+, sonolar
 , graphRefineInputs
 , l4vConfig
 }:
 
-{ targetDir ? "${graphRefineInputs}/${l4vConfig.arch}${l4vConfig.optLevel}"
+{ name ? null
+, targetDir ? "${graphRefineInputs}/${l4vConfig.arch}${l4vConfig.optLevel}"
 , commands ? [ [] ]
 }:
 
 let
+  solverList = defaultSolverList;
+
+  cvc4Exe = "${cvc4}/bin/cvc4";
+  cvc5Exe = "${cvc5}/bin/cvc5";
+  sonolarExe = "${sonolar}/bin/sonolar";
+
   # TODO
-  # - use nixpkgs cvc4
-  # - try cvc5
-  solverList = runCommand "solverlist" {
+  # - get working
+  # - tune
+  nextSolverList = writeText "solverlist" ''
+    CVC4: online: ${cvc4Exe} --incremental --lang smt --tlimit=5000
+    CVC4: offline: ${cvc4Exe} --lang smt
+  '';
+    # CVC5: online: ${cvc5Exe} --incremental --lang smt --tlimit=5000
+    # CVC5: offline: ${cvc5Exe} --lang smt
+    # SONOLAR: offline: ${sonolarExe} --input-format=smtlib2
+
+  defaultSolverList = runCommand "solverlist" {
     nativeBuildInputs = [
       isabelle
     ];
@@ -33,14 +50,10 @@ let
 
 in
 stdenv.mkDerivation {
-
-  # TODO extend with arg
-  name = "graph-refine";
+  name = "graph-refine${lib.optionalString (name != null) "-${name}"}";
 
   nativeBuildInputs = [
-    isabelle
     python2
-    python3
   ];
 
   buildCommand = ''

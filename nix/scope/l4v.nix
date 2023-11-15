@@ -12,7 +12,9 @@
 , l4vConfig
 }:
 
-{ tests ? null
+{ name ? null
+
+, tests ? null
 , exclude ? []
 , remove ? []
 , verbose ? false
@@ -36,9 +38,7 @@ let
 
 in
 stdenv.mkDerivation {
-
-  # TODO extend with arg
-  name = "l4v";
+  name = "l4v${lib.optionalString (name != null) "-${name}"}";
 
   inherit src;
 

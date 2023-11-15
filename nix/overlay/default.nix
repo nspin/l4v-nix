@@ -58,6 +58,6 @@ in {
   ];
 
   mlton = throw "fallthrough";
-  # polyml = throw "fallthrough"; # TODO
+  polyml = throw "fallthrough";
   isabelle = throw "fallthrough";
 }

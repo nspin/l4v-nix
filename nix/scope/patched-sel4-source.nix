@@ -4,8 +4,6 @@
 , rawSources
 }:
 
-# TODO use applyPatches
-
 stdenv.mkDerivation {
   name = "sel4-source";
 

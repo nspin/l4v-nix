@@ -71,17 +71,20 @@ self: with self; {
   l4vWith = callPackage ./l4v.nix {};
 
   l4vSpec = l4vWith {
+    name = "spec";
     tests = [
       "ASpec"
     ];
   };
 
   l4vAll = l4vWith {
+    name = "all";
     tests = [];
     buildStandaloneCParser = bv;
   };
 
   cProofs = l4vWith {
+    name = "c-proofs";
     tests = [
       "CRefine"
     ] ++ lib.optionals bv [
@@ -91,6 +94,7 @@ self: with self; {
   };
 
   minimalBinaryVerificationInputs = l4vWith {
+    name = "minimal-bv-input";
     buildStandaloneCParser = true;
     simplExport = true;
   };
@@ -104,27 +108,31 @@ self: with self; {
   };
 
   graphRefineInputs = callPackage ./graph-refine-inputs.nix {
-    # TODO
-    # polyml = polymlForHol4;
+    polyml = polymlForHol4;
   };
 
   graphRefineWith = callPackage ./graph-refine.nix {};
 
   graphRefine = rec {
-    justStackBounds = graphRefineWith {};
+    justStackBounds = graphRefineWith {
+      name = "just-stack-bounds";
+    };
     coverage = graphRefineWith {
+      name = "coverage";
       targetDir = justStackBounds;
       commands = [
         [ "trace-to:coverage.txt" "coverage" ]
       ];
     };
     demo = graphRefineWith {
+      name = "demo";
       targetDir = justStackBounds;
       commands = [
         [ "trace-to:report.txt" "deps:Kernel_C.cancelAllIPC" ]
       ];
     };
     all = graphRefineWith {
+      name = "all";
       targetDir = justStackBounds;
       commands = [
         [ "trace-to:report.txt" "all" ]
@@ -169,4 +177,6 @@ self: with self; {
   };
 
   isabelleInitialHeaps = callPackage ./isabelle-initial-heaps.nix {};
+
+  sonolar = callPackage ./deps/sonolar.nix {};
 }
