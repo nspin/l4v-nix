@@ -9,6 +9,7 @@
 , sources
 , isabelleInitialHeaps
 , texliveEnv
+, ghcWithPackagesForL4v
 , l4vConfig
 , oldNixpkgs
 }:
@@ -35,9 +36,11 @@ let
     cp -r ${sources.l4v} $out/l4v
   '';
 
-  ghcWithPackages = oldNixpkgs.haskell.packages.ghc865.ghcWithPackages (p: with p; [
-    mtl_2_2_2
-  ]);
+  ghcWithPackages = ghcWithPackagesForL4v;
+
+  # ghcWithPackages = oldNixpkgs.haskell.packages.ghc865.ghcWithPackages (p: with p; [
+  #   mtl_2_2_2
+  # ]);
 
 in
 stdenv.mkDerivation {

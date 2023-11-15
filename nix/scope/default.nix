@@ -87,11 +87,19 @@ self: with self; {
 
   isabelleInitialHeaps = callPackage ./isabelle-initial-heaps.nix {};
 
+  ghcWithPackagesForL4v = callPackage  ./ghc-with-packages-for-l4v {};
+
   l4vWith = callPackage ./l4v.nix {};
 
   l4vSpec = l4vWith {
     tests = [
       "ASpec"
+    ];
+  };
+
+  x = l4vWith {
+    tests = [
+      "HaskellKernel"
     ];
   };
 
