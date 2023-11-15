@@ -59,6 +59,11 @@ let
       chmod 0700 /build
       chmod 0777 /tmp
     '';
+
+    config = {
+      User = "${uid}:${gid}";
+      WorkingDir = "/build";
+    };
   };
 
   env = buildEnv {
@@ -109,8 +114,6 @@ let
         set -x
 
         exec docker run \
-          --user ${uid}:${gid} \
-          --workdir /build \
           ${passthru "/nix/store"} \
           ${passthru "/nix/var/nix/db"} \
           ${passthru "/nix/var/nix/daemon-socket"} \
