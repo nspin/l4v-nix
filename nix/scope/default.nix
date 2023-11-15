@@ -70,7 +70,7 @@ self: with self; {
         "--enable-intinf-as-int"
         "--with-gmp"
         "--disable-shared"
-        # "--with-system-libffi"
+        "--with-system-libffi"
       ];
     });
   };
