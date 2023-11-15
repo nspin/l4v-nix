@@ -30,6 +30,8 @@ let
 
 in
 stdenv.mkDerivation {
+
+  # TODO extend with arg
   name = "graph-refine";
 
   nativeBuildInputs = [

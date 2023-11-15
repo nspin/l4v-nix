@@ -44,6 +44,8 @@ let
 
 in
 stdenv.mkDerivation {
+
+  # TODO extend with arg
   name = "l4v";
 
   inherit src;
