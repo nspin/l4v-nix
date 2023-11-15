@@ -47,7 +47,7 @@ let
       mkdir $out
       cd $out
 
-      mkdir etc tmp build
+      mkdir -p etc tmp build root home/nixbld
 
       ${lib.concatStrings (lib.flip lib.mapAttrsToList etc (k: v: ''
         cp ${v} etc/${k}
@@ -55,8 +55,8 @@ let
     '';
 
     runAsRoot = ''
-      chown nixbld:nixbld /build
-      chmod 0700 /build
+      chown nixbld:nixbld /build /home/nixbld
+      chmod 0700 /root /build /home/nixbld
       chmod 0777 /tmp
     '';
 
