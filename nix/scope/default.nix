@@ -148,12 +148,12 @@ self: with self; {
   cached = writeText "cached" (toString [
     isabelle
     isabelleInitialHeaps
-    binaryVerificationInputs
+    # binaryVerificationInputs
     hol4
-    graphRefineInputs
-    graphRefine.justStackBounds
-    graphRefine.coverage
-    graphRefine.demo
+    # graphRefineInputs
+    # graphRefine.justStackBounds
+    # graphRefine.coverage
+    # graphRefine.demo
     l4vSpec
   ]);
 
