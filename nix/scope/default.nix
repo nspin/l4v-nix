@@ -1,6 +1,10 @@
 { lib
 , writeText
 , texlive
+, mlton20180207
+, libffi_3_3
+, openjdk11
+, z3_4_8_5
 }:
 
 { l4vConfig
@@ -45,29 +49,50 @@ self: with self; {
     ;
   };
 
+  mlton = mlton20180207;
+
+  polymlForHol4 = callPackage ./polyml-for-hol4.nix {
+    libffi = libffi_3_3;
+  };
+
+  polymlForIsabelle = callPackage ./polyml-for-isabelle.nix {
+    libffi = libffi_3_3;
+  };
+
+  z3ForIsabelle = callPackage ./z3-for-isabelle.nix {};
+
+  hol4 = callPackage ./hol4.nix {
+    polyml = polymlForHol4;
+  };
+
   isabelle-sha1 = callPackage ./isabelle-sha1.nix {};
 
-  isabelle = callPackage ./isabelle.nix {};
+  isabelle = callPackage ./isabelle.nix {
+    java = openjdk11;
+    polyml = polymlForIsabelle;
+    z3 = z3ForIsabelle;
+    # z3 = z3_4_8_5;
+  };
 
   isabelleInitialHeaps = callPackage ./isabelle-initial-heaps.nix {};
 
-  hol4 = callPackage ./hol4.nix {};
+  ghcWithPackagesForL4v = callPackage  ./ghc-with-packages-for-l4v {};
 
   l4vWith = callPackage ./l4v.nix {};
 
   l4vSpec = l4vWith {
-    testTargets = [
+    tests = [
       "ASpec"
     ];
   };
 
   l4vAll = l4vWith {
-    testTargets = [];
+    tests = [];
     buildStandaloneCParser = bv;
   };
 
   cProofs = l4vWith {
-    testTargets = [
+    tests = [
       "CRefine"
     ] ++ lib.optionals bv [
       "SimplExportAndRefine"
@@ -80,9 +105,13 @@ self: with self; {
     simplExport = true;
   };
 
+  # binaryVerificationInputs = cProofs;
   binaryVerificationInputs = minimalBinaryVerificationInputs;
 
-  graphRefineInputs = callPackage ./graph-refine-inputs.nix {};
+  graphRefineInputs = callPackage ./graph-refine-inputs.nix {
+    # TODO
+    # polyml = polymlForHol4;
+  };
 
   graphRefineWith = callPackage ./graph-refine.nix {};
 
@@ -122,7 +151,7 @@ self: with self; {
 
   all = writeText "all" (toString [
     cached
-    l4vAllTests
+    l4vAll
     graphRefine.all
   ]);
 }

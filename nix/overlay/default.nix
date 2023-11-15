@@ -8,7 +8,7 @@ let
   mkL4vConfig =
     { arch
     , optLevel ? "-O1"
-    , targetCC ? targetPkgsByL4vArch."${arch}".stdenv.cc
+    , targetCC ? targetPkgsByL4vArch."${arch}".buildPackages.gcc9
     , targetPrefix ? targetCC.targetPrefix
     }:
     {
@@ -21,12 +21,9 @@ let
     "X64" = x64Pkgs;
   };
 
-  armv7Pkgs = import ../../nixpkgs {
-    crossSystem = {
-      system = "armv7l-linux";
-      config = "armv7l-unknown-linux-gnueabi";
-    };
-  };
+  armv7Pkgs = pkgsCross.arm-embedded;
+
+  riscv64Pkgs = pkgsCross.riscv64-embedded;
 
   x64Pkgs = self;
 
@@ -55,15 +52,8 @@ in {
     };
   };
 
-  python2 = super.python2.override {
-    packageOverrides = pythonOverrides;
-  };
-
-  python3 = super.python3.override {
-    packageOverrides = pythonOverrides;
-  };
-
-  isabelleFromNixpkgs = super.isabelle;
-
-  isabelle = throw "wrong isabelle";
+  # Add Python packages needed by the seL4 ecosystem
+  pythonPackagesExtensions = super.pythonPackagesExtensions ++ [
+    (callPackage ./python-overrides.nix {})
+  ];
 }

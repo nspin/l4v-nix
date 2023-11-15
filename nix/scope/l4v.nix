@@ -9,10 +9,13 @@
 , sources
 , isabelleInitialHeaps
 , texliveEnv
+, ghcWithPackagesForL4v
 , l4vConfig
 }:
 
-{ testTargets ? null
+{ tests ? null
+, exclude ? []
+, remove ? []
 , verbose ? false
 , numJobs ? 1
 , timeouts ? false
@@ -22,6 +25,8 @@
 , simplExport ? false
 }:
 
+assert tests == null -> (exclude == [] && remove == []);
+
 let
   src = runCommand "src" {} ''
     mkdir $out
@@ -30,12 +35,12 @@ let
     cp -r ${sources.l4v} $out/l4v
   '';
 
-  ghcWithPackages = haskell.packages.ghc865.ghcWithPackages (p: with p; [
-    mtl_2_2_2
-  ]);
+  ghcWithPackages = ghcWithPackagesForL4v;
 
 in
 stdenv.mkDerivation {
+
+  # TODO extend with arg
   name = "l4v";
 
   inherit src;
@@ -75,15 +80,17 @@ stdenv.mkDerivation {
   '';
 
   buildPhase = ''
-    ${lib.optionalString (testTargets != null) ''
+    ${lib.optionalString (tests != null) ''
       ./run_tests \
         ${lib.optionalString verbose "-v"} \
         ${lib.optionalString (!timeouts) "--no-timeouts"} \
         ${lib.optionalString (timeoutScale != null) "--scale-timeouts ${toString timeoutScale}"} \
         -j ${toString numJobs} \
-        ${lib.concatStringsSep " " testTargets}
+        ${lib.concatMapStringsSep " " (test: "-x ${test}") exclude} \
+        ${lib.concatMapStringsSep " " (test: "-r ${test}") remove} \
+        ${lib.concatStringsSep " " tests}
 
-      ${lib.optionalString (lib.elem "ASpec" testTargets) ''
+      ${lib.optionalString (lib.elem "ASpec" tests) ''
         cp -v \
           $HOME/.isabelle/Isabelle2020/browser_info/Specifications/ASpec/document.pdf \
           spec/abstract
