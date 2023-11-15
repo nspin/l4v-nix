@@ -27,12 +27,14 @@ in {
     };
   };
 
+  # WIP
   thisArmHyp = mkThis {
     l4vConfig = mkL4vConfig {
       arch = "ARM_HYP";
     };
   };
 
+  # WIP
   thisX64 = mkThis {
     l4vConfig = mkL4vConfig {
       arch = "X64";
