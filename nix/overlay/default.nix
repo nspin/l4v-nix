@@ -8,7 +8,7 @@ let
   mkL4vConfig =
     { arch
     , optLevel ? "-O1"
-    , targetCC ? targetPkgsByL4vArch."${arch}".stdenv.cc
+    , targetCC ? targetPkgsByL4vArch."${arch}".buildPackages.gcc9
     , targetPrefix ? targetCC.targetPrefix
     }:
     {
