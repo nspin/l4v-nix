@@ -1,7 +1,6 @@
 { lib
 , writeText
 , texlive
-, isabelle
 }:
 
 { l4vConfig
@@ -47,6 +46,8 @@ self: with self; {
   };
 
   isabelle-sha1 = callPackage ./isabelle-sha1.nix {};
+
+  isabelle = callPackage ./isabelle.nix {};
 
   isabelleInitialHeaps = callPackage ./isabelle-initial-heaps.nix {};
 
