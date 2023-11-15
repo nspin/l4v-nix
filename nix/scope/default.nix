@@ -1,6 +1,7 @@
 { lib
 , writeText
 , texlive
+, mlton20180207
 }:
 
 { l4vConfig
@@ -62,6 +63,10 @@ self: with self; {
   };
 
   isabelleInitialHeaps = callPackage ./isabelle-initial-heaps.nix {};
+
+  mlton = mlton20180207;
+
+  polyml = callPackage ./polyml.nix {};
 
   hol4 = callPackage ./hol4.nix {};
 

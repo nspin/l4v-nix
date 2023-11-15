@@ -4,15 +4,16 @@
 , python3, perl
 
 , sources
+, oldNixpkgs
 }:
 
-stdenv.mkDerivation {
+oldNixpkgs.stdenv.mkDerivation {
   name = "hol4";
 
   src = sources.hol4;
 
   buildInputs = [
-    polyml mlton
+    oldNixpkgs.polyml oldNixpkgs.mlton
     graphviz
     python3 perl
   ];
