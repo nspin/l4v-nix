@@ -90,18 +90,18 @@ self: with self; {
   l4vWith = callPackage ./l4v.nix {};
 
   l4vSpec = l4vWith {
-    testTargets = [
+    tests = [
       "ASpec"
     ];
   };
 
   l4vAll = l4vWith {
-    testTargets = [];
+    tests = [];
     buildStandaloneCParser = bv;
   };
 
   cProofs = l4vWith {
-    testTargets = [
+    tests = [
       "CRefine"
     ] ++ lib.optionals bv [
       "SimplExportAndRefine"

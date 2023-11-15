@@ -13,7 +13,9 @@
 , oldNixpkgs
 }:
 
-{ testTargets ? null
+{ tests ? null
+, exclude ? []
+, remove ? []
 , verbose ? false
 , numJobs ? 1
 , timeouts ? false
@@ -22,6 +24,8 @@
 , buildStandaloneCParser ? false
 , simplExport ? false
 }:
+
+assert tests == null -> (exclude == [] && remove == []);
 
 let
   src = runCommand "src" {} ''
@@ -76,15 +80,17 @@ stdenv.mkDerivation {
   '';
 
   buildPhase = ''
-    ${lib.optionalString (testTargets != null) ''
+    ${lib.optionalString (tests != null) ''
       ./run_tests \
         ${lib.optionalString verbose "-v"} \
         ${lib.optionalString (!timeouts) "--no-timeouts"} \
         ${lib.optionalString (timeoutScale != null) "--scale-timeouts ${toString timeoutScale}"} \
         -j ${toString numJobs} \
-        ${lib.concatStringsSep " " testTargets}
+        ${lib.concatMapStringsSep " " (test: "-x ${test}") exclude} \
+        ${lib.concatMapStringsSep " " (test: "-r ${test}") remove} \
+        ${lib.concatStringsSep " " tests}
 
-      ${lib.optionalString (lib.elem "ASpec" testTargets) ''
+      ${lib.optionalString (lib.elem "ASpec" tests) ''
         cp -v \
           $HOME/.isabelle/Isabelle2020/browser_info/Specifications/ASpec/document.pdf \
           spec/abstract
