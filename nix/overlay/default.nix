@@ -55,13 +55,10 @@ in {
     };
   };
 
-  python2 = super.python2.override {
-    packageOverrides = pythonOverrides;
-  };
-
-  python3 = super.python3.override {
-    packageOverrides = pythonOverrides;
-  };
+  # Add Python packages needed by the seL4 ecosystem
+  pythonPackagesExtensions = super.pythonPackagesExtensions ++ [
+    (callPackage ./python-overrides.nix {})
+  ];
 
   isabelleFromNixpkgs = super.isabelle;
 
