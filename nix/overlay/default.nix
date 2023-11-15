@@ -56,8 +56,4 @@ in {
   pythonPackagesExtensions = super.pythonPackagesExtensions ++ [
     (callPackage ./python-overrides.nix {})
   ];
-
-  isabelleFromNixpkgs = super.isabelle;
-
-  isabelle = throw "wrong isabelle";
 }
