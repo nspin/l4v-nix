@@ -69,6 +69,8 @@ self: with self; {
     libffi = libffi_3_3;
   };
 
+  z3ForIsabelle = callPackage ./z3-for-isabelle.nix {};
+
   hol4 = callPackage ./hol4.nix {
     polyml = polymlForHol4;
   };
@@ -78,8 +80,8 @@ self: with self; {
   isabelle = callPackage ./isabelle.nix {
     polyml = polymlForIsabelle;
     java = openjdk11;
-    # z3 = z3_4_8_5; # ideally z3_4_4_0
-    z3 = oldNixpkgs.z3_4_4_0;
+    z3 = z3_4_8_5; # ideally z3_4_4_0
+    # z3 = oldNixpkgs.z3_4_4_0;
   };
 
   isabelleInitialHeaps = callPackage ./isabelle-initial-heaps.nix {};
