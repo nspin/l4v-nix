@@ -23,11 +23,9 @@ self: with self; {
 
   ### aggregate ###
 
-  cached = writeText "cached" (toString [
-    isabelle
-    isabelleInitialHeaps
-    binaryVerificationInputs
+  slow = writeText "slow" (toString [
     hol4
+    binaryVerificationInputs
     graphRefineInputs
     graphRefine.justStackBounds
     graphRefine.coverage
@@ -35,9 +33,25 @@ self: with self; {
     l4vSpec
   ]);
 
+  slower = writeText "slower" (toString [
+    slow
+    l4vAll
+  ]);
+
+  slowest = writeText "slowest" (toString [
+    slower
+    graphRefine.all
+  ]);
+
+  cached = writeText "cached" (toString [
+    slow
+    l4vAll
+  ]);
+
   all = writeText "all" (toString [
     cached
-    l4vAll
+    cProofs
+    minimalBinaryVerificationInputs
     graphRefine.all
   ]);
 
