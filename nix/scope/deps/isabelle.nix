@@ -100,6 +100,6 @@ stdenv.mkDerivation rec {
   '';
 
   passthru = {
-    inherit polyml;
+    inherit sha1;
   };
 }

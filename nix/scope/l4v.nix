@@ -26,6 +26,10 @@
 , simplExport ? false
 }:
 
+# NOTE
+# The default Isabelle settings seem to be working. Nevertheless, we should consider experimenting
+# with some from seL4-CAmkES-L4v-dockerfiles/res/isabelle_settings.
+
 assert tests == null -> (exclude == [] && remove == []);
 
 let
@@ -56,6 +60,10 @@ stdenv.mkDerivation {
 
     l4vConfig.targetCC
   ];
+
+  # TODO
+  # What does this do? It is set in seL4-CAmkES-L4v-dockerfiles/res/isabelle_settings.
+  # SKIP_DUPLICATED_PROOFS = 1;
 
   postPatch = ''
     cd l4v
