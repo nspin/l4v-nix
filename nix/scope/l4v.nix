@@ -59,11 +59,16 @@ stdenv.mkDerivation {
     texliveEnv
 
     l4vConfig.targetCC
+    l4vConfig.targetBintools
   ];
 
+  hardeningDisable = [ "all" ];
+
   # TODO
-  # What does this do? It is set in seL4-CAmkES-L4v-dockerfiles/res/isabelle_settings.
   # SKIP_DUPLICATED_PROOFS = 1;
+  # What does this do?
+  # Is it appropriate?
+  # It is set in seL4-CAmkES-L4v-dockerfiles/res/isabelle_settings.
 
   postPatch = ''
     cd l4v
@@ -74,9 +79,10 @@ stdenv.mkDerivation {
 
     export ISABELLE_HOME=$(./isabelle/bin/isabelle env sh -c 'echo $ISABELLE_HOME')
 
-    export TOOLPREFIX=${l4vConfig.targetPrefix}
-    export CROSS_COMPILER_PREFIX=${l4vConfig.targetPrefix}
     export L4V_ARCH=${l4vConfig.arch}
+    export TOOLPREFIX=${l4vConfig.targetPrefix}
+
+    export SKIP_DUPLICATED_PROOFS=1
 
     mkdir -p $HOME/.cabal
     touch $HOME/.cabal/config

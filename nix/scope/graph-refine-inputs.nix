@@ -34,7 +34,10 @@ stdenv.mkDerivation {
     python2Packages.python
     python3Packages.sel4-deps
     l4vConfig.targetCC
+    l4vConfig.targetBintools
   ];
+
+  hardeningDisable = [ "all" ];
 
   postPatch = ''
     patchShebangs .
@@ -45,9 +48,8 @@ stdenv.mkDerivation {
 
     export ISABELLE_HOME=$(./isabelle/bin/isabelle env sh -c 'echo $ISABELLE_HOME')
 
-    export TOOLPREFIX=${l4vConfig.targetPrefix}
-    export CROSS_COMPILER_PREFIX=${l4vConfig.targetPrefix}
     export L4V_ARCH=${l4vConfig.arch}
+    export TOOLPREFIX=${l4vConfig.targetPrefix}
     export CONFIG_OPTIMISATION_LEVEL=${l4vConfig.optLevel}
 
     export OBJDUMP=''${TOOLPREFIX}objdump

@@ -1,6 +1,7 @@
 { stdenv
 , python3
 , rawSources
+, l4vConfig
 }:
 
 stdenv.mkDerivation {
@@ -24,7 +25,7 @@ stdenv.mkDerivation {
       tools/c-parser/testfiles/jiraver313.thy
       "
     for x in $cpp_files; do
-      substituteInPlace $x --replace /usr/bin/cpp ${stdenv.cc}/bin/cpp
+      substituteInPlace $x --replace /usr/bin/cpp ${l4vConfig.targetCC}/bin/${l4vConfig.targetPrefix}cpp
     done
   '';
 

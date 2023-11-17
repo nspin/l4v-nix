@@ -6,13 +6,17 @@ let
   mkScope = args: lib.makeScope newScope (callPackage ../scope {} args);
 
   mkL4vConfig =
+    let
+      defaultCCWrapper = arch: targetPkgsByL4vArch."${arch}".buildPackages.gcc9;
+    in
     { arch
     , optLevel ? "-O1"
-    , targetCC ? targetPkgsByL4vArch."${arch}".buildPackages.gcc9
-    , targetPrefix ? targetCC.targetPrefix
+    , targetCC ? (defaultCCWrapper arch).cc
+    , targetBintools ? (defaultCCWrapper arch).bintools.bintools
+    , targetPrefix ? (defaultCCWrapper arch).targetPrefix
     }:
     {
-      inherit arch optLevel targetCC targetPrefix;
+      inherit arch optLevel targetCC targetBintools targetPrefix;
     };
 
   targetPkgsByL4vArch = {

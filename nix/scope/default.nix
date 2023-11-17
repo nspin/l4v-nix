@@ -20,9 +20,11 @@ self: with self; {
 
   inherit l4vConfig;
 
+
   ### aggregate ###
 
   slow = writeText "slow" (toString [
+    kernel
     hol4
     binaryVerificationInputs
     graphRefineInputs
@@ -44,13 +46,14 @@ self: with self; {
 
   cached = writeText "cached" (toString [
     slow
-    l4vAll
+    cProofs
   ]);
 
   all = writeText "all" (toString [
     cached
-    cProofs
     minimalBinaryVerificationInputs
+    cProofs
+    l4vAll
     graphRefine.all
   ]);
 
@@ -80,6 +83,8 @@ self: with self; {
 
 
   ### tools and proofs ###
+
+  kernel = callPackage ./kernel.nix {};
 
   l4vWith = callPackage ./l4v.nix {};
 
