@@ -20,7 +20,6 @@ self: with self; {
 
   inherit l4vConfig;
 
-
   ### aggregate ###
 
   slow = writeText "slow" (toString [
@@ -192,5 +191,7 @@ self: with self; {
 
   isabelleInitialHeaps = callPackage ./isabelle-initial-heaps.nix {};
 
-  sonolar = callPackage ./deps/sonolar.nix {};
+  sonolarBinary = callPackage ./deps/sonolar-binary.nix {};
+  cvc4Binary = callPackage ./deps/cvc4-binary.nix {};
+  cvc5Binary = callPackage ./deps/cvc5-binary.nix {};
 }
