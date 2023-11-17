@@ -91,6 +91,7 @@ stdenv.mkDerivation {
     cp -r ${isabelleInitialHeaps}/* $HOME/.isabelle --no-preserve=ownership,mode
   '';
 
+  # TODO wrap './run_tests' in 'time' invocation
   buildPhase = ''
     ${lib.optionalString (tests != null) ''
       ./run_tests \
