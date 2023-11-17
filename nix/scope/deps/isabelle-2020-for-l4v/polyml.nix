@@ -1,13 +1,14 @@
-{ stdenv, lib, fetchpatch, fetchFromGitHub, gmp, libffi }:
+{ stdenv, lib, fetchpatch, fetchFromGitHub, gmp, libffi_3_3 }:
 
 stdenv.mkDerivation rec {
-  name = "polyml";
+  pname = "polyml";
+  version = "5.8.1";
 
   src = fetchFromGitHub {
-    owner = "seL4";
+    owner = "polyml";
     repo = "polyml";
-    rev = "cf46747fee61f6ed6ca49bc2e269d5d9960d5f7b";
-    sha256 = "sha256-rPgiiIT3jKLojKjC7Q+7vilOyzbOhvaa4YSlh14ljoc=";
+    rev = "v${version}";
+    sha256 = "0gcx2fjiwsiazlyfhm7zlrd563blc4fy9w2mspib9divbavaxin6";
   };
 
   patches = [
@@ -17,11 +18,11 @@ stdenv.mkDerivation rec {
     })
   ];
 
-  buildInputs = [ libffi gmp ];
+  buildInputs = [ libffi_3_3 gmp ];
 
   configureFlags = [
-    "--enable-shared"
+    "--disable-shared"
+    "--enable-intinf-as-int"
     "--with-gmp"
-    "--with-system-libffi"
   ];
 }

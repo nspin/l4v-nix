@@ -1,6 +1,6 @@
-{ stdenv, fetchFromGitHub, python2 }:
+{ gcc49Stdenv, fetchFromGitHub, python2 }:
 
-stdenv.mkDerivation rec {
+gcc49Stdenv.mkDerivation rec {
   pname = "z3";
   version = "4.4.0";
 

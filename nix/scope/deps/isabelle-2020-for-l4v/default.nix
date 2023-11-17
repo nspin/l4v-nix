@@ -1,11 +1,16 @@
 { stdenv
+, callPackage
 , fetchurl, fetchhg
-, perl, nettools, java, polyml, z3, rlwrap
-
-, coreutils
+, perl, nettools
+, openjdk11
+, rlwrap, coreutils
 }:
 
 let
+  polyml = callPackage ./polyml.nix {};
+
+  z3 = callPackage ./z3.nix { };
+
   sha1 = stdenv.mkDerivation {
     pname = "isabelle-sha1";
     version = "2021-1";
@@ -41,7 +46,7 @@ stdenv.mkDerivation rec {
     sha256 = "1bibabhlsvf6qsjjkgxcpq3cvl1z7r8yfcgqbhbvsiv69n3gyfk3";
   };
 
-  buildInputs = [ perl polyml z3 nettools java ];
+  buildInputs = [ perl polyml z3 nettools openjdk11 ];
 
   sourceRoot = dirname;
 
@@ -67,7 +72,7 @@ stdenv.mkDerivation rec {
 
     cat >contrib/jdk*/etc/settings <<EOF
       ISABELLE_JAVA_PLATFORM=${stdenv.system}
-      ISABELLE_JDK_HOME=${java}
+      ISABELLE_JDK_HOME=${openjdk11}
     EOF
 
     echo ISABELLE_LINE_EDITOR=${rlwrap}/bin/rlwrap >>etc/settings

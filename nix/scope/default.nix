@@ -1,12 +1,9 @@
 { lib
+, stdenv
 , writeText
-, gcc49Stdenv
-, gcc9Stdenv
 , texlive
+, gcc9Stdenv
 , mlton20180207
-, libffi_3_3
-, openjdk11
-, z3_4_8_5
 }:
 
 { l4vConfig
@@ -120,14 +117,9 @@ self: with self; {
   # binaryVerificationInputs = cProofs;
   binaryVerificationInputs = minimalBinaryVerificationInputs;
 
-  hol4 = callPackage ./hol4.nix {
-    stdenv = gcc9Stdenv;
-    polyml = polymlForHol4;
-  };
+  hol4 = callPackage ./hol4.nix {};
 
-  graphRefineInputs = callPackage ./graph-refine-inputs.nix {
-    polyml = polymlForHol4;
-  };
+  graphRefineInputs = callPackage ./graph-refine-inputs.nix {};
 
   graphRefineWith = callPackage ./graph-refine.nix {};
 
@@ -173,30 +165,26 @@ self: with self; {
 
   ghcWithPackagesForL4v = callPackage  ./deps/ghc-with-packages-for-l4v {};
 
-  mlton = mlton20180207;
+  polyml58ForHol4 = callPackage ./deps/polyml-5.8-for-hol4.nix {};
 
-  polymlForHol4 = callPackage ./deps/polyml-for-hol4.nix {
-    libffi = libffi_3_3;
-  };
+  # polyml59ForHol4 = polyml;
 
-  polymlForIsabelle = callPackage ./deps/polyml-for-isabelle.nix {
-    libffi = libffi_3_3;
-  };
-
-  z3ForIsabelle = callPackage ./deps/z3-for-isabelle.nix {
-    stdenv = gcc49Stdenv;
-  };
-
-  isabelle = callPackage ./deps/isabelle.nix {
-    java = openjdk11;
-    polyml = polymlForIsabelle;
-    z3 = z3ForIsabelle;
-    # z3 = z3_4_8_5;
-  };
+  isabelle2020ForL4v = callPackage ./deps/isabelle-2020-for-l4v {};
 
   isabelleInitialHeaps = callPackage ./isabelle-initial-heaps.nix {};
 
-  sonolarBinary = callPackage ./deps/sonolar-binary.nix {};
-  cvc4Binary = callPackage ./deps/cvc4-binary.nix {};
-  cvc5Binary = callPackage ./deps/cvc5-binary.nix {};
+  sonolarBinary = callPackage ./deps/solvers-for-graph-refine/sonolar-binary.nix {};
+  cvc4Binary = callPackage ./deps/solvers-for-graph-refine/cvc4-binary.nix {};
+  cvc5Binary = callPackage ./deps/solvers-for-graph-refine/cvc5-binary.nix {};
+
+
+  ### choices ###
+
+  stdenvForHol4 = gcc9Stdenv;
+
+  mlton = mlton20180207;
+
+  polymlForHol4 = polyml58ForHol4;
+
+  isabelleForL4v = isabelle2020ForL4v;
 }

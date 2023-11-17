@@ -1,6 +1,6 @@
 { lib, stdenv
 , hostname, perl
-, isabelle
+, isabelleForL4v
 }:
 
 let
@@ -15,7 +15,7 @@ stdenv.mkDerivation {
   name = "isabelle-initial-heaps";
 
   nativeBuildInputs = [
-    isabelle
+    isabelleForL4v
     hostname
     perl
   ];

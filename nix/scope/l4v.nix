@@ -3,9 +3,10 @@
 , python3Packages
 , haskell, haskellPackages
 , rsync, git, perl, hostname, which, cmake, ninja, dtc, libxml2
-, isabelle, mlton
+, mlton
 
 , sources
+, isabelleForL4v
 , isabelleInitialHeaps
 , texliveEnv
 , ghcWithPackagesForL4v
@@ -35,7 +36,7 @@ assert tests == null -> (exclude == [] && remove == []);
 let
   src = runCommand "src" {} ''
     mkdir $out
-    ln -s ${isabelle} $out/isabelle
+    ln -s ${isabelleForL4v} $out/isabelle
     cp -r ${sources.seL4} $out/seL4
     cp -r ${sources.l4v} $out/l4v
   '';

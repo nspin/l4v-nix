@@ -1,12 +1,14 @@
 { stdenv
 , runCommand
 , rsync, git, perl, hostname, which, cmake, ninja, dtc, libxml2
-, polyml, mlton
 , python2Packages
 , python3Packages
-, isabelle
+
+, mlton
 
 , sources
+, isabelleForL4v
+, polymlForHol4
 , hol4
 , binaryVerificationInputs
 , l4vConfig
@@ -15,7 +17,7 @@
 let
   src = runCommand "src" {} ''
     mkdir $out
-    ln -s ${isabelle} $out/isabelle
+    ln -s ${isabelleForL4v} $out/isabelle
     cp -r ${sources.seL4} $out/seL4
     cp -r ${sources.graphRefineJustSeL4} $out/graph-refine
     cp -r ${hol4} $out/HOL4
@@ -30,7 +32,7 @@ stdenv.mkDerivation {
 
   nativeBuildInputs = [
     rsync git perl hostname which cmake ninja dtc libxml2
-    polyml mlton
+    polymlForHol4 mlton
     python2Packages.python
     python3Packages.sel4-deps
     l4vConfig.targetCC
@@ -69,7 +71,7 @@ stdenv.mkDerivation {
 }
 
 # if [ -n "$IN_NIX_SHELL" ]; then
-#   export -p >shell-env.sh
+#   export -p > shell-env.sh
 # fi
 
 # # HACK
