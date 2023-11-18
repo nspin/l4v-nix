@@ -1,48 +1,31 @@
 { lib, stdenv
-, runCommand, writeText
-, python2
+, python2Packages
 
 , sources
-, isabelleForL4v
 , graphRefineInputs
-, cvc4Binary
-, sonolarBinary
+, graphRefineSolverLists
 , l4vConfig
 }:
 
 { name ? null
+, solverList ? graphRefineSolverLists.default
 , targetDir ? "${graphRefineInputs}/${l4vConfig.arch}${l4vConfig.optLevel}"
 , commands ? [ [] ]
 }:
 
 let
-  # TODO
-  # - tune
-  # - figure out why are cvc4 >= 1.6 and cvc5 so slow?
-  # - figure out why cvc5 throws ConversationProblem
-
-  solverList = solverLists.likeDockerImage;
-
-  cvc4BinaryExe = "${cvc4Binary.v1_5}/bin/cvc4";
-  sonolarExe = "${sonolarBinary}/bin/sonolar";
-
-  solverLists = {
-    # see git history for other configurations and related measurements
-    likeDockerImage = writeText "solverlist" ''
-      CVC4: online: ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000
-      SONOLAR: offline: ${sonolarExe} --input-format=smtlib2
-      CVC4: offline: ${cvc4BinaryExe} --lang smt
-      SONOLAR-word8: offline: ${sonolarExe} --input-format=smtlib2
-        config: mem_mode = 8
-    '';
-  };
+  psutil = python2Packages.psutil.overridePythonAttrs (_attrs: {
+    disabled = false;
+    doCheck = false;
+  });
 
 in
 stdenv.mkDerivation {
   name = "graph-refine${lib.optionalString (name != null) "-${name}"}";
 
   nativeBuildInputs = [
-    python2
+    python2Packages.python
+    psutil
   ];
 
   buildCommand = ''
@@ -56,8 +39,4 @@ stdenv.mkDerivation {
 
     cp -r . $out
   '';
-
-  passthru = {
-    inherit solverList;
-  };
 }

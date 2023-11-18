@@ -8,7 +8,7 @@ stdenv.mkDerivation {
     hash = "sha256-vzu03g07OVA95Db0OFx6i4BAYmrd6/9cIwtPT5Ka41g=";
   };
 
-  phases = [ "unpackPhase" "installPhase" "fixupPhase" ];
+  phases = [ "unpackPhase" "installPhase" ];
 
   installPhase = ''
     cp -r . $out

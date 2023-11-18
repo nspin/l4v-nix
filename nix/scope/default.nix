@@ -122,6 +122,8 @@ self: with self; {
 
   graphRefineInputs = callPackage ./graph-refine-inputs.nix {};
 
+  graphRefineSolverLists = callPackage ./graph-refine-solver-lists.nix {};
+
   graphRefineWith = callPackage ./graph-refine.nix {};
 
   graphRefine = rec {
