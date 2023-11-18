@@ -23,7 +23,7 @@ let
 
   solverList = solverLists.likeDockerImage;
 
-  cvc4BinaryExe = "${cvc4Binary.v1_5}/bin/cvc5";
+  cvc4BinaryExe = "${cvc4Binary.v1_5}/bin/cvc4";
   sonolarExe = "${sonolarBinary}/bin/sonolar";
 
   solverLists = {
