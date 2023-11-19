@@ -17,6 +17,15 @@ self: with self; {
 
   inherit l4vConfig;
 
+  wip1 = graphRefineWith {
+    name = "wip1";
+    solverList = graphRefineSolverLists.wip1;
+    targetDir = graphRefine.justStackBounds;
+    source = lib.cleanSource ../../tmp/graph-refine;
+    commands = [
+      [ "verbose" "trace-to:report.txt" "deps:Kernel_C.memcpy" ]
+    ];
+  };
 
   ### aggregate ###
 

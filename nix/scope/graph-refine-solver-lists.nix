@@ -1,5 +1,6 @@
 { lib
 , writeText
+, writeShellApplication
 , yices
 
 , cvc4Binary
@@ -18,6 +19,15 @@ let
   sonolarBinaryExe = "${sonolarBinary}/bin/sonolar";
   yicesSmt2Exe = "${yices}/bin/yices-smt2";
 
+  sonolarWrapper = writeShellApplication {
+    name = "x";
+    text = ''
+      cat | tee -a in.txt | ${sonolarBinaryExe} --input-format=smtlib2
+    '';
+  };
+
+  sonolarWrapperExe = "${sonolarWrapper}/bin/x";
+
 in {
   default = writeText "solverlist" ''
     CVC4: online: ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000
@@ -32,4 +42,14 @@ in {
     # TODO
     # SONOLAR-word8: offline: ${sonolarBinaryExe} --input-format=smtlib2
     #   config: mem_mode = 8
+
+  wip1 = writeText "solverlist" ''
+    CVC4: online: ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000
+    SONOLAR: offline: ${sonolarBinaryExe} --input-format=smtlib2
+    CVC4: offline: ${cvc4BinaryExe} --lang smt
+    SONOLAR-word8: offline: ${sonolarBinaryExe} --input-format=smtlib2
+      config: mem_mode = 8
+  '';
+    # SONOLAR: offline: ${sonolarWrapperExe}
+    # SONOLAR: offline: ${sonolarWrapperExe} --input-format=smtlib2
 }
