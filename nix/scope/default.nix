@@ -27,6 +27,17 @@ self: with self; {
     ];
   };
 
+  wip2 = graphRefineWith {
+    name = "wip2";
+    targetDir = graphRefine.justStackBounds;
+    args = [
+      "trace-to:report.txt"
+      "skip-proofs-of:${../../notes/graph-refine-1.log}"
+      "skip-proofs-of:${../../notes/graph-refine-2.log}"
+      "all"
+    ];
+  };
+
   ### aggregate ###
 
   slow = writeText "slow" (toString [
