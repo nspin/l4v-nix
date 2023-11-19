@@ -22,8 +22,8 @@ self: with self; {
     solverList = graphRefineSolverLists.wip1;
     targetDir = graphRefine.justStackBounds;
     source = lib.cleanSource ../../tmp/graph-refine;
-    commands = [
-      [ "verbose" "trace-to:report.txt" "deps:Kernel_C.memcpy" ]
+    args = [
+      "verbose" "trace-to:report.txt" "deps:Kernel_C.memcpy"
     ];
   };
 
@@ -143,21 +143,21 @@ self: with self; {
       name = "coverage";
       targetDir = justStackBounds;
       commands = [
-        [ "trace-to:coverage.txt" "coverage" ]
+        "trace-to:coverage.txt" "coverage"
       ];
     };
     demo = graphRefineWith {
       name = "demo";
       targetDir = justStackBounds;
-      commands = [
-        [ "trace-to:report.txt" "deps:Kernel_C.cancelAllIPC" ]
+      args = [
+        "trace-to:report.txt" "deps:Kernel_C.cancelAllIPC"
       ];
     };
     all = graphRefineWith {
       name = "all";
       targetDir = justStackBounds;
       commands = [
-        [ "trace-to:report.txt" "all" ]
+        "trace-to:report.txt" "all"
       ];
     };
   };

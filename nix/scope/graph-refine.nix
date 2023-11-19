@@ -8,10 +8,14 @@
 }:
 
 { name ? null
-, source ? sources.graphRefineNoSeL4
 , solverList ? graphRefineSolverLists.default
 , targetDir ? "${graphRefineInputs}/${l4vConfig.arch}${l4vConfig.optLevel}"
-, commands ? [ [] ]
+, source ? sources.graphRefineNoSeL4
+, args ? []
+, argLists ? [ args ]
+, commands ? lib.flip lib.concatMapStrings argLists (argList: ''
+    time python ${source}/graph-refine.py . ${lib.concatStringsSep " " argList} 2>&1 | tee log.txt
+  '')
 }:
 
 stdenv.mkDerivation {
@@ -27,9 +31,7 @@ stdenv.mkDerivation {
     cp -r --no-preserve=owner,mode ${targetDir} target
     cd target
 
-    ${lib.flip lib.concatMapStrings commands (args: ''
-      time python ${source}/graph-refine.py . ${lib.concatStringsSep " " args}
-    '')}
+    ${commands}
 
     cp -r . $out
   '';
