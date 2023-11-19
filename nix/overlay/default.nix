@@ -59,5 +59,11 @@ in {
   # Add Python packages needed by the seL4 ecosystem
   pythonPackagesExtensions = super.pythonPackagesExtensions ++ [
     (callPackage ./python-overrides.nix {})
+    (self: super: {
+      psutilForPython2 = self.psutil.overridePythonAttrs {
+        disabled = false;
+        doCheck = false;
+      };
+    })
   ];
 }

@@ -18,6 +18,7 @@ let
   sonolarBinaryExe = "${sonolarBinary}/bin/sonolar";
   yicesSmt2Exe = "${yices}/bin/yices-smt2";
 
+in {
   default = writeText "solverlist" ''
     CVC4: online: ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000
     SONOLAR: offline: ${sonolarBinaryExe} --input-format=smtlib2
@@ -31,7 +32,4 @@ let
     # TODO
     # SONOLAR-word8: offline: ${sonolarBinaryExe} --input-format=smtlib2
     #   config: mem_mode = 8
-
-in {
-  inherit default;
 }

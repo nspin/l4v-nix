@@ -8,24 +8,18 @@
 }:
 
 { name ? null
+, source ? sources.graphRefineNoSeL4
 , solverList ? graphRefineSolverLists.default
 , targetDir ? "${graphRefineInputs}/${l4vConfig.arch}${l4vConfig.optLevel}"
 , commands ? [ [] ]
 }:
 
-let
-  psutil = python2Packages.psutil.overridePythonAttrs (_attrs: {
-    disabled = false;
-    doCheck = false;
-  });
-
-in
 stdenv.mkDerivation {
   name = "graph-refine${lib.optionalString (name != null) "-${name}"}";
 
   nativeBuildInputs = [
     python2Packages.python
-    psutil
+    python2Packages.psutilForPython2
   ];
 
   buildCommand = ''
@@ -34,7 +28,7 @@ stdenv.mkDerivation {
     cd target
 
     ${lib.flip lib.concatMapStrings commands (args: ''
-      time python ${sources.graphRefineNoSeL4}/graph-refine.py . ${lib.concatStringsSep " " args}
+      time python ${source}/graph-refine.py . ${lib.concatStringsSep " " args}
     '')}
 
     cp -r . $out
