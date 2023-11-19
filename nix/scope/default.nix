@@ -64,7 +64,6 @@ self: with self; {
     graphRefine.all
   ]);
 
-
   ### sources ###
 
   rawSources = {
@@ -87,7 +86,6 @@ self: with self; {
     seL4 = callPackage ./patched-sel4-source.nix {};
     l4v = callPackage ./patched-l4v-source.nix {};
   };
-
 
   ### tools and proofs ###
 
@@ -162,7 +160,6 @@ self: with self; {
     };
   };
 
-
   ### deps ###
 
   texliveEnv = with texlive; combine {
@@ -188,7 +185,6 @@ self: with self; {
   sonolarBinary = callPackage ./deps/solvers-for-graph-refine/sonolar-binary.nix {};
   cvc4Binary = callPackage ./deps/solvers-for-graph-refine/cvc4-binary.nix {};
   cvc5Binary = callPackage ./deps/solvers-for-graph-refine/cvc5-binary.nix {};
-
 
   ### choices ###
 
