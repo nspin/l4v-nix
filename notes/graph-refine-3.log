@@ -1,0 +1,1539 @@
+these 2 derivations will be built:
+  /nix/store/s14kkdx2alj69cca4g562mmjzmh5j5v6-graph-refine-just-stack-bounds.drv
+  /nix/store/vxiqnbp446k2pgd1ik9y12xxxq8l505h-graph-refine-wip2.drv
+building '/nix/store/s14kkdx2alj69cca4g562mmjzmh5j5v6-graph-refine-just-stack-bounds.drv'...
+Loading syntax from ./CFunctions.txt
+Loaded 835 functions, 75 structs, 0 globals.
+Loading syntax from ./ASMFunctions.txt
+Missing nodes after calls to idle_thread
+  in ['halt']
+Missing nodes after calls to restore_user_context
+  in ['c_handle_data_fault', 'c_handle_undefined_instruction', 'c_handle_interrupt']
+Missing nodes after calls to halt
+  in ['handleReply', 'Arch_createObject', 'completeSignal', 'init_freemem', 'unmapPage', 'doFlush', 'maskCapRights', 'decodeInvocation', 'cteDelete', 'Arch_setMRs_fault', 'handleInterrupt', 'Arch_deriveCap', 'invokeCNodeSaveCaller', 'handleSyscall', 'arm_reset_exception', 'createObject', 'Arch_handleFaultReply']
+Missing nodes after calls to instruction'isb_sy_E000097C
+  in ['fpsimd_HWCapTest']
+Missing nodes after calls to instruction'ldr_pc_pc_20_e0010038_arm_vector_table_0x38_E001001C
+  in ['arm_vector_table']
+Warning: dead arc in c_handle_syscall: 67 -> 3758164096
+  (follows Basic node!)
+Warning: dead arc in c_handle_syscall: 69 -> 3758164096
+  (follows Basic node!)
+Warning: dead arc in arm_fiq_exception: 7 -> 3758162208
+  (follows Basic node!)
+Warning: dead arc in arm_fiq_exception: 9 -> 3758162208
+  (follows Basic node!)
+Warning: dead arc in c_handle_instruction_fault: 3758162396 -> 3758162400
+  (follows Basic node!)
+Warning: dead arc in _start: 3758096388 -> 3758096392
+  (follows Basic node!)
+Loaded 481 functions, 0 structs, 0 globals.
+Pseudo-Compiling.
+Doing stack/inst logic.
+Computing stack bounds.
+Doing recursion analysis for function group:
+  ['Kernel_C.deletingIRQHandler', 'Kernel_C.finaliseCap', 'Kernel_C.suspend', 'Kernel_C.cancelIPC', 'Kernel_C.cteDeleteOne']
+Doing recursion analysis for function group:
+  ['Kernel_C.reduceZombie', 'Kernel_C.cteDelete', 'Kernel_C.finaliseSlot']
+Computed recursion limits.
+Doing stack analysis for 'APFromVMRights'. (1 of 428)
+Doing stack analysis for 'Arch_activateIdleThread'. (2 of 428)
+Doing stack analysis for 'Arch_configureIdleThread'. (3 of 428)
+Doing stack analysis for 'Arch_createObject'. (4 of 428)
+Doing stack analysis for 'Arch_decodeIRQControlInvocation'. (5 of 428)
+Doing stack analysis for 'Arch_decodeInvocation'. (6 of 428)
+Doing stack analysis for 'Arch_decodeTransfer'. (7 of 428)
+Doing stack analysis for 'Arch_deriveCap'. (8 of 428)
+Doing stack analysis for 'Arch_finaliseCap'. (9 of 428)
+Doing stack analysis for 'Arch_getObjectSize'. (10 of 428)
+Doing stack analysis for 'Arch_handleFaultReply'. (11 of 428)
+Doing stack analysis for 'Arch_isFrameType'. (12 of 428)
+Doing stack analysis for 'Arch_maskCapRights'. (13 of 428)
+Doing stack analysis for 'Arch_performTransfer'. (14 of 428)
+Doing stack analysis for 'Arch_postModifyRegisters'. (15 of 428)
+Doing stack analysis for 'Arch_prepareThreadDelete'. (16 of 428)
+Doing stack analysis for 'Arch_sameObjectAs'. (17 of 428)
+Doing stack analysis for 'Arch_sameRegionAs'. (18 of 428)
+Doing stack analysis for 'Arch_setMRs_fault'. (19 of 428)
+Doing stack analysis for 'Arch_switchToIdleThread'. (20 of 428)
+Doing stack analysis for 'Arch_switchToThread'. (21 of 428)
+Doing stack analysis for 'Arch_updateCapData'. (22 of 428)
+Doing stack analysis for 'activateThread'. (23 of 428)
+Doing stack analysis for 'activate_global_pd'. (24 of 428)
+Doing stack analysis for 'alloc_rootserver_obj'. (25 of 428)
+Doing stack analysis for 'arch_clean_invalidate_L1_caches'. (26 of 428)
+Doing stack analysis for 'arch_clean_invalidate_caches'. (27 of 428)
+Doing stack analysis for 'arch_get_n_paging'. (28 of 428)
+Doing stack analysis for 'arm_errata'. (29 of 428)
+Doing stack analysis for 'armv_init_user_access'. (30 of 428)
+Doing stack analysis for 'bi_finalise'. (31 of 428)
+Doing stack analysis for 'bindNotification'. (32 of 428)
+Doing stack analysis for 'branchFlushRange'. (33 of 428)
+Doing stack analysis for 'c_handle_data_fault'. (34 of 428)
+Doing stack analysis for 'c_handle_fastpath_call'. (35 of 428)
+Doing stack analysis for 'c_handle_fastpath_reply_recv'. (36 of 428)
+Doing stack analysis for 'c_handle_instruction_fault'. (37 of 428)
+Doing stack analysis for 'c_handle_interrupt'. (38 of 428)
+Doing stack analysis for 'c_handle_undefined_instruction'. (39 of 428)
+Doing stack analysis for 'calculate_extra_bi_size_bits'. (40 of 428)
+Doing stack analysis for 'cancelAllIPC'. (41 of 428)
+Doing stack analysis for 'cancelAllSignals'. (42 of 428)
+Doing stack analysis for 'cancelBadgedSends'. (43 of 428)
+Doing stack analysis for 'cancelIPC'. (44 of 428)
+Doing stack analysis for 'cancelSignal'. (45 of 428)
+Doing stack analysis for 'capSwapForDelete'. (46 of 428)
+Doing stack analysis for 'char_to_long'. (47 of 428)
+Doing stack analysis for 'checkValidIPCBuffer'. (48 of 428)
+Doing stack analysis for 'chooseThread'. (49 of 428)
+Doing stack analysis for 'cleanCacheRange_PoU'. (50 of 428)
+Doing stack analysis for 'cleanCacheRange_RAM'. (51 of 428)
+Doing stack analysis for 'cleanCaches_PoU'. (52 of 428)
+Doing stack analysis for 'cleanInvalidateCacheRange_RAM'. (53 of 428)
+Doing stack analysis for 'cleanInvalidateL1Caches'. (54 of 428)
+Doing stack analysis for 'cleanInvalidate_D_PoC'. (55 of 428)
+Aborting Problem (Function (cleanInvalidate_D_PoC)), complex loop
+Doing stack analysis for 'cleanInvalidate_L1D'. (56 of 428)
+Aborting Problem (Function (cleanInvalidate_L1D)), complex loop
+Doing stack analysis for 'clean_D_PoU'. (57 of 428)
+Aborting Problem (Function (clean_D_PoU)), complex loop
+Doing stack analysis for 'completeSignal'. (58 of 428)
+Doing stack analysis for 'configureIdleThread'. (59 of 428)
+Doing stack analysis for 'copyGlobalMappings'. (60 of 428)
+Doing stack analysis for 'copyMRs'. (61 of 428)
+Doing stack analysis for 'cpu_iface_init'. (62 of 428)
+Doing stack analysis for 'cpu_initLocalIRQController'. (63 of 428)
+Doing stack analysis for 'createNewObjects'. (64 of 428)
+Doing stack analysis for 'createObject'. (65 of 428)
+Doing stack analysis for 'create_bi_frame_cap'. (66 of 428)
+Doing stack analysis for 'create_device_untypeds'. (67 of 428)
+Doing stack analysis for 'create_domain_cap'. (68 of 428)
+Doing stack analysis for 'create_frames_of_region'. (69 of 428)
+Doing stack analysis for 'create_idle_thread'. (70 of 428)
+Doing stack analysis for 'create_initial_thread'. (71 of 428)
+Doing stack analysis for 'create_ipcbuf_frame_cap'. (72 of 428)
+Doing stack analysis for 'create_it_address_space'. (73 of 428)
+Doing stack analysis for 'create_it_asid_pool'. (74 of 428)
+Doing stack analysis for 'create_kernel_untypeds'. (75 of 428)
+Doing stack analysis for 'create_mapped_it_frame_cap'. (76 of 428)
+Doing stack analysis for 'create_root_cnode'. (77 of 428)
+Doing stack analysis for 'create_rootserver_objects'. (78 of 428)
+Doing stack analysis for 'create_unmapped_it_frame_cap'. (79 of 428)
+Doing stack analysis for 'create_untypeds_for_region'. (80 of 428)
+Doing stack analysis for 'cteDelete'. (81 of 428)
+Doing stack analysis for 'cteDeleteOne'. (82 of 428)
+Doing stack analysis for 'cteInsert'. (83 of 428)
+Doing stack analysis for 'cteMove'. (84 of 428)
+Doing stack analysis for 'cteRevoke'. (85 of 428)
+Doing stack analysis for 'cteSwap'. (86 of 428)
+Doing stack analysis for 'decodeARMMMUInvocation'. (87 of 428)
+Doing stack analysis for 'decodeBindNotification'. (88 of 428)
+Doing stack analysis for 'decodeCNodeInvocation'. (89 of 428)
+Doing stack analysis for 'decodeCopyRegisters'. (90 of 428)
+Doing stack analysis for 'decodeDomainInvocation'. (91 of 428)
+Doing stack analysis for 'decodeIRQControlInvocation'. (92 of 428)
+Doing stack analysis for 'decodeIRQHandlerInvocation'. (93 of 428)
+Doing stack analysis for 'decodeInvocation'. (94 of 428)
+Doing stack analysis for 'decodeReadRegisters'. (95 of 428)
+Doing stack analysis for 'decodeSetIPCBuffer'. (96 of 428)
+Doing stack analysis for 'decodeSetMCPriority'. (97 of 428)
+Doing stack analysis for 'decodeSetPriority'. (98 of 428)
+Doing stack analysis for 'decodeSetSchedParams'. (99 of 428)
+Doing stack analysis for 'decodeSetSpace'. (100 of 428)
+Doing stack analysis for 'decodeTCBConfigure'. (101 of 428)
+Doing stack analysis for 'decodeTCBInvocation'. (102 of 428)
+Doing stack analysis for 'decodeUnbindNotification'. (103 of 428)
+Doing stack analysis for 'decodeUntypedInvocation'. (104 of 428)
+Doing stack analysis for 'decodeWriteRegisters'. (105 of 428)
+Doing stack analysis for 'deleteASID'. (106 of 428)
+Doing stack analysis for 'deleteASIDPool'. (107 of 428)
+Doing stack analysis for 'deleteCallerCap'. (108 of 428)
+Doing stack analysis for 'deletedIRQHandler'. (109 of 428)
+Doing stack analysis for 'deletingIRQHandler'. (110 of 428)
+Doing stack analysis for 'deriveCap'. (111 of 428)
+Doing stack analysis for 'dist_init'. (112 of 428)
+Doing stack analysis for 'doFaultTransfer'. (113 of 428)
+Doing stack analysis for 'doFlush'. (114 of 428)
+Doing stack analysis for 'doIPCTransfer'. (115 of 428)
+Doing stack analysis for 'doNBRecvFailedTransfer'. (116 of 428)
+Doing stack analysis for 'doNormalTransfer'. (117 of 428)
+Doing stack analysis for 'doReplyTransfer'. (118 of 428)
+Doing stack analysis for 'emptySlot'. (119 of 428)
+Doing stack analysis for 'ensureEmptySlot'. (120 of 428)
+Doing stack analysis for 'ensureNoChildren'. (121 of 428)
+Doing stack analysis for 'finaliseCap'. (122 of 428)
+Doing stack analysis for 'findFreeHWASID'. (123 of 428)
+Doing stack analysis for 'findPDForASID'. (124 of 428)
+Doing stack analysis for 'flushPage'. (125 of 428)
+Doing stack analysis for 'flushSpace'. (126 of 428)
+Doing stack analysis for 'flushTable'. (127 of 428)
+Doing stack analysis for 'fpsimd_HWCapTest'. (128 of 428)
+Doing stack analysis for 'getExtraCPtr'. (129 of 428)
+Doing stack analysis for 'getHWASID'. (130 of 428)
+Doing stack analysis for 'getObjectSize'. (131 of 428)
+Doing stack analysis for 'getReceiveSlots'. (132 of 428)
+Doing stack analysis for 'getRestartPC'. (133 of 428)
+Doing stack analysis for 'get_avail_p_regs'. (134 of 428)
+Doing stack analysis for 'get_num_avail_p_regs'. (135 of 428)
+Doing stack analysis for 'halt'. (136 of 428)
+Doing stack analysis for 'handleDoubleFault'. (137 of 428)
+Doing stack analysis for 'handleFault'. (138 of 428)
+Doing stack analysis for 'handleFaultReply'. (139 of 428)
+Doing stack analysis for 'handleInterrupt'. (140 of 428)
+Doing stack analysis for 'handleInterruptEntry'. (141 of 428)
+Doing stack analysis for 'handleInvocation'. (142 of 428)
+Doing stack analysis for 'handleRecv'. (143 of 428)
+Doing stack analysis for 'handleReply'. (144 of 428)
+Doing stack analysis for 'handleSyscall'. (145 of 428)
+Doing stack analysis for 'handleUnknownSyscall'. (146 of 428)
+Doing stack analysis for 'handleUserLevelFault'. (147 of 428)
+Doing stack analysis for 'handleVMFault'. (148 of 428)
+Doing stack analysis for 'handleVMFaultEvent'. (149 of 428)
+Doing stack analysis for 'hasCancelSendRights'. (150 of 428)
+Doing stack analysis for 'idle_thread'. (151 of 428)
+Doing stack analysis for 'initIRQController'. (152 of 428)
+Doing stack analysis for 'initL2Cache'. (153 of 428)
+Doing stack analysis for 'initTimer'. (154 of 428)
+Doing stack analysis for 'init_core_state'. (155 of 428)
+Doing stack analysis for 'init_freemem'. (156 of 428)
+Doing stack analysis for 'init_kernel'. (157 of 428)
+Aborting Problem (Function (init_kernel)), complex loop
+Doing stack analysis for 'insertNewCap'. (158 of 428)
+Doing stack analysis for 'insert_region'. (159 of 428)
+Doing stack analysis for "instruction'cpsid_aif_E0010948". (160 of 428)
+Doing stack analysis for "instruction'dmb_sy_E0011460". (161 of 428)
+Doing stack analysis for "instruction'dmb_sy_E0012014". (162 of 428)
+Doing stack analysis for "instruction'dmb_sy_E0012054". (163 of 428)
+Doing stack analysis for "instruction'dmb_sy_E0012068". (164 of 428)
+Doing stack analysis for "instruction'dmb_sy_E00120DC". (165 of 428)
+Doing stack analysis for "instruction'dmb_sy_E0012128". (166 of 428)
+Doing stack analysis for "instruction'dmb_sy_E0012170". (167 of 428)
+Doing stack analysis for "instruction'dmb_sy_E001221C". (168 of 428)
+Doing stack analysis for "instruction'dmb_sy_E00122F0". (169 of 428)
+Doing stack analysis for "instruction'dmb_sy_E001252C". (170 of 428)
+Doing stack analysis for "instruction'dmb_sy_E0012570". (171 of 428)
+Doing stack analysis for "instruction'dmb_sy_E0012978". (172 of 428)
+Doing stack analysis for "instruction'dmb_sy_E00129C4". (173 of 428)
+Doing stack analysis for "instruction'dmb_sy_E0012AA4". (174 of 428)
+Doing stack analysis for "instruction'dmb_sy_E0019D44". (175 of 428)
+Doing stack analysis for "instruction'dsb_sy_E00009B8". (176 of 428)
+Doing stack analysis for "instruction'dsb_sy_E00009D4". (177 of 428)
+Doing stack analysis for "instruction'dsb_sy_E00009E0". (178 of 428)
+Doing stack analysis for "instruction'dsb_sy_E0003EC4". (179 of 428)
+Doing stack analysis for "instruction'dsb_sy_E0003ECC". (180 of 428)
+Doing stack analysis for "instruction'dsb_sy_E0011074". (181 of 428)
+Doing stack analysis for "instruction'dsb_sy_E001107C". (182 of 428)
+Doing stack analysis for "instruction'dsb_sy_E0011134". (183 of 428)
+Doing stack analysis for "instruction'dsb_sy_E00111A0". (184 of 428)
+Doing stack analysis for "instruction'dsb_sy_E00111DC". (185 of 428)
+Doing stack analysis for "instruction'dsb_sy_E0011274". (186 of 428)
+Doing stack analysis for "instruction'dsb_sy_E00113A8". (187 of 428)
+Doing stack analysis for "instruction'dsb_sy_E00113BC". (188 of 428)
+Doing stack analysis for "instruction'dsb_sy_E0011400". (189 of 428)
+Doing stack analysis for "instruction'dsb_sy_E001140C". (190 of 428)
+Doing stack analysis for "instruction'dsb_sy_E0011488". (191 of 428)
+Doing stack analysis for "instruction'dsb_sy_E0011494". (192 of 428)
+Doing stack analysis for "instruction'dsb_sy_E0012028". (193 of 428)
+Doing stack analysis for "instruction'dsb_sy_E00120A0". (194 of 428)
+Doing stack analysis for "instruction'dsb_sy_E00120B4". (195 of 428)
+Doing stack analysis for "instruction'dsb_sy_E00120F0". (196 of 428)
+Doing stack analysis for "instruction'dsb_sy_E0012584". (197 of 428)
+Doing stack analysis for "instruction'dsb_sy_E001268C". (198 of 428)
+Doing stack analysis for "instruction'dsb_sy_E00126C0". (199 of 428)
+Doing stack analysis for "instruction'dsb_sy_E00126C8". (200 of 428)
+Doing stack analysis for "instruction'dsb_sy_E00126D8". (201 of 428)
+Doing stack analysis for "instruction'dsb_sy_E00126F8". (202 of 428)
+Doing stack analysis for "instruction'dsb_sy_E0012704". (203 of 428)
+Doing stack analysis for "instruction'dsb_sy_E001292C". (204 of 428)
+Doing stack analysis for "instruction'dsb_sy_E0012934". (205 of 428)
+Doing stack analysis for "instruction'dsb_sy_E0012944". (206 of 428)
+Doing stack analysis for "instruction'dsb_sy_E0012A00". (207 of 428)
+Doing stack analysis for "instruction'dsb_sy_E0012A20". (208 of 428)
+Doing stack analysis for "instruction'dsb_sy_E0012A30". (209 of 428)
+Doing stack analysis for "instruction'isb_sy_E000097C". (210 of 428)
+Doing stack analysis for "instruction'isb_sy_E00009D0". (211 of 428)
+Doing stack analysis for "instruction'isb_sy_E00009E4". (212 of 428)
+Doing stack analysis for "instruction'isb_sy_E0003ED0". (213 of 428)
+Doing stack analysis for "instruction'isb_sy_E0011080". (214 of 428)
+Doing stack analysis for "instruction'isb_sy_E001114C". (215 of 428)
+Doing stack analysis for "instruction'isb_sy_E00111B8". (216 of 428)
+Doing stack analysis for "instruction'isb_sy_E00111C0". (217 of 428)
+Doing stack analysis for "instruction'isb_sy_E00111D0". (218 of 428)
+Doing stack analysis for "instruction'isb_sy_E00111F4". (219 of 428)
+Doing stack analysis for "instruction'isb_sy_E001128C". (220 of 428)
+Doing stack analysis for "instruction'isb_sy_E0011294". (221 of 428)
+Doing stack analysis for "instruction'isb_sy_E00112AC". (222 of 428)
+Doing stack analysis for "instruction'isb_sy_E00113C0". (223 of 428)
+Doing stack analysis for "instruction'isb_sy_E0011410". (224 of 428)
+Doing stack analysis for "instruction'isb_sy_E0011498". (225 of 428)
+Doing stack analysis for "instruction'isb_sy_E00125A8". (226 of 428)
+Doing stack analysis for "instruction'isb_sy_E00126B0". (227 of 428)
+Doing stack analysis for "instruction'isb_sy_E00126D4". (228 of 428)
+Doing stack analysis for "instruction'isb_sy_E0012708". (229 of 428)
+Doing stack analysis for "instruction'isb_sy_E0012940". (230 of 428)
+Doing stack analysis for "instruction'isb_sy_E00129F0". (231 of 428)
+Doing stack analysis for "instruction'isb_sy_E0012A1C". (232 of 428)
+Doing stack analysis for "instruction'isb_sy_E0012A24". (233 of 428)
+Doing stack analysis for "instruction'mcr_15_0_ip_cr7_cr10_1_E00120D8". (234 of 428)
+Doing stack analysis for "instruction'mcr_15_0_ip_cr8_cr7_2_E0011078". (235 of 428)
+Doing stack analysis for "instruction'mcr_15_0_lr_cr7_cr10_1_E0012010". (236 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r0_cr10_cr1_0_E0010894". (237 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r0_cr10_cr1_1_E0010888". (238 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r0_cr13_cr0_1_E00111BC". (239 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r0_cr13_cr0_1_E0011290". (240 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r0_cr2_cr0_0_E00112A8". (241 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r0_cr7_cr11_1_E00122EC". (242 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r0_cr8_cr7_1_E0010880". (243 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r0_cr8_cr7_2_E0011408". (244 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r0_cr8_cr7_2_E0011490". (245 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r1_cr10_cr0_0_E0010890". (246 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r1_cr10_cr0_1_E0010884". (247 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r1_cr7_cr10_2_E0011D88". (248 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r1_cr7_cr14_2_E0011E68". (249 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r1_cr7_cr14_2_E0011F68". (250 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r2_cr10_cr0_0_E0010898". (251 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r2_cr10_cr0_1_E001088C". (252 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r2_cr7_cr11_1_E001145C". (253 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r2_cr7_cr11_1_E0012218". (254 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr13_cr0_4_E00038EC". (255 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr14_cr1_0_E0011FE4". (256 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr1_cr0_2_E0000978". (257 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr2_cr0_0_E00009CC". (258 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr2_cr0_0_E0011148". (259 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr2_cr0_0_E00111B4". (260 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr2_cr0_0_E00111CC". (261 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr2_cr0_0_E00111F0". (262 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr2_cr0_0_E0011288". (263 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr7_cr11_1_E001216C". (264 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr7_cr11_1_E0019D40". (265 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr7_cr14_1_E001209C". (266 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr7_cr5_0_E00126D0". (267 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr7_cr5_0_E001293C". (268 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr7_cr5_0_E0012A18". (269 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr7_cr5_1_E00125A4". (270 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr7_cr5_7_E00125D8". (271 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr7_cr6_1_E001256C". (272 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr8_cr7_0_E00009DC". (273 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr8_cr7_1_E00113B8". (274 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r4_cr8_cr7_0_E0003EC8". (275 of 428)
+Doing stack analysis for "instruction'mcr_15_0_r4_cr8_cr7_2_E0012700". (276 of 428)
+Doing stack analysis for "instruction'mcr_15_2_r2_cr0_cr0_0_E0011DFC". (277 of 428)
+Doing stack analysis for "instruction'mcr_15_2_r2_cr0_cr0_0_E0011ED8". (278 of 428)
+Doing stack analysis for "instruction'mcr_15_2_r2_cr0_cr0_0_E0011F2C". (279 of 428)
+Doing stack analysis for "instruction'mcr_15_2_r3_cr0_cr0_0_E0011F24". (280 of 428)
+Doing stack analysis for "instruction'mcr_15_2_r9_cr0_cr0_0_E0011DF4". (281 of 428)
+Doing stack analysis for "instruction'mcr_15_2_r9_cr0_cr0_0_E0011ED0". (282 of 428)
+Doing stack analysis for "instruction'mrc_15_0_r1_cr6_cr0_0_E001132C". (283 of 428)
+Doing stack analysis for "instruction'mrc_15_0_r2_cr13_cr0_2_E0010130". (284 of 428)
+Doing stack analysis for "instruction'mrc_15_0_r2_cr13_cr0_2_E0010158". (285 of 428)
+Doing stack analysis for "instruction'mrc_15_0_r2_cr13_cr0_2_E0010188". (286 of 428)
+Doing stack analysis for "instruction'mrc_15_0_r2_cr13_cr0_2_E00101B4". (287 of 428)
+Doing stack analysis for "instruction'mrc_15_0_r2_cr13_cr0_3_E0010138". (288 of 428)
+Doing stack analysis for "instruction'mrc_15_0_r2_cr13_cr0_3_E0010160". (289 of 428)
+Doing stack analysis for "instruction'mrc_15_0_r2_cr13_cr0_3_E0010190". (290 of 428)
+Doing stack analysis for "instruction'mrc_15_0_r2_cr13_cr0_3_E00101BC". (291 of 428)
+Doing stack analysis for "instruction'mrc_15_0_r3_cr0_cr1_1_E0011FD4". (292 of 428)
+Doing stack analysis for "instruction'mrc_15_0_r3_cr0_cr1_2_E0011FD0". (293 of 428)
+Doing stack analysis for "instruction'mrc_15_0_r3_cr1_cr0_2_E0000970". (294 of 428)
+Doing stack analysis for "instruction'mrc_15_0_r3_cr5_cr0_0_E0011330". (295 of 428)
+Doing stack analysis for "instruction'mrc_15_0_r3_cr5_cr0_1_E0011358". (296 of 428)
+Doing stack analysis for "instruction'mrc_15_1_fp_cr0_cr0_1_E0011E40". (297 of 428)
+Doing stack analysis for "instruction'mrc_15_1_r3_cr0_cr0_0_E0011DF8". (298 of 428)
+Doing stack analysis for "instruction'mrc_15_1_r3_cr0_cr0_0_E0011ED4". (299 of 428)
+Doing stack analysis for "instruction'mrc_15_1_r3_cr0_cr0_0_E0011F28". (300 of 428)
+Doing stack analysis for "instruction'mrc_15_1_r3_cr0_cr0_1_E0011D58". (301 of 428)
+Doing stack analysis for "instruction'mrc_15_2_r2_cr0_cr0_0_E0011DEC". (302 of 428)
+Doing stack analysis for "instruction'mrc_15_2_r2_cr0_cr0_0_E0011EC8". (303 of 428)
+Doing stack analysis for "instruction'mrc_15_2_r2_cr0_cr0_0_E0011F1C". (304 of 428)
+Doing stack analysis for "instruction'strex_r0_r1_r3_E0011210". (305 of 428)
+Doing stack analysis for "instruction'vmrs_r3_fpexc_E0000990". (306 of 428)
+Doing stack analysis for "instruction'vmrs_r3_fpexc_E000099C". (307 of 428)
+Doing stack analysis for "instruction'vmrs_r3_fpexc_E0003B54". (308 of 428)
+Doing stack analysis for "instruction'vmsr_fpexc_r3_E0000998". (309 of 428)
+Doing stack analysis for "instruction'vmsr_fpexc_r3_E0003B5C". (310 of 428)
+Doing stack analysis for "instruction'wfi_E00108A0". (311 of 428)
+Doing stack analysis for 'invalidateASIDEntry'. (312 of 428)
+Doing stack analysis for 'invalidateCacheRange_I'. (313 of 428)
+Doing stack analysis for 'invalidateCacheRange_RAM'. (314 of 428)
+Doing stack analysis for 'invalidateTLBByASID'. (315 of 428)
+Doing stack analysis for 'invokeCNodeCancelBadgedSends'. (316 of 428)
+Doing stack analysis for 'invokeCNodeDelete'. (317 of 428)
+Doing stack analysis for 'invokeCNodeInsert'. (318 of 428)
+Doing stack analysis for 'invokeCNodeMove'. (319 of 428)
+Doing stack analysis for 'invokeCNodeRevoke'. (320 of 428)
+Doing stack analysis for 'invokeCNodeRotate'. (321 of 428)
+Doing stack analysis for 'invokeCNodeSaveCaller'. (322 of 428)
+Doing stack analysis for 'invokeIRQControl'. (323 of 428)
+Doing stack analysis for 'invokeIRQHandler_AckIRQ'. (324 of 428)
+Doing stack analysis for 'invokeIRQHandler_ClearIRQHandler'. (325 of 428)
+Doing stack analysis for 'invokeIRQHandler_SetIRQHandler'. (326 of 428)
+Doing stack analysis for 'invokeTCB_CopyRegisters'. (327 of 428)
+Doing stack analysis for 'invokeTCB_NotificationControl'. (328 of 428)
+Doing stack analysis for 'invokeTCB_ReadRegisters'. (329 of 428)
+Doing stack analysis for 'invokeTCB_Resume'. (330 of 428)
+Doing stack analysis for 'invokeTCB_Suspend'. (331 of 428)
+Doing stack analysis for 'invokeTCB_ThreadControl'. (332 of 428)
+Doing stack analysis for 'invokeTCB_WriteRegisters'. (333 of 428)
+Doing stack analysis for 'invokeUntyped_Retype'. (334 of 428)
+Doing stack analysis for 'isFinalCapability'. (335 of 428)
+Doing stack analysis for 'isIOSpaceFrameCap'. (336 of 428)
+Doing stack analysis for 'isIRQActive'. (337 of 428)
+Doing stack analysis for 'isMDBParentOf'. (338 of 428)
+Doing stack analysis for 'isValidVTableRoot'. (339 of 428)
+Doing stack analysis for 'loadCapTransfer'. (340 of 428)
+Doing stack analysis for 'loadHWASID'. (341 of 428)
+Doing stack analysis for 'lockTLBEntry'. (342 of 428)
+Doing stack analysis for 'lockTLBEntryCritical'. (343 of 428)
+Doing stack analysis for 'lookupCap'. (344 of 428)
+Doing stack analysis for 'lookupCapAndSlot'. (345 of 428)
+Doing stack analysis for 'lookupExtraCaps'. (346 of 428)
+Doing stack analysis for 'lookupIPCBuffer'. (347 of 428)
+Doing stack analysis for 'lookupPDSlot'. (348 of 428)
+Doing stack analysis for 'lookupPTSlot'. (349 of 428)
+Doing stack analysis for 'lookupPivotSlot'. (350 of 428)
+Doing stack analysis for 'lookupSlot'. (351 of 428)
+Doing stack analysis for 'lookupSlotForCNodeOp'. (352 of 428)
+Doing stack analysis for 'lookupSourceSlot'. (353 of 428)
+Doing stack analysis for 'lookupTargetSlot'. (354 of 428)
+Doing stack analysis for 'makeUserPDE'. (355 of 428)
+Doing stack analysis for 'map_kernel_devices'. (356 of 428)
+Doing stack analysis for 'map_kernel_frame'. (357 of 428)
+Doing stack analysis for 'map_kernel_window'. (358 of 428)
+Aborting Problem (Function (map_kernel_window)), complex loop
+Doing stack analysis for 'maskCapRights'. (359 of 428)
+Doing stack analysis for 'maskVMRights'. (360 of 428)
+Doing stack analysis for 'maybe_alloc_extra_bi'. (361 of 428)
+Doing stack analysis for 'memcpy'. (362 of 428)
+Doing stack analysis for 'memset'. (363 of 428)
+Doing stack analysis for 'memzero'. (364 of 428)
+Doing stack analysis for 'merge_regions'. (365 of 428)
+Aborting Problem (Function (merge_regions)), complex loop
+Doing stack analysis for 'pageTableMapped'. (366 of 428)
+Doing stack analysis for 'performInvocation_Endpoint'. (367 of 428)
+Doing stack analysis for 'performInvocation_Notification'. (368 of 428)
+Doing stack analysis for 'performInvocation_Reply'. (369 of 428)
+Doing stack analysis for 'plat_cleanCache'. (370 of 428)
+Doing stack analysis for 'populate_bi_frame'. (371 of 428)
+Doing stack analysis for 'possibleSwitchTo'. (372 of 428)
+Doing stack analysis for 'preemptionPoint'. (373 of 428)
+Doing stack analysis for 'provide_cap'. (374 of 428)
+Doing stack analysis for 'receiveIPC'. (375 of 428)
+Doing stack analysis for 'receiveSignal'. (376 of 428)
+Doing stack analysis for 'replyFromKernel_error'. (377 of 428)
+Doing stack analysis for 'replyFromKernel_success_empty'. (378 of 428)
+Doing stack analysis for 'rescheduleRequired'. (379 of 428)
+Doing stack analysis for 'reserve_region'. (380 of 428)
+Doing stack analysis for 'resolveAddressBits'. (381 of 428)
+Doing stack analysis for 'restart'. (382 of 428)
+Doing stack analysis for 'restore_user_context'. (383 of 428)
+Doing stack analysis for 'sameObjectAs'. (384 of 428)
+Doing stack analysis for 'sameRegionAs'. (385 of 428)
+Doing stack analysis for 'schedule'. (386 of 428)
+Doing stack analysis for 'scheduleChooseNewThread'. (387 of 428)
+Doing stack analysis for 'scheduleTCB'. (388 of 428)
+Doing stack analysis for 'sendFaultIPC'. (389 of 428)
+Doing stack analysis for 'sendIPC'. (390 of 428)
+Doing stack analysis for 'sendSignal'. (391 of 428)
+Doing stack analysis for 'setDomain'. (392 of 428)
+Doing stack analysis for 'setExtraBadge'. (393 of 428)
+Doing stack analysis for 'setIRQState'. (394 of 428)
+Doing stack analysis for 'setIRQTrigger'. (395 of 428)
+Doing stack analysis for 'setMCPriority'. (396 of 428)
+Doing stack analysis for 'setMRs_fault'. (397 of 428)
+Doing stack analysis for 'setMRs_syscall_error'. (398 of 428)
+Doing stack analysis for 'setNextPC'. (399 of 428)
+Doing stack analysis for 'setPriority'. (400 of 428)
+Doing stack analysis for 'setThreadState'. (401 of 428)
+Doing stack analysis for 'setVMRoot'. (402 of 428)
+Doing stack analysis for 'setVMRootForFlush'. (403 of 428)
+Doing stack analysis for 'setupCallerCap'. (404 of 428)
+Doing stack analysis for 'setupReplyMaster'. (405 of 428)
+Doing stack analysis for 'slotCapLongRunningDelete'. (406 of 428)
+Doing stack analysis for 'slowpath'. (407 of 428)
+Doing stack analysis for 'str_to_long'. (408 of 428)
+Doing stack analysis for 'strlcat'. (409 of 428)
+Doing stack analysis for 'strlcpy'. (410 of 428)
+Doing stack analysis for 'strncmp'. (411 of 428)
+Doing stack analysis for 'strnlen'. (412 of 428)
+Doing stack analysis for 'suspend'. (413 of 428)
+Doing stack analysis for 'switchToIdleThread'. (414 of 428)
+Doing stack analysis for 'switchToThread'. (415 of 428)
+Doing stack analysis for 'tcbEPAppend'. (416 of 428)
+Doing stack analysis for 'tcbEPDequeue'. (417 of 428)
+Doing stack analysis for 'tcbSchedAppend'. (418 of 428)
+Doing stack analysis for 'tcbSchedDequeue'. (419 of 428)
+Doing stack analysis for 'tcbSchedEnqueue'. (420 of 428)
+Doing stack analysis for 'timerTick'. (421 of 428)
+Doing stack analysis for 'unbindMaybeNotification'. (422 of 428)
+Doing stack analysis for 'unbindNotification'. (423 of 428)
+Doing stack analysis for 'unmapPage'. (424 of 428)
+Doing stack analysis for 'unmapPageTable'. (425 of 428)
+Doing stack analysis for 'updateCapData'. (426 of 428)
+Doing stack analysis for 'write_it_asid_pool'. (427 of 428)
+Doing stack analysis for 'write_slot'. (428 of 428)
+Computed stack bounds.
+Warning: asm instruction name: formatting: "asm_instruction'.word_0xeef00a10__\\nmov_%0,_r0________\\n"
+Warning: asm instruction name: formatting: "asm_instruction'.word_0xeef00a10__\\nmov_%0,_r0________\\n"
+Function 'init_kernel' contains unhandled instructions:
+  ["instruction'vmsr_fpexc_r3_E0003B5C", "instruction'vmrs_r3_fpexc_E0003B54"]
+Function 'Arch_switchToThread' contains unhandled instructions:
+  ["instruction'strex_r0_r1_r3_E0011210"]
+Function 'Kernel_C.fpsimd_HWCapTest' contains unhandled instructions:
+  ["asm_instruction'.word_0xeef00a10__\\nmov_%0,_r0________\\n"]
+Function 'arm_vector_table' contains unhandled instructions:
+  ["instruction'ldr_pc_pc_24_e0010020_arm_vector_table_0x20_E0010000", "instruction'ldr_pc_pc_24_e001002c_arm_vector_table_0x2c_E001000C", "instruction'ldr_pc_pc_20_e0010038_arm_vector_table_0x38_E001001C", "instruction'ldr_pc_pc_24_e0010024_arm_vector_table_0x24_E0010004", "instruction'ldr_pc_pc_24_e0010030_arm_vector_table_0x30_E0010010", "instruction'ldr_pc_pc_24_e0010028_arm_vector_table_0x28_E0010008", "instruction'ldr_pc_pc_20_e0010034_arm_vector_table_0x34_E0010018", "instruction'ldr_pc_pc_4_e0010020_arm_vector_table_0x20_E0010014"]
+Function 'arm_undefined_inst_exception' contains unhandled instructions:
+  ["instruction'cps_19_E0010040", "instruction'srsia_sp_19_E001003C", "instruction'stmdb_sp_r0_r1_r2_r3_r4_r5_r6_r7_r8_r9_sl_fp_ip_sp_lr_E0010044"]
+Function 'arm_data_abort_exception' contains unhandled instructions:
+  ["instruction'cps_19_E00100BC", "instruction'stmdb_sp_r0_r1_r2_r3_r4_r5_r6_r7_r8_r9_sl_fp_ip_sp_lr_E00100C0", "instruction'srsia_sp_19_E00100B8"]
+Function 'Kernel_C.supportsAsyncExceptions' contains unhandled instructions:
+  ["asm_instruction'.fpu_vfp\\nvmsr_fpexc,_%0", "asm_instruction'.fpu_vfp\\nvmrs_%0,_fpexc"]
+Function 'Kernel_C.clearEnFPEXC' contains unhandled instructions:
+  ["asm_instruction'.fpu_vfp\\nvmsr_fpexc,_%0", "asm_instruction'.fpu_vfp\\nvmrs_%0,_fpexc"]
+Function 'arm_irq_exception' contains unhandled instructions:
+  ["instruction'stmdb_sp_r0_r1_r2_r3_r4_r5_r6_r7_r8_r9_sl_fp_ip_sp_lr_E00100F4", "instruction'cps_19_E00100F0", "instruction'srsia_sp_19_E00100EC"]
+Function 'fpsimd_HWCapTest' contains unhandled instructions:
+  ["instruction'vmrs_r3_fpexc_E0000990", "instruction'vmrs_r3_fpexc_E000099C", "instruction'vmsr_fpexc_r3_E0000998"]
+Function '_start' contains unhandled instructions:
+  ["instruction'cps_23_E0000034", "instruction'cps_19_E000003C"]
+Function 'arm_prefetch_abort_exception' contains unhandled instructions:
+  ["instruction'cps_19_E001008C", "instruction'stmdb_sp_r0_r1_r2_r3_r4_r5_r6_r7_r8_r9_sl_fp_ip_sp_lr_E0010090", "instruction'srsia_sp_19_E0010088"]
+Function 'halt' contains unhandled instructions:
+  ["instruction'cpsid_aif_E0010948"]
+Checking.
+
+real    3m0.553s
+user    2m46.257s
+sys     0m18.837s
+building '/nix/store/vxiqnbp446k2pgd1ik9y12xxxq8l505h-graph-refine-wip2.drv'...
+Loading syntax from ./CFunctions.txt
+Loaded 835 functions, 75 structs, 0 globals.
+Loading syntax from ./ASMFunctions.txt
+Missing nodes after calls to idle_thread
+  in ['halt']
+Missing nodes after calls to restore_user_context
+  in ['c_handle_data_fault', 'c_handle_undefined_instruction', 'c_handle_interrupt']
+Missing nodes after calls to halt
+  in ['handleReply', 'Arch_createObject', 'completeSignal', 'init_freemem', 'unmapPage', 'doFlush', 'maskCapRights', 'decodeInvocation', 'cteDelete', 'Arch_setMRs_fault', 'handleInterrupt', 'Arch_deriveCap', 'invokeCNodeSaveCaller', 'handleSyscall', 'arm_reset_exception', 'createObject', 'Arch_handleFaultReply']
+Missing nodes after calls to instruction'isb_sy_E000097C
+  in ['fpsimd_HWCapTest']
+Missing nodes after calls to instruction'ldr_pc_pc_20_e0010038_arm_vector_table_0x38_E001001C
+  in ['arm_vector_table']
+Warning: dead arc in c_handle_syscall: 67 -> 3758164096
+  (follows Basic node!)
+Warning: dead arc in c_handle_syscall: 69 -> 3758164096
+  (follows Basic node!)
+Warning: dead arc in arm_fiq_exception: 7 -> 3758162208
+  (follows Basic node!)
+Warning: dead arc in arm_fiq_exception: 9 -> 3758162208
+  (follows Basic node!)
+Warning: dead arc in c_handle_instruction_fault: 3758162396 -> 3758162400
+  (follows Basic node!)
+Warning: dead arc in _start: 3758096388 -> 3758096392
+  (follows Basic node!)
+Loaded 481 functions, 0 structs, 0 globals.
+Pseudo-Compiling.
+Doing stack/inst logic.
+Warning: asm instruction name: formatting: "asm_instruction'.word_0xeef00a10__\\nmov_%0,_r0________\\n"
+Warning: asm instruction name: formatting: "asm_instruction'.word_0xeef00a10__\\nmov_%0,_r0________\\n"
+Function 'init_kernel' contains unhandled instructions:
+  ["instruction'vmsr_fpexc_r3_E0003B5C", "instruction'vmrs_r3_fpexc_E0003B54"]
+Function 'Arch_switchToThread' contains unhandled instructions:
+  ["instruction'strex_r0_r1_r3_E0011210"]
+Function 'Kernel_C.fpsimd_HWCapTest' contains unhandled instructions:
+  ["asm_instruction'.word_0xeef00a10__\\nmov_%0,_r0________\\n"]
+Function 'arm_vector_table' contains unhandled instructions:
+  ["instruction'ldr_pc_pc_24_e0010020_arm_vector_table_0x20_E0010000", "instruction'ldr_pc_pc_24_e001002c_arm_vector_table_0x2c_E001000C", "instruction'ldr_pc_pc_20_e0010038_arm_vector_table_0x38_E001001C", "instruction'ldr_pc_pc_24_e0010024_arm_vector_table_0x24_E0010004", "instruction'ldr_pc_pc_24_e0010030_arm_vector_table_0x30_E0010010", "instruction'ldr_pc_pc_24_e0010028_arm_vector_table_0x28_E0010008", "instruction'ldr_pc_pc_20_e0010034_arm_vector_table_0x34_E0010018", "instruction'ldr_pc_pc_4_e0010020_arm_vector_table_0x20_E0010014"]
+Function 'arm_undefined_inst_exception' contains unhandled instructions:
+  ["instruction'cps_19_E0010040", "instruction'srsia_sp_19_E001003C", "instruction'stmdb_sp_r0_r1_r2_r3_r4_r5_r6_r7_r8_r9_sl_fp_ip_sp_lr_E0010044"]
+Function 'arm_data_abort_exception' contains unhandled instructions:
+  ["instruction'cps_19_E00100BC", "instruction'stmdb_sp_r0_r1_r2_r3_r4_r5_r6_r7_r8_r9_sl_fp_ip_sp_lr_E00100C0", "instruction'srsia_sp_19_E00100B8"]
+Function 'Kernel_C.supportsAsyncExceptions' contains unhandled instructions:
+  ["asm_instruction'.fpu_vfp\\nvmsr_fpexc,_%0", "asm_instruction'.fpu_vfp\\nvmrs_%0,_fpexc"]
+Function 'Kernel_C.clearEnFPEXC' contains unhandled instructions:
+  ["asm_instruction'.fpu_vfp\\nvmsr_fpexc,_%0", "asm_instruction'.fpu_vfp\\nvmrs_%0,_fpexc"]
+Function 'arm_irq_exception' contains unhandled instructions:
+  ["instruction'stmdb_sp_r0_r1_r2_r3_r4_r5_r6_r7_r8_r9_sl_fp_ip_sp_lr_E00100F4", "instruction'cps_19_E00100F0", "instruction'srsia_sp_19_E00100EC"]
+Function 'fpsimd_HWCapTest' contains unhandled instructions:
+  ["instruction'vmrs_r3_fpexc_E0000990", "instruction'vmrs_r3_fpexc_E000099C", "instruction'vmsr_fpexc_r3_E0000998"]
+Function '_start' contains unhandled instructions:
+  ["instruction'cps_23_E0000034", "instruction'cps_19_E000003C"]
+Function 'arm_prefetch_abort_exception' contains unhandled instructions:
+  ["instruction'cps_19_E001008C", "instruction'stmdb_sp_r0_r1_r2_r3_r4_r5_r6_r7_r8_r9_sl_fp_ip_sp_lr_E0010090", "instruction'srsia_sp_19_E0010088"]
+Function 'halt' contains unhandled instructions:
+  ["instruction'cpsid_aif_E0010948"]
+Checking.
+Checking 38 function pair problems
+Testing Function pair Pairing (l_impl'dmb (ASM) <= r_impl'dmb (C))
+  (function pairing 1 of 38)
+Skipping Pairing (l_impl'dmb (ASM) <= r_impl'dmb (C)), underspecified C
+Testing Function pair Pairing (strlcpy (ASM) <= Kernel_C.strlcpy (C))
+  (function pairing 2 of 38)
+ .. built problem, finding proof
+Discovered a loop relation for split points [48, 6]
+  (in problem)
+Now doing proof search in 48 init case in problem.
+Now doing proof search in 48 loop case in problem.
+ProofNode ('Split', ((48, (0, 1), [Expr ('Var', Type ('Word', 32), name = 'r7'), Expr ('Var', Type ('Word', 32), name = 'r8'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r14'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Num', Type ('Word', 32), val = 1)])]), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r3'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Num', Type ('Word', 32), val = 1)])]), Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Var', Type ('Word', 32), name = 'r5'), Expr ('Var', Type ('Word', 32), name = 'r0'), Expr ('Var', Type ('Word', 32), name = 'r9'), Expr ('Var', Type ('Word', 32), name = 'ret'), Expr ('Var', Type ('Word', 32), name = 'r2'), Expr ('Var', Type ('Word', 32), name = 'r11'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r1'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Num', Type ('Word', 32), val = 1)])]), Expr ('Var', Type ('Word', 32), name = 'r10'), Expr ('Op', Type ('Builtin', 'Bool'), name = 'ROData', vals = [Expr ('Var', Type ('Builtin', 'Mem'), name = 'mem')]), Expr ('Var', Type ('Word', 32), name = 'r6'), Expr ('Op', Type ('Builtin', 'RelWrapper'), name = 'EqSelectiveWrapper', vals = [Expr ('Op', Type ('Builtin', 'RelWrapper'), name = 'StackWrapper', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Var', Type ('Builtin', 'Mem'), name = 'stack')]), Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Op', Type ('Builtin', 'Bool'), name = 'Equals', vals = [Expr ('Op', Type ('Builtin', 'Bool'), name = 'LessEquals', vals = [Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r3'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Num', Type ('Word', 32), val = 1)])]), Expr ('Var', Type ('Word', 32), name = 'r3')]), Expr ('Op', Type ('Builtin', 'Bool'), name = 'Less', vals = [Expr ('Var', Type ('Word', 32), name = 'r2'), Expr ('Var', Type ('Word', 32), name = 'r3')])])]), (6, (1, 1), [Expr ('Var', Type ('Word', 32), name = 'dest___ptr_to_char#v'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'len___unsigned_long#v'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Op', Type ('Word', 32), name = 'WordCastSigned', vals = [Expr ('Num', Type ('Word', 32), val = 1)])])]), Expr ('Var', Type ('Word', 32), name = 'size___unsigned_long#v'), Expr ('Var', Type ('Word', 32), name = 'src___ptr_to_char#v'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'loop#6#count'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Num', Type ('Word', 32), val = 1)])]), Expr ('Var', Type ('WordArray', 50, 32), name = 'GhostAssertions')]), [(Expr ('Var', Type ('Builtin', 'Mem'), name = 'mem'), Expr ('Var', Type ('Builtin', 'Mem'), name = 'Mem'))], 2, 1), (ProofNode ('Restr', (48, ('Number', (0, 3))), (ProofNode ('Restr', (6, ('Number', (0, 4))), (ProofNode ('Leaf', None, ()),)),)), ProofNode ('Restr', (48, ('Offset', (0, 3))), (ProofNode ('Restr', (6, ('Offset', (0, 3))), (ProofNode ('Leaf', None, ()),)),))))
+ .. proof found.
+Step 1: 
+  prove visits to 48 related to visits [2, 3, 4 ...] to 6
+    with equalities
+      ((Mem) ('mem')) (@ addr 48)
+      = ((Mem) ('Mem')) (@ addr 6)
+    and with invariants
+      ((Word32) ('r7')) (@ addr 48)
+      ((Word32) ('r8')) (@ addr 48)
+      ((Word32) (('r14' + ((0 - '#seq-visits') * 1)))) (@ addr 48)
+      ((Word32) (('r3' + ((0 - '#seq-visits') * 1)))) (@ addr 48)
+      ((Word32) ('r13')) (@ addr 48)
+      ((Word32) ('r5')) (@ addr 48)
+      ((Word32) ('r0')) (@ addr 48)
+      ((Word32) ('r9')) (@ addr 48)
+      ((Word32) ('ret')) (@ addr 48)
+      ((Word32) ('r2')) (@ addr 48)
+      ((Word32) ('r11')) (@ addr 48)
+      ((Word32) (('r1' + ((0 - '#seq-visits') * 1)))) (@ addr 48)
+      ((Word32) ('r10')) (@ addr 48)
+      ((Bool) (ROData('mem'))) (@ addr 48)
+      ((Word32) ('r6')) (@ addr 48)
+      ((RelWrapper) (EqSelectiveWrapper(StackWrapper(((Word32) ('r13')), ((Mem) ('stack'))), ((Word32) ((0 - 0))), ((Word32) (0))))) (@ addr 48)
+      ((Bool) (Equals(LessEquals(((Word32) (('r3' + ((0 - '#seq-visits') * 1)))), ((Word32) ('r3'))), Less(((Word32) ('r2')), ((Word32) ('r3')))))) (@ addr 48)
+      ((Word32) ('dest___ptr_to_char#v')) (@ addr 6)
+      ((Word32) (('len___unsigned_long#v' + ((0 - '#seq-visits') * WordCastSigned(1))))) (@ addr 6)
+      ((Word32) ('size___unsigned_long#v')) (@ addr 6)
+      ((Word32) ('src___ptr_to_char#v')) (@ addr 6)
+      ((Word32) (('loop#6#count' + ((0 - '#seq-visits') * 1)))) (@ addr 6)
+      ((Word32[50]) ('GhostAssertions')) (@ addr 6)
+    .. proven.
+Step 2: case in (1) where the length of the sequence < 2
+  Prove the number of visits to 48 is in {0 ..< 3}
+    .. proven.
+Step 3: 
+  Prove the number of visits to 6 is in {0 ..< 4}
+    .. proven.
+Step 4: 
+  prove all verification conditions
+    .. proven.
+Step 5: case in (1) where the length of the sequence is i + 2
+  Prove the number of visits to 48 is in {i + 0 ..< i + 3}
+    .. proven.
+Step 6: 
+  Prove the number of visits to 6 is in {i + 0 ..< i + 3}
+    .. proven.
+Step 7: 
+  prove all verification conditions
+    .. proven.
+Result True for pair Pairing (strlcpy (ASM) <= Kernel_C.strlcpy (C)), time taken: 125.88s
+Testing Function pair Pairing (decodeIRQControlInvocation (ASM) <= Kernel_C.decodeIRQControlInvocation (C))
+  (function pairing 3 of 38)
+ .. built problem, finding proof
+Decided to case split at (50, 'ASM')
+  (in problem)
+Now doing proof search in true case (50 visited) in problem.
+Now doing proof search in false case (50 not visited) in problem.
+ProofNode ('CaseSplit', (50, 'ASM'), (ProofNode ('Restr', (50, ('Number', (1, 2))), (ProofNode ('Restr', (42, ('Number', (1, 2))), (ProofNode ('Leaf', None, ()),)),)), ProofNode ('Restr', (50, ('Number', (0, 1))), (ProofNode ('Restr', (42, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))))
+ .. proof found.
+Step 1: 
+  case split on whether 50 is visited
+Step 2: case in (1) where 50 is visited
+  Prove the number of visits to 50 is in {1 ..< 2}
+    .. proven.
+Step 3: 
+  Prove the number of visits to 42 is in {1 ..< 2}
+    .. proven.
+Step 4: 
+  prove all verification conditions
+    .. proven.
+Step 5: case in (1) where 50 is not visited
+  Prove the number of visits to 50 is in {0 ..< 1}
+    .. proven.
+Step 6: 
+  Prove the number of visits to 42 is in {0 ..< 1}
+    .. proven.
+Step 7: 
+  prove all verification conditions
+    .. proven.
+Result True for pair Pairing (decodeIRQControlInvocation (ASM) <= Kernel_C.decodeIRQControlInvocation (C)), time taken: 36.13s
+Testing Function pair Pairing (cteDelete (ASM) <= Kernel_C.cteDelete (C))
+  (function pairing 4 of 38)
+ .. built problem, finding proof
+
+**************************************
+FATAL ERROR
+Broken pipe
+
+**************************************
+
+Discovered a loop relation for split points [53, 315]
+  (in problem)
+Now doing proof search in 53 init case in problem.
+Now doing proof search in 53 loop case in problem.
+ProofNode ('Split', ((53, (0, 1), [Expr ('Var', Type ('Word', 32), name = 'r4'), Expr ('Var', Type ('Word', 32), name = 'r5'), Expr ('Var', Type ('Word', 32), name = 'r7'), Expr ('Var', Type ('Word', 32), name = 'ret'), Expr ('Var', Type ('Word', 32), name = 'r11'), Expr ('Op', Type ('Word', 32), name = 'MemAcc', vals = [Expr ('Var', Type ('Builtin', 'Mem'), name = 'stack'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Num', Type ('Word', 32), val = 0)])]), Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Var', Type ('Word', 32), name = 'r6'), Expr ('Op', Type ('Builtin', 'Bool'), name = 'ROData', vals = [Expr ('Var', Type ('Builtin', 'Mem'), name = 'mem')]), Expr ('Op', Type ('Builtin', 'RelWrapper'), name = 'EqSelectiveWrapper', vals = [Expr ('Op', Type ('Builtin', 'RelWrapper'), name = 'StackWrapper', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Op', Type ('Builtin', 'Mem'), name = 'MemUpdate', vals = [Expr ('Op', Type ('Builtin', 'Mem'), name = 'MemUpdate', vals = [Expr ('Op', Type ('Builtin', 'Mem'), name = 'MemUpdate', vals = [Expr ('Op', Type ('Builtin', 'Mem'), name = 'MemUpdate', vals = [Expr ('Op', Type ('Builtin', 'Mem'), name = 'MemUpdate', vals = [Expr ('Var', Type ('Builtin', 'Mem'), name = 'stack'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Num', Type ('Word', 32), val = 12)]), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Num', Type ('Word', 32), val = 20)]), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Num', Type ('Word', 32), val = 8)]), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Num', Type ('Word', 32), val = 16)]), Expr ('Num', Type ('Word', 32), val = 0)])]), Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Num', Type ('Word', 32), val = 0)])]), (315, (0, 1), [Expr ('Var', Type ('Word', 32), name = 'slot___ptr_to_struct_cte_C#v.1'), Expr ('Var', Type ('Word', 32), name = 'immediate___unsigned_long#v'), Expr ('Var', Type ('Word', 32), name = 'exposed___unsigned_long#v'), Expr ('Var', Type ('Word', 32), name = 'slot___ptr_to_struct_cte_C#v'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'loop#9#count'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Num', Type ('Word', 32), val = 1)])])]), [(Expr ('Var', Type ('Builtin', 'Mem'), name = 'mem'), Expr ('Var', Type ('Builtin', 'Mem'), name = 'Mem.1')), (Expr ('Var', Type ('Word', 32), name = 'r3'), Expr ('Var', Type ('Word', 32), name = 'final___unsigned_long#v'))], 2, 1), (ProofNode ('Restr', (53, ('Number', (0, 3))), (ProofNode ('Restr', (315, ('Number', (0, 3))), (ProofNode ('Leaf', None, ()),)),)), ProofNode ('Restr', (53, ('Offset', (0, 3))), (ProofNode ('Restr', (315, ('Offset', (0, 3))), (ProofNode ('Leaf', None, ()),)),))))
+ .. proof found.
+Step 1: 
+  prove visits to 53 related to visits to 315
+    with equalities
+      ((Mem) ('mem')) (@ addr 53)
+      = ((Mem) ('Mem.1')) (@ addr 315)
+      ((Word32) ('r3')) (@ addr 53)
+      = ((Word32) ('final___unsigned_long#v')) (@ addr 315)
+    and with invariants
+      ((Word32) ('r4')) (@ addr 53)
+      ((Word32) ('r5')) (@ addr 53)
+      ((Word32) ('r7')) (@ addr 53)
+      ((Word32) ('ret')) (@ addr 53)
+      ((Word32) ('r11')) (@ addr 53)
+      ((Word32) (MemAcc('stack', ('r13' + 0)))) (@ addr 53)
+      ((Word32) ('r13')) (@ addr 53)
+      ((Word32) ('r6')) (@ addr 53)
+      ((Bool) (ROData('mem'))) (@ addr 53)
+      ((RelWrapper) (EqSelectiveWrapper(StackWrapper(((Word32) ('r13')), ((Mem) (MemUpdate(MemUpdate(MemUpdate(MemUpdate(MemUpdate('stack', ((Word32) (('r13' + 12))), ((Word32) (0))), ((Word32) (('r13' + 20))), ((Word32) (0))), ((Word32) (('r13' + 8))), ((Word32) (0))), ((Word32) (('r13' + 0))), ((Word32) (0))), ((Word32) (('r13' + 16))), ((Word32) (0)))))), ((Word32) ((0 - 0))), ((Word32) (0))))) (@ addr 53)
+      ((Word32) ('slot___ptr_to_struct_cte_C#v.1')) (@ addr 315)
+      ((Word32) ('immediate___unsigned_long#v')) (@ addr 315)
+      ((Word32) ('exposed___unsigned_long#v')) (@ addr 315)
+      ((Word32) ('slot___ptr_to_struct_cte_C#v')) (@ addr 315)
+      ((Word32) (('loop#9#count' + ((0 - '#seq-visits') * 1)))) (@ addr 315)
+    .. proven.
+Step 2: case in (1) where the length of the sequence < 2
+  Prove the number of visits to 53 is in {0 ..< 3}
+    .. proven.
+Step 3: 
+  Prove the number of visits to 315 is in {0 ..< 3}
+    .. proven.
+Step 4: 
+  prove all verification conditions
+    .. proven.
+Step 5: case in (1) where the length of the sequence is i + 2
+  Prove the number of visits to 53 is in {i + 0 ..< i + 3}
+    .. proven.
+Step 6: 
+  Prove the number of visits to 315 is in {i + 0 ..< i + 3}
+    .. proven.
+Step 7: 
+  prove all verification conditions
+    .. proven.
+Result True for pair Pairing (cteDelete (ASM) <= Kernel_C.cteDelete (C)), time taken: 2451.56s
+Testing Function pair Pairing (cancelBadgedSends (ASM) <= Kernel_C.cancelBadgedSends (C))
+  (function pairing 5 of 38)
+ .. built problem, finding proof
+
+**************************************
+FATAL ERROR
+Broken pipe
+
+**************************************
+
+Discovered a loop relation for split points [113, 21]
+  (in problem)
+Now doing proof search in 113 init case in problem.
+Now doing proof search in 113 loop case in problem.
+ProofNode ('Split', ((113, (0, 1), [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Var', Type ('Word', 32), name = 'r9'), Expr ('Var', Type ('Word', 32), name = 'r6'), Expr ('Var', Type ('Word', 32), name = 'r7'), Expr ('Var', Type ('Word', 32), name = 'r11'), Expr ('Var', Type ('Word', 32), name = 'ret'), Expr ('Op', Type ('Builtin', 'Bool'), name = 'ROData', vals = [Expr ('Var', Type ('Builtin', 'Mem'), name = 'mem')]), Expr ('Op', Type ('Builtin', 'RelWrapper'), name = 'EqSelectiveWrapper', vals = [Expr ('Op', Type ('Builtin', 'RelWrapper'), name = 'StackWrapper', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Op', Type ('Builtin', 'Mem'), name = 'MemUpdate', vals = [Expr ('Op', Type ('Builtin', 'Mem'), name = 'MemUpdate', vals = [Expr ('Op', Type ('Builtin', 'Mem'), name = 'MemUpdate', vals = [Expr ('Op', Type ('Builtin', 'Mem'), name = 'MemUpdate', vals = [Expr ('Var', Type ('Builtin', 'Mem'), name = 'stack'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Num', Type ('Word', 32), val = 12)]), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Num', Type ('Word', 32), val = 4)]), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Num', Type ('Word', 32), val = 8)]), Expr ('Num', Type ('Word', 32), val = 0)])]), Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Num', Type ('Word', 32), val = 0)])]), (21, (0, 1), [Expr ('Var', Type ('Word', 32), name = 'badge___unsigned_long#v'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'loop#6#count'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Num', Type ('Word', 32), val = 1)])]), Expr ('Var', Type ('Word', 32), name = 'epptr___ptr_to_struct_endpoint_C#v')]), [(Expr ('Var', Type ('Builtin', 'Mem'), name = 'mem'), Expr ('Var', Type ('Builtin', 'Mem'), name = 'Mem')), (Expr ('Var', Type ('Word', 32), name = 'r10'), Expr ('Var', Type ('Word', 32), name = 'queue___struct_tcb_queue_C#v.head_C')), (Expr ('Var', Type ('Word', 32), name = 'r4'), Expr ('Var', Type ('Word', 32), name = 'thread___ptr_to_struct_tcb_C#v')), (Expr ('Var', Type ('Word', 32), name = 'r8'), Expr ('Var', Type ('Word', 32), name = 'queue___struct_tcb_queue_C#v.end_C'))], 2, 1), (ProofNode ('Restr', (113, ('Number', (0, 3))), (ProofNode ('Restr', (21, ('Number', (0, 3))), (ProofNode ('Leaf', None, ()),)),)), ProofNode ('Restr', (113, ('Offset', (0, 3))), (ProofNode ('Restr', (21, ('Offset', (0, 3))), (ProofNode ('Leaf', None, ()),)),))))
+ .. proof found.
+Step 1: 
+  prove visits to 113 related to visits to 21
+    with equalities
+      ((Mem) ('mem')) (@ addr 113)
+      = ((Mem) ('Mem')) (@ addr 21)
+      ((Word32) ('r10')) (@ addr 113)
+      = ((Word32) ('queue___struct_tcb_queue_C#v.head_C')) (@ addr 21)
+      ((Word32) ('r4')) (@ addr 113)
+      = ((Word32) ('thread___ptr_to_struct_tcb_C#v')) (@ addr 21)
+      ((Word32) ('r8')) (@ addr 113)
+      = ((Word32) ('queue___struct_tcb_queue_C#v.end_C')) (@ addr 21)
+    and with invariants
+      ((Word32) ('r13')) (@ addr 113)
+      ((Word32) ('r9')) (@ addr 113)
+      ((Word32) ('r6')) (@ addr 113)
+      ((Word32) ('r7')) (@ addr 113)
+      ((Word32) ('r11')) (@ addr 113)
+      ((Word32) ('ret')) (@ addr 113)
+      ((Bool) (ROData('mem'))) (@ addr 113)
+      ((RelWrapper) (EqSelectiveWrapper(StackWrapper(((Word32) ('r13')), ((Mem) (MemUpdate(MemUpdate(MemUpdate(MemUpdate('stack', ((Word32) (('r13' + 12))), ((Word32) (0))), ((Word32) (('r13' + 4))), ((Word32) (0))), ((Word32) (('r13' + 0))), ((Word32) (0))), ((Word32) (('r13' + 8))), ((Word32) (0)))))), ((Word32) ((0 - 0))), ((Word32) (0))))) (@ addr 113)
+      ((Word32) ('badge___unsigned_long#v')) (@ addr 21)
+      ((Word32) (('loop#6#count' + ((0 - '#seq-visits') * 1)))) (@ addr 21)
+      ((Word32) ('epptr___ptr_to_struct_endpoint_C#v')) (@ addr 21)
+    .. proven.
+Step 2: case in (1) where the length of the sequence < 2
+  Prove the number of visits to 113 is in {0 ..< 3}
+    .. proven.
+Step 3: 
+  Prove the number of visits to 21 is in {0 ..< 3}
+    .. proven.
+Step 4: 
+  prove all verification conditions
+    .. proven.
+Step 5: case in (1) where the length of the sequence is i + 2
+  Prove the number of visits to 113 is in {i + 0 ..< i + 3}
+    .. proven.
+Step 6: 
+  Prove the number of visits to 21 is in {i + 0 ..< i + 3}
+    .. proven.
+Step 7: 
+  prove all verification conditions
+    .. proven.
+Result True for pair Pairing (cancelBadgedSends (ASM) <= Kernel_C.cancelBadgedSends (C)), time taken: 301.32s
+Testing Function pair Pairing (create_untypeds_for_region (ASM) <= Kernel_C.create_untypeds_for_region (C))
+  (function pairing 6 of 38)
+ .. built problem, finding proof
+
+**************************************
+FATAL ERROR
+Broken pipe
+
+**************************************
+
+
+**************************************
+FATAL ERROR
+Broken pipe
+
+**************************************
+
+
+**************************************
+FATAL ERROR
+Broken pipe
+
+**************************************
+
+Discovered a loop relation for split points [131, 27]
+  (in problem)
+Now doing proof search in 131 init case in problem.
+Now doing proof search in 131 loop case in problem.
+ProofNode ('Split', ((131, (0, 1), [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Var', Type ('Word', 32), name = 'r10'), Expr ('Var', Type ('Word', 32), name = 'r9'), Expr ('Var', Type ('Word', 32), name = 'r6'), Expr ('Var', Type ('Word', 32), name = 'r7'), Expr ('Var', Type ('Word', 32), name = 'r8'), Expr ('Var', Type ('Word', 32), name = 'r11'), Expr ('Var', Type ('Word', 32), name = 'ret'), Expr ('Op', Type ('Builtin', 'Bool'), name = 'ROData', vals = [Expr ('Var', Type ('Builtin', 'Mem'), name = 'mem')]), Expr ('Op', Type ('Builtin', 'RelWrapper'), name = 'EqSelectiveWrapper', vals = [Expr ('Op', Type ('Builtin', 'RelWrapper'), name = 'StackWrapper', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Op', Type ('Builtin', 'Mem'), name = 'MemUpdate', vals = [Expr ('Op', Type ('Builtin', 'Mem'), name = 'MemUpdate', vals = [Expr ('Op', Type ('Builtin', 'Mem'), name = 'MemUpdate', vals = [Expr ('Op', Type ('Builtin', 'Mem'), name = 'MemUpdate', vals = [Expr ('Var', Type ('Builtin', 'Mem'), name = 'stack'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Num', Type ('Word', 32), val = 20)]), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Num', Type ('Word', 32), val = 28)]), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Num', Type ('Word', 32), val = 16)]), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Num', Type ('Word', 32), val = 24)]), Expr ('Num', Type ('Word', 32), val = 0)])]), Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Num', Type ('Word', 32), val = 0)])]), (27, (0, 1), [Expr ('Var', Type ('Word', 32), name = 'first_untyped_slot___unsigned_long#v'), Expr ('Var', Type ('Word', 32), name = 'root_cnode_cap___struct_cap_C#v.words_C.0'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'loop#4#count'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Num', Type ('Word', 32), val = 1)])]), Expr ('Var', Type ('Word', 32), name = 'device_memory___unsigned_long#v'), Expr ('Var', Type ('Word', 32), name = 'root_cnode_cap___struct_cap_C#v.words_C.1'), Expr ('Var', Type ('Word', 32), name = 'reg___struct_region_C#v.end_C')]), [(Expr ('Var', Type ('Builtin', 'Mem'), name = 'mem'), Expr ('Var', Type ('Builtin', 'Mem'), name = 'Mem')), (Expr ('Var', Type ('Word', 32), name = 'r5'), Expr ('Var', Type ('Word', 32), name = 'reg___struct_region_C#v.start_C'))], 2, 1), (ProofNode ('Restr', (131, ('Number', (0, 3))), (ProofNode ('Restr', (27, ('Number', (0, 3))), (ProofNode ('Leaf', None, ()),)),)), ProofNode ('Restr', (131, ('Offset', (0, 3))), (ProofNode ('Restr', (27, ('Offset', (0, 3))), (ProofNode ('Leaf', None, ()),)),))))
+ .. proof found.
+Step 1: 
+  prove visits to 131 related to visits to 27
+    with equalities
+      ((Mem) ('mem')) (@ addr 131)
+      = ((Mem) ('Mem')) (@ addr 27)
+      ((Word32) ('r5')) (@ addr 131)
+      = ((Word32) ('reg___struct_region_C#v.start_C')) (@ addr 27)
+    and with invariants
+      ((Word32) ('r13')) (@ addr 131)
+      ((Word32) ('r10')) (@ addr 131)
+      ((Word32) ('r9')) (@ addr 131)
+      ((Word32) ('r6')) (@ addr 131)
+      ((Word32) ('r7')) (@ addr 131)
+      ((Word32) ('r8')) (@ addr 131)
+      ((Word32) ('r11')) (@ addr 131)
+      ((Word32) ('ret')) (@ addr 131)
+      ((Bool) (ROData('mem'))) (@ addr 131)
+      ((RelWrapper) (EqSelectiveWrapper(StackWrapper(((Word32) ('r13')), ((Mem) (MemUpdate(MemUpdate(MemUpdate(MemUpdate('stack', ((Word32) (('r13' + 20))), ((Word32) (0))), ((Word32) (('r13' + 28))), ((Word32) (0))), ((Word32) (('r13' + 16))), ((Word32) (0))), ((Word32) (('r13' + 24))), ((Word32) (0)))))), ((Word32) ((0 - 0))), ((Word32) (0))))) (@ addr 131)
+      ((Word32) ('first_untyped_slot___unsigned_long#v')) (@ addr 27)
+      ((Word32) ('root_cnode_cap___struct_cap_C#v.words_C.0')) (@ addr 27)
+      ((Word32) (('loop#4#count' + ((0 - '#seq-visits') * 1)))) (@ addr 27)
+      ((Word32) ('device_memory___unsigned_long#v')) (@ addr 27)
+      ((Word32) ('root_cnode_cap___struct_cap_C#v.words_C.1')) (@ addr 27)
+      ((Word32) ('reg___struct_region_C#v.end_C')) (@ addr 27)
+    .. proven.
+Step 2: case in (1) where the length of the sequence < 2
+  Prove the number of visits to 131 is in {0 ..< 3}
+    .. proven.
+Step 3: 
+  Prove the number of visits to 27 is in {0 ..< 3}
+    .. proven.
+Step 4: 
+  prove all verification conditions
+    .. proven.
+Step 5: case in (1) where the length of the sequence is i + 2
+  Prove the number of visits to 131 is in {i + 0 ..< i + 3}
+    .. proven.
+Step 6: 
+  Prove the number of visits to 27 is in {i + 0 ..< i + 3}
+    .. proven.
+Step 7: 
+  prove all verification conditions
+    .. proven.
+Result True for pair Pairing (create_untypeds_for_region (ASM) <= Kernel_C.create_untypeds_for_region (C)), time taken: 825.46s
+Testing Function pair Pairing (fpsimd_HWCapTest (ASM) <= Kernel_C.fpsimd_HWCapTest (C))
+  (function pairing 7 of 38)
+Aborting Problem (Pairing (fpsimd_HWCapTest (ASM) <= Kernel_C.fpsimd_HWCapTest (C))): underspecified asm_instruction'.word_0xeef00a10__\nmov_%0,_r0________\n
+Result ProblemAbort for pair Pairing (fpsimd_HWCapTest (ASM) <= Kernel_C.fpsimd_HWCapTest (C)), time taken: 0.00s
+Testing Function pair Pairing (l_impl'isb (ASM) <= r_impl'isb (C))
+  (function pairing 8 of 38)
+Skipping Pairing (l_impl'isb (ASM) <= r_impl'isb (C)), underspecified C
+Testing Function pair Pairing (decodeUntypedInvocation (ASM) <= Kernel_C.decodeUntypedInvocation (C))
+  (function pairing 9 of 38)
+ .. built problem, finding proof
+
+**************************************
+FATAL ERROR
+Broken pipe
+
+**************************************
+
+
+**************************************
+FATAL ERROR
+Broken pipe
+
+**************************************
+
+Discovered a loop relation for split points [209, 48]
+  (in problem)
+Now doing proof search in 209 init case in problem.
+Now doing proof search in 209 loop case in problem.
+ProofNode ('Split', ((209, (0, 1), [Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r4'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Num', Type ('Word', 32), val = 1)])]), Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Var', Type ('Word', 32), name = 'r10'), Expr ('Var', Type ('Word', 32), name = 'r9'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r6'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Num', Type ('Word', 32), val = 16)])]), Expr ('Var', Type ('Word', 32), name = 'r7'), Expr ('Var', Type ('Word', 32), name = 'r8'), Expr ('Var', Type ('Word', 32), name = 'r11'), Expr ('Var', Type ('Word', 32), name = 'r5'), Expr ('Var', Type ('Word', 32), name = 'ret'), Expr ('Op', Type ('Builtin', 'Bool'), name = 'ROData', vals = [Expr ('Var', Type ('Builtin', 'Mem'), name = 'mem')]), Expr ('Op', Type ('Builtin', 'RelWrapper'), name = 'EqSelectiveWrapper', vals = [Expr ('Op', Type ('Builtin', 'RelWrapper'), name = 'StackWrapper', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Var', Type ('Builtin', 'Mem'), name = 'stack')]), Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Num', Type ('Word', 32), val = 0)])]), (48, (0, 1), [Expr ('Var', Type ('Word', 32), name = 'nodeWindow___unsigned_long#v'), Expr ('Var', Type ('Word', 32), name = 'cap___struct_cap_C#v.words_C.1'), Expr ('Var', Type ('Word', 32), name = 'objectSize___unsigned_long#v'), Expr ('Var', Type ('Word', 32), name = 'slots___struct_slot_range_C#v.offset_C'), Expr ('Var', Type ('Word', 32), name = 'slot___ptr_to_struct_cte_C#v'), Expr ('Var', Type ('Word', 32), name = 'cap___struct_cap_C#v.words_C.0'), Expr ('Var', Type ('Word', 32), name = 'slots___struct_slot_range_C#v.cnode_C'), Expr ('Var', Type ('Word', 32), name = 'userObjSize___unsigned_long#v'), Expr ('Var', Type ('Word', 32), name = 'nodeOffset___unsigned_long#v'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'i___unsigned_long#v'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Op', Type ('Word', 32), name = 'WordCastSigned', vals = [Expr ('Num', Type ('Word', 32), val = 1)])])]), Expr ('Var', Type ('Word', 32), name = 'newType___unsigned_long#v'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'loop#48#count'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Num', Type ('Word', 32), val = 1)])]), Expr ('Var', Type ('Word', 32), name = 'slots___struct_slot_range_C#v.length_C')]), [(Expr ('Var', Type ('Builtin', 'Mem'), name = 'mem'), Expr ('Var', Type ('Builtin', 'Mem'), name = 'Mem'))], 2, 1), (ProofNode ('Restr', (209, ('Number', (0, 3))), (ProofNode ('Restr', (48, ('Number', (0, 3))), (ProofNode ('Leaf', None, ()),)),)), ProofNode ('Restr', (209, ('Offset', (0, 3))), (ProofNode ('Restr', (48, ('Offset', (0, 3))), (ProofNode ('Leaf', None, ()),)),))))
+ .. proof found.
+Step 1: 
+  prove visits to 209 related to visits to 48
+    with equalities
+      ((Mem) ('mem')) (@ addr 209)
+      = ((Mem) ('Mem')) (@ addr 48)
+    and with invariants
+      ((Word32) (('r4' + ((0 - '#seq-visits') * 1)))) (@ addr 209)
+      ((Word32) ('r13')) (@ addr 209)
+      ((Word32) ('r10')) (@ addr 209)
+      ((Word32) ('r9')) (@ addr 209)
+      ((Word32) (('r6' + ((0 - '#seq-visits') * 16)))) (@ addr 209)
+      ((Word32) ('r7')) (@ addr 209)
+      ((Word32) ('r8')) (@ addr 209)
+      ((Word32) ('r11')) (@ addr 209)
+      ((Word32) ('r5')) (@ addr 209)
+      ((Word32) ('ret')) (@ addr 209)
+      ((Bool) (ROData('mem'))) (@ addr 209)
+      ((RelWrapper) (EqSelectiveWrapper(StackWrapper(((Word32) ('r13')), ((Mem) ('stack'))), ((Word32) ((0 - 0))), ((Word32) (0))))) (@ addr 209)
+      ((Word32) ('nodeWindow___unsigned_long#v')) (@ addr 48)
+      ((Word32) ('cap___struct_cap_C#v.words_C.1')) (@ addr 48)
+      ((Word32) ('objectSize___unsigned_long#v')) (@ addr 48)
+      ((Word32) ('slots___struct_slot_range_C#v.offset_C')) (@ addr 48)
+      ((Word32) ('slot___ptr_to_struct_cte_C#v')) (@ addr 48)
+      ((Word32) ('cap___struct_cap_C#v.words_C.0')) (@ addr 48)
+      ((Word32) ('slots___struct_slot_range_C#v.cnode_C')) (@ addr 48)
+      ((Word32) ('userObjSize___unsigned_long#v')) (@ addr 48)
+      ((Word32) ('nodeOffset___unsigned_long#v')) (@ addr 48)
+      ((Word32) (('i___unsigned_long#v' + ((0 - '#seq-visits') * WordCastSigned(1))))) (@ addr 48)
+      ((Word32) ('newType___unsigned_long#v')) (@ addr 48)
+      ((Word32) (('loop#48#count' + ((0 - '#seq-visits') * 1)))) (@ addr 48)
+      ((Word32) ('slots___struct_slot_range_C#v.length_C')) (@ addr 48)
+    .. proven.
+Step 2: case in (1) where the length of the sequence < 2
+  Prove the number of visits to 209 is in {0 ..< 3}
+    .. proven.
+Step 3: 
+  Prove the number of visits to 48 is in {0 ..< 3}
+    .. proven.
+Step 4: 
+  prove all verification conditions
+    .. proven.
+Step 5: case in (1) where the length of the sequence is i + 2
+  Prove the number of visits to 209 is in {i + 0 ..< i + 3}
+    .. proven.
+Step 6: 
+  Prove the number of visits to 48 is in {i + 0 ..< i + 3}
+    .. proven.
+Step 7: 
+  prove all verification conditions
+    .. proven.
+Result True for pair Pairing (decodeUntypedInvocation (ASM) <= Kernel_C.decodeUntypedInvocation (C)), time taken: 484.50s
+Testing Function pair Pairing (merge_regions (ASM) <= Kernel_C.merge_regions (C))
+  (function pairing 10 of 38)
+Aborting Problem (Pairing (merge_regions (ASM) <= Kernel_C.merge_regions (C))), complex loop
+Result ProblemAbort for pair Pairing (merge_regions (ASM) <= Kernel_C.merge_regions (C)), time taken: 0.64s
+Testing Function pair Pairing (create_kernel_untypeds (ASM) <= Kernel_C.create_kernel_untypeds (C))
+  (function pairing 11 of 38)
+ .. built problem, finding proof
+Discovered that points [66 (loop head)] can be bounded
+  (in problem)
+Traceback (most recent call last):
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/graph-refine.py", line 69, in toplevel_check
+    proof = search.build_proof (p)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 56, in build_proof
+    proof = build_proof_rec (default_searcher, p, (), list (init_hyps))
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1712, in build_proof_rec
+    searcher, p, restrs, hyps, name = name)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1756, in build_proof_rec_with_restrs
+    kind, must_find = must_find)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1785, in get_proof_split_limit
+    hints = [limit, limit + 1], use_rep = mk_graph_slice (p))
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 113, in find_split_limit
+    assert not 'split limit found'
+AssertionError
+Result ProofEXCEPT for pair Pairing (create_kernel_untypeds (ASM) <= Kernel_C.create_kernel_untypeds (C)), time taken: 40.33s
+Testing Function pair Pairing (cleanInvalidate_L1D (ASM) <= Kernel_C.cleanInvalidate_L1D (C))
+  (function pairing 12 of 38)
+Aborting Problem (Pairing (cleanInvalidate_L1D (ASM) <= Kernel_C.cleanInvalidate_L1D (C))), complex loop
+Result ProblemAbort for pair Pairing (cleanInvalidate_L1D (ASM) <= Kernel_C.cleanInvalidate_L1D (C)), time taken: 1.91s
+Testing Function pair Pairing (c_handle_data_fault (ASM) <= Kernel_C.c_handle_data_fault (C))
+  (function pairing 13 of 38)
+Aborting Problem (Pairing (c_handle_data_fault (ASM) <= Kernel_C.c_handle_data_fault (C))): underspecified Kernel_C.StrictC'__builtin_unreachable
+Result ProblemAbort for pair Pairing (c_handle_data_fault (ASM) <= Kernel_C.c_handle_data_fault (C)), time taken: 0.00s
+Testing Function pair Pairing (cancelIPC (ASM) <= Kernel_C.cancelIPC (C))
+  (function pairing 14 of 38)
+ .. built problem, finding proof
+Decided to case split at (50, 'ASM')
+  (in problem)
+Now doing proof search in true case (50 visited) in problem.
+Now doing proof search in false case (50 not visited) in problem.
+ProofNode ('CaseSplit', (50, 'ASM'), (ProofNode ('Restr', (50, ('Number', (1, 2))), (ProofNode ('Leaf', None, ()),)), ProofNode ('Restr', (50, ('Number', (0, 1))), (ProofNode ('Restr', (15, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))))
+ .. proof found.
+Step 1: 
+  case split on whether 50 is visited
+Step 2: case in (1) where 50 is visited
+  Prove the number of visits to 50 is in {1 ..< 2}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Step 4: case in (1) where 50 is not visited
+  Prove the number of visits to 50 is in {0 ..< 1}
+    .. proven.
+Step 5: 
+  Prove the number of visits to 15 is in {0 ..< 1}
+    .. proven.
+Step 6: 
+  prove all verification conditions
+    .. proven.
+Result True for pair Pairing (cancelIPC (ASM) <= Kernel_C.cancelIPC (C)), time taken: 28.94s
+Testing Function pair Pairing (c_handle_fastpath_reply_recv (ASM) <= Kernel_C.c_handle_fastpath_reply_recv (C))
+  (function pairing 15 of 38)
+Skipping Pairing (c_handle_fastpath_reply_recv (ASM) <= Kernel_C.c_handle_fastpath_reply_recv (C)), underspecified ASM
+Testing Function pair Pairing (slowpath (ASM) <= Kernel_C.slowpath (C))
+  (function pairing 16 of 38)
+Aborting Problem (Pairing (slowpath (ASM) <= Kernel_C.slowpath (C))): underspecified Kernel_C.StrictC'__builtin_unreachable
+Result ProblemAbort for pair Pairing (slowpath (ASM) <= Kernel_C.slowpath (C)), time taken: 0.00s
+Testing Function pair Pairing (invokeTCB_ReadRegisters (ASM) <= Kernel_C.invokeTCB_ReadRegisters (C))
+  (function pairing 17 of 38)
+ .. built problem, finding proof
+Discovered that points [164 (loop head)] can be bounded
+  (in problem)
+Discovered that points [44 (loop head)] can be bounded
+  (in problem)
+
+**************************************
+FATAL ERROR
+Broken pipe
+
+**************************************
+
+
+**************************************
+FATAL ERROR
+Broken pipe
+
+**************************************
+
+Discovered a loop relation for split points [107, 38]
+  (in problem)
+Now doing proof search in 107 init case in problem.
+Discovered that points [21 (loop head)] can be bounded
+  (in 107 init case in problem)
+Discovered that points [10 (loop head)] can be bounded
+  (in 107 init case in problem)
+Discovered that points [214 (loop head)] can be bounded
+  (in 107 init case in problem)
+Now doing proof search in 107 loop case in problem.
+Discovered that points [21 (loop head)] can be bounded
+  (in 107 loop case in problem)
+
+**************************************
+FATAL ERROR
+Broken pipe
+
+**************************************
+
+Discovered a loop relation for split points [129, 15]
+  (in 107 loop case in problem)
+Now doing proof search in 129 init case in 107 loop case in problem.
+Now doing proof search in 129 loop case in 107 loop case in problem.
+ProofNode ('Restr', (164, ('Number', (0, 5))), (ProofNode ('Restr', (44, ('Number', (0, 6))), (ProofNode ('Split', ((107, (1, 1), [Expr ('Var', Type ('Word', 32), name = 'r4'), Expr ('Var', Type ('Word', 32), name = 'r0'), Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Var', Type ('Word', 32), name = 'r10'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r12'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Num', Type ('Word', 32), val = 4)])]), Expr ('Var', Type ('Word', 32), name = 'r9'), Expr ('Var', Type ('Word', 32), name = 'r6'), Expr ('Var', Type ('Word', 32), name = 'r7'), Expr ('Var', Type ('Word', 32), name = 'r8'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r3'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Num', Type ('Word', 32), val = 1)])]), Expr ('Var', Type ('Word', 32), name = 'r11'), Expr ('Var', Type ('Word', 32), name = 'r5'), Expr ('Var', Type ('Word', 32), name = 'ret'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r1'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Num', Type ('Word', 32), val = 4)])]), Expr ('Op', Type ('Builtin', 'Bool'), name = 'ROData', vals = [Expr ('Var', Type ('Builtin', 'Mem'), name = 'mem')]), Expr ('Op', Type ('Builtin', 'RelWrapper'), name = 'EqSelectiveWrapper', vals = [Expr ('Op', Type ('Builtin', 'RelWrapper'), name = 'StackWrapper', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Var', Type ('Builtin', 'Mem'), name = 'stack')]), Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Var', Type ('Word', 32), name = 'r14')]), (38, (1, 1), [Expr ('Var', Type ('Word', 32), name = 'tcb_src___ptr_to_struct_tcb_C#v'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'i___unsigned_long#v'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Op', Type ('Word', 32), name = 'WordCastSigned', vals = [Expr ('Num', Type ('Word', 32), val = 1)])])]), Expr ('Var', Type ('Word', 32), name = 'n___unsigned_long#v'), Expr ('Var', Type ('Word', 32), name = 'ipcBuffer___ptr_to_unsigned_long#v'), Expr ('Var', Type ('Word', 32), name = 'thread___ptr_to_struct_tcb_C#v'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'loop#33#count'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Num', Type ('Word', 32), val = 1)])]), Expr ('Var', Type ('WordArray', 50, 32), name = 'GhostAssertions')]), [(Expr ('Var', Type ('Builtin', 'Mem'), name = 'mem'), Expr ('Var', Type ('Builtin', 'Mem'), name = 'Mem'))], 2, 1), (ProofNode ('Restr', (107, ('Number', (0, 4))), (ProofNode ('Restr', (38, ('Number', (0, 4))), (ProofNode ('Restr', (21, ('Number', (0, 2))), (ProofNode ('Restr', (10, ('Number', (0, 1))), (ProofNode ('Restr', (214, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),)),)),)),)), ProofNode ('Restr', (107, ('Offset', (0, 3))), (ProofNode ('Restr', (38, ('Offset', (0, 3))), (ProofNode ('Restr', (21, ('Number', (0, 2))), (ProofNode ('Split', ((129, (0, 1), [Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r4'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Num', Type ('Word', 32), val = 1)])]), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r0'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Num', Type ('Word', 32), val = 4)])]), Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Var', Type ('Word', 32), name = 'r10'), Expr ('Var', Type ('Word', 32), name = 'r12'), Expr ('Var', Type ('Word', 32), name = 'r9'), Expr ('Var', Type ('Word', 32), name = 'r6'), Expr ('Var', Type ('Word', 32), name = 'r7'), Expr ('Var', Type ('Word', 32), name = 'r8'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r3'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Num', Type ('Word', 32), val = 4)])]), Expr ('Var', Type ('Word', 32), name = 'r11'), Expr ('Var', Type ('Word', 32), name = 'r5'), Expr ('Var', Type ('Word', 32), name = 'ret'), Expr ('Var', Type ('Word', 32), name = 'r2'), Expr ('Op', Type ('Builtin', 'Bool'), name = 'ROData', vals = [Expr ('Var', Type ('Builtin', 'Mem'), name = 'mem')]), Expr ('Op', Type ('Builtin', 'RelWrapper'), name = 'EqSelectiveWrapper', vals = [Expr ('Op', Type ('Builtin', 'RelWrapper'), name = 'StackWrapper', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Var', Type ('Builtin', 'Mem'), name = 'stack')]), Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Num', Type ('Word', 32), val = 0)])]), (15, (1, 1), [Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'loop#10#count'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Num', Type ('Word', 32), val = 1)])]), Expr ('Var', Type ('Word', 32), name = 'tcb_src___ptr_to_struct_tcb_C#v'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'i___unsigned_long#v'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Op', Type ('Word', 32), name = 'WordCastSigned', vals = [Expr ('Num', Type ('Word', 32), val = 1)])])]), Expr ('Var', Type ('Word', 32), name = 'n___unsigned_long#v'), Expr ('Var', Type ('Word', 32), name = 'ipcBuffer___ptr_to_unsigned_long#v'), Expr ('Var', Type ('Word', 32), name = 'thread___ptr_to_struct_tcb_C#v'), Expr ('Var', Type ('WordArray', 50, 32), name = 'GhostAssertions'), Expr ('Var', Type ('Word', 32), name = 'j___unsigned_long#v')]), [(Expr ('Var', Type ('Builtin', 'Mem'), name = 'mem'), Expr ('Var', Type ('Builtin', 'Mem'), name = 'Mem'))], 2, 1), (ProofNode ('Restr', (129, ('Number', (0, 3))), (ProofNode ('Restr', (15, ('Number', (0, 4))), (ProofNode ('Leaf', None, ()),)),)), ProofNode ('Restr', (129, ('Offset', (0, 3))), (ProofNode ('Restr', (15, ('Offset', (0, 3))), (ProofNode ('Leaf', None, ()),)),)))),)),)),)))),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 164 is in {0 ..< 5}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 44 is in {0 ..< 6}
+    .. proven.
+Step 3: 
+  prove visits [2, 3, 4 ...] to 107 related to visits [2, 3, 4 ...] to 38
+    with equalities
+      ((Mem) ('mem')) (@ addr 107)
+      = ((Mem) ('Mem')) (@ addr 38)
+    and with invariants
+      ((Word32) ('r4')) (@ addr 107)
+      ((Word32) ('r0')) (@ addr 107)
+      ((Word32) ('r13')) (@ addr 107)
+      ((Word32) ('r10')) (@ addr 107)
+      ((Word32) (('r12' + ((0 - '#seq-visits') * 4)))) (@ addr 107)
+      ((Word32) ('r9')) (@ addr 107)
+      ((Word32) ('r6')) (@ addr 107)
+      ((Word32) ('r7')) (@ addr 107)
+      ((Word32) ('r8')) (@ addr 107)
+      ((Word32) (('r3' + ((0 - '#seq-visits') * 1)))) (@ addr 107)
+      ((Word32) ('r11')) (@ addr 107)
+      ((Word32) ('r5')) (@ addr 107)
+      ((Word32) ('ret')) (@ addr 107)
+      ((Word32) (('r1' + ((0 - '#seq-visits') * 4)))) (@ addr 107)
+      ((Bool) (ROData('mem'))) (@ addr 107)
+      ((RelWrapper) (EqSelectiveWrapper(StackWrapper(((Word32) ('r13')), ((Mem) ('stack'))), ((Word32) ((0 - 0))), ((Word32) (0))))) (@ addr 107)
+      ((Word32) ('r14')) (@ addr 107)
+      ((Word32) ('tcb_src___ptr_to_struct_tcb_C#v')) (@ addr 38)
+      ((Word32) (('i___unsigned_long#v' + ((0 - '#seq-visits') * WordCastSigned(1))))) (@ addr 38)
+      ((Word32) ('n___unsigned_long#v')) (@ addr 38)
+      ((Word32) ('ipcBuffer___ptr_to_unsigned_long#v')) (@ addr 38)
+      ((Word32) ('thread___ptr_to_struct_tcb_C#v')) (@ addr 38)
+      ((Word32) (('loop#33#count' + ((0 - '#seq-visits') * 1)))) (@ addr 38)
+      ((Word32[50]) ('GhostAssertions')) (@ addr 38)
+    .. proven.
+Step 4: case in (3) where the length of the sequence < 2
+  Prove the number of visits to 107 is in {0 ..< 4}
+    .. proven.
+Step 5: 
+  Prove the number of visits to 38 is in {0 ..< 4}
+    .. proven.
+Step 6: 
+  Prove the number of visits to 21 is in {0 ..< 2}
+    .. proven.
+Step 7: 
+  Prove the number of visits to 10 is in {0 ..< 1}
+    .. proven.
+Step 8: 
+  Prove the number of visits to 214 is in {0 ..< 1}
+    .. proven.
+Step 9: 
+  prove all verification conditions
+    .. proven.
+Step 10: case in (3) where the length of the sequence is i + 2
+  Prove the number of visits to 107 is in {i + 0 ..< i + 3}
+    .. proven.
+Step 11: 
+  Prove the number of visits to 38 is in {i + 0 ..< i + 3}
+    .. proven.
+Step 12: 
+  Prove the number of visits to 21 is in {0 ..< 2}
+    .. proven.
+Step 13: 
+  prove visits to 129 related to visits [2, 3, 4 ...] to 15
+    with equalities
+      ((Mem) ('mem')) (@ addr 129)
+      = ((Mem) ('Mem')) (@ addr 15)
+    and with invariants
+      ((Word32) (('r4' + ((0 - '#seq-visits') * 1)))) (@ addr 129)
+      ((Word32) (('r0' + ((0 - '#seq-visits') * 4)))) (@ addr 129)
+      ((Word32) ('r13')) (@ addr 129)
+      ((Word32) ('r10')) (@ addr 129)
+      ((Word32) ('r12')) (@ addr 129)
+      ((Word32) ('r9')) (@ addr 129)
+      ((Word32) ('r6')) (@ addr 129)
+      ((Word32) ('r7')) (@ addr 129)
+      ((Word32) ('r8')) (@ addr 129)
+      ((Word32) (('r3' + ((0 - '#seq-visits') * 4)))) (@ addr 129)
+      ((Word32) ('r11')) (@ addr 129)
+      ((Word32) ('r5')) (@ addr 129)
+      ((Word32) ('ret')) (@ addr 129)
+      ((Word32) ('r2')) (@ addr 129)
+      ((Bool) (ROData('mem'))) (@ addr 129)
+      ((RelWrapper) (EqSelectiveWrapper(StackWrapper(((Word32) ('r13')), ((Mem) ('stack'))), ((Word32) ((0 - 0))), ((Word32) (0))))) (@ addr 129)
+      ((Word32) (('loop#10#count' + ((0 - '#seq-visits') * 1)))) (@ addr 15)
+      ((Word32) ('tcb_src___ptr_to_struct_tcb_C#v')) (@ addr 15)
+      ((Word32) (('i___unsigned_long#v' + ((0 - '#seq-visits') * WordCastSigned(1))))) (@ addr 15)
+      ((Word32) ('n___unsigned_long#v')) (@ addr 15)
+      ((Word32) ('ipcBuffer___ptr_to_unsigned_long#v')) (@ addr 15)
+      ((Word32) ('thread___ptr_to_struct_tcb_C#v')) (@ addr 15)
+      ((Word32[50]) ('GhostAssertions')) (@ addr 15)
+      ((Word32) ('j___unsigned_long#v')) (@ addr 15)
+    .. proven.
+Step 14: case in (13) where the length of the sequence < 2
+  Prove the number of visits to 129 is in {0 ..< 3}
+    .. proven.
+Step 15: 
+  Prove the number of visits to 15 is in {0 ..< 4}
+    .. proven.
+Step 16: 
+  prove all verification conditions
+    .. proven.
+Step 17: case in (13) where the length of the sequence is j + 2
+  Prove the number of visits to 129 is in {j + 0 ..< j + 3}
+    .. proven.
+Step 18: 
+  Prove the number of visits to 15 is in {j + 0 ..< j + 3}
+    .. proven.
+Step 19: 
+  prove all verification conditions
+    .. proven.
+Result True for pair Pairing (invokeTCB_ReadRegisters (ASM) <= Kernel_C.invokeTCB_ReadRegisters (C)), time taken: 911.87s
+Testing Function pair Pairing (clean_D_PoU (ASM) <= Kernel_C.clean_D_PoU (C))
+  (function pairing 18 of 38)
+Aborting Problem (Pairing (clean_D_PoU (ASM) <= Kernel_C.clean_D_PoU (C))), complex loop
+Result ProblemAbort for pair Pairing (clean_D_PoU (ASM) <= Kernel_C.clean_D_PoU (C)), time taken: 29.51s
+Testing Function pair Pairing (lockTLBEntryCritical (ASM) <= Kernel_C.lockTLBEntryCritical (C))
+  (function pairing 19 of 38)
+Skipping Pairing (lockTLBEntryCritical (ASM) <= Kernel_C.lockTLBEntryCritical (C)), underspecified C
+Testing Function pair Pairing (l_impl'dsb (ASM) <= r_impl'dsb (C))
+  (function pairing 20 of 38)
+Skipping Pairing (l_impl'dsb (ASM) <= r_impl'dsb (C)), underspecified C
+Testing Function pair Pairing (setVMRoot (ASM) <= Kernel_C.setVMRoot (C))
+  (function pairing 21 of 38)
+ .. built problem, finding proof
+Decided to case split at (43, 'ASM')
+  (in problem)
+Now doing proof search in true case (43 visited) in problem.
+Now doing proof search in false case (43 not visited) in problem.
+ProofNode ('CaseSplit', (43, 'ASM'), (ProofNode ('Restr', (43, ('Number', (1, 2))), (ProofNode ('Leaf', None, ()),)), ProofNode ('Restr', (43, ('Number', (0, 1))), (ProofNode ('Restr', (15, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))))
+ .. proof found.
+Step 1: 
+  case split on whether 43 is visited
+Step 2: case in (1) where 43 is visited
+  Prove the number of visits to 43 is in {1 ..< 2}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Step 4: case in (1) where 43 is not visited
+  Prove the number of visits to 43 is in {0 ..< 1}
+    .. proven.
+Step 5: 
+  Prove the number of visits to 15 is in {0 ..< 1}
+    .. proven.
+Step 6: 
+  prove all verification conditions
+    .. proven.
+Result True for pair Pairing (setVMRoot (ASM) <= Kernel_C.setVMRoot (C)), time taken: 14.53s
+Testing Function pair Pairing (l_impl'mcr (ASM) <= r_impl'mcr (C))
+  (function pairing 22 of 38)
+Skipping Pairing (l_impl'mcr (ASM) <= r_impl'mcr (C)), underspecified C
+Testing Function pair Pairing (create_frames_of_region (ASM) <= Kernel_C.create_frames_of_region (C))
+  (function pairing 23 of 38)
+ .. built problem, finding proof
+
+**************************************
+FATAL ERROR
+Broken pipe
+
+**************************************
+
+Discovered a loop relation for split points [46, 14]
+  (in problem)
+Now doing proof search in 46 init case in problem.
+Now doing proof search in 46 loop case in problem.
+ProofNode ('Split', ((46, (0, 1), [Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r4'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Num', Type ('Word', 32), val = 4096)])]), Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Var', Type ('Word', 32), name = 'r10'), Expr ('Var', Type ('Word', 32), name = 'r9'), Expr ('Var', Type ('Word', 32), name = 'r6'), Expr ('Var', Type ('Word', 32), name = 'r7'), Expr ('Var', Type ('Word', 32), name = 'r8'), Expr ('Var', Type ('Word', 32), name = 'ret_addr_input'), Expr ('Op', Type ('Builtin', 'Bool'), name = 'ROData', vals = [Expr ('Var', Type ('Builtin', 'Mem'), name = 'mem')]), Expr ('Var', Type ('Word', 32), name = 'r5'), Expr ('Var', Type ('Word', 32), name = 'ret'), Expr ('Var', Type ('Word', 32), name = 'r11'), Expr ('Op', Type ('Builtin', 'RelWrapper'), name = 'EqSelectiveWrapper', vals = [Expr ('Op', Type ('Builtin', 'RelWrapper'), name = 'StackWrapper', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Op', Type ('Builtin', 'Mem'), name = 'MemUpdate', vals = [Expr ('Op', Type ('Builtin', 'Mem'), name = 'MemUpdate', vals = [Expr ('Op', Type ('Builtin', 'Mem'), name = 'MemUpdate', vals = [Expr ('Op', Type ('Builtin', 'Mem'), name = 'MemUpdate', vals = [Expr ('Op', Type ('Builtin', 'Mem'), name = 'MemUpdate', vals = [Expr ('Op', Type ('Builtin', 'Mem'), name = 'MemUpdate', vals = [Expr ('Var', Type ('Builtin', 'Mem'), name = 'stack'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Num', Type ('Word', 32), val = 32)]), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Num', Type ('Word', 32), val = 12)]), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Num', Type ('Word', 32), val = 4)]), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Num', Type ('Word', 32), val = 36)]), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Num', Type ('Word', 32), val = 8)]), Expr ('Num', Type ('Word', 32), val = 0)])]), Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Num', Type ('Word', 32), val = 0)])]), (14, (0, 1), [Expr ('Var', Type ('Word', 32), name = 'do_map___unsigned_long#v'), Expr ('Var', Type ('Word', 32), name = 'root_cnode_cap___struct_cap_C#v.words_C.0'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'f___unsigned_long#v'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Op', Type ('Word', 32), name = 'ShiftLeft', vals = [Expr ('Num', Type ('Word', 32), val = 1), Expr ('Op', Type ('Word', 32), name = 'WordCast', vals = [Expr ('Num', Type ('Word', 32), val = 12)])])])]), Expr ('Var', Type ('Word', 32), name = 'slot_pos_before___unsigned_long#v'), Expr ('Var', Type ('Word', 32), name = 'pd_cap___struct_cap_C#v.words_C.1'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'loop#6#count'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Num', Type ('Word', 32), val = 1)])]), Expr ('Var', Type ('Word', 32), name = 'pd_cap___struct_cap_C#v.words_C.0'), Expr ('Var', Type ('Word', 32), name = 'root_cnode_cap___struct_cap_C#v.words_C.1'), Expr ('Var', Type ('Word', 32), name = 'reg___struct_region_C#v.end_C'), Expr ('Var', Type ('Word', 32), name = 'pv_offset___long#v')]), [(Expr ('Op', Type ('Word', 32), name = 'MemAcc', vals = [Expr ('Var', Type ('Builtin', 'Mem'), name = 'stack'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Num', Type ('Word', 32), val = 32)])]), Expr ('Var', Type ('Word', 32), name = 'frame_cap___struct_cap_C#v.words_C.0')), (Expr ('Op', Type ('Word', 32), name = 'MemAcc', vals = [Expr ('Var', Type ('Builtin', 'Mem'), name = 'stack'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Num', Type ('Word', 32), val = 36)])]), Expr ('Var', Type ('Word', 32), name = 'frame_cap___struct_cap_C#v.words_C.1')), (Expr ('Var', Type ('Builtin', 'Mem'), name = 'mem'), Expr ('Var', Type ('Builtin', 'Mem'), name = 'Mem'))], 2, 1), (ProofNode ('Restr', (46, ('Number', (0, 3))), (ProofNode ('Restr', (14, ('Number', (0, 3))), (ProofNode ('Leaf', None, ()),)),)), ProofNode ('Restr', (46, ('Offset', (0, 3))), (ProofNode ('Restr', (14, ('Offset', (0, 3))), (ProofNode ('Leaf', None, ()),)),))))
+ .. proof found.
+Step 1: 
+  prove visits to 46 related to visits to 14
+    with equalities
+      ((Word32) (MemAcc('stack', ('r13' + 32)))) (@ addr 46)
+      = ((Word32) ('frame_cap___struct_cap_C#v.words_C.0')) (@ addr 14)
+      ((Word32) (MemAcc('stack', ('r13' + 36)))) (@ addr 46)
+      = ((Word32) ('frame_cap___struct_cap_C#v.words_C.1')) (@ addr 14)
+      ((Mem) ('mem')) (@ addr 46)
+      = ((Mem) ('Mem')) (@ addr 14)
+    and with invariants
+      ((Word32) (('r4' + ((0 - '#seq-visits') * 4096)))) (@ addr 46)
+      ((Word32) ('r13')) (@ addr 46)
+      ((Word32) ('r10')) (@ addr 46)
+      ((Word32) ('r9')) (@ addr 46)
+      ((Word32) ('r6')) (@ addr 46)
+      ((Word32) ('r7')) (@ addr 46)
+      ((Word32) ('r8')) (@ addr 46)
+      ((Word32) ('ret_addr_input')) (@ addr 46)
+      ((Bool) (ROData('mem'))) (@ addr 46)
+      ((Word32) ('r5')) (@ addr 46)
+      ((Word32) ('ret')) (@ addr 46)
+      ((Word32) ('r11')) (@ addr 46)
+      ((RelWrapper) (EqSelectiveWrapper(StackWrapper(((Word32) ('r13')), ((Mem) (MemUpdate(MemUpdate(MemUpdate(MemUpdate(MemUpdate(MemUpdate('stack', ((Word32) (('r13' + 32))), ((Word32) (0))), ((Word32) (('r13' + 0))), ((Word32) (0))), ((Word32) (('r13' + 12))), ((Word32) (0))), ((Word32) (('r13' + 4))), ((Word32) (0))), ((Word32) (('r13' + 36))), ((Word32) (0))), ((Word32) (('r13' + 8))), ((Word32) (0)))))), ((Word32) ((0 - 0))), ((Word32) (0))))) (@ addr 46)
+      ((Word32) ('do_map___unsigned_long#v')) (@ addr 14)
+      ((Word32) ('root_cnode_cap___struct_cap_C#v.words_C.0')) (@ addr 14)
+      ((Word32) (('f___unsigned_long#v' + ((0 - '#seq-visits') * ShiftLeft(1, WordCast(12)))))) (@ addr 14)
+      ((Word32) ('slot_pos_before___unsigned_long#v')) (@ addr 14)
+      ((Word32) ('pd_cap___struct_cap_C#v.words_C.1')) (@ addr 14)
+      ((Word32) (('loop#6#count' + ((0 - '#seq-visits') * 1)))) (@ addr 14)
+      ((Word32) ('pd_cap___struct_cap_C#v.words_C.0')) (@ addr 14)
+      ((Word32) ('root_cnode_cap___struct_cap_C#v.words_C.1')) (@ addr 14)
+      ((Word32) ('reg___struct_region_C#v.end_C')) (@ addr 14)
+      ((Word32) ('pv_offset___long#v')) (@ addr 14)
+    .. proven.
+Step 2: case in (1) where the length of the sequence < 2
+  Prove the number of visits to 46 is in {0 ..< 3}
+    .. proven.
+Step 3: 
+  Prove the number of visits to 14 is in {0 ..< 3}
+    .. proven.
+Step 4: 
+  prove all verification conditions
+    .. proven.
+Step 5: case in (1) where the length of the sequence is i + 2
+  Prove the number of visits to 46 is in {i + 0 ..< i + 3}
+    .. proven.
+Step 6: 
+  Prove the number of visits to 14 is in {i + 0 ..< i + 3}
+    .. proven.
+Step 7: 
+  prove all verification conditions
+    .. proven.
+Result True for pair Pairing (create_frames_of_region (ASM) <= Kernel_C.create_frames_of_region (C)), time taken: 897.32s
+Testing Function pair Pairing (map_kernel_window (ASM) <= Kernel_C.map_kernel_window (C))
+  (function pairing 24 of 38)
+Aborting Problem (Pairing (map_kernel_window (ASM) <= Kernel_C.map_kernel_window (C))), complex loop
+Result ProblemAbort for pair Pairing (map_kernel_window (ASM) <= Kernel_C.map_kernel_window (C)), time taken: 3.03s
+Testing Function pair Pairing (l_impl'wfi (ASM) <= r_impl'wfi (C))
+  (function pairing 25 of 38)
+Skipping Pairing (l_impl'wfi (ASM) <= r_impl'wfi (C)), underspecified C
+Testing Function pair Pairing (init_kernel (ASM) <= Kernel_C.init_kernel (C))
+  (function pairing 26 of 38)
+Aborting Problem (Pairing (init_kernel (ASM) <= Kernel_C.init_kernel (C))): underspecified instruction'vmrs_r3_fpexc_E0003B54
+Result ProblemAbort for pair Pairing (init_kernel (ASM) <= Kernel_C.init_kernel (C)), time taken: 0.09s
+Testing Function pair Pairing (l_impl'mrc (ASM) <= r_impl'mrc (C))
+  (function pairing 27 of 38)
+Skipping Pairing (l_impl'mrc (ASM) <= r_impl'mrc (C)), underspecified C
+Testing Function pair Pairing (Arch_switchToThread (ASM) <= Kernel_C.Arch_switchToThread (C))
+  (function pairing 28 of 38)
+Aborting Problem (Pairing (Arch_switchToThread (ASM) <= Kernel_C.Arch_switchToThread (C))): underspecified Kernel_C.clearExMonitor
+Result ProblemAbort for pair Pairing (Arch_switchToThread (ASM) <= Kernel_C.Arch_switchToThread (C)), time taken: 0.01s
+Testing Function pair Pairing (cleanInvalidate_D_PoC (ASM) <= Kernel_C.cleanInvalidate_D_PoC (C))
+  (function pairing 29 of 38)
+Aborting Problem (Pairing (cleanInvalidate_D_PoC (ASM) <= Kernel_C.cleanInvalidate_D_PoC (C))), complex loop
+Result ProblemAbort for pair Pairing (cleanInvalidate_D_PoC (ASM) <= Kernel_C.cleanInvalidate_D_PoC (C)), time taken: 29.25s
+Testing Function pair Pairing (restore_user_context (ASM) <= Kernel_C.restore_user_context (C))
+  (function pairing 30 of 38)
+Skipping Pairing (restore_user_context (ASM) <= Kernel_C.restore_user_context (C)), underspecified C
+Testing Function pair Pairing (c_handle_undefined_instruction (ASM) <= Kernel_C.c_handle_undefined_instruction (C))
+  (function pairing 31 of 38)
+Aborting Problem (Pairing (c_handle_undefined_instruction (ASM) <= Kernel_C.c_handle_undefined_instruction (C))): underspecified Kernel_C.StrictC'__builtin_unreachable
+Result ProblemAbort for pair Pairing (c_handle_undefined_instruction (ASM) <= Kernel_C.c_handle_undefined_instruction (C)), time taken: 0.00s
+Testing Function pair Pairing (sendSignal (ASM) <= Kernel_C.sendSignal (C))
+  (function pairing 32 of 38)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Result True for pair Pairing (sendSignal (ASM) <= Kernel_C.sendSignal (C)), time taken: 23.99s
+Testing Function pair Pairing (createNewObjects (ASM) <= Kernel_C.createNewObjects (C))
+  (function pairing 33 of 38)
+ .. built problem, finding proof
+Discovered a loop relation for split points [38, 11]
+  (in problem)
+Now doing proof search in 38 init case in problem.
+Now doing proof search in 38 loop case in problem.
+ProofNode ('Split', ((38, (0, 1), [Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r4'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Num', Type ('Word', 32), val = 1)])]), Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Var', Type ('Word', 32), name = 'r10'), Expr ('Var', Type ('Word', 32), name = 'r9'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r6'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Var', Type ('Word', 32), name = 'r7')])]), Expr ('Var', Type ('Word', 32), name = 'r8'), Expr ('Var', Type ('Word', 32), name = 'r11'), Expr ('Var', Type ('Word', 32), name = 'r5'), Expr ('Var', Type ('Word', 32), name = 'r7'), Expr ('Var', Type ('Word', 32), name = 'ret'), Expr ('Op', Type ('Builtin', 'Bool'), name = 'ROData', vals = [Expr ('Var', Type ('Builtin', 'Mem'), name = 'mem')]), Expr ('Op', Type ('Builtin', 'RelWrapper'), name = 'EqSelectiveWrapper', vals = [Expr ('Op', Type ('Builtin', 'RelWrapper'), name = 'StackWrapper', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Op', Type ('Builtin', 'Mem'), name = 'MemUpdate', vals = [Expr ('Op', Type ('Builtin', 'Mem'), name = 'MemUpdate', vals = [Expr ('Op', Type ('Builtin', 'Mem'), name = 'MemUpdate', vals = [Expr ('Var', Type ('Builtin', 'Mem'), name = 'stack'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Num', Type ('Word', 32), val = 12)]), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Num', Type ('Word', 32), val = 8)]), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Num', Type ('Word', 32), val = 0)])]), Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Num', Type ('Word', 32), val = 0)])]), (11, (0, 1), [Expr ('Var', Type ('Word', 32), name = 'userSize___unsigned_long#v'), Expr ('Var', Type ('Word', 32), name = 't___unsigned_long#v'), Expr ('Var', Type ('Word', 32), name = 'objectSize___unsigned_long#v'), Expr ('Var', Type ('Word', 32), name = 'slots___struct_slot_range_C#v.offset_C'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'loop#2#count'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Num', Type ('Word', 32), val = 1)])]), Expr ('Var', Type ('Word', 32), name = 'slots___struct_slot_range_C#v.cnode_C'), Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'i___unsigned_long#v'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Op', Type ('Word', 32), name = 'WordCastSigned', vals = [Expr ('Num', Type ('Word', 32), val = 1)])])]), Expr ('Var', Type ('Word', 32), name = 'nextFreeArea___ptr_to_void#v'), Expr ('Var', Type ('Word', 32), name = 'deviceMemory___unsigned_long#v'), Expr ('Var', Type ('Word', 32), name = 'parent___ptr_to_struct_cte_C#v'), Expr ('Var', Type ('Word', 32), name = 'slots___struct_slot_range_C#v.length_C')]), [(Expr ('Var', Type ('Builtin', 'Mem'), name = 'mem'), Expr ('Var', Type ('Builtin', 'Mem'), name = 'Mem'))], 2, 1), (ProofNode ('Restr', (38, ('Number', (0, 3))), (ProofNode ('Restr', (11, ('Number', (0, 3))), (ProofNode ('Leaf', None, ()),)),)), ProofNode ('Restr', (38, ('Offset', (0, 3))), (ProofNode ('Restr', (11, ('Offset', (0, 3))), (ProofNode ('Leaf', None, ()),)),))))
+ .. proof found.
+Step 1: 
+  prove visits to 38 related to visits to 11
+    with equalities
+      ((Mem) ('mem')) (@ addr 38)
+      = ((Mem) ('Mem')) (@ addr 11)
+    and with invariants
+      ((Word32) (('r4' + ((0 - '#seq-visits') * 1)))) (@ addr 38)
+      ((Word32) ('r13')) (@ addr 38)
+      ((Word32) ('r10')) (@ addr 38)
+      ((Word32) ('r9')) (@ addr 38)
+      ((Word32) (('r6' + ((0 - '#seq-visits') * 'r7')))) (@ addr 38)
+      ((Word32) ('r8')) (@ addr 38)
+      ((Word32) ('r11')) (@ addr 38)
+      ((Word32) ('r5')) (@ addr 38)
+      ((Word32) ('r7')) (@ addr 38)
+      ((Word32) ('ret')) (@ addr 38)
+      ((Bool) (ROData('mem'))) (@ addr 38)
+      ((RelWrapper) (EqSelectiveWrapper(StackWrapper(((Word32) ('r13')), ((Mem) (MemUpdate(MemUpdate(MemUpdate('stack', ((Word32) (('r13' + 12))), ((Word32) (0))), ((Word32) (('r13' + 8))), ((Word32) (0))), ((Word32) (('r13' + 0))), ((Word32) (0)))))), ((Word32) ((0 - 0))), ((Word32) (0))))) (@ addr 38)
+      ((Word32) ('userSize___unsigned_long#v')) (@ addr 11)
+      ((Word32) ('t___unsigned_long#v')) (@ addr 11)
+      ((Word32) ('objectSize___unsigned_long#v')) (@ addr 11)
+      ((Word32) ('slots___struct_slot_range_C#v.offset_C')) (@ addr 11)
+      ((Word32) (('loop#2#count' + ((0 - '#seq-visits') * 1)))) (@ addr 11)
+      ((Word32) ('slots___struct_slot_range_C#v.cnode_C')) (@ addr 11)
+      ((Word32) (('i___unsigned_long#v' + ((0 - '#seq-visits') * WordCastSigned(1))))) (@ addr 11)
+      ((Word32) ('nextFreeArea___ptr_to_void#v')) (@ addr 11)
+      ((Word32) ('deviceMemory___unsigned_long#v')) (@ addr 11)
+      ((Word32) ('parent___ptr_to_struct_cte_C#v')) (@ addr 11)
+      ((Word32) ('slots___struct_slot_range_C#v.length_C')) (@ addr 11)
+    .. proven.
+Step 2: case in (1) where the length of the sequence < 2
+  Prove the number of visits to 38 is in {0 ..< 3}
+    .. proven.
+Step 3: 
+  Prove the number of visits to 11 is in {0 ..< 3}
+    .. proven.
+Step 4: 
+  prove all verification conditions
+    .. proven.
+Step 5: case in (1) where the length of the sequence is i + 2
+  Prove the number of visits to 38 is in {i + 0 ..< i + 3}
+    .. proven.
+Step 6: 
+  Prove the number of visits to 11 is in {i + 0 ..< i + 3}
+    .. proven.
+Step 7: 
+  prove all verification conditions
+    .. proven.
+Result True for pair Pairing (createNewObjects (ASM) <= Kernel_C.createNewObjects (C)), time taken: 616.23s
+Testing Function pair Pairing (c_handle_instruction_fault (ASM) <= Kernel_C.c_handle_instruction_fault (C))
+  (function pairing 34 of 38)
+Aborting Problem (Pairing (c_handle_instruction_fault (ASM) <= Kernel_C.c_handle_instruction_fault (C))): underspecified Kernel_C.StrictC'__builtin_unreachable
+Result ProblemAbort for pair Pairing (c_handle_instruction_fault (ASM) <= Kernel_C.c_handle_instruction_fault (C)), time taken: 0.00s
+Testing Function pair Pairing (decodeARMMMUInvocation (ASM) <= Kernel_C.decodeARMMMUInvocation (C))
+  (function pairing 35 of 38)
+ .. built problem, finding proof
+
+**************************************
+FATAL ERROR
+Broken pipe
+
+**************************************
+
+Decided to case split at (473, 'ASM')
+  (in problem)
+Now doing proof search in true case (473 visited) in problem.
+Now doing proof search in false case (473 not visited) in problem.
+Decided to case split at (352, 'ASM')
+  (in false case (473 not visited) in problem)
+Now doing proof search in true case (352 visited) in false case (473 not visited) in problem.
+Now doing proof search in false case (352 not visited) in false case (473 not visited) in problem.
+Decided to case split at (354, 'ASM')
+  (in false case (352 not visited) in false case (473 not visited) in problem)
+Now doing proof search in true case (354 visited) in false case (352 not visited) in false case (473 not visited) in problem.
+Now doing proof search in false case (354 not visited) in false case (352 not visited) in false case (473 not visited) in problem.
+Decided to case split at (229, 'ASM')
+  (in false case (354 not visited) in false case (352 not visited) in false case (473 not visited) in problem)
+Now doing proof search in true case (229 visited) in false case (354 not visited) in false case (352 not visited) in false case (473 not visited) in problem.
+Discovered a loop relation for split points [1694, 112]
+  (in true case (229 visited) in false case (354 not visited) in false case (352 not visited) in false case (473 not visited) in problem)
+Now doing proof search in 1694 init case in true case (229 visited) in false case (354 not visited) in false case (352 not visited) in false case (473 not visited) in problem.
+Now doing proof search in 1694 loop case in true case (229 visited) in false case (354 not visited) in false case (352 not visited) in false case (473 not visited) in problem.
+Now doing proof search in false case (229 not visited) in false case (354 not visited) in false case (352 not visited) in false case (473 not visited) in problem.
+Decided to case split at (252, 'ASM')
+  (in false case (229 not visited) in false case (354 not visited) in false case (352 not visited) in false case (473 not visited) in problem)
+Now doing proof search in true case (252 visited) in false case (229 not visited) in false case (354 not visited) in false case (352 not visited) in false case (473 not visited) in problem.
+Discovered a loop relation for split points [1193, 58]
+  (in true case (252 visited) in false case (229 not visited) in false case (354 not visited) in false case (352 not visited) in false case (473 not visited) in problem)
+Now doing proof search in 1193 init case in true case (252 visited) in false case (229 not visited) in false case (354 not visited) in false case (352 not visited) in false case (473 not visited) in problem.
+Now doing proof search in 1193 loop case in true case (252 visited) in false case (229 not visited) in false case (354 not visited) in false case (352 not visited) in false case (473 not visited) in problem.
+Now doing proof search in false case (252 not visited) in false case (229 not visited) in false case (354 not visited) in false case (352 not visited) in false case (473 not visited) in problem.
+Decided to case split at (468, 'ASM')
+  (in false case (252 not visited) in false case (229 not visited) in false case (354 not visited) in false case (352 not visited) in false case (473 not visited) in problem)
+Now doing proof search in true case (468 visited) in false case (252 not visited) in false case (229 not visited) in false case (354 not visited) in false case (352 not visited) in false case (473 not visited) in problem.
+Decided to case split at (5795, 'ASM')
+  (in true case (468 visited) in false case (252 not visited) in false case (229 not visited) in false case (354 not visited) in false case (352 not visited) in false case (473 not visited) in problem)
+Now doing proof search in true case (5795 visited) in true case (468 visited) in false case (252 not visited) in false case (229 not visited) in false case (354 not visited) in false case (352 not visited) in false case (473 not visited) in problem.
+Discovered that points [3212 (loop head)] can be bounded
+  (in true case (5795 visited) in true case (468 visited) in false case (252 not visited) in false case (229 not visited) in false case (354 not visited) in false case (352 not visited) in false case (473 not visited) in problem)
+Discovered that points [3163 (loop head)] can be bounded
+  (in true case (5795 visited) in true case (468 visited) in false case (252 not visited) in false case (229 not visited) in false case (354 not visited) in false case (352 not visited) in false case (473 not visited) in problem)
+Discovered that points [3317 (loop head)] can be bounded
+  (in true case (5795 visited) in true case (468 visited) in false case (252 not visited) in false case (229 not visited) in false case (354 not visited) in false case (352 not visited) in false case (473 not visited) in problem)
+Discovered that points [3266 (loop head)] can be bounded
+  (in true case (5795 visited) in true case (468 visited) in false case (252 not visited) in false case (229 not visited) in false case (354 not visited) in false case (352 not visited) in false case (473 not visited) in problem)
+Discovered that points [517 (loop head)] can be bounded
+  (in true case (5795 visited) in true case (468 visited) in false case (252 not visited) in false case (229 not visited) in false case (354 not visited) in false case (352 not visited) in false case (473 not visited) in problem)
+Discovered that points [922 (loop head)] can be bounded
+  (in true case (5795 visited) in true case (468 visited) in false case (252 not visited) in false case (229 not visited) in false case (354 not visited) in false case (352 not visited) in false case (473 not visited) in problem)
+Discovered that points [1785 (loop head)] can be bounded
+  (in true case (5795 visited) in true case (468 visited) in false case (252 not visited) in false case (229 not visited) in false case (354 not visited) in false case (352 not visited) in false case (473 not visited) in problem)
+Discovered that points [1210 (loop head)] can be bounded
+  (in true case (5795 visited) in true case (468 visited) in false case (252 not visited) in false case (229 not visited) in false case (354 not visited) in false case (352 not visited) in false case (473 not visited) in problem)
+Discovered that points [1090 (loop head)] can be bounded
+  (in true case (5795 visited) in true case (468 visited) in false case (252 not visited) in false case (229 not visited) in false case (354 not visited) in false case (352 not visited) in false case (473 not visited) in problem)
+Now doing proof search in false case (5795 not visited) in true case (468 visited) in false case (252 not visited) in false case (229 not visited) in false case (354 not visited) in false case (352 not visited) in false case (473 not visited) in problem.
+Traceback (most recent call last):
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/graph-refine.py", line 69, in toplevel_check
+    proof = search.build_proof (p)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 56, in build_proof
+    proof = build_proof_rec (default_searcher, p, (), list (init_hyps))
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1738, in build_proof_rec
+    p, restrs, hyps, name = name)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1774, in build_proof_rec_with_restrs
+    searcher, p, restrs, hyps, name = name)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1774, in build_proof_rec_with_restrs
+    searcher, p, restrs, hyps, name = name)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1745, in build_proof_rec_with_restrs
+    return build_proof_rec (searcher, p, restrs, hyps, name = name)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1738, in build_proof_rec
+    p, restrs, hyps, name = name)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1774, in build_proof_rec_with_restrs
+    searcher, p, restrs, hyps, name = name)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1774, in build_proof_rec_with_restrs
+    searcher, p, restrs, hyps, name = name)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1745, in build_proof_rec_with_restrs
+    return build_proof_rec (searcher, p, restrs, hyps, name = name)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1738, in build_proof_rec
+    p, restrs, hyps, name = name)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1774, in build_proof_rec_with_restrs
+    searcher, p, restrs, hyps, name = name)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1774, in build_proof_rec_with_restrs
+    searcher, p, restrs, hyps, name = name)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1745, in build_proof_rec_with_restrs
+    return build_proof_rec (searcher, p, restrs, hyps, name = name)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1738, in build_proof_rec
+    p, restrs, hyps, name = name)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1774, in build_proof_rec_with_restrs
+    searcher, p, restrs, hyps, name = name)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1764, in build_proof_rec_with_restrs
+    searcher, p, restrs, hyps, name = name)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1745, in build_proof_rec_with_restrs
+    return build_proof_rec (searcher, p, restrs, hyps, name = name)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1738, in build_proof_rec
+    p, restrs, hyps, name = name)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1774, in build_proof_rec_with_restrs
+    searcher, p, restrs, hyps, name = name)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1774, in build_proof_rec_with_restrs
+    searcher, p, restrs, hyps, name = name)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1745, in build_proof_rec_with_restrs
+    return build_proof_rec (searcher, p, restrs, hyps, name = name)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1738, in build_proof_rec
+    p, restrs, hyps, name = name)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1774, in build_proof_rec_with_restrs
+    searcher, p, restrs, hyps, name = name)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1774, in build_proof_rec_with_restrs
+    searcher, p, restrs, hyps, name = name)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1745, in build_proof_rec_with_restrs
+    return build_proof_rec (searcher, p, restrs, hyps, name = name)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1738, in build_proof_rec
+    p, restrs, hyps, name = name)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1774, in build_proof_rec_with_restrs
+    searcher, p, restrs, hyps, name = name)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1745, in build_proof_rec_with_restrs
+    return build_proof_rec (searcher, p, restrs, hyps, name = name)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1701, in build_proof_rec
+    (kind, details) = searcher (p, restrs, hyps)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1840, in default_searcher
+    (kind, split) = find_split_loop (p, n, restrs, hyps)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 692, in find_split_loop
+    i_opts, j_opts, node_restrs = node_restrs)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1245, in find_split
+    i_opts, j_opts, unfold_limit, tags, node_restrs = node_restrs)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1043, in setup_split_search
+    get_pc (n, unfold_limit)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 1039, in get_pc
+    restrs2 = get_nth_visit_restrs (rep, restrs, hyps, n, k)
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 403, in get_nth_visit_restrs
+    if i in get_entry_visits_up_to (rep, head, restrs, hyps):
+  File "/nix/store/b1d0dhfk83ravfjf7hhzpp4kynmmkyh1-source/search.py", line 383, in get_entry_visits_up_to
+    [entry] = get_loop_entry_sites (rep, restrs, hyps, head)
+ValueError: need more than 0 values to unpack
+Result ProofEXCEPT for pair Pairing (decodeARMMMUInvocation (ASM) <= Kernel_C.decodeARMMMUInvocation (C)), time taken: 2355.40s
+Testing Function pair Pairing (init_freemem (ASM) <= Kernel_C.init_freemem (C))
+  (function pairing 36 of 38)
+ .. built problem, finding proof
+Discovered a loop relation for split points [249, 193]
+  (in problem)
+Now doing proof search in 249 init case in problem.
+Discovered a loop relation for split points [270, 187]
+  (in 249 init case in problem)
+Now doing proof search in 270 init case in 249 init case in problem.
+Discovered that points [177 (loop head)] can be bounded
+  (in 270 init case in 249 init case in problem)
+Discovered that points [150 (loop head)] can be bounded
+  (in 270 init case in 249 init case in problem)
+Discovered that points [345 (loop head)] can be bounded
+  (in 270 init case in 249 init case in problem)
+
+**************************************
+FATAL ERROR
+Broken pipe
+
+**************************************
+
+Discovered a loop relation for split points [254, 146]
+  (in 270 init case in 249 init case in problem)
+Now doing proof search in 254 init case in 270 init case in 249 init case in problem.
+Discovered that points [70 (loop head)] can be bounded
+  (in 254 init case in 270 init case in 249 init case in problem)
+Discovered that points [59 (loop head)] can be bounded
+  (in 254 init case in 270 init case in 249 init case in problem)
+Discovered that points [36 (loop head)] can be bounded
+  (in 254 init case in 270 init case in 249 init case in problem)
+Discovered that points [3 (loop head)] can be bounded
+  (in 254 init case in 270 init case in 249 init case in problem)
+Discovered that points [560 (loop head)] can be bounded
+  (in 254 init case in 270 init case in 249 init case in problem)

@@ -34,6 +34,12 @@ self: with self; {
       "trace-to:report.txt"
       "skip-proofs-of:${../../notes/graph-refine-1.log}"
       "skip-proofs-of:${../../notes/graph-refine-2.log}"
+      "skip-proofs-of:${../../notes/graph-refine-3.log}"
+      "-exclude"
+        "Kernel_C.create_kernel_untypeds"
+        "Kernel_C.decodeARMMMUInvocation"
+        "Kernel_C.init_freemem"
+      "-end-exclude"
       "all"
     ];
   };
@@ -151,7 +157,7 @@ self: with self; {
     coverage = graphRefineWith {
       name = "coverage";
       targetDir = justStackBounds;
-      commands = [
+      args = [
         "trace-to:coverage.txt" "coverage"
       ];
     };
@@ -165,7 +171,7 @@ self: with self; {
     all = graphRefineWith {
       name = "all";
       targetDir = justStackBounds;
-      commands = [
+      args = [
         "trace-to:report.txt" "all"
       ];
     };
