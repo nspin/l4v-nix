@@ -59,6 +59,7 @@ self: with self; {
 
   slower = writeText "slower" (toString [
     slow
+    cProofs
     l4vAll
   ]);
 
@@ -69,8 +70,9 @@ self: with self; {
 
   cached = writeText "cached" (toString [
     slow
-    cProofs
-    graphRefine.all
+    # cProofs
+    # l4vAll
+    # graphRefine.all
   ]);
 
   all = writeText "all" (toString [
