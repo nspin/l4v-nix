@@ -1537,3 +1537,26 @@ Discovered that points [3 (loop head)] can be bounded
   (in 254 init case in 270 init case in 249 init case in problem)
 Discovered that points [560 (loop head)] can be bounded
   (in 254 init case in 270 init case in 249 init case in problem)
+Discovered that points [535 (loop head)] can be bounded
+  (in 254 init case in 270 init case in 249 init case in problem)
+Discovered that points [569 (loop head)] can be bounded
+  (in 254 init case in 270 init case in 249 init case in problem)
+Discovered that points [610 (loop head)] can be bounded
+  (in 254 init case in 270 init case in 249 init case in problem)
+Now doing proof search in 254 loop case in 270 init case in 249 init case in problem.
+Discovered that points [70 (loop head)] can be bounded
+  (in 254 loop case in 270 init case in 249 init case in problem)
+Discovered that points [59 (loop head)] can be bounded
+  (in 254 loop case in 270 init case in 249 init case in problem)
+Discovered that points [36 (loop head)] can be bounded
+  (in 254 loop case in 270 init case in 249 init case in problem)
+Discovered that points [3 (loop head)] can be bounded
+  (in 254 loop case in 270 init case in 249 init case in problem)
+Discovered that points [560 (loop head)] can be bounded
+  (in 254 loop case in 270 init case in 249 init case in problem)
+Discovered that points [535 (loop head)] can be bounded
+  (in 254 loop case in 270 init case in 249 init case in problem)
+Discovered that points [569 (loop head)] can be bounded
+  (in 254 loop case in 270 init case in 249 init case in problem)
+Discovered that points [610 (loop head)] can be bounded
+  (in 254 loop case in 270 init case in 249 init case in problem)
