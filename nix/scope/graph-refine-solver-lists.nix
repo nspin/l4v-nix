@@ -22,7 +22,9 @@ let
   sonolarWrapper = writeShellApplication {
     name = "x";
     text = ''
-      cat | tee -a in.txt | ${sonolarBinaryExe} --input-format=smtlib2
+      t=$(date +"%T.%6N")
+      echo "$t" >&2
+      cat | tee -a in."$t".smt2 | ${sonolarBinaryExe} --input-format=smtlib2
     '';
   };
 
@@ -55,9 +57,9 @@ in rec {
 
   wip1 = writeText "solverlist" ''
     CVC4: online: ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000
-    SONOLAR: offline: ${sonolarBinaryExe} --input-format=smtlib2
-    CVC4: offline: ${cvc4BinaryExe} --lang smt
-    SONOLAR-word8: offline: ${sonolarBinaryExe} --input-format=smtlib2
+    # SONOLAR: offline: ${sonolarWrapperExe} --input-format=smtlib2
+    # CVC4: offline: ${cvc4BinaryExe} --lang smt
+    SONOLAR-word8: offline: ${sonolarWrapperExe} --input-format=smtlib2
       config: mem_mode = 8
   '';
     # SONOLAR: offline: ${sonolarWrapperExe}
