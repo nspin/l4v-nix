@@ -28,8 +28,18 @@ let
 
   sonolarWrapperExe = "${sonolarWrapper}/bin/x";
 
-in {
-  default = writeText "solverlist" ''
+in rec {
+  default = original;
+
+  original = writeText "solverlist" ''
+    CVC4: online: ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000
+    SONOLAR: offline: ${sonolarBinaryExe} --input-format=smtlib2
+    CVC4: offline: ${cvc4BinaryExe} --lang smt
+    SONOLAR-word8: offline: ${sonolarBinaryExe} --input-format=smtlib2
+      config: mem_mode = 8
+  '';
+
+  new = writeText "solverlist" ''
     CVC4: online: ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000
     SONOLAR: offline: ${sonolarBinaryExe} --input-format=smtlib2
     CVC4: offline: ${cvc4BinaryExe} --lang smt
