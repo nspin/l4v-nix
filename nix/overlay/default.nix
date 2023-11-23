@@ -7,7 +7,7 @@ let
 
   mkL4vConfig =
     let
-      defaultCCWrapper = arch: targetPkgsByL4vArch."${arch}".buildPackages.gcc6;
+      defaultCCWrapper = arch: targetPkgsByL4vArch."${arch}".buildPackages.gcc8;
     in
     { arch
     , optLevel ? "-O1"
