@@ -9,6 +9,7 @@
 , expect
 , python3
 , mkShell
+, strace
 }:
 
 # TODO
@@ -33,12 +34,14 @@ let
       # t=xxx
       # echo XXXXXXXXX "$t" >&2
       # cat | tee in."$t".smt2 | cat | ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000 "$@" | cat
-      cat | cat | ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000
+      # cat | cat | ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000
+      # stdbuf -i0 -o0 cat | stdbuf -i0 -o0 tee in."$t".smt2 | stdbuf -i0 -o0 ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000
       # ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000 "$@" | tee out."$t".smt2
       # ${expect}/bin/unbuffer -p tee in."$t".smt2 | ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000 "$@"
       #  | tee out."$t".smt2
       # exec bash -c "set -o pipefail; tee in.$t.smt2 | ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000 $@"
       # exec python3 -u ${script}
+      exec ${strace}/bin/strace -o strace."$t".txt -f -e 'trace=!all' ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000
     '';
   };
 
@@ -111,7 +114,7 @@ in rec {
     # SONOLAR: offline: ${sonolarWrapperExe} --input-format=smtlib2
 
   wip2 = writeText "solverlist" ''
-    # CVC4: online: ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000
+    # CVC4: online: ${strace}/bin/strace -f -e trace=!all ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000
     CVC4: online: ${cvc4OnlineWrapperExe}
     SONOLAR: offline: ${sonolarBinaryExe} --input-format=smtlib2
     CVC4: offline: ${cvc4BinaryExe} --lang smt
@@ -125,6 +128,7 @@ in rec {
   s = mkShell {
     nativeBuildInputs = [
       cvc4Binary.v1_5
+      cvc4OnlineWrapper
     ];
   };
 }
