@@ -29,8 +29,8 @@ self: with self; {
 
   wip2 = graphRefineWith rec {
     name = "wip2";
-    solverList = graphRefineSolverLists.new;
-    # solverList = graphRefineSolverLists.wip2;
+    # solverList = graphRefineSolverLists.new;
+    solverList = graphRefineSolverLists.wip2;
     targetDir = graphRefine.justStackBounds;
     source = lib.cleanSource ../../tmp/graph-refine;
     # commands = ''

@@ -1,15 +1,13 @@
 { lib
 , writeText
+, writeScript
 , writeShellApplication
+, runtimeShell
 , yices
 
 , cvc4Binary
 , sonolarBinary
 
-, expect
-, python3
-, mkShell
-, strace
 }:
 
 # TODO
@@ -24,59 +22,22 @@ let
   sonolarBinaryExe = "${sonolarBinary}/bin/sonolar";
   yicesSmt2Exe = "${yices}/bin/yices-smt2";
 
-  cvc4OnlineWrapper = writeShellApplication {
-    name = "x";
-    checkPhase = "";
-    runtimeInputs = [ python3 ];
-    text = ''
-      # echo YYYYYYYYY >&2
-      t=$(date +"%T.%6N")
-      # t=xxx
-      # echo XXXXXXXXX "$t" >&2
-      # cat | tee in."$t".smt2 | cat | ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000 "$@" | cat
-      # cat | cat | ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000
-      # stdbuf -i0 -o0 cat | stdbuf -i0 -o0 tee in."$t".smt2 | stdbuf -i0 -o0 ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000
-      # ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000 "$@" | tee out."$t".smt2
-      # ${expect}/bin/unbuffer -p tee in."$t".smt2 | ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000 "$@"
-      #  | tee out."$t".smt2
-      # exec bash -c "set -o pipefail; tee in.$t.smt2 | ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000 $@"
-      # exec python3 -u ${script}
-      exec ${strace}/bin/strace -o strace."$t".txt -f -e 'trace=!all' ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000
-    '';
-  };
+  wrap = writeScript "wrap" ''
+    #!${runtimeShell}
 
-  script = writeText "x.py" ''
-    import time
-    import subprocess
-    from threading import Thread
+    set -eu -o pipefail
 
-    p = subprocess.Popen(
-      ["${cvc4BinaryExe}", "--incremental", "--lang", "smt", "--tlimit=5000"]
-      stdin=subprocess.PIPE,
-    )
+    t=$(date +%s.%6N)
+    d=tmp/tlogs/$t
 
-    def f(p):
-      import sys
-      for line in sys.stdin:
-        p.stdin.write(line)
+    mkdir -p $d
 
-    Thread(target=f, args=p).start()
+    echo "$@" > $d/args.txt
 
-    p.wait()
+    "$@" < <(tee $d/in.smt2) | tee $d/out.smt2
+
+    # "$@"
   '';
-
-  cvc4OnlineWrapperExe = "${cvc4OnlineWrapper}/bin/x";
-
-  sonolarWrapper = writeShellApplication {
-    name = "x";
-    text = ''
-      t=$(date +"%T.%6N")
-      echo "$t" >&2
-      cat | tee -a in."$t".smt2 | ${sonolarBinaryExe} --input-format=smtlib2
-    '';
-  };
-
-  sonolarWrapperExe = "${sonolarWrapper}/bin/x";
 
 in rec {
   default = original;
@@ -105,17 +66,16 @@ in rec {
 
   wip1 = writeText "solverlist" ''
     CVC4: online: ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000
-    # SONOLAR: offline: ${sonolarWrapperExe} --input-format=smtlib2
+    # SONOLAR: offline: ${sonolarBinaryExe} --input-format=smtlib2
     # CVC4: offline: ${cvc4BinaryExe} --lang smt
-    SONOLAR-word8: offline: ${sonolarWrapperExe} --input-format=smtlib2
+    SONOLAR-word8: offline: ${sonolarBinaryExe} --input-format=smtlib2
       config: mem_mode = 8
   '';
-    # SONOLAR: offline: ${sonolarWrapperExe}
-    # SONOLAR: offline: ${sonolarWrapperExe} --input-format=smtlib2
+    # SONOLAR: offline: ${sonolarBinaryExe}
+    # SONOLAR: offline: ${sonolarBinaryExe} --input-format=smtlib2
 
   wip2 = writeText "solverlist" ''
-    # CVC4: online: ${strace}/bin/strace -f -e trace=!all ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000
-    CVC4: online: ${cvc4OnlineWrapperExe}
+    CVC4: online: ${wrap} ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000
     SONOLAR: offline: ${sonolarBinaryExe} --input-format=smtlib2
     CVC4: offline: ${cvc4BinaryExe} --lang smt
     Yices: offline: ${yicesSmt2Exe}
@@ -124,11 +84,4 @@ in rec {
     Yices-word8: offline: ${yicesSmt2Exe}
       config: mem_mode = 8
   '';
-
-  s = mkShell {
-    nativeBuildInputs = [
-      cvc4Binary.v1_5
-      cvc4OnlineWrapper
-    ];
-  };
 }
