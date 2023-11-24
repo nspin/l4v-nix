@@ -34,14 +34,15 @@ self: with self; {
     args = [
       "trace-to:report.txt"
       "skip-proofs-of:${../../notes/graph-refine-1.log}"
-      # "skip-proofs-of:${../../notes/graph-refine-2.log}"
+      "skip-proofs-of:${../../notes/graph-refine-2.log}"
       # "skip-proofs-of:${../../notes/graph-refine-3.log}"
-      "-exclude"
+      # "-exclude"
         # "Kernel_C.create_kernel_untypeds"
         # "Kernel_C.decodeARMMMUInvocation"
-        "Kernel_C.init_freemem"
-      "-end-exclude"
+        # "Kernel_C.init_freemem"
+      # "-end-exclude"
       "all"
+      # "Kernel_C.init_freemem"
     ];
   };
 
