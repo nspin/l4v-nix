@@ -6,6 +6,7 @@
 , yices
 
 , cvc4Binary
+, cvc5Binary
 , sonolarBinary
 
 }:
@@ -19,6 +20,7 @@
 
 let
   cvc4BinaryExe = "${cvc4Binary.v1_5}/bin/cvc4";
+  cvc5BinaryExe = "${cvc5Binary}/bin/cvc5";
   sonolarBinaryExe = "${sonolarBinary}/bin/sonolar";
   yicesSmt2Exe = "${yices}/bin/yices-smt2";
 
@@ -93,9 +95,19 @@ in rec {
 
   wip3 = writeText "solverlist" ''
     CVC4: online: ${wrap} ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000
-    SONOLAR: offline: ${sonolarBinaryExe} --input-format=smtlib2
-    CVC4: offline: ${cvc4BinaryExe} --lang smt
-    SONOLAR-word8: offline: ${sonolarBinaryExe} --input-format=smtlib2
+    SONOLAR: offline: ${wrap} ${sonolarBinaryExe} --input-format=smtlib2
+    # CVC4: offline: ${wrap} ${cvc4BinaryExe} --lang smt
+    # SONOLAR-word8: offline: ${wrap} ${sonolarBinaryExe} --input-format=smtlib2
+    #   config: mem_mode = 8
+  '';
+
+  wip4 = writeText "solverlist" ''
+    CVC5: online: ${cvc5BinaryExe} --incremental --lang smt --tlimit=500000
+    CVC5: offline: ${cvc5BinaryExe} --lang smt
+    Yices: offline: ${yicesSmt2Exe}
+    CVC5-word8: offline: ${cvc5BinaryExe} --lang smt
+      config: mem_mode = 8
+    Yices-word8: offline: ${yicesSmt2Exe}
       config: mem_mode = 8
   '';
 }

@@ -1,5 +1,6 @@
 { lib, stdenv
 , python2Packages
+, strace
 
 , sources
 , graphRefineInputs
@@ -8,6 +9,7 @@
 }:
 
 { name ? null
+, extraNativeBuildInputs ? []
 , solverList ? graphRefineSolverLists.default
 , targetDir ? "${graphRefineInputs}/${l4vConfig.arch}${l4vConfig.optLevel}"
 , source ? sources.graphRefineNoSeL4
@@ -24,7 +26,7 @@ stdenv.mkDerivation {
   nativeBuildInputs = [
     python2Packages.python
     python2Packages.psutilForPython2
-  ];
+  ] ++ extraNativeBuildInputs;
 
   buildCommand = ''
     ln -s ${solverList} .solverlist

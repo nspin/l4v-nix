@@ -4,6 +4,7 @@
 , texlive
 , gcc9Stdenv
 , mlton20180207
+, strace
 }:
 
 { l4vConfig
@@ -19,9 +20,11 @@ self: with self; {
 
   wip1 = graphRefineWith {
     name = "wip1";
-    solverList = graphRefineSolverLists.wip1;
+    # solverList = graphRefineSolverLists.wip1;
+    # solverList = graphRefineSolverLists.wip3;
+    solverList = graphRefineSolverLists.wip4;
     targetDir = graphRefine.justStackBounds;
-    source = lib.cleanSource ../../tmp/graph-refine;
+    # source = lib.cleanSource ../../tmp/graph-refine;
     args = [
       "verbose" "trace-to:report.txt" "deps:Kernel_C.memcpy"
     ];
@@ -31,13 +34,17 @@ self: with self; {
     name = "wip2";
     # solverList = graphRefineSolverLists.new;
     # solverList = graphRefineSolverLists.wip2;
-    solverList = graphRefineSolverLists.wip3;
+    # solverList = graphRefineSolverLists.wip3;
+    solverList = graphRefineSolverLists.wip4;
     targetDir = graphRefine.justStackBounds;
     source = lib.cleanSource ../../tmp/graph-refine;
     # source = sources.graphRefine;
-    commands = ''
-      (timeout 300 python ${source}/graph-refine.py . ${lib.concatStringsSep " " args} 2>&1 || true) | tee log.txt
-    '';
+    extraNativeBuildInputs = [
+      strace
+    ];
+    # commands = ''
+    #   (strace -f -e 'trace=!all' python2 ${source}/graph-refine.py . ${lib.concatStringsSep " " args} 2>&1 || true) | tee log.txt
+    # '';
     args = [
       "verbose"
       "trace-to:report.txt"
