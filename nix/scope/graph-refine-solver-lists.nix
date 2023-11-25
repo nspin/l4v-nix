@@ -32,6 +32,8 @@ let
 
     mkdir -p $d
 
+    echo $t >&2
+
     echo $$ > $d/pid.txt
     echo "$@" > $d/args.txt
 
@@ -91,9 +93,9 @@ in rec {
 
   wip3 = writeText "solverlist" ''
     CVC4: online: ${wrap} ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000
-    SONOLAR: offline: ${wrap} ${sonolarBinaryExe} --input-format=smtlib2
-    CVC4: offline: ${wrap} ${cvc4BinaryExe} --lang smt
-    SONOLAR-word8: offline: ${wrap} ${sonolarBinaryExe} --input-format=smtlib2
+    SONOLAR: offline: ${sonolarBinaryExe} --input-format=smtlib2
+    CVC4: offline: ${cvc4BinaryExe} --lang smt
+    SONOLAR-word8: offline: ${sonolarBinaryExe} --input-format=smtlib2
       config: mem_mode = 8
   '';
 }
