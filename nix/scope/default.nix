@@ -30,12 +30,14 @@ self: with self; {
   wip2 = graphRefineWith rec {
     name = "wip2";
     # solverList = graphRefineSolverLists.new;
-    solverList = graphRefineSolverLists.wip2;
+    # solverList = graphRefineSolverLists.wip2;
+    solverList = graphRefineSolverLists.wip3;
     targetDir = graphRefine.justStackBounds;
     source = lib.cleanSource ../../tmp/graph-refine;
-    # commands = ''
-    #   (timeout 600 python ${source}/graph-refine.py . ${lib.concatStringsSep " " args} 2>&1 || true) | tee log.txt
-    # '';
+    # source = sources.graphRefine;
+    commands = ''
+      (timeout 300 python ${source}/graph-refine.py . ${lib.concatStringsSep " " args} 2>&1 || true) | tee log.txt
+    '';
     args = [
       "verbose"
       "trace-to:report.txt"

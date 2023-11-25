@@ -25,18 +25,22 @@ let
   wrap = writeScript "wrap" ''
     #!${runtimeShell}
 
-    set -eu -o pipefail
+    set -u -o pipefail
 
     t=$(date +%s.%6N)
     d=tmp/tlogs/$t
 
     mkdir -p $d
 
+    echo $$ > $d/pid.txt
     echo "$@" > $d/args.txt
 
-    "$@" < <(tee $d/in.smt2) | tee $d/out.smt2
+    "$@" < <(tee $d/in.smt2) > >(tee $d/out.smt2)
+    ret=$?
 
-    # "$@"
+    echo $ret > $d/ret.txt
+
+    exit $ret
   '';
 
 in rec {
@@ -82,6 +86,14 @@ in rec {
     CVC4-word8: offline: ${cvc4BinaryExe} --lang smt
       config: mem_mode = 8
     Yices-word8: offline: ${yicesSmt2Exe}
+      config: mem_mode = 8
+  '';
+
+  wip3 = writeText "solverlist" ''
+    CVC4: online: ${wrap} ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000
+    SONOLAR: offline: ${wrap} ${sonolarBinaryExe} --input-format=smtlib2
+    CVC4: offline: ${wrap} ${cvc4BinaryExe} --lang smt
+    SONOLAR-word8: offline: ${wrap} ${sonolarBinaryExe} --input-format=smtlib2
       config: mem_mode = 8
   '';
 }
