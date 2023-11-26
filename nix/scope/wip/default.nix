@@ -50,7 +50,7 @@ let
 in {
   a = graphRefineWith {
     solverList = with graphRefineSolverLists; writeText "solverlist" ''
-      CVC4: online: ${wrap} tlogs/online ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000
+      CVC4: online: ${wrap} tlogs/online ${cvc4BinaryExe} --incremental --lang smt --tlimit=0
       SONOLAR: offline: ${wrap} tlogs/offline ${sonolarBinaryExe} --input-format=smtlib2
       # CVC4: offline: ${wrap} tlogs/offline ${cvc4BinaryExe} --lang smt
       # SONOLAR-word8: offline: ${sonolarBinaryExe} --input-format=smtlib2
@@ -68,9 +68,9 @@ in {
     targetDir = graphRefine.justStackBounds;
     args = [
       "trace-to:report.txt"
-      "skip-proofs-of:${./notes/graph-refine-1.log}"
-      "skip-proofs-of:${./notes/graph-refine-2.log}"
-      "skip-proofs-of:${./notes/graph-refine-3.log}"
+      "skip-proofs-of:${./artifacts/logs-from-all/graph-refine-1.log}"
+      "skip-proofs-of:${./artifacts/logs-from-all/graph-refine-2.log}"
+      "skip-proofs-of:${./artifacts/logs-from-all/graph-refine-3.log}"
       "-exclude"
         "Kernel_C.create_kernel_untypeds"
         "Kernel_C.decodeARMMMUInvocation"
