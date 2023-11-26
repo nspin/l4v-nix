@@ -49,7 +49,6 @@ let
 
 in {
   a = graphRefineWith {
-    name = "wip-a";
     solverList = with graphRefineSolverLists; writeText "solverlist" ''
       CVC4: online: ${wrap} tlogs/online ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000
       SONOLAR: offline: ${wrap} tlogs/offline ${sonolarBinaryExe} --input-format=smtlib2
@@ -65,21 +64,9 @@ in {
   };
 
   b = graphRefineWith rec {
-    name = "wip-b";
-    # solverList = graphRefineSolverLists.sb;
-    # solverList = graphRefineSolverLists.wip4;
     solverList = graphRefineSolverLists.new;
     targetDir = graphRefine.justStackBounds;
-    # source = lib.cleanSource ../../tmp/graph-refine;
-    # source = sources.graphRefine;
-    # extraNativeBuildInputs = [
-    #   strace
-    # ];
-    # commands = ''
-    #   (strace -f -e 'trace=!all' python2 ${source}/graph-refine.py . ${lib.concatStringsSep " " args} 2>&1 || true) | tee log.txt
-    # '';
     args = [
-      # "verbose"
       "trace-to:report.txt"
       "skip-proofs-of:${./notes/graph-refine-1.log}"
       "skip-proofs-of:${./notes/graph-refine-2.log}"
@@ -91,7 +78,37 @@ in {
         "Kernel_C.invokeTCB_WriteRegisters"
       "-end-exclude"
       "all"
-      # "deps:Kernel_C.init_freemem"
     ];
   };
+
+  # b = graphRefineWith rec {
+  #   name = "wip-b";
+  #   # solverList = graphRefineSolverLists.sb;
+  #   # solverList = graphRefineSolverLists.wip4;
+  #   solverList = graphRefineSolverLists.new;
+  #   targetDir = graphRefine.justStackBounds;
+  #   # source = lib.cleanSource ../../tmp/graph-refine;
+  #   # source = sources.graphRefine;
+  #   # extraNativeBuildInputs = [
+  #   #   strace
+  #   # ];
+  #   # commands = ''
+  #   #   (strace -f -e 'trace=!all' python2 ${source}/graph-refine.py . ${lib.concatStringsSep " " args} 2>&1 || true) | tee log.txt
+  #   # '';
+  #   args = [
+  #     # "verbose"
+  #     "trace-to:report.txt"
+  #     "skip-proofs-of:${./notes/graph-refine-1.log}"
+  #     "skip-proofs-of:${./notes/graph-refine-2.log}"
+  #     "skip-proofs-of:${./notes/graph-refine-3.log}"
+  #     "-exclude"
+  #       "Kernel_C.create_kernel_untypeds"
+  #       "Kernel_C.decodeARMMMUInvocation"
+  #       "Kernel_C.init_freemem"
+  #       "Kernel_C.invokeTCB_WriteRegisters"
+  #     "-end-exclude"
+  #     "all"
+  #     # "deps:Kernel_C.init_freemem"
+  #   ];
+  # };
 }
