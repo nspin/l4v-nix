@@ -1,6 +1,5 @@
 { lib, stdenv
 , python2Packages
-, strace
 
 , sources
 , graphRefineInputs
