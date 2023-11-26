@@ -1,5 +1,6 @@
 let
-  pkgs = import ../nixpkgs {
+  pkgs = import ../nixpkgs/pkgs/top-level {
+    localSystem = "x86_64-linux";
     overlays = [
       (import ./overlay)
     ];
