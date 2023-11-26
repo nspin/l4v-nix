@@ -17,32 +17,7 @@ self: with self; {
 
   inherit l4vConfig;
 
-  wip1 = graphRefineWith {
-    name = "wip1";
-    solverList = graphRefineSolverLists.wip1;
-    targetDir = graphRefine.justStackBounds;
-    source = lib.cleanSource ../../tmp/graph-refine;
-    args = [
-      "verbose" "trace-to:report.txt" "deps:Kernel_C.memcpy"
-    ];
-  };
-
-  wip2 = graphRefineWith {
-    name = "wip2";
-    targetDir = graphRefine.justStackBounds;
-    args = [
-      "trace-to:report.txt"
-      "skip-proofs-of:${../../notes/graph-refine-1.log}"
-      "skip-proofs-of:${../../notes/graph-refine-2.log}"
-      "skip-proofs-of:${../../notes/graph-refine-3.log}"
-      "-exclude"
-        "Kernel_C.create_kernel_untypeds"
-        "Kernel_C.decodeARMMMUInvocation"
-        "Kernel_C.init_freemem"
-      "-end-exclude"
-      "all"
-    ];
-  };
+  wip = callPackage ./wip {};
 
   ### aggregate ###
 
@@ -59,6 +34,7 @@ self: with self; {
 
   slower = writeText "slower" (toString [
     slow
+    cProofs
     l4vAll
   ]);
 
@@ -69,16 +45,15 @@ self: with self; {
 
   cached = writeText "cached" (toString [
     slow
-    cProofs
-    graphRefine.all
+    # cProofs
+    # l4vAll
+    # graphRefine.all
   ]);
 
   all = writeText "all" (toString [
-    cached
+    slowest
     minimalBinaryVerificationInputs
     cProofs
-    l4vAll
-    graphRefine.all
   ]);
 
   ### sources ###
