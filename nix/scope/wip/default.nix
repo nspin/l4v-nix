@@ -52,24 +52,7 @@ let
   '';
 
 in {
-  a = graphRefineWith {
-    solverList = with graphRefineSolverLists; writeText "solverlist" ''
-      CVC4: online: ${cvc4BinaryExe} --incremental --lang smt --tlimit=0
-      # CVC4: offline: ${wrap} tlogs/offline ${cvc4BinaryExe} --lang smt
-      # CVC4: offline: ${wrap} tlogs/offline ${cvc4BinaryExe} --lang smt
-        # config: mem_mode = 8
-      # SONOLAR: offline: ${wrap} tlogs/offline ${sonolarBinaryExe} --input-format=smtlib2
-      SONOLAR-word8: offline: ${wrap} tlogs/offline ${sonolarBinaryExe} --input-format=smtlib2
-        config: mem_mode = 8
-    '';
-    targetDir = graphRefine.justStackBounds;
-    # source = lib.cleanSource ../../tmp/graph-refine;
-    args = [
-      "verbose" "trace-to:report.txt" "deps:Kernel_C.memcpy"
-    ];
-  };
-
-  b = graphRefineWith rec {
+  checkAllExceptFailing = graphRefineWith rec {
     solverList = graphRefineSolverLists.new;
     targetDir = graphRefine.justStackBounds;
     args = [
