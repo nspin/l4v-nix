@@ -88,16 +88,38 @@ in {
   repro =
     let
       d = ./artifacts/sonolar-bug-repro;
+      cmd = {
+        sonolar = "sonolar --input-format=smtlib2";
+        cvc4 = "cvc4 --lang smt";
+      };
+      solvers = [ "sonolar" "cvc4" ];
     in runCommand "x" {
       nativeBuildInputs = [
         graphRefineSolverLists.selectedCvc4Binary
         sonolarBinary
       ];
     } ''
-      echo ">>> get"
-      cat ${d + "/common.smt2"} ${d + "/get.smt2"} | sonolar --input-format=smtlib2
-      echo ">>> check"
-      cat ${d + "/common.smt2"} ${d + "/check.smt2"} | sonolar --input-format=smtlib2
+      ${lib.concatStrings
+        (lib.flatten
+          (lib.forEach solvers (solver: ''
+            echo ">>> getting model from ${solver}"
+            cat ${d + "/common.smt2"} ${d + "/get.smt2"} | ${cmd."${solver}"}
+          ''))
+        )
+      }
+
+      ${lib.concatStrings
+        (lib.flatten
+          (lib.forEach solvers (runSolver:
+            lib.forEach solvers (useModelFromSolver: ''
+              echo ">>> running ${runSolver} with model from ${useModelFromSolver}"
+              cat ${d + "/common.smt2"} ${d + "/check-${useModelFromSolver}.smt2"} | ${cmd."${runSolver}"}
+            '')
+          ))
+        )
+      }
+
+      false
     '';
 
   # b = graphRefineWith rec {
