@@ -7,9 +7,9 @@
 }:
 
 rec {
-  selectedCvc4Binary = cvc4Binary.v1_5;
+  selectedCVC4Binary = cvc4Binary.v1_5;
 
-  cvc4BinaryExe = "${selectedCvc4Binary}/bin/cvc4";
+  cvc4BinaryExe = "${selectedCVC4Binary}/bin/cvc4";
   cvc5BinaryExe = "${cvc5Binary}/bin/cvc5";
   sonolarBinaryExe = "${sonolarBinary}/bin/sonolar";
   yicesSmt2Exe = "${yices}/bin/yices-smt2";
