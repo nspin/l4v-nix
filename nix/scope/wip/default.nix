@@ -5,6 +5,8 @@
 , runtimeShell
 , strace
 
+, sources
+, graphRefine
 , graphRefineWith
 , graphRefineSolverLists
 }:
@@ -17,6 +19,8 @@
 # - z3 offline
 
 let
+  graohRefineSource = sources.graphRefine;
+
   wrap = writeScript "wrap" ''
     #!${runtimeShell}
 
@@ -42,10 +46,8 @@ let
 
 in {
   a = graphRefineWith {
-    name = "wip1";
-    # solverList = graphRefineSolverLists.wip1;
-    # solverList = graphRefineSolverLists.wip3;
-    solverList = graphRefineSolverLists.wip4;
+    name = "wip-a";
+    # solverList = sa;
     targetDir = graphRefine.justStackBounds;
     # source = lib.cleanSource ../../tmp/graph-refine;
     args = [
@@ -54,17 +56,15 @@ in {
   };
 
   b = graphRefineWith rec {
-    name = "wip2";
-    # solverList = graphRefineSolverLists.new;
-    # solverList = graphRefineSolverLists.wip2;
-    # solverList = graphRefineSolverLists.wip3;
+    name = "wip-b";
+    # solverList = graphRefineSolverLists.sb;
     solverList = graphRefineSolverLists.wip4;
     targetDir = graphRefine.justStackBounds;
-    source = lib.cleanSource ../../tmp/graph-refine;
+    # source = lib.cleanSource ../../tmp/graph-refine;
     # source = sources.graphRefine;
-    extraNativeBuildInputs = [
-      strace
-    ];
+    # extraNativeBuildInputs = [
+    #   strace
+    # ];
     # commands = ''
     #   (strace -f -e 'trace=!all' python2 ${source}/graph-refine.py . ${lib.concatStringsSep " " args} 2>&1 || true) | tee log.txt
     # '';
