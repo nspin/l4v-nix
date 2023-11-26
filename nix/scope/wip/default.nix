@@ -1,8 +1,20 @@
 { lib
+, writeText
+, writeScript
+, writeShellApplication
+, runtimeShell
 , strace
+
 , graphRefineWith
 , graphRefineSolverLists
 }:
+
+# TODO
+# - tune
+# - figure out why are cvc4 >= 1.6 and cvc5 so slow
+# - figure out why cvc5 throws ConversationProblem
+# - figure out apparent buf in cvc4 1.5 and sonolar (assert self.parallel_solvers)
+# - z3 offline
 
 let
   wrap = writeScript "wrap" ''
