@@ -1,4 +1,5 @@
 { lib
+, runCommand
 , writeText
 , writeScript
 , writeShellApplication
@@ -9,6 +10,7 @@
 , graphRefine
 , graphRefineWith
 , graphRefineSolverLists
+, sonolarBinary
 }:
 
 # TODO
@@ -19,6 +21,8 @@
 # - z3 offline
 
 let
+  inherit (graphRefineSolverLists) selectedCvc4Binary;
+
   graohRefineSource = sources.graphRefine;
 
   wrap = writeScript "wrap" ''
@@ -80,6 +84,18 @@ in {
       "all"
     ];
   };
+
+  repro = runCommand "x" {
+    nativeBuildInputs = [
+      graphRefineSolverLists.selectedCvc4Binary
+      sonolarBinary
+    ];
+  } ''
+    echo !!! A
+    sonolar --input-format=smtlib2 < ${./artifacts/sonolar-bug-repro/a.smt2}
+    echo !!! B
+    sonolar --input-format=smtlib2 < ${./artifacts/sonolar-bug-repro/b.smt2}
+  '';
 
   # b = graphRefineWith rec {
   #   name = "wip-b";
