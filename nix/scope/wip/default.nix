@@ -85,17 +85,20 @@ in {
     ];
   };
 
-  repro = runCommand "x" {
-    nativeBuildInputs = [
-      graphRefineSolverLists.selectedCvc4Binary
-      sonolarBinary
-    ];
-  } ''
-    echo !!! A
-    sonolar --input-format=smtlib2 < ${./artifacts/sonolar-bug-repro/a.smt2}
-    echo !!! B
-    sonolar --input-format=smtlib2 < ${./artifacts/sonolar-bug-repro/b.smt2}
-  '';
+  repro =
+    let
+      d = ./artifacts/sonolar-bug-repro;
+    in runCommand "x" {
+      nativeBuildInputs = [
+        graphRefineSolverLists.selectedCvc4Binary
+        sonolarBinary
+      ];
+    } ''
+      echo ">>> get"
+      cat ${d + "/common.smt2"} ${d + "/get.smt2"} | sonolar --input-format=smtlib2
+      echo ">>> check"
+      cat ${d + "/common.smt2"} ${d + "/check.smt2"} | sonolar --input-format=smtlib2
+    '';
 
   # b = graphRefineWith rec {
   #   name = "wip-b";
