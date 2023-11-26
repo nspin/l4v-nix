@@ -51,11 +51,9 @@ self: with self; {
   ]);
 
   all = writeText "all" (toString [
-    cached
+    slowest
     minimalBinaryVerificationInputs
     cProofs
-    l4vAll
-    graphRefine.all
   ]);
 
   ### sources ###
