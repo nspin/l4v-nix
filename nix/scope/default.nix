@@ -45,8 +45,8 @@ self: with self; {
 
   cached = writeText "cached" (toString [
     slow
-    # cProofs
-    # l4vAll
+    cProofs
+    l4vAll
     # graphRefine.all
   ]);
 
