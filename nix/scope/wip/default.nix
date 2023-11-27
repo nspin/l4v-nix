@@ -55,18 +55,20 @@ let
 in {
 
   decodeARMMMUInvocation = graphRefineWith rec {
-    solverList = with graphRefineSolverLists; writeText "solverlist" ''
-      CVC4: online: ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000
-      CVC4: offline: ${cvc4BinaryExe} --lang smt
-      CVC4-word8: offline: ${cvc4BinaryExe} --lang smt
-        config: mem_mode = 8
-      SONOLAR: offline: ${sonolarBinaryExe} --input-format=smtlib2
-      SONOLAR-word8: offline: ${sonolarBinaryExe} --input-format=smtlib2
-        config: mem_mode = 8
-      Yices: offline: ${wrap} t32 ${yicesSmt2Exe}
-      Yices-word8: offline: ${wrap} t8 ${yicesSmt2Exe}
-        config: mem_mode = 8
-    '';
+    source = lib.cleanSource ../../../tmp/graph-refine;
+    solverList = with graphRefineSolverLists; new;
+    # solverList = with graphRefineSolverLists; writeText "solverlist" ''
+    #   CVC4: online: ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000
+    #   CVC4: offline: ${cvc4BinaryExe} --lang smt
+    #   CVC4-word8: offline: ${cvc4BinaryExe} --lang smt
+    #     config: mem_mode = 8
+    #   SONOLAR: offline: ${sonolarBinaryExe} --input-format=smtlib2
+    #   SONOLAR-word8: offline: ${sonolarBinaryExe} --input-format=smtlib2
+    #     config: mem_mode = 8
+    #   Yices: offline: ${wrap} t32 ${yicesSmt2Exe}
+    #   Yices-word8: offline: ${wrap} t8 ${yicesSmt2Exe}
+    #     config: mem_mode = 8
+    # '';
     targetDir = graphRefine.justStackBounds;
     args = [
       "verbose"
