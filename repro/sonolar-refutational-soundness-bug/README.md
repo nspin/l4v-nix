@@ -1,3 +1,6 @@
+The model SONOLAR produces with `$(cat context/resources/common.smt2 context/resources/get.smt2)` is inconsistent.
+In particular, `$(cat context/resources/common.smt2 context/resources/check-sonolar.smt2)` is `unsat`.
+
 ```
 $ make
 image=$(docker build -f Dockerfile context -q) && \
