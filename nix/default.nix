@@ -1,8 +1,22 @@
 let
+  overlay = self: super: with self; {
+    this = callPackage ./this {};
+    pythonPackagesExtensions = super.pythonPackagesExtensions ++ [
+      (callPackage ./python-packages-extension.nix {})
+      # HACK
+      (self: super: {
+        psutilForPython2 = self.psutil.overridePythonAttrs {
+          disabled = false;
+          doCheck = false;
+        };
+      })
+    ];
+  };
+
   pkgs = import ../nixpkgs/pkgs/top-level {
     localSystem = "x86_64-linux";
     overlays = [
-      (import ./overlay)
+      overlay
     ];
     config = {
       permittedInsecurePackages = [
@@ -10,6 +24,8 @@ let
       ];
     };
   };
-in pkgs.this // pkgs.this.default // {
+
+in pkgs.this.primary // {
   inherit pkgs;
+  topLevel = pkgs.this;
 }
