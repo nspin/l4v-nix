@@ -175,6 +175,7 @@ self: with self; {
   isabelleInitialHeaps = callPackage ./isabelle-initial-heaps.nix {};
 
   sonolarBinary = callPackage ./deps/solvers-for-graph-refine/sonolar-binary.nix {};
+  cvc4BinaryFromIsabelle = callPackage ./deps/solvers-for-graph-refine/cvc4-binary-from-isabelle.nix {};
   cvc4Binary = callPackage ./deps/solvers-for-graph-refine/cvc4-binary.nix {};
   cvc5Binary = callPackage ./deps/solvers-for-graph-refine/cvc5-binary.nix {};
 
