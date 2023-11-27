@@ -10,6 +10,6 @@ let
       ];
     };
   };
-in pkgs.this.default // {
+in pkgs.this // pkgs.this.default // {
   inherit pkgs;
 }

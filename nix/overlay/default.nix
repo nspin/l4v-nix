@@ -35,11 +35,26 @@ in {
   this = rec {
     inherit armv7Pkgs x64Pkgs;
 
-    default = arm;
+    default = armO1;
 
-    arm = mkScope {
+    armO0 = mkScope {
       l4vConfig = mkL4vConfig {
         arch = "ARM";
+        optLevel = "-O0";
+      };
+    };
+
+    armO1 = mkScope {
+      l4vConfig = mkL4vConfig {
+        arch = "ARM";
+        optLevel = "-O1";
+      };
+    };
+
+    armO2 = mkScope {
+      l4vConfig = mkL4vConfig {
+        arch = "ARM";
+        optLevel = "-O2";
       };
     };
 

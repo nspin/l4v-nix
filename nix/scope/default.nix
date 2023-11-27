@@ -126,9 +126,11 @@ self: with self; {
   graphRefineWith = callPackage ./graph-refine.nix {};
 
   graphRefine = rec {
+
     justStackBounds = graphRefineWith {
       name = "just-stack-bounds";
     };
+
     coverage = graphRefineWith {
       name = "coverage";
       targetDir = justStackBounds;
@@ -136,6 +138,7 @@ self: with self; {
         "trace-to:coverage.txt" "coverage"
       ];
     };
+
     demo = graphRefineWith {
       name = "demo";
       targetDir = justStackBounds;
@@ -143,13 +146,27 @@ self: with self; {
         "trace-to:report.txt" "deps:Kernel_C.cancelAllIPC"
       ];
     };
-    all = graphRefineWith {
-      name = "all";
+
+    allWithOriginalSolverList = graphRefineWith {
+      name = "all-with-original-solverlist";
+      solverList = graphRefineSolverLists.original;
       targetDir = justStackBounds;
       args = [
         "trace-to:report.txt" "all"
       ];
     };
+
+    allWithNewSolverList = graphRefineWith {
+      name = "all-with-new-solverlist";
+      solverList = graphRefineSolverLists.new;
+      targetDir = justStackBounds;
+      args = [
+        "trace-to:report.txt" "all"
+      ];
+    };
+
+    all = allWithNewSolverList;
+
   };
 
   ### deps ###
