@@ -1,5 +1,6 @@
 { lib
 , stdenv
+, runCommand
 , writeText
 , texlive
 , gcc9Stdenv
@@ -137,6 +138,23 @@ self: with self; {
 
   graphRefineInputs = callPackage ./graph-refine-inputs.nix {};
 
+  minimalGraphRefineInputs =
+    let
+      files = [
+        "kernel.elf.symtab"
+        "kernel.elf.rodata"
+        "CFunctions.txt"
+        "ASMFunctions.txt"
+        "target.py"
+      ];
+    in
+      runCommand "minimal-graph-refine-inputs" {} ''
+        cd ${graphRefineInputs}
+        for config in *; do
+          install -D -t $out/$config $config/{${lib.concatStringsSep "," files}}
+        done
+      '';
+
   graphRefineSolverLists = callPackage ./graph-refine-solver-lists.nix {};
 
   graphRefineWith = callPackage ./graph-refine.nix {};
@@ -144,6 +162,14 @@ self: with self; {
   graphRefine = rec {
     justStackBounds = graphRefineWith {
       name = "just-stack-bounds";
+    };
+
+    functions = graphRefineWith {
+      name = "functions";
+      targetDir = justStackBounds;
+      args = [
+        "save:functions.txt"
+      ];
     };
 
     coverage = graphRefineWith {
@@ -158,27 +184,22 @@ self: with self; {
       name = "demo";
       targetDir = justStackBounds;
       args = [
-        "trace-to:report.txt" "deps:Kernel_C.cancelAllIPC"
+        "trace-to:report.txt" "save-proofs:proofs.txt" "deps:Kernel_C.cancelAllIPC"
       ];
     };
 
-    allWithOriginalSolverList = graphRefineWith {
-      name = "all-with-original-solverlist";
-      solverList = graphRefineSolverLists.original;
+    allWithSolverList = name: solverList: graphRefineWith {
+      name = "all-with-solverlist-${name}";
+      inherit solverList;
       targetDir = justStackBounds;
       args = [
-        "trace-to:report.txt" "all"
+        "trace-to:report.txt" "save-proofs:proofs.txt" "all"
       ];
     };
 
-    allWithNewSolverList = graphRefineWith {
-      name = "all-with-new-solverlist";
-      solverList = graphRefineSolverLists.new;
-      targetDir = justStackBounds;
-      args = [
-        "trace-to:report.txt" "all"
-      ];
-    };
+    allWithOriginalSolverList = allWithSolverList "original" graphRefineSolverLists.original;
+
+    allWithNewSolverList = allWithSolverList "new" graphRefineSolverLists.new;
 
     all = allWithNewSolverList;
   };

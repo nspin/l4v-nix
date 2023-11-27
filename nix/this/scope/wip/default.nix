@@ -54,8 +54,25 @@ let
 
 in {
 
+  save = graphRefineWith {
+    name = "x";
+    solverList = with graphRefineSolverLists; new;
+    source = lib.cleanSource ../../../../tmp/graph-refine;
+    targetDir = graphRefine.justStackBounds;
+    args = [
+      # "trace-to:report.txt" "deps:Kernel_C.cancelAllIPC"
+      # "verbose"
+      # "trace-to:report.txt" "save-proofs:proofs.txt" "save:functions.txt" "deps:Kernel_C.cancelAllIPC"
+      "trace-to:report.txt"
+      "save-proofs:proofs.txt"
+      # "save:functions.txt"
+      # "deps:Kernel_C.cancelAllIPC"
+      "deps:Kernel_C.memcpy"
+    ];
+  };
+
   decodeARMMMUInvocation = graphRefineWith rec {
-    source = lib.cleanSource ../../../tmp/graph-refine;
+    source = lib.cleanSource ../../../../tmp/graph-refine;
     solverList = with graphRefineSolverLists; new;
     # solverList = with graphRefineSolverLists; writeText "solverlist" ''
     #   CVC4: online: ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000
@@ -177,7 +194,7 @@ in {
     '';
 }
 
-# source = lib.cleanSource ../../tmp/graph-refine;
+# source = lib.cleanSource ../../../../tmp/graph-refine;
 # source = sources.graphRefine;
 # extraNativeBuildInputs = [
 #   strace

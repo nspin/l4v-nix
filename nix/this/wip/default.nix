@@ -8,10 +8,10 @@ with this;
 let
 
 in rec {
-  x = writeText "x" (toString [
-    byConfig.arm.gcc49.o0.graphRefineInputs
-    byConfig.arm.gcc49.o1.graphRefineInputs
-    byConfig.arm.gcc49.o2.graphRefineInputs
+  workingSet = writeText "x" (toString [
+    byConfig.arm.gcc49.o0.graphRefine.justStackBounds
+    byConfig.arm.gcc49.o1.graphRefine.justStackBounds
+    byConfig.arm.gcc49.o2.graphRefine.justStackBounds
   ]);
 
   graphRefineInputs = writeText "all-graph-refine-inputs" (toString (mkAggregate (

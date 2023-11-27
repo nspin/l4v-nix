@@ -2,7 +2,7 @@
 , python2Packages
 
 , sources
-, graphRefineInputs
+, minimalGraphRefineInputs
 , graphRefineSolverLists
 , l4vConfig
 }:
@@ -10,7 +10,7 @@
 { name ? null
 , extraNativeBuildInputs ? []
 , solverList ? graphRefineSolverLists.default
-, targetDir ? "${graphRefineInputs}/${l4vConfig.arch}${l4vConfig.optLevel}"
+, targetDir ? "${minimalGraphRefineInputs}/${l4vConfig.arch}${l4vConfig.optLevel}"
 , source ? sources.graphRefineNoSeL4
 , args ? []
 , argLists ? [ args ]
