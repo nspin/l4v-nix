@@ -17,11 +17,9 @@
 }:
 
 # TODO
-# - tune
-# - figure out why are cvc4 >= 1.6 and cvc5 so slow
 # - figure out why cvc5 throws ConversationProblem
-# - figure out apparent bug in sonolar (assert self.parallel_solvers)
 # - z3 offline
+# - coverage fails for gcc8 but not gcc49
 
 let
   inherit (graphRefineSolverLists) selectedCVC4Binary;
@@ -71,23 +69,6 @@ in {
       ]
   )));
 
-  save = graphRefineWith {
-    name = "x";
-    solverList = with graphRefineSolverLists; new;
-    source = lib.cleanSource ../../../../tmp/graph-refine;
-    targetDir = graphRefine.justStackBounds;
-    args = [
-      # "trace-to:report.txt" "deps:Kernel_C.cancelAllIPC"
-      # "verbose"
-      # "trace-to:report.txt" "save-proofs:proofs.txt" "save:functions.txt" "deps:Kernel_C.cancelAllIPC"
-      "trace-to:report.txt"
-      "save-proofs:proofs.txt"
-      # "save:functions.txt"
-      # "deps:Kernel_C.cancelAllIPC"
-      "deps:Kernel_C.memcpy"
-    ];
-  };
-
   decodeARMMMUInvocation = graphRefineWith rec {
     source = lib.cleanSource ../../../../tmp/graph-refine;
     solverList = with graphRefineSolverLists; new;
@@ -117,25 +98,6 @@ in {
         "Kernel_C.invokeTCB_WriteRegisters"
       "-end-exclude"
       "all"
-    ];
-  };
-
-  newerCVCSlow = graphRefineWith rec {
-    solverList =
-      let
-        # exe = cvc5BinaryExe;
-        exe = "${cvc4Binary.v1_6}/bin/cvc4";
-        # exe = "${cvc4Binary.v1_5}/bin/cvc4";
-      in
-        writeText "solverlist" ''
-          CVC: online: ${exe} --incremental --lang smt --tlimit=5000
-          CVC: offline: ${exe} --lang smt
-        '';
-    targetDir = graphRefine.justStackBounds;
-    args = [
-      "verbose"
-      "trace-to:report.txt"
-      "deps:Kernel_C.cancelAllIPC"
     ];
   };
 

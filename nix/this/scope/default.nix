@@ -207,6 +207,7 @@ self: with self; {
   ### notes ###
 
   sonolarModelBug = callPackage ./notes/sonolar-model-bug {};
+  cvcPerformanceRegression = callPackage ./notes/cvc-performance-regression {};
 
   ### deps ###
 
