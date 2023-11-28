@@ -61,7 +61,7 @@ rec {
       )
     );
 
-  primary = byConfig.arm.gcc8.o1;
+  primary = byConfig.arm.gcc49.o1;
 
   byConfig = lib.flip lib.mapAttrs archs (_: arch:
     lib.flip lib.mapAttrs targetCCWrapperAttrs (_: targetCCWrapperAttr:
