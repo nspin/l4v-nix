@@ -204,6 +204,10 @@ self: with self; {
     all = allWithNewSolverList;
   };
 
+  ### notes ###
+
+  sonolarModelBug = callPackage ./notes/sonolar-model-bug {};
+
   ### deps ###
 
   texliveEnv = with texlive; combine {
