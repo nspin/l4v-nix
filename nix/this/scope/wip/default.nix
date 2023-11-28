@@ -12,6 +12,8 @@
 , graphRefineSolverLists
 , sonolarBinary
 , cvc4Binary
+
+, this
 }:
 
 # TODO
@@ -53,6 +55,21 @@ let
   '';
 
 in {
+  workingSet = writeText "x" (toString [
+    this.byConfig.arm.gcc49.o0.graphRefineInputs
+    this.byConfig.arm.gcc49.o1.graphRefineInputs
+    this.byConfig.arm.gcc49.o2.graphRefineInputs
+  ]);
+
+  graphRefineInputs = writeText "all-graph-refine-inputs" (toString (this.mkAggregate (
+    { archName, targetCCWrapperAttrName, optLevelName }:
+    let
+      scope = this.byConfig.${archName}.${targetCCWrapperAttrName}.${optLevelName};
+    in
+      lib.optionals scope.l4vConfig.bvSupport [
+        scope.graphRefineInputs
+      ]
+  )));
 
   save = graphRefineWith {
     name = "x";

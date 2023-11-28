@@ -96,6 +96,4 @@ rec {
       scope.cachedWhenBVSupport
     ]
   )));
-
-  wip = callPackage ./wip {};
 }
