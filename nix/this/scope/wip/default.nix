@@ -1,9 +1,12 @@
 { lib
+, pkgs
 , runCommand
 , writeText
 , writeScript
 , writeShellApplication
 , runtimeShell
+, breakpointHook
+, bashInteractive
 , strace
 
 , sources
@@ -16,16 +19,17 @@
 , this
 }:
 
-# TODO
-# - figure out why cvc5 throws ConversationProblem
-# - z3 offline
+# TODO(now)
 # - coverage fails for gcc8 but not gcc49
+# - figure out why cvc5 throws ConversationProblem
+#
+# TODO(later)
+# - z3 offline
 
 let
   inherit (graphRefineSolverLists) selectedCVC4Binary;
 
-  graohRefineSource = sources.graphRefine;
-
+in rec {
   wrap = writeScript "wrap" ''
     #!${runtimeShell}
 
@@ -52,22 +56,16 @@ let
     exit $ret
   '';
 
-in {
-  workingSet = writeText "x" (toString [
-    this.byConfig.arm.gcc49.o0.graphRefineInputs
-    this.byConfig.arm.gcc49.o1.graphRefineInputs
-    this.byConfig.arm.gcc49.o2.graphRefineInputs
-  ]);
+  debug = runCommand "x" {
+    nativeBuildInputs = [
+      bashInteractive
+      breakpointHook
+    ];
+  } ''
+    export FOO=bar
 
-  graphRefineInputs = writeText "all-graph-refine-inputs" (toString (this.mkAggregate (
-    { archName, targetCCWrapperAttrName, optLevelName }:
-    let
-      scope = this.byConfig.${archName}.${targetCCWrapperAttrName}.${optLevelName};
-    in
-      lib.optionals scope.l4vConfig.bvSupport [
-        scope.graphRefineInputs
-      ]
-  )));
+    false
+  '';
 
   decodeARMMMUInvocation = graphRefineWith rec {
     source = lib.cleanSource ../../../../tmp/graph-refine;
@@ -118,6 +116,22 @@ in {
       "all"
     ];
   };
+
+  prime = writeText "x"
+    (toString
+      (lib.forEach (lib.attrNames this.optLevels)
+        (optLevel: this.byConfig.arm.gcc49.${optLevel}.graphRefineInputs)));
+
+  allGraphRefineInputs = writeText "x" (toString (this.mkAggregate (
+    { archName, targetCCWrapperAttrName, optLevelName }:
+    let
+      scope = this.byConfig.${archName}.${targetCCWrapperAttrName}.${optLevelName};
+    in
+      lib.optionals scope.l4vConfig.bvSupport [
+        scope.graphRefineInputs
+      ]
+  )));
+
 }
 
 # source = lib.cleanSource ../../../../tmp/graph-refine;

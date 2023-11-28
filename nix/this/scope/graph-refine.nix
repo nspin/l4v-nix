@@ -15,7 +15,7 @@
 , args ? []
 , argLists ? [ args ]
 , commands ? lib.flip lib.concatMapStrings argLists (argList: ''
-    time python ${source}/graph-refine.py . ${lib.concatStringsSep " " argList} 2>&1 | tee log.txt
+    (time python ${source}/graph-refine.py . ${lib.concatStringsSep " " argList}) 2>&1 | tee log.txt
   '')
 }:
 
