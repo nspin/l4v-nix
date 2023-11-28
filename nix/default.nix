@@ -27,5 +27,5 @@ let
 
 in pkgs.this.primary // {
   inherit pkgs;
-  topLevel = pkgs.this;
+  inherit (pkgs) this;
 }
