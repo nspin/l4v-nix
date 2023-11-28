@@ -9,7 +9,7 @@ let
       installPhase = ''
         install -D -t $out/bin ${hostPlatform.system}/cvc4
       '';
-    };      
+    };
 in {
   v1_5_3 = mk {
     url = "https://isabelle.sketis.net/components/cvc4-1.5-3.tar.gz";

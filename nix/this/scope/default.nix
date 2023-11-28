@@ -235,6 +235,7 @@ self: with self; {
   cvc4BinaryFromIsabelle = callPackage ./deps/solvers-for-graph-refine/cvc4-binary-from-isabelle.nix {};
   cvc4Binary = callPackage ./deps/solvers-for-graph-refine/cvc4-binary.nix {};
   cvc5Binary = callPackage ./deps/solvers-for-graph-refine/cvc5-binary.nix {};
+  mathsat5Binary = callPackage ./deps/solvers-for-graph-refine/mathsat5-binary.nix {};
 
   ### choices ###
 

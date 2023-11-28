@@ -25,6 +25,7 @@
 # - cvc5 throws ConversationProblem
 #
 # TODO(later)
+# - use mathsat4 as offline solver
 # - use z3 as offline solver
 
 let
@@ -71,6 +72,7 @@ in rec {
   failures = {
 
     decodeARMMMUInvocation = graphRefineWith {
+      solverList = graphRefineSolverLists.experimental;
       targetDir = graphRefine.justStackBounds;
       args = [
         "trace-to:report.txt" "decodeARMMMUInvocation"
@@ -78,6 +80,7 @@ in rec {
     };
 
     invokeTCB_WriteRegisters = graphRefineWith {
+      solverList = graphRefineSolverLists.experimental;
       targetDir = graphRefine.justStackBounds;
       args = [
         "trace-to:report.txt" "invokeTCB_WriteRegisters"
@@ -85,6 +88,7 @@ in rec {
     };
 
     create_kernel_untypeds = graphRefineWith {
+      solverList = graphRefineSolverLists.experimental;
       targetDir = graphRefine.justStackBounds;
       args = [
         "trace-to:report.txt" "create_kernel_untypeds"
@@ -92,6 +96,7 @@ in rec {
     };
 
     init_freemem = graphRefineWith {
+      solverList = graphRefineSolverLists.experimental;
       targetDir = graphRefine.justStackBounds;
       args = [
         "trace-to:report.txt" "init_freemem"
@@ -109,6 +114,18 @@ in rec {
   };
 
   allFailures = writeText "x" (toString (lib.attrValues failures));
+
+  s = graphRefineWith {
+    solverList = with graphRefineSolverLists; experimental;
+    # solverList = with graphRefineSolverLists; writeText "solverlist" ''
+    #   CVC4: online: ${cvc4BinaryExe} --incremental --lang smt --tlimit=0
+    #   Other: offline: ${z3Exe} -in
+    # '';
+    targetDir = graphRefine.justStackBounds;
+    args = [
+      "verbose" "trace-to:report.txt" "deps:Kernel_C.memcpy"
+    ];
+  };
 
   check = graphRefineWith rec {
     source = lib.cleanSource ../../../../tmp/graph-refine;
