@@ -1,13 +1,15 @@
 { lib
 , writeText
 , yices
+, cvc4BinaryFromIsabelle
 , cvc4Binary
 , cvc5Binary
 , sonolarBinary
 }:
 
 rec {
-  selectedCVC4Binary = cvc4Binary.v1_5;
+  selectedCVC4Binary = cvc4BinaryFromIsabelle.v1_5_3;
+  # selectedCVC4Binary = cvc4Binary.v1_5;
 
   cvc4BinaryExe = "${selectedCVC4Binary}/bin/cvc4";
   cvc5BinaryExe = "${cvc5Binary}/bin/cvc5";

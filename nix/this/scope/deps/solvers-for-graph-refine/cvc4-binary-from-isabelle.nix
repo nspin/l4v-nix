@@ -11,7 +11,7 @@ let
       '';
     };      
 in {
-  v1_3 = mk {
+  v1_5_3 = mk {
     url = "https://isabelle.sketis.net/components/cvc4-1.5-3.tar.gz";
     hash = "sha256-ozQ8QlWsLR9k+D1P66LtB22iPkKfFF2gBmqc1m6TIWI=";
   };

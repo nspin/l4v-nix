@@ -21,10 +21,11 @@
 
 # TODO(now)
 # - coverage fails for gcc8 but not gcc49
-# - figure out why cvc5 throws ConversationProblem
+# - stack check fails for all but -O1
+# - cvc5 throws ConversationProblem
 #
 # TODO(later)
-# - z3 offline
+# - use z3 as offline solver
 
 let
   inherit (graphRefineSolverLists) selectedCVC4Binary;
@@ -66,6 +67,59 @@ in rec {
 
     false
   '';
+
+  failures = {
+
+    decodeARMMMUInvocation = graphRefineWith {
+      targetDir = graphRefine.justStackBounds;
+      args = [
+        "trace-to:report.txt" "decodeARMMMUInvocation"
+      ];
+    };
+
+    invokeTCB_WriteRegisters = graphRefineWith {
+      targetDir = graphRefine.justStackBounds;
+      args = [
+        "trace-to:report.txt" "invokeTCB_WriteRegisters"
+      ];
+    };
+
+    create_kernel_untypeds = graphRefineWith {
+      targetDir = graphRefine.justStackBounds;
+      args = [
+        "trace-to:report.txt" "create_kernel_untypeds"
+      ];
+    };
+
+    init_freemem = graphRefineWith {
+      targetDir = graphRefine.justStackBounds;
+      args = [
+        "trace-to:report.txt" "init_freemem"
+      ];
+    };
+
+    # just an example
+    memcpyWithOriginalSolverList = graphRefineWith {
+      solverList = graphRefineSolverLists.original;
+      targetDir = graphRefine.justStackBounds;
+      args = [
+        "trace-to:report.txt" "memcpy"
+      ];
+    };
+  };
+
+  allFailures = writeText "x" (toString (lib.attrValues failures));
+
+  check = graphRefineWith rec {
+    source = lib.cleanSource ../../../../tmp/graph-refine;
+    targetDir = graphRefine.justStackBounds;
+    args = [
+      # "verbose"
+      "trace-to:report.txt"
+      "use-proofs-of:${graphRefine.demo}/proofs.txt"
+      "deps:Kernel_C.cancelAllIPC"
+    ];
+  };
 
   decodeARMMMUInvocation = graphRefineWith rec {
     source = lib.cleanSource ../../../../tmp/graph-refine;

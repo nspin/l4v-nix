@@ -6,12 +6,8 @@ attr := $(A)
 
 cache_name := coliasgroup
 
-.PHONY: default
-default: all
-
-.PHONY: all
-all:
-	nix-build -j1 -A aggregate.all --no-out-link
+.PHONY: none
+none:
 
 .PHONY: push
 push:
