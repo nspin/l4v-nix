@@ -79,6 +79,7 @@ in rec {
       ];
     };
 
+    # Only fails with newer GCC versions?
     invokeTCB_WriteRegisters = graphRefineWith {
       solverList = graphRefineSolverLists.experimental;
       targetDir = graphRefine.justStackBounds;
@@ -104,6 +105,17 @@ in rec {
       ];
     };
 
+    # Appears that search returns proof that fails check.
+    handleInterruptEntry = graphRefineWith {
+      # solverList = graphRefineSolverLists.experimental;
+      solverList = graphRefineSolverLists.original;
+      targetDir = graphRefine.justStackBounds;
+      args = [
+        "verbose"
+        "trace-to:report.txt" "handleInterruptEntry"
+      ];
+    };
+
     # `memcpy` is just one example of this problem.
     memcpyWithOriginalSolverList = graphRefineWith {
       solverList = graphRefineSolverLists.original;
@@ -121,8 +133,9 @@ in rec {
       decodeARMMMUInvocation
       invokeTCB_WriteRegisters
       create_kernel_untypeds
-      # init_freemem
+      handleInterruptEntry
       memcpyWithOriginalSolverList
+      # init_freemem # hangs
     ;
   }));
 
@@ -140,18 +153,7 @@ in rec {
     ];
   };
 
-  s = graphRefineWith {
-    solverList = with graphRefineSolverLists; experimental;
-    # solverList = with graphRefineSolverLists; writeText "solverlist" ''
-    #   CVC4: online: ${cvc4BinaryExe} --incremental --lang smt --tlimit=0
-    #   Other: offline: ${z3Exe} -in
-    # '';
-    targetDir = graphRefine.justStackBounds;
-    args = [
-      "verbose" "trace-to:report.txt" "deps:Kernel_C.memcpy"
-    ];
-  };
-
+  # very wip
   check = graphRefineWith rec {
     source = lib.cleanSource ../../../../tmp/graph-refine;
     targetDir = graphRefine.justStackBounds;
@@ -163,6 +165,7 @@ in rec {
     ];
   };
 
+  # very wip
   decodeARMMMUInvocation = graphRefineWith rec {
     source = lib.cleanSource ../../../../tmp/graph-refine;
     solverList = with graphRefineSolverLists; new;
@@ -195,6 +198,7 @@ in rec {
     ];
   };
 
+  # old
   checkAllExceptFailing = graphRefineWith rec {
     solverList = graphRefineSolverLists.new;
     targetDir = graphRefine.justStackBounds;
@@ -235,6 +239,10 @@ in rec {
 # extraNativeBuildInputs = [
 #   strace
 # ];
+# solverList = with graphRefineSolverLists; writeText "solverlist" ''
+#   CVC4: online: ${cvc4BinaryExe} --incremental --lang smt --tlimit=0
+#   Other: offline: ${z3Exe} -in
+# '';
 # commands = ''
 #   (strace -f -e 'trace=!all' python2 ${source}/graph-refine.py . ${lib.concatStringsSep " " args} 2>&1 || true) | tee log.txt
 # '';
