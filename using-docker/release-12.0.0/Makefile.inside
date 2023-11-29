@@ -1,0 +1,16 @@
+TARGET_DIR := target/$(TARGET_NAME)
+
+.PHONY: none
+none:
+
+.PHONY: memcpy
+memcpy:
+	python graph-refine/graph-refine.py graph-refine/seL4-example/$(TARGET_DIR) \
+		trace-to:report.txt \
+		memcpy
+
+.PHONY: all
+all:
+	python graph-refine/graph-refine.py graph-refine/seL4-example/$(TARGET_DIR) \
+		trace-to:report.txt \
+		all
