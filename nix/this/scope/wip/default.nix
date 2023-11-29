@@ -144,7 +144,7 @@ in rec {
     targetDir = graphRefine.justStackBounds;
     args = [
       "trace-to:report.txt"
-      "skip-proofs-of:${./resources/misc-logs/all.log}"
+      "skip-proofs-of:${./resources/misc-logs/all-1.log}"
       "-exclude"
         "create_kernel_untypeds" # fails
         "init_freemem" # hangs
