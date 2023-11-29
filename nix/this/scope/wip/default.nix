@@ -95,6 +95,7 @@ in rec {
       ];
     };
 
+    # Hangs. All solvers exit, only Python remains.
     init_freemem = graphRefineWith {
       solverList = graphRefineSolverLists.experimental;
       targetDir = graphRefine.justStackBounds;
@@ -103,7 +104,7 @@ in rec {
       ];
     };
 
-    # just an example
+    # `memcpy` is just one example of this problem.
     memcpyWithOriginalSolverList = graphRefineWith {
       solverList = graphRefineSolverLists.original;
       targetDir = graphRefine.justStackBounds;
@@ -114,6 +115,30 @@ in rec {
   };
 
   allFailures = writeText "x" (toString (lib.attrValues failures));
+
+  mostFailures = writeText "x" (toString (lib.attrValues {
+    inherit (failures)
+      decodeARMMMUInvocation
+      invokeTCB_WriteRegisters
+      create_kernel_untypeds
+      # init_freemem
+      memcpyWithOriginalSolverList
+    ;
+  }));
+
+  most = graphRefineWith {
+    solverList = graphRefineSolverLists.experimental;
+    targetDir = graphRefine.justStackBounds;
+    args = [
+      "trace-to:report.txt"
+      "skip-proofs-of:${./resources/misc-logs/all.log}"
+      "-exclude"
+        "create_kernel_untypeds" # fails
+        "init_freemem" # hangs
+      "-end-exclude"
+      "all"
+    ];
+  };
 
   s = graphRefineWith {
     solverList = with graphRefineSolverLists; experimental;
