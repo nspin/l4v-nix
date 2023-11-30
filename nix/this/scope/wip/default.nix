@@ -19,14 +19,15 @@
 , this
 }:
 
-# TODO(now)
+# NOTES
+# - O0 and O2 stack bounds fail with multiple compiler versions
+# - compiler versions similar overall
 # - coverage fails for gcc8 but not gcc49
-# - stack check fails for all but -O1
-# - cvc5 throws ConversationProblem
-#
-# TODO(later)
-# - use mathsat4 as offline solver
-# - use z3 as offline solver
+# - cvc4-1.6+ and cvc5 slow (esp cvc5)
+# - cvc5 conversation problem
+# - sonolar bug, mitigated by many solvers
+# - seL4 12.0.0 and 11.0.0 have same issues
+# - same issues using dockerhub images and nix
 
 let
   inherit (graphRefineSolverLists) selectedCVC4Binary;
