@@ -31,6 +31,8 @@
 let
   inherit (graphRefineSolverLists) selectedCVC4Binary;
 
+  tmpSource = lib.cleanSource ../../../../tmp/graph-refine;
+
 in rec {
   wrap = writeScript "wrap" ''
     #!${runtimeShell}
@@ -153,9 +155,21 @@ in rec {
     ];
   };
 
+  x = graphRefineWith {
+    solverList = graphRefineSolverLists.experimental;
+    source = tmpSource;
+    targetDir = graphRefine.justStackBounds;
+    args = [
+      "verbose"
+      "trace-to:report.txt"
+      "save:functions.txt"
+      "create_kernel_untypeds"
+    ];
+  };
+
   # very wip
   check = graphRefineWith rec {
-    source = lib.cleanSource ../../../../tmp/graph-refine;
+    source = tmpSource;
     targetDir = graphRefine.justStackBounds;
     args = [
       # "verbose"
@@ -167,7 +181,7 @@ in rec {
 
   # very wip
   decodeARMMMUInvocation = graphRefineWith rec {
-    source = lib.cleanSource ../../../../tmp/graph-refine;
+    source = tmpSource;
     solverList = with graphRefineSolverLists; new;
     # solverList = with graphRefineSolverLists; writeText "solverlist" ''
     #   CVC4: online: ${cvc4BinaryExe} --incremental --lang smt --tlimit=5000
@@ -234,7 +248,7 @@ in rec {
 
 }
 
-# source = lib.cleanSource ../../../../tmp/graph-refine;
+# source = tmpSource;
 # source = sources.graphRefine;
 # extraNativeBuildInputs = [
 #   strace
