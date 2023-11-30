@@ -1,5 +1,6 @@
 { lib
 , pkgs
+, callPackage
 , runCommand
 , writeText
 , writeScript
@@ -156,7 +157,7 @@ in rec {
     ];
   };
 
-  x = graphRefineWith {
+  d1 = graphRefineWith {
     solverList = graphRefineSolverLists.experimental;
     source = tmpSource;
     targetDir = graphRefine.justStackBounds;

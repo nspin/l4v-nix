@@ -78,6 +78,7 @@ self: with self; {
     l4v = lib.cleanSource (relativeToProjectsDir "l4v");
     hol4 = lib.cleanSource (relativeToProjectsDir "HOL4");
     graphRefine = lib.cleanSource (relativeToProjectsDir "graph-refine");
+    currentGraphRefine = lib.cleanSource (relativeToProjectsDir "current-graph-refine");
 
     graphRefineNoSeL4 = lib.cleanSourceWith ({
       src = rawSources.graphRefine;
@@ -88,10 +89,23 @@ self: with self; {
       src = rawSources.graphRefine;
       filter = path: type: builtins.match ".*/seL4-example(/.*)?" path != null;
     });
+
+    currentGraphRefineNoSeL4 = lib.cleanSourceWith ({
+      src = rawSources.currentGraphRefine;
+      filter = path: type: builtins.match ".*/seL4-example/.*" path == null;
+    });
+
+    currentGraphRefineJustSeL4 = lib.cleanSourceWith ({
+      src = rawSources.currentGraphRefine;
+      filter = path: type: builtins.match ".*/seL4-example(/.*)?" path != null;
+    });
   };
 
   sources = {
-    inherit (rawSources) hol4 graphRefine graphRefineNoSeL4 graphRefineJustSeL4;
+    inherit (rawSources)
+      hol4
+      graphRefine graphRefineNoSeL4 graphRefineJustSeL4
+      currentGraphRefine currentGraphRefineNoSeL4 currentGraphRefineJustSeL4;
     seL4 = callPackage ./patched-sel4-source.nix {};
     l4v = callPackage ./patched-l4v-source.nix {};
   };
@@ -129,6 +143,16 @@ self: with self; {
     name = "minimal-bv-input";
     buildStandaloneCParser = l4vConfig.bvSupport;
     simplExport = l4vConfig.bvSupport;
+  };
+
+  standaloneCParser = assert l4vConfig.bvSupport; l4vWith {
+    name = "standalone-cparser";
+    buildStandaloneCParser = true;
+  };
+
+  simplExport = assert l4vConfig.bvSupport; l4vWith {
+    name = "simpl-export";
+    buildStandaloneCParser = true;
   };
 
   # binaryVerificationInputs = cProofs;
@@ -203,6 +227,10 @@ self: with self; {
 
     all = allWithNewSolverList;
   };
+
+  currentGraphRefineSolverLists = callPackage ./current-graph-refine-solver-lists.nix {};
+
+  currentGraphRefine = callPackage ./current-graph-refine.nix {};
 
   ### notes ###
 
