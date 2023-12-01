@@ -1,5 +1,4 @@
 { lib
-, stdenv
 , runCommand
 , writeText
 , texlive
@@ -10,62 +9,9 @@
 { l4vConfig
 }:
 
-let
-
-in
 self: with self; {
 
   inherit l4vConfig;
-
-  wip = callPackage ./wip {};
-
-  ### aggregate ###
-
-  slow = writeText "slow" (toString ([
-    kernel
-    hol4
-    l4vSpec
-  ] ++ lib.optionals l4vConfig.bvSupport [
-    binaryVerificationInputs
-    graphRefineInputs
-    graphRefine.justStackBounds
-    graphRefine.coverage
-    graphRefine.demo
-  ]));
-
-  slower = writeText "slower" (toString [
-    slow
-    cProofs
-    l4vAll
-  ]);
-
-  slowest = writeText "slowest" (toString ([
-    slower
-  ] ++ lib.optionals l4vConfig.bvSupport [
-    graphRefine.all
-  ]));
-
-  all = writeText "all" (toString [
-    slowest
-    minimalBinaryVerificationInputs
-    cProofs
-  ]);
-
-  cachedForPrimary = writeText "cached" (toString [
-    slow
-    cProofs
-    # l4vAll
-  ]);
-
-  cachedWhenBVSupport = writeText "cached" (toString [
-    graphRefineInputs
-  ]);
-
-  cachedForAll = writeText "cached" (toString [
-    kernel
-    l4vSpec
-    cProofs
-  ]);
 
   ### sources ###
 
@@ -89,23 +35,14 @@ self: with self; {
       src = rawSources.graphRefine;
       filter = path: type: builtins.match ".*/seL4-example(/.*)?" path != null;
     });
-
-    currentGraphRefineNoSeL4 = lib.cleanSourceWith ({
-      src = rawSources.currentGraphRefine;
-      filter = path: type: builtins.match ".*/seL4-example/.*" path == null;
-    });
-
-    currentGraphRefineJustSeL4 = lib.cleanSourceWith ({
-      src = rawSources.currentGraphRefine;
-      filter = path: type: builtins.match ".*/seL4-example(/.*)?" path != null;
-    });
   };
 
   sources = {
     inherit (rawSources)
       hol4
       graphRefine graphRefineNoSeL4 graphRefineJustSeL4
-      currentGraphRefine currentGraphRefineNoSeL4 currentGraphRefineJustSeL4;
+      currentGraphRefine
+    ;
     seL4 = callPackage ./patched-sel4-source.nix {};
     l4v = callPackage ./patched-l4v-source.nix {};
   };
@@ -145,45 +82,48 @@ self: with self; {
     buildStandaloneCParser = l4vConfig.bvSupport;
   };
 
-  minimalBinaryVerificationInputs = l4vWith {
-    name = "minimal-bv-input";
-    buildStandaloneCParser = l4vConfig.bvSupport;
-    simplExport = l4vConfig.bvSupport;
-  };
-
-  standaloneCParser = assert l4vConfig.bvSupport; l4vWith {
+  justStandaloneCParser = l4vWith {
     name = "standalone-cparser";
     buildStandaloneCParser = true;
   };
 
-  simplExport = assert l4vConfig.bvSupport; l4vWith {
+  justSimplExport = l4vWith {
     name = "simpl-export";
+    simplExport = l4vConfig.bvSupport;
+  };
+
+  minimalBinaryVerificationInputs = l4vWith {
+    name = "minimal-bv-input";
     buildStandaloneCParser = true;
+    simplExport = l4vConfig.bvSupport;
   };
 
   # binaryVerificationInputs = cProofs;
-  binaryVerificationInputs = minimalBinaryVerificationInputs;
+  binaryVerificationInputs = assert l4vConfig.bvSupport; minimalBinaryVerificationInputs;
+
+  # standaloneCParser = binaryVerificationInputs;
+  # simplExport = binaryVerificationInputs;
+
+  standaloneCParser = justStandaloneCParser;
+  simplExport = justSimplExport;
 
   hol4 = callPackage ./hol4.nix {};
 
-  graphRefineInputs = callPackage ./graph-refine-inputs.nix {};
+  decompilation = callPackage ./decompilation.nix {};
 
-  minimalGraphRefineInputs =
-    let
-      files = [
-        "kernel.elf.symtab"
-        "kernel.elf.rodata"
-        "CFunctions.txt"
-        "ASMFunctions.txt"
-        "target.py"
-      ];
-    in
-      runCommand "minimal-graph-refine-inputs" {} ''
-        cd ${graphRefineInputs}
-        for config in *; do
-          install -D -t $out/$config $config/{${lib.concatStringsSep "," files}}
-        done
-      '';
+  preprocessedKernelsAreIdentical = runCommand "preprocessed-kernels-are-identical" {} ''
+    diff -q --ignore-matching-lines='^#' \
+      ${kernelWithCParser}/kernel_all.c_pp \
+      ${simplExport}/spec/cspec/c/build/${l4vConfig.arch}/kernel_all.c_pp
+
+    touch $out
+  '';
+
+  cFunctionsTxt = "${simplExport}/proof/asmrefine/export/${l4vConfig.arch}/CFunDump.txt";
+
+  asmFunctionsTxt = "${decompilation}/kernel_mc_graph.txt";
+
+  graphRefineInputsViaMake = callPackage ./graph-refine-inputs-via-make.nix {};
 
   graphRefineSolverLists = callPackage ./graph-refine-solver-lists.nix {};
 
@@ -236,7 +176,37 @@ self: with self; {
 
   currentGraphRefineSolverLists = callPackage ./current-graph-refine-solver-lists.nix {};
 
-  currentGraphRefine = callPackage ./current-graph-refine.nix {};
+  currentGraphRefineWith = callPackage ./current-graph-refine.nix {};
+
+  currentGraphRefine = rec {
+    functions = currentGraphRefineWith {
+      name = "functions";
+      args = [
+        "save:functions.txt"
+      ];
+    };
+
+    coverage = currentGraphRefineWith {
+      name = "coverage";
+      args = [
+        "trace-to:coverage.txt" "coverage"
+      ];
+    };
+
+    demo = currentGraphRefineWith {
+      name = "demo";
+      args = [
+        "trace-to:report.txt" "save-proofs:proofs.txt" "deps:Kernel_C.cancelAllIPC"
+      ];
+    };
+
+    all = currentGraphRefineWith {
+      name = "all-with-solverlist";
+      args = [
+        "trace-to:report.txt" "save-proofs:proofs.txt" "all"
+      ];
+    };
+  };
 
   ### notes ###
 
@@ -280,4 +250,64 @@ self: with self; {
   polymlForHol4 = polyml58ForHol4;
 
   isabelleForL4v = isabelle2020ForL4v;
+
+  ### aggregate ###
+
+  slow = writeText "slow" (toString ([
+    kernelWithCParser
+    kernelWithoutCParser
+    justStandaloneCParser
+    justSimplExport
+    minimalBinaryVerificationInputs
+    l4vSpec
+    hol4
+  ] ++ lib.optionals l4vConfig.bvSupport [
+    decompilation
+    preprocessedKernelsAreIdentical
+    graphRefineInputsViaMake
+    graphRefine.justStackBounds
+    graphRefine.functions
+    graphRefine.coverage
+    graphRefine.demo
+    currentGraphRefine.functions
+    currentGraphRefine.coverage
+    currentGraphRefine.demo
+    currentGraphRefine.all
+    sonolarModelBug.evidence
+    cvcVersions.evidence
+  ]));
+
+  slower = writeText "slower" (toString ([
+    slow
+    cProofs
+    l4vAll
+  ] ++ lib.optionals l4vConfig.bvSupport [
+  ]));
+
+  slowest = writeText "slowest" (toString ([
+    slower
+  ] ++ lib.optionals l4vConfig.bvSupport [
+    graphRefine.all
+  ]));
+
+  all = writeText "all" (toString [
+    slowest
+  ]);
+
+  cachedForPrimary = writeText "cached" (toString [
+    # slow
+    slower
+  ]);
+
+  cachedWhenBVSupport = writeText "cached" (toString [
+    graphRefineInputs
+  ]);
+
+  cachedForAll = writeText "cached" (toString [
+    kernelWithoutCParser
+  ]);
+
+  ### wip ###
+
+  wip = callPackage ./wip {};
 }

@@ -29,7 +29,12 @@
 
 # NOTE
 # The default Isabelle settings seem to be working. Nevertheless, we should consider experimenting
-# with some from seL4-CAmkES-L4v-dockerfiles/res/isabelle_settings.
+# with some from:
+# - l4v/misc/etc/settings
+# - seL4-CAmkES-L4v-dockerfiles/res/isabelle_settings
+
+# TODO
+# Consider exporting the entire top-level
 
 assert tests == null -> (exclude == [] && remove == []);
 
@@ -127,6 +132,3 @@ stdenv.mkDerivation {
 
   dontFixup = true;
 }
-
-# NOTE:
-# RefineOrphanage depends on ./make_spec.sh having run
