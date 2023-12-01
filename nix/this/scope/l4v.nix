@@ -117,6 +117,8 @@ stdenv.mkDerivation {
     ${lib.optionalString simplExport ''
       make -C proof/ SimplExport
     ''}
+
+    ln -sfT ${isabelleForL4v} isabelle
   '';
 
   installPhase = ''

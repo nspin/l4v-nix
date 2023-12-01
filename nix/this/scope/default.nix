@@ -112,7 +112,13 @@ self: with self; {
 
   ### tools and proofs ###
 
-  kernel = callPackage ./kernel.nix {};
+  kernelWithoutCParser = callPackage ./kernel.nix {
+    withCParser = false;
+  };
+
+  kernelWithCParser = kernelWithoutCParser.override {
+    withCParser = true;
+  };
 
   l4vWith = callPackage ./l4v.nix {};
 
