@@ -151,11 +151,10 @@ in rec {
     , targetDir ? defaultTargetDir
     , source ? sources.currentGraphRefineNoSeL4
     , args ? []
-    , argLists ? [ args ]
-    , wrapArgs ? ""
-    , commands ? lib.flip lib.concatMapStrings argLists (argList: ''
-        (time ${wrapArgs} python ${source}/graph-refine.py . ${lib.concatStringsSep " " argList}) 2>&1 | tee log.txt
-      '')
+    , keepSMTDumps ? false
+    , commands ? ''
+        (time python ${source}/graph-refine.py . ${lib.concatStringsSep " " args}) 2>&1 | tee log.txt
+      ''
     }:
 
     runCommand "current-graph-refine${lib.optionalString (name != null) "-${name}"}" {
@@ -173,6 +172,12 @@ in rec {
 
       ${commands}
 
+      rm -f target.pyc
+
+      ${lib.optionalString (!keepSMTDumps) ''
+        rm -r smt2
+      ''}
+
       cp -r . $out
     '';
 
@@ -180,6 +185,7 @@ in rec {
     name = "all";
     args = [
       "trace-to:report.txt"
+      "save-proofs:proofs.txt"
       "all"
     ];
   };
