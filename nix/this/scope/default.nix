@@ -206,7 +206,7 @@ self: with self; {
     graphRefine.demo
     graphRefine.all
     sonolarModelBug.evidence
-    cvcVersions.evidence
+    # cvcVersions.evidence # broken since removal of old graph-refine
   ]));
 
   slower = writeText "slower" (toString ([
