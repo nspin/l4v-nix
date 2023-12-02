@@ -42,8 +42,8 @@ let
     cp ${targetPy} $out/target.py
   '';
 
-  baseTargetDir = baseTargetDirWithGraphRefineInputsViaMake;
-  # baseTargetDir = baseTargetDirWithDecomposition;
+  # baseTargetDir = baseTargetDirWithGraphRefineInputsViaMake;
+  baseTargetDir = baseTargetDirWithDecomposition;
 
 in
 
