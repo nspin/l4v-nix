@@ -14,8 +14,6 @@
 , graphRefine
 , graphRefineWith
 , graphRefineSolverLists
-, sonolarBinary
-, cvc4Binary
 
 , this
 }:
@@ -31,8 +29,6 @@
 # - same issues using dockerhub images and nix
 
 let
-  inherit (graphRefineSolverLists) selectedCVC4Binary;
-
   tmpSource = lib.cleanSource ../../../../tmp/graph-refine;
 
 in rec {
@@ -171,13 +167,13 @@ in rec {
 
   # very wip
   check = graphRefineWith rec {
-    source = tmpSource;
+    source = tmpSource; # branch nspin/wip/load-proofs
     targetDir = graphRefine.justStackBounds;
     args = [
       # "verbose"
       "trace-to:report.txt"
       "use-proofs-of:${graphRefine.demo}/proofs.txt"
-      "deps:Kernel_C.cancelAllIPC"
+      # "deps:Kernel_C.cancelAllIPC"
     ];
   };
 
@@ -200,32 +196,37 @@ in rec {
     ];
   };
 
-  prime = writeText "x"
-    (toString
-      (lib.forEach (lib.attrNames this.optLevels)
-        (optLevel: this.byConfig.arm.gcc49.${optLevel}.graphRefineInputs)));
+  prime = writeText "prime" (toString (lib.flatten [
+    gcc49GraphRefineInputs
+    # allGraphRefineInputs
+  ]));
 
-  allGraphRefineInputs = writeText "x" (toString (this.mkAggregate (
+  gcc49GraphRefineInputs =
+    lib.forEach (lib.attrNames this.optLevels)
+      (optLevel: this.byConfig.arm.gcc49.${optLevel}.graphRefineInputsViaMake);
+
+  allGraphRefineInputs = this.mkAggregate (
     { archName, targetCCWrapperAttrName, optLevelName }:
     let
       scope = this.byConfig.${archName}.${targetCCWrapperAttrName}.${optLevelName};
     in
       lib.optionals scope.l4vConfig.bvSupport [
-        scope.graphRefineInputs
+        scope.graphRefineInputsViaMake
       ]
-  )));
+  );
 
 }
 
 # source = tmpSource;
 # source = sources.graphRefine;
-# extraNativeBuildInputs = [
-#   strace
-# ];
+# solverList = graphRefineSolverLists.experimental;
 # solverList = with graphRefineSolverLists; writeText "solverlist" ''
 #   CVC4: online: ${cvc4BinaryExe} --incremental --lang smt --tlimit=0
 #   Other: offline: ${z3Exe} -in
 # '';
+# extraNativeBuildInputs = [
+#   strace
+# ];
 # commands = ''
 #   (strace -f -e 'trace=!all' python2 ${source}/graph-refine.py . ${lib.concatStringsSep " " args} 2>&1 || true) | tee log.txt
 # '';
