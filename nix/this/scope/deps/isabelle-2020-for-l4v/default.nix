@@ -4,6 +4,7 @@
 , perl, nettools
 , openjdk11
 , rlwrap, coreutils
+, makeFontsConf
 }:
 
 let
@@ -47,6 +48,8 @@ stdenv.mkDerivation rec {
   };
 
   buildInputs = [ perl polyml z3 nettools openjdk11 ];
+
+  FONTCONFIG_FILE = makeFontsConf { fontDirectories = [ ]; };
 
   sourceRoot = dirname;
 
@@ -95,6 +98,14 @@ stdenv.mkDerivation rec {
         --replace \
           '"$ML_HOME/" ^ (if ML_System.platform_is_windows then "sha1.dll" else "libsha1.so")' \
           '"${sha1}/lib/libsha1.so"'
+  '';
+
+  configurePhase = ''
+    export HOME=$(mktemp -d --suffix=-home)
+  '';
+
+  buildPhase = ''
+    bin/isabelle build -v -o system_heaps -b Pure HOL HOL-Word
   '';
 
   installPhase = ''
