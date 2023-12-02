@@ -58,17 +58,6 @@ in rec {
     exit $ret
   '';
 
-  debug = runCommand "x" {
-    nativeBuildInputs = [
-      bashInteractive
-      breakpointHook
-    ];
-  } ''
-    export FOO=bar
-
-    false
-  '';
-
   failures = {
 
     decodeARMMMUInvocation = graphRefineWith {
@@ -144,24 +133,11 @@ in rec {
     targetDir = graphRefine.justStackBounds;
     args = [
       "trace-to:report.txt"
-      "skip-proofs-of:${./resources/misc-logs/all-1.log}"
       "-exclude"
         "create_kernel_untypeds" # fails
         "init_freemem" # hangs
       "-end-exclude"
       "all"
-    ];
-  };
-
-  d1 = graphRefineWith {
-    solverList = graphRefineSolverLists.experimental;
-    source = tmpSource;
-    targetDir = graphRefine.justStackBounds;
-    args = [
-      "verbose"
-      "trace-to:report.txt"
-      "save:functions.txt"
-      "create_kernel_untypeds"
     ];
   };
 
@@ -177,26 +153,8 @@ in rec {
     ];
   };
 
-  # old
-  checkAllExceptFailing = graphRefineWith rec {
-    solverList = graphRefineSolverLists.new;
-    targetDir = graphRefine.justStackBounds;
-    args = [
-      "trace-to:report.txt"
-      "skip-proofs-of:${./resources/logs-from-all/graph-refine-1.log}"
-      "skip-proofs-of:${./resources/logs-from-all/graph-refine-2.log}"
-      "skip-proofs-of:${./resources/logs-from-all/graph-refine-3.log}"
-      "-exclude"
-        "Kernel_C.create_kernel_untypeds"
-        "Kernel_C.decodeARMMMUInvocation"
-        "Kernel_C.init_freemem"
-        "Kernel_C.invokeTCB_WriteRegisters"
-      "-end-exclude"
-      "all"
-    ];
-  };
-
   prime = writeText "prime" (toString (lib.flatten [
+    mostFailures
     gcc49GraphRefineInputs
     # allGraphRefineInputs
   ]));
@@ -215,6 +173,16 @@ in rec {
       ]
   );
 
+  debug = runCommand "x" {
+    nativeBuildInputs = [
+      bashInteractive
+      breakpointHook
+    ];
+  } ''
+    export FOO=bar
+
+    false
+  '';
 }
 
 # source = tmpSource;
