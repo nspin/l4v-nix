@@ -23,13 +23,13 @@ self: with self; {
     seL4 = lib.cleanSource (relativeToProjectsDir "seL4");
     l4v = lib.cleanSource (relativeToProjectsDir "l4v");
     hol4 = lib.cleanSource (relativeToProjectsDir "HOL4");
-    currentGraphRefine = lib.cleanSource (relativeToProjectsDir "graph-refine");
+    graphRefine = lib.cleanSource (relativeToProjectsDir "graph-refine");
   };
 
   sources = {
     inherit (rawSources)
       hol4
-      currentGraphRefine
+      graphRefine
     ;
     seL4 = callPackage ./patched-sel4-source.nix {};
     l4v = callPackage ./patched-l4v-source.nix {};
@@ -111,33 +111,33 @@ self: with self; {
 
   asmFunctionsTxt = "${decompilation}/kernel_mc_graph.txt";
 
-  currentGraphRefineSolverLists = callPackage ./current-graph-refine-solver-lists.nix {};
+  graphRefineSolverLists = callPackage ./graph-refine-solver-lists.nix {};
 
-  currentGraphRefineWith = callPackage ./current-graph-refine.nix {};
+  graphRefineWith = callPackage ./graph-refine.nix {};
 
-  currentGraphRefine = rec {
-    functions = currentGraphRefineWith {
+  graphRefine = rec {
+    functions = graphRefineWith {
       name = "functions";
       args = [
         "save:functions.txt"
       ];
     };
 
-    coverage = currentGraphRefineWith {
+    coverage = graphRefineWith {
       name = "coverage";
       args = [
         "trace-to:coverage.txt" "coverage"
       ];
     };
 
-    demo = currentGraphRefineWith {
+    demo = graphRefineWith {
       name = "demo";
       args = [
         "trace-to:report.txt" "save-proofs:proofs.txt" "deps:Kernel_C.cancelAllIPC"
       ];
     };
 
-    all = currentGraphRefineWith {
+    all = graphRefineWith {
       name = "all-with-solverlist";
       args = [
         "trace-to:report.txt" "save-proofs:proofs.txt" "all"
@@ -201,10 +201,10 @@ self: with self; {
   ] ++ lib.optionals l4vConfig.bvSupport [
     decompilation
     preprocessedKernelsAreIdentical
-    currentGraphRefine.functions
-    currentGraphRefine.coverage
-    currentGraphRefine.demo
-    currentGraphRefine.all
+    graphRefine.functions
+    graphRefine.coverage
+    graphRefine.demo
+    graphRefine.all
     sonolarModelBug.evidence
     cvcVersions.evidence
   ]));

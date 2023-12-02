@@ -10,13 +10,13 @@
 , preprocessedKernelsAreIdentical
 , cFunctionsTxt
 , asmFunctionsTxt
-, currentGraphRefineSolverLists
+, graphRefineSolverLists
 }:
 
 { name ? null
 , extraNativeBuildInputs ? []
-, solverList ? currentGraphRefineSolverLists.default
-, source ? sources.currentGraphRefine
+, solverList ? graphRefineSolverLists.default
+, source ? sources.graphRefine
 , args ? []
 , keepSMTDumps ? false
 , commands ? ''
@@ -27,7 +27,7 @@
 let
   targetPy = source + "/seL4-example/target-${l4vConfig.arch}.py";
 
-  preTargetDir = runCommand "current-graph-refine-initial-target-dir" {
+  preTargetDir = runCommand "graph-refine-initial-target-dir" {
     inherit preprocessedKernelsAreIdentical;
   } ''
     mkdir $out
@@ -37,7 +37,7 @@ let
     cp ${targetPy} $out/target.py
   '';
 
-  targetDir = runCommand "current-graph-refine-prepared-target-dir" {
+  targetDir = runCommand "graph-refine-prepared-target-dir" {
     nativeBuildInputs = [
       python3Packages.python
     ];
@@ -53,7 +53,7 @@ let
   '';
 
 in
-runCommand "current-graph-refine${lib.optionalString (name != null) "-${name}"}" {
+runCommand "graph-refine${lib.optionalString (name != null) "-${name}"}" {
   nativeBuildInputs = [
     python2Packages.python
     python2Packages.typing
