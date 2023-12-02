@@ -167,6 +167,7 @@ self: with self; {
   ghcWithPackagesForL4v = callPackage  ./deps/ghc-with-packages-for-l4v {};
 
   isabelle2020ForL4v = callPackage ./deps/isabelle-2020-for-l4v {};
+  isabelle2023ForL4v = callPackage ./deps/isabelle-2023-for-l4v {};
 
   isabelleInitialHeaps = callPackage ./isabelle-initial-heaps.nix {};
 
