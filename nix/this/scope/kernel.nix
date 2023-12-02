@@ -4,11 +4,11 @@
 , dtc, libxml2
 , python3Packages
 , perl
-, mlton
 
 , sources
 , l4vConfig
 , standaloneCParser
+, mltonForL4v
 , isabelle2020ForL4v
 
 , withCParser ? false
@@ -37,7 +37,7 @@ runCommand "kernel-${if withCParser then "with" else "without"}-cparser" {
     l4vConfig.targetBintools
   ] ++ lib.optionals withCParser [
     perl
-    mlton
+    mltonForL4v
     isabelle2020ForL4v
   ];
 } ''

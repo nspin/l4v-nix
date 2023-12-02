@@ -3,6 +3,8 @@
 , writeText
 , texlive
 , gcc9Stdenv
+, polyml
+, mlton
 , mlton20180207
 }:
 
@@ -164,10 +166,6 @@ self: with self; {
 
   ghcWithPackagesForL4v = callPackage  ./deps/ghc-with-packages-for-l4v {};
 
-  polyml58ForHol4 = callPackage ./deps/polyml-5.8-for-hol4.nix {};
-
-  # polyml59ForHol4 = polyml;
-
   isabelle2020ForL4v = callPackage ./deps/isabelle-2020-for-l4v {};
 
   isabelleInitialHeaps = callPackage ./isabelle-initial-heaps.nix {};
@@ -182,9 +180,13 @@ self: with self; {
 
   stdenvForHol4 = gcc9Stdenv;
 
-  mlton = mlton20180207;
+  mltonForHol4 = mlton;
 
-  polymlForHol4 = polyml58ForHol4;
+  polymlForHol4 = lib.overrideDerivation polyml (attrs: {
+    configureFlags = [ "--enable-shared" ];
+  });
+
+  mltonForL4v = mlton20180207;
 
   isabelleForL4v = isabelle2020ForL4v;
 

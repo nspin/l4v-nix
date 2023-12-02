@@ -3,9 +3,9 @@
 , python3Packages
 , haskell, haskellPackages
 , rsync, git, perl, hostname, which, cmake, ninja, dtc, libxml2
-, mlton
 
 , sources
+, mltonForL4v
 , isabelleForL4v
 , isabelleInitialHeaps
 , texliveEnv
@@ -57,7 +57,7 @@ stdenv.mkDerivation {
   nativeBuildInputs = [
     rsync git perl hostname which cmake ninja dtc libxml2
 
-    mlton
+    mltonForL4v
 
     ghcWithPackagesForL4v
     haskellPackages.cabal-install
