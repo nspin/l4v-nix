@@ -1,5 +1,5 @@
 F ?= .
-A ?= aggregate.cached
+A ?= this.cached
 
 file := $(F)
 attr := $(A)
