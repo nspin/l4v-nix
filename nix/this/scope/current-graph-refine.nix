@@ -79,7 +79,7 @@ runCommand "current-graph-refine${lib.optionalString (name != null) "-${name}"}"
   rm -f target.pyc
 
   ${lib.optionalString (!keepSMTDumps) ''
-    rm -r smt2
+    rm -rf smt2
   ''}
 
   cp -r . $out

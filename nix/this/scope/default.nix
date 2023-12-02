@@ -303,9 +303,12 @@ self: with self; {
     # graphRefineInputsViaMake
   ]);
 
-  cachedForAll = writeText "cached" (toString [
-    kernelWithoutCParser
-  ]);
+  cachedForAll = writeText "cached" (toString (
+    # Fails only with X64-O1, all GCC versions
+    lib.optionals (!(l4vConfig.arch == "X64" && l4vConfig.optLevel == "-O1")) [
+      kernelWithoutCParser
+    ]
+  ));
 
   ### wip ###
 
