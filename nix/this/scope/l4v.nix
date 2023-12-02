@@ -141,7 +141,7 @@ stdenv.mkDerivation {
 
       ${lib.optionalString (lib.elem "ASpec" tests) ''
         cp -v \
-          $HOME/.isabelle/Isabelle2020/browser_info/Specifications/ASpec/document.pdf \
+          $HOME/.isabelle/Isabelle*/browser_info/Specifications/ASpec/document.pdf \
           spec/abstract
       ''}
     ''}

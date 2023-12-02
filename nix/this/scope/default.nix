@@ -133,7 +133,7 @@ self: with self; {
     };
 
     all = graphRefineWith {
-      name = "all-with-solverlist";
+      name = "all";
       args = [
         "trace-to:report.txt" "save-proofs:proofs.txt" "all"
       ];
