@@ -13,6 +13,3 @@
 [submodule "nixpkgs"]
 	path = nixpkgs
 	url = https://github.com/NixOS/nixpkgs.git
-[submodule "projects/current-graph-refine"]
-	path = projects/current-graph-refine
-	url = https://github.com/coliasgroup/graph-refine.git

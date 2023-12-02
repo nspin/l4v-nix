@@ -23,24 +23,12 @@ self: with self; {
     seL4 = lib.cleanSource (relativeToProjectsDir "seL4");
     l4v = lib.cleanSource (relativeToProjectsDir "l4v");
     hol4 = lib.cleanSource (relativeToProjectsDir "HOL4");
-    graphRefine = lib.cleanSource (relativeToProjectsDir "graph-refine");
-    currentGraphRefine = lib.cleanSource (relativeToProjectsDir "current-graph-refine");
-
-    graphRefineNoSeL4 = lib.cleanSourceWith ({
-      src = rawSources.graphRefine;
-      filter = path: type: builtins.match ".*/seL4-example/.*" path == null;
-    });
-
-    graphRefineJustSeL4 = lib.cleanSourceWith ({
-      src = rawSources.graphRefine;
-      filter = path: type: builtins.match ".*/seL4-example(/.*)?" path != null;
-    });
+    currentGraphRefine = lib.cleanSource (relativeToProjectsDir "graph-refine");
   };
 
   sources = {
     inherit (rawSources)
       hol4
-      graphRefine graphRefineNoSeL4 graphRefineJustSeL4
       currentGraphRefine
     ;
     seL4 = callPackage ./patched-sel4-source.nix {};
@@ -122,57 +110,6 @@ self: with self; {
   cFunctionsTxt = "${simplExport}/proof/asmrefine/export/${l4vConfig.arch}/CFunDump.txt";
 
   asmFunctionsTxt = "${decompilation}/kernel_mc_graph.txt";
-
-  graphRefineInputsViaMake = callPackage ./graph-refine-inputs-via-make.nix {};
-
-  graphRefineSolverLists = callPackage ./graph-refine-solver-lists.nix {};
-
-  graphRefineWith = callPackage ./graph-refine.nix {};
-
-  graphRefine = rec {
-    justStackBounds = graphRefineWith {
-      name = "just-stack-bounds";
-    };
-
-    functions = graphRefineWith {
-      name = "functions";
-      targetDir = justStackBounds;
-      args = [
-        "save:functions.txt"
-      ];
-    };
-
-    coverage = graphRefineWith {
-      name = "coverage";
-      targetDir = justStackBounds;
-      args = [
-        "trace-to:coverage.txt" "coverage"
-      ];
-    };
-
-    demo = graphRefineWith {
-      name = "demo";
-      targetDir = justStackBounds;
-      args = [
-        "trace-to:report.txt" "save-proofs:proofs.txt" "deps:Kernel_C.cancelAllIPC"
-      ];
-    };
-
-    allWithSolverList = name: solverList: graphRefineWith {
-      name = "all-with-solverlist-${name}";
-      inherit solverList;
-      targetDir = justStackBounds;
-      args = [
-        "trace-to:report.txt" "save-proofs:proofs.txt" "all"
-      ];
-    };
-
-    allWithOriginalSolverList = allWithSolverList "original" graphRefineSolverLists.original;
-
-    allWithNewSolverList = allWithSolverList "new" graphRefineSolverLists.new;
-
-    all = allWithNewSolverList;
-  };
 
   currentGraphRefineSolverLists = callPackage ./current-graph-refine-solver-lists.nix {};
 
@@ -264,11 +201,6 @@ self: with self; {
   ] ++ lib.optionals l4vConfig.bvSupport [
     decompilation
     preprocessedKernelsAreIdentical
-    graphRefineInputsViaMake
-    graphRefine.justStackBounds
-    graphRefine.functions
-    graphRefine.coverage
-    graphRefine.demo
     currentGraphRefine.functions
     currentGraphRefine.coverage
     currentGraphRefine.demo
