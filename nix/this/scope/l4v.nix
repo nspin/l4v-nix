@@ -25,6 +25,8 @@
 
 , buildStandaloneCParser ? false
 , simplExport ? false
+
+, isabelleLink ? buildStandaloneCParser
 }:
 
 # NOTE
@@ -122,7 +124,7 @@ stdenv.mkDerivation {
     ${lib.optionalString simplExport ''
       make -C proof/ SimplExport
     ''}
-
+  '' + lib.optionalString isabelleLink ''
     ln -sfT ${isabelleForL4v} isabelle
   '';
 
