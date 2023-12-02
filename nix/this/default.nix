@@ -85,7 +85,7 @@ rec {
   )));
 
   cached = writeText "aggregate-cached" (toString ([
-    primary.cachedOnPrimary
+    primary.cachedForPrimary
   ] ++ mkAggregate (
     { archName, targetCCWrapperAttrName, optLevelName }:
     let

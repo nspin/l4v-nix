@@ -300,7 +300,7 @@ self: with self; {
   ]);
 
   cachedWhenBVSupport = writeText "cached" (toString [
-    graphRefineInputs
+    # graphRefineInputsViaMake
   ]);
 
   cachedForAll = writeText "cached" (toString [
