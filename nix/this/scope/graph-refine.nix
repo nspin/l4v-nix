@@ -30,7 +30,7 @@ let
           ${graphRefineInputsViaMake}/${l4vConfig.arch}${l4vConfig.optLevel}/{${lib.concatStringsSep "," files}}
       '';
 
-  targetPy = sources.graphRefineNoSeL4 + "/seL4-example/target.py";
+  targetPy = sources.graphRefineJustSeL4 + "/seL4-example/target.py";
 
   baseTargetDirWithDecomposition = runCommand "base-target-dir" {
     inherit preprocessedKernelsAreIdentical;
@@ -38,7 +38,7 @@ let
     mkdir $out
     cp ${kernelWithCParser}/{kernel.elf.rodata,kernel.elf.txt,kernel.elf.symtab} $out
     cp ${cFunctionsTxt} $out/CFunctions.txt
-    cp ${asmFunctionsTxt} $out/kernel_mc_graph.txt
+    cp ${asmFunctionsTxt} $out/ASMFunctions.txt
     cp ${targetPy} $out/target.py
   '';
 
