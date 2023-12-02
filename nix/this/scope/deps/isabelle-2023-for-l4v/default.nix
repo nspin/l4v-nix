@@ -11,4 +11,8 @@ let
   nixpkgs = import nixpkgsSource {};
 
 in
-nixpkgs.isabelle
+nixpkgs.isabelle.overrideAttrs (attrs: {
+  patches = (attrs.patches or []) ++ [
+    ./permissions.patch
+  ];
+})

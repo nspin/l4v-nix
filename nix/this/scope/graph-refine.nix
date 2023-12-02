@@ -7,7 +7,7 @@
 , sources
 , l4vConfig
 , kernelWithCParser
-, preprocessedKernelsAreIdentical
+, preprocessedKernelsAreEquivalent
 , cFunctionsTxt
 , asmFunctionsTxt
 , graphRefineSolverLists
@@ -28,7 +28,7 @@ let
   targetPy = source + "/seL4-example/target-${l4vConfig.arch}.py";
 
   preTargetDir = runCommand "graph-refine-initial-target-dir" {
-    inherit preprocessedKernelsAreIdentical;
+    inherit preprocessedKernelsAreEquivalent;
   } ''
     mkdir $out
     cp ${kernelWithCParser}/{kernel.elf.rodata,kernel.elf.txt,kernel.elf.symtab} $out
@@ -64,7 +64,7 @@ runCommand "graph-refine${lib.optionalString (name != null) "-${name}"}" {
 
   passthru = {
     inherit
-      preprocessedKernelsAreIdentical
+      preprocessedKernelsAreEquivalent
       preTargetDir
       targetDir
     ;

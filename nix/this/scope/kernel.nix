@@ -9,7 +9,7 @@
 , l4vConfig
 , standaloneCParser
 , mltonForL4v
-, isabelle2020ForL4v
+, isabelleForL4v
 
 , withCParser ? false
 }:
@@ -38,7 +38,7 @@ runCommand "kernel-${if withCParser then "with" else "without"}-cparser" {
   ] ++ lib.optionals withCParser [
     perl
     mltonForL4v
-    isabelle2020ForL4v
+    isabelleForL4v
   ];
 } ''
   export L4V_ARCH=${l4vConfig.arch}

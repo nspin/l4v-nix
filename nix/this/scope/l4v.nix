@@ -1,16 +1,20 @@
 { lib, stdenv
 , runCommand
+, writeText
 , python3Packages
-, haskell, haskellPackages
+, haskellPackages
 , rsync, git, perl, hostname, which, cmake, ninja, dtc, libxml2
+, makeFontsConf
 
 , sources
 , mltonForL4v
 , isabelleForL4v
-, isabelleInitialHeaps
 , texliveEnv
 , ghcWithPackagesForL4v
 , l4vConfig
+
+, breakpointHook, bashInteractive
+, strace
 }:
 
 { name ? null
@@ -22,6 +26,8 @@
 , numJobs ? 1
 , timeouts ? false
 , timeoutScale ? null
+
+, overlay ? null
 
 , buildStandaloneCParser ? false
 , simplExport ? false
@@ -38,6 +44,11 @@
 # TODO
 # Consider exporting the entire top-level
 
+# TODO
+# Debug the following for (at least) justStandaloneCParser:
+# *** Consumer thread failure: "Isabelle.Session.manager"
+# *** Missing session sources entry "/build/src/l4v/tools/c-parser/umm_
+
 assert tests == null -> (exclude == [] && remove == []);
 
 let
@@ -46,6 +57,12 @@ let
     ln -s ${isabelleForL4v} $out/isabelle
     cp -r ${sources.seL4} $out/seL4
     cp -r ${sources.l4v} $out/l4v
+  '';
+
+  # Selected from l4v/misc/etc/settings
+  settings = writeText "settings" ''
+    ML_OPTIONS="-H 1000 --maxheap 10000 --stackspace 64"
+    ISABELLE_BUILD_JAVA_OPTIONS="-Xms2048m -Xmx6096m -Xss4m"
   '';
 
 in
@@ -68,15 +85,21 @@ stdenv.mkDerivation {
 
     l4vConfig.targetCC
     l4vConfig.targetBintools
+
+    # breakpointHook bashInteractive
+    # strace
   ];
 
-  hardeningDisable = [ "all" ];
+  L4V_ARCH = l4vConfig.arch;
+  TOOLPREFIX = l4vConfig.targetPrefix;
 
   # TODO
-  # SKIP_DUPLICATED_PROOFS = 1;
   # What does this do?
   # Is it appropriate?
   # It is set in seL4-CAmkES-L4v-dockerfiles/res/isabelle_settings.
+  SKIP_DUPLICATED_PROOFS = 1;
+
+  FONTCONFIG_FILE = makeFontsConf { fontDirectories = [ ]; };
 
   postPatch = ''
     cd l4v
@@ -87,16 +110,22 @@ stdenv.mkDerivation {
 
     export ISABELLE_HOME=$(./isabelle/bin/isabelle env sh -c 'echo $ISABELLE_HOME')
 
-    export L4V_ARCH=${l4vConfig.arch}
-    export TOOLPREFIX=${l4vConfig.targetPrefix}
-
-    export SKIP_DUPLICATED_PROOFS=1
+    isabelle_home_user=$(./isabelle/bin/isabelle env sh -c 'echo $ISABELLE_HOME_USER')
+    settings_dir=$isabelle_home_user/etc
+    mkdir -p $settings_dir
+    cp ${settings} $settings_dir
 
     mkdir -p $HOME/.cabal
     touch $HOME/.cabal/config
 
-    cp -r ${isabelleInitialHeaps}/* $HOME/.isabelle --no-preserve=ownership,mode
-  '';
+  '' + lib.optionalString (l4vConfig.arch != "X64") (
+    let
+      overlayDir = "spec/cspec/c/overlays/${l4vConfig.arch}";
+      overlayOrDefault = if overlay != null then overlay else "${overlayDir}/default-overlay.dts";
+    in ''
+      cp ${overlayOrDefault} ${overlayDir}/overlay.dts
+    ''
+  );
 
   # TODO wrap './run_tests' in 'time' invocation
   buildPhase = ''

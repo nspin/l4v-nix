@@ -5,7 +5,6 @@
 , gcc9Stdenv
 , polyml
 , mlton
-, mlton20180207
 }:
 
 { l4vConfig
@@ -101,13 +100,7 @@ self: with self; {
 
   decompilation = callPackage ./decompilation.nix {};
 
-  preprocessedKernelsAreIdentical = runCommand "preprocessed-kernels-are-identical" {} ''
-    diff -q --ignore-matching-lines='^#' \
-      ${kernelWithCParser}/kernel_all.c_pp \
-      ${simplExport}/spec/cspec/c/build/${l4vConfig.arch}/kernel_all.c_pp
-
-    touch $out
-  '';
+  preprocessedKernelsAreEquivalent = callPackage ./preprocessed-kernels-are-equivalent.nix {};
 
   cFunctionsTxt = "${simplExport}/proof/asmrefine/export/${l4vConfig.arch}/CFunDump.txt";
 
@@ -169,8 +162,6 @@ self: with self; {
   isabelle2020ForL4v = callPackage ./deps/isabelle-2020-for-l4v {};
   isabelle2023ForL4v = callPackage ./deps/isabelle-2023-for-l4v {};
 
-  isabelleInitialHeaps = callPackage ./isabelle-initial-heaps.nix {};
-
   sonolarBinary = callPackage ./deps/solvers-for-graph-refine/sonolar-binary.nix {};
   cvc4BinaryFromIsabelle = callPackage ./deps/solvers-for-graph-refine/cvc4-binary-from-isabelle.nix {};
   cvc4Binary = callPackage ./deps/solvers-for-graph-refine/cvc4-binary.nix {};
@@ -187,9 +178,9 @@ self: with self; {
     configureFlags = [ "--enable-shared" ];
   });
 
-  mltonForL4v = mlton20180207;
+  mltonForL4v = mlton;
 
-  isabelleForL4v = isabelle2020ForL4v;
+  isabelleForL4v = isabelle2023ForL4v;
 
   ### aggregate ###
 
@@ -203,7 +194,7 @@ self: with self; {
     hol4
   ] ++ lib.optionals l4vConfig.bvSupport [
     decompilation
-    preprocessedKernelsAreIdentical
+    preprocessedKernelsAreEquivalent
     graphRefine.functions
     graphRefine.coverage
     graphRefine.demo
