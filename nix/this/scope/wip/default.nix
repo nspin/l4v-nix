@@ -34,7 +34,7 @@ in rec {
       };
       l4vSource = builtins.fetchGit {
         url = "https://github.com/seL4/l4v";
-        rev = "e51ea954278db48c20dc5132bbbbcb54b511433f";
+        rev = "6700d97b7f0593dbf5d8145ee43f1e151553dea0";
       };
       isabelleVersion = "2020";
       stackLTSAttr = "lts_13_15";
