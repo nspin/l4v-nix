@@ -159,8 +159,8 @@ self: with self; {
 
   ghcWithPackagesForL4v = callPackage  ./deps/ghc-with-packages-for-l4v {};
 
-  isabelle2020ForL4v = callPackage ./deps/isabelle-2020-for-l4v {};
-  isabelle2023ForL4v = callPackage ./deps/isabelle-2023-for-l4v {};
+  isabelle2020ForL4v = callPackage ./deps/isabelle-for-l4v/2020 {};
+  isabelle2023ForL4v = callPackage ./deps/isabelle-for-l4v/2023 {};
 
   sonolarBinary = callPackage ./deps/solvers-for-graph-refine/sonolar-binary.nix {};
   cvc4BinaryFromIsabelle = callPackage ./deps/solvers-for-graph-refine/cvc4-binary-from-isabelle.nix {};
