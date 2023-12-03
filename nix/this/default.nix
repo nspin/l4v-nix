@@ -10,6 +10,8 @@ rec {
 
   mkL4vConfig =
     { arch
+    , features ? ""
+    , plat ? ""
     , targetCCWrapperAttr ? "gcc8"
     , targetCCWrapper ? targetPkgsByL4vArch."${arch}".buildPackages."${targetCCWrapperAttr}"
     , targetCC ? targetCCWrapper.cc
@@ -19,7 +21,12 @@ rec {
     , bvSupport ? arch == "ARM"
     }:
     {
-      inherit arch optLevel targetCC targetBintools targetPrefix bvSupport;
+      inherit
+        arch features plat
+        targetCC targetBintools targetPrefix
+        optLevel
+        bvSupport
+      ;
     };
 
   archs = {

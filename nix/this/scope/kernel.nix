@@ -29,6 +29,7 @@ let
 
 in
 runCommand "kernel-${if withCParser then "with" else "without"}-cparser" {
+
   nativeBuildInputs = [
     cmake ninja
     dtc libxml2
@@ -40,21 +41,27 @@ runCommand "kernel-${if withCParser then "with" else "without"}-cparser" {
     mltonForL4v
     isabelleForL4v
   ];
+
+  L4V_ARCH = l4vConfig.arch;
+  L4V_FEATURES = l4vConfig.features;
+  L4V_PLAT = l4vConfig.plat;
+  TOOLPREFIX = l4vConfig.targetPrefix;
+
+  OBJDUMP = "${TOOLPREFIX}objdump";
+
+  L4V_REPO_PATH = l4vPath;
+  SOURCE_ROOT = sources.seL4;
+
+  KERNEL_CMAKE_EXTRA_OPTIONS = "-DKernelOptimisation=${l4vConfig.optLevel}";
+
 } ''
-  export L4V_ARCH=${l4vConfig.arch}
-  export TOOLPREFIX=${l4vConfig.targetPrefix}
-  export KERNEL_CMAKE_EXTRA_OPTIONS=-DKernelOptimisation=${l4vConfig.optLevel}
-  export KERNEL_BUILD_ROOT=$out
-
-  export L4V_REPO_PATH=${l4vPath}
-  export SOURCE_ROOT=${sources.seL4}
-
-  export OBJDUMP=''${TOOLPREFIX}objdump
+  export HOME=$(mktemp -d --suffix=-home)
 
   ${lib.optionalString withCParser ''
-    export HOME=$(mktemp -d --suffix=-home)
     export ISABELLE_HOME=$(isabelle env sh -c 'echo $ISABELLE_HOME')
   ''}
+
+  export KERNEL_BUILD_ROOT=$out
 
   make -f ${l4vPath + "/spec/cspec/c/kernel.mk"} \
     ${lib.concatMapStringsSep " " (file: "$KERNEL_BUILD_ROOT/${file}") files}

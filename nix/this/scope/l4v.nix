@@ -1,17 +1,17 @@
 { lib, stdenv
 , runCommand
 , writeText
+, makeFontsConf
 , python3Packages
 , haskellPackages
 , rsync, git, perl, hostname, which, cmake, ninja, dtc, libxml2
-, makeFontsConf
 
 , sources
+, l4vConfig
 , mltonForL4v
 , isabelleForL4v
 , texliveEnv
 , ghcWithPackagesForL4v
-, l4vConfig
 
 , breakpointHook, bashInteractive
 , strace
@@ -83,6 +83,8 @@ stdenv.mkDerivation {
   ];
 
   L4V_ARCH = l4vConfig.arch;
+  L4V_FEATURES = l4vConfig.features;
+  L4V_PLAT = l4vConfig.plat;
   TOOLPREFIX = l4vConfig.targetPrefix;
 
   # TODO
@@ -104,6 +106,28 @@ stdenv.mkDerivation {
     sourceRoot=$d/l4v
 
     chmod -R u+w -- $sourceRoot
+  '';
+
+  postPatch = ''
+    cpp_files="
+      tools/c-parser/isar_install.ML
+      tools/c-parser/standalone-parser/tokenizer.sml
+      tools/c-parser/standalone-parser/main.sml
+      tools/c-parser/testfiles/jiraver313.thy
+      "
+    for x in $cpp_files; do
+      substituteInPlace $x --replace \
+        /usr/bin/cpp \
+        ${l4vConfig.targetCC}/bin/${l4vConfig.targetPrefix}cpp
+    done
+
+    substituteInPlace spec/Makefile --replace \
+      '$(ASPEC_GITREV_FILE): .FORCE' \
+      '$(ASPEC_GITREV_FILE):'
+
+    pwd | tr -d '\n' > spec/abstract/document/git-root.tex
+
+    echo -n unknown > spec/abstract/document/gitrev.tex
   '';
 
   configurePhase = ''

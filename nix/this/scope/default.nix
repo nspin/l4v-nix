@@ -33,7 +33,7 @@ self: with self; {
       graphRefine
     ;
     seL4 = callPackage ./patched-sel4-source.nix {};
-    l4v = callPackage ./patched-l4v-source.nix {};
+    l4v = callPackage ./patched-l4v-source {};
   };
 
   ### tools and proofs ###
@@ -226,11 +226,10 @@ self: with self; {
   ]);
 
   cachedWhenBVSupport = writeText "cached" (toString [
-    # graphRefineInputsViaMake
   ]);
 
   cachedForAll = writeText "cached" (toString (
-    # Fails only with X64-O1, all GCC versions
+    # Fails only with X64-O1 (all GCC versions)
     lib.optionals (!(l4vConfig.arch == "X64" && l4vConfig.optLevel == "-O1")) [
       kernelWithoutCParser
     ]

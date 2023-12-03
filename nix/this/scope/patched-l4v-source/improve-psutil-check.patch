@@ -1,0 +1,20 @@
+diff --git a/misc/regression/memusage.py b/misc/regression/memusage.py
+index ee05d94d0..e30077dca 100755
+--- a/misc/regression/memusage.py
++++ b/misc/regression/memusage.py
+@@ -19,9 +19,13 @@ import time
+ PSUTIL_NOT_AVAILABLE = False
+ try:
+     import psutil
+-    if not hasattr(psutil.Process, "children") and hasattr(psutil.Process, "get_children"):
++    if not hasattr(psutil.Process, "children"):
++        if not hasattr(psutil.Process, "get_children"):
++            raise ImportError()
+         psutil.Process.children = psutil.Process.get_children
+-    if not hasattr(psutil.Process, "memory_maps") and hasattr(psutil.Process, "get_memory_maps"):
++    if not hasattr(psutil.Process, "memory_maps"):
++        if not hasattr(psutil.Process, "get_memory_maps"):
++            raise ImportError()
+         psutil.Process.memory_maps = psutil.Process.get_memory_maps
+ 
+ except ImportError:
