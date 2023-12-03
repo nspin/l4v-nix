@@ -20,21 +20,11 @@ self: with self; {
 
   relativeToProjectsDir = path: projectsDir + "/${path}";
 
-  rawSources = {
-    seL4 = lib.cleanSource (relativeToProjectsDir "seL4");
-    l4v = lib.cleanSource (relativeToProjectsDir "l4v");
-    hol4 = lib.cleanSource (relativeToProjectsDir "HOL4");
-    graphRefine = lib.cleanSource (relativeToProjectsDir "graph-refine");
-  };
+  hol4Source = lib.cleanSource (relativeToProjectsDir "HOL4");
+  graphRefineSource = lib.cleanSource (relativeToProjectsDir "graph-refine");
 
-  sources = {
-    inherit (rawSources)
-      hol4
-      graphRefine
-    ;
-    seL4 = callPackage ./patched-sel4-source {};
-    l4v = callPackage ./patched-l4v-source {};
-  };
+  patchedSeL4Source = callPackage ./patched-sel4-source {};
+  patchedL4vSource = callPackage ./patched-l4v-source {};
 
   ### tools and proofs ###
 

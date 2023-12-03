@@ -6,7 +6,8 @@
 , haskellPackages
 , rsync, git, perl, hostname, which, cmake, ninja, dtc, libxml2
 
-, sources
+, patchedSeL4Source
+, patchedL4vSource
 , scopeConfig
 , mltonForL4v
 , isabelleForL4v
@@ -100,8 +101,8 @@ stdenv.mkDerivation {
 
     mkdir $d
     ln -s ${isabelleForL4v} $d/isabelle
-    ln -s ${sources.seL4} $d/seL4
-    cp -r ${sources.l4v} $d/l4v
+    ln -s ${patchedSeL4Source} $d/seL4
+    cp -r ${patchedL4vSource} $d/l4v
 
     sourceRoot=$d/l4v
 

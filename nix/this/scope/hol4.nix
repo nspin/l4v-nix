@@ -2,15 +2,15 @@
 , graphviz
 , python3, perl
 
-, sources
 , polymlForHol4
 , mltonForHol4
+, hol4Source
 }:
 
 stdenvForHol4.mkDerivation {
   name = "hol4";
 
-  src = sources.hol4;
+  src = hol4Source;
 
   buildInputs = [
     polymlForHol4 mltonForHol4

@@ -5,7 +5,8 @@
 , python3Packages
 , perl
 
-, sources
+, patchedSeL4Source
+, patchedL4vSource
 , scopeConfig
 , standaloneCParser
 , mltonForL4v
@@ -29,7 +30,7 @@ let
     "kernel.sigs"
   ];
 
-  l4vPath = if withCParser then standaloneCParser else sources.l4v;
+  l4vPath = if withCParser then standaloneCParser else patchedL4vSource;
 
 in
 runCommand "kernel-${if withCParser then "with" else "without"}-cparser" {
@@ -54,7 +55,7 @@ runCommand "kernel-${if withCParser then "with" else "without"}-cparser" {
   OBJDUMP = "${scopeConfig.targetPrefix}objdump";
 
   L4V_REPO_PATH = l4vPath;
-  SOURCE_ROOT = sources.seL4;
+  SOURCE_ROOT = patchedSeL4Source;
 
   KERNEL_CMAKE_EXTRA_OPTIONS = "-DKernelOptimisation=${scopeConfig.optLevel}";
 

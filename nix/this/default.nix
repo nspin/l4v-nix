@@ -19,6 +19,8 @@ rec {
     , targetPrefix ? targetCCWrapper.targetPrefix
     , optLevel ? "-O1"
     , bvSupport ? arch == "ARM"
+    , seL4Source ? lib.cleanSource ../../projects/seL4
+    , l4vSource ? lib.cleanSource ../../projects/l4v
     }:
     {
       inherit
@@ -26,6 +28,8 @@ rec {
         targetCC targetBintools targetPrefix
         optLevel
         bvSupport
+        seL4Source
+        l4vSource
       ;
     };
 

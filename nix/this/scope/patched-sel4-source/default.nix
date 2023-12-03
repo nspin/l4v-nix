@@ -1,13 +1,13 @@
 { stdenv
 , python3
 , cmake
-, rawSources
+, scopeConfig
 }:
 
 stdenv.mkDerivation {
   name = "sel4-source";
 
-  src = rawSources.seL4;
+  src = scopeConfig.seL4Source;
 
   phases = [ "unpackPhase" "patchPhase" "installPhase" ];
 

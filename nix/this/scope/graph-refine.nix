@@ -4,19 +4,19 @@
 , python3Packages
 , git
 
-, sources
 , scopeConfig
 , kernelWithCParser
 , preprocessedKernelsAreEquivalent
 , cFunctionsTxt
 , asmFunctionsTxt
 , graphRefineSolverLists
+, graphRefineSource
 }:
 
 { name ? null
 , extraNativeBuildInputs ? []
 , solverList ? graphRefineSolverLists.default
-, source ? sources.graphRefine
+, source ? graphRefineSource
 , args ? []
 , keepSMTDumps ? false
 , commands ? ''

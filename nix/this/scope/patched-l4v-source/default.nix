@@ -1,13 +1,12 @@
 { stdenv
 , python3
-, rawSources
 , scopeConfig
 }:
 
 stdenv.mkDerivation {
   name = "l4v-source";
 
-  src = rawSources.l4v;
+  src = scopeConfig.l4vSource;
 
   phases = [ "unpackPhase" "patchPhase" "installPhase" ];
 

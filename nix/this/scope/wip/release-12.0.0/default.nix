@@ -186,7 +186,7 @@ in rec {
 }
 
 # source = tmpSource;
-# source = sources.graphRefine;
+# source = graphRefineSource;
 # solverList = graphRefineSolverLists.experimental;
 # solverList = with graphRefineSolverLists; writeText "solverlist" ''
 #   CVC4: online: ${cvc4BinaryExe} --incremental --lang smt --tlimit=0

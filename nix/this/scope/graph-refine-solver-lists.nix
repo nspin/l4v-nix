@@ -3,7 +3,7 @@
 , z3
 , yices
 
-, sources
+, graphRefineSource
 
 , cvc4BinaryFromIsabelle
 , cvc4Binary
@@ -26,7 +26,7 @@ rec {
 
   default = matt;
 
-  mattFn = import (sources.graphRefine + "/nix/solvers.nix");
+  mattFn = import (graphRefineSource + "/nix/solvers.nix");
 
   mattDir = (mattFn { use_sonolar = false; }).solverlist;
 
