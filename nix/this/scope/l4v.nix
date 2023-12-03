@@ -52,14 +52,8 @@
 assert tests == null -> (exclude == [] && remove == []);
 
 let
-  src = runCommand "src" {} ''
-    mkdir $out
-    ln -s ${isabelleForL4v} $out/isabelle
-    cp -r ${sources.seL4} $out/seL4
-    cp -r ${sources.l4v} $out/l4v
-  '';
-
   # Selected from l4v/misc/etc/settings
+  # TODO tune
   settings = writeText "settings" ''
     ML_OPTIONS="-H 1000 --maxheap 10000 --stackspace 64"
     ISABELLE_BUILD_JAVA_OPTIONS="-Xms2048m -Xmx6096m -Xss4m"
@@ -68,8 +62,6 @@ let
 in
 stdenv.mkDerivation {
   name = "l4v${lib.optionalString (name != null) "-${name}"}";
-
-  inherit src;
 
   nativeBuildInputs = [
     rsync git perl hostname which cmake ninja dtc libxml2
@@ -101,8 +93,17 @@ stdenv.mkDerivation {
 
   FONTCONFIG_FILE = makeFontsConf { fontDirectories = [ ]; };
 
-  postPatch = ''
-    cd l4v
+  unpackPhase = ''
+    d=src
+
+    mkdir $d
+    ln -s ${isabelleForL4v} $d/isabelle
+    ln -s ${sources.seL4} $d/seL4
+    cp -r ${sources.l4v} $d/l4v
+
+    sourceRoot=$d/l4v
+
+    chmod -R u+w -- $sourceRoot
   '';
 
   configurePhase = ''
@@ -123,7 +124,9 @@ stdenv.mkDerivation {
       overlayDir = "spec/cspec/c/overlays/${l4vConfig.arch}";
       overlayOrDefault = if overlay != null then overlay else "${overlayDir}/default-overlay.dts";
     in ''
-      cp ${overlayOrDefault} ${overlayDir}/overlay.dts
+      if [ -e ${overlayDir} ]; then
+        cp ${overlayOrDefault} ${overlayDir}/overlay.dts
+      fi
     ''
   );
 
