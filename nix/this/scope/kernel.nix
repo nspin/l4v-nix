@@ -14,6 +14,10 @@
 , withCParser ? false
 }:
 
+# NOTE
+# CONFIG_OPTIMISATION is more correct but KERNEL_CMAKE_EXTRA_OPTIONS is more
+# backwards-compatible.
+
 let
   files = [
     "kernel_all.c_pp"

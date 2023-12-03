@@ -78,7 +78,7 @@ stdenv.mkDerivation {
     scopeConfig.targetCC
     scopeConfig.targetBintools
 
-    breakpointHook bashInteractive
+    # breakpointHook bashInteractive
     # strace
   ];
 
@@ -128,6 +128,10 @@ stdenv.mkDerivation {
     pwd | tr -d '\n' > spec/abstract/document/git-root.tex
 
     echo -n unknown > spec/abstract/document/gitrev.tex
+
+    substituteInPlace spec/ROOT --replace \
+      'document=pdf' \
+      'document=pdf, document_output="output"'
   '';
 
   configurePhase = ''
@@ -138,7 +142,7 @@ stdenv.mkDerivation {
     isabelle_home_user=$(./isabelle/bin/isabelle env sh -c 'echo $ISABELLE_HOME_USER')
     settings_dir=$isabelle_home_user/etc
     mkdir -p $settings_dir
-    cp ${settings} $settings_dir
+    cp ${settings} $settings_dir/settings
 
     mkdir -p $HOME/.cabal
     touch $HOME/.cabal/config
@@ -157,7 +161,7 @@ stdenv.mkDerivation {
   # TODO wrap './run_tests' in 'time' invocation
   buildPhase = ''
     ${lib.optionalString (tests != null) ''
-      ./run_tests \
+      time ./run_tests \
         ${lib.optionalString verbose "-v"} \
         ${lib.optionalString (!timeouts) "--no-timeouts"} \
         ${lib.optionalString (timeoutScale != null) "--scale-timeouts ${toString timeoutScale}"} \
@@ -166,19 +170,15 @@ stdenv.mkDerivation {
         ${lib.concatMapStringsSep " " (test: "-r ${test}") remove} \
         ${lib.concatStringsSep " " tests}
 
-      ${lib.optionalString (lib.elem "ASpec" tests) ''
-        cp -v \
-          $HOME/.isabelle/Isabelle*/browser_info/Specifications/ASpec/document.pdf \
-          spec/abstract
-      ''}
+      rm -rf spec/abstract/output/document
     ''}
 
     ${lib.optionalString buildStandaloneCParser ''
-      make -C tools/c-parser/standalone-parser standalone-cparser
+      time make -C tools/c-parser/standalone-parser standalone-cparser
     ''}
 
     ${lib.optionalString simplExport ''
-      make -C proof/ SimplExport
+      time make -C proof/ SimplExport
     ''}
   '' + lib.optionalString isabelleLink ''
     ln -sfT ${isabelleForL4v} isabelle
