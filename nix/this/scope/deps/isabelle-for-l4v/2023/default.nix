@@ -1,5 +1,4 @@
-{
-}:
+{ }:
 
 let
   nixpkgsSource = builtins.fetchGit rec {

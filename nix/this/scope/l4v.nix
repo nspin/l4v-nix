@@ -78,7 +78,7 @@ stdenv.mkDerivation {
     scopeConfig.targetCC
     scopeConfig.targetBintools
 
-    # breakpointHook bashInteractive
+    breakpointHook bashInteractive
     # strace
   ];
 

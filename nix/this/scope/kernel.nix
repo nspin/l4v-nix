@@ -47,7 +47,7 @@ runCommand "kernel-${if withCParser then "with" else "without"}-cparser" {
   L4V_PLAT = scopeConfig.plat;
   TOOLPREFIX = scopeConfig.targetPrefix;
 
-  OBJDUMP = "${TOOLPREFIX}objdump";
+  OBJDUMP = "${scopeConfig.targetPrefix}objdump";
 
   L4V_REPO_PATH = l4vPath;
   SOURCE_ROOT = sources.seL4;

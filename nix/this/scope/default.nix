@@ -32,7 +32,7 @@ self: with self; {
       hol4
       graphRefine
     ;
-    seL4 = callPackage ./patched-sel4-source.nix {};
+    seL4 = callPackage ./patched-sel4-source {};
     l4v = callPackage ./patched-l4v-source {};
   };
 
