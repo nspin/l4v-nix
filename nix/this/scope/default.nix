@@ -12,18 +12,26 @@
 { scopeConfig
 }:
 
-self: with self; {
+# scopeConfig gymnastics allow for overriding
 
-  inherit scopeConfig;
+let
+  origScopeConifig = scopeConfig;
+in
+
+self:
+
+let
+  scopeConfig = self.scopeConfig;
+in
+
+with self; {
+
+  scopeConfig = origScopeConifig;
 
   ### sources ###
 
-  projectsDir = ../../../projects;
-
-  relativeToProjectsDir = path: projectsDir + "/${path}";
-
-  hol4Source = lib.cleanSource (relativeToProjectsDir "HOL4");
-  graphRefineSource = lib.cleanSource (relativeToProjectsDir "graph-refine");
+  hol4Source = lib.cleanSource ../../../projects/HOL4;
+  graphRefineSource = lib.cleanSource ../../../projects/graph-refine;
 
   patchedSeL4Source = callPackage ./patched-sel4-source {};
   patchedL4vSource = callPackage ./patched-l4v-source {};

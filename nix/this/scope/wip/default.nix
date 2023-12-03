@@ -10,12 +10,14 @@
 , bashInteractive
 , strace
 
+, scopeConfig
 , l4vWith
 , graphRefine
 , graphRefineWith
 , graphRefineSolverLists
 
 , this
+, overrideScope
 }:
 
 let
@@ -23,7 +25,23 @@ let
 
 in rec {
 
-  hs = l4vWith {
+  r12 = overrideScope (self: super: {
+    scopeConfig = super.scopeConfig.override {
+      # seL4-12.0.0
+      seL4Source = builtins.fetchGit {
+        url = "https://github.com/seL4/seL4";
+        rev = "dc83859f6a220c04f272be17406a8d59de9c8fbf";
+      };
+      l4vSource = builtins.fetchGit {
+        url = "https://github.com/seL4/l4v";
+        rev = "e51ea954278db48c20dc5132bbbbcb54b511433f";
+      };
+      isabelleVersion = "2020";
+      stackLTSAttr = "lts_13_15";
+    };
+  });
+
+  hs = r12.l4vWith {
     tests = [
       "HaskellKernel"
     ];

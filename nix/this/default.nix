@@ -82,7 +82,7 @@ rec {
     lib.flip lib.mapAttrs targetCCWrapperAttrs (_: targetCCWrapperAttr:
       lib.flip lib.mapAttrs optLevels (_: optLevel:
         mkScope {
-          scopeConfig = mkScopeConfig {
+          scopeConfig = lib.makeOverridable mkScopeConfig {
             inherit arch targetCCWrapperAttr optLevel;
           };
         }
