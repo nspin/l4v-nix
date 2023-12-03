@@ -21,6 +21,7 @@ rec {
     , bvSupport ? arch == "ARM"
     , seL4Source ? lib.cleanSource ../../projects/seL4
     , l4vSource ? lib.cleanSource ../../projects/l4v
+    , isabelleVersion ? "2023"
     }:
     {
       inherit
@@ -30,6 +31,7 @@ rec {
         bvSupport
         seL4Source
         l4vSource
+        isabelleVersion
       ;
     };
 

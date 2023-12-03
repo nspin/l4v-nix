@@ -9,7 +9,6 @@
 , patchedSeL4Source
 , patchedL4vSource
 , scopeConfig
-, mltonForL4v
 , isabelleForL4v
 , texliveEnv
 , ghcWithPackagesForL4v
@@ -67,7 +66,7 @@ stdenv.mkDerivation {
   nativeBuildInputs = [
     rsync git perl hostname which cmake ninja dtc libxml2
 
-    mltonForL4v
+    isabelleForL4v.mlton
 
     ghcWithPackagesForL4v
     haskellPackages.cabal-install

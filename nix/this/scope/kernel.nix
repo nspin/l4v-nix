@@ -8,7 +8,6 @@
 , patchedSeL4Source
 , scopeConfig
 , standaloneCParser
-, mltonForL4v
 , isabelleForL4v
 }:
 
@@ -36,8 +35,8 @@ runCommand "kernel" {
     scopeConfig.targetCC
     scopeConfig.targetBintools
     perl
-    mltonForL4v
     isabelleForL4v
+    isabelleForL4v.mlton
   ];
 
   L4V_ARCH = scopeConfig.arch;
