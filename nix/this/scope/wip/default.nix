@@ -10,7 +10,7 @@
 , bashInteractive
 , strace
 
-, sources
+, l4vWith
 , graphRefine
 , graphRefineWith
 , graphRefineSolverLists
@@ -22,6 +22,12 @@ let
   tmpSource = lib.cleanSource ../../../../tmp/graph-refine;
 
 in rec {
+
+  hs = l4vWith {
+    tests = [
+      "HaskellKernel"
+    ];
+  };
 
   prime = writeText "prime" (toString (lib.flatten [
     all
@@ -37,7 +43,7 @@ in rec {
       scope = this.byConfig.${archName}.${targetCCWrapperAttrName}.${optLevelName};
     in
       lib.optionals scope.scopeConfig.bvSupport [
-        scope.graphRefine.all
+        scope.graphRefine.demo
       ]
   );
 

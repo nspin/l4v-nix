@@ -22,6 +22,7 @@ rec {
     , seL4Source ? lib.cleanSource ../../projects/seL4
     , l4vSource ? lib.cleanSource ../../projects/l4v
     , isabelleVersion ? "2023"
+    , stackLTSAttr ? "lts_20_25"
     }:
     {
       inherit
@@ -32,6 +33,7 @@ rec {
         seL4Source
         l4vSource
         isabelleVersion
+        stackLTSAttr
       ;
     };
 

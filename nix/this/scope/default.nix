@@ -143,7 +143,7 @@ self: with self; {
     ;
   };
 
-  ghcWithPackagesForL4v = callPackage  ./deps/ghc-with-packages-for-l4v {};
+  ghcWithPackagesForL4vByLTS = callPackage  ./deps/ghc-with-packages-for-l4v {};
 
   withMLton = mlton: lib.extendDerivation true { inherit mlton; };
 
@@ -170,6 +170,8 @@ self: with self; {
     "2020" = isabelle2020ForL4v;
     "2023" = isabelle2023ForL4v;
   }.${scopeConfig.isabelleVersion};
+
+  ghcWithPackagesForL4v = ghcWithPackagesForL4vByLTS.${scopeConfig.stackLTSAttr};
 
   ### aggregate ###
 
