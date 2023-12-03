@@ -151,8 +151,8 @@ self: with self; {
   isabelle2023ForL4v = withMLton mlton20210107 (callPackage ./deps/isabelle-for-l4v/2023 {});
 
   sonolarBinary = callPackage ./deps/solvers-for-graph-refine/sonolar-binary.nix {};
-  cvc4BinaryFromIsabelle = callPackage ./deps/solvers-for-graph-refine/cvc4-binary-from-isabelle.nix {};
-  cvc4Binary = callPackage ./deps/solvers-for-graph-refine/cvc4-binary.nix {};
+  cvc4BinariesFromIsabelle = callPackage ./deps/solvers-for-graph-refine/cvc4-binaries-from-isabelle.nix {};
+  cvc4Binaries = callPackage ./deps/solvers-for-graph-refine/cvc4-binaries.nix {};
   cvc5Binary = callPackage ./deps/solvers-for-graph-refine/cvc5-binary.nix {};
   mathsat5Binary = callPackage ./deps/solvers-for-graph-refine/mathsat5-binary.nix {};
 

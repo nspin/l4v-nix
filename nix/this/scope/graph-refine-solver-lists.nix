@@ -5,8 +5,8 @@
 
 , graphRefineSource
 
-, cvc4BinaryFromIsabelle
-, cvc4Binary
+, cvc4BinariesFromIsabelle
+, cvc4Binaries
 , cvc5Binary
 , sonolarBinary
 , mathsat5Binary
@@ -14,7 +14,7 @@
 
 rec {
 
-  selectedCVC4Binary = cvc4BinaryFromIsabelle.v1_5_3;
+  selectedCVC4Binary = cvc4BinariesFromIsabelle.v1_5_3;
   # selectedCVC4Binary = cvc4Binary.v1_5;
 
   cvc4BinaryExe = "${selectedCVC4Binary}/bin/cvc4";
