@@ -3,7 +3,7 @@
 
 , scopeConfig
 , simplExport
-, kernelWithCParser
+, kernel
 }:
 
 # TODO
@@ -15,7 +15,7 @@ runCommand "preprocessed-kernels-are-identical" {} ''
       --ignore-matching-lines='^#' \
       --ignore-matching-lines='^/\*[^*]*\*/$' \
       --ignore-matching-lines='^$' \
-      ${kernelWithCParser}/kernel_all.c_pp \
+      ${kernel}/kernel_all.c_pp \
       ${simplExport}/spec/cspec/c/build/${scopeConfig.arch}/kernel_all.c_pp
   }
 

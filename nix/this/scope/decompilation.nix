@@ -4,7 +4,7 @@
 , git
 
 , hol4
-, kernelWithCParser
+, kernel
 }:
 
 let
@@ -31,7 +31,7 @@ runCommand "decompilation" {
   ln -s ${hol4} $hol_dir
 
   mkdir $target_dir
-  cp ${kernelWithCParser}/{kernel.elf.txt,kernel.sigs} target
+  cp ${kernel}/{kernel.elf.txt,kernel.sigs} target
 
   substitute ${scriptIn} $script --subst-var-by path $target_dir/kernel
 

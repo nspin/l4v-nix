@@ -6,13 +6,10 @@
 , perl
 
 , patchedSeL4Source
-, patchedL4vSource
 , scopeConfig
 , standaloneCParser
 , mltonForL4v
 , isabelleForL4v
-
-, withCParser ? false
 }:
 
 # NOTE
@@ -26,14 +23,11 @@ let
     "kernel.elf.rodata"
     "kernel.elf.txt"
     "kernel.elf.symtab"
-  ] ++ lib.optionals withCParser [
     "kernel.sigs"
   ];
 
-  l4vPath = if withCParser then standaloneCParser else patchedL4vSource;
-
 in
-runCommand "kernel-${if withCParser then "with" else "without"}-cparser" {
+runCommand "kernel" {
 
   nativeBuildInputs = [
     cmake ninja
@@ -41,7 +35,6 @@ runCommand "kernel-${if withCParser then "with" else "without"}-cparser" {
     python3Packages.sel4-deps
     scopeConfig.targetCC
     scopeConfig.targetBintools
-  ] ++ lib.optionals withCParser [
     perl
     mltonForL4v
     isabelleForL4v
@@ -54,7 +47,7 @@ runCommand "kernel-${if withCParser then "with" else "without"}-cparser" {
 
   OBJDUMP = "${scopeConfig.targetPrefix}objdump";
 
-  L4V_REPO_PATH = l4vPath;
+  L4V_REPO_PATH = standaloneCParser;
   SOURCE_ROOT = patchedSeL4Source;
 
   KERNEL_CMAKE_EXTRA_OPTIONS = "-DKernelOptimisation=${scopeConfig.optLevel}";
@@ -62,12 +55,10 @@ runCommand "kernel-${if withCParser then "with" else "without"}-cparser" {
 } ''
   export HOME=$(mktemp -d --suffix=-home)
 
-  ${lib.optionalString withCParser ''
-    export ISABELLE_HOME=$(isabelle env sh -c 'echo $ISABELLE_HOME')
-  ''}
+  export ISABELLE_HOME=$(isabelle env sh -c 'echo $ISABELLE_HOME')
 
   export KERNEL_BUILD_ROOT=$out
 
-  make -f ${l4vPath + "/spec/cspec/c/kernel.mk"} \
+  make -f $L4V_REPO_PATH/spec/cspec/c/kernel.mk \
     ${lib.concatMapStringsSep " " (file: "$KERNEL_BUILD_ROOT/${file}") files}
 ''

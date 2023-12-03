@@ -28,13 +28,7 @@ self: with self; {
 
   ### tools and proofs ###
 
-  kernelWithoutCParser = callPackage ./kernel.nix {
-    withCParser = false;
-  };
-
-  kernelWithCParser = kernelWithoutCParser.override {
-    withCParser = true;
-  };
+  kernel = callPackage ./kernel.nix {};
 
   l4vWith = callPackage ./l4v.nix {};
 
@@ -175,8 +169,7 @@ self: with self; {
   ### aggregate ###
 
   slow = writeText "slow" (toString ([
-    kernelWithCParser
-    kernelWithoutCParser
+    kernel
     justStandaloneCParser
     justSimplExport
     minimalBinaryVerificationInputs
@@ -221,7 +214,7 @@ self: with self; {
   cachedForAll = writeText "cached" (toString (
     # Fails only with X64-O1 (all GCC versions)
     lib.optionals (!(scopeConfig.arch == "X64" && scopeConfig.optLevel == "-O1")) [
-      kernelWithoutCParser
+      kernel
     ]
   ));
 

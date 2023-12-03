@@ -5,7 +5,7 @@
 , git
 
 , scopeConfig
-, kernelWithCParser
+, kernel
 , preprocessedKernelsAreEquivalent
 , cFunctionsTxt
 , asmFunctionsTxt
@@ -31,7 +31,7 @@ let
     inherit preprocessedKernelsAreEquivalent;
   } ''
     mkdir $out
-    cp ${kernelWithCParser}/{kernel.elf.rodata,kernel.elf.txt,kernel.elf.symtab} $out
+    cp ${kernel}/{kernel.elf.rodata,kernel.elf.txt,kernel.elf.symtab} $out
     cp ${cFunctionsTxt} $out/CFunctions.txt
     cp ${asmFunctionsTxt} $out/kernel_mc_graph.txt
     cp ${targetPy} $out/target.py
