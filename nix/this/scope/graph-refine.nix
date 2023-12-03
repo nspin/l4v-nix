@@ -5,7 +5,7 @@
 , git
 
 , sources
-, l4vConfig
+, scopeConfig
 , kernelWithCParser
 , preprocessedKernelsAreEquivalent
 , cFunctionsTxt
@@ -25,7 +25,7 @@
 }:
 
 let
-  targetPy = source + "/seL4-example/target-${l4vConfig.arch}.py";
+  targetPy = source + "/seL4-example/target-${scopeConfig.arch}.py";
 
   preTargetDir = runCommand "graph-refine-initial-target-dir" {
     inherit preprocessedKernelsAreEquivalent;

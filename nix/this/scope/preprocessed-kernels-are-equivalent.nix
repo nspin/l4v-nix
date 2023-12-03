@@ -1,7 +1,7 @@
 { lib
 , runCommand
 
-, l4vConfig
+, scopeConfig
 , simplExport
 , kernelWithCParser
 }:
@@ -16,7 +16,7 @@ runCommand "preprocessed-kernels-are-identical" {} ''
       --ignore-matching-lines='^/\*[^*]*\*/$' \
       --ignore-matching-lines='^$' \
       ${kernelWithCParser}/kernel_all.c_pp \
-      ${simplExport}/spec/cspec/c/build/${l4vConfig.arch}/kernel_all.c_pp
+      ${simplExport}/spec/cspec/c/build/${scopeConfig.arch}/kernel_all.c_pp
   }
 
   # Show both diff and paths if different

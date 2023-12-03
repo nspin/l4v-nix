@@ -7,7 +7,7 @@
 , rsync, git, perl, hostname, which, cmake, ninja, dtc, libxml2
 
 , sources
-, l4vConfig
+, scopeConfig
 , mltonForL4v
 , isabelleForL4v
 , texliveEnv
@@ -75,17 +75,17 @@ stdenv.mkDerivation {
 
     texliveEnv
 
-    l4vConfig.targetCC
-    l4vConfig.targetBintools
+    scopeConfig.targetCC
+    scopeConfig.targetBintools
 
     # breakpointHook bashInteractive
     # strace
   ];
 
-  L4V_ARCH = l4vConfig.arch;
-  L4V_FEATURES = l4vConfig.features;
-  L4V_PLAT = l4vConfig.plat;
-  TOOLPREFIX = l4vConfig.targetPrefix;
+  L4V_ARCH = scopeConfig.arch;
+  L4V_FEATURES = scopeConfig.features;
+  L4V_PLAT = scopeConfig.plat;
+  TOOLPREFIX = scopeConfig.targetPrefix;
 
   # TODO
   # What does this do?
@@ -118,7 +118,7 @@ stdenv.mkDerivation {
     for x in $cpp_files; do
       substituteInPlace $x --replace \
         /usr/bin/cpp \
-        ${l4vConfig.targetCC}/bin/${l4vConfig.targetPrefix}cpp
+        ${scopeConfig.targetCC}/bin/${scopeConfig.targetPrefix}cpp
     done
 
     substituteInPlace spec/Makefile --replace \
@@ -143,9 +143,9 @@ stdenv.mkDerivation {
     mkdir -p $HOME/.cabal
     touch $HOME/.cabal/config
 
-  '' + lib.optionalString (l4vConfig.arch != "X64") (
+  '' + lib.optionalString (scopeConfig.arch != "X64") (
     let
-      overlayDir = "spec/cspec/c/overlays/${l4vConfig.arch}";
+      overlayDir = "spec/cspec/c/overlays/${scopeConfig.arch}";
       overlayOrDefault = if overlay != null then overlay else "${overlayDir}/default-overlay.dts";
     in ''
       if [ -e ${overlayDir} ]; then

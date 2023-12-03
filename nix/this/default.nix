@@ -8,7 +8,7 @@ rec {
 
   mkScope = args: lib.makeScope newScope (callPackage ./scope {} args);
 
-  mkL4vConfig =
+  mkScopeConfig =
     { arch
     , features ? ""
     , plat ? ""
@@ -74,7 +74,7 @@ rec {
     lib.flip lib.mapAttrs targetCCWrapperAttrs (_: targetCCWrapperAttr:
       lib.flip lib.mapAttrs optLevels (_: optLevel:
         mkScope {
-          l4vConfig = mkL4vConfig {
+          scopeConfig = mkScopeConfig {
             inherit arch targetCCWrapperAttr optLevel;
           };
         }
@@ -99,7 +99,7 @@ rec {
       scope = byConfig.${archName}.${targetCCWrapperAttrName}.${optLevelName};
     in [
       scope.cachedForAll
-    ] ++ lib.optionals scope.l4vConfig.bvSupport [
+    ] ++ lib.optionals scope.scopeConfig.bvSupport [
       scope.cachedWhenBVSupport
     ]
   )));

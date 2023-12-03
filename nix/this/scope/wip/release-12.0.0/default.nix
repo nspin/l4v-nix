@@ -168,7 +168,7 @@ in rec {
     let
       scope = this.byConfig.${archName}.${targetCCWrapperAttrName}.${optLevelName};
     in
-      lib.optionals scope.l4vConfig.bvSupport [
+      lib.optionals scope.scopeConfig.bvSupport [
         scope.graphRefineInputsViaMake
       ]
   );

@@ -1,7 +1,7 @@
 { stdenv
 , python3
 , rawSources
-, l4vConfig
+, scopeConfig
 }:
 
 stdenv.mkDerivation {

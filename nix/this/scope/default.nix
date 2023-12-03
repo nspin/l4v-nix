@@ -7,12 +7,12 @@
 , mlton
 }:
 
-{ l4vConfig
+{ scopeConfig
 }:
 
 self: with self; {
 
-  inherit l4vConfig;
+  inherit scopeConfig;
 
   ### sources ###
 
@@ -58,17 +58,17 @@ self: with self; {
   l4vAll = l4vWith {
     name = "all";
     tests = [];
-    buildStandaloneCParser = l4vConfig.bvSupport;
+    buildStandaloneCParser = scopeConfig.bvSupport;
   };
 
   cProofs = l4vWith {
     name = "c-proofs";
     tests = [
       "CRefine"
-    ] ++ lib.optionals l4vConfig.bvSupport [
+    ] ++ lib.optionals scopeConfig.bvSupport [
       "SimplExportAndRefine"
     ];
-    buildStandaloneCParser = l4vConfig.bvSupport;
+    buildStandaloneCParser = scopeConfig.bvSupport;
   };
 
   justStandaloneCParser = l4vWith {
@@ -78,17 +78,17 @@ self: with self; {
 
   justSimplExport = l4vWith {
     name = "simpl-export";
-    simplExport = l4vConfig.bvSupport;
+    simplExport = scopeConfig.bvSupport;
   };
 
   minimalBinaryVerificationInputs = l4vWith {
     name = "minimal-bv-input";
     buildStandaloneCParser = true;
-    simplExport = l4vConfig.bvSupport;
+    simplExport = scopeConfig.bvSupport;
   };
 
   # binaryVerificationInputs = cProofs;
-  binaryVerificationInputs = assert l4vConfig.bvSupport; minimalBinaryVerificationInputs;
+  binaryVerificationInputs = assert scopeConfig.bvSupport; minimalBinaryVerificationInputs;
 
   # standaloneCParser = binaryVerificationInputs;
   # simplExport = binaryVerificationInputs;
@@ -102,7 +102,7 @@ self: with self; {
 
   preprocessedKernelsAreEquivalent = callPackage ./preprocessed-kernels-are-equivalent.nix {};
 
-  cFunctionsTxt = "${simplExport}/proof/asmrefine/export/${l4vConfig.arch}/CFunDump.txt";
+  cFunctionsTxt = "${simplExport}/proof/asmrefine/export/${scopeConfig.arch}/CFunDump.txt";
 
   asmFunctionsTxt = "${decompilation}/kernel_mc_graph.txt";
 
@@ -192,7 +192,7 @@ self: with self; {
     minimalBinaryVerificationInputs
     l4vSpec
     hol4
-  ] ++ lib.optionals l4vConfig.bvSupport [
+  ] ++ lib.optionals scopeConfig.bvSupport [
     decompilation
     preprocessedKernelsAreEquivalent
     graphRefine.functions
@@ -207,12 +207,12 @@ self: with self; {
     slow
     cProofs
     l4vAll
-  ] ++ lib.optionals l4vConfig.bvSupport [
+  ] ++ lib.optionals scopeConfig.bvSupport [
   ]));
 
   slowest = writeText "slowest" (toString ([
     slower
-  ] ++ lib.optionals l4vConfig.bvSupport [
+  ] ++ lib.optionals scopeConfig.bvSupport [
     graphRefine.all
   ]));
 
@@ -230,7 +230,7 @@ self: with self; {
 
   cachedForAll = writeText "cached" (toString (
     # Fails only with X64-O1 (all GCC versions)
-    lib.optionals (!(l4vConfig.arch == "X64" && l4vConfig.optLevel == "-O1")) [
+    lib.optionals (!(scopeConfig.arch == "X64" && scopeConfig.optLevel == "-O1")) [
       kernelWithoutCParser
     ]
   ));

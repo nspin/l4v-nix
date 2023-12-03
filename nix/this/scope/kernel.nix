@@ -6,7 +6,7 @@
 , perl
 
 , sources
-, l4vConfig
+, scopeConfig
 , standaloneCParser
 , mltonForL4v
 , isabelleForL4v
@@ -34,25 +34,25 @@ runCommand "kernel-${if withCParser then "with" else "without"}-cparser" {
     cmake ninja
     dtc libxml2
     python3Packages.sel4-deps
-    l4vConfig.targetCC
-    l4vConfig.targetBintools
+    scopeConfig.targetCC
+    scopeConfig.targetBintools
   ] ++ lib.optionals withCParser [
     perl
     mltonForL4v
     isabelleForL4v
   ];
 
-  L4V_ARCH = l4vConfig.arch;
-  L4V_FEATURES = l4vConfig.features;
-  L4V_PLAT = l4vConfig.plat;
-  TOOLPREFIX = l4vConfig.targetPrefix;
+  L4V_ARCH = scopeConfig.arch;
+  L4V_FEATURES = scopeConfig.features;
+  L4V_PLAT = scopeConfig.plat;
+  TOOLPREFIX = scopeConfig.targetPrefix;
 
   OBJDUMP = "${TOOLPREFIX}objdump";
 
   L4V_REPO_PATH = l4vPath;
   SOURCE_ROOT = sources.seL4;
 
-  KERNEL_CMAKE_EXTRA_OPTIONS = "-DKernelOptimisation=${l4vConfig.optLevel}";
+  KERNEL_CMAKE_EXTRA_OPTIONS = "-DKernelOptimisation=${scopeConfig.optLevel}";
 
 } ''
   export HOME=$(mktemp -d --suffix=-home)
