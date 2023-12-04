@@ -38,31 +38,46 @@ in rec {
       };
       isabelleVersion = "2020";
       stackLTSAttr = "lts_13_15";
+      targetCCWrapperAttr = "gcc49";
     };
   });
 
-  hs = r12.l4vWith {
-    tests = [
-      "HaskellKernel"
-    ];
-  };
+  keep = writeText "kleep" (toString (lib.flatten [
+    r12.graphRefine.all
+    graphRefine.all
+    kernels
+  ]));
+
+  kernels = writeText "x" (toString (this.mkAggregate (
+    { archName, targetCCWrapperAttrName, optLevelName }:
+    let
+      scope = this.byConfig.${archName}.${targetCCWrapperAttrName}.${optLevelName};
+    in
+      lib.optionals (lib.all lib.id [
+        (lib.elem scope.scopeConfig.arch [
+          "ARM"
+        ])
+      ])
+      [
+        scope.kernel
+      ]
+  )));
 
   prime = writeText "prime" (toString (lib.flatten [
-    all
   ]));
 
   # gcc49GraphRefineInputs =
   #   lib.forEach (lib.attrNames this.optLevels)
   #     (optLevel: this.byConfig.arm.gcc49.${optLevel}.graphRefineInputsViaMake);
 
-  all = this.mkAggregate (
-    { archName, targetCCWrapperAttrName, optLevelName }:
-    let
-      scope = this.byConfig.${archName}.${targetCCWrapperAttrName}.${optLevelName};
-    in
-      lib.optionals scope.scopeConfig.bvSupport [
-        scope.graphRefine.demo
-      ]
-  );
+  # all = this.mkAggregate (
+  #   { archName, targetCCWrapperAttrName, optLevelName }:
+  #   let
+  #     scope = this.byConfig.${archName}.${targetCCWrapperAttrName}.${optLevelName};
+  #   in
+  #     lib.optionals scope.scopeConfig.bvSupport [
+  #       scope.graphRefine.demo
+  #     ]
+  # );
 
 }

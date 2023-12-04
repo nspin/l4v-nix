@@ -12,7 +12,7 @@ rec {
     { arch
     , features ? ""
     , plat ? ""
-    , targetCCWrapperAttr ? "gcc8"
+    , targetCCWrapperAttr ? "gcc10"
     , targetCCWrapper ? targetPkgsByL4vArch."${arch}".buildPackages."${targetCCWrapperAttr}"
     , targetCC ? targetCCWrapper.cc
     , targetBintools ? targetCCWrapper.bintools.bintools
@@ -27,6 +27,7 @@ rec {
     {
       inherit
         arch features plat
+        targetCCWrapperAttr
         targetCC targetBintools targetPrefix
         optLevel
         bvSupport
@@ -44,7 +45,7 @@ rec {
   };
 
   targetCCWrapperAttrs = lib.listToAttrs (map (v: lib.nameValuePair v v) [
-    "gcc49" "gcc6" "gcc8" "gcc10"
+    "gcc49" "gcc6" "gcc7" "gcc8" "gcc9" "gcc10" "gcc11" "gcc12" "gcc13"
   ]);
 
   optLevels = {
@@ -65,6 +66,12 @@ rec {
 
   x64Pkgs = pkgs;
 
+  primary = mkScope {
+    scopeConfig = lib.makeOverridable mkScopeConfig {
+      arch = "ARM";
+    };
+  };
+
   mkAggregate = f:
     lib.flip lib.concatMap (lib.attrNames archs) (archName:
       lib.flip lib.concatMap (lib.attrNames targetCCWrapperAttrs) (targetCCWrapperAttrName:
@@ -75,8 +82,6 @@ rec {
         )
       )
     );
-
-  primary = byConfig.arm.gcc10.o1;
 
   byConfig = lib.flip lib.mapAttrs archs (_: arch:
     lib.flip lib.mapAttrs targetCCWrapperAttrs (_: targetCCWrapperAttr:
