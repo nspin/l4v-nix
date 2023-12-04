@@ -158,6 +158,12 @@ with self; {
   isabelle2020ForL4v = withMLton mlton20180207 (callPackage ./deps/isabelle-for-l4v/2020 {});
   isabelle2023ForL4v = withMLton mlton20210107 (callPackage ./deps/isabelle-for-l4v/2023 {});
 
+  polyml58ForHol4 = callPackage ./deps/polyml-5.8-for-hol4.nix {};
+
+  polyml59ForHol4 = lib.overrideDerivation polyml (attrs: {
+    configureFlags = [ "--enable-shared" ];
+  });
+
   sonolarBinary = callPackage ./deps/solvers-for-graph-refine/sonolar-binary.nix {};
   cvc4BinariesFromIsabelle = callPackage ./deps/solvers-for-graph-refine/cvc4-binaries-from-isabelle.nix {};
   cvc4Binaries = callPackage ./deps/solvers-for-graph-refine/cvc4-binaries.nix {};
@@ -168,11 +174,11 @@ with self; {
 
   stdenvForHol4 = gcc9Stdenv;
 
-  mltonForHol4 = mlton;
+  # polymlForHol4 = polyml58ForHol4;
+  # mltonForHol4 = mlton20180207;
 
-  polymlForHol4 = lib.overrideDerivation polyml (attrs: {
-    configureFlags = [ "--enable-shared" ];
-  });
+  mltonForHol4 = mlton;
+  polymlForHol4 = polyml59ForHol4;
 
   isabelleForL4v = {
     "2020" = isabelle2020ForL4v;
