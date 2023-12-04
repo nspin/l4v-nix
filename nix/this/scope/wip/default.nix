@@ -44,7 +44,8 @@ in rec {
 
   keep = writeText "kleep" (toString (lib.flatten [
     r12.graphRefine.all
-    graphRefine.all
+    # graphRefine.all
+    allExceptInitFreemem
     kernels
   ]));
 
@@ -65,6 +66,27 @@ in rec {
 
   prime = writeText "prime" (toString (lib.flatten [
   ]));
+
+  allExceptInitFreemem = graphRefineWith {
+    name = "x";
+    args = [
+      "trace-to:report.txt"
+      "save-proofs:proofs.txt"
+      "-exclude"
+        "init_freemem"
+      "-end-exclude"
+      "all"
+    ];
+  };
+
+  justInitFreemem = graphRefineWith {
+    args = [
+      "trace-to:report.txt"
+      "save-proofs:proofs.txt"
+      # "deps:Kernel_C.init_freemem"
+      "init_freemem"
+    ];
+  };
 
   # gcc49GraphRefineInputs =
   #   lib.forEach (lib.attrNames this.optLevels)
