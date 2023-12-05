@@ -135,8 +135,8 @@ in rec {
 
   z2 = {
     # TODO, may have omitted -k
-    # x4 = f "3ec1136e48d82d77e1f2280b1133988520dd6ee5"; # fail
-    # x5 = f "34a7a9b6b4eacdd295f278782359c3be7810727a"; # fail
+    x4 = f "3ec1136e48d82d77e1f2280b1133988520dd6ee5"; # w # fail
+    x5 = f "34a7a9b6b4eacdd295f278782359c3be7810727a"; # w # fail
   };
 
   z3 = {
