@@ -152,25 +152,24 @@ in rec {
 
   # from git log seL4-12.0.0..94c0018eeb56544fd9797ea3bd403c7b0357790d --merges:
   z4 = {
-    # TODO, probably omitted -k
-    # x1 = f "b268ea121de2252e00172169281cc1f6aac071b4";
-    # x2 = f "2809015377f873ada95535e89b801a87c05eda9c";
+    # x1 = f "b268ea121de2252e00172169281cc1f6aac071b4"; # (see below)
+    # x2 = f "2809015377f873ada95535e89b801a87c05eda9c"; # (see below)
   };
   z5 = {
-    x3 = f "98775dbc8a019b522bd9e7d08e24c75cd6f27a9a";
-    x4 = f "3f7c783c43f82cb47d9f09e21916f96d3279aa7b";
+    x3 = f "98775dbc8a019b522bd9e7d08e24c75cd6f27a9a"; # bad
+    x4 = f "3f7c783c43f82cb47d9f09e21916f96d3279aa7b"; # good
   };
 
   z6 = {
     # first disjnorm commit
-    x1 = f "4875b1b60d4ee6357932f6ca7e384107130d1169";
+    x1 = f "4875b1b60d4ee6357932f6ca7e384107130d1169"; # fail
     # disjnorm anchor
-    x2 = f "53a2a87362930e08c64eb2e030a10c92c0b3b45e";
+    x2 = f "53a2a87362930e08c64eb2e030a10c92c0b3b45e"; # runs, but graph-refine can't find proof
   };
 
   z7 = {
     # bad (Jul 23 2020) parents
-    x1 = f "b268ea121de2252e00172169281cc1f6aac071b4"; # ww
+    x1 = f "b268ea121de2252e00172169281cc1f6aac071b4"; # fail (old commit, could be polyml version?)
     x2 = f "2809015377f873ada95535e89b801a87c05eda9c";
   };
 
