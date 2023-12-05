@@ -107,7 +107,16 @@ in rec {
     merb2 = f "f95c3d726a80b80aecd056966ec07d66a2beda18"; # good
   };
 
+  y = {
+    b = f "191f43f4fa8e735dfc9a7fe9feb50dae25e1048a";
+    b = f "9b84a1fde534aab7a716e621ea011a7d8188d7be";
+    b = f "f8ad83efa9d8ea2344e5b67bc06a8970b79e8cd2";
+    b = f "d188bb043305bef02ffc770fbb9c9d657a2d1aa0";
+    b = f "9f1e6b692e075aee80e9f58e590ce929699c829f";
+  };
+
   xs = writeText "xs" (toString (lib.attrValues x));
+  ys = writeText "xs" (toString (lib.attrValues y));
 
   keep = writeText "kleep" (toString (lib.flatten [
     r12.graphRefine.all
