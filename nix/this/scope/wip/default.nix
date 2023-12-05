@@ -69,7 +69,7 @@ in rec {
   testHOL4Rev = rev:
     let
       scope = scopeWithHOL4Rev rev;
-      run = graphRefineWith {
+      run = scope.graphRefineWith {
         args = [
           "trace-to:report.txt"
           "save-proofs:proofs.txt"
