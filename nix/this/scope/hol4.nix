@@ -18,6 +18,7 @@ stdenvForHol4.mkDerivation {
     python3 perl
   ];
 
+  # TODO patch "/bin/unquote" too
   postPatch = ''
     patchShebangs .
 
