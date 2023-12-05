@@ -190,6 +190,9 @@ in rec {
 
     # on master, merged in early
     x4 = f "6d809bfa2ef8cbcb75d63317c4f8f2e1a6a836ed"; # ww
+
+    x5 = f "fc11d43b57cd3d4383786df50863d191dea4ca53";
+    x6 = f "6297c9b9bec605590209e9e842f3f783f3cad282";
   };
 
   xs = writeText "xs" (toString (lib.attrValues x));
