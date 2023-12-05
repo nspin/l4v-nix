@@ -108,15 +108,30 @@ in rec {
   };
 
   y = {
-    y1 = f "191f43f4fa8e735dfc9a7fe9feb50dae25e1048a";
-    y2 = f "9b84a1fde534aab7a716e621ea011a7d8188d7be";
-    y3 = f "f8ad83efa9d8ea2344e5b67bc06a8970b79e8cd2";
-    y4 = f "d188bb043305bef02ffc770fbb9c9d657a2d1aa0";
-    y5 = f "9f1e6b692e075aee80e9f58e590ce929699c829f";
+    y1 = f "191f43f4fa8e735dfc9a7fe9feb50dae25e1048a"; # bad
+    y2 = f "9b84a1fde534aab7a716e621ea011a7d8188d7be"; # good
+    y3 = f "f8ad83efa9d8ea2344e5b67bc06a8970b79e8cd2"; # good
+    y4 = f "d188bb043305bef02ffc770fbb9c9d657a2d1aa0"; # bad
+    y5 = f "9f1e6b692e075aee80e9f58e590ce929699c829f"; # bad
+  };
+
+  # From 9f1e6b692e075aee80e9f58e590ce929699c829f (bad)
+
+  z = {
+    x1 = f "56eb8cb294e62f57600b94fc836e07fbcaea1928";
+    x2 = f "94c0018eeb56544fd9797ea3bd403c7b0357790d";
+    x3 = f "b268ea121de2252e00172169281cc1f6aac071b4";
+  };
+
+  zz = {
+    x4 = f "3ec1136e48d82d77e1f2280b1133988520dd6ee5";
+    x5 = f "34a7a9b6b4eacdd295f278782359c3be7810727a";
   };
 
   xs = writeText "xs" (toString (lib.attrValues x));
   ys = writeText "ys" (toString (lib.attrValues y));
+  zs = writeText "zs" (toString (lib.attrValues z));
+  zzs = writeText "zzs" (toString (lib.attrValues zz));
 
   keep = writeText "kleep" (toString (lib.flatten [
     r12.graphRefine.all
