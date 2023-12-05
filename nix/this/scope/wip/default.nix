@@ -83,7 +83,9 @@ in rec {
       runCommand "summary" {} ''
         tail ${run}/report.txt > $out
         echo >> $out
-        echo "rev: ${rev}" > $out
+        echo "out: ${run}" >> $out
+        echo >> $out
+        echo "rev: ${rev}" >> $out
       '';
 
   f = testHOL4Rev;
