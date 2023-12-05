@@ -119,8 +119,11 @@ in rec {
 
   # https://github.com/HOL-Theorem-Prover/HOL/issues/609
 
-  # first disjnorm:
+  # first disjnorm commit:
   # 4875b1b60d4ee6357932f6ca7e384107130d1169
+
+  # last disjorm merge:
+  # 97cd72e1ce58b888b52153ca5ed025fa97820876
 
   # git log seL4-12.0.0..seL4-12.1.0 --graph
 
@@ -138,7 +141,7 @@ in rec {
   z3 = {
     # x6 = f "89e07c5a43c0637bc614b4396e6a8b3cb902cedb"; # ? # other parent of commit linked at end of https://github.com/HOL-Theorem-Prover/HOL/issues/609
     # x7 = f "53a2a87362930e08c64eb2e030a10c92c0b3b45e"; # (not worth, is parent of 12.0.0) # ? # anchor of disjnorm
-  
+
     # on disjnorm
     x8 = f "dcd235c4e88e3465077ae2efe18dd9964b7f6332"; # bad
 
