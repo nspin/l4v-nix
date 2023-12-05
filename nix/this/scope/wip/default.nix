@@ -139,7 +139,7 @@ in rec {
     # x6 = f "89e07c5a43c0637bc614b4396e6a8b3cb902cedb"; # ? # other parent of commit linked at end of https://github.com/HOL-Theorem-Prover/HOL/issues/609
     # x7 = f "53a2a87362930e08c64eb2e030a10c92c0b3b45e"; # (not worth, is parent of 12.0.0) # ? # anchor of disjnorm
   
-    # right before first merge into disjnorm
+    # on disjnorm
     x8 = f "dcd235c4e88e3465077ae2efe18dd9964b7f6332"; # bad
 
     # anchor of disjnorm
