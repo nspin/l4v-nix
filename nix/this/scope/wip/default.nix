@@ -159,6 +159,13 @@ in rec {
     x4 = f "3f7c783c43f82cb47d9f09e21916f96d3279aa7b";
   };
 
+  z6 = {
+    # first disjnorm commit
+    x1 = f "4875b1b60d4ee6357932f6ca7e384107130d1169";
+    # disjnorm anchor
+    x2 = f "53a2a87362930e08c64eb2e030a10c92c0b3b45e";
+  };
+
   xs = writeText "xs" (toString (lib.attrValues x));
   ys = writeText "ys" (toString (lib.attrValues y));
   z1s = writeText "z1s" (toString (lib.attrValues z1));
@@ -166,6 +173,7 @@ in rec {
   z3s = writeText "z3s" (toString (lib.attrValues z3));
   z4s = writeText "z4s" (toString (lib.attrValues z4));
   z5s = writeText "z5s" (toString (lib.attrValues z5));
+  z6s = writeText "z6s" (toString (lib.attrValues z6));
 
   keep = writeText "kleep" (toString (lib.flatten [
     r12.graphRefine.all
