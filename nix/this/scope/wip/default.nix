@@ -103,10 +103,10 @@ in rec {
     a = f "464d1d1202b6346a4d8487950408544aec4f3389"; # bad
     mb = f "16846f9e05c84636d8bfd91298a70ef027040f73"; # good
 
-    mer = f "ec86d1ca16156f00edae83594988a957c8ff4b99";
-    op = f "fd26642e95039121ff282174d9113f1bd9386e2f";
+    mer = f "ec86d1ca16156f00edae83594988a957c8ff4b99"; # bad
+    op = f "fd26642e95039121ff282174d9113f1bd9386e2f"; # bad
 
-    merb2 = f "f95c3d726a80b80aecd056966ec07d66a2beda18";
+    merb2 = f "f95c3d726a80b80aecd056966ec07d66a2beda18"; # good
   };
 
   xs = writeText "xs" (toString (lib.attrValues x));
