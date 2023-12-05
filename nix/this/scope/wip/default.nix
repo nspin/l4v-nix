@@ -69,6 +69,12 @@ in rec {
     hol4Rev = rev;
   });
 
+  w = overrideScope (self: super: {
+    scopeConfig = super.scopeConfig.override {
+      hol4Source = lib.cleanSource ../../../../tmp/HOL;
+    };
+  });
+
   checkpointScopes = {
     h120 = scopeWithHOL4Rev "6c0c2409ecdbd7195911f674a77bfdd39c83816e";
     h121 = scopeWithHOL4Rev "ab03cec5200c8b23f9ba60c5cea958cfcd0cd158";
