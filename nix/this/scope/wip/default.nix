@@ -56,17 +56,19 @@ in rec {
     };
   });
 
-  testHOL4Commit = rev:
-    let
-      scope = overrideScope (self: super: {
-        scopeConfig = super.scopeConfig.override {
-          # From manifest at seL4-12.1.0
-          hol4Source = lib.cleanSource (builtins.fetchGit {
-            url = "https://github.com/seL4/HOL";
-            inherit rev;
-          });
-        };
+  scopeWithHOL4Rev = rev: overrideScope (self: super: {
+    scopeConfig = super.scopeConfig.override {
+      # From manifest at seL4-12.1.0
+      hol4Source = lib.cleanSource (builtins.fetchGit {
+        url = "https://github.com/seL4/HOL";
+        inherit rev;
       });
+    };
+  });
+
+  testHOL4Rev = rev:
+    let
+      scope = scopeWithHOL4Rev rev;
       run = graphRefineWith {
         args = [
           "trace-to:report.txt"
@@ -83,6 +85,15 @@ in rec {
         echo >> $out
         echo "rev: ${rev}" > $out
       '';
+
+  f = testHOL4Rev;
+
+  x = {
+    r120 = f "6c0c2409ecdbd7195911f674a77bfdd39c83816e";
+    r121 = f "ab03cec5200c8b23f9ba60c5cea958cfcd0cd158";
+  };
+
+  xs = writeText "xs" (toString (lib.attrValues x));
 
   keep = writeText "kleep" (toString (lib.flatten [
     r12.graphRefine.all
