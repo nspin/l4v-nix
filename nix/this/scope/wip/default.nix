@@ -20,6 +20,10 @@
 , overrideScope
 }:
 
+# NOTES
+# - HOL4 at seL4-12.0.0 works (~25 skipped) for both seL4 12.0.0 and current
+# - HOL4 at seL4-12.1.0 and beyond don't work (~125 skipped) for both seL4 12.0.0 and current
+
 let
   tmpSource = lib.cleanSource ../../../../tmp/graph-refine;
 
