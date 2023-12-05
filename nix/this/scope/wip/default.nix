@@ -64,7 +64,27 @@ in rec {
         inherit rev;
       });
     };
+
+    hol4Rev = rev;
   });
+
+  checkpoint = {
+    h120 = scopeWithHOL4Rev "6c0c2409ecdbd7195911f674a77bfdd39c83816e";
+    h121 = scopeWithHOL4Rev "ab03cec5200c8b23f9ba60c5cea958cfcd0cd158";
+    good = scopeWithHOL4Rev "6d809bfa2ef8cbcb75d63317c4f8f2e1a6a836ed";
+    bad = scopeWithHOL4Rev "bd30aea4dae85d51001ea398c59d2459a3e57dc6";
+  };
+
+  txt = writeText "checkpoint.md" ''
+    ${lib.concatStrings (lib.flip lib.mapAttrsToList checkpoint (k: scope: ''
+      ### ${k} (${scope.hol4Rev})
+
+      [report](file://${scope.wip.justMemzero}/report.txt)
+      [decompilation](file://${scope.decompilation})
+
+    ''))}
+  '';
+    # allExceptInitFreemem
 
   testHOL4Rev = rev:
     let
@@ -192,14 +212,14 @@ in rec {
     x4 = f "6d809bfa2ef8cbcb75d63317c4f8f2e1a6a836ed"; # good (@@)
 
     x5 = f "fc11d43b57cd3d4383786df50863d191dea4ca53"; # fail (SET_SQUARED_CARDEQ_SET)
-    x6 = f "6297c9b9bec605590209e9e842f3f783f3cad282"; # ww
+    x6 = f "6297c9b9bec605590209e9e842f3f783f3cad282"; # good
   };
 
-  # good:
-  #   6d809bfa2ef8cbcb75d63317c4f8f2e1a6a836ed
   # bad:
   #   98775dbc8a019b522bd9e7d08e24c75cd6f27a9a (child)
   #   bd30aea4dae85d51001ea398c59d2459a3e57dc6 (parent)
+  # good:
+  #   6d809bfa2ef8cbcb75d63317c4f8f2e1a6a836ed
 
   xs = writeText "xs" (toString (lib.attrValues x));
   ys = writeText "ys" (toString (lib.attrValues y));
