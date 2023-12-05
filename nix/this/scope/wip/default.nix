@@ -180,16 +180,16 @@ in rec {
 
   z8 = {
     # commit of l3 change
-    x1 = f "bd30aea4dae85d51001ea398c59d2459a3e57dc6"; # w
+    x1 = f "bd30aea4dae85d51001ea398c59d2459a3e57dc6"; # bad (@@)
     # commit before l3 change
-    x2 = f "7f41eb1b2ab83fa76c1bb6016f5423625c9cdad3"; # w # (check) fail at MAPPED_COMPONENT_INSERT
+    x2 = f "7f41eb1b2ab83fa76c1bb6016f5423625c9cdad3"; # (check) fail at MAPPED_COMPONENT_INSERT
   };
   z9 = {
     # commit of pred set
     x3 = f "7a11b12046dc61785d8d94e73d6b0792d8cd580c"; # fail at /build/src/HOL4/src/Boolify/src
 
     # on master, merged in early
-    x4 = f "6d809bfa2ef8cbcb75d63317c4f8f2e1a6a836ed"; # ww
+    x4 = f "6d809bfa2ef8cbcb75d63317c4f8f2e1a6a836ed"; # good (@@)
 
     x5 = f "fc11d43b57cd3d4383786df50863d191dea4ca53"; # fail (SET_SQUARED_CARDEQ_SET)
     x6 = f "6297c9b9bec605590209e9e842f3f783f3cad282"; # ww
