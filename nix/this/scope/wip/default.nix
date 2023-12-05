@@ -153,6 +153,8 @@ in rec {
   z4 = {
     x1 = f "b268ea121de2252e00172169281cc1f6aac071b4";
     x2 = f "2809015377f873ada95535e89b801a87c05eda9c";
+  };
+  z5 = {
     x3 = f "98775dbc8a019b522bd9e7d08e24c75cd6f27a9a";
     x4 = f "3f7c783c43f82cb47d9f09e21916f96d3279aa7b";
   };
@@ -163,6 +165,7 @@ in rec {
   z2s = writeText "z2s" (toString (lib.attrValues z2));
   z3s = writeText "z3s" (toString (lib.attrValues z3));
   z4s = writeText "z4s" (toString (lib.attrValues z4));
+  z5s = writeText "z5s" (toString (lib.attrValues z5));
 
   keep = writeText "kleep" (toString (lib.flatten [
     r12.graphRefine.all
