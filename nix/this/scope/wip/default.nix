@@ -168,6 +168,12 @@ in rec {
     x2 = f "53a2a87362930e08c64eb2e030a10c92c0b3b45e";
   };
 
+  z7 = {
+    # bad (Jul 23 2020) parents
+    x1 = f "b268ea121de2252e00172169281cc1f6aac071b4";
+  };
+
+
   xs = writeText "xs" (toString (lib.attrValues x));
   ys = writeText "ys" (toString (lib.attrValues y));
   z1s = writeText "z1s" (toString (lib.attrValues z1));
