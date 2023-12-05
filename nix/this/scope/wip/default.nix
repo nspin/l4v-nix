@@ -79,13 +79,12 @@ in rec {
   checkpoint = linkFarm "checkpoint" (lib.flip lib.mapAttrs checkpointScopes (_: scope:
     linkFarm "scope" (
       {
-        "report.txt" = "${scope.wip.justMemzero}/report.txt";
+        "report.txt" = "${scope.wip.allExceptInitFreemem}/report.txt";
         "kernel_mc_graph.txt" = "${scope.decompilation}/kernel_mc_graph.txt";
         "rev" = writeText "rev.txt" scope.hol4Rev;
       }
     )
   ));
-    # allExceptInitFreemem
 
   testHOL4Rev = rev:
     let
