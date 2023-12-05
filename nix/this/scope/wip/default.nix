@@ -91,6 +91,8 @@ in rec {
   x = {
     r120 = f "6c0c2409ecdbd7195911f674a77bfdd39c83816e";
     r121 = f "ab03cec5200c8b23f9ba60c5cea958cfcd0cd158";
+    exampleChanges = f "dcd235c4e88e3465077ae2efe18dd9964b7f6332";
+    commonAncestor = f "6c081713c2712205fd8b325b55a31207ec3b7a8d";
   };
 
   xs = writeText "xs" (toString (lib.attrValues x));
