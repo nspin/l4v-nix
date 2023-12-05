@@ -56,10 +56,39 @@ in rec {
     };
   });
 
+  testHOL4Commit = rev:
+    let
+      scope = overrideScope (self: super: {
+        scopeConfig = super.scopeConfig.override {
+          # From manifest at seL4-12.1.0
+          hol4Source = lib.cleanSource (builtins.fetchGit {
+            url = "https://github.com/seL4/HOL";
+            inherit rev;
+          });
+        };
+      });
+      run = graphRefineWith {
+        args = [
+          "trace-to:report.txt"
+          "save-proofs:proofs.txt"
+          "-exclude"
+            "init_freemem"
+          "-end-exclude"
+          "all"
+        ];
+      };
+    in
+      runCommand "summary" {} ''
+        tail ${run}/report.txt > $out
+        echo >> $out
+        echo "rev: ${rev}" > $out
+      '';
+
   keep = writeText "kleep" (toString (lib.flatten [
     r12.graphRefine.all
     # graphRefine.all
     allExceptInitFreemem
+    h121.wip.allExceptInitFreemem
     kernels
   ]));
 
