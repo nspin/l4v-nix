@@ -117,21 +117,21 @@ in rec {
 
   # From 9f1e6b692e075aee80e9f58e590ce929699c829f (bad)
 
-  z = {
+  z1 = {
     x1 = f "56eb8cb294e62f57600b94fc836e07fbcaea1928";
     x2 = f "94c0018eeb56544fd9797ea3bd403c7b0357790d";
     x3 = f "b268ea121de2252e00172169281cc1f6aac071b4";
   };
 
-  zz = {
+  z2 = {
     x4 = f "3ec1136e48d82d77e1f2280b1133988520dd6ee5";
     x5 = f "34a7a9b6b4eacdd295f278782359c3be7810727a";
   };
 
   xs = writeText "xs" (toString (lib.attrValues x));
   ys = writeText "ys" (toString (lib.attrValues y));
-  zs = writeText "zs" (toString (lib.attrValues z));
-  zzs = writeText "zzs" (toString (lib.attrValues zz));
+  z1s = writeText "z1s" (toString (lib.attrValues z1));
+  z2s = writeText "z2s" (toString (lib.attrValues z2));
 
   keep = writeText "kleep" (toString (lib.flatten [
     r12.graphRefine.all
