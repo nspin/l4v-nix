@@ -134,9 +134,8 @@ in rec {
   };
 
   z2 = {
-    # TODO, may have omitted -k
-    x4 = f "3ec1136e48d82d77e1f2280b1133988520dd6ee5"; # w # fail
-    x5 = f "34a7a9b6b4eacdd295f278782359c3be7810727a"; # w # fail
+    x4 = f "3ec1136e48d82d77e1f2280b1133988520dd6ee5"; # fail at SET_SQUARED_CARDEQ_SET
+    x5 = f "34a7a9b6b4eacdd295f278782359c3be7810727a"; # fail at SET_SQUARED_CARDEQ_SET
   };
 
   z3 = {
@@ -169,7 +168,7 @@ in rec {
 
   z7 = {
     # bad (Jul 23 2020) parents
-    x1 = f "b268ea121de2252e00172169281cc1f6aac071b4"; # fail (old commit, could be polyml version?)
+    x1 = f "b268ea121de2252e00172169281cc1f6aac071b4"; # w # fail (old commit, could be polyml version?)
     x2 = f "2809015377f873ada95535e89b801a87c05eda9c";
   };
 
