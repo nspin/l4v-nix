@@ -170,7 +170,8 @@ in rec {
 
   z7 = {
     # bad (Jul 23 2020) parents
-    x1 = f "b268ea121de2252e00172169281cc1f6aac071b4";
+    x1 = f "b268ea121de2252e00172169281cc1f6aac071b4"; # ww
+    x2 = f "2809015377f873ada95535e89b801a87c05eda9c";
   };
 
 
