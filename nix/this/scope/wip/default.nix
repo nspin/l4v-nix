@@ -68,7 +68,6 @@ in rec {
   ]));
 
   allExceptInitFreemem = graphRefineWith {
-    name = "x";
     args = [
       "trace-to:report.txt"
       "save-proofs:proofs.txt"
