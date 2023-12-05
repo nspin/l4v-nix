@@ -21,6 +21,7 @@ rec {
     , bvSupport ? arch == "ARM"
     , seL4Source ? lib.cleanSource ../../projects/seL4
     , l4vSource ? lib.cleanSource ../../projects/l4v
+    , hol4Source ? lib.cleanSource ../../projects/HOL4
     , isabelleVersion ? "2023"
     , stackLTSAttr ? "lts_20_25"
     }:
@@ -33,6 +34,7 @@ rec {
         bvSupport
         seL4Source
         l4vSource
+        hol4Source
         isabelleVersion
         stackLTSAttr
       ;

@@ -46,6 +46,16 @@ in rec {
     };
   });
 
+  h121 = overrideScope (self: super: {
+    scopeConfig = super.scopeConfig.override {
+      # From manifest at seL4-12.1.0
+      hol4Source = lib.cleanSource (builtins.fetchGit {
+        url = "https://github.com/seL4/HOL";
+        rev = "ab03cec5200c8b23f9ba60c5cea958cfcd0cd158";
+      });
+    };
+  });
+
   keep = writeText "kleep" (toString (lib.flatten [
     r12.graphRefine.all
     # graphRefine.all

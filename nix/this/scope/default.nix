@@ -30,8 +30,9 @@ with self; {
 
   ### sources ###
 
-  hol4Source = lib.cleanSource ../../../projects/HOL4;
   graphRefineSource = lib.cleanSource ../../../projects/graph-refine;
+
+  inherit (scopeConfig) hol4Source;
 
   patchedSeL4Source = callPackage ./patched-sel4-source {};
   patchedL4vSource = callPackage ./patched-l4v-source {};
