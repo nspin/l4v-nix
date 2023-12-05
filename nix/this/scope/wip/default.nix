@@ -117,6 +117,13 @@ in rec {
 
   # From 9f1e6b692e075aee80e9f58e590ce929699c829f (bad)
 
+  # https://github.com/HOL-Theorem-Prover/HOL/issues/609
+
+  # first disjnorm:
+  # 4875b1b60d4ee6357932f6ca7e384107130d1169
+
+  # git log seL4-12.0.0..seL4-12.1.0 --graph
+
   z1 = {
     x1 = f "56eb8cb294e62f57600b94fc836e07fbcaea1928";
     x2 = f "94c0018eeb56544fd9797ea3bd403c7b0357790d";
@@ -124,14 +131,26 @@ in rec {
   };
 
   z2 = {
-    x4 = f "3ec1136e48d82d77e1f2280b1133988520dd6ee5";
-    x5 = f "34a7a9b6b4eacdd295f278782359c3be7810727a";
+    x4 = f "3ec1136e48d82d77e1f2280b1133988520dd6ee5"; # fail
+    x5 = f "34a7a9b6b4eacdd295f278782359c3be7810727a"; # fail
+  };
+
+  z3 = {
+    # x6 = f "89e07c5a43c0637bc614b4396e6a8b3cb902cedb"; # ? # other parent of commit linked at end of https://github.com/HOL-Theorem-Prover/HOL/issues/609
+    # x7 = f "53a2a87362930e08c64eb2e030a10c92c0b3b45e"; # (not worth, is parent of 12.0.0) # ? # anchor of disjnorm
+  
+    # right before first merge into disjnorm
+    x8 = f "dcd235c4e88e3465077ae2efe18dd9964b7f6332"; # bad
+
+    # anchor of disjnorm
+    x9 = f "53a2a87362930e08c64eb2e030a10c92c0b3b45e"; # good?
   };
 
   xs = writeText "xs" (toString (lib.attrValues x));
   ys = writeText "ys" (toString (lib.attrValues y));
   z1s = writeText "z1s" (toString (lib.attrValues z1));
   z2s = writeText "z2s" (toString (lib.attrValues z2));
+  z3s = writeText "z3s" (toString (lib.attrValues z3));
 
   keep = writeText "kleep" (toString (lib.flatten [
     r12.graphRefine.all
