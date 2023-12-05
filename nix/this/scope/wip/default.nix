@@ -151,8 +151,9 @@ in rec {
 
   # from git log seL4-12.0.0..94c0018eeb56544fd9797ea3bd403c7b0357790d --merges:
   z4 = {
-    # x1 = f "b268ea121de2252e00172169281cc1f6aac071b4"; # fail (quick)
-    # x2 = f "2809015377f873ada95535e89b801a87c05eda9c"; # fail (quick)
+    # TODO
+    # x1 = f "b268ea121de2252e00172169281cc1f6aac071b4";
+    # x2 = f "2809015377f873ada95535e89b801a87c05eda9c";
   };
   z5 = {
     x3 = f "98775dbc8a019b522bd9e7d08e24c75cd6f27a9a";
