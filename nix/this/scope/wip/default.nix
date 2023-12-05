@@ -134,6 +134,7 @@ in rec {
   };
 
   z2 = {
+    # TODO, may have omitted -k
     # x4 = f "3ec1136e48d82d77e1f2280b1133988520dd6ee5"; # fail
     # x5 = f "34a7a9b6b4eacdd295f278782359c3be7810727a"; # fail
   };
@@ -151,7 +152,7 @@ in rec {
 
   # from git log seL4-12.0.0..94c0018eeb56544fd9797ea3bd403c7b0357790d --merges:
   z4 = {
-    # TODO
+    # TODO, may have omitted -k
     # x1 = f "b268ea121de2252e00172169281cc1f6aac071b4";
     # x2 = f "2809015377f873ada95535e89b801a87c05eda9c";
   };
