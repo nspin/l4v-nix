@@ -79,7 +79,7 @@ in rec {
     ${lib.concatStrings (lib.flip lib.mapAttrsToList checkpoint (k: scope: ''
       ### ${k} (${scope.hol4Rev})
 
-      [report](file://${scope.wip.justMemzero}/report.txt)
+      [report](file://${scope.wip.allExceptInitFreemem}/report.txt)
       [decompilation](file://${scope.decompilation})
 
     ''))}
