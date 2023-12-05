@@ -128,19 +128,19 @@ in rec {
   # git log seL4-12.0.0..seL4-12.1.0 --graph
 
   z1 = {
-    x1 = f "56eb8cb294e62f57600b94fc836e07fbcaea1928";
-    x2 = f "94c0018eeb56544fd9797ea3bd403c7b0357790d";
-    x3 = f "b268ea121de2252e00172169281cc1f6aac071b4";
+    x1 = f "56eb8cb294e62f57600b94fc836e07fbcaea1928"; # bad
+    x2 = f "94c0018eeb56544fd9797ea3bd403c7b0357790d"; # bad (Jul 23 2020)
+    # x3 = f "b268ea121de2252e00172169281cc1f6aac071b4";
   };
 
   z2 = {
-    x4 = f "3ec1136e48d82d77e1f2280b1133988520dd6ee5"; # fail
-    x5 = f "34a7a9b6b4eacdd295f278782359c3be7810727a"; # fail
+    # x4 = f "3ec1136e48d82d77e1f2280b1133988520dd6ee5"; # fail
+    # x5 = f "34a7a9b6b4eacdd295f278782359c3be7810727a"; # fail
   };
 
   z3 = {
     # x6 = f "89e07c5a43c0637bc614b4396e6a8b3cb902cedb"; # ? # other parent of commit linked at end of https://github.com/HOL-Theorem-Prover/HOL/issues/609
-    # x7 = f "53a2a87362930e08c64eb2e030a10c92c0b3b45e"; # (not worth, is parent of 12.0.0) # ? # anchor of disjnorm
+    # x7 = f "53a2a87362930e08c64eb2e030a10c92c0b3b45e"; # ? # (not worth, is parent of 12.0.0) # anchor of disjnorm
 
     # on disjnorm
     x8 = f "dcd235c4e88e3465077ae2efe18dd9964b7f6332"; # bad
@@ -149,11 +149,20 @@ in rec {
     x9 = f "53a2a87362930e08c64eb2e030a10c92c0b3b45e"; # good?
   };
 
+  # from git log seL4-12.0.0..94c0018eeb56544fd9797ea3bd403c7b0357790d --merges:
+  z4 = {
+    x1 = f "b268ea121de2252e00172169281cc1f6aac071b4";
+    x2 = f "2809015377f873ada95535e89b801a87c05eda9c";
+    x3 = f "98775dbc8a019b522bd9e7d08e24c75cd6f27a9a";
+    x4 = f "3f7c783c43f82cb47d9f09e21916f96d3279aa7b";
+  };
+
   xs = writeText "xs" (toString (lib.attrValues x));
   ys = writeText "ys" (toString (lib.attrValues y));
   z1s = writeText "z1s" (toString (lib.attrValues z1));
   z2s = writeText "z2s" (toString (lib.attrValues z2));
   z3s = writeText "z3s" (toString (lib.attrValues z3));
+  z4s = writeText "z4s" (toString (lib.attrValues z4));
 
   keep = writeText "kleep" (toString (lib.flatten [
     r12.graphRefine.all
