@@ -73,14 +73,19 @@ in rec {
         args = [
           "trace-to:report.txt"
           "save-proofs:proofs.txt"
-          "-exclude"
-            "init_freemem"
-          "-end-exclude"
-          "all"
+          "memzero"
+          # "-exclude"
+          #   "init_freemem"
+          # "-end-exclude"
+          # "all"
         ];
       };
     in
-      runCommand "summary" {} ''
+      runCommand "summary" {
+        passthru = { 
+          inherit run;
+        };
+      } ''
         tail ${run}/report.txt > $out
         echo >> $out
         echo "out: ${run}" >> $out
