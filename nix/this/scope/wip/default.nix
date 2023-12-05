@@ -82,7 +82,7 @@ in rec {
       };
     in
       runCommand "summary" {
-        passthru = { 
+        passthru = {
           inherit run;
         };
       } ''
@@ -100,8 +100,8 @@ in rec {
     r121 = f "ab03cec5200c8b23f9ba60c5cea958cfcd0cd158"; # bad
     exampleChanges = f "dcd235c4e88e3465077ae2efe18dd9964b7f6332"; # bad
     commonAncestor = f "6c081713c2712205fd8b325b55a31207ec3b7a8d"; # good
-    a = f "464d1d1202b6346a4d8487950408544aec4f3389";
-    mb = f "16846f9e05c84636d8bfd91298a70ef027040f73";
+    a = f "464d1d1202b6346a4d8487950408544aec4f3389"; # bad
+    mb = f "16846f9e05c84636d8bfd91298a70ef027040f73"; # good
 
     mer = f "ec86d1ca16156f00edae83594988a957c8ff4b99";
     op = f "fd26642e95039121ff282174d9113f1bd9386e2f";
