@@ -129,11 +129,12 @@ in rec {
 
   z1 = {
     x1 = f "56eb8cb294e62f57600b94fc836e07fbcaea1928"; # bad
-    x2 = f "94c0018eeb56544fd9797ea3bd403c7b0357790d"; # bad (Jul 23 2020)
+    x2 = f "94c0018eeb56544fd9797ea3bd403c7b0357790d"; # bad (@) (Jul 23 2020)
     # x3 = f "b268ea121de2252e00172169281cc1f6aac071b4";
   };
 
   z2 = {
+    # both fail around src/pred_set_src/more_theories
     x4 = f "3ec1136e48d82d77e1f2280b1133988520dd6ee5"; # fail at SET_SQUARED_CARDEQ_SET
     x5 = f "34a7a9b6b4eacdd295f278782359c3be7810727a"; # fail at SET_SQUARED_CARDEQ_SET
   };
@@ -155,7 +156,8 @@ in rec {
     # x2 = f "2809015377f873ada95535e89b801a87c05eda9c"; # (see below)
   };
   z5 = {
-    x3 = f "98775dbc8a019b522bd9e7d08e24c75cd6f27a9a"; # bad
+    # !!!
+    x3 = f "98775dbc8a019b522bd9e7d08e24c75cd6f27a9a"; # bad (@)
     x4 = f "3f7c783c43f82cb47d9f09e21916f96d3279aa7b"; # good
   };
 
@@ -168,10 +170,24 @@ in rec {
 
   z7 = {
     # bad (Jul 23 2020) parents
-    x1 = f "b268ea121de2252e00172169281cc1f6aac071b4"; # w # fail (old commit, could be polyml version?)
-    x2 = f "2809015377f873ada95535e89b801a87c05eda9c";
+    x1 = f "b268ea121de2252e00172169281cc1f6aac071b4"; # fail (surprising, both children pass, one good one bad)
+    x2 = f "2809015377f873ada95535e89b801a87c05eda9c"; # good (@)
   };
 
+
+  # along
+  # git log 2809015377f873ada95535e89b801a87c05eda9c..94c0018eeb56544fd9797ea3bd403c7b0357790d
+
+  z8 = {
+    # commit of l3 change
+    x1 = f "bd30aea4dae85d51001ea398c59d2459a3e57dc6";
+    # commit before l3 change
+    x2 = f "7f41eb1b2ab83fa76c1bb6016f5423625c9cdad3";
+  };
+  z9 = {
+    # commit of pred set
+    x3 = f "7a11b12046dc61785d8d94e73d6b0792d8cd580c";
+  };
 
   xs = writeText "xs" (toString (lib.attrValues x));
   ys = writeText "ys" (toString (lib.attrValues y));
@@ -181,6 +197,8 @@ in rec {
   z4s = writeText "z4s" (toString (lib.attrValues z4));
   z5s = writeText "z5s" (toString (lib.attrValues z5));
   z6s = writeText "z6s" (toString (lib.attrValues z6));
+  zs8 = writeText "zs8" (toString (lib.attrValues z8));
+  zs9 = writeText "zs9" (toString (lib.attrValues z9));
 
   keep = writeText "kleep" (toString (lib.flatten [
     r12.graphRefine.all
