@@ -195,6 +195,12 @@ in rec {
     x6 = f "6297c9b9bec605590209e9e842f3f783f3cad282"; # ww
   };
 
+  # good:
+  #   6d809bfa2ef8cbcb75d63317c4f8f2e1a6a836ed
+  # bad:
+  #   98775dbc8a019b522bd9e7d08e24c75cd6f27a9a (child)
+  #   bd30aea4dae85d51001ea398c59d2459a3e57dc6 (parent)
+
   xs = writeText "xs" (toString (lib.attrValues x));
   ys = writeText "ys" (toString (lib.attrValues y));
   z1s = writeText "z1s" (toString (lib.attrValues z1));
