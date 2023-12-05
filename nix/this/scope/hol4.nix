@@ -7,17 +7,25 @@
 , hol4Source
 }:
 
+# TODO
+# ./bin/build --relocbuild
+# ./bin/build -j $NIX_BUILD_CORES
+# put in $out
+
 stdenvForHol4.mkDerivation {
   name = "hol4";
 
   src = hol4Source;
 
+  # TODO use nativeBuildInputs
   buildInputs = [
     polymlForHol4 mltonForHol4
     graphviz
     python3 perl
   ];
 
+  # TODO patch "/bin/unquote" too
+  # TODO /bin/* unecessary with more recent versions
   postPatch = ''
     patchShebangs .
 
@@ -27,6 +35,7 @@ stdenvForHol4.mkDerivation {
         --replace '"/bin/cp"' '"cp"'
   '';
 
+  # TODO try removing HOLDIR hack now that we don't use decompile.py
   configurePhase = ''
     # $HOLDIR hack
     holdir=$NIX_BUILD_TOP/src/HOL4

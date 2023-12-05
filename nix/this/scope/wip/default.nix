@@ -5,6 +5,7 @@
 , writeText
 , writeScript
 , writeShellApplication
+, linkFarm
 , runtimeShell
 , breakpointHook
 , bashInteractive
@@ -20,18 +21,40 @@
 , overrideScope
 }:
 
-# NOTES
-# - HOL4 at seL4-12.0.0 works (~25 skipped) for both seL4 12.0.0 and current
-# - HOL4 at seL4-12.1.0 and beyond don't work (~125 skipped) for both seL4 12.0.0 and current
-
 let
   tmpSource = lib.cleanSource ../../../../tmp/graph-refine;
 
 in rec {
 
-  r12 = overrideScope (self: super: {
+  allExceptInitFreemem = graphRefineWith {
+    args = [
+      "trace-to:report.txt"
+      "save-proofs:proofs.txt"
+      "-exclude"
+        "init_freemem"
+      "-end-exclude"
+      "all"
+    ];
+  };
+
+  justMemzero = graphRefineWith {
+    args = [
+      "trace-to:report.txt"
+      "save-proofs:proofs.txt"
+      "memzero"
+    ];
+  };
+
+  justInitFreemem = graphRefineWith {
+    args = [
+      "trace-to:report.txt"
+      "save-proofs:proofs.txt"
+      "init_freemem"
+    ];
+  };
+
+  seL4_12_0_0 = overrideScope (self: super: {
     scopeConfig = super.scopeConfig.override {
-      # seL4-12.0.0
       seL4Source = builtins.fetchGit {
         url = "https://github.com/seL4/seL4";
         rev = "dc83859f6a220c04f272be17406a8d59de9c8fbf";
@@ -40,28 +63,47 @@ in rec {
         url = "https://github.com/seL4/l4v";
         rev = "6700d97b7f0593dbf5d8145ee43f1e151553dea0";
       };
+      hol4Source = lib.cleanSource (builtins.fetchGit {
+        url = "https://github.com/seL4/HOL";
+        rev = "6c0c2409ecdbd7195911f674a77bfdd39c83816e";
+      });
       isabelleVersion = "2020";
       stackLTSAttr = "lts_13_15";
       targetCCWrapperAttr = "gcc49";
     };
   });
 
-  h121 = overrideScope (self: super: {
+  scopeWithHOL4Rev = { rev, ref ? "HEAD" }: overrideScope (self: super: {
     scopeConfig = super.scopeConfig.override {
-      # From manifest at seL4-12.1.0
       hol4Source = lib.cleanSource (builtins.fetchGit {
-        url = "https://github.com/seL4/HOL";
-        rev = "ab03cec5200c8b23f9ba60c5cea958cfcd0cd158";
+        url = "https://github.com/coliasgroup/HOL";
+        inherit rev ref;
       });
     };
+    hol4Rev = rev;
   });
 
-  keep = writeText "kleep" (toString (lib.flatten [
-    r12.graphRefine.all
-    # graphRefine.all
-    allExceptInitFreemem
-    kernels
-  ]));
+  evidenceScopes = {
+    at120 = scopeWithHOL4Rev { rev = "6c0c2409ecdbd7195911f674a77bfdd39c83816e"; };
+    at121 = scopeWithHOL4Rev { rev = "ab03cec5200c8b23f9ba60c5cea958cfcd0cd158"; };
+    good = scopeWithHOL4Rev { rev = "6d809bfa2ef8cbcb75d63317c4f8f2e1a6a836ed"; };
+    bad = scopeWithHOL4Rev { rev = "bd30aea4dae85d51001ea398c59d2459a3e57dc6"; };
+    current = scopeWithHOL4Rev rec {
+      rev = "39606aea49bbfef131fcad2af088800e4b048da3";
+      ref = "refs/tags/keep/${builtins.substring 0 32 rev}";
+    };
+  };
+
+  evidence = linkFarm "evidence" (lib.flip lib.mapAttrs evidenceScopes (_: scope:
+    linkFarm "scope" {
+      "rev" = writeText "rev.txt" scope.hol4Rev;
+      "kernel.elf.txt" = "${scope.kernel}/kernel.elf.txt";
+      "kernel.sigs" = "${scope.kernel}/kernel.sigs";
+      "kernel_mc_graph.txt" = "${scope.decompilation}/kernel_mc_graph.txt";
+      "log.txt" = "${scope.decompilation}/log.txt";
+      "report.txt" = "${scope.wip.justMemzero}/report.txt";
+    }
+  ));
 
   kernels = writeText "x" (toString (this.mkAggregate (
     { archName, targetCCWrapperAttrName, optLevelName }:
@@ -78,41 +120,12 @@ in rec {
       ]
   )));
 
-  prime = writeText "prime" (toString (lib.flatten [
+  keep = writeText "kleep" (toString (lib.flatten [
+    seL4_12_0_0.graphRefine.all
+    allExceptInitFreemem
+    kernels
   ]));
 
-  allExceptInitFreemem = graphRefineWith {
-    args = [
-      "trace-to:report.txt"
-      "save-proofs:proofs.txt"
-      "-exclude"
-        "init_freemem"
-      "-end-exclude"
-      "all"
-    ];
-  };
-
-  justInitFreemem = graphRefineWith {
-    args = [
-      "trace-to:report.txt"
-      "save-proofs:proofs.txt"
-      # "deps:Kernel_C.init_freemem"
-      "init_freemem"
-    ];
-  };
-
-  # gcc49GraphRefineInputs =
-  #   lib.forEach (lib.attrNames this.optLevels)
-  #     (optLevel: this.byConfig.arm.gcc49.${optLevel}.graphRefineInputsViaMake);
-
-  # all = this.mkAggregate (
-  #   { archName, targetCCWrapperAttrName, optLevelName }:
-  #   let
-  #     scope = this.byConfig.${archName}.${targetCCWrapperAttrName}.${optLevelName};
-  #   in
-  #     lib.optionals scope.scopeConfig.bvSupport [
-  #       scope.graphRefine.demo
-  #     ]
-  # );
-
+  prime = writeText "prime" (toString (lib.flatten [
+  ]));
 }

@@ -18,10 +18,11 @@ rec {
     , targetBintools ? targetCCWrapper.bintools.bintools
     , targetPrefix ? targetCCWrapper.targetPrefix
     , optLevel ? "-O1"
-    , bvSupport ? arch == "ARM"
+    , bvSupport ? lib.elem arch [ "ARM" "RISCV64" ]
     , seL4Source ? lib.cleanSource ../../projects/seL4
     , l4vSource ? lib.cleanSource ../../projects/l4v
     , hol4Source ? lib.cleanSource ../../projects/HOL4
+    , graphRefineSource ? lib.cleanSource ../../projects/graph-refine
     , isabelleVersion ? "2023"
     , stackLTSAttr ? "lts_20_25"
     }:
@@ -35,6 +36,7 @@ rec {
         seL4Source
         l4vSource
         hol4Source
+        graphRefineSource
         isabelleVersion
         stackLTSAttr
       ;
@@ -43,6 +45,8 @@ rec {
   archs = {
     arm = "ARM";
     armHyp = "ARM_HYP";
+    aarch64 = "AARCH64";
+    riscv64 = "RISCV64";
     x64 = "X64";
   };
 
@@ -59,13 +63,14 @@ rec {
   targetPkgsByL4vArch = {
     "ARM" = armv7Pkgs;
     "ARM_HYP" = armv7Pkgs;
+    "AARCH64" = aarch64Pkgs;
+    "RISCV64" = riscv64Pkgs;
     "X64" = x64Pkgs;
   };
 
   armv7Pkgs = pkgsCross.arm-embedded;
-
+  aarch64Pkgs = pkgsCross.aarch64-embedded;
   riscv64Pkgs = pkgsCross.riscv64-embedded;
-
   x64Pkgs = pkgs;
 
   primary = mkScope {
