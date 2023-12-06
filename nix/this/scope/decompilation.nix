@@ -12,6 +12,7 @@ let
     "_start" "c_handle_fastpath_call" "c_handle_fastpath_reply_recv" "restore_user_context"
   ];
 
+  # TODO rename to .sml
   scriptIn = writeText "x.ml" ''
     load "decompileLib";
     val _ = decompileLib.decomp "@path@" true "${lib.concatStringsSep "," ignore}";

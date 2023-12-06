@@ -87,6 +87,7 @@ in rec {
       {
         "report.txt" = "${scope.wip.allExceptInitFreemem}/report.txt";
         "kernel_mc_graph.txt" = "${scope.decompilation}/kernel_mc_graph.txt";
+        "log.txt" = "${scope.decompilation}/log.txt";
         "rev" = writeText "rev.txt" scope.hol4Rev;
       }
     )
