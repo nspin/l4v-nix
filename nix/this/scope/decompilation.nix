@@ -13,7 +13,7 @@ let
   # ];
 
   ignore = runCommand "ignore" {} ''
-    cat ${kernel}/kernel.sigs | cut -d ' ' -f 2 | tr '\n' ',' | sed 's/,$/\n/' > $out
+    cat ${kernel}/kernel.sigs | cut -d ' ' -f 2 | grep -v memzero | tr '\n' ',' | sed 's/,$/\n/' > $out
   '';
 
   # TODO rename to .sml
