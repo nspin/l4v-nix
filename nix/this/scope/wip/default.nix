@@ -284,6 +284,16 @@ in rec {
     ];
   };
 
+
+  justMemzeroVerbose = graphRefineWith {
+    args = [
+      "verbose"
+      "trace-to:report.txt"
+      "save-proofs:proofs.txt"
+      "memzero"
+    ];
+  };
+
   justInitFreemem = graphRefineWith {
     args = [
       "trace-to:report.txt"
