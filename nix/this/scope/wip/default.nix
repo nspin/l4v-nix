@@ -80,6 +80,7 @@ in rec {
     h121 = scopeWithHOL4Rev "ab03cec5200c8b23f9ba60c5cea958cfcd0cd158";
     good = scopeWithHOL4Rev "6d809bfa2ef8cbcb75d63317c4f8f2e1a6a836ed";
     bad = scopeWithHOL4Rev "bd30aea4dae85d51001ea398c59d2459a3e57dc6";
+    sdcr = scopeWithHOL4Rev "553e7165b4d27ecda9b69913728e93f8f3f7b891";
   };
 
   checkpoint = linkFarm "checkpoint" (lib.flip lib.mapAttrs checkpointScopes (_: scope:
