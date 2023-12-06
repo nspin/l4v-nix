@@ -43,6 +43,8 @@ rec {
   archs = {
     arm = "ARM";
     armHyp = "ARM_HYP";
+    riscv64 = "RISCV64";
+    aarch64 = "AARCH64";
     x64 = "X64";
   };
 
