@@ -9,6 +9,7 @@
 # TODO
 # --ignore-matching-lines='^$' is a hack to handle the possible '/* disabled: CONFIG_KERNEL_OPT_LEVEL_O[12] */' difference.
 
+# TODO reneame to "equivalent"
 runCommand "preprocessed-kernels-are-identical" {} ''
   f() {
     diff "$@" \

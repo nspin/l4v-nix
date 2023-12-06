@@ -18,7 +18,7 @@ rec {
     , targetBintools ? targetCCWrapper.bintools.bintools
     , targetPrefix ? targetCCWrapper.targetPrefix
     , optLevel ? "-O1"
-    , bvSupport ? arch == "ARM"
+    , bvSupport ? lib.elem arch [ "ARM" "RISCV64" ]
     , seL4Source ? lib.cleanSource ../../projects/seL4
     , l4vSource ? lib.cleanSource ../../projects/l4v
     , hol4Source ? lib.cleanSource ../../projects/HOL4

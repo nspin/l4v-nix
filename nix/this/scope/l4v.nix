@@ -48,6 +48,7 @@
 # Debug the following for (at least) justStandaloneCParser:
 # *** Consumer thread failure: "Isabelle.Session.manager"
 # *** Missing session sources entry "/build/src/l4v/tools/c-parser/umm_
+# ... test hardcoding L4V_ARCH in pointed-to lines?
 
 assert tests == null -> (exclude == [] && remove == []);
 
