@@ -45,7 +45,7 @@ let
     cp -r --no-preserve=ownership,mode ${preTargetDir} $out
 
     python3 ${source + "/seL4-example/functions-tool.py"} \
-      --arch ARM \
+      --arch ${scopeConfig.arch} \
       --target-dir $out \
       --functions-list-out functions-list.txt.txt \
       --asm-functions-out ASMFunctions.txt \
