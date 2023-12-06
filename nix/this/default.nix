@@ -43,8 +43,8 @@ rec {
   archs = {
     arm = "ARM";
     armHyp = "ARM_HYP";
-    riscv64 = "RISCV64";
     aarch64 = "AARCH64";
+    riscv64 = "RISCV64";
     x64 = "X64";
   };
 
@@ -61,13 +61,14 @@ rec {
   targetPkgsByL4vArch = {
     "ARM" = armv7Pkgs;
     "ARM_HYP" = armv7Pkgs;
+    "AARCH64" = aarch64Pkgs;
+    "RISCV64" = riscv64Pkgs;
     "X64" = x64Pkgs;
   };
 
   armv7Pkgs = pkgsCross.arm-embedded;
-
+  aarch64Pkgs = pkgsCross.aarch64-embedded;
   riscv64Pkgs = pkgsCross.riscv64-embedded;
-
   x64Pkgs = pkgs;
 
   primary = mkScope {
