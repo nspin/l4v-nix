@@ -28,6 +28,7 @@ stdenvForHol4.mkDerivation {
         --replace '"/bin/cp"' '"cp"'
   '';
 
+  # TODO try removing HOLDIR hack now that we don't use decompile.py
   configurePhase = ''
     # $HOLDIR hack
     holdir=$NIX_BUILD_TOP/src/HOL4
