@@ -78,6 +78,7 @@ in rec {
   rv = overrideScope (self: super: {
     scopeConfig = super.scopeConfig.override {
       arch = "RISCV64";
+      targetCCWrapperAttr = "gcc12";
       hol4Source = lib.cleanSource (builtins.fetchGit {
         url = "https://github.com/seL4/HOL";
         rev = "553e7165b4d27ecda9b69913728e93f8f3f7b891";

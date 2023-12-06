@@ -68,8 +68,7 @@ rec {
 
   armv7Pkgs = pkgsCross.arm-embedded;
   aarch64Pkgs = pkgsCross.aarch64-embedded;
-  # riscv64Pkgs = pkgsCross.riscv64-embedded;
-  riscv64Pkgs = pkgsCross.riscv64;
+  riscv64Pkgs = pkgsCross.riscv64-embedded;
   x64Pkgs = pkgs;
 
   primary = mkScope {
