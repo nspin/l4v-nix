@@ -16,6 +16,7 @@ stdenvForHol4.mkDerivation {
 
   src = hol4Source;
 
+  # TODO use nativeBuildInputs
   buildInputs = [
     polymlForHol4 mltonForHol4
     graphviz
