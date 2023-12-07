@@ -7,6 +7,10 @@
 , hol4Source
 }:
 
+# TODO
+# ./bin/build --relocbuild
+# ./bin/build -j
+
 stdenvForHol4.mkDerivation {
   name = "hol4";
 
