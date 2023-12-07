@@ -5,7 +5,29 @@
 , polymlForHol4
 , mltonForHol4
 , hol4Source
+
+, runCommand
+, writeScript
+, runtimeShell
 }:
+
+let
+
+  w = writeScript "w.sh" ''
+    #!${runtimeShell}
+
+    echo "$@" >&2
+
+    exec ${polymlForHol4}/bin/poly "$@"
+  '';
+
+  ww = runCommand "ww" {} ''
+    mkdir -p $out/bin
+    cp ${polymlForHol4}/bin/{polyc,polyimport} $out/bin
+    cp ${w} $out/bin/poly
+  '';
+
+in
 
 # TODO
 # ./bin/build --relocbuild
@@ -18,7 +40,9 @@ stdenvForHol4.mkDerivation {
 
   # TODO use nativeBuildInputs
   buildInputs = [
-    polymlForHol4 mltonForHol4
+    polymlForHol4
+    # ww
+    mltonForHol4
     graphviz
     python3 perl
   ];
