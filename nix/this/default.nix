@@ -22,6 +22,7 @@ rec {
     , seL4Source ? lib.cleanSource ../../projects/seL4
     , l4vSource ? lib.cleanSource ../../projects/l4v
     , hol4Source ? lib.cleanSource ../../projects/HOL4
+    , graphRefineSource ? lib.cleanSource ../../projects/graph-refine
     , isabelleVersion ? "2023"
     , stackLTSAttr ? "lts_20_25"
     }:
@@ -35,6 +36,7 @@ rec {
         seL4Source
         l4vSource
         hol4Source
+        graphRefineSource
         isabelleVersion
         stackLTSAttr
       ;
