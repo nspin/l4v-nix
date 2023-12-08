@@ -40,58 +40,31 @@ in rec {
         url = "https://github.com/seL4/HOL";
         rev = "6c0c2409ecdbd7195911f674a77bfdd39c83816e";
       });
-      graphRefineSource = lib.cleanSource (builtins.fetchGit {
-        url = "https://github.com/seL4/graph-refine";
-        rev = "946bf9c6e7bd8eeb4aecc60ad567663d37af86b7"; # coliasgroup/verification-reproducability-release-12.0.0
-      });
       isabelleVersion = "2020";
       stackLTSAttr = "lts_13_15";
       targetCCWrapperAttr = "gcc49";
     };
   });
 
-  h121 = overrideScope (self: super: {
-    scopeConfig = super.scopeConfig.override {
-      # From manifest at seL4-12.1.0
-      hol4Source = lib.cleanSource (builtins.fetchGit {
-        url = "https://github.com/seL4/HOL";
-        rev = "ab03cec5200c8b23f9ba60c5cea958cfcd0cd158";
-      });
-    };
-  });
-
   scopeWithHOL4Rev = rev: overrideScope (self: super: {
     scopeConfig = super.scopeConfig.override {
-      # From manifest at seL4-12.1.0
       hol4Source = lib.cleanSource (builtins.fetchGit {
-        url = "https://github.com/seL4/HOL";
+        url = "https://github.com/coliasgroup/HOL";
         inherit rev;
       });
     };
-
     hol4Rev = rev;
   });
 
-  cs = checkpointScopes;
-
-  checkpointScopes = {
-    h120 = scopeWithHOL4Rev "6c0c2409ecdbd7195911f674a77bfdd39c83816e";
-    h121 = scopeWithHOL4Rev "ab03cec5200c8b23f9ba60c5cea958cfcd0cd158";
+  evidenceScopes = {
+    at120 = scopeWithHOL4Rev "6c0c2409ecdbd7195911f674a77bfdd39c83816e";
+    at121 = scopeWithHOL4Rev "ab03cec5200c8b23f9ba60c5cea958cfcd0cd158";
     good = scopeWithHOL4Rev "6d809bfa2ef8cbcb75d63317c4f8f2e1a6a836ed";
     bad = scopeWithHOL4Rev "bd30aea4dae85d51001ea398c59d2459a3e57dc6";
-    sdcr = scopeWithHOL4Rev "553e7165b4d27ecda9b69913728e93f8f3f7b891";
-    upstream = overrideScope (self: super: {
-      scopeConfig = super.scopeConfig.override {
-        hol4Source = lib.cleanSource (builtins.fetchGit {
-          url = "https://github.com/HOL-Theorem-Prover/HOL.git";
-          rev = self.hol4Rev;
-        });
-      };
-      hol4Rev = "3f6e78258b82149b95ab354e180b95cd094ec4e7";
-    });
+    current = scopeWithHOL4Rev "39606aea49bbfef131fcad2af088800e4b048da3";
   };
 
-  checkpoint = linkFarm "checkpoint" (lib.flip lib.mapAttrs checkpointScopes (_: scope:
+  evidence = linkFarm "evidence" (lib.flip lib.mapAttrs evidenceScopes (_: scope:
     linkFarm "scope" (
       {
         "rev" = writeText "rev.txt" scope.hol4Rev;
@@ -103,15 +76,11 @@ in rec {
       }
     )
   ));
-  # allExceptInitFreemem
 
   keep = writeText "kleep" (toString (lib.flatten [
-    r12.graphRefine.all
-    # graphRefine.all
+    seL4_12_0_0.graphRefine.all
     allExceptInitFreemem
-    h121.wip.allExceptInitFreemem
     kernels
-    xs
   ]));
 
   kernels = writeText "x" (toString (this.mkAggregate (
@@ -155,23 +124,8 @@ in rec {
     args = [
       "trace-to:report.txt"
       "save-proofs:proofs.txt"
-      # "deps:Kernel_C.init_freemem"
       "init_freemem"
     ];
   };
-
-  # gcc49GraphRefineInputs =
-  #   lib.forEach (lib.attrNames this.optLevels)
-  #     (optLevel: this.byConfig.arm.gcc49.${optLevel}.graphRefineInputsViaMake);
-
-  # all = this.mkAggregate (
-  #   { archName, targetCCWrapperAttrName, optLevelName }:
-  #   let
-  #     scope = this.byConfig.${archName}.${targetCCWrapperAttrName}.${optLevelName};
-  #   in
-  #     lib.optionals scope.scopeConfig.bvSupport [
-  #       scope.graphRefine.demo
-  #     ]
-  # );
 
 }
