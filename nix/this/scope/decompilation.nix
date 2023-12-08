@@ -8,20 +8,20 @@
 }:
 
 let
-  ignore = [
+  ignoreList = [
     "_start" "c_handle_fastpath_call" "c_handle_fastpath_reply_recv" "restore_user_context"
   ];
 
-  # ignore = runCommand "ignore" {} ''
+  # ignoreFile = runCommand "ignore" {} ''
   #   cat ${kernel}/kernel.sigs | cut -d ' ' -f 2 | grep -v memzero | tr '\n' ',' | sed 's/,$/\n/' > $out
   # '';
 
-  # TODO rename to .sml
-  scriptIn = writeText "x.ml" ''
+  ignoreFile = writeText "ignore" (lib.concatStringsSep "," ignoreList);
+
+  scriptIn = writeText "x.sml" ''
     load "decompileLib";
-    val _ = decompileLib.decomp "@path@" true "${lib.concatStringsSep "," ignore}";
+    val _ = decompileLib.decomp "@path@" true "@ignore@";
   '';
-    # val _ = decompileLib.decomp "@path@" true "@ignore@";
 
 in
 runCommand "decompilation" {
@@ -29,24 +29,18 @@ runCommand "decompilation" {
     git
   ];
 }''
-  hol_dir=$(pwd)/src/HOL4
   target_dir=$(pwd)/target
   script=$(pwd)/script
-
-  mkdir $(dirname $hol_dir)
-  ln -s ${hol4} $hol_dir
 
   mkdir $target_dir
   cp ${kernel}/{kernel.elf.txt,kernel.sigs} target
 
-  substitute ${scriptIn} $script --subst-var-by path $target_dir/kernel
+  substitute ${scriptIn} $script \
+    --subst-var-by path $target_dir/kernel \
+    --subst-var-by ignore $(cat ${ignoreFile})
 
-  cd $hol_dir/examples/machine-code/graph
+  cd ${hol4}/examples/machine-code/graph
   echo "decompiling..."
-  $hol_dir/bin/hol < $script > $target_dir/log.txt
+  ${hol4}/bin/hol < $script > $target_dir/log.txt
   cp -r $target_dir $out
 ''
-
-  # substitute ${scriptIn} $script \
-  #   --subst-var-by path $target_dir/kernel \
-  #   --subst-var-by ignore $(cat ${ignore})

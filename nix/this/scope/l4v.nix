@@ -45,10 +45,11 @@
 # Consider exporting the entire top-level
 
 # TODO
-# Debug the following for (at least) justStandaloneCParser:
-# *** Consumer thread failure: "Isabelle.Session.manager"
-# *** Missing session sources entry "/build/src/l4v/tools/c-parser/umm_
-# ... test hardcoding L4V_ARCH in pointed-to lines?
+# Debug the following for (at least) justSimplExport:
+# - *** Consumer thread failure: "Isabelle.Session.manager"
+#   *** Missing session sources entry "/build/src/l4v/tools/c-parser/umm_heap/$L4V_ARCH/TargetNumbers.ML"
+# - *** Consumer thread failure: "Isabelle.Session.manager"
+#   *** Missing session sources entry "/build/src/l4v/spec/cspec/c/build/$L4V_ARCH/kernel_all.c_pp"
 
 assert tests == null -> (exclude == [] && remove == []);
 
@@ -159,7 +160,6 @@ stdenv.mkDerivation {
     ''
   );
 
-  # TODO wrap './run_tests' in 'time' invocation
   buildPhase = ''
     ${lib.optionalString (tests != null) ''
       time ./run_tests \

@@ -26,6 +26,15 @@ let
 
 in rec {
 
+  d = graphRefineWith {
+    source = tmpSource;
+    args = [
+      "trace-to:report.txt"
+      "save-proofs:proofs.txt"
+      "init_freemem"
+    ];
+  };
+
   allExceptInitFreemem = graphRefineWith {
     args = [
       "trace-to:report.txt"
@@ -63,10 +72,10 @@ in rec {
         url = "https://github.com/seL4/l4v";
         rev = "6700d97b7f0593dbf5d8145ee43f1e151553dea0";
       };
-      hol4Source = lib.cleanSource (builtins.fetchGit {
+      hol4Source = builtins.fetchGit {
         url = "https://github.com/seL4/HOL";
         rev = "6c0c2409ecdbd7195911f674a77bfdd39c83816e";
-      });
+      };
       isabelleVersion = "2020";
       stackLTSAttr = "lts_13_15";
       targetCCWrapperAttr = "gcc49";
@@ -105,6 +114,22 @@ in rec {
     }
   ));
 
+  hol4PR =
+    let
+      f = rev: (overrideScope (self: super: {
+        scopeConfig = super.scopeConfig.override {
+          hol4Source = lib.cleanSource (builtins.fetchGit {
+            url = "https://github.com/nspin/HOL";
+            ref = "pr/fix-arm-step-lib-for-disjnorm";
+            inherit rev;
+          });
+        };
+      })).hol4;
+    in {
+      before = f "4954936b88855c6857edc273d4bf60189e311d85";
+      after = f "2446310e6cffcf46249b7706d5ceffc0a1c49b33";
+    };
+
   kernels = writeText "x" (toString (this.mkAggregate (
     { archName, targetCCWrapperAttrName, optLevelName }:
     let
@@ -114,18 +139,27 @@ in rec {
         (lib.elem scope.scopeConfig.arch [
           "ARM"
         ])
-      ])
-      [
+      ]) [
         scope.kernel
       ]
   )));
 
-  keep = writeText "kleep" (toString (lib.flatten [
-    seL4_12_0_0.graphRefine.all
-    allExceptInitFreemem
+  keep = writeText "keep" (toString (lib.flatten [
+    # seL4_12_0_0.graphRefine.all
     kernels
+    allExceptInitFreemem
+    # evidence
+    # hol4PR.before
+    # hol4PR.after
   ]));
 
   prime = writeText "prime" (toString (lib.flatten [
+    allExceptInitFreemem
+    this.byConfig.arm.gcc10.o2.wip.allExceptInitFreemem
+
+    # seL4_12_0_0.graphRefine.all
+    # evidence
+    # hol4PR.after
+    # hol4PR.before
   ]));
 }

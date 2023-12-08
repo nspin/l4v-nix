@@ -173,11 +173,11 @@ with self; {
 
   stdenvForHol4 = gcc9Stdenv;
 
-  polymlForHol4 = polyml58ForHol4;
-  mltonForHol4 = mlton20180207;
+  # polymlForHol4 = polyml58ForHol4;
+  # mltonForHol4 = mlton20180207;
 
-  # mltonForHol4 = mlton;
-  # polymlForHol4 = polyml59ForHol4;
+  polymlForHol4 = polyml59ForHol4;
+  mltonForHol4 = mlton20210107;
 
   isabelleForL4v = {
     "2020" = isabelle2020ForL4v;

@@ -7,10 +7,11 @@
 }:
 
 # TODO
-# --ignore-matching-lines='^$' is a hack to handle the possible '/* disabled: CONFIG_KERNEL_OPT_LEVEL_O[12] */' difference.
+# The following args are a hack to handle the possible '/* disabled: CONFIG_KERNEL_OPT_LEVEL_O[12] */' difference:
+# --ignore-matching-lines='^/\*[^*]*\*/$'
+# --ignore-matching-lines='^$'
 
-# TODO reneame to "equivalent"
-runCommand "preprocessed-kernels-are-identical" {} ''
+runCommand "preprocessed-kernels-are-equivalent" {} ''
   f() {
     diff "$@" \
       --ignore-matching-lines='^#' \

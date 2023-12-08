@@ -1,6 +1,8 @@
 { stdenvForHol4
-, graphviz
+, makeFontsConf
 , python3, perl
+, fontconfig
+, graphviz
 
 , polymlForHol4
 , mltonForHol4
@@ -8,52 +10,42 @@
 }:
 
 # TODO
-# ./bin/build --relocbuild
 # ./bin/build -j $NIX_BUILD_CORES
-# put in $out
+# ./bin/build --relocbuild
+
+let
+  fontconfigFile = makeFontsConf { fontDirectories = [ ]; };
+in
 
 stdenvForHol4.mkDerivation {
   name = "hol4";
 
   src = hol4Source;
 
-  # TODO use nativeBuildInputs
-  buildInputs = [
+  phases = [ "unpackPhase" "patchPhase" "buildPhase" ];
+
+  nativeBuildInputs = [
     polymlForHol4 mltonForHol4
-    graphviz
     python3 perl
+    fontconfig
+    graphviz
   ];
 
-  # TODO patch "/bin/unquote" too
-  # TODO /bin/* unecessary with more recent versions
   postPatch = ''
     patchShebangs .
-
-    substituteInPlace \
-      tools/Holmake/Holmake_types.sml \
-        --replace '"/bin/mv"' '"mv"' \
-        --replace '"/bin/cp"' '"cp"'
-  '';
-
-  # TODO try removing HOLDIR hack now that we don't use decompile.py
-  configurePhase = ''
-    # $HOLDIR hack
-    holdir=$NIX_BUILD_TOP/src/HOL4
-    mkdir -p $(dirname $holdir)
-    old=$(pwd)
-    cd /
-    mv $old $holdir
-    cd $holdir
-
-    poly < tools/smart-configure.sml
   '';
 
   buildPhase = ''
+    export FONTCONFIG_FILE=$(pwd)/fonts.conf
+    cp --no-preserve=mode,ownership ${fontconfigFile} $FONTCONFIG_FILE
+
+    holdir=$out
+
+    cp -r . $holdir
+    cd $holdir
+
+    poly < tools/smart-configure.sml
     bin/build
     (cd examples/machine-code/graph && $holdir/bin/Holmake)
-  '';
-
-  installPhase = ''
-    cp -r . $out
   '';
 }
