@@ -9,7 +9,8 @@
 
 # TODO
 # ./bin/build --relocbuild
-# ./bin/build -j
+# ./bin/build -j $NIX_BUILD_CORES
+# put in $out
 
 stdenvForHol4.mkDerivation {
   name = "hol4";
