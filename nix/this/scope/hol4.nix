@@ -48,6 +48,7 @@ stdenvForHol4.mkDerivation {
   ];
 
   # TODO patch "/bin/unquote" too
+  # TODO /bin/* unecessary with more recent versions
   postPatch = ''
     patchShebangs .
 
