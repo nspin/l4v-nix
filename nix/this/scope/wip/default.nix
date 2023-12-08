@@ -95,16 +95,14 @@ in rec {
   };
 
   evidence = linkFarm "evidence" (lib.flip lib.mapAttrs evidenceScopes (_: scope:
-    linkFarm "scope" (
-      {
-        "rev" = writeText "rev.txt" scope.hol4Rev;
-        "kernel.elf.txt" = "${scope.kernel}/kernel.elf.txt";
-        "kernel.sigs" = "${scope.kernel}/kernel.sigs";
-        "kernel_mc_graph.txt" = "${scope.decompilation}/kernel_mc_graph.txt";
-        "log.txt" = "${scope.decompilation}/log.txt";
-        "report.txt" = "${scope.wip.justMemzero}/report.txt";
-      }
-    )
+    linkFarm "scope" {
+      "rev" = writeText "rev.txt" scope.hol4Rev;
+      "kernel.elf.txt" = "${scope.kernel}/kernel.elf.txt";
+      "kernel.sigs" = "${scope.kernel}/kernel.sigs";
+      "kernel_mc_graph.txt" = "${scope.decompilation}/kernel_mc_graph.txt";
+      "log.txt" = "${scope.decompilation}/log.txt";
+      "report.txt" = "${scope.wip.justMemzero}/report.txt";
+    }
   ));
 
   kernels = writeText "x" (toString (this.mkAggregate (
