@@ -25,7 +25,7 @@ let
     };
   };
 
-in pkgs.this.primary // {
+in pkgs.this.named.default // {
   inherit pkgs;
   inherit (pkgs) this;
 }

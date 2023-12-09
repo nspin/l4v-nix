@@ -133,7 +133,7 @@ in rec {
   kernels = writeText "x" (toString (this.mkAggregate (
     { archName, targetCCWrapperAttrName, optLevelName }:
     let
-      scope = this.byConfig.${archName}.${targetCCWrapperAttrName}.${optLevelName};
+      scope = this.named.byConfig.${archName}.${targetCCWrapperAttrName}.${optLevelName};
     in
       lib.optionals (lib.all lib.id [
         (lib.elem scope.scopeConfig.arch [
@@ -155,7 +155,7 @@ in rec {
 
   prime = writeText "prime" (toString (lib.flatten [
     allExceptInitFreemem
-    this.byConfig.arm.gcc10.o2.wip.allExceptInitFreemem
+    this.named.o2.arm.wip.allExceptInitFreemem
 
     # seL4_12_0_0.graphRefine.all
     # evidence
