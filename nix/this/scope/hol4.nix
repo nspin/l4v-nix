@@ -1,7 +1,6 @@
 { stdenvForHol4
 , makeFontsConf
 , python3, perl
-, fontconfig
 , graphviz
 
 , polymlForHol4
@@ -10,11 +9,14 @@
 }:
 
 # TODO
+# Address:
+# Fontconfig error: No writable cache directories
+
+# TODO
 # ./bin/build -j $NIX_BUILD_CORES
 # ./bin/build --relocbuild
 
 let
-  fontconfigFile = makeFontsConf { fontDirectories = [ ]; };
 in
 
 stdenvForHol4.mkDerivation {
@@ -27,17 +29,18 @@ stdenvForHol4.mkDerivation {
   nativeBuildInputs = [
     polymlForHol4 mltonForHol4
     python3 perl
-    fontconfig
     graphviz
   ];
+
+  # FONTCONFIG_FILE = makeFontsConf { fontDirectories = [ ]; };
 
   postPatch = ''
     patchShebangs .
   '';
 
   buildPhase = ''
-    export FONTCONFIG_FILE=$(pwd)/fonts.conf
-    cp --no-preserve=mode,ownership ${fontconfigFile} $FONTCONFIG_FILE
+    # avoid noisy warning from fontconfig
+    export HOME=$(mktemp -d --suffix=-home)
 
     holdir=$out
 
