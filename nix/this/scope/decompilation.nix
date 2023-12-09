@@ -7,6 +7,9 @@
 , kernel
 }:
 
+# TODO
+# prefix with "time" invocation
+
 let
   ignoreList = [
     "_start" "c_handle_fastpath_call" "c_handle_fastpath_reply_recv" "restore_user_context"

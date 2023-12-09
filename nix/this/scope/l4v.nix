@@ -45,7 +45,7 @@
 # Consider exporting the entire top-level
 
 # TODO
-# Debug the following for (at least) justSimplExport:
+# Debug the following for (at least) justSimplExport (does not impact performance):
 # - *** Consumer thread failure: "Isabelle.Session.manager"
 #   *** Missing session sources entry "/build/src/l4v/tools/c-parser/umm_heap/$L4V_ARCH/TargetNumbers.ML"
 # - *** Consumer thread failure: "Isabelle.Session.manager"
