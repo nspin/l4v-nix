@@ -64,15 +64,16 @@ runCommand "graph-refine${lib.optionalString (name != null) "-${name}"}" {
 
   passthru = {
     inherit
+      solverList
       preprocessedKernelsAreEquivalent
       preTargetDir
       targetDir
     ;
   };
 } ''
-  ln -s ${solverList} .solverlist
   cp -r --no-preserve=owner,mode ${targetDir} target
   cd target
+  ln -sf ${solverList} .solverlist
 
   ${commands}
 

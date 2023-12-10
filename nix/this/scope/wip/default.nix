@@ -26,8 +26,67 @@ let
 
 in rec {
 
-  d = graphRefineWith {
+  wrap = writeScript "wrap" ''
+    #!${runtimeShell}
+
+    set -u -o pipefail
+
+    parent="$1"
+    shift
+
+    t=$(date +%s.%6N)
+    d=$parent/$t
+
+    mkdir -p $d
+
+    echo $t >&2
+
+    echo $$ > $d/wrapper-pid.txt
+    echo "$@" > $d/args.txt
+
+    exec < <(tee $d/in.smt2) > >(tee $d/out.smt2) 2> >(tee $d/err.log >&2)
+
+    bash -c 'echo $$ > solver-pid.txt && exec "$@"' -- "$@"
+
+    ret=$?
+
+    echo $ret > $d/ret.txt
+
+    exit $ret
+  '';
+
+  wrappedSolverList =
+    let
+      # chosen = "boolector";
+      # chosen = "bitwuzla";
+      chosen = "yices";
+      scope = graphRefineSolverLists.overrideScope (self: super: {
+        # cvc4TLimit = "120";
+        # cvc5TLimit = "120";
+        executables = lib.flip lib.mapAttrs super.executables (lib.const (old: [ wrap "trace" ] ++ old));
+        # executables = lib.flip lib.mapAttrs super.executables (k: v:
+        #   (if k == chosen then [ wrap "trace" ] else []) ++ v
+        # );
+        # onlineSolver = {
+        #   command = self.onlineCommands.${chosen};
+        #   inherit (super.onlineSolver) config;
+        # };
+        # offlineSolverKey = {
+        #   attr = chosen;
+        #   inherit (super.offlineSolverKey) granularity;
+        # };
+      });
+    in
+      scope.solverList;
+
+  d = graphRefineWith rec {
     source = tmpSource;
+    # keepSMTDumps = true;
+    # solverList = wrappedSolverList;
+    # extraNativeBuildInputs = [
+    #   breakpointHook
+    #   bashInteractive
+    # ];
     args = [
       "trace-to:report.txt"
       "save-proofs:proofs.txt"
@@ -35,7 +94,42 @@ in rec {
     ];
   };
 
-  allExceptInitFreemem = graphRefineWith {
+  d1 = graphRefineWith rec {
+    source = tmpSource;
+    # keepSMTDumps = true;
+    # solverList = wrappedSolverList;
+    # extraNativeBuildInputs = [
+    #   breakpointHook
+    #   bashInteractive
+    # ];
+    args = [
+      "trace-to:report.txt"
+      "save-proofs:proofs.txt"
+      "init_freemem"
+    ];
+  };
+
+  d2 = graphRefineWith rec {
+    source = tmpSource;
+    # keepSMTDumps = true;
+    # solverList = wrappedSolverList;
+    # extraNativeBuildInputs = [
+    #   breakpointHook
+    #   bashInteractive
+    # ];
+    args = [
+      "trace-to:report.txt"
+      "save-proofs:proofs.txt"
+      "decodeARMMMUInvocation"
+    ];
+  };
+
+  ds = writeText "x" (toString [
+    d1
+    d2
+  ]);
+
+  allExceptNotWorkingForO1 = graphRefineWith {
     args = [
       "trace-to:report.txt"
       "save-proofs:proofs.txt"
@@ -46,19 +140,34 @@ in rec {
     ];
   };
 
-  justMemzero = graphRefineWith {
+  allExceptNotWorkingForO2 = graphRefineWith {
     args = [
       "trace-to:report.txt"
+      # "skip-proofs-of:${./logs/all-o2-1.log}"
       "save-proofs:proofs.txt"
-      "memzero"
+      "-exclude"
+        "init_freemem"
+        "decodeARMMMUInvocation"
+      "-end-exclude"
+      "all"
     ];
   };
+
+  x = this.named.o2.arm.wip.ds;
 
   justInitFreemem = graphRefineWith {
     args = [
       "trace-to:report.txt"
       "save-proofs:proofs.txt"
       "init_freemem"
+    ];
+  };
+
+  justDecodeARMMMUInvocation = graphRefineWith {
+    args = [
+      "trace-to:report.txt"
+      "save-proofs:proofs.txt"
+      "decodeARMMMUInvocation"
     ];
   };
 
@@ -145,21 +254,21 @@ in rec {
   )));
 
   keep = writeText "keep" (toString (lib.flatten [
-    # seL4_12_0_0.graphRefine.all
+    this.named.o2.arm.wip.allExceptNotWorkingForO2
+    allExceptNotWorkingForO1
     kernels
-    allExceptInitFreemem
+    # seL4_12_0_0.graphRefine.all
     # evidence
     # hol4PR.before
     # hol4PR.after
   ]));
 
   prime = writeText "prime" (toString (lib.flatten [
-    allExceptInitFreemem
-    this.named.o2.arm.wip.allExceptInitFreemem
-
-    # seL4_12_0_0.graphRefine.all
+    this.named.default.slower
+    this.named.riscv64.slower
     # evidence
     # hol4PR.after
     # hol4PR.before
   ]));
+
 }

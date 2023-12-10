@@ -9,9 +9,15 @@
 , cvc5Binary
 , sonolarBinary
 , mathsat5Binary
+, bitwuzla_0_2_0
 
 , graphRefineSource
 }:
+
+# TODO
+# It doesn't seem like these support arrays as arguments to functions, but worth investigating further:
+# - boolector
+# - bitwuzla 0.1.0
 
 lib.makeScope newScope (self: with self;
   let
@@ -27,27 +33,40 @@ lib.makeScope newScope (self: with self;
       cvc5 = cvc5Binary;
       sonolar = sonolarBinary;
       mathsat5 = mathsat5Binary;
+      bitwuzla = bitwuzla_0_2_0;
     };
 
-    executables = {
+    executables = lib.mapAttrs (lib.const lib.singleton) {
       cvc4 = "${packages'.cvc4}/bin/cvc4";
       cvc5 = "${packages'.cvc5}/bin/cvc5";
       sonolar = "${packages'.sonolar}/bin/sonolar";
       mathsat5 = "${packages'.mathsat5}/bin/mathsat";
       z3 = "${packages'.z3}/bin/z3";
       yices = "${packages'.yices}/bin/yices-smt2";
+      bitwuzla = "${packages'.bitwuzla}/bin/bitwuzla";
+    };
+
+
+    offlineCommands = {
+      cvc4 = executables.cvc4 ++ [ "--lang" "smt" ];
+      cvc5 = executables.cvc5 ++ [ "--lang" "smt" ];
+      sonolar = executables.sonolar ++ [ "--input-format=smtlib2" ];
+      mathsat5 = executables.mathsat5 ++ [ "-input=smt2" ];
+      z3 = executables.z3 ++ [ "-smt2" "-in" ];
+      yices = executables.yices;
+      bitwuzla = executables.bitwuzla;
     };
 
     onlineCommands = {
-      cvc4 = [ executables.cvc4 "--lang" "smt" "--incremental" "--tlimit=120" ];
+      cvc4 = offlineCommands.cvc4 ++ [ "--incremental" "--tlimit=${cvc4TLimit}" ];
+      cvc5 = offlineCommands.cvc5 ++ [ "--incremental" "--tlimit=${cvc5TLimit}" ];
+      z3 = offlineCommands.z3;
+      yices = offlineCommands.yices ++ [ "--incremental" ];
+      bitwuzla = offlineCommands.bitwuzla;
     };
 
-    offlineCommands = {
-      cvc4 = [ executables.cvc4 "--lang" "smt" ];
-      cvc5 = [ executables.cvc5 "--incremental" "--lang" "smt" "--tlimit=120" ];
-      sonolar = [ executables.sonolar "----input-format=smtlib2" ];
-      yices = [ executables.yices ];
-    };
+    cvc4TLimit = "120";
+    cvc5TLimit = "120";
 
     formatSolverList =
       { strategy
@@ -96,16 +115,19 @@ lib.makeScope newScope (self: with self;
     modelStrategyFilter = attr: granularity: true;
 
     onlineSolver = {
-      command = onlineCommands.cvc4;
+      command = onlineCommands.yices;
       config = configForGranularity granularities.machineWord;
     };
 
     offlineSolverKey = {
-      attr = "cvc4";
+      attr = "yices";
       granularity = granularities.machineWord;
     };
 
-    offlineSolverFilter = attr: [ granularities.machineWord granularities.byte ];
+    offlineSolverFilter = attr: [
+      granularities.machineWord
+      granularities.byte
+    ];
 
     formatKey = { attr, granularity }: "${attr}-${formatGranularity granularity}";
 
@@ -113,8 +135,8 @@ lib.makeScope newScope (self: with self;
       let
         formattedOnlineSolverKey = "the-online-solver";
       in {
-        strategy = lib.flatten (lib.forEach (lib.attrNames onlineCommands) (attr:
-          lib.forEach (lib.attrValues granularities) (granularity:
+        strategy = lib.flatten (lib.forEach (lib.attrNames offlineCommands) (attr:
+          lib.forEach (offlineSolverFilter attr) (granularity:
             lib.forEach (strategyFilter attr granularity) (scope: {
               key = formatKey { inherit attr granularity; };
               inherit scope;
@@ -122,8 +144,8 @@ lib.makeScope newScope (self: with self;
           )
         ));
 
-        modelStrategy = lib.flatten (lib.forEach (lib.attrNames onlineCommands) (attr:
-          lib.forEach (lib.attrValues granularities) (granularity:
+        modelStrategy = lib.flatten (lib.forEach (lib.attrNames offlineCommands) (attr:
+          lib.forEach (offlineSolverFilter attr) (granularity:
             lib.optionals (modelStrategyFilter attr granularity) [
               (formatKey { inherit attr granularity; })
             ]
@@ -139,7 +161,7 @@ lib.makeScope newScope (self: with self;
         offlineSolverKey = formatKey offlineSolverKey;
 
         offlineSolvers = lib.listToAttrs (lib.concatLists (lib.flip lib.mapAttrsToList offlineCommands (attr: command:
-          (lib.forEach (lib.attrValues granularities) (granularity:
+          (lib.forEach (offlineSolverFilter attr) (granularity:
             lib.nameValuePair (formatKey { inherit attr granularity; }) {
               inherit command;
               config = configForGranularity granularity;
@@ -148,9 +170,9 @@ lib.makeScope newScope (self: with self;
         )));
       };
 
-    solverlist = formatSolverList formatSolverListArgs;
+    solverList = formatSolverList formatSolverListArgs;
 
-    default = solverlist;
+    default = solverList;
 
     # default = mattSolverlist;
 

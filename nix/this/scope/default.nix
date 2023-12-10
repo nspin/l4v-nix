@@ -1,8 +1,10 @@
 { lib
+, pkgs
+, pkgsStatic
 , runCommand
 , writeText
-, texlive
 , gcc9Stdenv
+, texlive
 , polyml
 , mlton
 , mlton20180207
@@ -168,6 +170,9 @@ with self; {
   cvc4Binaries = callPackage ./deps/solvers-for-graph-refine/cvc4-binaries.nix {};
   cvc5Binary = callPackage ./deps/solvers-for-graph-refine/cvc5-binary.nix {};
   mathsat5Binary = callPackage ./deps/solvers-for-graph-refine/mathsat5-binary.nix {};
+  bitwuzla_0_2_0 = pkgsStatic.callPackage ./deps/solvers-for-graph-refine/bitwuzla-0.2.0.nix {
+    pkgsDynamic = pkgs;
+  };
 
   ### choices ###
 
