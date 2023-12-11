@@ -250,6 +250,7 @@ in rec {
 
   keep = writeText "keep" (toString (lib.flatten [
     this.named.arm.all
+    this.named.riscv.l4vAll
     this.named.o2.arm.graphRefine.easy
     this.named.riscv64.graphRefine.demo.preTargetDir
     this.named.o2.riscv64.graphRefine.demo.preTargetDir
