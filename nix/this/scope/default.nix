@@ -5,6 +5,7 @@
 , writeText
 , gcc9Stdenv
 , texlive
+, python2
 , polyml
 , mlton
 , mlton20180207
@@ -127,6 +128,12 @@ with self; {
       ];
     };
 
+    easy = writeText "graph-refine-easy" (toString [
+      functions
+      coverage
+      demo
+    ]);
+
     all = graphRefineWith {
       name = "all";
       args = [
@@ -141,6 +148,14 @@ with self; {
   cvcVersions = callPackage ./notes/cvc-versions {};
 
   ### deps ###
+
+  # TODO For use with GDB. Not working.
+  python2WithDebuggingSymbols = python2.overrideAttrs (attrs: {
+    configureFlags = attrs.configureFlags ++ [
+      "--with-pydebug"
+    ];
+    dontStrip = true;
+  });
 
   texliveEnv = with texlive; combine {
     inherit

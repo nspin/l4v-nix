@@ -18,3 +18,13 @@ build:
 run: build
 	docker run --rm -it \
 		$(image_tag)
+
+local_target_dir := target
+
+$(local_target_dir): build
+	mkdir $(local_target_dir)
+	docker run --rm $(image_tag) tar -c -C graph-refine/seL4-example target | tar -x -C $(local_target_dir)
+
+.PHONY: clean
+clean:
+	rm -rf $(local_target_dir)

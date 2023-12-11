@@ -1,16 +1,16 @@
-TARGET_DIR := target/$(TARGET_NAME)
+L4V_OPT_LEVEL ?= -O1
+
+graph_refine_script := graph-refine/graph-refine.py
+target_dir := graph-refine/seL4-example/target/$(L4V_ARCH)$(L4V_OPT_LEVEL)
+graph_refine_cmd_prefix := python $(graph_refine_script) $(target_dir)
 
 .PHONY: none
 none:
 
 .PHONY: memcpy
 memcpy:
-	python graph-refine/graph-refine.py graph-refine/seL4-example/$(TARGET_DIR) \
-		trace-to:report.txt \
-		memcpy
+	$(graph_refine_cmd_prefix) trace-to:report.txt memcpy
 
 .PHONY: all
 all:
-	python graph-refine/graph-refine.py graph-refine/seL4-example/$(TARGET_DIR) \
-		trace-to:report.txt \
-		all
+	$(graph_refine_cmd_prefix) trace-to:report.txt all

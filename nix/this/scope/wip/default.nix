@@ -1,5 +1,6 @@
 { lib
 , pkgs
+, stdenv
 , callPackage
 , runCommand
 , writeText
@@ -10,6 +11,10 @@
 , breakpointHook
 , bashInteractive
 , strace
+, mkShell
+, python2
+, gdb
+, cntr
 
 , scopeConfig
 , l4vWith
@@ -55,15 +60,15 @@ in rec {
     exit $ret
   '';
 
-  wrappedSolverList =
+  debugSolverList =
     let
       # chosen = "boolector";
-      # chosen = "bitwuzla";
-      chosen = "yices";
+      chosen = "bitwuzla";
+      # chosen = "yices";
       scope = graphRefineSolverLists.overrideScope (self: super: {
+        # executables = lib.flip lib.mapAttrs super.executables (lib.const (old: [ wrap "trace" ] ++ old));
         # cvc4TLimit = "120";
         # cvc5TLimit = "120";
-        executables = lib.flip lib.mapAttrs super.executables (lib.const (old: [ wrap "trace" ] ++ old));
         # executables = lib.flip lib.mapAttrs super.executables (k: v:
         #   (if k == chosen then [ wrap "trace" ] else []) ++ v
         # );
@@ -82,7 +87,7 @@ in rec {
   d = graphRefineWith rec {
     source = tmpSource;
     # keepSMTDumps = true;
-    # solverList = wrappedSolverList;
+    # solverList = debugSolverList;
     # extraNativeBuildInputs = [
     #   breakpointHook
     #   bashInteractive
@@ -91,59 +96,51 @@ in rec {
       "trace-to:report.txt"
       "save-proofs:proofs.txt"
       "init_freemem"
+      # "decodeARMMMUInvocation"
     ];
   };
 
-  d1 = graphRefineWith rec {
-    source = tmpSource;
-    # keepSMTDumps = true;
-    # solverList = wrappedSolverList;
-    # extraNativeBuildInputs = [
-    #   breakpointHook
-    #   bashInteractive
-    # ];
-    args = [
-      "trace-to:report.txt"
-      "save-proofs:proofs.txt"
-      "init_freemem"
-    ];
+  py2gdbScript =
+    let
+      path = "Tools/gdb/libpython.py";
+    in
+      stdenv.mkDerivation {
+        name = "${python2.name}-gdb-support";
+
+        inherit (python2) src;
+
+        phases = [ "unpackPhase" "patchPhase" "installPhase" ];
+
+        postPatch = ''
+          patchShebangs ${path}
+        '';
+
+        installPhase = ''
+          install -D -t $out ${path}
+        '';
   };
 
-  d2 = graphRefineWith rec {
-    source = tmpSource;
-    # keepSMTDumps = true;
-    # solverList = wrappedSolverList;
-    # extraNativeBuildInputs = [
-    #   breakpointHook
-    #   bashInteractive
-    # ];
-    args = [
-      "trace-to:report.txt"
-      "save-proofs:proofs.txt"
-      "decodeARMMMUInvocation"
-    ];
-  };
+  x = this.named.o2.arm.wip.d;
 
-  ds = writeText "x" (toString [
-    d1
-    d2
-  ]);
-
-  allExceptNotWorkingForO1 = graphRefineWith {
-    args = [
-      "trace-to:report.txt"
-      "save-proofs:proofs.txt"
-      "-exclude"
-        "init_freemem"
-      "-end-exclude"
-      "all"
+  sh = mkShell {
+    nativeBuildInputs = [
+      gdb
+      cntr
     ];
+
+    pgd = py2gdbScript;
+
+    shellHook = ''
+      d() {
+        pid="$1"
+        sudo gdb -p "$pid" -x "$pgd"/*
+      }
+    '';
   };
 
   allExceptNotWorkingForO2 = graphRefineWith {
     args = [
       "trace-to:report.txt"
-      # "skip-proofs-of:${./logs/all-o2-1.log}"
       "save-proofs:proofs.txt"
       "-exclude"
         "init_freemem"
@@ -152,8 +149,6 @@ in rec {
       "all"
     ];
   };
-
-  x = this.named.o2.arm.wip.ds;
 
   justInitFreemem = graphRefineWith {
     args = [
@@ -254,18 +249,15 @@ in rec {
   )));
 
   keep = writeText "keep" (toString (lib.flatten [
-    this.named.o2.arm.wip.allExceptNotWorkingForO2
-    allExceptNotWorkingForO1
+    this.named.arm.all
+    this.named.o2.arm.graphRefine.easy
+    this.named.riscv64.graphRefine.demo.preTargetDir
+    this.named.o2.riscv64.graphRefine.demo.preTargetDir
     kernels
-    # seL4_12_0_0.graphRefine.all
-    # evidence
-    # hol4PR.before
-    # hol4PR.after
   ]));
 
   prime = writeText "prime" (toString (lib.flatten [
-    this.named.default.slower
-    this.named.riscv64.slower
+    # seL4_12_0_0.graphRefine.all
     # evidence
     # hol4PR.after
     # hol4PR.before

@@ -43,24 +43,17 @@ RUN set -eux; \
     ./isabelle/bin/isabelle build -bv HOL-Word;
 
 ENV L4V_ARCH=ARM
-ENV CONFIG_OPTIMISATION_LEVEL=-O1
-ENV TARGET_NAME=${L4V_ARCH}${CONFIG_OPTIMISATION_LEVEL}
-ENV TARGET_DIR=target/${TARGET_NAME}
 
-RUN make -C graph-refine/seL4-example ${TARGET_DIR}/CFunctions.txt
-
-RUN make -C graph-refine/seL4-example ${TARGET_DIR}/ASMFunctions.txt
+RUN CONFIG_OPTIMISATION_LEVEL=-O1 make -C graph-refine/seL4-example target/${L4V_ARCH}-O1/CFunctions.txt
+RUN CONFIG_OPTIMISATION_LEVEL=-O2 make -C graph-refine/seL4-example target/${L4V_ARCH}-O2/CFunctions.txt
+RUN CONFIG_OPTIMISATION_LEVEL=-O1 make -C graph-refine/seL4-example target/${L4V_ARCH}-O1/ASMFunctions.txt
+RUN CONFIG_OPTIMISATION_LEVEL=-O2 make -C graph-refine/seL4-example target/${L4V_ARCH}-O2/ASMFunctions.txt
 
 RUN ln -s /smtsolvers/solverlist .solverlist
 
-RUN make -C graph-refine/seL4-example StackBounds
+RUN CONFIG_OPTIMISATION_LEVEL=-O1 make -C graph-refine/seL4-example StackBounds coverage target/${L4V_ARCH}-O1/demo-report.txt
 
-RUN make -C graph-refine/seL4-example coverage
-
-RUN make -C graph-refine/seL4-example ${TARGET_DIR}/demo-report.txt
-
-# RUN make -C graph-refine/seL4-example report
+# TODO broken
+# RUN CONFIG_OPTIMISATION_LEVEL=-O2 make -C graph-refine/seL4-example StackBounds coverage target/${L4V_ARCH}-O2/demo-report.txt
 
 COPY Makefile.inside Makefile
-
-# RUN make
