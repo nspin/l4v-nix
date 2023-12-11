@@ -1,0 +1,95 @@
+Testing functions: ['Kernel_C.cancelAllIPC', 'Kernel_C.rescheduleRequired', 'Kernel_C.scheduleTCB', 'Kernel_C.setThreadState', 'Kernel_C.tcbSchedEnqueue']
+Checking 5 function pair problems
+Testing Function pair Pairing (cancelAllIPC (ASM) <= Kernel_C.cancelAllIPC (C))
+  (function pairing 1 of 5)
+ .. built problem, finding proof
+Discovered a loop relation for split points [34, 10]
+  (in problem)
+Now doing proof search in 34 init case in problem.
+Now doing proof search in 34 loop case in problem.
+ProofNode ('Split', ((34, (0, 1), [Expr ('Var', Type ('Word', 32), name = 'r7'), Expr ('Var', Type ('Word', 32), name = 'r8'), Expr ('Var', Type ('Word', 32), name = 'r11'), Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Var', Type ('Word', 32), name = 'r9'), Expr ('Var', Type ('Word', 32), name = 'ret'), Expr ('Var', Type ('Word', 32), name = 'r1'), Expr ('Var', Type ('Word', 32), name = 'r10'), Expr ('Op', Type ('Builtin', 'Bool'), name = 'ROData', vals = [Expr ('Var', Type ('Builtin', 'Mem'), name = 'mem')]), Expr ('Var', Type ('Word', 32), name = 'r5'), Expr ('Op', Type ('Builtin', 'RelWrapper'), name = 'EqSelectiveWrapper', vals = [Expr ('Op', Type ('Builtin', 'RelWrapper'), name = 'StackWrapper', vals = [Expr ('Var', Type ('Word', 32), name = 'r13'), Expr ('Var', Type ('Builtin', 'Mem'), name = 'stack')]), Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Num', Type ('Word', 32), val = 0)]), Expr ('Num', Type ('Word', 32), val = 0)])]), (10, (0, 1), [Expr ('Op', Type ('Word', 32), name = 'Plus', vals = [Expr ('Var', Type ('Word', 32), name = 'loop#3#count'), Expr ('Op', Type ('Word', 32), name = 'Times', vals = [Expr ('Op', Type ('Word', 32), name = 'Minus', vals = [Expr ('Num', Type ('Word', 32), val = 0), Expr ('Var', Type ('Word', 32), name = '%i')]), Expr ('Num', Type ('Word', 32), val = 1)])])]), [(Expr ('Var', Type ('Builtin', 'Mem'), name = 'mem'), Expr ('Var', Type ('Builtin', 'Mem'), name = 'Mem')), (Expr ('Var', Type ('Word', 32), name = 'r0'), Expr ('Var', Type ('Word', 32), name = 'thread___ptr_to_struct_tcb_C#v')), (Expr ('Var', Type ('Word', 32), name = 'r4'), Expr ('Var', Type ('Word', 32), name = 'thread___ptr_to_struct_tcb_C#v'))], 2, 1), (ProofNode ('Restr', (34, ('Number', (0, 3))), (ProofNode ('Restr', (10, ('Number', (0, 3))), (ProofNode ('Leaf', None, ()),)),)), ProofNode ('Restr', (34, ('Offset', (0, 3))), (ProofNode ('Restr', (10, ('Offset', (0, 3))), (ProofNode ('Leaf', None, ()),)),))))
+ .. proof found.
+Step 1: 
+  prove visits to 34 related to visits to 10
+    with equalities
+      ((Mem) ('mem')) (@ addr 34)
+      = ((Mem) ('Mem')) (@ addr 10)
+      ((Word32) ('r0')) (@ addr 34)
+      = ((Word32) ('thread___ptr_to_struct_tcb_C#v')) (@ addr 10)
+      ((Word32) ('r4')) (@ addr 34)
+      = ((Word32) ('thread___ptr_to_struct_tcb_C#v')) (@ addr 10)
+    and with invariants
+      ((Word32) ('r7')) (@ addr 34)
+      ((Word32) ('r8')) (@ addr 34)
+      ((Word32) ('r11')) (@ addr 34)
+      ((Word32) ('r13')) (@ addr 34)
+      ((Word32) ('r9')) (@ addr 34)
+      ((Word32) ('ret')) (@ addr 34)
+      ((Word32) ('r1')) (@ addr 34)
+      ((Word32) ('r10')) (@ addr 34)
+      ((Bool) (ROData('mem'))) (@ addr 34)
+      ((Word32) ('r5')) (@ addr 34)
+      ((RelWrapper) (EqSelectiveWrapper(StackWrapper(((Word32) ('r13')), ((Mem) ('stack'))), ((Word32) ((0 - 0))), ((Word32) (0))))) (@ addr 34)
+      ((Word32) (('loop#3#count' + ((0 - '#seq-visits') * 1)))) (@ addr 10)
+    .. proven.
+Step 2: case in (1) where the length of the sequence < 2
+  Prove the number of visits to 34 is in {0 ..< 3}
+    .. proven.
+Step 3: 
+  Prove the number of visits to 10 is in {0 ..< 3}
+    .. proven.
+Step 4: 
+  prove all verification conditions
+    .. proven.
+Step 5: case in (1) where the length of the sequence is i + 2
+  Prove the number of visits to 34 is in {i + 0 ..< i + 3}
+    .. proven.
+Step 6: 
+  Prove the number of visits to 10 is in {i + 0 ..< i + 3}
+    .. proven.
+Step 7: 
+  prove all verification conditions
+    .. proven.
+Result True for pair Pairing (cancelAllIPC (ASM) <= Kernel_C.cancelAllIPC (C)), time taken: 123.80s
+Testing Function pair Pairing (rescheduleRequired (ASM) <= Kernel_C.rescheduleRequired (C))
+  (function pairing 2 of 5)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Result True for pair Pairing (rescheduleRequired (ASM) <= Kernel_C.rescheduleRequired (C)), time taken: 0.63s
+Testing Function pair Pairing (scheduleTCB (ASM) <= Kernel_C.scheduleTCB (C))
+  (function pairing 3 of 5)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Result True for pair Pairing (scheduleTCB (ASM) <= Kernel_C.scheduleTCB (C)), time taken: 0.92s
+Testing Function pair Pairing (setThreadState (ASM) <= Kernel_C.setThreadState (C))
+  (function pairing 4 of 5)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Result True for pair Pairing (setThreadState (ASM) <= Kernel_C.setThreadState (C)), time taken: 2.19s
+Testing Function pair Pairing (tcbSchedEnqueue (ASM) <= Kernel_C.tcbSchedEnqueue (C))
+  (function pairing 5 of 5)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Result True for pair Pairing (tcbSchedEnqueue (ASM) <= Kernel_C.tcbSchedEnqueue (C)), time taken: 26.99s
+Results: [('Pairing (cancelAllIPC (ASM) <= Kernel_C.cancelAllIPC (C))', 'True'), ('Pairing (rescheduleRequired (ASM) <= Kernel_C.rescheduleRequired (C))', 'True'), ('Pairing (scheduleTCB (ASM) <= Kernel_C.scheduleTCB (C))', 'True'), ('Pairing (setThreadState (ASM) <= Kernel_C.setThreadState (C))', 'True'), ('Pairing (tcbSchedEnqueue (ASM) <= Kernel_C.tcbSchedEnqueue (C))', 'True')]
+Result summary:
+  - 5 proofs checked
+  - 0 proofs skipped
+  - 0.78% instructions covered
+  - failures: []
