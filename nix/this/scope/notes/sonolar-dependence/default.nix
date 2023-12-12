@@ -38,9 +38,10 @@ in rec {
     (lib.forEach [ true false ] (withSonolar:
       (lib.forEach [ true false ] (withBitwuzla:
         lib.optionals
-          (
-            withSonolar && withBitwuzla || (!withSonolar) && (!withBitwuzla)
-          )
+          (lib.any lib.id [
+            (!withSonolar)
+            (withSonolar && withBitwuzla)
+          ])
           [
             (mk {
               inherit withSonolar withBitwuzla;
