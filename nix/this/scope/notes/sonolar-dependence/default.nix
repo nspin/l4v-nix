@@ -6,14 +6,16 @@
 }:
 
 let
-  mk = { withSonolar ? true }:
+  mk = { withSonolar ? true, withBitwuzla ? true }:
     let
-      caseName = "${if withSonolar then "with" else "without"}-sonolar";
+      mkSuffix = solver: with_: lib.optionalString (!with_) "-without-${solver}";
+
+      caseName = "all${mkSuffix "sonolar" withSonolar}${mkSuffix "bitwuzla" withBitwuzla}";
 
       solverListsScope = graphRefineSolverLists.overrideScope (self: super: {
         offlineSolverFilter = attr:
           lib.optionals
-            (!(attr == "sonolar" && !withSonolar))
+            (!(attr == "sonolar" && !withSonolar) && !(attr == "bitwuzla" && !withBitwuzla))
             (super.offlineSolverFilter attr);
       });
 
@@ -32,11 +34,21 @@ let
     };
 
 in rec {
-  cases = lib.listToAttrs (map (case: lib.nameValuePair case.caseName case) (lib.flatten (lib.forEach [ true false ] (withSonolar: [
-    (mk {
-      inherit withSonolar;
-    })
-  ]))));
+  cases = lib.listToAttrs (map (case: lib.nameValuePair case.caseName case) (lib.flatten
+    (lib.forEach [ true false ] (withSonolar:
+      (lib.forEach [ true false ] (withBitwuzla:
+        lib.optionals
+          (
+            withSonolar && withBitwuzla || (!withSonolar) && (!withBitwuzla)
+          )
+          [
+            (mk {
+              inherit withSonolar withBitwuzla;
+            })
+          ]
+      ))
+    ))
+  ));
 
   evidence = linkFarm "evidence" (lib.mapAttrs (_: v: v.links) cases);
 }
