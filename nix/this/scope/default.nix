@@ -151,6 +151,7 @@ with self; {
   ### notes ###
 
   sonolarModelBug = callPackage ./notes/sonolar-model-bug {};
+  sonolarDependence = callPackage ./notes/sonolar-dependence {};
 
   ### deps ###
 
@@ -219,6 +220,7 @@ with self; {
     graphRefine.coverage
     graphRefine.demo
     sonolarModelBug.evidence
+    sonolarDependence.evidence
   ]));
 
   slower = writeText "slower" (toString ([
