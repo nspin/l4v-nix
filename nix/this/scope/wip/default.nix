@@ -227,6 +227,14 @@ in rec {
     this.scopes.riscv64.mcs.o1.cProofs
     this.scopes.armHyp.legacy.o1.cProofs
     this.scopes.aarch64.legacy.o1.cProofs
+
+    # (lib.forEach (map this.mkScopeFomNamedConfig this.namedConfigs) (scope: [
+    #   scope.l4vAll
+    # ] ++ lib.optionals scope.scopeConfig.bvSupport [
+    #   scope.graphRefine.everythingAtOnce.preTargetDir
+    # ] ++ lib.optionals (!(scope.scopeConfig.arch == "X64" && scope.scopeConfig.optLevel == "-O1")) [
+    #   scope.kernel
+    # ]))
   ]));
 
 }

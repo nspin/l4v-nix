@@ -147,6 +147,19 @@ rec {
     ))
   ]));
 
+  tests = writeText "tests"
+    (toString
+      (lib.flatten
+        (lib.forEach (map mkScopeFomNamedConfig namedConfigs) (scope: [
+          scope.l4vAll
+        ] ++ lib.optionals scope.scopeConfig.bvSupport [
+          scope.graphRefine.everythingAtOnce.preTargetDir
+        ] ++ lib.optionals (!(scope.scopeConfig.arch == "X64" && scope.scopeConfig.optLevel == "-O1")) [
+          scope.kernel
+        ]))
+      )
+    );
+
   cached = writeText "aggregate-cached" (toString (lib.flatten [
     # TODO
   ]));
