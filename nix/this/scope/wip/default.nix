@@ -217,28 +217,16 @@ in rec {
       after = f "2446310e6cffcf46249b7706d5ceffc0a1c49b33";
     };
 
-  kernels = writeText "x" (toString (this.mkAggregate (
-    { archName, targetCCWrapperAttrName, optLevelName }:
-    let
-      scope = this.named.byConfig.${archName}.${targetCCWrapperAttrName}.${optLevelName};
-    in
-      lib.optionals (lib.all lib.id [
-        (lib.elem scope.scopeConfig.arch [
-          "ARM"
-        ])
-      ]) [
-        scope.kernel
-      ]
-  )));
-
   keep = writeText "keep" (toString (lib.flatten [
     this.displayStatus
-    this.named.arm.all
-    this.named.riscv64.l4vAll
-    this.named.o2.arm.graphRefine.demo.preTargetDir
-    this.named.riscv64.graphRefine.demo.preTargetDir
-    this.named.o2.riscv64.graphRefine.demo.preTargetDir
-    kernels
+    this.scopes.riscv64.legacy.o1.l4vAll
+    this.scopes.arm.legacy.o1.all
+
+    (lib.forEach (map this.mkScopeFomNamedConfig this.namedConfigs) (scope: [
+      # empty
+    ] ++ lib.optionals (!(scope.scopeConfig.arch == "X64" && scope.scopeConfig.optLevel == "-O1")) [
+      scope.kernel
+    ]))
   ]));
 
   prime = writeText "prime" (toString (lib.flatten [

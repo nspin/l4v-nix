@@ -31,6 +31,8 @@ with self; {
 
   scopeConfig = origScopeConifig;
 
+  configName = "${scopeConfig.arch}${lib.optionalString (scopeConfig.features != "") "_${scopeConfig.features}"}${scopeConfig.optLevel}";
+
   ### sources ###
 
   inherit (scopeConfig) hol4Source graphRefineSource;
@@ -241,14 +243,17 @@ with self; {
     slowest
   ]);
 
+  # TODO
   cachedForPrimary = writeText "cached" (toString [
     # slow
     slower
   ]);
 
+  # TODO
   cachedWhenBVSupport = writeText "cached" (toString [
   ]);
 
+  # TODO
   cachedForAll = writeText "cached" (toString (
     # Fails only with X64-O1 (all GCC versions)
     lib.optionals (!(scopeConfig.arch == "X64" && scopeConfig.optLevel == "-O1")) [

@@ -11,35 +11,35 @@ rec {
 
   mkScopeConfig =
     { arch
-    , features ? ""
+    , mcs ? false
+    , features ? lib.optionalString mcs "MCS"
     , plat ? ""
+    , optLevel ? "-O1"
     , targetCCWrapperAttr ? targetCCWrapperAttrForArch arch
     , targetCCWrapper ? targetPkgsByL4vArch."${arch}".buildPackages."${targetCCWrapperAttr}"
     , targetCC ? targetCCWrapper.cc
     , targetBintools ? targetCCWrapper.bintools.bintools
     , targetPrefix ? targetCCWrapper.targetPrefix
-    , optLevel ? "-O1"
-    , bvSupport ? lib.elem arch [ "ARM" "RISCV64" ]
     , seL4Source ? lib.cleanSource ../../projects/seL4
     , l4vSource ? lib.cleanSource ../../projects/l4v
     , hol4Source ? lib.cleanSource ../../projects/HOL4
     , graphRefineSource ? lib.cleanSource ../../projects/graph-refine
     , isabelleVersion ? "2023"
     , stackLTSAttr ? "lts_20_25"
+    , bvSupport ? lib.elem arch [ "ARM" "RISCV64" ]
     }:
     {
       inherit
         arch features plat
-        targetCCWrapperAttr
-        targetCC targetBintools targetPrefix
         optLevel
-        bvSupport
+        targetCC targetBintools targetPrefix
         seL4Source
         l4vSource
         hol4Source
         graphRefineSource
         isabelleVersion
         stackLTSAttr
+        bvSupport
       ;
     };
 
@@ -51,17 +51,25 @@ rec {
     x64 = "X64";
   };
 
-  targetCCWrapperAttrForArch = arch: if arch == "RISCV64" then "gcc12" else "gcc10";
+  schedulers = {
+    legacy = false;
+    mcs = true;
+  };
 
-  targetCCWrapperAttrs = lib.listToAttrs (map (v: lib.nameValuePair v v) [
-    "gcc49" "gcc6" "gcc7" "gcc8" "gcc9" "gcc10" "gcc11" "gcc12" "gcc13"
-  ]);
+  archSupportsVerifiedMCS = arch: lib.elem arch [ "ARM" "RISCV64" ];
 
   optLevels = {
     o0 = "-O0";
     o1 = "-O1";
     o2 = "-O2";
+    o3 = "-O3";
   };
+
+  targetCCWrapperAttrForArch = arch: if arch == "RISCV64" then "gcc12" else "gcc10";
+
+  targetCCWrapperAttrs = lib.listToAttrs (map (v: lib.nameValuePair v v) [
+    "gcc49" "gcc6" "gcc7" "gcc8" "gcc9" "gcc10" "gcc11" "gcc12" "gcc13"
+  ]);
 
   targetPkgsByL4vArch = {
     "ARM" = armv7Pkgs;
@@ -76,98 +84,86 @@ rec {
   riscv64Pkgs = pkgsCross.riscv64-embedded;
   x64Pkgs = pkgs;
 
-  # shorthand
-  mk = scopeConfigArgs: mkScope {
+  mkOverridableScopeFromConfigArgs = scopeConfigArgs: mkScope {
     scopeConfig = lib.makeOverridable mkScopeConfig scopeConfigArgs;
   };
 
-  named =
+  mkScopeFomNamedConfig =
+    { archName, schedulerName, optLevelName, ... } @ args:
+    mkOverridableScopeFromConfigArgs {
+      arch = archs.${archName};
+      mcs = schedulers.${schedulerName};
+      optLevel = optLevels.${optLevelName};
+    } // lib.optionalAttrs (args ? targetCCWrapperAttrName) {
+        targetCCWrapperAttr = targetCCWrapperAttrs.${args.targetCCWrapperAttrName};
+    };
+
+  mkScopeTreeFromNamedConfigs =
     let
-      withOptLevel = optLevel: {
-        arm = mk {
-          arch = "ARM";
-          inherit optLevel;
-        };
-        riscv64 = mk {
-          arch = "RISCV64";
-          inherit optLevel;
-        };
-      };
-
-      o1 = withOptLevel "-O1";
-      o2 = withOptLevel "-O2";
+      f =
+        { archName, schedulerName, optLevelName, ... } @ args:
+        lib.setAttrByPath
+          ([ archName schedulerName optLevelName ] ++ lib.optionals (args ? targetCCWrapperAttrName) [ args.targetCCWrapperAttrName ])
+          (mkScopeFomNamedConfig args);
     in
-      lib.fix (self: o1 // {
-        default = self.arm;
+      namedConfigs': lib.fold lib.recursiveUpdate {} (map f namedConfigs');
 
-        inherit o1 o2;
+  scopes = mkScopeTreeFromNamedConfigs namedConfigs;
 
-        byConfig = lib.flip lib.mapAttrs archs (_: arch:
-          lib.flip lib.mapAttrs targetCCWrapperAttrs (_: targetCCWrapperAttr:
-            lib.flip lib.mapAttrs optLevels (_: optLevel:
-              mkScope {
-                scopeConfig = lib.makeOverridable mkScopeConfig {
-                  inherit arch targetCCWrapperAttr optLevel;
-                };
-              }
-            )
-          )
-        );
-      });
+  allScopes = mkScopeTreeFromNamedConfigs allNamedConfigs;
 
-  mkAggregate = f:
+  namedConfigs =
     lib.flip lib.concatMap (lib.attrNames archs) (archName:
-      lib.flip lib.concatMap (lib.attrNames targetCCWrapperAttrs) (targetCCWrapperAttrName:
+      lib.flip lib.concatMap (lib.attrNames schedulers) (schedulerName:
         lib.flip lib.concatMap (lib.attrNames optLevels) (optLevelName:
-          f {
-            inherit archName targetCCWrapperAttrName optLevelName;
-          }
+          lib.optional
+            (lib.elem optLevelName [ "o1" "o2" ] && (schedulerName == "legacy" || archSupportsVerifiedMCS archs.${archName}))
+            {
+              inherit archName schedulerName optLevelName;
+            }
         )
       )
     );
 
-  all = writeText "aggregate-all" (toString (mkAggregate (
-    { archName, targetCCWrapperAttrName, optLevelName }:
-    let
-      scope = named.byConfig.${archName}.${targetCCWrapperAttrName}.${optLevelName};
-    in [
-      scope.all
-    ]
-  )));
+  allNamedConfigs =
+    lib.flip lib.concatMap (lib.attrNames archs) (archName:
+      lib.flip lib.concatMap (lib.attrNames schedulers) (schedulerName:
+        lib.flip lib.concatMap (lib.attrNames optLevels) (optLevelName:
+          lib.flip lib.concatMap (lib.attrNames targetCCWrapperAttrs) (targetCCWrapperAttrName:
+            lib.singleton {
+              inherit archName schedulerName optLevelName targetCCWrapperAttrName;
+            }
+          )
+        )
+      )
+    );
 
-  cached = writeText "aggregate-cached" (toString ([
-    named.default.cachedForPrimary
-  ] ++ mkAggregate (
-    { archName, targetCCWrapperAttrName, optLevelName }:
-    let
-      scope = named.byConfig.${archName}.${targetCCWrapperAttrName}.${optLevelName};
-    in [
-      scope.cachedForAll
-    ] ++ lib.optionals scope.scopeConfig.bvSupport [
-      scope.cachedWhenBVSupport
-    ]
-  )));
+  defaultScope = scopes.arm.legacy.o1;
+
+  all = writeText "aggregate-all" (toString (lib.flatten [
+    displayStatus
+    (lib.forEach (map mkScopeFomNamedConfig namedConfigs) (scope:
+      scope.all
+    ))
+  ]));
+
+  cached = writeText "aggregate-cached" (toString (lib.flatten [
+    # TODO
+  ]));
 
   displayStatus =
     let
-      mkConfigName = scope:
-        let
-          config = scope.scopeConfig;
-        in
-          "${config.arch}${config.optLevel}";
-      mkPreTargetDirEntry = scope: {
-        name = mkConfigName scope;
-        path = scope.graphRefine.everythingAtOnce.preTargetDir;
+      mk = f: scope: {
+        name = scope.configName;
+        path = f scope;
       };
-      mkEverythingEntry = scope: {
-        name = mkConfigName scope;
-        path = scope.graphRefine.everythingAtOnce;
-      };
+      everythingAtOnce = scope: scope.graphRefine.everythingAtOnce;
+      preTargetDir = scope: scope.graphRefine.everythingAtOnce.preTargetDir;
     in
       linkFarm "display-status" [
-        (mkEverythingEntry named.o1.arm)
-        (mkPreTargetDirEntry named.o2.arm)
-        (mkPreTargetDirEntry named.o1.riscv64)
-        (mkPreTargetDirEntry named.o2.riscv64)
+        (mk everythingAtOnce scopes.arm.legacy.o1)
+        (mk preTargetDir scopes.arm.legacy.o2)
+        (mk preTargetDir scopes.riscv64.legacy.o1)
+        (mk preTargetDir scopes.riscv64.legacy.o2)
       ];
 }
