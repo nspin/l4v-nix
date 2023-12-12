@@ -21,6 +21,7 @@
 , graphRefine
 , graphRefineWith
 , graphRefineSolverLists
+, python2WithDebuggingSymbols
 
 , this
 , overrideScope
@@ -100,27 +101,9 @@ in rec {
     ];
   };
 
-  py2gdbScript =
-    let
-      path = "Tools/gdb/libpython.py";
-    in
-      stdenv.mkDerivation {
-        name = "${python2.name}-gdb-support";
-
-        inherit (python2) src;
-
-        phases = [ "unpackPhase" "patchPhase" "installPhase" ];
-
-        postPatch = ''
-          patchShebangs ${path}
-        '';
-
-        installPhase = ''
-          install -D -t $out ${path}
-        '';
-  };
-
   x = this.named.o2.arm.wip.d;
+
+  py2gdbScript = "${python2WithDebuggingSymbols}/share/gdb/libpython.py";
 
   sh = mkShell {
     nativeBuildInputs = [
@@ -133,7 +116,7 @@ in rec {
     shellHook = ''
       d() {
         pid="$1"
-        sudo gdb -p "$pid" -x "$pgd"/*
+        sudo gdb -p "$pid" -x "$pgd"
       }
     '';
   };
