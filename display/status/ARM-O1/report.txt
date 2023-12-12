@@ -1,0 +1,3715 @@
+VERSION_INFO GITSTATUS error
+VERSION_INFO GITCOMMIT error - fatal: not a git repository (or any of the parent directories): .git
+
+Loading syntax from ./CFunctions.txt
+VERSION_INFO SHA256SUM 3ef5a809393b72e15783ee2b912ef5173f7983381c6235e5ea67175a4a61b177 - ./CFunctions.txt
+Loaded 842 functions, 74 structs, 0 globals.
+Loading syntax from ./ASMFunctions.txt
+VERSION_INFO SHA256SUM c4d3e0455a3d489a223663d1ecc637b1f0d8f9a992b7fb028113e21dd4007bb9 - ./ASMFunctions.txt
+Missing nodes after calls to instruction'isb_sy_E0000508
+  in ['fpsimd_HWCapTest']
+Missing nodes after calls to restore_user_context
+  in ['c_handle_data_fault', 'c_handle_undefined_instruction', 'c_handle_interrupt']
+Missing nodes after calls to halt
+  in ['handleReply', 'Arch_createObject', 'completeSignal', 'unmapPage', 'doFlush', 'maskCapRights', 'decodeInvocation', 'Arch_setMRs_fault', 'handleInterrupt', 'Arch_deriveCap', 'handleFaultReply', 'invokeCNodeSaveCaller', 'handleSyscall', 'arm_reset_exception', 'createObject', 'Arch_handleFaultReply']
+Missing nodes after calls to idle_thread
+  in ['halt']
+Missing nodes after calls to instruction'ldr_pc_pc_20_e0010038_arm_vector_table_0x38_E001001C
+  in ['arm_vector_table']
+Warning: dead arc in c_handle_syscall: 19 -> 3758163904
+  (follows Basic node!)
+Warning: dead arc in c_handle_syscall: 21 -> 3758163904
+  (follows Basic node!)
+Warning: dead arc in arm_fiq_exception: 7 -> 3758162208
+  (follows Basic node!)
+Warning: dead arc in arm_fiq_exception: 9 -> 3758162208
+  (follows Basic node!)
+Warning: dead arc in c_handle_instruction_fault: 3758162396 -> 3758162400
+  (follows Basic node!)
+Loaded 487 functions, 0 structs, 0 globals.
+VERSION_INFO SHA256SUM 2f77b48f7a239965c65b7afec135927cfa56d4993faa669bd1886de2e97259fa - StackBounds.txt
+Warning: asm instruction name: formatting: "asm_instruction'.word_0xeef00a10__\\nmov_%0,_r0________\\n"
+Warning: asm instruction name: formatting: "asm_instruction'.word_0xeef00a10__\\nmov_%0,_r0________\\n"
+Function 'init_kernel' contains unhandled instructions:
+  ["instruction'vmrs_r3_fpexc_E0001CD0", "instruction'vmsr_fpexc_r3_E0001CD8"]
+Function 'Arch_switchToThread' contains unhandled instructions:
+  ["instruction'strex_r0_r1_r3_E00113B0"]
+Function 'Kernel_C.fpsimd_HWCapTest' contains unhandled instructions:
+  ["asm_instruction'.word_0xeef00a10__\\nmov_%0,_r0________\\n"]
+Function 'arm_vector_table' contains unhandled instructions:
+  ["instruction'ldr_pc_pc_24_e0010020_arm_vector_table_0x20_E0010000", "instruction'ldr_pc_pc_24_e001002c_arm_vector_table_0x2c_E001000C", "instruction'ldr_pc_pc_20_e0010038_arm_vector_table_0x38_E001001C", "instruction'ldr_pc_pc_24_e0010024_arm_vector_table_0x24_E0010004", "instruction'ldr_pc_pc_24_e0010030_arm_vector_table_0x30_E0010010", "instruction'ldr_pc_pc_24_e0010028_arm_vector_table_0x28_E0010008", "instruction'ldr_pc_pc_20_e0010034_arm_vector_table_0x34_E0010018", "instruction'ldr_pc_pc_4_e0010020_arm_vector_table_0x20_E0010014"]
+Function 'arm_undefined_inst_exception' contains unhandled instructions:
+  ["instruction'cps_19_E0010040", "instruction'srsia_sp_19_E001003C", "instruction'stmdb_sp_r0_r1_r2_r3_r4_r5_r6_r7_r8_r9_sl_fp_ip_sp_lr_E0010044"]
+Function 'arm_data_abort_exception' contains unhandled instructions:
+  ["instruction'cps_19_E00100BC", "instruction'stmdb_sp_r0_r1_r2_r3_r4_r5_r6_r7_r8_r9_sl_fp_ip_sp_lr_E00100C0", "instruction'srsia_sp_19_E00100B8"]
+Function 'Kernel_C.supportsAsyncExceptions' contains unhandled instructions:
+  ["asm_instruction'.fpu_vfp\\nvmsr_fpexc,_%0", "asm_instruction'.fpu_vfp\\nvmrs_%0,_fpexc"]
+Function 'Kernel_C.clearEnFPEXC' contains unhandled instructions:
+  ["asm_instruction'.fpu_vfp\\nvmsr_fpexc,_%0", "asm_instruction'.fpu_vfp\\nvmrs_%0,_fpexc"]
+Function 'arm_irq_exception' contains unhandled instructions:
+  ["instruction'stmdb_sp_r0_r1_r2_r3_r4_r5_r6_r7_r8_r9_sl_fp_ip_sp_lr_E00100F4", "instruction'cps_19_E00100F0", "instruction'srsia_sp_19_E00100EC"]
+Function 'fpsimd_HWCapTest' contains unhandled instructions:
+  ["instruction'vmsr_fpexc_r3_E0000524", "instruction'vmrs_r3_fpexc_E000051C", "instruction'vmrs_r3_fpexc_E0000528"]
+Function 'arm_prefetch_abort_exception' contains unhandled instructions:
+  ["instruction'cps_19_E001008C", "instruction'stmdb_sp_r0_r1_r2_r3_r4_r5_r6_r7_r8_r9_sl_fp_ip_sp_lr_E0010090", "instruction'srsia_sp_19_E0010088"]
+Function 'halt' contains unhandled instructions:
+  ["instruction'cpsid_aif_E0010928"]
+Checking 287 function pair problems
+Testing Function pair Pairing (unbindNotification (ASM) <= Kernel_C.unbindNotification (C))
+  (function pairing 1 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (unbindNotification (ASM) <= Kernel_C.unbindNotification (C)), time taken: 0.44s
+Testing Function pair Pairing (armv_contextSwitch_HWASID (ASM) <= Kernel_C.armv_contextSwitch_HWASID (C))
+  (function pairing 2 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (armv_contextSwitch_HWASID (ASM) <= Kernel_C.armv_contextSwitch_HWASID (C)), time taken: 0.69s
+Testing Function pair Pairing (cancelIPC (ASM) <= Kernel_C.cancelIPC (C))
+  (function pairing 3 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (cancelIPC (ASM) <= Kernel_C.cancelIPC (C)), time taken: 1.72s
+Testing Function pair Pairing (doNormalTransfer (ASM) <= Kernel_C.doNormalTransfer (C))
+  (function pairing 4 of 287)
+ .. built problem, finding proof
+Discovered that points [248 (loop head)] can be bounded
+  (in problem)
+Discovered that points [217 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (248, ('Number', (0, 1))), (ProofNode ('Restr', (217, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 248 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 217 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (doNormalTransfer (ASM) <= Kernel_C.doNormalTransfer (C)), time taken: 9.34s
+Testing Function pair Pairing (performInvocation_Endpoint (ASM) <= Kernel_C.performInvocation_Endpoint (C))
+  (function pairing 5 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (performInvocation_Endpoint (ASM) <= Kernel_C.performInvocation_Endpoint (C)), time taken: 0.51s
+Testing Function pair Pairing (setVMRoot (ASM) <= Kernel_C.setVMRoot (C))
+  (function pairing 6 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (setVMRoot (ASM) <= Kernel_C.setVMRoot (C)), time taken: 2.79s
+Testing Function pair Pairing (Arch_configureIdleThread (ASM) <= Kernel_C.Arch_configureIdleThread (C))
+  (function pairing 7 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (Arch_configureIdleThread (ASM) <= Kernel_C.Arch_configureIdleThread (C)), time taken: 0.39s
+Testing Function pair Pairing (performInvocation_Reply (ASM) <= Kernel_C.performInvocation_Reply (C))
+  (function pairing 8 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (performInvocation_Reply (ASM) <= Kernel_C.performInvocation_Reply (C)), time taken: 0.44s
+Testing Function pair Pairing (capSwapForDelete (ASM) <= Kernel_C.capSwapForDelete (C))
+  (function pairing 9 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (capSwapForDelete (ASM) <= Kernel_C.capSwapForDelete (C)), time taken: 0.54s
+Testing Function pair Pairing (create_it_address_space (ASM) <= Kernel_C.create_it_address_space (C))
+  (function pairing 10 of 287)
+ .. built problem, finding proof
+Discovered that points [10 (loop head)] can be bounded
+  (in problem)
+Discovered that points [121 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (10, ('Number', (0, 1))), (ProofNode ('Restr', (121, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 10 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 121 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (create_it_address_space (ASM) <= Kernel_C.create_it_address_space (C)), time taken: 8.82s
+Testing Function pair Pairing (write_it_asid_pool (ASM) <= Kernel_C.write_it_asid_pool (C))
+  (function pairing 11 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (write_it_asid_pool (ASM) <= Kernel_C.write_it_asid_pool (C)), time taken: 0.54s
+Testing Function pair Pairing (sendIPC (ASM) <= Kernel_C.sendIPC (C))
+  (function pairing 12 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (sendIPC (ASM) <= Kernel_C.sendIPC (C)), time taken: 3.13s
+Testing Function pair Pairing (timerTick (ASM) <= Kernel_C.timerTick (C))
+  (function pairing 13 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (timerTick (ASM) <= Kernel_C.timerTick (C)), time taken: 0.77s
+Testing Function pair Pairing (decodeUnbindNotification (ASM) <= Kernel_C.decodeUnbindNotification (C))
+  (function pairing 14 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (decodeUnbindNotification (ASM) <= Kernel_C.decodeUnbindNotification (C)), time taken: 0.60s
+Testing Function pair Pairing (invokeIRQHandler_ClearIRQHandler (ASM) <= Kernel_C.invokeIRQHandler_ClearIRQHandler (C))
+  (function pairing 15 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (invokeIRQHandler_ClearIRQHandler (ASM) <= Kernel_C.invokeIRQHandler_ClearIRQHandler (C)), time taken: 0.43s
+Testing Function pair Pairing (decodeIRQControlInvocation (ASM) <= Kernel_C.decodeIRQControlInvocation (C))
+  (function pairing 16 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (decodeIRQControlInvocation (ASM) <= Kernel_C.decodeIRQControlInvocation (C)), time taken: 3.42s
+Testing Function pair Pairing (invokeTCB_ReadRegisters (ASM) <= Kernel_C.invokeTCB_ReadRegisters (C))
+  (function pairing 17 of 287)
+ .. built problem, finding proof
+Discovered that points [44 (loop head)] can be bounded
+  (in problem)
+Discovered that points [33 (loop head)] can be bounded
+  (in problem)
+Discovered that points [21 (loop head)] can be bounded
+  (in problem)
+Discovered that points [10 (loop head)] can be bounded
+  (in problem)
+Discovered that points [140 (loop head)] can be bounded
+  (in problem)
+Discovered that points [196 (loop head)] can be bounded
+  (in problem)
+Discovered that points [211 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (44, ('Number', (0, 1))), (ProofNode ('Restr', (33, ('Number', (0, 1))), (ProofNode ('Restr', (21, ('Number', (0, 1))), (ProofNode ('Restr', (10, ('Number', (0, 1))), (ProofNode ('Restr', (140, ('Number', (0, 1))), (ProofNode ('Restr', (196, ('Number', (0, 1))), (ProofNode ('Restr', (211, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),)),)),)),)),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 44 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 33 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  Prove the number of visits to 21 is in {0 ..< 1}
+    .. proven.
+Step 4: 
+  Prove the number of visits to 10 is in {0 ..< 1}
+    .. proven.
+Step 5: 
+  Prove the number of visits to 140 is in {0 ..< 1}
+    .. proven.
+Step 6: 
+  Prove the number of visits to 196 is in {0 ..< 1}
+    .. proven.
+Step 7: 
+  Prove the number of visits to 211 is in {0 ..< 1}
+    .. proven.
+Step 8: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (invokeTCB_ReadRegisters (ASM) <= Kernel_C.invokeTCB_ReadRegisters (C)), time taken: 9.62s
+Testing Function pair Pairing (get_p_reg_kernel_img_boot (ASM) <= Kernel_C.get_p_reg_kernel_img_boot (C))
+  (function pairing 18 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (get_p_reg_kernel_img_boot (ASM) <= Kernel_C.get_p_reg_kernel_img_boot (C)), time taken: 0.48s
+Testing Function pair Pairing (isFinalCapability (ASM) <= Kernel_C.isFinalCapability (C))
+  (function pairing 19 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (isFinalCapability (ASM) <= Kernel_C.isFinalCapability (C)), time taken: 0.77s
+Testing Function pair Pairing (cteSwap (ASM) <= Kernel_C.cteSwap (C))
+  (function pairing 20 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (cteSwap (ASM) <= Kernel_C.cteSwap (C)), time taken: 1.19s
+Testing Function pair Pairing (handleReply (ASM) <= Kernel_C.handleReply (C))
+  (function pairing 21 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (handleReply (ASM) <= Kernel_C.handleReply (C)), time taken: 0.97s
+Testing Function pair Pairing (doNBRecvFailedTransfer (ASM) <= Kernel_C.doNBRecvFailedTransfer (C))
+  (function pairing 22 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (doNBRecvFailedTransfer (ASM) <= Kernel_C.doNBRecvFailedTransfer (C)), time taken: 0.41s
+Testing Function pair Pairing (emptySlot (ASM) <= Kernel_C.emptySlot (C))
+  (function pairing 23 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (emptySlot (ASM) <= Kernel_C.emptySlot (C)), time taken: 1.28s
+Testing Function pair Pairing (completeSignal (ASM) <= Kernel_C.completeSignal (C))
+  (function pairing 24 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (completeSignal (ASM) <= Kernel_C.completeSignal (C)), time taken: 0.76s
+Testing Function pair Pairing (setMRs_fault (ASM) <= Kernel_C.setMRs_fault (C))
+  (function pairing 25 of 287)
+ .. built problem, finding proof
+Discovered that points [273 (loop head)] can be bounded
+  (in problem)
+Discovered that points [346 (loop head)] can be bounded
+  (in problem)
+Discovered that points [335 (loop head)] can be bounded
+  (in problem)
+Discovered that points [262 (loop head)] can be bounded
+  (in problem)
+Discovered that points [167 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (273, ('Number', (0, 1))), (ProofNode ('Restr', (346, ('Number', (0, 1))), (ProofNode ('Restr', (335, ('Number', (0, 1))), (ProofNode ('Restr', (262, ('Number', (0, 1))), (ProofNode ('Restr', (167, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),)),)),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 273 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 346 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  Prove the number of visits to 335 is in {0 ..< 1}
+    .. proven.
+Step 4: 
+  Prove the number of visits to 262 is in {0 ..< 1}
+    .. proven.
+Step 5: 
+  Prove the number of visits to 167 is in {0 ..< 1}
+    .. proven.
+Step 6: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (setMRs_fault (ASM) <= Kernel_C.setMRs_fault (C)), time taken: 42.64s
+Testing Function pair Pairing (merge_regions (ASM) <= Kernel_C.merge_regions (C))
+  (function pairing 26 of 287)
+Aborting Problem (Pairing (merge_regions (ASM) <= Kernel_C.merge_regions (C))), complex loop
+Result ProblemAbort for pair Pairing (merge_regions (ASM) <= Kernel_C.merge_regions (C)), time taken: 1.05s
+Testing Function pair Pairing (copyGlobalMappings (ASM) <= Kernel_C.copyGlobalMappings (C))
+  (function pairing 27 of 287)
+ .. built problem, finding proof
+Discovered that points [3 (loop head)] can be bounded
+  (in problem)
+Discovered that points [27 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (3, ('Number', (0, 1))), (ProofNode ('Restr', (27, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 3 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 27 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (copyGlobalMappings (ASM) <= Kernel_C.copyGlobalMappings (C)), time taken: 12.17s
+Testing Function pair Pairing (cpu_initLocalIRQController (ASM) <= Kernel_C.cpu_initLocalIRQController (C))
+  (function pairing 28 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (cpu_initLocalIRQController (ASM) <= Kernel_C.cpu_initLocalIRQController (C)), time taken: 0.38s
+Testing Function pair Pairing (memcpy (ASM) <= Kernel_C.memcpy (C))
+  (function pairing 29 of 287)
+ .. built problem, finding proof
+Discovered that points [4 (loop head)] can be bounded
+  (in problem)
+Discovered that points [32 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (4, ('Number', (0, 1))), (ProofNode ('Restr', (32, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 4 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 32 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (memcpy (ASM) <= Kernel_C.memcpy (C)), time taken: 7.72s
+Testing Function pair Pairing (create_it_asid_pool (ASM) <= Kernel_C.create_it_asid_pool (C))
+  (function pairing 30 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (create_it_asid_pool (ASM) <= Kernel_C.create_it_asid_pool (C)), time taken: 1.40s
+Testing Function pair Pairing (create_untypeds (ASM) <= Kernel_C.create_untypeds (C))
+  (function pairing 31 of 287)
+ .. built problem, finding proof
+Discovered that points [41 (loop head)] can be bounded
+  (in problem)
+Discovered that points [8 (loop head)] can be bounded
+  (in problem)
+Discovered that points [145 (loop head)] can be bounded
+  (in problem)
+Discovered that points [192 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (41, ('Number', (0, 1))), (ProofNode ('Restr', (8, ('Number', (0, 1))), (ProofNode ('Restr', (145, ('Number', (0, 1))), (ProofNode ('Restr', (192, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),)),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 41 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 8 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  Prove the number of visits to 145 is in {0 ..< 1}
+    .. proven.
+Step 4: 
+  Prove the number of visits to 192 is in {0 ..< 1}
+    .. proven.
+Step 5: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (create_untypeds (ASM) <= Kernel_C.create_untypeds (C)), time taken: 6.48s
+Testing Function pair Pairing (isHighestPrio (ASM) <= Kernel_C.isHighestPrio (C))
+  (function pairing 32 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (isHighestPrio (ASM) <= Kernel_C.isHighestPrio (C)), time taken: 0.55s
+Testing Function pair Pairing (idle_thread (ASM) <= Kernel_C.idle_thread (C))
+  (function pairing 33 of 287)
+ .. built problem, finding proof
+Discovered that points [3 (loop head)] can be bounded
+  (in problem)
+Discovered that points [10 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (3, ('Number', (0, 1))), (ProofNode ('Restr', (10, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 3 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 10 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (idle_thread (ASM) <= Kernel_C.idle_thread (C)), time taken: 0.75s
+Testing Function pair Pairing (restart (ASM) <= Kernel_C.restart (C))
+  (function pairing 34 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (restart (ASM) <= Kernel_C.restart (C)), time taken: 0.66s
+Testing Function pair Pairing (maskVMRights (ASM) <= Kernel_C.maskVMRights (C))
+  (function pairing 35 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (maskVMRights (ASM) <= Kernel_C.maskVMRights (C)), time taken: 0.56s
+Testing Function pair Pairing (invalidateCacheRange_I (ASM) <= Kernel_C.invalidateCacheRange_I (C))
+  (function pairing 36 of 287)
+ .. built problem, finding proof
+Discovered that points [3 (loop head)] can be bounded
+  (in problem)
+Discovered that points [27 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (3, ('Number', (0, 1))), (ProofNode ('Restr', (27, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 3 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 27 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (invalidateCacheRange_I (ASM) <= Kernel_C.invalidateCacheRange_I (C)), time taken: 1.11s
+Testing Function pair Pairing (tcbEPAppend (ASM) <= Kernel_C.tcbEPAppend (C))
+  (function pairing 37 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (tcbEPAppend (ASM) <= Kernel_C.tcbEPAppend (C)), time taken: 0.57s
+Testing Function pair Pairing (handleVMFault (ASM) <= Kernel_C.handleVMFault (C))
+  (function pairing 38 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (handleVMFault (ASM) <= Kernel_C.handleVMFault (C)), time taken: 1.08s
+Testing Function pair Pairing (handleSyscall (ASM) <= Kernel_C.handleSyscall (C))
+  (function pairing 39 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (handleSyscall (ASM) <= Kernel_C.handleSyscall (C)), time taken: 2.50s
+Testing Function pair Pairing (deleteASID (ASM) <= Kernel_C.deleteASID (C))
+  (function pairing 40 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (deleteASID (ASM) <= Kernel_C.deleteASID (C)), time taken: 0.63s
+Testing Function pair Pairing (cleanCacheRange_RAM (ASM) <= Kernel_C.cleanCacheRange_RAM (C))
+  (function pairing 41 of 287)
+ .. built problem, finding proof
+Discovered that points [90 (loop head)] can be bounded
+  (in problem)
+Discovered that points [71 (loop head)] can be bounded
+  (in problem)
+Discovered that points [113 (loop head)] can be bounded
+  (in problem)
+Discovered that points [35 (loop head)] can be bounded
+  (in problem)
+Discovered that points [56 (loop head)] can be bounded
+  (in problem)
+Discovered that points [50 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (90, ('Number', (0, 1))), (ProofNode ('Restr', (71, ('Number', (0, 1))), (ProofNode ('Restr', (113, ('Number', (0, 1))), (ProofNode ('Restr', (35, ('Number', (0, 1))), (ProofNode ('Restr', (56, ('Number', (0, 1))), (ProofNode ('Restr', (50, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),)),)),)),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 90 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 71 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  Prove the number of visits to 113 is in {0 ..< 1}
+    .. proven.
+Step 4: 
+  Prove the number of visits to 35 is in {0 ..< 1}
+    .. proven.
+Step 5: 
+  Prove the number of visits to 56 is in {0 ..< 1}
+    .. proven.
+Step 6: 
+  Prove the number of visits to 50 is in {0 ..< 1}
+    .. proven.
+Step 7: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (cleanCacheRange_RAM (ASM) <= Kernel_C.cleanCacheRange_RAM (C)), time taken: 5.53s
+Testing Function pair Pairing (invokeIRQHandler_SetIRQHandler (ASM) <= Kernel_C.invokeIRQHandler_SetIRQHandler (C))
+  (function pairing 42 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (invokeIRQHandler_SetIRQHandler (ASM) <= Kernel_C.invokeIRQHandler_SetIRQHandler (C)), time taken: 0.50s
+Testing Function pair Pairing (setMRs_syscall_error (ASM) <= Kernel_C.setMRs_syscall_error (C))
+  (function pairing 43 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (setMRs_syscall_error (ASM) <= Kernel_C.setMRs_syscall_error (C)), time taken: 2.66s
+Testing Function pair Pairing (getReceiveSlots (ASM) <= Kernel_C.getReceiveSlots (C))
+  (function pairing 44 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (getReceiveSlots (ASM) <= Kernel_C.getReceiveSlots (C)), time taken: 1.16s
+Testing Function pair Pairing (arch_get_n_paging (ASM) <= Kernel_C.arch_get_n_paging (C))
+  (function pairing 45 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (arch_get_n_paging (ASM) <= Kernel_C.arch_get_n_paging (C)), time taken: 0.40s
+Testing Function pair Pairing (setIRQState (ASM) <= Kernel_C.setIRQState (C))
+  (function pairing 46 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (setIRQState (ASM) <= Kernel_C.setIRQState (C)), time taken: 0.46s
+Testing Function pair Pairing (initIRQController (ASM) <= Kernel_C.initIRQController (C))
+  (function pairing 47 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (initIRQController (ASM) <= Kernel_C.initIRQController (C)), time taken: 0.39s
+Testing Function pair Pairing (lockTLBEntry (ASM) <= Kernel_C.lockTLBEntry (C))
+  (function pairing 48 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (lockTLBEntry (ASM) <= Kernel_C.lockTLBEntry (C)), time taken: 0.46s
+Testing Function pair Pairing (Arch_sameRegionAs (ASM) <= Kernel_C.Arch_sameRegionAs (C))
+  (function pairing 49 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (Arch_sameRegionAs (ASM) <= Kernel_C.Arch_sameRegionAs (C)), time taken: 2.57s
+Testing Function pair Pairing (lookupCapAndSlot (ASM) <= Kernel_C.lookupCapAndSlot (C))
+  (function pairing 50 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (lookupCapAndSlot (ASM) <= Kernel_C.lookupCapAndSlot (C)), time taken: 0.83s
+Testing Function pair Pairing (cap_get_capSizeBits (ASM) <= Kernel_C.cap_get_capSizeBits (C))
+  (function pairing 51 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (cap_get_capSizeBits (ASM) <= Kernel_C.cap_get_capSizeBits (C)), time taken: 1.95s
+Testing Function pair Pairing (receiveIPC (ASM) <= Kernel_C.receiveIPC (C))
+  (function pairing 52 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (receiveIPC (ASM) <= Kernel_C.receiveIPC (C)), time taken: 4.20s
+Testing Function pair Pairing (slotCapLongRunningDelete (ASM) <= Kernel_C.slotCapLongRunningDelete (C))
+  (function pairing 53 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (slotCapLongRunningDelete (ASM) <= Kernel_C.slotCapLongRunningDelete (C)), time taken: 0.58s
+Testing Function pair Pairing (l_impl'wfi (ASM) <= r_impl'wfi (C))
+  (function pairing 54 of 287)
+Skipping Pairing (l_impl'wfi (ASM) <= r_impl'wfi (C)), underspecified C
+Testing Function pair Pairing (lookupPDSlot (ASM) <= Kernel_C.lookupPDSlot (C))
+  (function pairing 55 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (lookupPDSlot (ASM) <= Kernel_C.lookupPDSlot (C)), time taken: 0.38s
+Testing Function pair Pairing (create_domain_cap (ASM) <= Kernel_C.create_domain_cap (C))
+  (function pairing 56 of 287)
+ .. built problem, finding proof
+Discovered that points [10 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (10, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 10 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (create_domain_cap (ASM) <= Kernel_C.create_domain_cap (C)), time taken: 1.11s
+Testing Function pair Pairing (rescheduleRequired (ASM) <= Kernel_C.rescheduleRequired (C))
+  (function pairing 57 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (rescheduleRequired (ASM) <= Kernel_C.rescheduleRequired (C)), time taken: 0.49s
+Testing Function pair Pairing (create_root_cnode (ASM) <= Kernel_C.create_root_cnode (C))
+  (function pairing 58 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (create_root_cnode (ASM) <= Kernel_C.create_root_cnode (C)), time taken: 0.87s
+Testing Function pair Pairing (finaliseCap (ASM) <= Kernel_C.finaliseCap (C))
+  (function pairing 59 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (finaliseCap (ASM) <= Kernel_C.finaliseCap (C)), time taken: 3.92s
+Testing Function pair Pairing (clean_D_PoU (ASM) <= Kernel_C.clean_D_PoU (C))
+  (function pairing 60 of 287)
+Aborting Problem (Pairing (clean_D_PoU (ASM) <= Kernel_C.clean_D_PoU (C))), complex loop
+Result ProblemAbort for pair Pairing (clean_D_PoU (ASM) <= Kernel_C.clean_D_PoU (C)), time taken: 15.55s
+Testing Function pair Pairing (loadHWASID (ASM) <= Kernel_C.loadHWASID (C))
+  (function pairing 61 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (loadHWASID (ASM) <= Kernel_C.loadHWASID (C)), time taken: 0.52s
+Testing Function pair Pairing (suspend (ASM) <= Kernel_C.suspend (C))
+  (function pairing 62 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (suspend (ASM) <= Kernel_C.suspend (C)), time taken: 0.69s
+Testing Function pair Pairing (maskCapRights (ASM) <= Kernel_C.maskCapRights (C))
+  (function pairing 63 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (maskCapRights (ASM) <= Kernel_C.maskCapRights (C)), time taken: 3.81s
+Testing Function pair Pairing (scheduleChooseNewThread (ASM) <= Kernel_C.scheduleChooseNewThread (C))
+  (function pairing 64 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (scheduleChooseNewThread (ASM) <= Kernel_C.scheduleChooseNewThread (C)), time taken: 0.72s
+Testing Function pair Pairing (c_handle_instruction_fault (ASM) <= Kernel_C.c_handle_instruction_fault (C))
+  (function pairing 65 of 287)
+Aborting Problem (Pairing (c_handle_instruction_fault (ASM) <= Kernel_C.c_handle_instruction_fault (C))): underspecified Kernel_C.StrictC'__builtin_unreachable
+Result ProblemAbort for pair Pairing (c_handle_instruction_fault (ASM) <= Kernel_C.c_handle_instruction_fault (C)), time taken: 0.00s
+Testing Function pair Pairing (decodeSetPriority (ASM) <= Kernel_C.decodeSetPriority (C))
+  (function pairing 66 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (decodeSetPriority (ASM) <= Kernel_C.decodeSetPriority (C)), time taken: 1.52s
+Testing Function pair Pairing (Arch_getObjectSize (ASM) <= Kernel_C.Arch_getObjectSize (C))
+  (function pairing 67 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (Arch_getObjectSize (ASM) <= Kernel_C.Arch_getObjectSize (C)), time taken: 0.57s
+Testing Function pair Pairing (l_impl'dsb (ASM) <= r_impl'dsb (C))
+  (function pairing 68 of 287)
+Skipping Pairing (l_impl'dsb (ASM) <= r_impl'dsb (C)), underspecified C
+Testing Function pair Pairing (checkValidIPCBuffer (ASM) <= Kernel_C.checkValidIPCBuffer (C))
+  (function pairing 69 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (checkValidIPCBuffer (ASM) <= Kernel_C.checkValidIPCBuffer (C)), time taken: 0.84s
+Testing Function pair Pairing (bi_finalise (ASM) <= Kernel_C.bi_finalise (C))
+  (function pairing 70 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (bi_finalise (ASM) <= Kernel_C.bi_finalise (C)), time taken: 0.46s
+Testing Function pair Pairing (create_frames_of_region (ASM) <= Kernel_C.create_frames_of_region (C))
+  (function pairing 71 of 287)
+ .. built problem, finding proof
+Discovered that points [6 (loop head)] can be bounded
+  (in problem)
+Discovered that points [87 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (6, ('Number', (0, 1))), (ProofNode ('Restr', (87, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 6 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 87 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (create_frames_of_region (ASM) <= Kernel_C.create_frames_of_region (C)), time taken: 3.48s
+Testing Function pair Pairing (strncmp (ASM) <= Kernel_C.strncmp (C))
+  (function pairing 72 of 287)
+ .. built problem, finding proof
+Discovered that points [4 (loop head)] can be bounded
+  (in problem)
+Discovered that points [42 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (4, ('Number', (0, 1))), (ProofNode ('Restr', (42, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 4 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 42 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (strncmp (ASM) <= Kernel_C.strncmp (C)), time taken: 1.35s
+Testing Function pair Pairing (Arch_decodeTransfer (ASM) <= Kernel_C.Arch_decodeTransfer (C))
+  (function pairing 73 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (Arch_decodeTransfer (ASM) <= Kernel_C.Arch_decodeTransfer (C)), time taken: 0.39s
+Testing Function pair Pairing (decodeSetSchedParams (ASM) <= Kernel_C.decodeSetSchedParams (C))
+  (function pairing 74 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (decodeSetSchedParams (ASM) <= Kernel_C.decodeSetSchedParams (C)), time taken: 1.93s
+Testing Function pair Pairing (performInvocation_Notification (ASM) <= Kernel_C.performInvocation_Notification (C))
+  (function pairing 75 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (performInvocation_Notification (ASM) <= Kernel_C.performInvocation_Notification (C)), time taken: 0.50s
+Testing Function pair Pairing (invokeCNodeSaveCaller (ASM) <= Kernel_C.invokeCNodeSaveCaller (C))
+  (function pairing 76 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (invokeCNodeSaveCaller (ASM) <= Kernel_C.invokeCNodeSaveCaller (C)), time taken: 1.03s
+Testing Function pair Pairing (tcbSchedDequeue (ASM) <= Kernel_C.tcbSchedDequeue (C))
+  (function pairing 77 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (tcbSchedDequeue (ASM) <= Kernel_C.tcbSchedDequeue (C)), time taken: 1.00s
+Testing Function pair Pairing (isMDBParentOf (ASM) <= Kernel_C.isMDBParentOf (C))
+  (function pairing 78 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (isMDBParentOf (ASM) <= Kernel_C.isMDBParentOf (C)), time taken: 1.06s
+Testing Function pair Pairing (lookupCap (ASM) <= Kernel_C.lookupCap (C))
+  (function pairing 79 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (lookupCap (ASM) <= Kernel_C.lookupCap (C)), time taken: 0.81s
+Testing Function pair Pairing (arch_clean_invalidate_caches (ASM) <= Kernel_C.arch_clean_invalidate_caches (C))
+  (function pairing 80 of 287)
+ .. built problem, finding proof
+Discovered that points [91 (loop head)] can be bounded
+  (in problem)
+Discovered that points [123 (loop head)] can be bounded
+  (in problem)
+Discovered that points [82 (loop head)] can be bounded
+  (in problem)
+Discovered that points [111 (loop head)] can be bounded
+  (in problem)
+Discovered that points [13 (loop head)] can be bounded
+  (in problem)
+Discovered that points [42 (loop head)] can be bounded
+  (in problem)
+Discovered that points [59 (loop head)] can be bounded
+  (in problem)
+Discovered that points [67 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (91, ('Number', (0, 1))), (ProofNode ('Restr', (123, ('Number', (0, 1))), (ProofNode ('Restr', (82, ('Number', (0, 1))), (ProofNode ('Restr', (111, ('Number', (0, 1))), (ProofNode ('Restr', (13, ('Number', (0, 1))), (ProofNode ('Restr', (42, ('Number', (0, 1))), (ProofNode ('Restr', (59, ('Number', (0, 1))), (ProofNode ('Restr', (67, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),)),)),)),)),)),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 91 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 123 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  Prove the number of visits to 82 is in {0 ..< 1}
+    .. proven.
+Step 4: 
+  Prove the number of visits to 111 is in {0 ..< 1}
+    .. proven.
+Step 5: 
+  Prove the number of visits to 13 is in {0 ..< 1}
+    .. proven.
+Step 6: 
+  Prove the number of visits to 42 is in {0 ..< 1}
+    .. proven.
+Step 7: 
+  Prove the number of visits to 59 is in {0 ..< 1}
+    .. proven.
+Step 8: 
+  Prove the number of visits to 67 is in {0 ..< 1}
+    .. proven.
+Step 9: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (arch_clean_invalidate_caches (ASM) <= Kernel_C.arch_clean_invalidate_caches (C)), time taken: 4.67s
+Testing Function pair Pairing (invokeTCB_Suspend (ASM) <= Kernel_C.invokeTCB_Suspend (C))
+  (function pairing 81 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (invokeTCB_Suspend (ASM) <= Kernel_C.invokeTCB_Suspend (C)), time taken: 0.47s
+Testing Function pair Pairing (setDomain (ASM) <= Kernel_C.setDomain (C))
+  (function pairing 82 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (setDomain (ASM) <= Kernel_C.setDomain (C)), time taken: 0.73s
+Testing Function pair Pairing (invalidateTLBByASID (ASM) <= Kernel_C.invalidateTLBByASID (C))
+  (function pairing 83 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (invalidateTLBByASID (ASM) <= Kernel_C.invalidateTLBByASID (C)), time taken: 0.74s
+Testing Function pair Pairing (setupReplyMaster (ASM) <= Kernel_C.setupReplyMaster (C))
+  (function pairing 84 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (setupReplyMaster (ASM) <= Kernel_C.setupReplyMaster (C)), time taken: 0.65s
+Testing Function pair Pairing (c_handle_fastpath_call (ASM) <= Kernel_C.c_handle_fastpath_call (C))
+  (function pairing 85 of 287)
+Skipping Pairing (c_handle_fastpath_call (ASM) <= Kernel_C.c_handle_fastpath_call (C)), underspecified ASM
+Testing Function pair Pairing (decodeWriteRegisters (ASM) <= Kernel_C.decodeWriteRegisters (C))
+  (function pairing 86 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (decodeWriteRegisters (ASM) <= Kernel_C.decodeWriteRegisters (C)), time taken: 1.80s
+Testing Function pair Pairing (invokeCNodeRevoke (ASM) <= Kernel_C.invokeCNodeRevoke (C))
+  (function pairing 87 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (invokeCNodeRevoke (ASM) <= Kernel_C.invokeCNodeRevoke (C)), time taken: 0.47s
+Testing Function pair Pairing (tcbSchedAppend (ASM) <= Kernel_C.tcbSchedAppend (C))
+  (function pairing 88 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (tcbSchedAppend (ASM) <= Kernel_C.tcbSchedAppend (C)), time taken: 0.86s
+Testing Function pair Pairing (write_slot (ASM) <= Kernel_C.write_slot (C))
+  (function pairing 89 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (write_slot (ASM) <= Kernel_C.write_slot (C)), time taken: 0.53s
+Testing Function pair Pairing (c_handle_undefined_instruction (ASM) <= Kernel_C.c_handle_undefined_instruction (C))
+  (function pairing 90 of 287)
+Aborting Problem (Pairing (c_handle_undefined_instruction (ASM) <= Kernel_C.c_handle_undefined_instruction (C))): underspecified Kernel_C.StrictC'__builtin_unreachable
+Result ProblemAbort for pair Pairing (c_handle_undefined_instruction (ASM) <= Kernel_C.c_handle_undefined_instruction (C)), time taken: 0.00s
+Testing Function pair Pairing (cteDeleteOne (ASM) <= Kernel_C.cteDeleteOne (C))
+  (function pairing 91 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (cteDeleteOne (ASM) <= Kernel_C.cteDeleteOne (C)), time taken: 0.72s
+Testing Function pair Pairing (Arch_performTransfer (ASM) <= Kernel_C.Arch_performTransfer (C))
+  (function pairing 92 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (Arch_performTransfer (ASM) <= Kernel_C.Arch_performTransfer (C)), time taken: 0.39s
+Testing Function pair Pairing (Arch_decodeIRQControlInvocation (ASM) <= Kernel_C.Arch_decodeIRQControlInvocation (C))
+  (function pairing 93 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (Arch_decodeIRQControlInvocation (ASM) <= Kernel_C.Arch_decodeIRQControlInvocation (C)), time taken: 2.41s
+Testing Function pair Pairing (l_impl'dmb (ASM) <= r_impl'dmb (C))
+  (function pairing 94 of 287)
+Skipping Pairing (l_impl'dmb (ASM) <= r_impl'dmb (C)), underspecified C
+Testing Function pair Pairing (doIPCTransfer (ASM) <= Kernel_C.doIPCTransfer (C))
+  (function pairing 95 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (doIPCTransfer (ASM) <= Kernel_C.doIPCTransfer (C)), time taken: 0.75s
+Testing Function pair Pairing (replyFromKernel_success_empty (ASM) <= Kernel_C.replyFromKernel_success_empty (C))
+  (function pairing 96 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (replyFromKernel_success_empty (ASM) <= Kernel_C.replyFromKernel_success_empty (C)), time taken: 0.45s
+Testing Function pair Pairing (deriveCap (ASM) <= Kernel_C.deriveCap (C))
+  (function pairing 97 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (deriveCap (ASM) <= Kernel_C.deriveCap (C)), time taken: 1.44s
+Testing Function pair Pairing (setupCallerCap (ASM) <= Kernel_C.setupCallerCap (C))
+  (function pairing 98 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (setupCallerCap (ASM) <= Kernel_C.setupCallerCap (C)), time taken: 0.68s
+Testing Function pair Pairing (Arch_postModifyRegisters (ASM) <= Kernel_C.Arch_postModifyRegisters (C))
+  (function pairing 99 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (Arch_postModifyRegisters (ASM) <= Kernel_C.Arch_postModifyRegisters (C)), time taken: 0.35s
+Testing Function pair Pairing (plat_cleanCache (ASM) <= Kernel_C.plat_cleanCache (C))
+  (function pairing 100 of 287)
+ .. built problem, finding proof
+Discovered that points [4 (loop head)] can be bounded
+  (in problem)
+Discovered that points [48 (loop head)] can be bounded
+  (in problem)
+Discovered that points [29 (loop head)] can be bounded
+  (in problem)
+Discovered that points [40 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (4, ('Number', (0, 1))), (ProofNode ('Restr', (48, ('Number', (0, 1))), (ProofNode ('Restr', (29, ('Number', (0, 1))), (ProofNode ('Restr', (40, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),)),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 4 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 48 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  Prove the number of visits to 29 is in {0 ..< 1}
+    .. proven.
+Step 4: 
+  Prove the number of visits to 40 is in {0 ..< 1}
+    .. proven.
+Step 5: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (plat_cleanCache (ASM) <= Kernel_C.plat_cleanCache (C)), time taken: 1.74s
+Testing Function pair Pairing (lookupTargetSlot (ASM) <= Kernel_C.lookupTargetSlot (C))
+  (function pairing 101 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (lookupTargetSlot (ASM) <= Kernel_C.lookupTargetSlot (C)), time taken: 0.63s
+Testing Function pair Pairing (ensureEmptySlot (ASM) <= Kernel_C.ensureEmptySlot (C))
+  (function pairing 102 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (ensureEmptySlot (ASM) <= Kernel_C.ensureEmptySlot (C)), time taken: 0.56s
+Testing Function pair Pairing (flushTable (ASM) <= Kernel_C.flushTable (C))
+  (function pairing 103 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (flushTable (ASM) <= Kernel_C.flushTable (C)), time taken: 0.95s
+Testing Function pair Pairing (cpu_iface_init (ASM) <= Kernel_C.cpu_iface_init (C))
+  (function pairing 104 of 287)
+ .. built problem, finding proof
+Discovered that points [23 (loop head)] can be bounded
+  (in problem)
+Discovered that points [5 (loop head)] can be bounded
+  (in problem)
+Discovered that points [80 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (23, ('Number', (0, 1))), (ProofNode ('Restr', (5, ('Number', (0, 1))), (ProofNode ('Restr', (80, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 23 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 5 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  Prove the number of visits to 80 is in {0 ..< 1}
+    .. proven.
+Step 4: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (cpu_iface_init (ASM) <= Kernel_C.cpu_iface_init (C)), time taken: 5.50s
+Testing Function pair Pairing (decodeTCBInvocation (ASM) <= Kernel_C.decodeTCBInvocation (C))
+  (function pairing 105 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (decodeTCBInvocation (ASM) <= Kernel_C.decodeTCBInvocation (C)), time taken: 3.10s
+Testing Function pair Pairing (l_impl'mcr (ASM) <= r_impl'mcr (C))
+  (function pairing 106 of 287)
+Skipping Pairing (l_impl'mcr (ASM) <= r_impl'mcr (C)), underspecified C
+Testing Function pair Pairing (resolveAddressBits (ASM) <= Kernel_C.resolveAddressBits (C))
+  (function pairing 107 of 287)
+Aborting Problem (Pairing (resolveAddressBits (ASM) <= Kernel_C.resolveAddressBits (C))): underspecified Kernel_C.StrictC'__builtin_unreachable
+Result ProblemAbort for pair Pairing (resolveAddressBits (ASM) <= Kernel_C.resolveAddressBits (C)), time taken: 0.02s
+Testing Function pair Pairing (preemptionPoint (ASM) <= Kernel_C.preemptionPoint (C))
+  (function pairing 108 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (preemptionPoint (ASM) <= Kernel_C.preemptionPoint (C)), time taken: 0.54s
+Testing Function pair Pairing (decodeBindNotification (ASM) <= Kernel_C.decodeBindNotification (C))
+  (function pairing 109 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (decodeBindNotification (ASM) <= Kernel_C.decodeBindNotification (C)), time taken: 1.12s
+Testing Function pair Pairing (decodeInvocation (ASM) <= Kernel_C.decodeInvocation (C))
+  (function pairing 110 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (decodeInvocation (ASM) <= Kernel_C.decodeInvocation (C)), time taken: 4.86s
+Testing Function pair Pairing (activate_kernel_vspace (ASM) <= Kernel_C.activate_kernel_vspace (C))
+  (function pairing 111 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (activate_kernel_vspace (ASM) <= Kernel_C.activate_kernel_vspace (C)), time taken: 0.92s
+Testing Function pair Pairing (Arch_activateIdleThread (ASM) <= Kernel_C.Arch_activateIdleThread (C))
+  (function pairing 112 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (Arch_activateIdleThread (ASM) <= Kernel_C.Arch_activateIdleThread (C)), time taken: 0.36s
+Testing Function pair Pairing (cap_get_capIsPhysical (ASM) <= Kernel_C.cap_get_capIsPhysical (C))
+  (function pairing 113 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (cap_get_capIsPhysical (ASM) <= Kernel_C.cap_get_capIsPhysical (C)), time taken: 1.42s
+Testing Function pair Pairing (schedule (ASM) <= Kernel_C.schedule (C))
+  (function pairing 114 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (schedule (ASM) <= Kernel_C.schedule (C)), time taken: 1.87s
+Testing Function pair Pairing (invokeTCB_CopyRegisters (ASM) <= Kernel_C.invokeTCB_CopyRegisters (C))
+  (function pairing 115 of 287)
+ .. built problem, finding proof
+Discovered that points [25 (loop head)] can be bounded
+  (in problem)
+Discovered that points [10 (loop head)] can be bounded
+  (in problem)
+Discovered that points [83 (loop head)] can be bounded
+  (in problem)
+Discovered that points [111 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (25, ('Number', (0, 1))), (ProofNode ('Restr', (10, ('Number', (0, 1))), (ProofNode ('Restr', (83, ('Number', (0, 1))), (ProofNode ('Restr', (111, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),)),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 25 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 10 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  Prove the number of visits to 83 is in {0 ..< 1}
+    .. proven.
+Step 4: 
+  Prove the number of visits to 111 is in {0 ..< 1}
+    .. proven.
+Step 5: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (invokeTCB_CopyRegisters (ASM) <= Kernel_C.invokeTCB_CopyRegisters (C)), time taken: 14.73s
+Testing Function pair Pairing (create_unmapped_it_frame_cap (ASM) <= Kernel_C.create_unmapped_it_frame_cap (C))
+  (function pairing 116 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (create_unmapped_it_frame_cap (ASM) <= Kernel_C.create_unmapped_it_frame_cap (C)), time taken: 0.62s
+Testing Function pair Pairing (decodeCNodeInvocation (ASM) <= Kernel_C.decodeCNodeInvocation (C))
+  (function pairing 117 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (decodeCNodeInvocation (ASM) <= Kernel_C.decodeCNodeInvocation (C)), time taken: 12.41s
+Testing Function pair Pairing (findPDForASID (ASM) <= Kernel_C.findPDForASID (C))
+  (function pairing 118 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (findPDForASID (ASM) <= Kernel_C.findPDForASID (C)), time taken: 0.75s
+Testing Function pair Pairing (cteInsert (ASM) <= Kernel_C.cteInsert (C))
+  (function pairing 119 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (cteInsert (ASM) <= Kernel_C.cteInsert (C)), time taken: 1.55s
+Testing Function pair Pairing (switchToIdleThread (ASM) <= Kernel_C.switchToIdleThread (C))
+  (function pairing 120 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (switchToIdleThread (ASM) <= Kernel_C.switchToIdleThread (C)), time taken: 0.49s
+Testing Function pair Pairing (decodeUntypedInvocation (ASM) <= Kernel_C.decodeUntypedInvocation (C))
+  (function pairing 121 of 287)
+ .. built problem, finding proof
+Discovered that points [48 (loop head)] can be bounded
+  (in problem)
+Discovered that points [494 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (48, ('Number', (0, 1))), (ProofNode ('Restr', (494, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 48 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 494 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (decodeUntypedInvocation (ASM) <= Kernel_C.decodeUntypedInvocation (C)), time taken: 16.25s
+Testing Function pair Pairing (lookupIPCBuffer (ASM) <= Kernel_C.lookupIPCBuffer (C))
+  (function pairing 122 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (lookupIPCBuffer (ASM) <= Kernel_C.lookupIPCBuffer (C)), time taken: 1.65s
+Testing Function pair Pairing (map_kernel_devices (ASM) <= Kernel_C.map_kernel_devices (C))
+  (function pairing 123 of 287)
+ .. built problem, finding proof
+Discovered that points [3 (loop head)] can be bounded
+  (in problem)
+Discovered that points [23 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (3, ('Number', (0, 1))), (ProofNode ('Restr', (23, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 3 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 23 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (map_kernel_devices (ASM) <= Kernel_C.map_kernel_devices (C)), time taken: 2.04s
+Testing Function pair Pairing (initL2Cache (ASM) <= Kernel_C.initL2Cache (C))
+  (function pairing 124 of 287)
+ .. built problem, finding proof
+Discovered that points [47 (loop head)] can be bounded
+  (in problem)
+Discovered that points [180 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (47, ('Number', (0, 1))), (ProofNode ('Restr', (180, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 47 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 180 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (initL2Cache (ASM) <= Kernel_C.initL2Cache (C)), time taken: 1.94s
+Testing Function pair Pairing (sendSignal (ASM) <= Kernel_C.sendSignal (C))
+  (function pairing 125 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (sendSignal (ASM) <= Kernel_C.sendSignal (C)), time taken: 2.21s
+Testing Function pair Pairing (alloc_rootserver_obj (ASM) <= Kernel_C.alloc_rootserver_obj (C))
+  (function pairing 126 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (alloc_rootserver_obj (ASM) <= Kernel_C.alloc_rootserver_obj (C)), time taken: 0.55s
+Testing Function pair Pairing (tcbEPDequeue (ASM) <= Kernel_C.tcbEPDequeue (C))
+  (function pairing 127 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (tcbEPDequeue (ASM) <= Kernel_C.tcbEPDequeue (C)), time taken: 0.77s
+Testing Function pair Pairing (unmapPage (ASM) <= Kernel_C.unmapPage (C))
+  (function pairing 128 of 287)
+ .. built problem, finding proof
+Discovered that points [73 (loop head)] can be bounded
+  (in problem)
+Discovered that points [27 (loop head)] can be bounded
+  (in problem)
+Discovered that points [275 (loop head)] can be bounded
+  (in problem)
+Discovered that points [236 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (73, ('Number', (0, 1))), (ProofNode ('Restr', (27, ('Number', (0, 1))), (ProofNode ('Restr', (275, ('Number', (0, 1))), (ProofNode ('Restr', (236, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),)),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 73 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 27 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  Prove the number of visits to 275 is in {0 ..< 1}
+    .. proven.
+Step 4: 
+  Prove the number of visits to 236 is in {0 ..< 1}
+    .. proven.
+Step 5: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (unmapPage (ASM) <= Kernel_C.unmapPage (C)), time taken: 31.16s
+Testing Function pair Pairing (cleanInvalidateL1Caches (ASM) <= Kernel_C.cleanInvalidateL1Caches (C))
+  (function pairing 129 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (cleanInvalidateL1Caches (ASM) <= Kernel_C.cleanInvalidateL1Caches (C)), time taken: 0.63s
+Testing Function pair Pairing (cancelAllIPC (ASM) <= Kernel_C.cancelAllIPC (C))
+  (function pairing 130 of 287)
+ .. built problem, finding proof
+Discovered that points [4 (loop head)] can be bounded
+  (in problem)
+Discovered that points [46 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (4, ('Number', (0, 1))), (ProofNode ('Restr', (46, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 4 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 46 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (cancelAllIPC (ASM) <= Kernel_C.cancelAllIPC (C)), time taken: 2.12s
+Testing Function pair Pairing (Arch_decodeInvocation (ASM) <= Kernel_C.Arch_decodeInvocation (C))
+  (function pairing 131 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (Arch_decodeInvocation (ASM) <= Kernel_C.Arch_decodeInvocation (C)), time taken: 0.58s
+Testing Function pair Pairing (Arch_deriveCap (ASM) <= Kernel_C.Arch_deriveCap (C))
+  (function pairing 132 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (Arch_deriveCap (ASM) <= Kernel_C.Arch_deriveCap (C)), time taken: 1.95s
+Testing Function pair Pairing (invokeCNodeInsert (ASM) <= Kernel_C.invokeCNodeInsert (C))
+  (function pairing 133 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (invokeCNodeInsert (ASM) <= Kernel_C.invokeCNodeInsert (C)), time taken: 0.50s
+Testing Function pair Pairing (slowpath (ASM) <= Kernel_C.slowpath (C))
+  (function pairing 134 of 287)
+Aborting Problem (Pairing (slowpath (ASM) <= Kernel_C.slowpath (C))): underspecified Kernel_C.StrictC'__builtin_unreachable
+Result ProblemAbort for pair Pairing (slowpath (ASM) <= Kernel_C.slowpath (C)), time taken: 0.00s
+Testing Function pair Pairing (copyMRs (ASM) <= Kernel_C.copyMRs (C))
+  (function pairing 135 of 287)
+ .. built problem, finding proof
+Discovered that points [13 (loop head)] can be bounded
+  (in problem)
+Discovered that points [4 (loop head)] can be bounded
+  (in problem)
+Discovered that points [51 (loop head)] can be bounded
+  (in problem)
+Discovered that points [92 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (13, ('Number', (0, 1))), (ProofNode ('Restr', (4, ('Number', (0, 1))), (ProofNode ('Restr', (51, ('Number', (0, 1))), (ProofNode ('Restr', (92, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),)),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 13 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 4 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  Prove the number of visits to 51 is in {0 ..< 1}
+    .. proven.
+Step 4: 
+  Prove the number of visits to 92 is in {0 ..< 1}
+    .. proven.
+Step 5: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (copyMRs (ASM) <= Kernel_C.copyMRs (C)), time taken: 5.57s
+Testing Function pair Pairing (Arch_prepareThreadDelete (ASM) <= Kernel_C.Arch_prepareThreadDelete (C))
+  (function pairing 136 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (Arch_prepareThreadDelete (ASM) <= Kernel_C.Arch_prepareThreadDelete (C)), time taken: 0.35s
+Testing Function pair Pairing (reserve_region (ASM) <= Kernel_C.reserve_region (C))
+  (function pairing 137 of 287)
+ .. built problem, finding proof
+Discovered that points [12 (loop head)] can be bounded
+  (in problem)
+Discovered that points [23 (loop head)] can be bounded
+  (in problem)
+Discovered that points [142 (loop head)] can be bounded
+  (in problem)
+Discovered that points [80 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (12, ('Number', (0, 1))), (ProofNode ('Restr', (23, ('Number', (0, 1))), (ProofNode ('Restr', (142, ('Number', (0, 1))), (ProofNode ('Restr', (80, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),)),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 12 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 23 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  Prove the number of visits to 142 is in {0 ..< 1}
+    .. proven.
+Step 4: 
+  Prove the number of visits to 80 is in {0 ..< 1}
+    .. proven.
+Step 5: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (reserve_region (ASM) <= Kernel_C.reserve_region (C)), time taken: 4.81s
+Testing Function pair Pairing (cap_get_capPtr (ASM) <= Kernel_C.cap_get_capPtr (C))
+  (function pairing 138 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (cap_get_capPtr (ASM) <= Kernel_C.cap_get_capPtr (C)), time taken: 2.04s
+Testing Function pair Pairing (cleanInvalidateCacheRange_RAM (ASM) <= Kernel_C.cleanInvalidateCacheRange_RAM (C))
+  (function pairing 139 of 287)
+ .. built problem, finding proof
+Discovered that points [136 (loop head)] can be bounded
+  (in problem)
+Discovered that points [114 (loop head)] can be bounded
+  (in problem)
+Discovered that points [175 (loop head)] can be bounded
+  (in problem)
+Discovered that points [4 (loop head)] can be bounded
+  (in problem)
+Discovered that points [84 (loop head)] can be bounded
+  (in problem)
+Discovered that points [47 (loop head)] can be bounded
+  (in problem)
+Discovered that points [98 (loop head)] can be bounded
+  (in problem)
+Discovered that points [94 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (136, ('Number', (0, 1))), (ProofNode ('Restr', (114, ('Number', (0, 1))), (ProofNode ('Restr', (175, ('Number', (0, 1))), (ProofNode ('Restr', (4, ('Number', (0, 1))), (ProofNode ('Restr', (84, ('Number', (0, 1))), (ProofNode ('Restr', (47, ('Number', (0, 1))), (ProofNode ('Restr', (98, ('Number', (0, 1))), (ProofNode ('Restr', (94, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),)),)),)),)),)),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 136 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 114 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  Prove the number of visits to 175 is in {0 ..< 1}
+    .. proven.
+Step 4: 
+  Prove the number of visits to 4 is in {0 ..< 1}
+    .. proven.
+Step 5: 
+  Prove the number of visits to 84 is in {0 ..< 1}
+    .. proven.
+Step 6: 
+  Prove the number of visits to 47 is in {0 ..< 1}
+    .. proven.
+Step 7: 
+  Prove the number of visits to 98 is in {0 ..< 1}
+    .. proven.
+Step 8: 
+  Prove the number of visits to 94 is in {0 ..< 1}
+    .. proven.
+Step 9: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (cleanInvalidateCacheRange_RAM (ASM) <= Kernel_C.cleanInvalidateCacheRange_RAM (C)), time taken: 6.93s
+Testing Function pair Pairing (get_p_reg_kernel_img (ASM) <= Kernel_C.get_p_reg_kernel_img (C))
+  (function pairing 140 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (get_p_reg_kernel_img (ASM) <= Kernel_C.get_p_reg_kernel_img (C)), time taken: 0.53s
+Testing Function pair Pairing (lookupPTSlot (ASM) <= Kernel_C.lookupPTSlot (C))
+  (function pairing 141 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (lookupPTSlot (ASM) <= Kernel_C.lookupPTSlot (C)), time taken: 0.80s
+Testing Function pair Pairing (cleanInvalidate_D_PoC (ASM) <= Kernel_C.cleanInvalidate_D_PoC (C))
+  (function pairing 142 of 287)
+Aborting Problem (Pairing (cleanInvalidate_D_PoC (ASM) <= Kernel_C.cleanInvalidate_D_PoC (C))), complex loop
+Result ProblemAbort for pair Pairing (cleanInvalidate_D_PoC (ASM) <= Kernel_C.cleanInvalidate_D_PoC (C)), time taken: 15.26s
+Testing Function pair Pairing (armv_init_user_access (ASM) <= Kernel_C.armv_init_user_access (C))
+  (function pairing 143 of 287)
+ .. built problem, finding proof
+Discovered that points [29 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (29, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 29 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (armv_init_user_access (ASM) <= Kernel_C.armv_init_user_access (C)), time taken: 1.00s
+Testing Function pair Pairing (ensureNoChildren (ASM) <= Kernel_C.ensureNoChildren (C))
+  (function pairing 144 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (ensureNoChildren (ASM) <= Kernel_C.ensureNoChildren (C)), time taken: 0.67s
+Testing Function pair Pairing (cleanInvalidate_L1D (ASM) <= Kernel_C.cleanInvalidate_L1D (C))
+  (function pairing 145 of 287)
+Aborting Problem (Pairing (cleanInvalidate_L1D (ASM) <= Kernel_C.cleanInvalidate_L1D (C))), complex loop
+Result ProblemAbort for pair Pairing (cleanInvalidate_L1D (ASM) <= Kernel_C.cleanInvalidate_L1D (C)), time taken: 1.66s
+Testing Function pair Pairing (APFromVMRights (ASM) <= Kernel_C.APFromVMRights (C))
+  (function pairing 146 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (APFromVMRights (ASM) <= Kernel_C.APFromVMRights (C)), time taken: 0.54s
+Testing Function pair Pairing (handleInvocation (ASM) <= Kernel_C.handleInvocation (C))
+  (function pairing 147 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (handleInvocation (ASM) <= Kernel_C.handleInvocation (C)), time taken: 1.94s
+Testing Function pair Pairing (updateCapData (ASM) <= Kernel_C.updateCapData (C))
+  (function pairing 148 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (updateCapData (ASM) <= Kernel_C.updateCapData (C)), time taken: 1.39s
+Testing Function pair Pairing (findFreeHWASID (ASM) <= Kernel_C.findFreeHWASID (C))
+  (function pairing 149 of 287)
+ .. built problem, finding proof
+Discovered that points [17 (loop head)] can be bounded
+  (in problem)
+Discovered that points [87 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (17, ('Number', (0, 1))), (ProofNode ('Restr', (87, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 17 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 87 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (findFreeHWASID (ASM) <= Kernel_C.findFreeHWASID (C)), time taken: 1.66s
+Testing Function pair Pairing (Arch_finaliseCap (ASM) <= Kernel_C.Arch_finaliseCap (C))
+  (function pairing 150 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (Arch_finaliseCap (ASM) <= Kernel_C.Arch_finaliseCap (C)), time taken: 3.41s
+Testing Function pair Pairing (map_kernel_window (ASM) <= Kernel_C.map_kernel_window (C))
+  (function pairing 151 of 287)
+Aborting Problem (Pairing (map_kernel_window (ASM) <= Kernel_C.map_kernel_window (C))), complex loop
+Result ProblemAbort for pair Pairing (map_kernel_window (ASM) <= Kernel_C.map_kernel_window (C)), time taken: 7.17s
+Testing Function pair Pairing (Arch_updateCapData (ASM) <= Kernel_C.Arch_updateCapData (C))
+  (function pairing 152 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (Arch_updateCapData (ASM) <= Kernel_C.Arch_updateCapData (C)), time taken: 0.53s
+Testing Function pair Pairing (restore_user_context (ASM) <= Kernel_C.restore_user_context (C))
+  (function pairing 153 of 287)
+Skipping Pairing (restore_user_context (ASM) <= Kernel_C.restore_user_context (C)), underspecified C
+Testing Function pair Pairing (lookupPivotSlot (ASM) <= Kernel_C.lookupPivotSlot (C))
+  (function pairing 154 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (lookupPivotSlot (ASM) <= Kernel_C.lookupPivotSlot (C)), time taken: 0.71s
+Testing Function pair Pairing (handleUserLevelFault (ASM) <= Kernel_C.handleUserLevelFault (C))
+  (function pairing 155 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (handleUserLevelFault (ASM) <= Kernel_C.handleUserLevelFault (C)), time taken: 0.65s
+Testing Function pair Pairing (setThreadState (ASM) <= Kernel_C.setThreadState (C))
+  (function pairing 156 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (setThreadState (ASM) <= Kernel_C.setThreadState (C)), time taken: 0.54s
+Testing Function pair Pairing (halt (ASM) <= Kernel_C.halt (C))
+  (function pairing 157 of 287)
+Skipping Pairing (halt (ASM) <= Kernel_C.halt (C)), underspecified C
+Testing Function pair Pairing (handleFaultReply (ASM) <= Kernel_C.handleFaultReply (C))
+  (function pairing 158 of 287)
+ .. built problem, finding proof
+Discovered that points [272 (loop head)] can be bounded
+  (in problem)
+Discovered that points [256 (loop head)] can be bounded
+  (in problem)
+Discovered that points [307 (loop head)] can be bounded
+  (in problem)
+Discovered that points [291 (loop head)] can be bounded
+  (in problem)
+Discovered that points [232 (loop head)] can be bounded
+  (in problem)
+Discovered that points [184 (loop head)] can be bounded
+  (in problem)
+Discovered that points [201 (loop head)] can be bounded
+  (in problem)
+Discovered that points [35 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (272, ('Number', (0, 1))), (ProofNode ('Restr', (256, ('Number', (0, 1))), (ProofNode ('Restr', (307, ('Number', (0, 1))), (ProofNode ('Restr', (291, ('Number', (0, 1))), (ProofNode ('Restr', (232, ('Number', (0, 1))), (ProofNode ('Restr', (184, ('Number', (0, 1))), (ProofNode ('Restr', (201, ('Number', (0, 1))), (ProofNode ('Restr', (35, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),)),)),)),)),)),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 272 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 256 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  Prove the number of visits to 307 is in {0 ..< 1}
+    .. proven.
+Step 4: 
+  Prove the number of visits to 291 is in {0 ..< 1}
+    .. proven.
+Step 5: 
+  Prove the number of visits to 232 is in {0 ..< 1}
+    .. proven.
+Step 6: 
+  Prove the number of visits to 184 is in {0 ..< 1}
+    .. proven.
+Step 7: 
+  Prove the number of visits to 201 is in {0 ..< 1}
+    .. proven.
+Step 8: 
+  Prove the number of visits to 35 is in {0 ..< 1}
+    .. proven.
+Step 9: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (handleFaultReply (ASM) <= Kernel_C.handleFaultReply (C)), time taken: 38.93s
+Testing Function pair Pairing (sendFaultIPC (ASM) <= Kernel_C.sendFaultIPC (C))
+  (function pairing 159 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (sendFaultIPC (ASM) <= Kernel_C.sendFaultIPC (C)), time taken: 1.34s
+Testing Function pair Pairing (sameRegionAs (ASM) <= Kernel_C.sameRegionAs (C))
+  (function pairing 160 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (sameRegionAs (ASM) <= Kernel_C.sameRegionAs (C)), time taken: 5.66s
+Testing Function pair Pairing (create_initial_thread (ASM) <= Kernel_C.create_initial_thread (C))
+  (function pairing 161 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (create_initial_thread (ASM) <= Kernel_C.create_initial_thread (C)), time taken: 2.70s
+Testing Function pair Pairing (memset (ASM) <= Kernel_C.memset (C))
+  (function pairing 162 of 287)
+ .. built problem, finding proof
+Discovered that points [5 (loop head)] can be bounded
+  (in problem)
+Discovered that points [54 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (5, ('Number', (0, 1))), (ProofNode ('Restr', (54, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 5 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 54 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (memset (ASM) <= Kernel_C.memset (C)), time taken: 5.69s
+Testing Function pair Pairing (handleRecv (ASM) <= Kernel_C.handleRecv (C))
+  (function pairing 163 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (handleRecv (ASM) <= Kernel_C.handleRecv (C)), time taken: 1.67s
+Testing Function pair Pairing (handleUnknownSyscall (ASM) <= Kernel_C.handleUnknownSyscall (C))
+  (function pairing 164 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (handleUnknownSyscall (ASM) <= Kernel_C.handleUnknownSyscall (C)), time taken: 0.62s
+Testing Function pair Pairing (loadCapTransfer (ASM) <= Kernel_C.loadCapTransfer (C))
+  (function pairing 165 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (loadCapTransfer (ASM) <= Kernel_C.loadCapTransfer (C)), time taken: 0.92s
+Testing Function pair Pairing (l_impl'isb (ASM) <= r_impl'isb (C))
+  (function pairing 166 of 287)
+Skipping Pairing (l_impl'isb (ASM) <= r_impl'isb (C)), underspecified C
+Testing Function pair Pairing (hasCancelSendRights (ASM) <= Kernel_C.hasCancelSendRights (C))
+  (function pairing 167 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (hasCancelSendRights (ASM) <= Kernel_C.hasCancelSendRights (C)), time taken: 0.67s
+Testing Function pair Pairing (cancelBadgedSends (ASM) <= Kernel_C.cancelBadgedSends (C))
+  (function pairing 168 of 287)
+ .. built problem, finding proof
+Discovered that points [7 (loop head)] can be bounded
+  (in problem)
+Discovered that points [102 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (7, ('Number', (0, 1))), (ProofNode ('Restr', (102, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 7 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 102 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (cancelBadgedSends (ASM) <= Kernel_C.cancelBadgedSends (C)), time taken: 3.94s
+Testing Function pair Pairing (doReplyTransfer (ASM) <= Kernel_C.doReplyTransfer (C))
+  (function pairing 169 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (doReplyTransfer (ASM) <= Kernel_C.doReplyTransfer (C)), time taken: 1.30s
+Testing Function pair Pairing (create_untypeds_for_region (ASM) <= Kernel_C.create_untypeds_for_region (C))
+  (function pairing 170 of 287)
+ .. built problem, finding proof
+Discovered that points [4 (loop head)] can be bounded
+  (in problem)
+Discovered that points [175 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (4, ('Number', (0, 1))), (ProofNode ('Restr', (175, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 4 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 175 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (create_untypeds_for_region (ASM) <= Kernel_C.create_untypeds_for_region (C)), time taken: 5.04s
+Testing Function pair Pairing (invokeCNodeMove (ASM) <= Kernel_C.invokeCNodeMove (C))
+  (function pairing 171 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (invokeCNodeMove (ASM) <= Kernel_C.invokeCNodeMove (C)), time taken: 0.51s
+Testing Function pair Pairing (char_to_long (ASM) <= Kernel_C.char_to_long (C))
+  (function pairing 172 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (char_to_long (ASM) <= Kernel_C.char_to_long (C)), time taken: 0.50s
+Testing Function pair Pairing (deletingIRQHandler (ASM) <= Kernel_C.deletingIRQHandler (C))
+  (function pairing 173 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (deletingIRQHandler (ASM) <= Kernel_C.deletingIRQHandler (C)), time taken: 0.48s
+Testing Function pair Pairing (chooseThread (ASM) <= Kernel_C.chooseThread (C))
+  (function pairing 174 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (chooseThread (ASM) <= Kernel_C.chooseThread (C)), time taken: 1.04s
+Testing Function pair Pairing (sameObjectAs (ASM) <= Kernel_C.sameObjectAs (C))
+  (function pairing 175 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (sameObjectAs (ASM) <= Kernel_C.sameObjectAs (C)), time taken: 1.25s
+Testing Function pair Pairing (create_mapped_it_frame_cap (ASM) <= Kernel_C.create_mapped_it_frame_cap (C))
+  (function pairing 176 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (create_mapped_it_frame_cap (ASM) <= Kernel_C.create_mapped_it_frame_cap (C)), time taken: 2.12s
+Testing Function pair Pairing (invokeTCB_NotificationControl (ASM) <= Kernel_C.invokeTCB_NotificationControl (C))
+  (function pairing 177 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (invokeTCB_NotificationControl (ASM) <= Kernel_C.invokeTCB_NotificationControl (C)), time taken: 0.69s
+Testing Function pair Pairing (invokeUntyped_Retype (ASM) <= Kernel_C.invokeUntyped_Retype (C))
+  (function pairing 178 of 287)
+ .. built problem, finding proof
+Discovered that points [172 (loop head)] can be bounded
+  (in problem)
+Discovered that points [135 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (172, ('Number', (0, 1))), (ProofNode ('Restr', (135, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 172 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 135 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (invokeUntyped_Retype (ASM) <= Kernel_C.invokeUntyped_Retype (C)), time taken: 6.31s
+Testing Function pair Pairing (cancelSignal (ASM) <= Kernel_C.cancelSignal (C))
+  (function pairing 179 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (cancelSignal (ASM) <= Kernel_C.cancelSignal (C)), time taken: 0.82s
+Testing Function pair Pairing (c_handle_fastpath_reply_recv (ASM) <= Kernel_C.c_handle_fastpath_reply_recv (C))
+  (function pairing 180 of 287)
+Skipping Pairing (c_handle_fastpath_reply_recv (ASM) <= Kernel_C.c_handle_fastpath_reply_recv (C)), underspecified ASM
+Testing Function pair Pairing (cleanCacheRange_PoU (ASM) <= Kernel_C.cleanCacheRange_PoU (C))
+  (function pairing 181 of 287)
+ .. built problem, finding proof
+Discovered that points [3 (loop head)] can be bounded
+  (in problem)
+Discovered that points [29 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (3, ('Number', (0, 1))), (ProofNode ('Restr', (29, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 3 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 29 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (cleanCacheRange_PoU (ASM) <= Kernel_C.cleanCacheRange_PoU (C)), time taken: 1.28s
+Testing Function pair Pairing (init_core_state (ASM) <= Kernel_C.init_core_state (C))
+  (function pairing 182 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (init_core_state (ASM) <= Kernel_C.init_core_state (C)), time taken: 0.51s
+Testing Function pair Pairing (deleteCallerCap (ASM) <= Kernel_C.deleteCallerCap (C))
+  (function pairing 183 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (deleteCallerCap (ASM) <= Kernel_C.deleteCallerCap (C)), time taken: 0.49s
+Testing Function pair Pairing (cteMove (ASM) <= Kernel_C.cteMove (C))
+  (function pairing 184 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (cteMove (ASM) <= Kernel_C.cteMove (C)), time taken: 0.87s
+Testing Function pair Pairing (decodeIRQHandlerInvocation (ASM) <= Kernel_C.decodeIRQHandlerInvocation (C))
+  (function pairing 185 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (decodeIRQHandlerInvocation (ASM) <= Kernel_C.decodeIRQHandlerInvocation (C)), time taken: 1.64s
+Testing Function pair Pairing (insert_region (ASM) <= Kernel_C.insert_region (C))
+  (function pairing 186 of 287)
+ .. built problem, finding proof
+Discovered that points [4 (loop head)] can be bounded
+  (in problem)
+Discovered that points [86 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (4, ('Number', (0, 1))), (ProofNode ('Restr', (86, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 4 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 86 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (insert_region (ASM) <= Kernel_C.insert_region (C)), time taken: 1.57s
+Testing Function pair Pairing (decodeARMMMUInvocation (ASM) <= Kernel_C.decodeARMMMUInvocation (C))
+  (function pairing 187 of 287)
+ .. built problem, finding proof
+Discovered that points [117 (loop head)] can be bounded
+  (in problem)
+Discovered that points [58 (loop head)] can be bounded
+  (in problem)
+Discovered that points [3222 (loop head)] can be bounded
+  (in problem)
+Discovered that points [3173 (loop head)] can be bounded
+  (in problem)
+Discovered that points [3327 (loop head)] can be bounded
+  (in problem)
+Discovered that points [3276 (loop head)] can be bounded
+  (in problem)
+Discovered that points [1987 (loop head)] can be bounded
+  (in problem)
+Discovered that points [252 (loop head)] can be bounded
+  (in problem)
+Discovered that points [1964 (loop head)] can be bounded
+  (in problem)
+Discovered that points [1910 (loop head)] can be bounded
+  (in problem)
+Discovered that points [879 (loop head)] can be bounded
+  (in problem)
+Discovered that points [711 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (117, ('Number', (0, 1))), (ProofNode ('Restr', (58, ('Number', (0, 1))), (ProofNode ('Restr', (3222, ('Number', (0, 1))), (ProofNode ('Restr', (3173, ('Number', (0, 1))), (ProofNode ('Restr', (3327, ('Number', (0, 1))), (ProofNode ('Restr', (3276, ('Number', (0, 1))), (ProofNode ('Restr', (1987, ('Number', (0, 1))), (ProofNode ('Restr', (252, ('Number', (0, 1))), (ProofNode ('Restr', (1964, ('Number', (0, 1))), (ProofNode ('Restr', (1910, ('Number', (0, 1))), (ProofNode ('Restr', (879, ('Number', (0, 1))), (ProofNode ('Restr', (711, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),)),)),)),)),)),)),)),)),)),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 117 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 58 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  Prove the number of visits to 3222 is in {0 ..< 1}
+    .. proven.
+Step 4: 
+  Prove the number of visits to 3173 is in {0 ..< 1}
+    .. proven.
+Step 5: 
+  Prove the number of visits to 3327 is in {0 ..< 1}
+    .. proven.
+Step 6: 
+  Prove the number of visits to 3276 is in {0 ..< 1}
+    .. proven.
+Step 7: 
+  Prove the number of visits to 1987 is in {0 ..< 1}
+    .. proven.
+Step 8: 
+  Prove the number of visits to 252 is in {0 ..< 1}
+    .. proven.
+Step 9: 
+  Prove the number of visits to 1964 is in {0 ..< 1}
+    .. proven.
+Step 10: 
+  Prove the number of visits to 1910 is in {0 ..< 1}
+    .. proven.
+Step 11: 
+  Prove the number of visits to 879 is in {0 ..< 1}
+    .. proven.
+Step 12: 
+  Prove the number of visits to 711 is in {0 ..< 1}
+    .. proven.
+Step 13: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (decodeARMMMUInvocation (ASM) <= Kernel_C.decodeARMMMUInvocation (C)), time taken: 821.59s
+Testing Function pair Pairing (Arch_isFrameType (ASM) <= Kernel_C.Arch_isFrameType (C))
+  (function pairing 188 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (Arch_isFrameType (ASM) <= Kernel_C.Arch_isFrameType (C)), time taken: 1.70s
+Testing Function pair Pairing (isCapRevocable (ASM) <= Kernel_C.isCapRevocable (C))
+  (function pairing 189 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (isCapRevocable (ASM) <= Kernel_C.isCapRevocable (C)), time taken: 2.32s
+Testing Function pair Pairing (setNextPC (ASM) <= Kernel_C.setNextPC (C))
+  (function pairing 190 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (setNextPC (ASM) <= Kernel_C.setNextPC (C)), time taken: 1.65s
+Testing Function pair Pairing (Arch_sameObjectAs (ASM) <= Kernel_C.Arch_sameObjectAs (C))
+  (function pairing 191 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (Arch_sameObjectAs (ASM) <= Kernel_C.Arch_sameObjectAs (C)), time taken: 2.53s
+Testing Function pair Pairing (handleDoubleFault (ASM) <= Kernel_C.handleDoubleFault (C))
+  (function pairing 192 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (handleDoubleFault (ASM) <= Kernel_C.handleDoubleFault (C)), time taken: 1.67s
+Testing Function pair Pairing (invalidateCacheRange_RAM (ASM) <= Kernel_C.invalidateCacheRange_RAM (C))
+  (function pairing 193 of 287)
+ .. built problem, finding proof
+Discovered that points [123 (loop head)] can be bounded
+  (in problem)
+Discovered that points [154 (loop head)] can be bounded
+  (in problem)
+Discovered that points [4 (loop head)] can be bounded
+  (in problem)
+Discovered that points [65 (loop head)] can be bounded
+  (in problem)
+Discovered that points [89 (loop head)] can be bounded
+  (in problem)
+Discovered that points [86 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (123, ('Number', (0, 1))), (ProofNode ('Restr', (154, ('Number', (0, 1))), (ProofNode ('Restr', (4, ('Number', (0, 1))), (ProofNode ('Restr', (65, ('Number', (0, 1))), (ProofNode ('Restr', (89, ('Number', (0, 1))), (ProofNode ('Restr', (86, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),)),)),)),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 123 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 154 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  Prove the number of visits to 4 is in {0 ..< 1}
+    .. proven.
+Step 4: 
+  Prove the number of visits to 65 is in {0 ..< 1}
+    .. proven.
+Step 5: 
+  Prove the number of visits to 89 is in {0 ..< 1}
+    .. proven.
+Step 6: 
+  Prove the number of visits to 86 is in {0 ..< 1}
+    .. proven.
+Step 7: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (invalidateCacheRange_RAM (ASM) <= Kernel_C.invalidateCacheRange_RAM (C)), time taken: 50.97s
+Testing Function pair Pairing (decodeTCBConfigure (ASM) <= Kernel_C.decodeTCBConfigure (C))
+  (function pairing 194 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (decodeTCBConfigure (ASM) <= Kernel_C.decodeTCBConfigure (C)), time taken: 5.73s
+Testing Function pair Pairing (c_handle_interrupt (ASM) <= Kernel_C.c_handle_interrupt (C))
+  (function pairing 195 of 287)
+ .. built problem, finding proof
+Discovered that points [6 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (6, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 6 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (c_handle_interrupt (ASM) <= Kernel_C.c_handle_interrupt (C)), time taken: 2.77s
+Testing Function pair Pairing (decodeDomainInvocation (ASM) <= Kernel_C.decodeDomainInvocation (C))
+  (function pairing 196 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (decodeDomainInvocation (ASM) <= Kernel_C.decodeDomainInvocation (C)), time taken: 2.38s
+Testing Function pair Pairing (invokeCNodeDelete (ASM) <= Kernel_C.invokeCNodeDelete (C))
+  (function pairing 197 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (invokeCNodeDelete (ASM) <= Kernel_C.invokeCNodeDelete (C)), time taken: 1.80s
+Testing Function pair Pairing (strlcpy (ASM) <= Kernel_C.strlcpy (C))
+  (function pairing 198 of 287)
+ .. built problem, finding proof
+Discovered that points [6 (loop head)] can be bounded
+  (in problem)
+Discovered that points [39 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (6, ('Number', (0, 1))), (ProofNode ('Restr', (39, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 6 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 39 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (strlcpy (ASM) <= Kernel_C.strlcpy (C)), time taken: 4.01s
+Testing Function pair Pairing (possibleSwitchTo (ASM) <= Kernel_C.possibleSwitchTo (C))
+  (function pairing 199 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (possibleSwitchTo (ASM) <= Kernel_C.possibleSwitchTo (C)), time taken: 2.44s
+Testing Function pair Pairing (handleFault (ASM) <= Kernel_C.handleFault (C))
+  (function pairing 200 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (handleFault (ASM) <= Kernel_C.handleFault (C)), time taken: 1.84s
+Testing Function pair Pairing (invalidateASIDEntry (ASM) <= Kernel_C.invalidateASIDEntry (C))
+  (function pairing 201 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (invalidateASIDEntry (ASM) <= Kernel_C.invalidateASIDEntry (C)), time taken: 1.88s
+Testing Function pair Pairing (decodeSetMCPriority (ASM) <= Kernel_C.decodeSetMCPriority (C))
+  (function pairing 202 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (decodeSetMCPriority (ASM) <= Kernel_C.decodeSetMCPriority (C)), time taken: 2.76s
+Testing Function pair Pairing (arm_errata (ASM) <= Kernel_C.arm_errata (C))
+  (function pairing 203 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (arm_errata (ASM) <= Kernel_C.arm_errata (C)), time taken: 1.46s
+Testing Function pair Pairing (setExtraBadge (ASM) <= Kernel_C.setExtraBadge (C))
+  (function pairing 204 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (setExtraBadge (ASM) <= Kernel_C.setExtraBadge (C)), time taken: 1.65s
+Testing Function pair Pairing (getExtraCPtr (ASM) <= Kernel_C.getExtraCPtr (C))
+  (function pairing 205 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (getExtraCPtr (ASM) <= Kernel_C.getExtraCPtr (C)), time taken: 1.60s
+Testing Function pair Pairing (init_freemem (ASM) <= Kernel_C.init_freemem (C))
+  (function pairing 206 of 287)
+ .. built problem, finding proof
+Discovered that points [1017 (loop head)] can be bounded
+  (in problem)
+Discovered that points [996 (loop head)] can be bounded
+  (in problem)
+Discovered that points [189 (loop head)] can be bounded
+  (in problem)
+Discovered that points [162 (loop head)] can be bounded
+  (in problem)
+Discovered that points [94 (loop head)] can be bounded
+  (in problem)
+Discovered that points [82 (loop head)] can be bounded
+  (in problem)
+Discovered that points [71 (loop head)] can be bounded
+  (in problem)
+Discovered that points [43 (loop head)] can be bounded
+  (in problem)
+Discovered that points [4 (loop head)] can be bounded
+  (in problem)
+Discovered that points [629 (loop head)] can be bounded
+  (in problem)
+Discovered that points [643 (loop head)] can be bounded
+  (in problem)
+Discovered that points [655 (loop head)] can be bounded
+  (in problem)
+Discovered that points [693 (loop head)] can be bounded
+  (in problem)
+Discovered that points [775 (loop head)] can be bounded
+  (in problem)
+Discovered that points [791 (loop head)] can be bounded
+  (in problem)
+Discovered that points [385 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (1017, ('Number', (0, 1))), (ProofNode ('Restr', (996, ('Number', (0, 1))), (ProofNode ('Restr', (189, ('Number', (0, 1))), (ProofNode ('Restr', (162, ('Number', (0, 1))), (ProofNode ('Restr', (94, ('Number', (0, 1))), (ProofNode ('Restr', (82, ('Number', (0, 1))), (ProofNode ('Restr', (71, ('Number', (0, 1))), (ProofNode ('Restr', (43, ('Number', (0, 1))), (ProofNode ('Restr', (4, ('Number', (0, 1))), (ProofNode ('Restr', (629, ('Number', (0, 1))), (ProofNode ('Restr', (643, ('Number', (0, 1))), (ProofNode ('Restr', (655, ('Number', (0, 1))), (ProofNode ('Restr', (693, ('Number', (0, 1))), (ProofNode ('Restr', (775, ('Number', (0, 1))), (ProofNode ('Restr', (791, ('Number', (0, 1))), (ProofNode ('Restr', (385, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),)),)),)),)),)),)),)),)),)),)),)),)),)),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 1017 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 996 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  Prove the number of visits to 189 is in {0 ..< 1}
+    .. proven.
+Step 4: 
+  Prove the number of visits to 162 is in {0 ..< 1}
+    .. proven.
+Step 5: 
+  Prove the number of visits to 94 is in {0 ..< 1}
+    .. proven.
+Step 6: 
+  Prove the number of visits to 82 is in {0 ..< 1}
+    .. proven.
+Step 7: 
+  Prove the number of visits to 71 is in {0 ..< 1}
+    .. proven.
+Step 8: 
+  Prove the number of visits to 43 is in {0 ..< 1}
+    .. proven.
+Step 9: 
+  Prove the number of visits to 4 is in {0 ..< 1}
+    .. proven.
+Step 10: 
+  Prove the number of visits to 629 is in {0 ..< 1}
+    .. proven.
+Step 11: 
+  Prove the number of visits to 643 is in {0 ..< 1}
+    .. proven.
+Step 12: 
+  Prove the number of visits to 655 is in {0 ..< 1}
+    .. proven.
+Step 13: 
+  Prove the number of visits to 693 is in {0 ..< 1}
+    .. proven.
+Step 14: 
+  Prove the number of visits to 775 is in {0 ..< 1}
+    .. proven.
+Step 15: 
+  Prove the number of visits to 791 is in {0 ..< 1}
+    .. proven.
+Step 16: 
+  Prove the number of visits to 385 is in {0 ..< 1}
+    .. proven.
+Step 17: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (init_freemem (ASM) <= Kernel_C.init_freemem (C)), time taken: 142.16s
+Testing Function pair Pairing (replyFromKernel_error (ASM) <= Kernel_C.replyFromKernel_error (C))
+  (function pairing 207 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (replyFromKernel_error (ASM) <= Kernel_C.replyFromKernel_error (C)), time taken: 1.86s
+Testing Function pair Pairing (Arch_handleFaultReply (ASM) <= Kernel_C.Arch_handleFaultReply (C))
+  (function pairing 208 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (Arch_handleFaultReply (ASM) <= Kernel_C.Arch_handleFaultReply (C)), time taken: 1.73s
+Testing Function pair Pairing (str_to_long (ASM) <= Kernel_C.str_to_long (C))
+  (function pairing 209 of 287)
+ .. built problem, finding proof
+Discovered that points [4 (loop head)] can be bounded
+  (in problem)
+Discovered that points [86 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (4, ('Number', (0, 1))), (ProofNode ('Restr', (86, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 4 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 86 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (str_to_long (ASM) <= Kernel_C.str_to_long (C)), time taken: 4.23s
+Testing Function pair Pairing (getRestartPC (ASM) <= Kernel_C.getRestartPC (C))
+  (function pairing 210 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (getRestartPC (ASM) <= Kernel_C.getRestartPC (C)), time taken: 1.71s
+Testing Function pair Pairing (calculate_extra_bi_size_bits (ASM) <= Kernel_C.calculate_extra_bi_size_bits (C))
+  (function pairing 211 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (calculate_extra_bi_size_bits (ASM) <= Kernel_C.calculate_extra_bi_size_bits (C)), time taken: 1.74s
+Testing Function pair Pairing (invokeIRQControl (ASM) <= Kernel_C.invokeIRQControl (C))
+  (function pairing 212 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (invokeIRQControl (ASM) <= Kernel_C.invokeIRQControl (C)), time taken: 1.94s
+Testing Function pair Pairing (Arch_switchToIdleThread (ASM) <= Kernel_C.Arch_switchToIdleThread (C))
+  (function pairing 213 of 287)
+ .. built problem, finding proof
+Discovered that points [5 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (5, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 5 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (Arch_switchToIdleThread (ASM) <= Kernel_C.Arch_switchToIdleThread (C)), time taken: 2.74s
+Testing Function pair Pairing (setMCPriority (ASM) <= Kernel_C.setMCPriority (C))
+  (function pairing 214 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (setMCPriority (ASM) <= Kernel_C.setMCPriority (C)), time taken: 1.60s
+Testing Function pair Pairing (flushPage (ASM) <= Kernel_C.flushPage (C))
+  (function pairing 215 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (flushPage (ASM) <= Kernel_C.flushPage (C)), time taken: 2.13s
+Testing Function pair Pairing (setMRs_lookup_failure (ASM) <= Kernel_C.setMRs_lookup_failure (C))
+  (function pairing 216 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (setMRs_lookup_failure (ASM) <= Kernel_C.setMRs_lookup_failure (C)), time taken: 5.67s
+Testing Function pair Pairing (create_bi_frame_cap (ASM) <= Kernel_C.create_bi_frame_cap (C))
+  (function pairing 217 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (create_bi_frame_cap (ASM) <= Kernel_C.create_bi_frame_cap (C)), time taken: 2.46s
+Testing Function pair Pairing (populate_bi_frame (ASM) <= Kernel_C.populate_bi_frame (C))
+  (function pairing 218 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (populate_bi_frame (ASM) <= Kernel_C.populate_bi_frame (C)), time taken: 2.16s
+Testing Function pair Pairing (invokeIRQHandler_AckIRQ (ASM) <= Kernel_C.invokeIRQHandler_AckIRQ (C))
+  (function pairing 219 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (invokeIRQHandler_AckIRQ (ASM) <= Kernel_C.invokeIRQHandler_AckIRQ (C)), time taken: 1.68s
+Testing Function pair Pairing (initTimer (ASM) <= Kernel_C.initTimer (C))
+  (function pairing 220 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (initTimer (ASM) <= Kernel_C.initTimer (C)), time taken: 1.68s
+Testing Function pair Pairing (pageTableMapped (ASM) <= Kernel_C.pageTableMapped (C))
+  (function pairing 221 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (pageTableMapped (ASM) <= Kernel_C.pageTableMapped (C)), time taken: 1.93s
+Testing Function pair Pairing (lockTLBEntryCritical (ASM) <= Kernel_C.lockTLBEntryCritical (C))
+  (function pairing 222 of 287)
+Skipping Pairing (lockTLBEntryCritical (ASM) <= Kernel_C.lockTLBEntryCritical (C)), underspecified C
+Testing Function pair Pairing (decodeSetSpace (ASM) <= Kernel_C.decodeSetSpace (C))
+  (function pairing 223 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (decodeSetSpace (ASM) <= Kernel_C.decodeSetSpace (C)), time taken: 4.61s
+Testing Function pair Pairing (setIRQTrigger (ASM) <= Kernel_C.setIRQTrigger (C))
+  (function pairing 224 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (setIRQTrigger (ASM) <= Kernel_C.setIRQTrigger (C)), time taken: 1.65s
+Testing Function pair Pairing (Arch_setMRs_fault (ASM) <= Kernel_C.Arch_setMRs_fault (C))
+  (function pairing 225 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (Arch_setMRs_fault (ASM) <= Kernel_C.Arch_setMRs_fault (C)), time taken: 3.78s
+Testing Function pair Pairing (lookupSourceSlot (ASM) <= Kernel_C.lookupSourceSlot (C))
+  (function pairing 226 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (lookupSourceSlot (ASM) <= Kernel_C.lookupSourceSlot (C)), time taken: 2.09s
+Testing Function pair Pairing (lookupSlotForCNodeOp (ASM) <= Kernel_C.lookupSlotForCNodeOp (C))
+  (function pairing 227 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (lookupSlotForCNodeOp (ASM) <= Kernel_C.lookupSlotForCNodeOp (C)), time taken: 2.61s
+Testing Function pair Pairing (maybe_alloc_extra_bi (ASM) <= Kernel_C.maybe_alloc_extra_bi (C))
+  (function pairing 228 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (maybe_alloc_extra_bi (ASM) <= Kernel_C.maybe_alloc_extra_bi (C)), time taken: 1.74s
+Testing Function pair Pairing (create_ipcbuf_frame_cap (ASM) <= Kernel_C.create_ipcbuf_frame_cap (C))
+  (function pairing 229 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (create_ipcbuf_frame_cap (ASM) <= Kernel_C.create_ipcbuf_frame_cap (C)), time taken: 3.03s
+Testing Function pair Pairing (l_impl'mrc (ASM) <= r_impl'mrc (C))
+  (function pairing 230 of 287)
+Skipping Pairing (l_impl'mrc (ASM) <= r_impl'mrc (C)), underspecified C
+Testing Function pair Pairing (switchToThread (ASM) <= Kernel_C.switchToThread (C))
+  (function pairing 231 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (switchToThread (ASM) <= Kernel_C.switchToThread (C)), time taken: 1.71s
+Testing Function pair Pairing (handleVMFaultEvent (ASM) <= Kernel_C.handleVMFaultEvent (C))
+  (function pairing 232 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (handleVMFaultEvent (ASM) <= Kernel_C.handleVMFaultEvent (C)), time taken: 1.92s
+Testing Function pair Pairing (unmapPageTable (ASM) <= Kernel_C.unmapPageTable (C))
+  (function pairing 233 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (unmapPageTable (ASM) <= Kernel_C.unmapPageTable (C)), time taken: 1.87s
+Testing Function pair Pairing (invokeTCB_WriteRegisters (ASM) <= Kernel_C.invokeTCB_WriteRegisters (C))
+  (function pairing 234 of 287)
+ .. built problem, finding proof
+Discovered that points [26 (loop head)] can be bounded
+  (in problem)
+Discovered that points [13 (loop head)] can be bounded
+  (in problem)
+Discovered that points [127 (loop head)] can be bounded
+  (in problem)
+Discovered that points [176 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (26, ('Number', (0, 1))), (ProofNode ('Restr', (13, ('Number', (0, 1))), (ProofNode ('Restr', (127, ('Number', (0, 1))), (ProofNode ('Restr', (176, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),)),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 26 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 13 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  Prove the number of visits to 127 is in {0 ..< 1}
+    .. proven.
+Step 4: 
+  Prove the number of visits to 176 is in {0 ..< 1}
+    .. proven.
+Step 5: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (invokeTCB_WriteRegisters (ASM) <= Kernel_C.invokeTCB_WriteRegisters (C)), time taken: 12.25s
+Testing Function pair Pairing (Arch_createObject (ASM) <= Kernel_C.Arch_createObject (C))
+  (function pairing 235 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (Arch_createObject (ASM) <= Kernel_C.Arch_createObject (C)), time taken: 3.34s
+Testing Function pair Pairing (strnlen (ASM) <= Kernel_C.strnlen (C))
+  (function pairing 236 of 287)
+ .. built problem, finding proof
+Discovered that points [4 (loop head)] can be bounded
+  (in problem)
+Discovered that points [33 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (4, ('Number', (0, 1))), (ProofNode ('Restr', (33, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 4 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 33 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (strnlen (ASM) <= Kernel_C.strnlen (C)), time taken: 3.54s
+Testing Function pair Pairing (createObject (ASM) <= Kernel_C.createObject (C))
+  (function pairing 237 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (createObject (ASM) <= Kernel_C.createObject (C)), time taken: 3.78s
+Testing Function pair Pairing (getHWASID (ASM) <= Kernel_C.getHWASID (C))
+  (function pairing 238 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (getHWASID (ASM) <= Kernel_C.getHWASID (C)), time taken: 2.00s
+Testing Function pair Pairing (makeUserPDE (ASM) <= Kernel_C.makeUserPDE (C))
+  (function pairing 239 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (makeUserPDE (ASM) <= Kernel_C.makeUserPDE (C)), time taken: 1.89s
+Testing Function pair Pairing (decodeReadRegisters (ASM) <= Kernel_C.decodeReadRegisters (C))
+  (function pairing 240 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (decodeReadRegisters (ASM) <= Kernel_C.decodeReadRegisters (C)), time taken: 2.57s
+Testing Function pair Pairing (deleteASIDPool (ASM) <= Kernel_C.deleteASIDPool (C))
+  (function pairing 241 of 287)
+ .. built problem, finding proof
+Discovered that points [8 (loop head)] can be bounded
+  (in problem)
+Discovered that points [23 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (8, ('Number', (0, 1))), (ProofNode ('Restr', (23, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 8 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 23 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (deleteASIDPool (ASM) <= Kernel_C.deleteASIDPool (C)), time taken: 4.07s
+Testing Function pair Pairing (invokeCNodeCancelBadgedSends (ASM) <= Kernel_C.invokeCNodeCancelBadgedSends (C))
+  (function pairing 242 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (invokeCNodeCancelBadgedSends (ASM) <= Kernel_C.invokeCNodeCancelBadgedSends (C)), time taken: 1.81s
+Testing Function pair Pairing (insertNewCap (ASM) <= Kernel_C.insertNewCap (C))
+  (function pairing 243 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (insertNewCap (ASM) <= Kernel_C.insertNewCap (C)), time taken: 1.85s
+Testing Function pair Pairing (lookupExtraCaps (ASM) <= Kernel_C.lookupExtraCaps (C))
+  (function pairing 244 of 287)
+ .. built problem, finding proof
+Discovered that points [9 (loop head)] can be bounded
+  (in problem)
+Discovered that points [100 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (9, ('Number', (0, 1))), (ProofNode ('Restr', (100, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 9 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 100 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (lookupExtraCaps (ASM) <= Kernel_C.lookupExtraCaps (C)), time taken: 4.43s
+Testing Function pair Pairing (setPriority (ASM) <= Kernel_C.setPriority (C))
+  (function pairing 245 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (setPriority (ASM) <= Kernel_C.setPriority (C)), time taken: 1.88s
+Testing Function pair Pairing (isIOSpaceFrameCap (ASM) <= Kernel_C.isIOSpaceFrameCap (C))
+  (function pairing 246 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (isIOSpaceFrameCap (ASM) <= Kernel_C.isIOSpaceFrameCap (C)), time taken: 1.56s
+Testing Function pair Pairing (memzero (ASM) <= Kernel_C.memzero (C))
+  (function pairing 247 of 287)
+ .. built problem, finding proof
+Discovered that points [3 (loop head)] can be bounded
+  (in problem)
+Discovered that points [28 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (3, ('Number', (0, 1))), (ProofNode ('Restr', (28, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 3 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 28 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (memzero (ASM) <= Kernel_C.memzero (C)), time taken: 26.62s
+Testing Function pair Pairing (decodeCopyRegisters (ASM) <= Kernel_C.decodeCopyRegisters (C))
+  (function pairing 248 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (decodeCopyRegisters (ASM) <= Kernel_C.decodeCopyRegisters (C)), time taken: 2.47s
+Testing Function pair Pairing (setVMRootForFlush (ASM) <= Kernel_C.setVMRootForFlush (C))
+  (function pairing 249 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (setVMRootForFlush (ASM) <= Kernel_C.setVMRootForFlush (C)), time taken: 4.65s
+Testing Function pair Pairing (scheduleTCB (ASM) <= Kernel_C.scheduleTCB (C))
+  (function pairing 250 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (scheduleTCB (ASM) <= Kernel_C.scheduleTCB (C)), time taken: 1.79s
+Testing Function pair Pairing (configureIdleThread (ASM) <= Kernel_C.configureIdleThread (C))
+  (function pairing 251 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (configureIdleThread (ASM) <= Kernel_C.configureIdleThread (C)), time taken: 2.03s
+Testing Function pair Pairing (tcbSchedEnqueue (ASM) <= Kernel_C.tcbSchedEnqueue (C))
+  (function pairing 252 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (tcbSchedEnqueue (ASM) <= Kernel_C.tcbSchedEnqueue (C)), time taken: 2.00s
+Testing Function pair Pairing (unbindMaybeNotification (ASM) <= Kernel_C.unbindMaybeNotification (C))
+  (function pairing 253 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (unbindMaybeNotification (ASM) <= Kernel_C.unbindMaybeNotification (C)), time taken: 1.69s
+Testing Function pair Pairing (invokeCNodeRotate (ASM) <= Kernel_C.invokeCNodeRotate (C))
+  (function pairing 254 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (invokeCNodeRotate (ASM) <= Kernel_C.invokeCNodeRotate (C)), time taken: 2.44s
+Testing Function pair Pairing (Arch_switchToThread (ASM) <= Kernel_C.Arch_switchToThread (C))
+  (function pairing 255 of 287)
+Aborting Problem (Pairing (Arch_switchToThread (ASM) <= Kernel_C.Arch_switchToThread (C))): underspecified Kernel_C.clearExMonitor
+Result ProblemAbort for pair Pairing (Arch_switchToThread (ASM) <= Kernel_C.Arch_switchToThread (C)), time taken: 0.00s
+Testing Function pair Pairing (isValidVTableRoot (ASM) <= Kernel_C.isValidVTableRoot (C))
+  (function pairing 256 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (isValidVTableRoot (ASM) <= Kernel_C.isValidVTableRoot (C)), time taken: 1.66s
+Testing Function pair Pairing (strlcat (ASM) <= Kernel_C.strlcat (C))
+  (function pairing 257 of 287)
+ .. built problem, finding proof
+Discovered that points [24 (loop head)] can be bounded
+  (in problem)
+Discovered that points [6 (loop head)] can be bounded
+  (in problem)
+Discovered that points [91 (loop head)] can be bounded
+  (in problem)
+Discovered that points [65 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (24, ('Number', (0, 1))), (ProofNode ('Restr', (6, ('Number', (0, 1))), (ProofNode ('Restr', (91, ('Number', (0, 1))), (ProofNode ('Restr', (65, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),)),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 24 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 6 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  Prove the number of visits to 91 is in {0 ..< 1}
+    .. proven.
+Step 4: 
+  Prove the number of visits to 65 is in {0 ..< 1}
+    .. proven.
+Step 5: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (strlcat (ASM) <= Kernel_C.strlcat (C)), time taken: 5.94s
+Testing Function pair Pairing (map_kernel_frame (ASM) <= Kernel_C.map_kernel_frame (C))
+  (function pairing 258 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (map_kernel_frame (ASM) <= Kernel_C.map_kernel_frame (C)), time taken: 2.03s
+Testing Function pair Pairing (deletedIRQHandler (ASM) <= Kernel_C.deletedIRQHandler (C))
+  (function pairing 259 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (deletedIRQHandler (ASM) <= Kernel_C.deletedIRQHandler (C)), time taken: 1.60s
+Testing Function pair Pairing (receiveSignal (ASM) <= Kernel_C.receiveSignal (C))
+  (function pairing 260 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (receiveSignal (ASM) <= Kernel_C.receiveSignal (C)), time taken: 2.69s
+Testing Function pair Pairing (decodeSetIPCBuffer (ASM) <= Kernel_C.decodeSetIPCBuffer (C))
+  (function pairing 261 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (decodeSetIPCBuffer (ASM) <= Kernel_C.decodeSetIPCBuffer (C)), time taken: 2.73s
+Testing Function pair Pairing (activateThread (ASM) <= Kernel_C.activateThread (C))
+  (function pairing 262 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (activateThread (ASM) <= Kernel_C.activateThread (C)), time taken: 2.92s
+Testing Function pair Pairing (c_handle_data_fault (ASM) <= Kernel_C.c_handle_data_fault (C))
+  (function pairing 263 of 287)
+Aborting Problem (Pairing (c_handle_data_fault (ASM) <= Kernel_C.c_handle_data_fault (C))): underspecified Kernel_C.StrictC'__builtin_unreachable
+Result ProblemAbort for pair Pairing (c_handle_data_fault (ASM) <= Kernel_C.c_handle_data_fault (C)), time taken: 0.00s
+Testing Function pair Pairing (isIRQActive (ASM) <= Kernel_C.isIRQActive (C))
+  (function pairing 264 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (isIRQActive (ASM) <= Kernel_C.isIRQActive (C)), time taken: 1.58s
+Testing Function pair Pairing (lookupSlot (ASM) <= Kernel_C.lookupSlot (C))
+  (function pairing 265 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (lookupSlot (ASM) <= Kernel_C.lookupSlot (C)), time taken: 2.15s
+Testing Function pair Pairing (init_kernel (ASM) <= Kernel_C.init_kernel (C))
+  (function pairing 266 of 287)
+Aborting Problem (Pairing (init_kernel (ASM) <= Kernel_C.init_kernel (C))): underspecified Kernel_C.StrictC'__builtin_unreachable
+Result ProblemAbort for pair Pairing (init_kernel (ASM) <= Kernel_C.init_kernel (C)), time taken: 0.07s
+Testing Function pair Pairing (bindNotification (ASM) <= Kernel_C.bindNotification (C))
+  (function pairing 267 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (bindNotification (ASM) <= Kernel_C.bindNotification (C)), time taken: 1.65s
+Testing Function pair Pairing (branchFlushRange (ASM) <= Kernel_C.branchFlushRange (C))
+  (function pairing 268 of 287)
+ .. built problem, finding proof
+Discovered that points [3 (loop head)] can be bounded
+  (in problem)
+Discovered that points [15 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (3, ('Number', (0, 1))), (ProofNode ('Restr', (15, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 3 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 15 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (branchFlushRange (ASM) <= Kernel_C.branchFlushRange (C)), time taken: 3.40s
+Testing Function pair Pairing (dist_init (ASM) <= Kernel_C.dist_init (C))
+  (function pairing 269 of 287)
+ .. built problem, finding proof
+Discovered that points [45 (loop head)] can be bounded
+  (in problem)
+Discovered that points [34 (loop head)] can be bounded
+  (in problem)
+Discovered that points [193 (loop head)] can be bounded
+  (in problem)
+Discovered that points [24 (loop head)] can be bounded
+  (in problem)
+Discovered that points [16 (loop head)] can be bounded
+  (in problem)
+Discovered that points [5 (loop head)] can be bounded
+  (in problem)
+Discovered that points [100 (loop head)] can be bounded
+  (in problem)
+Discovered that points [114 (loop head)] can be bounded
+  (in problem)
+Discovered that points [124 (loop head)] can be bounded
+  (in problem)
+Discovered that points [144 (loop head)] can be bounded
+  (in problem)
+Discovered that points [156 (loop head)] can be bounded
+  (in problem)
+Discovered that points [169 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (45, ('Number', (0, 1))), (ProofNode ('Restr', (34, ('Number', (0, 1))), (ProofNode ('Restr', (193, ('Number', (0, 1))), (ProofNode ('Restr', (24, ('Number', (0, 1))), (ProofNode ('Restr', (16, ('Number', (0, 1))), (ProofNode ('Restr', (5, ('Number', (0, 1))), (ProofNode ('Restr', (100, ('Number', (0, 1))), (ProofNode ('Restr', (114, ('Number', (0, 1))), (ProofNode ('Restr', (124, ('Number', (0, 1))), (ProofNode ('Restr', (144, ('Number', (0, 1))), (ProofNode ('Restr', (156, ('Number', (0, 1))), (ProofNode ('Restr', (169, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),)),)),)),)),)),)),)),)),)),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 45 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 34 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  Prove the number of visits to 193 is in {0 ..< 1}
+    .. proven.
+Step 4: 
+  Prove the number of visits to 24 is in {0 ..< 1}
+    .. proven.
+Step 5: 
+  Prove the number of visits to 16 is in {0 ..< 1}
+    .. proven.
+Step 6: 
+  Prove the number of visits to 5 is in {0 ..< 1}
+    .. proven.
+Step 7: 
+  Prove the number of visits to 100 is in {0 ..< 1}
+    .. proven.
+Step 8: 
+  Prove the number of visits to 114 is in {0 ..< 1}
+    .. proven.
+Step 9: 
+  Prove the number of visits to 124 is in {0 ..< 1}
+    .. proven.
+Step 10: 
+  Prove the number of visits to 144 is in {0 ..< 1}
+    .. proven.
+Step 11: 
+  Prove the number of visits to 156 is in {0 ..< 1}
+    .. proven.
+Step 12: 
+  Prove the number of visits to 169 is in {0 ..< 1}
+    .. proven.
+Step 13: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (dist_init (ASM) <= Kernel_C.dist_init (C)), time taken: 48.17s
+Testing Function pair Pairing (Arch_maskCapRights (ASM) <= Kernel_C.Arch_maskCapRights (C))
+  (function pairing 270 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (Arch_maskCapRights (ASM) <= Kernel_C.Arch_maskCapRights (C)), time taken: 2.80s
+Testing Function pair Pairing (handleInterrupt (ASM) <= Kernel_C.handleInterrupt (C))
+  (function pairing 271 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (handleInterrupt (ASM) <= Kernel_C.handleInterrupt (C)), time taken: 3.34s
+Testing Function pair Pairing (flushSpace (ASM) <= Kernel_C.flushSpace (C))
+  (function pairing 272 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (flushSpace (ASM) <= Kernel_C.flushSpace (C)), time taken: 1.95s
+Testing Function pair Pairing (invokeTCB_ThreadControl (ASM) <= Kernel_C.invokeTCB_ThreadControl (C))
+  (function pairing 273 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (invokeTCB_ThreadControl (ASM) <= Kernel_C.invokeTCB_ThreadControl (C)), time taken: 3.68s
+Testing Function pair Pairing (invokeTCB_Resume (ASM) <= Kernel_C.invokeTCB_Resume (C))
+  (function pairing 274 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (invokeTCB_Resume (ASM) <= Kernel_C.invokeTCB_Resume (C)), time taken: 1.72s
+Testing Function pair Pairing (cleanCaches_PoU (ASM) <= Kernel_C.cleanCaches_PoU (C))
+  (function pairing 275 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (cleanCaches_PoU (ASM) <= Kernel_C.cleanCaches_PoU (C)), time taken: 1.82s
+Testing Function pair Pairing (arch_clean_invalidate_L1_caches (ASM) <= Kernel_C.arch_clean_invalidate_L1_caches (C))
+  (function pairing 276 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (arch_clean_invalidate_L1_caches (ASM) <= Kernel_C.arch_clean_invalidate_L1_caches (C)), time taken: 1.90s
+Testing Function pair Pairing (cancelAllSignals (ASM) <= Kernel_C.cancelAllSignals (C))
+  (function pairing 277 of 287)
+ .. built problem, finding proof
+Discovered that points [4 (loop head)] can be bounded
+  (in problem)
+Discovered that points [61 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (4, ('Number', (0, 1))), (ProofNode ('Restr', (61, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 4 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 61 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (cancelAllSignals (ASM) <= Kernel_C.cancelAllSignals (C)), time taken: 4.41s
+Testing Function pair Pairing (handleInterruptEntry (ASM) <= Kernel_C.handleInterruptEntry (C))
+  (function pairing 278 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (handleInterruptEntry (ASM) <= Kernel_C.handleInterruptEntry (C)), time taken: 1.94s
+Testing Function pair Pairing (fpsimd_HWCapTest (ASM) <= Kernel_C.fpsimd_HWCapTest (C))
+  (function pairing 279 of 287)
+Aborting Problem (Pairing (fpsimd_HWCapTest (ASM) <= Kernel_C.fpsimd_HWCapTest (C))): underspecified asm_instruction'.word_0xeef00a10__\nmov_%0,_r0________\n
+Result ProblemAbort for pair Pairing (fpsimd_HWCapTest (ASM) <= Kernel_C.fpsimd_HWCapTest (C)), time taken: 0.00s
+Testing Function pair Pairing (getObjectSize (ASM) <= Kernel_C.getObjectSize (C))
+  (function pairing 280 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (getObjectSize (ASM) <= Kernel_C.getObjectSize (C)), time taken: 2.26s
+Testing Function pair Pairing (create_idle_thread (ASM) <= Kernel_C.create_idle_thread (C))
+  (function pairing 281 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (create_idle_thread (ASM) <= Kernel_C.create_idle_thread (C)), time taken: 1.67s
+Testing Function pair Pairing (doFaultTransfer (ASM) <= Kernel_C.doFaultTransfer (C))
+  (function pairing 282 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (doFaultTransfer (ASM) <= Kernel_C.doFaultTransfer (C)), time taken: 1.74s
+Testing Function pair Pairing (cteDelete (ASM) <= Kernel_C.cteDelete (C))
+  (function pairing 283 of 287)
+ .. built problem, finding proof
+Discovered that points [269 (loop head)] can be bounded
+  (in problem)
+Discovered that points [59 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (269, ('Number', (0, 1))), (ProofNode ('Restr', (59, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 269 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 59 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (cteDelete (ASM) <= Kernel_C.cteDelete (C)), time taken: 73.23s
+Testing Function pair Pairing (createNewObjects (ASM) <= Kernel_C.createNewObjects (C))
+  (function pairing 284 of 287)
+ .. built problem, finding proof
+Discovered that points [3 (loop head)] can be bounded
+  (in problem)
+Discovered that points [65 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (3, ('Number', (0, 1))), (ProofNode ('Restr', (65, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 3 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 65 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (createNewObjects (ASM) <= Kernel_C.createNewObjects (C)), time taken: 4.27s
+Testing Function pair Pairing (provide_cap (ASM) <= Kernel_C.provide_cap (C))
+  (function pairing 285 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (provide_cap (ASM) <= Kernel_C.provide_cap (C)), time taken: 2.51s
+Testing Function pair Pairing (doFlush (ASM) <= Kernel_C.doFlush (C))
+  (function pairing 286 of 287)
+ .. built problem, finding proof
+ProofNode ('Leaf', None, ())
+ .. proof found.
+Step 1: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (doFlush (ASM) <= Kernel_C.doFlush (C)), time taken: 2.80s
+Testing Function pair Pairing (cteRevoke (ASM) <= Kernel_C.cteRevoke (C))
+  (function pairing 287 of 287)
+ .. built problem, finding proof
+Discovered that points [4 (loop head)] can be bounded
+  (in problem)
+Discovered that points [75 (loop head)] can be bounded
+  (in problem)
+ProofNode ('Restr', (4, ('Number', (0, 1))), (ProofNode ('Restr', (75, ('Number', (0, 1))), (ProofNode ('Leaf', None, ()),)),))
+ .. proof found.
+Step 1: 
+  Prove the number of visits to 4 is in {0 ..< 1}
+    .. proven.
+Step 2: 
+  Prove the number of visits to 75 is in {0 ..< 1}
+    .. proven.
+Step 3: 
+  prove all verification conditions
+    .. proven.
+Refinement proven.
+Result True for pair Pairing (cteRevoke (ASM) <= Kernel_C.cteRevoke (C)), time taken: 4.50s
+Results: [('Pairing (unbindNotification (ASM) <= Kernel_C.unbindNotification (C))', 'True'), ('Pairing (armv_contextSwitch_HWASID (ASM) <= Kernel_C.armv_contextSwitch_HWASID (C))', 'True'), ('Pairing (cancelIPC (ASM) <= Kernel_C.cancelIPC (C))', 'True'), ('Pairing (doNormalTransfer (ASM) <= Kernel_C.doNormalTransfer (C))', 'True'), ('Pairing (performInvocation_Endpoint (ASM) <= Kernel_C.performInvocation_Endpoint (C))', 'True'), ('Pairing (setVMRoot (ASM) <= Kernel_C.setVMRoot (C))', 'True'), ('Pairing (Arch_configureIdleThread (ASM) <= Kernel_C.Arch_configureIdleThread (C))', 'True'), ('Pairing (performInvocation_Reply (ASM) <= Kernel_C.performInvocation_Reply (C))', 'True'), ('Pairing (capSwapForDelete (ASM) <= Kernel_C.capSwapForDelete (C))', 'True'), ('Pairing (create_it_address_space (ASM) <= Kernel_C.create_it_address_space (C))', 'True'), ('Pairing (write_it_asid_pool (ASM) <= Kernel_C.write_it_asid_pool (C))', 'True'), ('Pairing (sendIPC (ASM) <= Kernel_C.sendIPC (C))', 'True'), ('Pairing (timerTick (ASM) <= Kernel_C.timerTick (C))', 'True'), ('Pairing (decodeUnbindNotification (ASM) <= Kernel_C.decodeUnbindNotification (C))', 'True'), ('Pairing (invokeIRQHandler_ClearIRQHandler (ASM) <= Kernel_C.invokeIRQHandler_ClearIRQHandler (C))', 'True'), ('Pairing (decodeIRQControlInvocation (ASM) <= Kernel_C.decodeIRQControlInvocation (C))', 'True'), ('Pairing (invokeTCB_ReadRegisters (ASM) <= Kernel_C.invokeTCB_ReadRegisters (C))', 'True'), ('Pairing (get_p_reg_kernel_img_boot (ASM) <= Kernel_C.get_p_reg_kernel_img_boot (C))', 'True'), ('Pairing (isFinalCapability (ASM) <= Kernel_C.isFinalCapability (C))', 'True'), ('Pairing (cteSwap (ASM) <= Kernel_C.cteSwap (C))', 'True'), ('Pairing (handleReply (ASM) <= Kernel_C.handleReply (C))', 'True'), ('Pairing (doNBRecvFailedTransfer (ASM) <= Kernel_C.doNBRecvFailedTransfer (C))', 'True'), ('Pairing (emptySlot (ASM) <= Kernel_C.emptySlot (C))', 'True'), ('Pairing (completeSignal (ASM) <= Kernel_C.completeSignal (C))', 'True'), ('Pairing (setMRs_fault (ASM) <= Kernel_C.setMRs_fault (C))', 'True'), ('Pairing (merge_regions (ASM) <= Kernel_C.merge_regions (C))', 'ProblemAbort'), ('Pairing (copyGlobalMappings (ASM) <= Kernel_C.copyGlobalMappings (C))', 'True'), ('Pairing (cpu_initLocalIRQController (ASM) <= Kernel_C.cpu_initLocalIRQController (C))', 'True'), ('Pairing (memcpy (ASM) <= Kernel_C.memcpy (C))', 'True'), ('Pairing (create_it_asid_pool (ASM) <= Kernel_C.create_it_asid_pool (C))', 'True'), ('Pairing (create_untypeds (ASM) <= Kernel_C.create_untypeds (C))', 'True'), ('Pairing (isHighestPrio (ASM) <= Kernel_C.isHighestPrio (C))', 'True'), ('Pairing (idle_thread (ASM) <= Kernel_C.idle_thread (C))', 'True'), ('Pairing (restart (ASM) <= Kernel_C.restart (C))', 'True'), ('Pairing (maskVMRights (ASM) <= Kernel_C.maskVMRights (C))', 'True'), ('Pairing (invalidateCacheRange_I (ASM) <= Kernel_C.invalidateCacheRange_I (C))', 'True'), ('Pairing (tcbEPAppend (ASM) <= Kernel_C.tcbEPAppend (C))', 'True'), ('Pairing (handleVMFault (ASM) <= Kernel_C.handleVMFault (C))', 'True'), ('Pairing (handleSyscall (ASM) <= Kernel_C.handleSyscall (C))', 'True'), ('Pairing (deleteASID (ASM) <= Kernel_C.deleteASID (C))', 'True'), ('Pairing (cleanCacheRange_RAM (ASM) <= Kernel_C.cleanCacheRange_RAM (C))', 'True'), ('Pairing (invokeIRQHandler_SetIRQHandler (ASM) <= Kernel_C.invokeIRQHandler_SetIRQHandler (C))', 'True'), ('Pairing (setMRs_syscall_error (ASM) <= Kernel_C.setMRs_syscall_error (C))', 'True'), ('Pairing (getReceiveSlots (ASM) <= Kernel_C.getReceiveSlots (C))', 'True'), ('Pairing (arch_get_n_paging (ASM) <= Kernel_C.arch_get_n_paging (C))', 'True'), ('Pairing (setIRQState (ASM) <= Kernel_C.setIRQState (C))', 'True'), ('Pairing (initIRQController (ASM) <= Kernel_C.initIRQController (C))', 'True'), ('Pairing (lockTLBEntry (ASM) <= Kernel_C.lockTLBEntry (C))', 'True'), ('Pairing (Arch_sameRegionAs (ASM) <= Kernel_C.Arch_sameRegionAs (C))', 'True'), ('Pairing (lookupCapAndSlot (ASM) <= Kernel_C.lookupCapAndSlot (C))', 'True'), ('Pairing (cap_get_capSizeBits (ASM) <= Kernel_C.cap_get_capSizeBits (C))', 'True'), ('Pairing (receiveIPC (ASM) <= Kernel_C.receiveIPC (C))', 'True'), ('Pairing (slotCapLongRunningDelete (ASM) <= Kernel_C.slotCapLongRunningDelete (C))', 'True'), ("Pairing (l_impl'wfi (ASM) <= r_impl'wfi (C))", 'None'), ('Pairing (lookupPDSlot (ASM) <= Kernel_C.lookupPDSlot (C))', 'True'), ('Pairing (create_domain_cap (ASM) <= Kernel_C.create_domain_cap (C))', 'True'), ('Pairing (rescheduleRequired (ASM) <= Kernel_C.rescheduleRequired (C))', 'True'), ('Pairing (create_root_cnode (ASM) <= Kernel_C.create_root_cnode (C))', 'True'), ('Pairing (finaliseCap (ASM) <= Kernel_C.finaliseCap (C))', 'True'), ('Pairing (clean_D_PoU (ASM) <= Kernel_C.clean_D_PoU (C))', 'ProblemAbort'), ('Pairing (loadHWASID (ASM) <= Kernel_C.loadHWASID (C))', 'True'), ('Pairing (suspend (ASM) <= Kernel_C.suspend (C))', 'True'), ('Pairing (maskCapRights (ASM) <= Kernel_C.maskCapRights (C))', 'True'), ('Pairing (scheduleChooseNewThread (ASM) <= Kernel_C.scheduleChooseNewThread (C))', 'True'), ('Pairing (c_handle_instruction_fault (ASM) <= Kernel_C.c_handle_instruction_fault (C))', 'ProblemAbort'), ('Pairing (decodeSetPriority (ASM) <= Kernel_C.decodeSetPriority (C))', 'True'), ('Pairing (Arch_getObjectSize (ASM) <= Kernel_C.Arch_getObjectSize (C))', 'True'), ("Pairing (l_impl'dsb (ASM) <= r_impl'dsb (C))", 'None'), ('Pairing (checkValidIPCBuffer (ASM) <= Kernel_C.checkValidIPCBuffer (C))', 'True'), ('Pairing (bi_finalise (ASM) <= Kernel_C.bi_finalise (C))', 'True'), ('Pairing (create_frames_of_region (ASM) <= Kernel_C.create_frames_of_region (C))', 'True'), ('Pairing (strncmp (ASM) <= Kernel_C.strncmp (C))', 'True'), ('Pairing (Arch_decodeTransfer (ASM) <= Kernel_C.Arch_decodeTransfer (C))', 'True'), ('Pairing (decodeSetSchedParams (ASM) <= Kernel_C.decodeSetSchedParams (C))', 'True'), ('Pairing (performInvocation_Notification (ASM) <= Kernel_C.performInvocation_Notification (C))', 'True'), ('Pairing (invokeCNodeSaveCaller (ASM) <= Kernel_C.invokeCNodeSaveCaller (C))', 'True'), ('Pairing (tcbSchedDequeue (ASM) <= Kernel_C.tcbSchedDequeue (C))', 'True'), ('Pairing (isMDBParentOf (ASM) <= Kernel_C.isMDBParentOf (C))', 'True'), ('Pairing (lookupCap (ASM) <= Kernel_C.lookupCap (C))', 'True'), ('Pairing (arch_clean_invalidate_caches (ASM) <= Kernel_C.arch_clean_invalidate_caches (C))', 'True'), ('Pairing (invokeTCB_Suspend (ASM) <= Kernel_C.invokeTCB_Suspend (C))', 'True'), ('Pairing (setDomain (ASM) <= Kernel_C.setDomain (C))', 'True'), ('Pairing (invalidateTLBByASID (ASM) <= Kernel_C.invalidateTLBByASID (C))', 'True'), ('Pairing (setupReplyMaster (ASM) <= Kernel_C.setupReplyMaster (C))', 'True'), ('Pairing (c_handle_fastpath_call (ASM) <= Kernel_C.c_handle_fastpath_call (C))', 'None'), ('Pairing (decodeWriteRegisters (ASM) <= Kernel_C.decodeWriteRegisters (C))', 'True'), ('Pairing (invokeCNodeRevoke (ASM) <= Kernel_C.invokeCNodeRevoke (C))', 'True'), ('Pairing (tcbSchedAppend (ASM) <= Kernel_C.tcbSchedAppend (C))', 'True'), ('Pairing (write_slot (ASM) <= Kernel_C.write_slot (C))', 'True'), ('Pairing (c_handle_undefined_instruction (ASM) <= Kernel_C.c_handle_undefined_instruction (C))', 'ProblemAbort'), ('Pairing (cteDeleteOne (ASM) <= Kernel_C.cteDeleteOne (C))', 'True'), ('Pairing (Arch_performTransfer (ASM) <= Kernel_C.Arch_performTransfer (C))', 'True'), ('Pairing (Arch_decodeIRQControlInvocation (ASM) <= Kernel_C.Arch_decodeIRQControlInvocation (C))', 'True'), ("Pairing (l_impl'dmb (ASM) <= r_impl'dmb (C))", 'None'), ('Pairing (doIPCTransfer (ASM) <= Kernel_C.doIPCTransfer (C))', 'True'), ('Pairing (replyFromKernel_success_empty (ASM) <= Kernel_C.replyFromKernel_success_empty (C))', 'True'), ('Pairing (deriveCap (ASM) <= Kernel_C.deriveCap (C))', 'True'), ('Pairing (setupCallerCap (ASM) <= Kernel_C.setupCallerCap (C))', 'True'), ('Pairing (Arch_postModifyRegisters (ASM) <= Kernel_C.Arch_postModifyRegisters (C))', 'True'), ('Pairing (plat_cleanCache (ASM) <= Kernel_C.plat_cleanCache (C))', 'True'), ('Pairing (lookupTargetSlot (ASM) <= Kernel_C.lookupTargetSlot (C))', 'True'), ('Pairing (ensureEmptySlot (ASM) <= Kernel_C.ensureEmptySlot (C))', 'True'), ('Pairing (flushTable (ASM) <= Kernel_C.flushTable (C))', 'True'), ('Pairing (cpu_iface_init (ASM) <= Kernel_C.cpu_iface_init (C))', 'True'), ('Pairing (decodeTCBInvocation (ASM) <= Kernel_C.decodeTCBInvocation (C))', 'True'), ("Pairing (l_impl'mcr (ASM) <= r_impl'mcr (C))", 'None'), ('Pairing (resolveAddressBits (ASM) <= Kernel_C.resolveAddressBits (C))', 'ProblemAbort'), ('Pairing (preemptionPoint (ASM) <= Kernel_C.preemptionPoint (C))', 'True'), ('Pairing (decodeBindNotification (ASM) <= Kernel_C.decodeBindNotification (C))', 'True'), ('Pairing (decodeInvocation (ASM) <= Kernel_C.decodeInvocation (C))', 'True'), ('Pairing (activate_kernel_vspace (ASM) <= Kernel_C.activate_kernel_vspace (C))', 'True'), ('Pairing (Arch_activateIdleThread (ASM) <= Kernel_C.Arch_activateIdleThread (C))', 'True'), ('Pairing (cap_get_capIsPhysical (ASM) <= Kernel_C.cap_get_capIsPhysical (C))', 'True'), ('Pairing (schedule (ASM) <= Kernel_C.schedule (C))', 'True'), ('Pairing (invokeTCB_CopyRegisters (ASM) <= Kernel_C.invokeTCB_CopyRegisters (C))', 'True'), ('Pairing (create_unmapped_it_frame_cap (ASM) <= Kernel_C.create_unmapped_it_frame_cap (C))', 'True'), ('Pairing (decodeCNodeInvocation (ASM) <= Kernel_C.decodeCNodeInvocation (C))', 'True'), ('Pairing (findPDForASID (ASM) <= Kernel_C.findPDForASID (C))', 'True'), ('Pairing (cteInsert (ASM) <= Kernel_C.cteInsert (C))', 'True'), ('Pairing (switchToIdleThread (ASM) <= Kernel_C.switchToIdleThread (C))', 'True'), ('Pairing (decodeUntypedInvocation (ASM) <= Kernel_C.decodeUntypedInvocation (C))', 'True'), ('Pairing (lookupIPCBuffer (ASM) <= Kernel_C.lookupIPCBuffer (C))', 'True'), ('Pairing (map_kernel_devices (ASM) <= Kernel_C.map_kernel_devices (C))', 'True'), ('Pairing (initL2Cache (ASM) <= Kernel_C.initL2Cache (C))', 'True'), ('Pairing (sendSignal (ASM) <= Kernel_C.sendSignal (C))', 'True'), ('Pairing (alloc_rootserver_obj (ASM) <= Kernel_C.alloc_rootserver_obj (C))', 'True'), ('Pairing (tcbEPDequeue (ASM) <= Kernel_C.tcbEPDequeue (C))', 'True'), ('Pairing (unmapPage (ASM) <= Kernel_C.unmapPage (C))', 'True'), ('Pairing (cleanInvalidateL1Caches (ASM) <= Kernel_C.cleanInvalidateL1Caches (C))', 'True'), ('Pairing (cancelAllIPC (ASM) <= Kernel_C.cancelAllIPC (C))', 'True'), ('Pairing (Arch_decodeInvocation (ASM) <= Kernel_C.Arch_decodeInvocation (C))', 'True'), ('Pairing (Arch_deriveCap (ASM) <= Kernel_C.Arch_deriveCap (C))', 'True'), ('Pairing (invokeCNodeInsert (ASM) <= Kernel_C.invokeCNodeInsert (C))', 'True'), ('Pairing (slowpath (ASM) <= Kernel_C.slowpath (C))', 'ProblemAbort'), ('Pairing (copyMRs (ASM) <= Kernel_C.copyMRs (C))', 'True'), ('Pairing (Arch_prepareThreadDelete (ASM) <= Kernel_C.Arch_prepareThreadDelete (C))', 'True'), ('Pairing (reserve_region (ASM) <= Kernel_C.reserve_region (C))', 'True'), ('Pairing (cap_get_capPtr (ASM) <= Kernel_C.cap_get_capPtr (C))', 'True'), ('Pairing (cleanInvalidateCacheRange_RAM (ASM) <= Kernel_C.cleanInvalidateCacheRange_RAM (C))', 'True'), ('Pairing (get_p_reg_kernel_img (ASM) <= Kernel_C.get_p_reg_kernel_img (C))', 'True'), ('Pairing (lookupPTSlot (ASM) <= Kernel_C.lookupPTSlot (C))', 'True'), ('Pairing (cleanInvalidate_D_PoC (ASM) <= Kernel_C.cleanInvalidate_D_PoC (C))', 'ProblemAbort'), ('Pairing (armv_init_user_access (ASM) <= Kernel_C.armv_init_user_access (C))', 'True'), ('Pairing (ensureNoChildren (ASM) <= Kernel_C.ensureNoChildren (C))', 'True'), ('Pairing (cleanInvalidate_L1D (ASM) <= Kernel_C.cleanInvalidate_L1D (C))', 'ProblemAbort'), ('Pairing (APFromVMRights (ASM) <= Kernel_C.APFromVMRights (C))', 'True'), ('Pairing (handleInvocation (ASM) <= Kernel_C.handleInvocation (C))', 'True'), ('Pairing (updateCapData (ASM) <= Kernel_C.updateCapData (C))', 'True'), ('Pairing (findFreeHWASID (ASM) <= Kernel_C.findFreeHWASID (C))', 'True'), ('Pairing (Arch_finaliseCap (ASM) <= Kernel_C.Arch_finaliseCap (C))', 'True'), ('Pairing (map_kernel_window (ASM) <= Kernel_C.map_kernel_window (C))', 'ProblemAbort'), ('Pairing (Arch_updateCapData (ASM) <= Kernel_C.Arch_updateCapData (C))', 'True'), ('Pairing (restore_user_context (ASM) <= Kernel_C.restore_user_context (C))', 'None'), ('Pairing (lookupPivotSlot (ASM) <= Kernel_C.lookupPivotSlot (C))', 'True'), ('Pairing (handleUserLevelFault (ASM) <= Kernel_C.handleUserLevelFault (C))', 'True'), ('Pairing (setThreadState (ASM) <= Kernel_C.setThreadState (C))', 'True'), ('Pairing (halt (ASM) <= Kernel_C.halt (C))', 'None'), ('Pairing (handleFaultReply (ASM) <= Kernel_C.handleFaultReply (C))', 'True'), ('Pairing (sendFaultIPC (ASM) <= Kernel_C.sendFaultIPC (C))', 'True'), ('Pairing (sameRegionAs (ASM) <= Kernel_C.sameRegionAs (C))', 'True'), ('Pairing (create_initial_thread (ASM) <= Kernel_C.create_initial_thread (C))', 'True'), ('Pairing (memset (ASM) <= Kernel_C.memset (C))', 'True'), ('Pairing (handleRecv (ASM) <= Kernel_C.handleRecv (C))', 'True'), ('Pairing (handleUnknownSyscall (ASM) <= Kernel_C.handleUnknownSyscall (C))', 'True'), ('Pairing (loadCapTransfer (ASM) <= Kernel_C.loadCapTransfer (C))', 'True'), ("Pairing (l_impl'isb (ASM) <= r_impl'isb (C))", 'None'), ('Pairing (hasCancelSendRights (ASM) <= Kernel_C.hasCancelSendRights (C))', 'True'), ('Pairing (cancelBadgedSends (ASM) <= Kernel_C.cancelBadgedSends (C))', 'True'), ('Pairing (doReplyTransfer (ASM) <= Kernel_C.doReplyTransfer (C))', 'True'), ('Pairing (create_untypeds_for_region (ASM) <= Kernel_C.create_untypeds_for_region (C))', 'True'), ('Pairing (invokeCNodeMove (ASM) <= Kernel_C.invokeCNodeMove (C))', 'True'), ('Pairing (char_to_long (ASM) <= Kernel_C.char_to_long (C))', 'True'), ('Pairing (deletingIRQHandler (ASM) <= Kernel_C.deletingIRQHandler (C))', 'True'), ('Pairing (chooseThread (ASM) <= Kernel_C.chooseThread (C))', 'True'), ('Pairing (sameObjectAs (ASM) <= Kernel_C.sameObjectAs (C))', 'True'), ('Pairing (create_mapped_it_frame_cap (ASM) <= Kernel_C.create_mapped_it_frame_cap (C))', 'True'), ('Pairing (invokeTCB_NotificationControl (ASM) <= Kernel_C.invokeTCB_NotificationControl (C))', 'True'), ('Pairing (invokeUntyped_Retype (ASM) <= Kernel_C.invokeUntyped_Retype (C))', 'True'), ('Pairing (cancelSignal (ASM) <= Kernel_C.cancelSignal (C))', 'True'), ('Pairing (c_handle_fastpath_reply_recv (ASM) <= Kernel_C.c_handle_fastpath_reply_recv (C))', 'None'), ('Pairing (cleanCacheRange_PoU (ASM) <= Kernel_C.cleanCacheRange_PoU (C))', 'True'), ('Pairing (init_core_state (ASM) <= Kernel_C.init_core_state (C))', 'True'), ('Pairing (deleteCallerCap (ASM) <= Kernel_C.deleteCallerCap (C))', 'True'), ('Pairing (cteMove (ASM) <= Kernel_C.cteMove (C))', 'True'), ('Pairing (decodeIRQHandlerInvocation (ASM) <= Kernel_C.decodeIRQHandlerInvocation (C))', 'True'), ('Pairing (insert_region (ASM) <= Kernel_C.insert_region (C))', 'True'), ('Pairing (decodeARMMMUInvocation (ASM) <= Kernel_C.decodeARMMMUInvocation (C))', 'True'), ('Pairing (Arch_isFrameType (ASM) <= Kernel_C.Arch_isFrameType (C))', 'True'), ('Pairing (isCapRevocable (ASM) <= Kernel_C.isCapRevocable (C))', 'True'), ('Pairing (setNextPC (ASM) <= Kernel_C.setNextPC (C))', 'True'), ('Pairing (Arch_sameObjectAs (ASM) <= Kernel_C.Arch_sameObjectAs (C))', 'True'), ('Pairing (handleDoubleFault (ASM) <= Kernel_C.handleDoubleFault (C))', 'True'), ('Pairing (invalidateCacheRange_RAM (ASM) <= Kernel_C.invalidateCacheRange_RAM (C))', 'True'), ('Pairing (decodeTCBConfigure (ASM) <= Kernel_C.decodeTCBConfigure (C))', 'True'), ('Pairing (c_handle_interrupt (ASM) <= Kernel_C.c_handle_interrupt (C))', 'True'), ('Pairing (decodeDomainInvocation (ASM) <= Kernel_C.decodeDomainInvocation (C))', 'True'), ('Pairing (invokeCNodeDelete (ASM) <= Kernel_C.invokeCNodeDelete (C))', 'True'), ('Pairing (strlcpy (ASM) <= Kernel_C.strlcpy (C))', 'True'), ('Pairing (possibleSwitchTo (ASM) <= Kernel_C.possibleSwitchTo (C))', 'True'), ('Pairing (handleFault (ASM) <= Kernel_C.handleFault (C))', 'True'), ('Pairing (invalidateASIDEntry (ASM) <= Kernel_C.invalidateASIDEntry (C))', 'True'), ('Pairing (decodeSetMCPriority (ASM) <= Kernel_C.decodeSetMCPriority (C))', 'True'), ('Pairing (arm_errata (ASM) <= Kernel_C.arm_errata (C))', 'True'), ('Pairing (setExtraBadge (ASM) <= Kernel_C.setExtraBadge (C))', 'True'), ('Pairing (getExtraCPtr (ASM) <= Kernel_C.getExtraCPtr (C))', 'True'), ('Pairing (init_freemem (ASM) <= Kernel_C.init_freemem (C))', 'True'), ('Pairing (replyFromKernel_error (ASM) <= Kernel_C.replyFromKernel_error (C))', 'True'), ('Pairing (Arch_handleFaultReply (ASM) <= Kernel_C.Arch_handleFaultReply (C))', 'True'), ('Pairing (str_to_long (ASM) <= Kernel_C.str_to_long (C))', 'True'), ('Pairing (getRestartPC (ASM) <= Kernel_C.getRestartPC (C))', 'True'), ('Pairing (calculate_extra_bi_size_bits (ASM) <= Kernel_C.calculate_extra_bi_size_bits (C))', 'True'), ('Pairing (invokeIRQControl (ASM) <= Kernel_C.invokeIRQControl (C))', 'True'), ('Pairing (Arch_switchToIdleThread (ASM) <= Kernel_C.Arch_switchToIdleThread (C))', 'True'), ('Pairing (setMCPriority (ASM) <= Kernel_C.setMCPriority (C))', 'True'), ('Pairing (flushPage (ASM) <= Kernel_C.flushPage (C))', 'True'), ('Pairing (setMRs_lookup_failure (ASM) <= Kernel_C.setMRs_lookup_failure (C))', 'True'), ('Pairing (create_bi_frame_cap (ASM) <= Kernel_C.create_bi_frame_cap (C))', 'True'), ('Pairing (populate_bi_frame (ASM) <= Kernel_C.populate_bi_frame (C))', 'True'), ('Pairing (invokeIRQHandler_AckIRQ (ASM) <= Kernel_C.invokeIRQHandler_AckIRQ (C))', 'True'), ('Pairing (initTimer (ASM) <= Kernel_C.initTimer (C))', 'True'), ('Pairing (pageTableMapped (ASM) <= Kernel_C.pageTableMapped (C))', 'True'), ('Pairing (lockTLBEntryCritical (ASM) <= Kernel_C.lockTLBEntryCritical (C))', 'None'), ('Pairing (decodeSetSpace (ASM) <= Kernel_C.decodeSetSpace (C))', 'True'), ('Pairing (setIRQTrigger (ASM) <= Kernel_C.setIRQTrigger (C))', 'True'), ('Pairing (Arch_setMRs_fault (ASM) <= Kernel_C.Arch_setMRs_fault (C))', 'True'), ('Pairing (lookupSourceSlot (ASM) <= Kernel_C.lookupSourceSlot (C))', 'True'), ('Pairing (lookupSlotForCNodeOp (ASM) <= Kernel_C.lookupSlotForCNodeOp (C))', 'True'), ('Pairing (maybe_alloc_extra_bi (ASM) <= Kernel_C.maybe_alloc_extra_bi (C))', 'True'), ('Pairing (create_ipcbuf_frame_cap (ASM) <= Kernel_C.create_ipcbuf_frame_cap (C))', 'True'), ("Pairing (l_impl'mrc (ASM) <= r_impl'mrc (C))", 'None'), ('Pairing (switchToThread (ASM) <= Kernel_C.switchToThread (C))', 'True'), ('Pairing (handleVMFaultEvent (ASM) <= Kernel_C.handleVMFaultEvent (C))', 'True'), ('Pairing (unmapPageTable (ASM) <= Kernel_C.unmapPageTable (C))', 'True'), ('Pairing (invokeTCB_WriteRegisters (ASM) <= Kernel_C.invokeTCB_WriteRegisters (C))', 'True'), ('Pairing (Arch_createObject (ASM) <= Kernel_C.Arch_createObject (C))', 'True'), ('Pairing (strnlen (ASM) <= Kernel_C.strnlen (C))', 'True'), ('Pairing (createObject (ASM) <= Kernel_C.createObject (C))', 'True'), ('Pairing (getHWASID (ASM) <= Kernel_C.getHWASID (C))', 'True'), ('Pairing (makeUserPDE (ASM) <= Kernel_C.makeUserPDE (C))', 'True'), ('Pairing (decodeReadRegisters (ASM) <= Kernel_C.decodeReadRegisters (C))', 'True'), ('Pairing (deleteASIDPool (ASM) <= Kernel_C.deleteASIDPool (C))', 'True'), ('Pairing (invokeCNodeCancelBadgedSends (ASM) <= Kernel_C.invokeCNodeCancelBadgedSends (C))', 'True'), ('Pairing (insertNewCap (ASM) <= Kernel_C.insertNewCap (C))', 'True'), ('Pairing (lookupExtraCaps (ASM) <= Kernel_C.lookupExtraCaps (C))', 'True'), ('Pairing (setPriority (ASM) <= Kernel_C.setPriority (C))', 'True'), ('Pairing (isIOSpaceFrameCap (ASM) <= Kernel_C.isIOSpaceFrameCap (C))', 'True'), ('Pairing (memzero (ASM) <= Kernel_C.memzero (C))', 'True'), ('Pairing (decodeCopyRegisters (ASM) <= Kernel_C.decodeCopyRegisters (C))', 'True'), ('Pairing (setVMRootForFlush (ASM) <= Kernel_C.setVMRootForFlush (C))', 'True'), ('Pairing (scheduleTCB (ASM) <= Kernel_C.scheduleTCB (C))', 'True'), ('Pairing (configureIdleThread (ASM) <= Kernel_C.configureIdleThread (C))', 'True'), ('Pairing (tcbSchedEnqueue (ASM) <= Kernel_C.tcbSchedEnqueue (C))', 'True'), ('Pairing (unbindMaybeNotification (ASM) <= Kernel_C.unbindMaybeNotification (C))', 'True'), ('Pairing (invokeCNodeRotate (ASM) <= Kernel_C.invokeCNodeRotate (C))', 'True'), ('Pairing (Arch_switchToThread (ASM) <= Kernel_C.Arch_switchToThread (C))', 'ProblemAbort'), ('Pairing (isValidVTableRoot (ASM) <= Kernel_C.isValidVTableRoot (C))', 'True'), ('Pairing (strlcat (ASM) <= Kernel_C.strlcat (C))', 'True'), ('Pairing (map_kernel_frame (ASM) <= Kernel_C.map_kernel_frame (C))', 'True'), ('Pairing (deletedIRQHandler (ASM) <= Kernel_C.deletedIRQHandler (C))', 'True'), ('Pairing (receiveSignal (ASM) <= Kernel_C.receiveSignal (C))', 'True'), ('Pairing (decodeSetIPCBuffer (ASM) <= Kernel_C.decodeSetIPCBuffer (C))', 'True'), ('Pairing (activateThread (ASM) <= Kernel_C.activateThread (C))', 'True'), ('Pairing (c_handle_data_fault (ASM) <= Kernel_C.c_handle_data_fault (C))', 'ProblemAbort'), ('Pairing (isIRQActive (ASM) <= Kernel_C.isIRQActive (C))', 'True'), ('Pairing (lookupSlot (ASM) <= Kernel_C.lookupSlot (C))', 'True'), ('Pairing (init_kernel (ASM) <= Kernel_C.init_kernel (C))', 'ProblemAbort'), ('Pairing (bindNotification (ASM) <= Kernel_C.bindNotification (C))', 'True'), ('Pairing (branchFlushRange (ASM) <= Kernel_C.branchFlushRange (C))', 'True'), ('Pairing (dist_init (ASM) <= Kernel_C.dist_init (C))', 'True'), ('Pairing (Arch_maskCapRights (ASM) <= Kernel_C.Arch_maskCapRights (C))', 'True'), ('Pairing (handleInterrupt (ASM) <= Kernel_C.handleInterrupt (C))', 'True'), ('Pairing (flushSpace (ASM) <= Kernel_C.flushSpace (C))', 'True'), ('Pairing (invokeTCB_ThreadControl (ASM) <= Kernel_C.invokeTCB_ThreadControl (C))', 'True'), ('Pairing (invokeTCB_Resume (ASM) <= Kernel_C.invokeTCB_Resume (C))', 'True'), ('Pairing (cleanCaches_PoU (ASM) <= Kernel_C.cleanCaches_PoU (C))', 'True'), ('Pairing (arch_clean_invalidate_L1_caches (ASM) <= Kernel_C.arch_clean_invalidate_L1_caches (C))', 'True'), ('Pairing (cancelAllSignals (ASM) <= Kernel_C.cancelAllSignals (C))', 'True'), ('Pairing (handleInterruptEntry (ASM) <= Kernel_C.handleInterruptEntry (C))', 'True'), ('Pairing (fpsimd_HWCapTest (ASM) <= Kernel_C.fpsimd_HWCapTest (C))', 'ProblemAbort'), ('Pairing (getObjectSize (ASM) <= Kernel_C.getObjectSize (C))', 'True'), ('Pairing (create_idle_thread (ASM) <= Kernel_C.create_idle_thread (C))', 'True'), ('Pairing (doFaultTransfer (ASM) <= Kernel_C.doFaultTransfer (C))', 'True'), ('Pairing (cteDelete (ASM) <= Kernel_C.cteDelete (C))', 'True'), ('Pairing (createNewObjects (ASM) <= Kernel_C.createNewObjects (C))', 'True'), ('Pairing (provide_cap (ASM) <= Kernel_C.provide_cap (C))', 'True'), ('Pairing (doFlush (ASM) <= Kernel_C.doFlush (C))', 'True'), ('Pairing (cteRevoke (ASM) <= Kernel_C.cteRevoke (C))', 'True')]
+Result summary:
+  - 263 proofs checked
+  - 24 proofs skipped
+  - 94.31% instructions covered
+  - largest skipped functions:
+      init_kernel (2.86%), resolveAddressBits (0.75%), map_kernel_window (0.43%)
+  - failures: []
