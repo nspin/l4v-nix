@@ -151,7 +151,6 @@ with self; {
   ### notes ###
 
   sonolarModelBug = callPackage ./notes/sonolar-model-bug {};
-  cvcVersions = callPackage ./notes/cvc-versions {};
 
   ### deps ###
 
@@ -220,7 +219,6 @@ with self; {
     graphRefine.coverage
     graphRefine.demo
     sonolarModelBug.evidence
-    # cvcVersions.evidence # broken since removal of old graph-refine
   ]));
 
   slower = writeText "slower" (toString ([
