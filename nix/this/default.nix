@@ -2,6 +2,7 @@
 , callPackage, newScope
 , pkgs, pkgsCross
 , writeText
+, linkFarm
 }:
 
 rec {
@@ -82,25 +83,24 @@ rec {
 
   named =
     let
-      topLevel = rec {
-        default = arm;
-
+      withOptLevel = optLevel: {
         arm = mk {
           arch = "ARM";
+          inherit optLevel;
         };
-
         riscv64 = mk {
           arch = "RISCV64";
+          inherit optLevel;
         };
       };
-    in
-      lib.fix (self: with self; topLevel // {
 
-        o2 = lib.flip lib.mapAttrs topLevel (_: scope: scope.overrideScope (self: super: {
-          scopeConfig = super.scopeConfig.override {
-            optLevel = "-O2";
-          };
-        }));
+      o1 = withOptLevel "-O1";
+      o2 = withOptLevel "-O2";
+    in
+      lib.fix (self: o1 // {
+        default = self.arm;
+
+        inherit o1 o2;
 
         byConfig = lib.flip lib.mapAttrs archs (_: arch:
           lib.flip lib.mapAttrs targetCCWrapperAttrs (_: targetCCWrapperAttr:
@@ -147,4 +147,27 @@ rec {
       scope.cachedWhenBVSupport
     ]
   )));
+
+  displayStatus =
+    let
+      mkConfigName = scope:
+        let
+          config = scope.scopeConfig;
+        in
+          "${config.arch}${config.optLevel}";
+      mkPreTargetDirEntry = scope: {
+        name = mkConfigName scope;
+        path = scope.graphRefine.everythingAtOnce.preTargetDir;
+      };
+      mkEverythingEntry = scope: {
+        name = mkConfigName scope;
+        path = scope.graphRefine.everythingAtOnce;
+      };
+    in
+      linkFarm "display-status" [
+        (mkEverythingEntry named.o1.arm)
+        (mkPreTargetDirEntry named.o2.arm)
+        (mkPreTargetDirEntry named.o1.riscv64)
+        (mkPreTargetDirEntry named.o2.riscv64)
+      ];
 }

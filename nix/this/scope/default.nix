@@ -128,16 +128,22 @@ with self; {
       ];
     };
 
-    easy = writeText "graph-refine-easy" (toString [
-      functions
-      coverage
-      demo
-    ]);
-
     all = graphRefineWith {
       name = "all";
       args = [
         "trace-to:report.txt" "save-proofs:proofs.txt" "all"
+      ];
+    };
+
+    # aggregate
+
+    everythingAtOnce = graphRefineWith {
+      name = "everything-at-once";
+      dontDecorateCommands = true;
+      argLists = [
+        [ "save:functions.txt" ]
+        [ "trace-to:coverage.txt" "coverage" ]
+        [ "trace-to:report.txt" "save-proofs:proofs.txt" "all" ]
       ];
     };
   };
@@ -221,7 +227,6 @@ with self; {
     graphRefine.functions
     graphRefine.coverage
     graphRefine.demo
-    graphRefine.all
     sonolarModelBug.evidence
     # cvcVersions.evidence # broken since removal of old graph-refine
   ]));
@@ -237,6 +242,7 @@ with self; {
     slower
   ] ++ lib.optionals scopeConfig.bvSupport [
     graphRefine.all
+    graphRefine.everythingAtOnce
   ]));
 
   all = writeText "all" (toString [

@@ -18,10 +18,13 @@
 , solverList ? graphRefineSolverLists.default
 , source ? graphRefineSource
 , args ? []
+, argLists ? [ args ]
+, dontDecorateCommands ? false
+, decorateCommand ? if dontDecorateCommands then lib.id else (command: "(time ${command}) 2>&1 | tee log.txt")
+, commands ? lib.flip lib.concatMapStrings argLists (argList: ''
+    ${decorateCommand "python ${source}/graph-refine.py . ${lib.concatStringsSep " " argList}"}
+  '')
 , keepSMTDumps ? false
-, commands ? ''
-    (time python ${source}/graph-refine.py . ${lib.concatStringsSep " " args}) 2>&1 | tee log.txt
-  ''
 }:
 
 let
