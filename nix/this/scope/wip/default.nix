@@ -232,6 +232,7 @@ in rec {
   )));
 
   keep = writeText "keep" (toString (lib.flatten [
+    this.displayStatus
     this.named.arm.all
     this.named.riscv64.l4vAll
     this.named.o2.arm.graphRefine.demo.preTargetDir
