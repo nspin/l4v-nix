@@ -63,13 +63,10 @@ in rec {
 
   debugSolverList =
     let
-      # chosen = "boolector";
       chosen = "bitwuzla";
       # chosen = "yices";
       scope = graphRefineSolverLists.overrideScope (self: super: {
         # executables = lib.flip lib.mapAttrs super.executables (lib.const (old: [ wrap "trace" ] ++ old));
-        # cvc4TLimit = "120";
-        # cvc5TLimit = "120";
         # executables = lib.flip lib.mapAttrs super.executables (k: v:
         #   (if k == chosen then [ wrap "trace" ] else []) ++ v
         # );
@@ -101,22 +98,19 @@ in rec {
     ];
   };
 
-  x = this.named.o2.arm.wip.d;
-
-  py2gdbScript = "${python2WithDebuggingSymbols}/share/gdb/libpython.py";
+  x = this.scopes.arm.legacy.o2.wip.d;
 
   sh = mkShell {
     nativeBuildInputs = [
       gdb
-      cntr
     ];
 
-    pgd = py2gdbScript;
+    lppy = "${python2WithDebuggingSymbols}/share/gdb/libpython.py";
 
     shellHook = ''
       d() {
         pid="$1"
-        sudo gdb -p "$pid" -x "$pgd"
+        sudo gdb -p "$pid" -x "$lppy"
       }
     '';
   };
@@ -230,10 +224,9 @@ in rec {
   ]));
 
   prime = writeText "prime" (toString (lib.flatten [
-    # seL4_12_0_0.graphRefine.all
-    # evidence
-    # hol4PR.after
-    # hol4PR.before
+    this.scopes.riscv64.mcs.o1.cProofs
+    this.scopes.armHyp.legacy.o1.cProofs
+    this.scopes.aarch64.legacy.o1.cProofs
   ]));
 
 }
