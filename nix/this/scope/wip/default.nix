@@ -211,16 +211,19 @@ in rec {
       after = f "2446310e6cffcf46249b7706d5ceffc0a1c49b33";
     };
 
+  kernels = writeText "kernels" (toString (lib.flatten [
+    (lib.forEach (map this.mkScopeFomNamedConfig this.namedConfigs) (scope: [
+    ] ++ lib.optionals (!(scope.scopeConfig.arch == "X64" && scope.scopeConfig.optLevel == "-O1")) [
+      scope.kernel
+    ]))
+  ]));
+
   keep = writeText "keep" (toString (lib.flatten [
     this.displayStatus
     this.scopes.riscv64.legacy.o1.l4vAll
     this.scopes.arm.legacy.o1.all
 
-    (lib.forEach (map this.mkScopeFomNamedConfig this.namedConfigs) (scope: [
-      # empty
-    ] ++ lib.optionals (!(scope.scopeConfig.arch == "X64" && scope.scopeConfig.optLevel == "-O1")) [
-      scope.kernel
-    ]))
+    kernels
   ]));
 
   prime = writeText "prime" (toString (lib.flatten [
@@ -235,6 +238,24 @@ in rec {
     # ] ++ lib.optionals (!(scope.scopeConfig.arch == "X64" && scope.scopeConfig.optLevel == "-O1")) [
     #   scope.kernel
     # ]))
+  ]));
+
+  a = writeText "x" (toString (lib.flatten [
+    (lib.forEach (map this.mkScopeFomNamedConfig this.namedConfigs) (scope: [
+      scope.l4vAll
+    ]))
+  ]));
+
+  b = writeText "x" (toString (lib.flatten [
+    (lib.forEach (map this.mkScopeFomNamedConfig this.namedConfigs) (scope: [
+    ] ++ lib.optionals scope.scopeConfig.bvSupport [
+      scope.graphRefine.everythingAtOnce.preTargetDir
+    ]))
+  ]));
+
+  c = writeText "c" (toString (lib.flatten [
+    this.scopes.riscv64.mcs.o1.cProofs
+    this.scopes.arm.mcs.o1.cProofs
   ]));
 
 }
