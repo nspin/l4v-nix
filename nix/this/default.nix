@@ -20,8 +20,8 @@ rec {
     , targetCC ? targetCCWrapper.cc
     , targetBintools ? targetCCWrapper.bintools.bintools
     , targetPrefix ? targetCCWrapper.targetPrefix
-    , seL4Source ? lib.cleanSource ../../projects/seL4
-    , l4vSource ? lib.cleanSource ../../projects/l4v
+    , seL4Source ? if mcs then mcsSources.seL4 else lib.cleanSource ../../projects/seL4
+    , l4vSource ? if mcs then mcsSources.l4v else lib.cleanSource ../../projects/l4v
     , hol4Source ? lib.cleanSource ../../projects/HOL4
     , graphRefineSource ? lib.cleanSource ../../projects/graph-refine
     , isabelleVersion ? "2023"
@@ -42,6 +42,19 @@ rec {
         bvSupport
       ;
     };
+
+  # HACK
+  mcsSources = {
+    seL4 = builtins.fetchGit {
+      url = "https://github.com/seL4/seL4";
+      rev = "b7ad2e0c669b5648ff32a9bb0dbc56337ec1ac77";
+    };
+    l4v = builtins.fetchGit {
+      url = "https://github.com/seL4/l4v";
+      rev = "9b4c43614741c1a55f1461273e382a803e7efcb6";
+      allRefs = true;
+    };
+  };
 
   archs = {
     arm = "ARM";
