@@ -22,6 +22,7 @@ rec {
     , targetPrefix ? targetCCWrapper.targetPrefix
     , seL4Source ? if mcs then mcsSources.seL4 else lib.cleanSource ../../projects/seL4
     , l4vSource ? if mcs then mcsSources.l4v else lib.cleanSource ../../projects/l4v
+    , isabelleSource ? lib.cleanSource ../../projects/isabelle
     , hol4Source ? lib.cleanSource ../../projects/HOL4
     , graphRefineSource ? lib.cleanSource ../../projects/graph-refine
     , isabelleVersion ? "2023"
