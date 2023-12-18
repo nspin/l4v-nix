@@ -23,6 +23,8 @@
 , graphRefineSolverLists
 , python2WithDebuggingSymbols
 
+, isabelleForL4vCommon
+
 , this
 , overrideScope
 }:
@@ -55,6 +57,8 @@ in rec {
       ]
     ))
   ]));
+
+  i = isabelleForL4vCommon;
 
   a = writeText "a" (toString (lib.flatten [
     (lib.forEach (map this.mkScopeFomNamedConfig this.namedConfigs) (scope:
