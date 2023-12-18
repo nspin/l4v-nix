@@ -34,7 +34,7 @@ $(display)/status: | $(display)
 	rm -rf $$dst && \
 	cp -rL --no-preserve=owner,mode $$src $$dst
 
-show-coverage-diff:
+show-coverage-diff: $(display)/status
 	diff \
 		<(grep -e '^Skipping' -e '^Aborting' docker-archaeology/release-12.0.0/target-sample/target/ARM-O1/coverage.txt | sort) \
 		<(grep -e '^Skipping' -e '^Aborting' $(display)/status/ARM-O1/coverage.txt | sort) \
