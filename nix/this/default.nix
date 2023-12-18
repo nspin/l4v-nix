@@ -164,8 +164,9 @@ rec {
     (toString
       (lib.flatten
         (lib.forEach (map mkScopeFomNamedConfig namedConfigs) (scope: [
+        ] ++ lib.optionals (scope.scopeConfig.arch != "X64" && scope.scopeConfig.features == "") [
           scope.l4vAll
-        ] ++ lib.optionals scope.scopeConfig.bvSupport [
+        ] ++ lib.optionals (scope.scopeConfig.bvSupport && scope.scopeConfig.features == "") [
           scope.graphRefine.everythingAtOnce.preTargetDir
         ] ++ lib.optionals (!(scope.scopeConfig.arch == "X64" && scope.scopeConfig.optLevel == "-O1")) [
           scope.kernel
