@@ -20,31 +20,60 @@ in
 rec {
   componentExtension = self: super:
     let
+      openjdk = openjdk17;
       jdkAttr = "jdk-17.0.7";
-      jdkName = "jdk-17";
+      jdkName = openjdk.name;
+      vscodiumAttr = "vscodium-1.70.1";
+      vscodiumName = vscodium.name;
+
+      origVSCodiumComponent = super."${vscodiumAttr}".overrideAttrs (attrs: {
+        dontAutoPatchelf = true;
+      });
+
+      getPatch = name: runCommand "${name}.patch" {} ''
+        gunzip < ${origVSCodiumComponent}/patches/${name}.patch.gz > $out
+      '';
+
+      patchedVSCodium = vscodium.overrideAttrs (attrs: {
+        patches = (attrs.patches or []) ++ [
+          (getPatch "01-vscodium")
+          (getPatch "02-isabelle_sources")
+          (getPatch "03-isabelle_resources")
+        ];
+      });
+
       naprocheAttrs = lib.flip lib.mapAttrs (lib.filterAttrs (k: v: lib.hasPrefix "naproche" k) super) (k: v: v.overrideAttrs (attrs: {
         buildInputs = (attrs.buildInputs or []) ++ [
           gmp
         ];
       }));
+
     in naprocheAttrs // {
+      "kodkodi-1.5.7" = super."kodkodi-1.5.7".overrideAttrs (attrs: {
+        buildInputs = (attrs.buildInputs or []) ++ [
+          "${openjdk}/lib/openjdk"
+        ];
+      });
       "${jdkAttr}" = mkLocalComponent {
         name = jdkName;
         settings = ''
           ISABELLE_JAVA_PLATFORM="$ISABELLE_PLATFORM64"
-          ISABELLE_JDK_HOME=${openjdk17}
+          ISABELLE_JDK_HOME=${openjdk}
         '';
       };
-      "kodkodi-1.5.7" = super."kodkodi-1.5.7".overrideAttrs (attrs: {
-        buildInputs = (attrs.buildInputs or []) ++ [
-          "${openjdk17}/lib/openjdk"
-        ];
-      });
+      "${vscodiumAttr}" = mkLocalComponent {
+        name = vscodiumName;
+        settings = ''
+          ISABELLE_VSCODIUM_HOME="${patchedVSCodium}/lib/vscode"
+          ISABELLE_VSCODIUM_ELECTRON="$ISABELLE_VSCODIUM_HOME/electron"
+          ISABELLE_VSCODIUM_RESOURCES="$ISABELLE_VSCODIUM_HOME/resources"
+        '';
+      };
       # "vscodium-1.70.1" = emptyDirectory;
-      "vscodium-1.70.1" = super."vscodium-1.70.1".overrideAttrs (attrs: {
-        # buildInputs = (attrs.buildInputs or []) ++ vscodium.buildInputs;
-        dontAutoPatchelf = false;
-      });
+      # "vscodium-1.70.1" = super."vscodium-1.70.1".overrideAttrs (attrs: {
+      #   # buildInputs = (attrs.buildInputs or []) ++ vscodium.buildInputs;
+      #   dontAutoPatchelf = false;
+      # });
     };
 
   parseHashesFile = contents:
