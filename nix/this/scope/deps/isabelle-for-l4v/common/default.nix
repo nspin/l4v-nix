@@ -1,8 +1,13 @@
 { lib
 , stdenv, hostPlatform
 , runCommand, writeText
+, linkFarm
+, emptyDirectory
 , fetchurl
 , autoPatchelfHook
+, openjdk17
+, gmp
+, vscodium
 
 , isabelleSource
 }:
@@ -10,10 +15,38 @@
 let
   isabelleSource = lib.cleanSource ../../../../../../tmp/src/isabelle;
 
-  componentExtension = self: super: {};
 in
 
 rec {
+  componentExtension = self: super:
+    let
+      jdkAttr = "jdk-17.0.7";
+      jdkName = "jdk-17";
+      naprocheAttrs = lib.flip lib.mapAttrs (lib.filterAttrs (k: v: lib.hasPrefix "naproche" k) super) (k: v: v.overrideAttrs (attrs: {
+        buildInputs = (attrs.buildInputs or []) ++ [
+          gmp
+        ];
+      }));
+    in naprocheAttrs // {
+      "${jdkAttr}" = mkLocalComponent {
+        name = jdkName;
+        settings = ''
+          ISABELLE_JAVA_PLATFORM="$ISABELLE_PLATFORM64"
+          ISABELLE_JDK_HOME=${openjdk17}
+        '';
+      };
+      "kodkodi-1.5.7" = super."kodkodi-1.5.7".overrideAttrs (attrs: {
+        buildInputs = (attrs.buildInputs or []) ++ [
+          "${openjdk17}/lib/openjdk"
+        ];
+      });
+      # "vscodium-1.70.1" = emptyDirectory;
+      "vscodium-1.70.1" = super."vscodium-1.70.1".overrideAttrs (attrs: {
+        # buildInputs = (attrs.buildInputs or []) ++ vscodium.buildInputs;
+        dontAutoPatchelf = false;
+      });
+    };
+
   parseHashesFile = contents:
     let
       pairs = lib.filter lib.isList (builtins.split "([^ ]*) ([^\n]*)\n" contents);
@@ -40,10 +73,11 @@ rec {
     inherit sha1;
   };
 
-  mkComponent = { name, src }: stdenv.mkDerivation {
+  mkComponent = { name, src }: stdenv.mkDerivation (finalAttrs: {
     name = "isabelle-component-${name}";
     inherit src;
-    nativeBuildInputs = [
+    dontAutoPatchelf = false;
+    nativeBuildInputs = lib.optional (!finalAttrs.dontAutoPatchelf) [
       autoPatchelfHook
     ];
     buildInputs = [
@@ -53,7 +87,7 @@ rec {
     installPhase = ''
       cp -r . $out
     '';
-  };
+  });
 
   mkLocalComponent =
     { name, settings ? null, options ? null, components ? null, passthru ? {} }:
