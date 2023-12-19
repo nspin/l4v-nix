@@ -49,11 +49,13 @@ rec {
       }));
 
     in naprocheAttrs // {
+
       "kodkodi-1.5.7" = super."kodkodi-1.5.7".overrideAttrs (attrs: {
         buildInputs = (attrs.buildInputs or []) ++ [
           "${openjdk}/lib/openjdk"
         ];
       });
+
       "${jdkAttr}" = mkLocalComponent {
         name = jdkName;
         settings = ''
@@ -61,19 +63,25 @@ rec {
           ISABELLE_JDK_HOME=${openjdk}
         '';
       };
-      "${vscodiumAttr}" = mkLocalComponent {
-        name = vscodiumName;
-        settings = ''
-          ISABELLE_VSCODIUM_HOME="${patchedVSCodium}/lib/vscode"
-          ISABELLE_VSCODIUM_ELECTRON="$ISABELLE_VSCODIUM_HOME/electron"
-          ISABELLE_VSCODIUM_RESOURCES="$ISABELLE_VSCODIUM_HOME/resources"
-        '';
-      };
+
+      # "${vscodiumAttr}" = mkLocalComponent {
+      #   name = vscodiumName;
+      #   settings = ''
+      #     ISABELLE_VSCODIUM_HOME="${patchedVSCodium}/lib/vscode"
+      #     ISABELLE_VSCODIUM_ELECTRON="$ISABELLE_VSCODIUM_HOME/electron"
+      #     ISABELLE_VSCODIUM_RESOURCES="$ISABELLE_VSCODIUM_HOME/resources"
+      #   '';
+      # };
+
       # "vscodium-1.70.1" = emptyDirectory;
-      # "vscodium-1.70.1" = super."vscodium-1.70.1".overrideAttrs (attrs: {
-      #   # buildInputs = (attrs.buildInputs or []) ++ vscodium.buildInputs;
-      #   dontAutoPatchelf = false;
-      # });
+
+      "${vscodiumAttr}" = super."${vscodiumAttr}".overrideAttrs (attrs: {
+        buildInputs = (attrs.buildInputs or []) ++ vscodium.buildInputs;
+        runtimeDependencies = (attrs.runtimeDependencies or []) ++ vscodium.runtimeDependencies;
+        # nativeBuildInputs = (attrs.nativeBuildInputs or []) ++ vscodium.nativeBuildInputs;
+        # dontAutoPatchelf = false;
+      });
+
     };
 
   parseHashesFile = contents:
