@@ -64,6 +64,9 @@ rec {
         '';
       };
 
+      # TODO
+      "${vscodiumAttr}" = emptyDirectory;
+
       # "${vscodiumAttr}" = mkLocalComponent {
       #   name = vscodiumName;
       #   settings = ''
@@ -73,14 +76,12 @@ rec {
       #   '';
       # };
 
-      # "vscodium-1.70.1" = emptyDirectory;
-
-      "${vscodiumAttr}" = super."${vscodiumAttr}".overrideAttrs (attrs: {
-        buildInputs = (attrs.buildInputs or []) ++ vscodium.buildInputs;
-        runtimeDependencies = (attrs.runtimeDependencies or []) ++ vscodium.runtimeDependencies;
-        # nativeBuildInputs = (attrs.nativeBuildInputs or []) ++ vscodium.nativeBuildInputs;
-        # dontAutoPatchelf = false;
-      });
+      # "${vscodiumAttr}" = super."${vscodiumAttr}".overrideAttrs (attrs: {
+      #   buildInputs = (attrs.buildInputs or []) ++ vscodium.buildInputs;
+      #   # runtimeDependencies = (attrs.runtimeDependencies or []) ++ vscodium.runtimeDependencies;
+      #   nativeBuildInputs = (attrs.nativeBuildInputs or []) ++ vscodium.nativeBuildInputs;
+      #   # dontAutoPatchelf = false;
+      # });
 
     };
 
