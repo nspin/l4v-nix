@@ -56,6 +56,8 @@ in rec {
         scope.graphRefine.everythingAtOnce.preTargetDir
       ]
     ))
+
+    i.x
   ]));
 
   i = isabelleForL4vCommon;
