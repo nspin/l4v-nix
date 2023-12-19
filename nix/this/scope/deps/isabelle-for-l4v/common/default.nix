@@ -100,6 +100,9 @@ rec {
       mkLocalComponent {
         name = "meta";
         inherit components;
+        passthru = {
+          inherit allComponentsBeforeExtension allComponents;
+        };
       };
 
     x = metaComponent isabelleSource;
