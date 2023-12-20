@@ -172,7 +172,7 @@ with self; {
   withMLton = mlton: lib.extendDerivation true { inherit mlton; };
 
   isabelleForL4vCommon = callPackage ./deps/isabelle-for-l4v/common/default.nix {};
-
+  isabelleForL4vNew = callPackage ./deps/isabelle-for-l4v/new/default.nix {};
   isabelle2020ForL4v = withMLton mlton20180207 (callPackage ./deps/isabelle-for-l4v/2020 {});
   isabelle2023ForL4v = withMLton mlton20210107 (callPackage ./deps/isabelle-for-l4v/2023 {});
 

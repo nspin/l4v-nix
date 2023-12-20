@@ -24,6 +24,7 @@
 , python2WithDebuggingSymbols
 
 , isabelleForL4vCommon
+, isabelleForL4vNew
 
 , this
 , overrideScope
@@ -61,6 +62,7 @@ in rec {
   ]));
 
   i = isabelleForL4vCommon;
+  n = isabelleForL4vNew;
 
   a = writeText "a" (toString (lib.flatten [
     (lib.forEach (map this.mkScopeFomNamedConfig this.namedConfigs) (scope:

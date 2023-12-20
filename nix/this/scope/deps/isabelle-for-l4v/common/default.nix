@@ -7,6 +7,9 @@
 , autoPatchelfHook
 , openjdk17
 , gmp
+, python2
+, python3
+, perl
 , vscodium
 
 , isabelleSource
@@ -111,6 +114,7 @@ rec {
     inherit sha1;
   };
 
+  # TODO remove directories for other architectures
   mkComponent = { name, src }: stdenv.mkDerivation (finalAttrs: {
     name = "isabelle-component-${name}";
     inherit src;
@@ -120,8 +124,18 @@ rec {
     ];
     buildInputs = [
       stdenv.cc.cc.lib
+      python2 # python is python2
+      python3
+      perl
     ];
-    phases = [ "unpackPhase" "patchPhase" "installPhase" "fixupPhase" ];
+    phases = [ "unpackPhase" "patchPhase" /* "configurePhase" */ "installPhase" "fixupPhase" ];
+    # configurePhase = ''
+    #   for d in $(ls | grep '^platform_'); do
+    #     if [ "$d" != 'platform_${hostPlatform.config}' ]; then
+    #       rm -r $d
+    #     fi
+    #   done
+    # '';
     installPhase = ''
       cp -r . $out
     '';
@@ -143,7 +157,7 @@ rec {
       '') components)} $out/etc/components
     '');
 
-  metaComponent = src:
+  mkMetaComponent = src:
     let
       componentHashes = parseHashesFile (lib.readFile (src + "/Admin/components/components.sha1"));
       allComponentsBeforeExtension =
@@ -177,5 +191,5 @@ rec {
         };
       };
 
-    x = metaComponent isabelleSource;
+    x = mkMetaComponent isabelleSource;
 }
