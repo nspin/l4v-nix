@@ -34,6 +34,12 @@ let
 
 in rec {
 
+  withClang = overrideScope (self: super: {
+    scopeConfig = super.scopeConfig.override {
+      targetCCWrapperAttr = "clang_11";
+    };
+  });
+
   keep = writeText "keep" (toString (lib.flatten [
     this.scopes.arm.legacy.o1.all
     this.displayStatus
