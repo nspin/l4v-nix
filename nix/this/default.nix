@@ -18,6 +18,7 @@ rec {
     , targetCCWrapperAttr ? targetCCWrapperAttrForArch arch
     , targetCCWrapper ? targetPkgsByL4vArch."${arch}".buildPackages."${targetCCWrapperAttr}"
     , targetCC ? targetCCWrapper.cc
+    , targetCCIsClang ? targetCCWrapper.isClang
     , targetBintools ? targetCCWrapper.bintools.bintools
     , targetPrefix ? targetCCWrapper.targetPrefix
     , seL4Source ? if mcs then mcsSources.seL4 else lib.cleanSource ../../projects/seL4
@@ -29,10 +30,11 @@ rec {
     , bvSupport ? lib.elem arch [ "ARM" "RISCV64" ]
     }:
     {
+      targetPkgs = targetPkgsByL4vArch."${arch}";
       inherit
         arch features plat
         optLevel
-        targetCC targetBintools targetPrefix
+        targetCC targetCCIsClang targetBintools targetPrefix
         seL4Source
         l4vSource
         hol4Source

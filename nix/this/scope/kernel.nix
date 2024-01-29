@@ -4,6 +4,7 @@
 , dtc, libxml2
 , python3Packages
 , perl
+, which
 
 , patchedSeL4Source
 , scopeConfig
@@ -25,12 +26,25 @@ let
     "kernel.sigs"
   ];
 
+  toolchainAttrs =
+    let
+      inherit (scopeConfig) targetPrefix;
+      triple = scopeConfig.targetPkgs.hostPlatform.config;
+    in
+      assert lib.trace triple (lib.trace targetPrefix false) || targetPrefix == "" || targetPrefix == "${triple}-";
+      if scopeConfig.targetCCIsClang then {
+        TRIPLE = triple;
+      } else {
+        TOOLPREFIX = targetPrefix;
+      };
+
 in
-runCommand "kernel" {
+runCommand "kernel" ({
 
   nativeBuildInputs = [
     cmake ninja
     dtc libxml2
+    which
     python3Packages.sel4-deps
     scopeConfig.targetCC
     scopeConfig.targetBintools
@@ -42,7 +56,6 @@ runCommand "kernel" {
   L4V_ARCH = scopeConfig.arch;
   L4V_FEATURES = scopeConfig.features;
   L4V_PLAT = scopeConfig.plat;
-  TOOLPREFIX = scopeConfig.targetPrefix;
 
   OBJDUMP = "${scopeConfig.targetPrefix}objdump";
 
@@ -51,7 +64,7 @@ runCommand "kernel" {
 
   KERNEL_CMAKE_EXTRA_OPTIONS = "-DKernelOptimisation=${scopeConfig.optLevel}";
 
-} ''
+} // toolchainAttrs) ''
   export HOME=$(mktemp -d --suffix=-home)
 
   export ISABELLE_HOME=$(isabelle env sh -c 'echo $ISABELLE_HOME')
