@@ -3,6 +3,7 @@
 , writeText
 , z3
 , yices
+, stp
 
 , cvc4BinariesFromIsabelle
 , cvc4Binaries
@@ -26,9 +27,16 @@ lib.makeScope newScope (self: with self;
   in {
     selectedCVC4Binary = cvc4BinariesFromIsabelle.v1_5_3;
 
+    # TODO (from https://www-cs.stanford.edu/~preiner/publications/2022/BarbosaBBKLMMMN-TACAS22.pdf)
+    # Boolector
+    # OpenSMT2
+    # SMTInterpol
+    # SMT-RAT
+    # veriT
+
     # lib.makeScope injects "packages" attr
     packages' = {
-      inherit z3 yices;
+      inherit z3 yices stp;
       cvc4 = selectedCVC4Binary;
       cvc5 = cvc5Binary;
       sonolar = sonolarBinary;
@@ -44,8 +52,8 @@ lib.makeScope newScope (self: with self;
       z3 = "${packages'.z3}/bin/z3";
       yices = "${packages'.yices}/bin/yices-smt2";
       bitwuzla = "${packages'.bitwuzla}/bin/bitwuzla";
+      stp = "${packages'.stp}/bin/stp";
     };
-
 
     offlineCommands = {
       cvc4 = executables.cvc4 ++ [ "--lang" "smt" ];
@@ -55,6 +63,8 @@ lib.makeScope newScope (self: with self;
       z3 = executables.z3 ++ [ "-smt2" "-in" ];
       yices = executables.yices;
       bitwuzla = executables.bitwuzla;
+      # Doesn't support QF_AUBV (I think)
+      # stp = executables.stp ++ [ "--SMTLIB2" ];
     };
 
     onlineCommands = {
@@ -79,14 +89,17 @@ lib.makeScope newScope (self: with self;
 
       writeText "solverlist" ''
         strategy: ${lib.concatStringsSep ", " (lib.forEach strategy ({ key, scope }: "${key} ${scope}"))}
-        model-strategy: ${lib.concatStringsSep ", " modelStrategy}
-        online-solver: ${onlineSolverKey}
-        offline-solver: ${offlineSolverKey}
         ${lib.concatStrings (lib.flip lib.mapAttrsToList onlineSolvers (key: { config, command }: ''
-          ${key}: online: ${lib.concatStringsSep ", " config}: ${lib.concatStringsSep " " command}
+          ${key}: online: ${lib.concatStringsSep " " command}
+          ${lib.optionalString (config != []) ''
+            config: ${lib.concatStringsSep ", " config}
+          ''}
         ''))}
         ${lib.concatStrings (lib.flip lib.mapAttrsToList offlineSolvers (key: { config, command }: ''
-          ${key}: offline: ${lib.concatStringsSep ", " config}: ${lib.concatStringsSep " " command}
+          ${key}: offline: ${lib.concatStringsSep " " command}
+          ${lib.optionalString (config != []) ''
+            config: ${lib.concatStringsSep ", " config}
+          ''}
         ''))}
       '';
 
@@ -173,14 +186,5 @@ lib.makeScope newScope (self: with self;
     solverList = formatSolverList formatSolverListArgs;
 
     default = solverList;
-
-    # default = mattSolverlist;
-
-    mattSolverlist =
-      let
-        f = import (graphRefineSource + "/nix/solvers.nix");
-        dir = (f { use_sonolar = true; }).solverlist;
-      in
-        "${dir}/.solverlist";
   }
 )

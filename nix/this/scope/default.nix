@@ -72,6 +72,7 @@ with self; {
   justStandaloneCParser = l4vWith {
     name = "standalone-cparser";
     buildStandaloneCParser = true;
+    excludeSeL4Source = true;
   };
 
   justSimplExport = l4vWith {
@@ -109,31 +110,42 @@ with self; {
   graphRefineWith = callPackage ./graph-refine.nix {};
 
   graphRefine = rec {
+
+    defaultArgs = saveArgs ++ [
+      "trace-to:report.txt"
+    ];
+
+    saveArgs = [
+      "save:functions.txt"
+      "save-pairings:pairings.txt"
+      "save-inline-scripts:inline-scripts.txt"
+      "save-problems:problems.txt"
+      "save-proofs:proofs.txt"
+    ];
+
     functions = graphRefineWith {
       name = "functions";
-      args = [
-        "save:functions.txt"
-      ];
+      args = defaultArgs;
     };
 
     coverage = graphRefineWith {
       name = "coverage";
-      args = [
-        "trace-to:coverage.txt" "coverage"
+      args = defaultArgs ++ [
+        "coverage"
       ];
     };
 
     demo = graphRefineWith {
       name = "demo";
-      args = [
-        "trace-to:report.txt" "save-proofs:proofs.txt" "deps:Kernel_C.cancelAllIPC"
+      args = defaultArgs ++ [
+        "deps:Kernel_C.cancelAllIPC"
       ];
     };
 
     all = graphRefineWith {
       name = "all";
-      args = [
-        "trace-to:report.txt" "save-proofs:proofs.txt" "all"
+      args = defaultArgs ++ [
+        "all"
       ];
     };
 
@@ -143,9 +155,8 @@ with self; {
       name = "everything-at-once";
       dontDecorateCommands = true;
       argLists = [
-        [ "save:functions.txt" ]
-        [ "trace-to:coverage.txt" "coverage" ]
-        [ "trace-to:report.txt" "save-proofs:proofs.txt" "all" ]
+        [ (defaultArgs ++ [ "coverage" ]) ]
+        [ (defaultArgs ++ [ "all" ]) ]
       ];
     };
   };

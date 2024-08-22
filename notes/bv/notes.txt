@@ -1,0 +1,48 @@
+Missing nodes after calls to instruction'isb_sy_E0000540
+  in ['fpsimd_HWCapTest']
+Missing nodes after calls to restore_user_context
+  in ['c_handle_data_fault', 'c_handle_undefined_instruction', 'c_handle_interrupt']
+Missing nodes after calls to halt
+  in ['handleReply', 'Arch_createObject', 'completeSignal', 'unmapPage', 'doFlush', 'maskCapRights', 'decodeInvocation', 'cteDelete', 'Arch_setMRs_fault', 'handleInterrupt', 'Arch_deriveCap', 'invokeCNodeSaveCaller', 'handleSyscall', 'arm_reset_exception', 'createObject', 'Arch_handleFaultReply']
+Missing nodes after calls to idle_thread
+  in ['halt']
+Missing nodes after calls to instruction'ldr_pc_pc_20_e0010038_arm_vector_table_0x38_E001001C
+  in ['arm_vector_table']
+
+NORETURN functions don't make sense (including slowpath)
+
+adding VISIBLE to slowpath doesn't work
+
+init_freemem:
+  align_reg optimized away in some reductions with 'static'
+  consider using old patch to remove array accesses in if conditions
+
+allowed to skip:
+  projects/l4v/proof/asmrefine/SEL4GraphRefine.thy
+    broken:
+      - Kernel_C.reserve_region
+      - Kernel_C.merge_regions
+      - Kernel_C.arch_init_freemem
+    slow:
+      - Kernel_C.init_freemem
+  projects/graph-refine/seL4-example/target.py
+    skip parsing ASM:
+      - fastpath_call
+      - fastpath_reply_recv
+      - c_handle_syscall
+      - arm_swi_syscall
+  projects/graph-refine/seL4-example/Makefile
+    tell decompiler to ignore:
+      - restore_user_context
+      - c_handle_fastpath_call
+      - c_handle_fastpath_reply_recv
+  nix/this/scope/decompilation.nix
+    tell decompiler to ignore:
+      - _start
+
+maybe:
+  NORETURN + UNREACHABLE()
+    slowpath
+    c_handle_data_fault
+    c_handle_instruction_fault
+    c_handle_undefined_instruction
