@@ -69,118 +69,42 @@ lib.makeScope newScope (self: with self;
     cvc5TLimit = "120";
 
     formatSolverList =
-      { strategy
-      , modelStrategy
-      , onlineSolverKey
-      , onlineSolvers
-      , offlineSolverKey
+      { onlineSolvers
       , offlineSolvers
       }:
 
       writeText "solverlist" ''
-        strategy: ${lib.concatStringsSep ", " (lib.forEach strategy ({ key, scope }: "${key} ${scope}"))}
-        model-strategy: ${lib.concatStringsSep ", " modelStrategy}
-        online-solver: ${onlineSolverKey}
-        offline-solver: ${offlineSolverKey}
-        ${lib.concatStrings (lib.flip lib.mapAttrsToList onlineSolvers (key: { config, command }: ''
-          ${key}: online: ${lib.concatStringsSep ", " config}: ${lib.concatStringsSep " " command}
+        ${lib.concatStrings (lib.flip lib.mapAttrsToList onlineSolvers (key: { command }: ''
+          ${key}: online: ${lib.concatStringsSep " " command}
         ''))}
-        ${lib.concatStrings (lib.flip lib.mapAttrsToList offlineSolvers (key: { config, command }: ''
-          ${key}: offline: ${lib.concatStringsSep ", " config}: ${lib.concatStringsSep " " command}
+        ${lib.concatStrings (lib.flip lib.mapAttrsToList offlineSolvers (key: { command }: ''
+          ${key}: offline: ${lib.concatStringsSep " " command}
         ''))}
       '';
 
-    granularities = mkEnum [
-      "machineWord"
-      "byte"
-    ];
-
-    scopes = mkEnum [
-      "all"
-      "hyp"
-    ];
-
-    formatGranularity = granularity: {
-      "${granularities.machineWord}" = "machine-word";
-      "${granularities.byte}" = "byte";
-    }.${granularity};
-
-    configForGranularity = granularity: {
-      "${granularities.machineWord}" = [];
-      "${granularities.byte}" = [ "mem_mode=8" ];
-    }.${granularity};
-
-    strategyFilter = attr: granularity: [ scopes.all scopes.hyp ];
-
-    modelStrategyFilter = attr: granularity: true;
-
     onlineSolver = {
       command = onlineCommands.yices;
-      config = configForGranularity granularities.machineWord;
     };
 
-    offlineSolverKey = {
-      attr = "yices";
-      granularity = granularities.machineWord;
-    };
-
-    offlineSolverFilter = attr: [
-      granularities.machineWord
-      granularities.byte
-    ];
-
-    formatKey = { attr, granularity }: "${attr}-${formatGranularity granularity}";
+    formatKey = { attr }: attr;
 
     formatSolverListArgs =
       let
         formattedOnlineSolverKey = "the-online-solver";
       in {
-        strategy = lib.flatten (lib.forEach (lib.attrNames offlineCommands) (attr:
-          lib.forEach (offlineSolverFilter attr) (granularity:
-            lib.forEach (strategyFilter attr granularity) (scope: {
-              key = formatKey { inherit attr granularity; };
-              inherit scope;
-            })
-          )
-        ));
-
-        modelStrategy = lib.flatten (lib.forEach (lib.attrNames offlineCommands) (attr:
-          lib.forEach (offlineSolverFilter attr) (granularity:
-            lib.optionals (modelStrategyFilter attr granularity) [
-              (formatKey { inherit attr granularity; })
-            ]
-          )
-        ));
-
-        onlineSolverKey = formattedOnlineSolverKey;
-
         onlineSolvers = {
           "${formattedOnlineSolverKey}" = onlineSolver;
         };
 
-        offlineSolverKey = formatKey offlineSolverKey;
-
-        offlineSolvers = lib.listToAttrs (lib.concatLists (lib.flip lib.mapAttrsToList offlineCommands (attr: command:
-          (lib.forEach (offlineSolverFilter attr) (granularity:
-            lib.nameValuePair (formatKey { inherit attr granularity; }) {
-              inherit command;
-              config = configForGranularity granularity;
-            }
-          ))
-        )));
+        offlineSolvers = lib.listToAttrs (lib.flip lib.mapAttrsToList offlineCommands (attr: command:
+          lib.nameValuePair (formatKey { inherit attr; }) {
+            inherit command;
+          }
+        ));
       };
 
     solverList = formatSolverList formatSolverListArgs;
 
     default = solverList;
-
-    # default = mattSolverlist;
-
-    mattSolverlist =
-      let
-        f = import (graphRefineSource + "/nix/solvers.nix");
-        dir = (f { use_sonolar = true; }).solverlist;
-      in
-        "${dir}/.solverlist";
   }
 )

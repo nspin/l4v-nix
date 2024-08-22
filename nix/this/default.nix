@@ -78,7 +78,7 @@ rec {
     o3 = "-O3";
   };
 
-  targetCCWrapperAttrForArch = arch: if arch == "RISCV64" then "gcc12" else "gcc10";
+  targetCCWrapperAttrForArch = arch: if arch == "RISCV64" then "gcc12" else "gcc6";
 
   targetCCWrapperAttrs = lib.listToAttrs (map (v: lib.nameValuePair v v) [
     "gcc49" "gcc6" "gcc7" "gcc8" "gcc9" "gcc10" "gcc11" "gcc12" "gcc13"
@@ -103,13 +103,13 @@ rec {
 
   mkScopeFomNamedConfig =
     { archName, schedulerName, optLevelName, ... } @ args:
-    mkOverridableScopeFromConfigArgs {
+    mkOverridableScopeFromConfigArgs ({
       arch = archs.${archName};
       mcs = schedulers.${schedulerName};
       optLevel = optLevels.${optLevelName};
     } // lib.optionalAttrs (args ? targetCCWrapperAttrName) {
         targetCCWrapperAttr = targetCCWrapperAttrs.${args.targetCCWrapperAttrName};
-    };
+    });
 
   mkScopeTreeFromNamedConfigs =
     let

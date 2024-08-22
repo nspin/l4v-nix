@@ -3,6 +3,7 @@
 , python2Packages
 , python3Packages
 , git
+, ncurses
 
 , scopeConfig
 , kernel
@@ -25,35 +26,23 @@
     ${decorateCommand "python ${source}/graph-refine.py . ${lib.concatStringsSep " " argList}"}
   '')
 , keepSMTDumps ? false
+, stackBounds ? null
 }:
 
 let
-  targetPy = source + "/seL4-example/target-${scopeConfig.arch}.py";
+  targetPy = source + "/seL4-example/target.py";
 
-  preTargetDir = runCommand "graph-refine-initial-target-dir" {
+  targetDir = runCommand "graph-refine-initial-target-dir" {
     inherit preprocessedKernelsAreEquivalent;
-  } ''
+  } (''
     mkdir $out
     cp ${kernel}/{kernel.elf.rodata,kernel.elf.txt,kernel.elf.symtab} $out
     cp ${cFunctionsTxt} $out/CFunctions.txt
-    cp ${asmFunctionsTxt} $out/kernel_mc_graph.txt
+    cp ${asmFunctionsTxt} $out/ASMFunctions.txt
     cp ${targetPy} $out/target.py
-  '';
-
-  targetDir = runCommand "graph-refine-prepared-target-dir" {
-    nativeBuildInputs = [
-      python3Packages.python
-    ];
-  } ''
-    cp -r --no-preserve=ownership,mode ${preTargetDir} $out
-
-    python3 ${source + "/seL4-example/functions-tool.py"} \
-      --arch ${scopeConfig.arch} \
-      --target-dir $out \
-      --functions-list-out functions-list.txt.txt \
-      --asm-functions-out ASMFunctions.txt \
-      --stack-bounds-out StackBounds.txt
-  '';
+  '' + lib.optionalString (stackBounds != null) ''
+    cp ${stackBounds} $out/StackBounds.txt
+  '');
 
 in
 runCommand "graph-refine${lib.optionalString (name != null) "-${name}"}" {
@@ -65,11 +54,13 @@ runCommand "graph-refine${lib.optionalString (name != null) "-${name}"}" {
     git
   ] ++ extraNativeBuildInputs;
 
+  # avoid warnings from solvers
+  TERMINFO = "${ncurses.out}/share/terminfo/";
+
   passthru = {
     inherit
       solverList
       preprocessedKernelsAreEquivalent
-      preTargetDir
       targetDir
     ;
   };
