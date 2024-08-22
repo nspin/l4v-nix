@@ -126,14 +126,14 @@ with self; {
     demo = graphRefineWith {
       name = "demo";
       args = [
-        "trace-to:report.txt" "save-proofs:proofs.txt" "deps:Kernel_C.cancelAllIPC"
+        "trace-to:report.txt" "save:functions.txt" "save-proofs:proofs.txt" "deps:Kernel_C.cancelAllIPC"
       ];
     };
 
     all = graphRefineWith {
       name = "all";
       args = [
-        "trace-to:report.txt" "save-proofs:proofs.txt" "all"
+        "trace-to:report.txt" "save:functions.txt" "save-proofs:proofs.txt" "all"
       ];
     };
 
