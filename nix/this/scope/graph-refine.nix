@@ -50,7 +50,7 @@ let
     python3 ${source + "/seL4-example/functions-tool.py"} \
       --arch ${scopeConfig.arch} \
       --target-dir $out \
-      --functions-list-out functions-list.txt.txt \
+      --functions-list-out functions-list.txt \
       --asm-functions-out ASMFunctions.txt \
       --stack-bounds-out StackBounds.txt
   '';
