@@ -143,9 +143,8 @@ with self; {
       name = "everything-at-once";
       dontDecorateCommands = true;
       argLists = [
-        [ "save:functions.txt" ]
         [ "trace-to:coverage.txt" "coverage" ]
-        [ "trace-to:report.txt" "save-proofs:proofs.txt" "all" ]
+        [ "trace-to:report.txt" "save:functions.txt" "save-proofs:proofs.txt" "all" ]
       ];
     };
   };
