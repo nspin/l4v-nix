@@ -127,7 +127,12 @@ with self; {
       name = "demo";
       args = [
         "trace-to:report.txt" "save:functions.txt" "save-proofs:proofs.txt"
-        "deps:Kernel_C.cancelAllIPC"
+        # "deps:Kernel_C.cancelAllIPC"
+        # "deps:Kernel_C.decodeARMMMUInvocation"
+        # "deps:Kernel_C.copyMRs"
+        "deps:Kernel_C.create_untypeds"
+        # "deps:Kernel_C.init_freemem"
+        # "verbose"
         # "deps:Kernel_C.activate_kernel_vspace"
       ];
     };
