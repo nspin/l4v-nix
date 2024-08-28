@@ -58,11 +58,11 @@ lib.makeScope newScope (self: with self;
     };
 
     onlineCommands = {
-      cvc4 = offlineCommands.cvc4 ++ [ "--incremental" "--tlimit=${cvc4TLimit}" ];
-      cvc5 = offlineCommands.cvc5 ++ [ "--incremental" "--tlimit=${cvc5TLimit}" ];
-      z3 = offlineCommands.z3;
+      # cvc4 = offlineCommands.cvc4 ++ [ "--incremental" "--tlimit=${cvc4TLimit}" ];
+      # cvc5 = offlineCommands.cvc5 ++ [ "--incremental" "--tlimit=${cvc5TLimit}" ];
+      # z3 = offlineCommands.z3;
       yices = offlineCommands.yices ++ [ "--incremental" ];
-      bitwuzla = offlineCommands.bitwuzla;
+      # bitwuzla = offlineCommands.bitwuzla;
     };
 
     cvc4TLimit = "120";
@@ -78,39 +78,39 @@ lib.makeScope newScope (self: with self;
       }:
 
       writeText "solverlist" ''
-        strategy: ${lib.concatStringsSep ", " (lib.forEach strategy ({ key, scope }: "${key} ${scope}"))}
-        model-strategy: ${lib.concatStringsSep ", " modelStrategy}
-        online-solver: ${onlineSolverKey}
-        offline-solver: ${offlineSolverKey}
+        # strategy: ${lib.concatStringsSep ", " (lib.forEach strategy ({ key, scope }: "${key} ${scope}"))}
+        # model-strategy: ${lib.concatStringsSep ", " modelStrategy}
+        # online-solver: ${onlineSolverKey}
+        # offline-solver: ${offlineSolverKey}
         ${lib.concatStrings (lib.flip lib.mapAttrsToList onlineSolvers (key: { config, command }: ''
-          ${key}: online: ${lib.concatStringsSep ", " config}: ${lib.concatStringsSep " " command}
+          ${key}: online: ${lib.concatStringsSep " " command}
         ''))}
         ${lib.concatStrings (lib.flip lib.mapAttrsToList offlineSolvers (key: { config, command }: ''
-          ${key}: offline: ${lib.concatStringsSep ", " config}: ${lib.concatStringsSep " " command}
+          ${key}: offline: ${lib.concatStringsSep " " command}
         ''))}
       '';
 
     granularities = mkEnum [
       "machineWord"
-      "byte"
+      # "byte"
     ];
 
     scopes = mkEnum [
       "all"
-      "hyp"
+      # "hyp"
     ];
 
     formatGranularity = granularity: {
       "${granularities.machineWord}" = "machine-word";
-      "${granularities.byte}" = "byte";
+      # "${granularities.byte}" = "byte";
     }.${granularity};
 
     configForGranularity = granularity: {
       "${granularities.machineWord}" = [];
-      "${granularities.byte}" = [ "mem_mode=8" ];
+      # "${granularities.byte}" = [ "mem_mode=8" ];
     }.${granularity};
 
-    strategyFilter = attr: granularity: [ scopes.all scopes.hyp ];
+    strategyFilter = attr: granularity: [ scopes.all ];
 
     modelStrategyFilter = attr: granularity: true;
 
@@ -126,7 +126,7 @@ lib.makeScope newScope (self: with self;
 
     offlineSolverFilter = attr: [
       granularities.machineWord
-      granularities.byte
+      # granularities.byte
     ];
 
     formatKey = { attr, granularity }: "${attr}-${formatGranularity granularity}";

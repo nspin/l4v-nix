@@ -28,7 +28,7 @@
 }:
 
 let
-  targetPy = source + "/seL4-example/target-${scopeConfig.arch}.py";
+  targetPy = source + "/seL4-example/target.py";
 
   preTargetDir = runCommand "graph-refine-initial-target-dir" {
     inherit preprocessedKernelsAreEquivalent;
@@ -36,24 +36,26 @@ let
     mkdir $out
     cp ${kernel}/{kernel.elf.rodata,kernel.elf.txt,kernel.elf.symtab} $out
     cp ${cFunctionsTxt} $out/CFunctions.txt
-    cp ${asmFunctionsTxt} $out/kernel_mc_graph.txt
+    cp ${asmFunctionsTxt} $out/ASMFunctions.txt
     cp ${targetPy} $out/target.py
   '';
 
-  targetDir = runCommand "graph-refine-prepared-target-dir" {
-    nativeBuildInputs = [
-      python3Packages.python
-    ];
-  } ''
-    cp -r --no-preserve=ownership,mode ${preTargetDir} $out
+  targetDir = preTargetDir;
 
-    python3 ${source + "/seL4-example/functions-tool.py"} \
-      --arch ${scopeConfig.arch} \
-      --target-dir $out \
-      --functions-list-out functions-list.txt \
-      --asm-functions-out ASMFunctions.txt \
-      --stack-bounds-out StackBounds.txt
-  '';
+  # targetDir = runCommand "graph-refine-prepared-target-dir" {
+  #   nativeBuildInputs = [
+  #     python3Packages.python
+  #   ];
+  # } ''
+  #   cp -r --no-preserve=ownership,mode ${preTargetDir} $out
+
+  #   python3 ${source + "/seL4-example/functions-tool.py"} \
+  #     --arch ${scopeConfig.arch} \
+  #     --target-dir $out \
+  #     --functions-list-out functions-list.txt \
+  #     --asm-functions-out ASMFunctions.txt \
+  #     --stack-bounds-out StackBounds.txt
+  # '';
 
 in
 runCommand "graph-refine${lib.optionalString (name != null) "-${name}"}" {
