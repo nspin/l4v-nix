@@ -151,31 +151,42 @@ with self; {
 
     # testing
 
+    infoArgs = [
+      "trace-to:report.txt"
+      "save:functions.txt"
+      "save-proofs:proofs.txt"
+      "save-problems:problems.txt"
+      "save-pairings:pairings.txt"
+    ];
+
+    a = graphRefineWith {
+      name = "x";
+      args = infoArgs ++ [
+        "all"
+      ];
+    };
+
+    c = graphRefineWith {
+      name = "x";
+      args = infoArgs ++ [
+        "coverage"
+      ];
+    };
+
+    d = graphRefineWith {
+      name = "x";
+      args = infoArgs ++ [
+        "deps:Kernel_C.cancelAllIPC"
+      ];
+    };
+
     x = graphRefineWith {
       name = "x";
-      args = [
-        "trace-to:report.txt"
-        "save:functions.txt"
-        "save-proofs:proofs.txt"
-        "save-problems:problems.txt"
-        "save-pairings:pairings.txt"
-        # "coverage"
+      args = infoArgs ++ [
         # "Kernel_C.decodeARMMMUInvocation"
-        # "Kernel_C.create_untypeds"
+        "Kernel_C.create_untypeds"
         # "Kernel_C.init_freemem"
       ];
-
-      a = graphRefineWith {
-        name = "x";
-        args = [
-          "trace-to:report.txt"
-          "save:functions.txt"
-          "save-proofs:proofs.txt"
-          "save-problems:problems.txt"
-          "save-pairings:pairings.txt"
-          "all"
-        ];
-      };
     };
   };
 
