@@ -183,9 +183,9 @@ with self; {
     x = graphRefineWith {
       name = "x";
       args = infoArgs ++ [
-        "deps:Kernel_C.cancelAllIPC"
+        # "deps:Kernel_C.cancelAllIPC"
         # "Kernel_C.decodeARMMMUInvocation"
-        # "Kernel_C.create_untypeds"
+        "Kernel_C.create_untypeds"
         # "Kernel_C.init_freemem"
       ];
       stackBounds = ../../../../tmp/target/StackBounds.txt;
