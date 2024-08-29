@@ -54,7 +54,6 @@ runCommand "graph-refine${lib.optionalString (name != null) "-${name}"}" {
     inherit
       solverList
       preprocessedKernelsAreEquivalent
-      preTargetDir
       targetDir
     ;
   };
