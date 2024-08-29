@@ -178,7 +178,11 @@ with self; {
       name = "x";
       args = infoArgs ++ [
         "coverage"
+        # "-only-build-problem"
+        # "Kernel_C.setMRs_fault"
+        # "Kernel_C.arch_clean_invalidate_caches"
       ];
+      stackBounds = ../../../../tmp/target/StackBounds.txt;
     };
 
     d = graphRefineWith {
