@@ -3,6 +3,7 @@
 , python2Packages
 , python3Packages
 , git
+, ncurses
 
 , scopeConfig
 , kernel
@@ -50,6 +51,9 @@ runCommand "graph-refine${lib.optionalString (name != null) "-${name}"}" {
     git
   ] ++ extraNativeBuildInputs;
 
+  # avoid warnings from solvers
+  TERMINFO = "${ncurses.out}/share/terminfo/";
+
   passthru = {
     inherit
       solverList
@@ -72,5 +76,3 @@ runCommand "graph-refine${lib.optionalString (name != null) "-${name}"}" {
 
   cp -r . $out
 ''
-
-    # export TERMINFO="${ncurses.out}/share/terminfo/";

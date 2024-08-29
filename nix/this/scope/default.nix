@@ -126,24 +126,14 @@ with self; {
     demo = graphRefineWith {
       name = "demo";
       args = [
-        "trace-to:report.txt" "save:functions.txt" "save-proofs:proofs.txt"
-        "save-problems:problems.txt"
-        "save-pairings:pairings.txt"
-        "coverage"
-        # "deps:Kernel_C.cancelAllIPC"
-        # "deps:Kernel_C.decodeARMMMUInvocation"
-        # "deps:Kernel_C.copyMRs"
-        # "deps:Kernel_C.create_untypeds"
-        # "deps:Kernel_C.init_freemem"
-        # "verbose"
-        # "deps:Kernel_C.activate_kernel_vspace"
+        "trace-to:report.txt" "save-proofs:proofs.txt" "deps:Kernel_C.cancelAllIPC"
       ];
     };
 
     all = graphRefineWith {
       name = "all";
       args = [
-        "trace-to:report.txt" "save:functions.txt" "save-proofs:proofs.txt" "all"
+        "trace-to:report.txt" "save-proofs:proofs.txt" "all"
       ];
     };
 
@@ -153,9 +143,39 @@ with self; {
       name = "everything-at-once";
       dontDecorateCommands = true;
       argLists = [
+        [ "save:functions.txt" ]
         [ "trace-to:coverage.txt" "coverage" ]
-        [ "trace-to:report.txt" "save:functions.txt" "save-proofs:proofs.txt" "all" ]
+        [ "trace-to:report.txt" "save-proofs:proofs.txt" "all" ]
       ];
+    };
+
+    # testing
+
+    x = graphRefineWith {
+      name = "x";
+      args = [
+        "trace-to:report.txt"
+        "save:functions.txt"
+        "save-proofs:proofs.txt"
+        "save-problems:problems.txt"
+        "save-pairings:pairings.txt"
+        # "coverage"
+        # "Kernel_C.decodeARMMMUInvocation"
+        # "Kernel_C.create_untypeds"
+        # "Kernel_C.init_freemem"
+      ];
+
+      a = graphRefineWith {
+        name = "x";
+        args = [
+          "trace-to:report.txt"
+          "save:functions.txt"
+          "save-proofs:proofs.txt"
+          "save-problems:problems.txt"
+          "save-pairings:pairings.txt"
+          "all"
+        ];
+      };
     };
   };
 
