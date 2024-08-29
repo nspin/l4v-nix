@@ -154,9 +154,10 @@ with self; {
     infoArgs = [
       "trace-to:report.txt"
       "save:functions.txt"
-      "save-proofs:proofs.txt"
-      "save-problems:problems.txt"
       "save-pairings:pairings.txt"
+      "save-inline-scripts:inline-scripts.txt"
+      "save-problems:problems.txt"
+      "save-proofs:proofs.txt"
     ];
 
     a = graphRefineWith {
@@ -167,6 +168,13 @@ with self; {
     };
 
     c = graphRefineWith {
+      name = "x";
+      args = infoArgs ++ [
+        "coverage"
+      ];
+    };
+
+    t = graphRefineWith {
       name = "x";
       args = infoArgs ++ [
         "coverage"
