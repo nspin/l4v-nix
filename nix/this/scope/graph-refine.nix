@@ -30,7 +30,7 @@
 let
   targetPy = source + "/seL4-example/target.py";
 
-  preTargetDir = runCommand "graph-refine-initial-target-dir" {
+  targetDir = runCommand "graph-refine-initial-target-dir" {
     inherit preprocessedKernelsAreEquivalent;
   } ''
     mkdir $out
@@ -39,23 +39,6 @@ let
     cp ${asmFunctionsTxt} $out/ASMFunctions.txt
     cp ${targetPy} $out/target.py
   '';
-
-  targetDir = preTargetDir;
-
-  # targetDir = runCommand "graph-refine-prepared-target-dir" {
-  #   nativeBuildInputs = [
-  #     python3Packages.python
-  #   ];
-  # } ''
-  #   cp -r --no-preserve=ownership,mode ${preTargetDir} $out
-
-  #   python3 ${source + "/seL4-example/functions-tool.py"} \
-  #     --arch ${scopeConfig.arch} \
-  #     --target-dir $out \
-  #     --functions-list-out functions-list.txt \
-  #     --asm-functions-out ASMFunctions.txt \
-  #     --stack-bounds-out StackBounds.txt
-  # '';
 
 in
 runCommand "graph-refine${lib.optionalString (name != null) "-${name}"}" {
@@ -90,3 +73,5 @@ runCommand "graph-refine${lib.optionalString (name != null) "-${name}"}" {
 
   cp -r . $out
 ''
+
+    # export TERMINFO="${ncurses.out}/share/terminfo/";
