@@ -26,6 +26,7 @@
     ${decorateCommand "python ${source}/graph-refine.py . ${lib.concatStringsSep " " argList}"}
   '')
 , keepSMTDumps ? false
+, stackBounds ? null
 }:
 
 let
@@ -33,13 +34,15 @@ let
 
   targetDir = runCommand "graph-refine-initial-target-dir" {
     inherit preprocessedKernelsAreEquivalent;
-  } ''
+  } (''
     mkdir $out
     cp ${kernel}/{kernel.elf.rodata,kernel.elf.txt,kernel.elf.symtab} $out
     cp ${cFunctionsTxt} $out/CFunctions.txt
     cp ${asmFunctionsTxt} $out/ASMFunctions.txt
     cp ${targetPy} $out/target.py
-  '';
+  '' + lib.optionalString (stackBounds != null) ''
+    cp ${stackBounds} $out/StackBounds.txt
+  '');
 
 in
 runCommand "graph-refine${lib.optionalString (name != null) "-${name}"}" {
