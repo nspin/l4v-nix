@@ -220,6 +220,20 @@ with self; {
       keepSMTDumps = true;
       stackBounds = ../../../notes/runs/this.allScopes.arm.legacy.o1.gcc6.graphRefine.a/copy/StackBounds.txt;
     };
+  
+    z = graphRefineWith {
+      name = "x";
+      args = infoArgs ++ [
+        # "deps:Kernel_C.cancelAllIPC"
+        # "Kernel_C.decodeARMMMUInvocation"
+        # "Kernel_C.create_untypeds"
+        # "Kernel_C.init_freemem"
+        "deps:Kernel_C.handleInterruptEntry"
+        # "Kernel_C.handleSyscall"
+      ];
+      # stackBounds = ../../../../tmp/target/StackBounds.txt;
+    };
+
   };
 
   ### notes ###
