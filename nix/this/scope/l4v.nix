@@ -33,6 +33,8 @@
 , simplExport ? false
 
 , isabelleLink ? buildStandaloneCParser
+
+, excludeSeL4Source ? false
 }:
 
 # NOTE
@@ -102,8 +104,10 @@ stdenv.mkDerivation {
 
     mkdir $d
     ln -s ${isabelleForL4v} $d/isabelle
-    ln -s ${patchedSeL4Source} $d/seL4
     cp -r ${patchedL4vSource} $d/l4v
+    ${lib.optionalString (!excludeSeL4Source) ''
+      ln -s ${patchedSeL4Source} $d/seL4
+    ''}
 
     sourceRoot=$d/l4v
 

@@ -72,6 +72,7 @@ with self; {
   justStandaloneCParser = l4vWith {
     name = "standalone-cparser";
     buildStandaloneCParser = true;
+    excludeSeL4Source = true;
   };
 
   justSimplExport = l4vWith {
