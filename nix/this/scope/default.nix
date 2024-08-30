@@ -200,9 +200,25 @@ with self; {
         # "Kernel_C.create_untypeds"
         # "Kernel_C.init_freemem"
         "Kernel_C.handleInterruptEntry"
-        "Kernel_C.handleSyscall"
+        # "Kernel_C.handleSyscall"
       ];
       stackBounds = ../../../../tmp/target/StackBounds.txt;
+    };
+
+    y = graphRefineWith {
+      name = "x";
+      args = [
+        "verbose"
+        "save:functions.txt"
+        "save-pairings:pairings.txt"
+        "save-inline-scripts:inline-scripts.txt"
+        "save-problems:problems.txt"
+        "save-proofs:proofs.txt"
+        "Kernel_C.handleInterruptEntry"
+        # "Kernel_C.invokeCNodeMove"
+      ];
+      keepSMTDumps = true;
+      stackBounds = ../../../notes/runs/this.allScopes.arm.legacy.o1.gcc6.graphRefine.a/copy/StackBounds.txt;
     };
   };
 
