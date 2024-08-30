@@ -232,6 +232,7 @@ with self; {
         "Kernel_C.getActiveIRQ"
         "Kernel_C.handleInterruptEntry"
         "Kernel_C.handleSyscall"
+        "Kernel_C.isIRQPending"
       ];
       # stackBounds = ../../../../tmp/target/StackBounds.txt;
     };

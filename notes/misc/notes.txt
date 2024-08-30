@@ -2,3 +2,8 @@ gcc 4.9 has at least same failures as 6
 
 handleSyscall and handleInterruptEntry "Refinement NOT proven":
     - these are the only two functions that call (inline) getActiveIRQ
+    - issue is irqInvalid being inlined in C but not in ASM
+        - solutions:
+            static const
+            const
+            enum
