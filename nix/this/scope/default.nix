@@ -228,8 +228,21 @@ with self; {
         # "Kernel_C.decodeARMMMUInvocation"
         # "Kernel_C.create_untypeds"
         # "Kernel_C.init_freemem"
-        "deps:Kernel_C.handleInterruptEntry"
-        # "Kernel_C.handleSyscall"
+        "Kernel_C.getActiveIRQ"
+        "Kernel_C.handleInterruptEntry"
+        "Kernel_C.handleSyscall"
+      ];
+      # stackBounds = ../../../../tmp/target/StackBounds.txt;
+    };
+
+    u = graphRefineWith {
+      name = "x";
+      args = infoArgs ++ [
+        "Kernel_C.c_handle_data_fault"
+        "Kernel_C.c_handle_instruction_fault"
+        "Kernel_C.c_handle_undefined_instruction"
+        "Kernel_C.slowpath"
+        "Kernel_C.resolveAddressBits"
       ];
       # stackBounds = ../../../../tmp/target/StackBounds.txt;
     };
