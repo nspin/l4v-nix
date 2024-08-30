@@ -103,13 +103,13 @@ rec {
 
   mkScopeFomNamedConfig =
     { archName, schedulerName, optLevelName, ... } @ args:
-    mkOverridableScopeFromConfigArgs {
+    mkOverridableScopeFromConfigArgs ({
       arch = archs.${archName};
       mcs = schedulers.${schedulerName};
       optLevel = optLevels.${optLevelName};
     } // lib.optionalAttrs (args ? targetCCWrapperAttrName) {
         targetCCWrapperAttr = targetCCWrapperAttrs.${args.targetCCWrapperAttrName};
-    };
+    });
 
   mkScopeTreeFromNamedConfigs =
     let
