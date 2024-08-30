@@ -197,8 +197,10 @@ with self; {
       args = infoArgs ++ [
         # "deps:Kernel_C.cancelAllIPC"
         # "Kernel_C.decodeARMMMUInvocation"
-        "Kernel_C.create_untypeds"
+        # "Kernel_C.create_untypeds"
         # "Kernel_C.init_freemem"
+        "Kernel_C.handleInterruptEntry"
+        "Kernel_C.handleSyscall"
       ];
       stackBounds = ../../../../tmp/target/StackBounds.txt;
     };

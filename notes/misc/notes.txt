@@ -1,0 +1,2 @@
+handleSyscall and handleInterruptEntry "Refinement NOT proven":
+    - these are the only two functions that call (inline) getActiveIRQ
