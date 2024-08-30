@@ -1,0 +1,10 @@
+the-online-solver: online: /nix/store/pny1ggfwnndhg1a4bs9d5nhchk0kmasn-yices-2.6.4/bin/yices-smt2 --incremental
+
+bitwuzla: offline: /nix/store/vr1rcbcnad9n03n2vyiw1mldr7mmr65j-bitwuzla-static-x86_64-unknown-linux-musl-0.2.0/bin/bitwuzla
+cvc4: offline: /nix/store/20gdsfszrzn7a9fbhlzwmda3gg7ciswz-cvc4-binary-from-isabelle-1.5-3/bin/cvc4 --lang smt
+cvc5: offline: /nix/store/l6fg9jmrcrp2hdca7yn8qswb91vxs281-cvc5-binary/bin/cvc5 --lang smt
+mathsat5: offline: /nix/store/s8vz71vpk7pywkpnn0sgl6lblh6pvc3b-mathsat5-binary/bin/mathsat -input=smt2
+sonolar: offline: /nix/store/bwjp36a2ad84ppdhx3014jg6i6jgyyg1-sonolar-binary/bin/sonolar --input-format=smtlib2
+yices: offline: /nix/store/pny1ggfwnndhg1a4bs9d5nhchk0kmasn-yices-2.6.4/bin/yices-smt2
+z3: offline: /nix/store/pc611vpabd864pfwh2xnp2j3d196s9h3-z3-4.8.17/bin/z3 -smt2 -in
+
