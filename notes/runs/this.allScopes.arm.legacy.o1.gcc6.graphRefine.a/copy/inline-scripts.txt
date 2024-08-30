@@ -1,0 +1,3189 @@
+Problem (Pairing (invokeTCB_Suspend (ASM) <= Kernel_C.invokeTCB_Suspend (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (invokeCNodeMove (ASM) <= Kernel_C.invokeCNodeMove (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (invokeIRQHandler_SetIRQHandler (ASM) <= Kernel_C.invokeIRQHandler_SetIRQHandler (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (create_untypeds (ASM) <= Kernel_C.create_untypeds (C))) {
+InlineScript
+C Kernel_C.create_untypeds 31 0 Kernel_C.paddr_to_pptr_reg
+C Kernel_C.create_untypeds 39 0 Kernel_C.paddr_to_pptr_reg
+C Kernel_C.create_untypeds 54 0 Kernel_C.paddr_to_pptr_reg
+C Kernel_C.paddr_to_pptr_reg 5 0 Kernel_C.ptrFromPAddr
+C Kernel_C.paddr_to_pptr_reg 7 0 Kernel_C.ptrFromPAddr
+C Kernel_C.paddr_to_pptr_reg 5 1 Kernel_C.ptrFromPAddr
+C Kernel_C.paddr_to_pptr_reg 7 1 Kernel_C.ptrFromPAddr
+C Kernel_C.paddr_to_pptr_reg 5 2 Kernel_C.ptrFromPAddr
+C Kernel_C.paddr_to_pptr_reg 7 2 Kernel_C.ptrFromPAddr
+C Kernel_C.ptrFromPAddr 5 0 Kernel_C.physBase
+C Kernel_C.ptrFromPAddr 5 1 Kernel_C.physBase
+C Kernel_C.ptrFromPAddr 5 2 Kernel_C.physBase
+C Kernel_C.ptrFromPAddr 5 3 Kernel_C.physBase
+C Kernel_C.ptrFromPAddr 5 4 Kernel_C.physBase
+C Kernel_C.ptrFromPAddr 5 5 Kernel_C.physBase
+C Kernel_C.create_untypeds 33 0 Kernel_C.get_p_reg_kernel_img_boot
+C Kernel_C.get_p_reg_kernel_img_boot 11 0 Kernel_C.physBase
+C Kernel_C.get_p_reg_kernel_img_boot 8 0 Kernel_C.addrFromKPPtr
+C Kernel_C.addrFromKPPtr 8 0 Kernel_C.physBase
+C Kernel_C.addrFromKPPtr 6 0 Kernel_C.physBase
+C Kernel_C.get_p_reg_kernel_img_boot 5 0 Kernel_C.addrFromKPPtr
+C Kernel_C.addrFromKPPtr 8 1 Kernel_C.physBase
+C Kernel_C.addrFromKPPtr 6 1 Kernel_C.physBase
+EndInlineScript
+}
+Problem (Pairing (lookupSourceSlot (ASM) <= Kernel_C.lookupSourceSlot (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (create_root_cnode (ASM) <= Kernel_C.create_root_cnode (C))) {
+InlineScript
+C Kernel_C.create_root_cnode 11 0 Kernel_C.cap_cnode_cap_new
+C Kernel_C.create_root_cnode 6 0 Kernel_C.write_slot
+C Kernel_C.write_slot 9 0 Kernel_C.mdb_node_new
+C Kernel_C.write_slot 4 0 Kernel_C.mdb_node_ptr_set_mdbRevocable
+C Kernel_C.write_slot 2 0 Kernel_C.mdb_node_ptr_set_mdbFirstBadged
+EndInlineScript
+}
+Problem (Pairing (handleVMFaultEvent (ASM) <= Kernel_C.handleVMFaultEvent (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (create_initial_thread (ASM) <= Kernel_C.create_initial_thread (C))) {
+InlineScript
+C Kernel_C.create_initial_thread 10 0 Kernel_C.cap_thread_cap_new
+C Kernel_C.create_initial_thread 30 0 Kernel_C.setRegister
+C Kernel_C.create_initial_thread 65 0 Kernel_C.Arch_initContext
+C Kernel_C.create_initial_thread 29 0 Kernel_C.setNextPC
+C Kernel_C.setNextPC 2 0 Kernel_C.setRegister
+C Kernel_C.create_initial_thread 5 0 Kernel_C.write_slot
+C Kernel_C.write_slot 9 0 Kernel_C.mdb_node_new
+C Kernel_C.write_slot 4 0 Kernel_C.mdb_node_ptr_set_mdbRevocable
+C Kernel_C.write_slot 2 0 Kernel_C.mdb_node_ptr_set_mdbFirstBadged
+EndInlineScript
+}
+Problem (Pairing (create_ipcbuf_frame_cap (ASM) <= Kernel_C.create_ipcbuf_frame_cap (C))) {
+InlineScript
+C Kernel_C.create_ipcbuf_frame_cap 12 0 Kernel_C.clearMemory
+C Kernel_C.clearMemory 5 0 Kernel_C.addrFromPPtr
+C Kernel_C.addrFromPPtr 5 0 Kernel_C.physBase
+C Kernel_C.create_ipcbuf_frame_cap 5 0 Kernel_C.write_slot
+C Kernel_C.write_slot 9 0 Kernel_C.mdb_node_new
+C Kernel_C.write_slot 4 0 Kernel_C.mdb_node_ptr_set_mdbRevocable
+C Kernel_C.write_slot 2 0 Kernel_C.mdb_node_ptr_set_mdbFirstBadged
+EndInlineScript
+}
+Problem (Pairing (sendFaultIPC (ASM) <= Kernel_C.sendFaultIPC (C))) {
+InlineScript
+C Kernel_C.sendFaultIPC 6 0 Kernel_C.cap_endpoint_cap_get_capEPPtr
+C Kernel_C.sendFaultIPC 8 0 Kernel_C.cap_endpoint_cap_get_capCanGrant
+C Kernel_C.sendFaultIPC 10 0 Kernel_C.cap_endpoint_cap_get_capEPBadge
+C Kernel_C.sendFaultIPC 15 0 Kernel_C.seL4_Fault_get_seL4_FaultType
+C Kernel_C.sendFaultIPC 23 0 Kernel_C.lookup_fault_missing_capability_new
+C Kernel_C.sendFaultIPC 26 0 Kernel_C.seL4_Fault_CapFault_new
+C Kernel_C.sendFaultIPC 30 0 Kernel_C.cap_endpoint_cap_get_capCanGrantReply
+C Kernel_C.sendFaultIPC 34 0 Kernel_C.cap_endpoint_cap_get_capCanGrant
+C Kernel_C.sendFaultIPC 38 0 Kernel_C.cap_endpoint_cap_get_capCanSend
+C Kernel_C.sendFaultIPC 42 0 Kernel_C.cap_get_capType
+C Kernel_C.sendFaultIPC 47 0 Kernel_C.seL4_Fault_CapFault_new
+EndInlineScript
+}
+Problem (Pairing (setThreadState (ASM) <= Kernel_C.setThreadState (C))) {
+InlineScript
+C Kernel_C.setThreadState 3 0 Kernel_C.thread_state_ptr_set_tsType
+EndInlineScript
+}
+Problem (Pairing (cteSwap (ASM) <= Kernel_C.cteSwap (C))) {
+InlineScript
+C Kernel_C.cteSwap 2 0 Kernel_C.mdb_node_ptr_set_mdbPrev
+C Kernel_C.cteSwap 7 0 Kernel_C.mdb_node_get_mdbNext
+C Kernel_C.cteSwap 8 0 Kernel_C.mdb_node_ptr_set_mdbNext
+C Kernel_C.cteSwap 13 0 Kernel_C.mdb_node_get_mdbPrev
+C Kernel_C.cteSwap 20 0 Kernel_C.mdb_node_ptr_set_mdbPrev
+C Kernel_C.cteSwap 25 0 Kernel_C.mdb_node_get_mdbNext
+C Kernel_C.cteSwap 26 0 Kernel_C.mdb_node_ptr_set_mdbNext
+C Kernel_C.cteSwap 31 0 Kernel_C.mdb_node_get_mdbPrev
+EndInlineScript
+}
+Problem (Pairing (invokeTCB_WriteRegisters (ASM) <= Kernel_C.invokeTCB_WriteRegisters (C))) {
+InlineScript
+C Kernel_C.invokeTCB_WriteRegisters 18 0 Kernel_C.setRegister
+C Kernel_C.invokeTCB_WriteRegisters 21 0 Kernel_C.sanitiseRegister
+C Kernel_C.invokeTCB_WriteRegisters 24 0 Kernel_C.getSyscallArg
+C Kernel_C.invokeTCB_WriteRegisters 31 0 Kernel_C.setRegister
+C Kernel_C.invokeTCB_WriteRegisters 34 0 Kernel_C.sanitiseRegister
+C Kernel_C.invokeTCB_WriteRegisters 37 0 Kernel_C.getSyscallArg
+C Kernel_C.invokeTCB_WriteRegisters 40 0 Kernel_C.Arch_getSanitiseRegisterInfo
+C Kernel_C.getSyscallArg 7 0 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 1 Kernel_C.getRegister
+C Kernel_C.invokeTCB_WriteRegisters 48 0 Kernel_C.Arch_performTransfer
+C Kernel_C.invokeTCB_WriteRegisters 12 0 Kernel_C.getRestartPC
+C Kernel_C.getRestartPC 5 0 Kernel_C.getRegister
+C Kernel_C.invokeTCB_WriteRegisters 10 0 Kernel_C.setNextPC
+C Kernel_C.setNextPC 2 0 Kernel_C.setRegister
+C Kernel_C.invokeTCB_WriteRegisters 9 0 Kernel_C.Arch_postModifyRegisters
+EndInlineScript
+}
+Problem (Pairing (decodeInvocation (ASM) <= Kernel_C.decodeInvocation (C))) {
+InlineScript
+C Kernel_C.decodeInvocation 17 0 Kernel_C.cap_endpoint_cap_get_capCanGrantReply
+C Kernel_C.decodeInvocation 19 0 Kernel_C.cap_endpoint_cap_get_capCanGrant
+C Kernel_C.decodeInvocation 21 0 Kernel_C.cap_endpoint_cap_get_capEPBadge
+C Kernel_C.decodeInvocation 23 0 Kernel_C.cap_endpoint_cap_get_capEPPtr
+C Kernel_C.decodeInvocation 33 0 Kernel_C.cap_endpoint_cap_get_capCanSend
+C Kernel_C.decodeInvocation 38 0 Kernel_C.cap_notification_cap_get_capNtfnBadge
+C Kernel_C.decodeInvocation 40 0 Kernel_C.cap_notification_cap_get_capNtfnPtr
+C Kernel_C.decodeInvocation 50 0 Kernel_C.cap_notification_cap_get_capNtfnCanSend
+C Kernel_C.decodeInvocation 55 0 Kernel_C.cap_reply_cap_get_capReplyCanGrant
+C Kernel_C.decodeInvocation 57 0 Kernel_C.cap_reply_cap_get_capTCBPtr
+C Kernel_C.decodeInvocation 67 0 Kernel_C.cap_reply_cap_get_capReplyMaster
+C Kernel_C.decodeInvocation 87 0 Kernel_C.cap_irq_handler_cap_get_capIRQ
+C Kernel_C.decodeInvocation 104 0 Kernel_C.cap_get_capType
+C Kernel_C.decodeInvocation 110 0 Kernel_C.isArchCap
+C Kernel_C.isArchCap 6 0 Kernel_C.cap_get_capType
+C Kernel_C.decodeInvocation 36 0 Kernel_C.performInvocation_Notification
+C Kernel_C.decodeInvocation 107 0 Kernel_C.Arch_decodeInvocation
+EndInlineScript
+}
+Problem (Pairing (lookupPDSlot (ASM) <= Kernel_C.lookupPDSlot (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (idle_thread (ASM) <= Kernel_C.idle_thread (C))) {
+InlineScript
+ASM idle_thread 1 0 instruction'wfi_E00108A0
+C Kernel_C.idle_thread 6 0 Kernel_C.wfi
+C Kernel_C.wfi 2 0 asm_instruction'wfi
+EndInlineScript
+}
+Problem (Pairing (reserve_region (ASM) <= Kernel_C.reserve_region (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (configureIdleThread (ASM) <= Kernel_C.configureIdleThread (C))) {
+InlineScript
+C Kernel_C.configureIdleThread 3 0 Kernel_C.Arch_configureIdleThread
+C Kernel_C.Arch_configureIdleThread 3 0 Kernel_C.setRegister
+C Kernel_C.Arch_configureIdleThread 2 0 Kernel_C.setRegister
+EndInlineScript
+}
+Problem (Pairing (capSwapForDelete (ASM) <= Kernel_C.capSwapForDelete (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (Arch_decodeInvocation (ASM) <= Kernel_C.Arch_decodeInvocation (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (Arch_deriveCap (ASM) <= Kernel_C.Arch_deriveCap (C))) {
+InlineScript
+C Kernel_C.Arch_deriveCap 9 0 Kernel_C.cap_null_cap_new
+C Kernel_C.Arch_deriveCap 14 0 Kernel_C.cap_page_table_cap_get_capPTIsMapped
+C Kernel_C.Arch_deriveCap 21 0 Kernel_C.cap_null_cap_new
+C Kernel_C.Arch_deriveCap 26 0 Kernel_C.cap_page_directory_cap_get_capPDIsMapped
+C Kernel_C.Arch_deriveCap 31 0 Kernel_C.cap_small_frame_cap_set_capFMappedASID
+C Kernel_C.Arch_deriveCap 36 0 Kernel_C.cap_frame_cap_set_capFMappedASID
+C Kernel_C.Arch_deriveCap 50 0 Kernel_C.cap_get_capType
+C Kernel_C.cap_small_frame_cap_set_capFMappedASID 5 0 Kernel_C.cap_small_frame_cap_set_capFMappedASIDHigh
+C Kernel_C.cap_small_frame_cap_set_capFMappedASID 8 0 Kernel_C.cap_small_frame_cap_set_capFMappedASIDLow
+C Kernel_C.cap_frame_cap_set_capFMappedASID 5 0 Kernel_C.cap_frame_cap_set_capFMappedASIDHigh
+C Kernel_C.cap_frame_cap_set_capFMappedASID 8 0 Kernel_C.cap_frame_cap_set_capFMappedASIDLow
+EndInlineScript
+}
+Problem (Pairing (init_freemem (ASM) <= Kernel_C.init_freemem (C))) {
+InlineScript
+C Kernel_C.init_freemem 23 0 Kernel_C.create_rootserver_objects
+C Kernel_C.init_freemem 40 0 Kernel_C.rootserver_max_size_bits
+C Kernel_C.init_freemem 42 0 Kernel_C.calculate_rootserver_size
+C Kernel_C.init_freemem 49 0 Kernel_C.is_reg_empty
+C Kernel_C.init_freemem 58 0 Kernel_C.is_reg_empty
+C Kernel_C.init_freemem 66 0 Kernel_C.is_reg_empty
+C Kernel_C.init_freemem 90 0 Kernel_C.pptr_to_paddr_reg
+C Kernel_C.init_freemem 104 0 Kernel_C.pptr_to_paddr_reg
+C Kernel_C.init_freemem 114 0 Kernel_C.pptr_to_paddr_reg
+C Kernel_C.init_freemem 131 0 Kernel_C.pptr_to_paddr_reg
+C Kernel_C.init_freemem 171 0 Kernel_C.ceiling_kernel_window
+C Kernel_C.init_freemem 178 0 Kernel_C.ceiling_kernel_window
+C Kernel_C.init_freemem 186 0 Kernel_C.paddr_to_pptr_reg
+C Kernel_C.init_freemem 203 0 Kernel_C.check_reserved_memory
+C Kernel_C.init_freemem 207 0 Kernel_C.check_available_memory
+C Kernel_C.create_rootserver_objects 43 0 Kernel_C.calculate_rootserver_size
+C Kernel_C.create_rootserver_objects 45 0 Kernel_C.rootserver_max_size_bits
+C Kernel_C.pptr_to_paddr_reg 5 0 Kernel_C.addrFromPPtr
+C Kernel_C.pptr_to_paddr_reg 7 0 Kernel_C.addrFromPPtr
+C Kernel_C.pptr_to_paddr_reg 5 1 Kernel_C.addrFromPPtr
+C Kernel_C.pptr_to_paddr_reg 7 1 Kernel_C.addrFromPPtr
+C Kernel_C.pptr_to_paddr_reg 5 2 Kernel_C.addrFromPPtr
+C Kernel_C.pptr_to_paddr_reg 7 2 Kernel_C.addrFromPPtr
+C Kernel_C.pptr_to_paddr_reg 5 3 Kernel_C.addrFromPPtr
+C Kernel_C.pptr_to_paddr_reg 7 3 Kernel_C.addrFromPPtr
+C Kernel_C.ceiling_kernel_window 7 0 Kernel_C.physBase
+C Kernel_C.ceiling_kernel_window 9 0 Kernel_C.addrFromPPtr
+C Kernel_C.ceiling_kernel_window 7 1 Kernel_C.physBase
+C Kernel_C.ceiling_kernel_window 9 1 Kernel_C.addrFromPPtr
+C Kernel_C.paddr_to_pptr_reg 5 0 Kernel_C.ptrFromPAddr
+C Kernel_C.paddr_to_pptr_reg 7 0 Kernel_C.ptrFromPAddr
+C Kernel_C.addrFromPPtr 5 0 Kernel_C.physBase
+C Kernel_C.addrFromPPtr 5 1 Kernel_C.physBase
+C Kernel_C.addrFromPPtr 5 2 Kernel_C.physBase
+C Kernel_C.addrFromPPtr 5 3 Kernel_C.physBase
+C Kernel_C.addrFromPPtr 5 4 Kernel_C.physBase
+C Kernel_C.addrFromPPtr 5 5 Kernel_C.physBase
+C Kernel_C.addrFromPPtr 5 6 Kernel_C.physBase
+C Kernel_C.addrFromPPtr 5 7 Kernel_C.physBase
+C Kernel_C.addrFromPPtr 5 8 Kernel_C.physBase
+C Kernel_C.addrFromPPtr 5 9 Kernel_C.physBase
+C Kernel_C.ptrFromPAddr 5 0 Kernel_C.physBase
+C Kernel_C.ptrFromPAddr 5 1 Kernel_C.physBase
+EndInlineScript
+}
+Problem (Pairing (invokeCNodeCancelBadgedSends (ASM) <= Kernel_C.invokeCNodeCancelBadgedSends (C))) {
+InlineScript
+C Kernel_C.invokeCNodeCancelBadgedSends 7 0 Kernel_C.cap_endpoint_cap_get_capEPPtr
+C Kernel_C.invokeCNodeCancelBadgedSends 11 0 Kernel_C.cap_endpoint_cap_get_capEPBadge
+EndInlineScript
+}
+Problem (Pairing (switchToThread (ASM) <= Kernel_C.switchToThread (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (isMDBParentOf (ASM) <= Kernel_C.isMDBParentOf (C))) {
+InlineScript
+C Kernel_C.isMDBParentOf 6 0 Kernel_C.mdb_node_get_mdbFirstBadged
+C Kernel_C.isMDBParentOf 11 0 Kernel_C.cap_endpoint_cap_get_capEPBadge
+C Kernel_C.isMDBParentOf 17 0 Kernel_C.cap_endpoint_cap_get_capEPBadge
+C Kernel_C.isMDBParentOf 22 0 Kernel_C.mdb_node_get_mdbFirstBadged
+C Kernel_C.isMDBParentOf 27 0 Kernel_C.cap_notification_cap_get_capNtfnBadge
+C Kernel_C.isMDBParentOf 33 0 Kernel_C.cap_notification_cap_get_capNtfnBadge
+C Kernel_C.isMDBParentOf 40 0 Kernel_C.cap_get_capType
+C Kernel_C.isMDBParentOf 50 0 Kernel_C.mdb_node_get_mdbRevocable
+EndInlineScript
+}
+Problem (Pairing (setMRs_fault (ASM) <= Kernel_C.setMRs_fault (C))) {
+InlineScript
+C Kernel_C.setMRs_fault 5 0 Kernel_C.setMRs_lookup_failure
+C Kernel_C.setMRs_fault 7 0 Kernel_C.setMR
+C Kernel_C.setMRs_fault 9 0 Kernel_C.seL4_Fault_CapFault_get_inReceivePhase
+C Kernel_C.setMRs_fault 11 0 Kernel_C.setMR
+C Kernel_C.setMRs_fault 13 0 Kernel_C.seL4_Fault_CapFault_get_address
+C Kernel_C.setMRs_fault 15 0 Kernel_C.setMR
+C Kernel_C.setMRs_fault 20 0 Kernel_C.setMR
+C Kernel_C.setMRs_fault 22 0 Kernel_C.seL4_Fault_UnknownSyscall_get_syscallNumber
+C Kernel_C.setMRs_fault 24 0 Kernel_C.copyMRsFault
+C Kernel_C.setMRs_fault 27 0 Kernel_C.setMR
+C Kernel_C.setMRs_fault 29 0 Kernel_C.seL4_Fault_UserException_get_code
+C Kernel_C.setMRs_fault 31 0 Kernel_C.setMR
+C Kernel_C.setMRs_fault 33 0 Kernel_C.seL4_Fault_UserException_get_number
+C Kernel_C.setMRs_fault 35 0 Kernel_C.copyMRsFault
+C Kernel_C.setMRs_fault 40 0 Kernel_C.seL4_Fault_get_seL4_FaultType
+C Kernel_C.setMRs_fault 47 0 Kernel_C.seL4_Fault_get_seL4_FaultType
+C Kernel_C.setMRs_lookup_failure 6 0 Kernel_C.setMR
+C Kernel_C.setMRs_lookup_failure 8 0 Kernel_C.lookup_fault_missing_capability_get_bitsLeft
+C Kernel_C.setMRs_lookup_failure 11 0 Kernel_C.setMR
+C Kernel_C.setMRs_lookup_failure 13 0 Kernel_C.lookup_fault_depth_mismatch_get_bitsFound
+C Kernel_C.setMRs_lookup_failure 14 0 Kernel_C.setMR
+C Kernel_C.setMRs_lookup_failure 16 0 Kernel_C.lookup_fault_depth_mismatch_get_bitsLeft
+C Kernel_C.setMRs_lookup_failure 19 0 Kernel_C.setMR
+C Kernel_C.setMRs_lookup_failure 21 0 Kernel_C.lookup_fault_guard_mismatch_get_bitsFound
+C Kernel_C.setMRs_lookup_failure 22 0 Kernel_C.setMR
+C Kernel_C.setMRs_lookup_failure 24 0 Kernel_C.lookup_fault_guard_mismatch_get_guardFound
+C Kernel_C.setMRs_lookup_failure 25 0 Kernel_C.setMR
+C Kernel_C.setMRs_lookup_failure 27 0 Kernel_C.lookup_fault_guard_mismatch_get_bitsLeft
+C Kernel_C.setMRs_lookup_failure 39 0 Kernel_C.setMR
+C Kernel_C.setMRs_lookup_failure 42 0 Kernel_C.lookup_fault_get_lufType
+C Kernel_C.setMR 9 0 Kernel_C.setRegister
+C Kernel_C.setMR 9 1 Kernel_C.setRegister
+C Kernel_C.setMR 9 2 Kernel_C.setRegister
+C Kernel_C.setMR 9 3 Kernel_C.setRegister
+C Kernel_C.copyMRsFault 10 0 Kernel_C.getRegister
+C Kernel_C.copyMRsFault 18 0 Kernel_C.setRegister
+C Kernel_C.copyMRsFault 21 0 Kernel_C.getRegister
+C Kernel_C.setMR 9 4 Kernel_C.setRegister
+C Kernel_C.setMR 9 5 Kernel_C.setRegister
+C Kernel_C.copyMRsFault 10 1 Kernel_C.getRegister
+C Kernel_C.copyMRsFault 18 1 Kernel_C.setRegister
+C Kernel_C.copyMRsFault 21 1 Kernel_C.getRegister
+C Kernel_C.setMR 9 6 Kernel_C.setRegister
+C Kernel_C.setMR 9 7 Kernel_C.setRegister
+C Kernel_C.setMR 9 8 Kernel_C.setRegister
+C Kernel_C.setMR 9 9 Kernel_C.setRegister
+C Kernel_C.setMR 9 10 Kernel_C.setRegister
+C Kernel_C.setMR 9 11 Kernel_C.setRegister
+C Kernel_C.setMR 9 12 Kernel_C.setRegister
+C Kernel_C.setMRs_fault 17 0 Kernel_C.getRestartPC
+C Kernel_C.getRestartPC 5 0 Kernel_C.getRegister
+EndInlineScript
+}
+Problem (Pairing (sameObjectAs (ASM) <= Kernel_C.sameObjectAs (C))) {
+InlineScript
+C Kernel_C.sameObjectAs 12 0 Kernel_C.isArchCap
+C Kernel_C.sameObjectAs 16 0 Kernel_C.isArchCap
+C Kernel_C.sameObjectAs 21 0 Kernel_C.cap_get_capType
+C Kernel_C.sameObjectAs 25 0 Kernel_C.cap_get_capType
+C Kernel_C.sameObjectAs 29 0 Kernel_C.cap_get_capType
+C Kernel_C.isArchCap 6 0 Kernel_C.cap_get_capType
+C Kernel_C.isArchCap 6 1 Kernel_C.cap_get_capType
+EndInlineScript
+}
+Problem (Pairing (getObjectSize (ASM) <= Kernel_C.getObjectSize (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (isIOSpaceFrameCap (ASM) <= Kernel_C.isIOSpaceFrameCap (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (setIRQTrigger (ASM) <= Kernel_C.setIRQTrigger (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (char_to_long (ASM) <= Kernel_C.char_to_long (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (Arch_getObjectSize (ASM) <= Kernel_C.Arch_getObjectSize (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (get_p_reg_kernel_img_boot (ASM) <= Kernel_C.get_p_reg_kernel_img_boot (C))) {
+InlineScript
+C Kernel_C.get_p_reg_kernel_img_boot 5 0 Kernel_C.addrFromKPPtr
+C Kernel_C.get_p_reg_kernel_img_boot 8 0 Kernel_C.addrFromKPPtr
+C Kernel_C.get_p_reg_kernel_img_boot 11 0 Kernel_C.physBase
+C Kernel_C.addrFromKPPtr 6 0 Kernel_C.physBase
+C Kernel_C.addrFromKPPtr 8 0 Kernel_C.physBase
+C Kernel_C.addrFromKPPtr 6 1 Kernel_C.physBase
+C Kernel_C.addrFromKPPtr 8 1 Kernel_C.physBase
+EndInlineScript
+}
+Problem (Pairing (doReplyTransfer (ASM) <= Kernel_C.doReplyTransfer (C))) {
+InlineScript
+C Kernel_C.doReplyTransfer 15 0 Kernel_C.seL4_Fault_NullFault_new
+C Kernel_C.doReplyTransfer 24 0 Kernel_C.seL4_Fault_get_seL4_FaultType
+EndInlineScript
+}
+Problem (Pairing (Arch_maskCapRights (ASM) <= Kernel_C.Arch_maskCapRights (C))) {
+InlineScript
+C Kernel_C.Arch_maskCapRights 5 0 Kernel_C.cap_small_frame_cap_set_capFVMRights
+C Kernel_C.Arch_maskCapRights 7 0 Kernel_C.wordFromVMRights
+C Kernel_C.Arch_maskCapRights 11 0 Kernel_C.vmRightsFromWord
+C Kernel_C.Arch_maskCapRights 13 0 Kernel_C.cap_small_frame_cap_get_capFVMRights
+C Kernel_C.Arch_maskCapRights 16 0 Kernel_C.cap_frame_cap_set_capFVMRights
+C Kernel_C.Arch_maskCapRights 18 0 Kernel_C.wordFromVMRights
+C Kernel_C.Arch_maskCapRights 22 0 Kernel_C.vmRightsFromWord
+C Kernel_C.Arch_maskCapRights 24 0 Kernel_C.cap_frame_cap_get_capFVMRights
+C Kernel_C.Arch_maskCapRights 28 0 Kernel_C.cap_get_capType
+C Kernel_C.Arch_maskCapRights 31 0 Kernel_C.cap_get_capType
+EndInlineScript
+}
+Problem (Pairing (lookupExtraCaps (ASM) <= Kernel_C.lookupExtraCaps (C))) {
+InlineScript
+C Kernel_C.lookupExtraCaps 20 0 Kernel_C.seL4_Fault_CapFault_new
+C Kernel_C.lookupExtraCaps 29 0 Kernel_C.seL4_MessageInfo_get_extraCaps
+C Kernel_C.lookupExtraCaps 25 0 Kernel_C.getExtraCPtr
+EndInlineScript
+}
+Problem (Pairing (create_idle_thread (ASM) <= Kernel_C.create_idle_thread (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (cancelAllSignals (ASM) <= Kernel_C.cancelAllSignals (C))) {
+InlineScript
+C Kernel_C.cancelAllSignals 11 0 Kernel_C.notification_ptr_set_ntfnQueue_tail
+C Kernel_C.cancelAllSignals 12 0 Kernel_C.notification_ptr_set_ntfnQueue_head
+C Kernel_C.cancelAllSignals 13 0 Kernel_C.notification_ptr_set_state
+C Kernel_C.cancelAllSignals 16 0 Kernel_C.notification_ptr_get_ntfnQueue_head
+C Kernel_C.cancelAllSignals 19 0 Kernel_C.notification_ptr_get_state
+EndInlineScript
+}
+Problem (Pairing (decodeARMMMUInvocation (ASM) <= Kernel_C.decodeARMMMUInvocation (C))) {
+InlineScript
+ASM decodeARMMMUInvocation 317 0 instruction'mcr_15_0_r3_cr7_cr11_1_E00195F4
+ASM decodeARMMMUInvocation 319 0 instruction'dmb_sy_E00195F8
+C Kernel_C.decodeARMMMUInvocation 5 0 Kernel_C.decodeARMPageDirectoryInvocation
+C Kernel_C.decodeARMMMUInvocation 8 0 Kernel_C.decodeARMPageTableInvocation
+C Kernel_C.decodeARMMMUInvocation 11 0 Kernel_C.decodeARMFrameInvocation
+C Kernel_C.decodeARMMMUInvocation 14 0 Kernel_C.performASIDControlInvocation
+C Kernel_C.decodeARMMMUInvocation 28 0 Kernel_C.cap_untyped_cap_get_capPtr
+C Kernel_C.decodeARMMMUInvocation 41 0 Kernel_C.cap_untyped_cap_get_capIsDevice
+C Kernel_C.decodeARMMMUInvocation 45 0 Kernel_C.cap_untyped_cap_get_capBlockSize
+C Kernel_C.decodeARMMMUInvocation 49 0 Kernel_C.cap_get_capType
+C Kernel_C.decodeARMMMUInvocation 85 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeARMMMUInvocation 87 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeARMMMUInvocation 107 0 Kernel_C.performASIDPoolInvocation
+C Kernel_C.decodeARMMMUInvocation 138 0 Kernel_C.cap_asid_pool_cap_get_capASIDBase
+C Kernel_C.decodeARMMMUInvocation 146 0 Kernel_C.cap_asid_pool_cap_get_capASIDPool
+C Kernel_C.decodeARMMMUInvocation 150 0 Kernel_C.lookup_fault_invalid_root_new
+C Kernel_C.decodeARMMMUInvocation 160 0 Kernel_C.cap_asid_pool_cap_get_capASIDBase
+C Kernel_C.decodeARMMMUInvocation 169 0 Kernel_C.cap_page_directory_cap_get_capPDIsMapped
+C Kernel_C.decodeARMMMUInvocation 173 0 Kernel_C.cap_get_capType
+C Kernel_C.decodeARMMMUInvocation 199 0 Kernel_C.cap_get_capType
+C Kernel_C.decodeARMPageDirectoryInvocation 5 0 Kernel_C.performPDFlush
+C Kernel_C.decodeARMPageDirectoryInvocation 11 0 Kernel_C.pageBitsForSize
+C Kernel_C.decodeARMPageDirectoryInvocation 17 0 Kernel_C.pageBitsForSize
+C Kernel_C.decodeARMPageDirectoryInvocation 19 0 Kernel_C.pageBase
+C Kernel_C.decodeARMPageDirectoryInvocation 26 0 Kernel_C.pageBase
+C Kernel_C.decodeARMPageDirectoryInvocation 28 0 Kernel_C.pageBase
+C Kernel_C.decodeARMPageDirectoryInvocation 34 0 Kernel_C.resolveVAddr
+C Kernel_C.decodeARMPageDirectoryInvocation 51 0 Kernel_C.cap_page_directory_cap_get_capPDMappedASID
+C Kernel_C.decodeARMPageDirectoryInvocation 54 0 Kernel_C.cap_page_directory_cap_get_capPDBasePtr
+C Kernel_C.decodeARMPageDirectoryInvocation 63 0 Kernel_C.cap_page_directory_cap_get_capPDIsMapped
+C Kernel_C.decodeARMPageDirectoryInvocation 67 0 Kernel_C.cap_get_capType
+C Kernel_C.decodeARMPageDirectoryInvocation 79 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeARMPageDirectoryInvocation 81 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeARMPageTableInvocation 5 0 Kernel_C.performPageTableInvocationMap
+C Kernel_C.decodeARMPageTableInvocation 9 0 Kernel_C.cap_page_table_cap_set_capPTMappedAddress
+C Kernel_C.decodeARMPageTableInvocation 11 0 Kernel_C.cap_page_table_cap_set_capPTMappedASID
+C Kernel_C.decodeARMPageTableInvocation 13 0 Kernel_C.cap_page_table_cap_set_capPTIsMapped
+C Kernel_C.decodeARMPageTableInvocation 15 0 Kernel_C.pde_pde_coarse_new
+C Kernel_C.decodeARMPageTableInvocation 17 0 Kernel_C.vm_attributes_get_armParityEnabled
+C Kernel_C.decodeARMPageTableInvocation 19 0 Kernel_C.addrFromPPtr
+C Kernel_C.decodeARMPageTableInvocation 21 0 Kernel_C.cap_page_table_cap_get_capPTBasePtr
+C Kernel_C.decodeARMPageTableInvocation 27 0 Kernel_C.pde_ptr_get_pdeType
+C Kernel_C.decodeARMPageTableInvocation 54 0 Kernel_C.cap_page_directory_cap_get_capPDMappedASID
+C Kernel_C.decodeARMPageTableInvocation 57 0 Kernel_C.cap_page_directory_cap_get_capPDBasePtr
+C Kernel_C.decodeARMPageTableInvocation 66 0 Kernel_C.cap_page_directory_cap_get_capPDIsMapped
+C Kernel_C.decodeARMPageTableInvocation 70 0 Kernel_C.cap_get_capType
+C Kernel_C.decodeARMPageTableInvocation 76 0 Kernel_C.vmAttributesFromWord
+C Kernel_C.decodeARMPageTableInvocation 78 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeARMPageTableInvocation 80 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeARMPageTableInvocation 88 0 Kernel_C.cap_page_table_cap_get_capPTIsMapped
+C Kernel_C.decodeARMPageTableInvocation 104 0 Kernel_C.performPageTableInvocationUnmap
+C Kernel_C.decodeARMFrameInvocation 5 0 Kernel_C.performPageInvocationMapPTE
+C Kernel_C.decodeARMFrameInvocation 11 0 Kernel_C.createSafeMappingEntries_PTE
+C Kernel_C.decodeARMFrameInvocation 14 0 Kernel_C.performPageInvocationMapPDE
+C Kernel_C.decodeARMFrameInvocation 20 0 Kernel_C.createSafeMappingEntries_PDE
+C Kernel_C.decodeARMFrameInvocation 23 0 Kernel_C.generic_frame_cap_set_capFMappedAddress
+C Kernel_C.decodeARMFrameInvocation 25 0 Kernel_C.addrFromPPtr
+C Kernel_C.decodeARMFrameInvocation 27 0 Kernel_C.generic_frame_cap_get_capFBasePtr
+C Kernel_C.decodeARMFrameInvocation 33 0 Kernel_C.checkVPAlignment
+C Kernel_C.decodeARMFrameInvocation 37 0 Kernel_C.rightsFromWord
+C Kernel_C.decodeARMFrameInvocation 59 0 Kernel_C.generic_frame_cap_get_capFMappedAddress
+C Kernel_C.decodeARMFrameInvocation 67 0 Kernel_C.generic_frame_cap_get_capFMappedASID
+C Kernel_C.decodeARMFrameInvocation 77 0 Kernel_C.pageBitsForSize
+C Kernel_C.decodeARMFrameInvocation 80 0 Kernel_C.generic_frame_cap_get_capFIsMapped
+C Kernel_C.decodeARMFrameInvocation 83 0 Kernel_C.cap_page_directory_cap_get_capPDMappedASID
+C Kernel_C.decodeARMFrameInvocation 86 0 Kernel_C.cap_page_directory_cap_get_capPDBasePtr
+C Kernel_C.decodeARMFrameInvocation 95 0 Kernel_C.cap_page_directory_cap_get_capPDIsMapped
+C Kernel_C.decodeARMFrameInvocation 99 0 Kernel_C.cap_get_capType
+C Kernel_C.decodeARMFrameInvocation 101 0 Kernel_C.generic_frame_cap_get_capFVMRights
+C Kernel_C.decodeARMFrameInvocation 103 0 Kernel_C.generic_frame_cap_get_capFSize
+C Kernel_C.decodeARMFrameInvocation 109 0 Kernel_C.vmAttributesFromWord
+C Kernel_C.decodeARMFrameInvocation 111 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeARMFrameInvocation 113 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeARMFrameInvocation 115 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeARMFrameInvocation 127 0 Kernel_C.performPageInvocationUnmap
+C Kernel_C.decodeARMFrameInvocation 132 0 Kernel_C.performPageFlush
+C Kernel_C.decodeARMFrameInvocation 145 0 Kernel_C.addrFromPPtr
+C Kernel_C.decodeARMFrameInvocation 147 0 Kernel_C.generic_frame_cap_get_capFBasePtr
+C Kernel_C.decodeARMFrameInvocation 151 0 Kernel_C.pageBitsForSize
+C Kernel_C.decodeARMFrameInvocation 153 0 Kernel_C.generic_frame_cap_get_capFSize
+C Kernel_C.decodeARMFrameInvocation 161 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeARMFrameInvocation 163 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeARMFrameInvocation 177 0 Kernel_C.generic_frame_cap_get_capFIsMapped
+C Kernel_C.decodeARMFrameInvocation 179 0 Kernel_C.generic_frame_cap_get_capFMappedAddress
+C Kernel_C.decodeARMFrameInvocation 181 0 Kernel_C.generic_frame_cap_get_capFMappedASID
+C Kernel_C.decodeARMFrameInvocation 188 0 Kernel_C.performPageGetAddress
+C Kernel_C.decodeARMFrameInvocation 190 0 Kernel_C.generic_frame_cap_get_capFBasePtr
+C Kernel_C.performASIDControlInvocation 9 0 Kernel_C.cap_asid_pool_cap_new
+C Kernel_C.performASIDControlInvocation 14 0 Kernel_C.cap_untyped_cap_ptr_set_capFreeIndex
+C Kernel_C.performASIDControlInvocation 17 0 Kernel_C.cap_untyped_cap_get_capBlockSize
+C Kernel_C.getSyscallArg 7 0 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 1 Kernel_C.getRegister
+C Kernel_C.performASIDPoolInvocation 7 0 Kernel_C.cap_page_directory_cap_get_capPDBasePtr
+C Kernel_C.performASIDPoolInvocation 9 0 Kernel_C.cap_page_directory_cap_ptr_set_capPDIsMapped
+C Kernel_C.performASIDPoolInvocation 11 0 Kernel_C.cap_page_directory_cap_ptr_set_capPDMappedASID
+C Kernel_C.pageBase 6 0 Kernel_C.pageBitsForSize
+C Kernel_C.pageBase 6 1 Kernel_C.pageBitsForSize
+C Kernel_C.pageBase 6 2 Kernel_C.pageBitsForSize
+C Kernel_C.resolveVAddr 10 0 Kernel_C.pde_pde_section_ptr_get_size
+C Kernel_C.resolveVAddr 13 0 Kernel_C.pde_pde_section_ptr_get_address
+C Kernel_C.resolveVAddr 18 0 Kernel_C.pte_pte_small_ptr_get_address
+C Kernel_C.resolveVAddr 23 0 Kernel_C.pte_pte_large_ptr_get_address
+C Kernel_C.resolveVAddr 28 0 Kernel_C.pte_ptr_get_pteType
+C Kernel_C.resolveVAddr 30 0 Kernel_C.lookupPTSlot_nofail
+C Kernel_C.resolveVAddr 33 0 Kernel_C.ptrFromPAddr
+C Kernel_C.resolveVAddr 35 0 Kernel_C.pde_pde_coarse_ptr_get_address
+C Kernel_C.resolveVAddr 40 0 Kernel_C.pde_ptr_get_pdeType
+C Kernel_C.getSyscallArg 7 2 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 3 Kernel_C.getRegister
+C Kernel_C.performPageTableInvocationMap 4 0 Kernel_C.cleanByVA_PoU
+C Kernel_C.performPageTableInvocationMap 6 0 Kernel_C.addrFromPPtr
+C Kernel_C.addrFromPPtr 5 0 Kernel_C.physBase
+C Kernel_C.getSyscallArg 7 4 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 5 Kernel_C.getRegister
+C Kernel_C.performPageTableInvocationUnmap 4 0 Kernel_C.cap_page_table_cap_ptr_set_capPTIsMapped
+C Kernel_C.performPageTableInvocationUnmap 6 0 Kernel_C.clearMemory_PT
+C Kernel_C.performPageTableInvocationUnmap 11 0 Kernel_C.cap_page_table_cap_get_capPTMappedAddress
+C Kernel_C.performPageTableInvocationUnmap 13 0 Kernel_C.cap_page_table_cap_get_capPTMappedASID
+C Kernel_C.performPageTableInvocationUnmap 16 0 Kernel_C.cap_page_table_cap_get_capPTBasePtr
+C Kernel_C.performPageTableInvocationUnmap 19 0 Kernel_C.cap_page_table_cap_get_capPTIsMapped
+C Kernel_C.performPageInvocationMapPTE 10 0 Kernel_C.addrFromPPtr
+C Kernel_C.performPageInvocationMapPTE 23 0 Kernel_C.pteCheckIfMapped
+C Kernel_C.createSafeMappingEntries_PTE 11 0 Kernel_C.pte_ptr_get_pteType
+C Kernel_C.createSafeMappingEntries_PTE 24 0 Kernel_C.makeUserPTE
+C Kernel_C.createSafeMappingEntries_PTE 26 0 Kernel_C.vm_attributes_get_armExecuteNever
+C Kernel_C.createSafeMappingEntries_PTE 28 0 Kernel_C.vm_attributes_get_armPageCacheable
+C Kernel_C.createSafeMappingEntries_PTE 46 0 Kernel_C.pte_get_pteType
+C Kernel_C.createSafeMappingEntries_PTE 62 0 Kernel_C.makeUserPTE
+C Kernel_C.createSafeMappingEntries_PTE 64 0 Kernel_C.vm_attributes_get_armExecuteNever
+C Kernel_C.createSafeMappingEntries_PTE 66 0 Kernel_C.vm_attributes_get_armPageCacheable
+C Kernel_C.performPageInvocationMapPDE 10 0 Kernel_C.addrFromPPtr
+C Kernel_C.performPageInvocationMapPDE 23 0 Kernel_C.pdeCheckIfMapped
+C Kernel_C.createSafeMappingEntries_PDE 12 0 Kernel_C.pde_pde_section_ptr_get_size
+C Kernel_C.createSafeMappingEntries_PDE 19 0 Kernel_C.pde_ptr_get_pdeType
+C Kernel_C.createSafeMappingEntries_PDE 24 0 Kernel_C.vm_attributes_get_armExecuteNever
+C Kernel_C.createSafeMappingEntries_PDE 26 0 Kernel_C.vm_attributes_get_armPageCacheable
+C Kernel_C.createSafeMappingEntries_PDE 28 0 Kernel_C.vm_attributes_get_armParityEnabled
+C Kernel_C.createSafeMappingEntries_PDE 49 0 Kernel_C.pde_pde_section_get_size
+C Kernel_C.createSafeMappingEntries_PDE 58 0 Kernel_C.pde_get_pdeType
+C Kernel_C.createSafeMappingEntries_PDE 66 0 Kernel_C.vm_attributes_get_armExecuteNever
+C Kernel_C.createSafeMappingEntries_PDE 68 0 Kernel_C.vm_attributes_get_armPageCacheable
+C Kernel_C.createSafeMappingEntries_PDE 70 0 Kernel_C.vm_attributes_get_armParityEnabled
+C Kernel_C.generic_frame_cap_set_capFMappedAddress 5 0 Kernel_C.cap_small_frame_cap_set_capFMappedAddress
+C Kernel_C.generic_frame_cap_set_capFMappedAddress 7 0 Kernel_C.cap_small_frame_cap_set_capFMappedASID
+C Kernel_C.generic_frame_cap_set_capFMappedAddress 10 0 Kernel_C.cap_frame_cap_set_capFMappedAddress
+C Kernel_C.generic_frame_cap_set_capFMappedAddress 12 0 Kernel_C.cap_frame_cap_set_capFMappedASID
+C Kernel_C.generic_frame_cap_set_capFMappedAddress 16 0 Kernel_C.cap_get_capType
+C Kernel_C.addrFromPPtr 5 1 Kernel_C.physBase
+C Kernel_C.generic_frame_cap_get_capFBasePtr 5 0 Kernel_C.cap_small_frame_cap_get_capFBasePtr
+C Kernel_C.generic_frame_cap_get_capFBasePtr 8 0 Kernel_C.cap_frame_cap_get_capFBasePtr
+C Kernel_C.generic_frame_cap_get_capFBasePtr 15 0 Kernel_C.cap_get_capType
+C Kernel_C.checkVPAlignment 6 0 Kernel_C.pageBitsForSize
+C Kernel_C.generic_frame_cap_get_capFMappedAddress 5 0 Kernel_C.cap_small_frame_cap_get_capFMappedAddress
+C Kernel_C.generic_frame_cap_get_capFMappedAddress 8 0 Kernel_C.cap_frame_cap_get_capFMappedAddress
+C Kernel_C.generic_frame_cap_get_capFMappedAddress 12 0 Kernel_C.cap_get_capType
+C Kernel_C.generic_frame_cap_get_capFMappedASID 5 0 Kernel_C.cap_small_frame_cap_get_capFMappedASID
+C Kernel_C.generic_frame_cap_get_capFMappedASID 8 0 Kernel_C.cap_frame_cap_get_capFMappedASID
+C Kernel_C.generic_frame_cap_get_capFMappedASID 12 0 Kernel_C.cap_get_capType
+C Kernel_C.generic_frame_cap_get_capFIsMapped 5 0 Kernel_C.generic_frame_cap_get_capFMappedASID
+C Kernel_C.generic_frame_cap_get_capFVMRights 5 0 Kernel_C.cap_small_frame_cap_get_capFVMRights
+C Kernel_C.generic_frame_cap_get_capFVMRights 8 0 Kernel_C.cap_frame_cap_get_capFVMRights
+C Kernel_C.generic_frame_cap_get_capFVMRights 15 0 Kernel_C.cap_get_capType
+C Kernel_C.generic_frame_cap_get_capFSize 6 0 Kernel_C.cap_frame_cap_get_capFSize
+C Kernel_C.generic_frame_cap_get_capFSize 13 0 Kernel_C.cap_get_capType
+C Kernel_C.getSyscallArg 7 6 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 7 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 8 Kernel_C.getRegister
+C Kernel_C.performPageInvocationUnmap 4 0 Kernel_C.generic_frame_cap_ptr_set_capFMappedAddress
+C Kernel_C.performPageInvocationUnmap 8 0 Kernel_C.generic_frame_cap_get_capFBasePtr
+C Kernel_C.performPageInvocationUnmap 10 0 Kernel_C.generic_frame_cap_get_capFMappedAddress
+C Kernel_C.performPageInvocationUnmap 12 0 Kernel_C.generic_frame_cap_get_capFMappedASID
+C Kernel_C.performPageInvocationUnmap 14 0 Kernel_C.generic_frame_cap_get_capFSize
+C Kernel_C.performPageInvocationUnmap 17 0 Kernel_C.generic_frame_cap_get_capFIsMapped
+C Kernel_C.addrFromPPtr 5 2 Kernel_C.physBase
+C Kernel_C.generic_frame_cap_get_capFBasePtr 5 1 Kernel_C.cap_small_frame_cap_get_capFBasePtr
+C Kernel_C.generic_frame_cap_get_capFBasePtr 8 1 Kernel_C.cap_frame_cap_get_capFBasePtr
+C Kernel_C.generic_frame_cap_get_capFBasePtr 15 1 Kernel_C.cap_get_capType
+C Kernel_C.generic_frame_cap_get_capFSize 6 1 Kernel_C.cap_frame_cap_get_capFSize
+C Kernel_C.generic_frame_cap_get_capFSize 13 1 Kernel_C.cap_get_capType
+C Kernel_C.getSyscallArg 7 9 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 10 Kernel_C.getRegister
+C Kernel_C.generic_frame_cap_get_capFIsMapped 5 1 Kernel_C.generic_frame_cap_get_capFMappedASID
+C Kernel_C.generic_frame_cap_get_capFMappedAddress 5 1 Kernel_C.cap_small_frame_cap_get_capFMappedAddress
+C Kernel_C.generic_frame_cap_get_capFMappedAddress 8 1 Kernel_C.cap_frame_cap_get_capFMappedAddress
+C Kernel_C.generic_frame_cap_get_capFMappedAddress 12 1 Kernel_C.cap_get_capType
+C Kernel_C.generic_frame_cap_get_capFMappedASID 5 1 Kernel_C.cap_small_frame_cap_get_capFMappedASID
+C Kernel_C.generic_frame_cap_get_capFMappedASID 8 1 Kernel_C.cap_frame_cap_get_capFMappedASID
+C Kernel_C.generic_frame_cap_get_capFMappedASID 12 1 Kernel_C.cap_get_capType
+C Kernel_C.performPageGetAddress 6 0 Kernel_C.setRegister
+C Kernel_C.performPageGetAddress 8 0 Kernel_C.wordFromMessageInfo
+C Kernel_C.performPageGetAddress 10 0 Kernel_C.seL4_MessageInfo_new
+C Kernel_C.performPageGetAddress 12 0 Kernel_C.setMR
+C Kernel_C.performPageGetAddress 13 0 Kernel_C.setRegister
+C Kernel_C.performPageGetAddress 20 0 Kernel_C.addrFromPPtr
+C Kernel_C.generic_frame_cap_get_capFBasePtr 5 2 Kernel_C.cap_small_frame_cap_get_capFBasePtr
+C Kernel_C.generic_frame_cap_get_capFBasePtr 8 2 Kernel_C.cap_frame_cap_get_capFBasePtr
+C Kernel_C.generic_frame_cap_get_capFBasePtr 15 2 Kernel_C.cap_get_capType
+C Kernel_C.pte_ptr_get_pteType 8 0 Kernel_C.pte_pte_large_ptr_get_reserved
+C Kernel_C.pte_ptr_get_pteType 11 0 Kernel_C.pte_ptr_get_pteSize
+C Kernel_C.ptrFromPAddr 5 0 Kernel_C.physBase
+C Kernel_C.cleanByVA_PoU 2 0 Kernel_C.dmb
+C Kernel_C.cleanByVA_PoU 3 0 asm_instruction'mcr_p15,_0,_%0,_c7,_c11,_1
+C Kernel_C.addrFromPPtr 5 3 Kernel_C.physBase
+C Kernel_C.clearMemory_PT 5 0 Kernel_C.addrFromPPtr
+C Kernel_C.addrFromPPtr 5 4 Kernel_C.physBase
+C Kernel_C.pteCheckIfMapped 5 0 Kernel_C.pte_ptr_get_pteType
+C Kernel_C.pte_ptr_get_pteType 8 1 Kernel_C.pte_pte_large_ptr_get_reserved
+C Kernel_C.pte_ptr_get_pteType 11 1 Kernel_C.pte_ptr_get_pteSize
+C Kernel_C.makeUserPTE 5 0 Kernel_C.pte_pte_small_new
+C Kernel_C.makeUserPTE 7 0 Kernel_C.pte_pte_small_new
+C Kernel_C.makeUserPTE 10 0 Kernel_C.pte_pte_large_new
+C Kernel_C.makeUserPTE 12 0 Kernel_C.pte_pte_large_new
+C Kernel_C.pte_get_pteType 8 0 Kernel_C.pte_pte_large_get_reserved
+C Kernel_C.pte_get_pteType 11 0 Kernel_C.pte_get_pteSize
+C Kernel_C.makeUserPTE 5 1 Kernel_C.pte_pte_small_new
+C Kernel_C.makeUserPTE 7 1 Kernel_C.pte_pte_small_new
+C Kernel_C.makeUserPTE 10 1 Kernel_C.pte_pte_large_new
+C Kernel_C.makeUserPTE 12 1 Kernel_C.pte_pte_large_new
+C Kernel_C.addrFromPPtr 5 5 Kernel_C.physBase
+C Kernel_C.pdeCheckIfMapped 5 0 Kernel_C.pde_ptr_get_pdeType
+C Kernel_C.cap_small_frame_cap_set_capFMappedASID 5 0 Kernel_C.cap_small_frame_cap_set_capFMappedASIDHigh
+C Kernel_C.cap_small_frame_cap_set_capFMappedASID 8 0 Kernel_C.cap_small_frame_cap_set_capFMappedASIDLow
+C Kernel_C.cap_frame_cap_set_capFMappedASID 5 0 Kernel_C.cap_frame_cap_set_capFMappedASIDHigh
+C Kernel_C.cap_frame_cap_set_capFMappedASID 8 0 Kernel_C.cap_frame_cap_set_capFMappedASIDLow
+C Kernel_C.cap_small_frame_cap_get_capFMappedASID 6 0 Kernel_C.cap_small_frame_cap_get_capFMappedASIDLow
+C Kernel_C.cap_small_frame_cap_get_capFMappedASID 8 0 Kernel_C.cap_small_frame_cap_get_capFMappedASIDHigh
+C Kernel_C.cap_frame_cap_get_capFMappedASID 6 0 Kernel_C.cap_frame_cap_get_capFMappedASIDLow
+C Kernel_C.cap_frame_cap_get_capFMappedASID 8 0 Kernel_C.cap_frame_cap_get_capFMappedASIDHigh
+C Kernel_C.generic_frame_cap_get_capFMappedASID 5 2 Kernel_C.cap_small_frame_cap_get_capFMappedASID
+C Kernel_C.generic_frame_cap_get_capFMappedASID 8 2 Kernel_C.cap_frame_cap_get_capFMappedASID
+C Kernel_C.generic_frame_cap_get_capFMappedASID 12 2 Kernel_C.cap_get_capType
+C Kernel_C.generic_frame_cap_ptr_set_capFMappedAddress 5 0 Kernel_C.generic_frame_cap_set_capFMappedAddress
+C Kernel_C.generic_frame_cap_get_capFBasePtr 5 3 Kernel_C.cap_small_frame_cap_get_capFBasePtr
+C Kernel_C.generic_frame_cap_get_capFBasePtr 8 3 Kernel_C.cap_frame_cap_get_capFBasePtr
+C Kernel_C.generic_frame_cap_get_capFBasePtr 15 3 Kernel_C.cap_get_capType
+C Kernel_C.generic_frame_cap_get_capFMappedAddress 5 2 Kernel_C.cap_small_frame_cap_get_capFMappedAddress
+C Kernel_C.generic_frame_cap_get_capFMappedAddress 8 2 Kernel_C.cap_frame_cap_get_capFMappedAddress
+C Kernel_C.generic_frame_cap_get_capFMappedAddress 12 2 Kernel_C.cap_get_capType
+C Kernel_C.generic_frame_cap_get_capFMappedASID 5 3 Kernel_C.cap_small_frame_cap_get_capFMappedASID
+C Kernel_C.generic_frame_cap_get_capFMappedASID 8 3 Kernel_C.cap_frame_cap_get_capFMappedASID
+C Kernel_C.generic_frame_cap_get_capFMappedASID 12 3 Kernel_C.cap_get_capType
+C Kernel_C.generic_frame_cap_get_capFSize 6 2 Kernel_C.cap_frame_cap_get_capFSize
+C Kernel_C.generic_frame_cap_get_capFSize 13 2 Kernel_C.cap_get_capType
+C Kernel_C.generic_frame_cap_get_capFIsMapped 5 2 Kernel_C.generic_frame_cap_get_capFMappedASID
+C Kernel_C.generic_frame_cap_get_capFMappedASID 5 4 Kernel_C.cap_small_frame_cap_get_capFMappedASID
+C Kernel_C.generic_frame_cap_get_capFMappedASID 8 4 Kernel_C.cap_frame_cap_get_capFMappedASID
+C Kernel_C.generic_frame_cap_get_capFMappedASID 12 4 Kernel_C.cap_get_capType
+C Kernel_C.cap_small_frame_cap_get_capFMappedASID 6 1 Kernel_C.cap_small_frame_cap_get_capFMappedASIDLow
+C Kernel_C.cap_small_frame_cap_get_capFMappedASID 8 1 Kernel_C.cap_small_frame_cap_get_capFMappedASIDHigh
+C Kernel_C.cap_frame_cap_get_capFMappedASID 6 1 Kernel_C.cap_frame_cap_get_capFMappedASIDLow
+C Kernel_C.cap_frame_cap_get_capFMappedASID 8 1 Kernel_C.cap_frame_cap_get_capFMappedASIDHigh
+C Kernel_C.setMR 9 0 Kernel_C.setRegister
+C Kernel_C.addrFromPPtr 5 6 Kernel_C.physBase
+C Kernel_C.dmb 2 0 asm_instruction'dmb
+C Kernel_C.addrFromPPtr 5 7 Kernel_C.physBase
+C Kernel_C.pte_ptr_get_pteType 8 2 Kernel_C.pte_pte_large_ptr_get_reserved
+C Kernel_C.pte_ptr_get_pteType 11 2 Kernel_C.pte_ptr_get_pteSize
+C Kernel_C.cap_small_frame_cap_get_capFMappedASID 6 2 Kernel_C.cap_small_frame_cap_get_capFMappedASIDLow
+C Kernel_C.cap_small_frame_cap_get_capFMappedASID 8 2 Kernel_C.cap_small_frame_cap_get_capFMappedASIDHigh
+C Kernel_C.cap_frame_cap_get_capFMappedASID 6 2 Kernel_C.cap_frame_cap_get_capFMappedASIDLow
+C Kernel_C.cap_frame_cap_get_capFMappedASID 8 2 Kernel_C.cap_frame_cap_get_capFMappedASIDHigh
+C Kernel_C.generic_frame_cap_set_capFMappedAddress 5 1 Kernel_C.cap_small_frame_cap_set_capFMappedAddress
+C Kernel_C.generic_frame_cap_set_capFMappedAddress 7 1 Kernel_C.cap_small_frame_cap_set_capFMappedASID
+C Kernel_C.generic_frame_cap_set_capFMappedAddress 10 1 Kernel_C.cap_frame_cap_set_capFMappedAddress
+C Kernel_C.generic_frame_cap_set_capFMappedAddress 12 1 Kernel_C.cap_frame_cap_set_capFMappedASID
+C Kernel_C.generic_frame_cap_set_capFMappedAddress 16 1 Kernel_C.cap_get_capType
+C Kernel_C.cap_small_frame_cap_get_capFMappedASID 6 3 Kernel_C.cap_small_frame_cap_get_capFMappedASIDLow
+C Kernel_C.cap_small_frame_cap_get_capFMappedASID 8 3 Kernel_C.cap_small_frame_cap_get_capFMappedASIDHigh
+C Kernel_C.cap_frame_cap_get_capFMappedASID 6 3 Kernel_C.cap_frame_cap_get_capFMappedASIDLow
+C Kernel_C.cap_frame_cap_get_capFMappedASID 8 3 Kernel_C.cap_frame_cap_get_capFMappedASIDHigh
+C Kernel_C.generic_frame_cap_get_capFMappedASID 5 5 Kernel_C.cap_small_frame_cap_get_capFMappedASID
+C Kernel_C.generic_frame_cap_get_capFMappedASID 8 5 Kernel_C.cap_frame_cap_get_capFMappedASID
+C Kernel_C.generic_frame_cap_get_capFMappedASID 12 5 Kernel_C.cap_get_capType
+C Kernel_C.cap_small_frame_cap_get_capFMappedASID 6 4 Kernel_C.cap_small_frame_cap_get_capFMappedASIDLow
+C Kernel_C.cap_small_frame_cap_get_capFMappedASID 8 4 Kernel_C.cap_small_frame_cap_get_capFMappedASIDHigh
+C Kernel_C.cap_frame_cap_get_capFMappedASID 6 4 Kernel_C.cap_frame_cap_get_capFMappedASIDLow
+C Kernel_C.cap_frame_cap_get_capFMappedASID 8 4 Kernel_C.cap_frame_cap_get_capFMappedASIDHigh
+C Kernel_C.cap_small_frame_cap_set_capFMappedASID 5 1 Kernel_C.cap_small_frame_cap_set_capFMappedASIDHigh
+C Kernel_C.cap_small_frame_cap_set_capFMappedASID 8 1 Kernel_C.cap_small_frame_cap_set_capFMappedASIDLow
+C Kernel_C.cap_frame_cap_set_capFMappedASID 5 1 Kernel_C.cap_frame_cap_set_capFMappedASIDHigh
+C Kernel_C.cap_frame_cap_set_capFMappedASID 8 1 Kernel_C.cap_frame_cap_set_capFMappedASIDLow
+C Kernel_C.cap_small_frame_cap_get_capFMappedASID 6 5 Kernel_C.cap_small_frame_cap_get_capFMappedASIDLow
+C Kernel_C.cap_small_frame_cap_get_capFMappedASID 8 5 Kernel_C.cap_small_frame_cap_get_capFMappedASIDHigh
+C Kernel_C.cap_frame_cap_get_capFMappedASID 6 5 Kernel_C.cap_frame_cap_get_capFMappedASIDLow
+C Kernel_C.cap_frame_cap_get_capFMappedASID 8 5 Kernel_C.cap_frame_cap_get_capFMappedASIDHigh
+C Kernel_C.resolveVAddr 44 0 Kernel_C.lookupPDSlot
+C Kernel_C.createSafeMappingEntries_PDE 75 0 Kernel_C.lookupPDSlot
+C Kernel_C.createSafeMappingEntries_PDE 32 0 Kernel_C.lookupPDSlot
+C Kernel_C.performPageGetAddress 15 0 Kernel_C.lookupIPCBuffer
+C Kernel_C.lookupIPCBuffer 28 0 Kernel_C.cap_get_capType
+C Kernel_C.lookupIPCBuffer 24 0 Kernel_C.cap_get_capType
+C Kernel_C.lookupIPCBuffer 19 0 Kernel_C.generic_frame_cap_get_capFIsDevice
+C Kernel_C.generic_frame_cap_get_capFIsDevice 12 0 Kernel_C.cap_get_capType
+C Kernel_C.generic_frame_cap_get_capFIsDevice 5 0 Kernel_C.cap_small_frame_cap_get_capFIsDevice
+C Kernel_C.generic_frame_cap_get_capFIsDevice 8 0 Kernel_C.cap_frame_cap_get_capFIsDevice
+C Kernel_C.lookupIPCBuffer 15 0 Kernel_C.generic_frame_cap_get_capFVMRights
+C Kernel_C.generic_frame_cap_get_capFVMRights 15 1 Kernel_C.cap_get_capType
+C Kernel_C.generic_frame_cap_get_capFVMRights 5 1 Kernel_C.cap_small_frame_cap_get_capFVMRights
+C Kernel_C.generic_frame_cap_get_capFVMRights 8 1 Kernel_C.cap_frame_cap_get_capFVMRights
+C Kernel_C.lookupIPCBuffer 11 0 Kernel_C.generic_frame_cap_get_capFBasePtr
+C Kernel_C.generic_frame_cap_get_capFBasePtr 15 4 Kernel_C.cap_get_capType
+C Kernel_C.generic_frame_cap_get_capFBasePtr 5 4 Kernel_C.cap_small_frame_cap_get_capFBasePtr
+C Kernel_C.generic_frame_cap_get_capFBasePtr 8 4 Kernel_C.cap_frame_cap_get_capFBasePtr
+C Kernel_C.lookupIPCBuffer 9 0 Kernel_C.generic_frame_cap_get_capFSize
+C Kernel_C.generic_frame_cap_get_capFSize 13 3 Kernel_C.cap_get_capType
+C Kernel_C.generic_frame_cap_get_capFSize 6 3 Kernel_C.cap_frame_cap_get_capFSize
+C Kernel_C.lookupIPCBuffer 7 0 Kernel_C.pageBitsForSize
+EndInlineScript
+}
+Problem (Pairing (invokeCNodeSaveCaller (ASM) <= Kernel_C.invokeCNodeSaveCaller (C))) {
+InlineScript
+C Kernel_C.invokeCNodeSaveCaller 7 0 Kernel_C.cap_reply_cap_get_capReplyMaster
+C Kernel_C.invokeCNodeSaveCaller 15 0 Kernel_C.cap_get_capType
+EndInlineScript
+}
+Problem (Pairing (decodeSetPriority (ASM) <= Kernel_C.decodeSetPriority (C))) {
+InlineScript
+C Kernel_C.decodeSetPriority 7 0 Kernel_C.cap_null_cap_new
+C Kernel_C.decodeSetPriority 9 0 Kernel_C.cap_null_cap_new
+C Kernel_C.decodeSetPriority 11 0 Kernel_C.cap_null_cap_new
+C Kernel_C.decodeSetPriority 13 0 Kernel_C.cap_thread_cap_get_capTCBPtr
+C Kernel_C.decodeSetPriority 19 0 Kernel_C.checkPrio
+C Kernel_C.decodeSetPriority 22 0 Kernel_C.cap_thread_cap_get_capTCBPtr
+C Kernel_C.decodeSetPriority 30 0 Kernel_C.cap_get_capType
+C Kernel_C.decodeSetPriority 36 0 Kernel_C.getSyscallArg
+C Kernel_C.getSyscallArg 7 0 Kernel_C.getRegister
+EndInlineScript
+}
+Problem (Pairing (doNBRecvFailedTransfer (ASM) <= Kernel_C.doNBRecvFailedTransfer (C))) {
+InlineScript
+C Kernel_C.doNBRecvFailedTransfer 2 0 Kernel_C.setRegister
+EndInlineScript
+}
+Problem (Pairing (invokeCNodeRevoke (ASM) <= Kernel_C.invokeCNodeRevoke (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (deletedIRQHandler (ASM) <= Kernel_C.deletedIRQHandler (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (setDomain (ASM) <= Kernel_C.setDomain (C))) {
+InlineScript
+C Kernel_C.setDomain 8 0 Kernel_C.isRunnable
+C Kernel_C.isRunnable 8 0 Kernel_C.thread_state_get_tsType
+EndInlineScript
+}
+Problem (Pairing (unmapPage (ASM) <= Kernel_C.unmapPage (C))) {
+InlineScript
+ASM unmapPage 61 0 instruction'mcr_15_0_r2_cr7_cr11_1_E0012208
+ASM unmapPage 63 0 instruction'dmb_sy_E001220C
+ASM unmapPage 119 0 instruction'mcr_15_0_r0_cr7_cr11_1_E00122DC
+ASM unmapPage 121 0 instruction'dmb_sy_E00122E0
+C Kernel_C.unmapPage 3 0 Kernel_C.cleanByVA_PoU
+C Kernel_C.unmapPage 5 0 Kernel_C.addrFromPPtr
+C Kernel_C.unmapPage 9 0 Kernel_C.pte_pte_invalid_new
+C Kernel_C.unmapPage 12 0 Kernel_C.pte_pte_small_ptr_get_address
+C Kernel_C.unmapPage 15 0 Kernel_C.pte_ptr_get_pteType
+C Kernel_C.unmapPage 24 0 Kernel_C.addrFromPPtr
+C Kernel_C.unmapPage 35 0 Kernel_C.pte_pte_invalid_new
+C Kernel_C.unmapPage 40 0 Kernel_C.pte_pte_large_ptr_get_address
+C Kernel_C.unmapPage 43 0 Kernel_C.pte_ptr_get_pteType
+C Kernel_C.unmapPage 47 0 Kernel_C.cleanByVA_PoU
+C Kernel_C.unmapPage 49 0 Kernel_C.addrFromPPtr
+C Kernel_C.unmapPage 53 0 Kernel_C.pde_pde_invalid_new
+C Kernel_C.unmapPage 56 0 Kernel_C.pde_pde_section_ptr_get_address
+C Kernel_C.unmapPage 59 0 Kernel_C.pde_pde_section_ptr_get_size
+C Kernel_C.unmapPage 62 0 Kernel_C.pde_ptr_get_pdeType
+C Kernel_C.unmapPage 70 0 Kernel_C.addrFromPPtr
+C Kernel_C.unmapPage 81 0 Kernel_C.pde_pde_invalid_new
+C Kernel_C.unmapPage 86 0 Kernel_C.pde_pde_section_ptr_get_address
+C Kernel_C.unmapPage 89 0 Kernel_C.pde_pde_section_ptr_get_size
+C Kernel_C.unmapPage 92 0 Kernel_C.pde_ptr_get_pdeType
+C Kernel_C.unmapPage 107 0 Kernel_C.addrFromPPtr
+C Kernel_C.cleanByVA_PoU 2 0 Kernel_C.dmb
+C Kernel_C.cleanByVA_PoU 3 0 asm_instruction'mcr_p15,_0,_%0,_c7,_c11,_1
+C Kernel_C.addrFromPPtr 5 0 Kernel_C.physBase
+C Kernel_C.pte_ptr_get_pteType 8 0 Kernel_C.pte_pte_large_ptr_get_reserved
+C Kernel_C.pte_ptr_get_pteType 11 0 Kernel_C.pte_ptr_get_pteSize
+C Kernel_C.addrFromPPtr 5 1 Kernel_C.physBase
+C Kernel_C.pte_ptr_get_pteType 8 1 Kernel_C.pte_pte_large_ptr_get_reserved
+C Kernel_C.pte_ptr_get_pteType 11 1 Kernel_C.pte_ptr_get_pteSize
+C Kernel_C.cleanByVA_PoU 2 1 Kernel_C.dmb
+C Kernel_C.cleanByVA_PoU 3 1 asm_instruction'mcr_p15,_0,_%0,_c7,_c11,_1
+C Kernel_C.addrFromPPtr 5 2 Kernel_C.physBase
+C Kernel_C.addrFromPPtr 5 3 Kernel_C.physBase
+C Kernel_C.addrFromPPtr 5 4 Kernel_C.physBase
+C Kernel_C.dmb 2 0 asm_instruction'dmb
+C Kernel_C.dmb 2 1 asm_instruction'dmb
+C Kernel_C.unmapPage 94 0 Kernel_C.lookupPDSlot
+C Kernel_C.unmapPage 64 0 Kernel_C.lookupPDSlot
+EndInlineScript
+}
+Problem (Pairing (handleDoubleFault (ASM) <= Kernel_C.handleDoubleFault (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (Arch_prepareThreadDelete (ASM) <= Kernel_C.Arch_prepareThreadDelete (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (decodeTCBInvocation (ASM) <= Kernel_C.decodeTCBInvocation (C))) {
+InlineScript
+C Kernel_C.decodeTCBInvocation 16 0 Kernel_C.cap_thread_cap_get_capTCBPtr
+C Kernel_C.decodeTCBInvocation 23 0 Kernel_C.cap_thread_cap_get_capTCBPtr
+C Kernel_C.decodeTCBInvocation 52 0 Kernel_C.decodeSetTLSBase
+C Kernel_C.decodeSetTLSBase 5 0 Kernel_C.invokeSetTLSBase
+C Kernel_C.decodeSetTLSBase 7 0 Kernel_C.cap_thread_cap_get_capTCBPtr
+C Kernel_C.decodeSetTLSBase 11 0 Kernel_C.getSyscallArg
+C Kernel_C.invokeSetTLSBase 7 0 Kernel_C.setRegister
+C Kernel_C.getSyscallArg 7 0 Kernel_C.getRegister
+C Kernel_C.decodeTCBInvocation 14 0 Kernel_C.invokeTCB_Suspend
+C Kernel_C.decodeTCBInvocation 21 0 Kernel_C.invokeTCB_Resume
+EndInlineScript
+}
+Problem (Pairing (cancelIPC (ASM) <= Kernel_C.cancelIPC (C))) {
+InlineScript
+C Kernel_C.cancelIPC 3 0 Kernel_C.endpoint_ptr_set_state
+C Kernel_C.cancelIPC 5 0 Kernel_C.ep_ptr_set_queue
+C Kernel_C.cancelIPC 9 0 Kernel_C.ep_ptr_get_queue
+C Kernel_C.cancelIPC 12 0 Kernel_C.thread_state_ptr_get_blockingObject
+C Kernel_C.cancelIPC 15 0 Kernel_C.thread_state_ptr_get_blockingObject
+C Kernel_C.cancelIPC 22 0 Kernel_C.mdb_node_get_mdbNext
+C Kernel_C.cancelIPC 29 0 Kernel_C.seL4_Fault_NullFault_new
+C Kernel_C.cancelIPC 35 0 Kernel_C.thread_state_ptr_get_tsType
+C Kernel_C.ep_ptr_set_queue 2 0 Kernel_C.endpoint_ptr_set_epQueue_tail
+C Kernel_C.ep_ptr_set_queue 3 0 Kernel_C.endpoint_ptr_set_epQueue_head
+C Kernel_C.ep_ptr_get_queue 6 0 Kernel_C.endpoint_ptr_get_epQueue_tail
+C Kernel_C.ep_ptr_get_queue 9 0 Kernel_C.endpoint_ptr_get_epQueue_head
+EndInlineScript
+}
+Problem (Pairing (setPriority (ASM) <= Kernel_C.setPriority (C))) {
+InlineScript
+C Kernel_C.setPriority 8 0 Kernel_C.isRunnable
+C Kernel_C.isRunnable 8 0 Kernel_C.thread_state_get_tsType
+EndInlineScript
+}
+Problem (Pairing (scheduleChooseNewThread (ASM) <= Kernel_C.scheduleChooseNewThread (C))) {
+InlineScript
+C Kernel_C.scheduleChooseNewThread 3 0 Kernel_C.nextDomain
+EndInlineScript
+}
+Problem (Pairing (activate_kernel_vspace (ASM) <= Kernel_C.activate_kernel_vspace (C))) {
+InlineScript
+ASM activate_kernel_vspace 5 0 instruction'dsb_sy_E000057C
+ASM activate_kernel_vspace 7 0 instruction'mcr_15_0_r3_cr2_cr0_0_E0000590
+ASM activate_kernel_vspace 9 0 instruction'isb_sy_E0000594
+ASM activate_kernel_vspace 11 0 instruction'dsb_sy_E0000598
+ASM activate_kernel_vspace 13 0 instruction'mcr_15_0_r3_cr8_cr7_0_E00005A0
+ASM activate_kernel_vspace 15 0 instruction'dsb_sy_E00005A4
+ASM activate_kernel_vspace 17 0 instruction'isb_sy_E00005A8
+C Kernel_C.activate_kernel_vspace 4 0 Kernel_C.invalidateLocalTLB
+C Kernel_C.activate_kernel_vspace 5 0 Kernel_C.setCurrentPD
+C Kernel_C.activate_kernel_vspace 7 0 Kernel_C.addrFromKPPtr
+C Kernel_C.invalidateLocalTLB 2 0 Kernel_C.isb
+C Kernel_C.invalidateLocalTLB 3 0 Kernel_C.dsb
+C Kernel_C.invalidateLocalTLB 4 0 asm_instruction'mcr_p15,_0,_%0,_c8,_c7,_0
+C Kernel_C.invalidateLocalTLB 5 0 Kernel_C.dsb
+C Kernel_C.setCurrentPD 2 0 Kernel_C.setCurrentPDPL2
+C Kernel_C.setCurrentPD 3 0 Kernel_C.isb
+C Kernel_C.setCurrentPD 4 0 Kernel_C.writeTTBR0Ptr
+C Kernel_C.setCurrentPD 5 0 Kernel_C.dsb
+C Kernel_C.addrFromKPPtr 6 0 Kernel_C.physBase
+C Kernel_C.addrFromKPPtr 8 0 Kernel_C.physBase
+C Kernel_C.isb 2 0 asm_instruction'isb
+C Kernel_C.dsb 2 0 asm_instruction'dsb
+C Kernel_C.dsb 2 1 asm_instruction'dsb
+C Kernel_C.isb 2 1 asm_instruction'isb
+C Kernel_C.writeTTBR0Ptr 2 0 Kernel_C.writeTTBR0
+C Kernel_C.dsb 2 2 asm_instruction'dsb
+C Kernel_C.writeTTBR0 2 0 asm_instruction'mcr_p15,_0,_%0,_c2,_c0,_0
+EndInlineScript
+}
+Problem (Pairing (cap_get_capPtr (ASM) <= Kernel_C.cap_get_capPtr (C))) {
+InlineScript
+C Kernel_C.cap_get_capPtr 5 0 Kernel_C.cap_untyped_cap_get_capPtr
+C Kernel_C.cap_get_capPtr 8 0 Kernel_C.cap_endpoint_cap_get_capEPPtr
+C Kernel_C.cap_get_capPtr 11 0 Kernel_C.cap_notification_cap_get_capNtfnPtr
+C Kernel_C.cap_get_capPtr 14 0 Kernel_C.cap_cnode_cap_get_capCNodePtr
+C Kernel_C.cap_get_capPtr 18 0 Kernel_C.cap_thread_cap_get_capTCBPtr
+C Kernel_C.cap_get_capPtr 21 0 Kernel_C.cap_zombie_cap_get_capZombiePtr
+C Kernel_C.cap_get_capPtr 28 0 Kernel_C.cap_get_archCapPtr
+C Kernel_C.cap_get_capPtr 42 0 Kernel_C.cap_get_capType
+C Kernel_C.cap_zombie_cap_get_capZombiePtr 6 0 Kernel_C.cap_zombie_cap_get_capZombieID
+C Kernel_C.cap_zombie_cap_get_capZombiePtr 8 0 Kernel_C.cap_zombie_cap_get_capZombieBits
+C Kernel_C.cap_get_archCapPtr 5 0 Kernel_C.generic_frame_cap_get_capFBasePtr
+C Kernel_C.cap_get_archCapPtr 8 0 Kernel_C.cap_page_table_cap_get_capPTBasePtr
+C Kernel_C.cap_get_archCapPtr 11 0 Kernel_C.cap_page_directory_cap_get_capPDBasePtr
+C Kernel_C.cap_get_archCapPtr 14 0 Kernel_C.cap_asid_pool_cap_get_capASIDPool
+C Kernel_C.cap_get_archCapPtr 25 0 Kernel_C.cap_get_capType
+C Kernel_C.cap_zombie_cap_get_capZombieBits 10 0 Kernel_C.cap_zombie_cap_get_capZombieType
+C Kernel_C.generic_frame_cap_get_capFBasePtr 5 0 Kernel_C.cap_small_frame_cap_get_capFBasePtr
+C Kernel_C.generic_frame_cap_get_capFBasePtr 8 0 Kernel_C.cap_frame_cap_get_capFBasePtr
+C Kernel_C.generic_frame_cap_get_capFBasePtr 15 0 Kernel_C.cap_get_capType
+EndInlineScript
+}
+Problem (Pairing (invokeCNodeInsert (ASM) <= Kernel_C.invokeCNodeInsert (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (invokeIRQHandler_AckIRQ (ASM) <= Kernel_C.invokeIRQHandler_AckIRQ (C))) {
+InlineScript
+C Kernel_C.invokeIRQHandler_AckIRQ 2 0 Kernel_C.maskInterrupt
+C Kernel_C.maskInterrupt 2 0 Kernel_C.dist_enable_clr
+C Kernel_C.maskInterrupt 3 0 Kernel_C.dist_enable_set
+EndInlineScript
+}
+Problem (Pairing (findFreeHWASID (ASM) <= Kernel_C.findFreeHWASID (C))) {
+InlineScript
+ASM findFreeHWASID 29 0 instruction'dsb_sy_E001107C
+ASM findFreeHWASID 31 0 instruction'mcr_15_0_ip_cr8_cr7_2_E0011080
+ASM findFreeHWASID 33 0 instruction'dsb_sy_E0011084
+ASM findFreeHWASID 35 0 instruction'isb_sy_E0011088
+C Kernel_C.findFreeHWASID 11 0 Kernel_C.invalidateTranslationASID
+C Kernel_C.findFreeHWASID 12 0 Kernel_C.invalidateASID
+C Kernel_C.invalidateTranslationASID 2 0 Kernel_C.invalidateTranslationASIDLocal
+C Kernel_C.invalidateASID 5 0 Kernel_C.pde_pde_invalid_new
+C Kernel_C.invalidateTranslationASIDLocal 2 0 Kernel_C.invalidateLocalTLB_ASID
+C Kernel_C.invalidateLocalTLB_ASID 2 0 Kernel_C.invalidateLocalTLB
+C Kernel_C.invalidateLocalTLB_ASID 3 0 Kernel_C.isb
+C Kernel_C.invalidateLocalTLB_ASID 4 0 Kernel_C.dsb
+C Kernel_C.invalidateLocalTLB_ASID 5 0 asm_instruction'mcr_p15,_0,_%0,_c8,_c7,_2
+C Kernel_C.invalidateLocalTLB_ASID 6 0 Kernel_C.dsb
+C Kernel_C.invalidateLocalTLB 2 0 Kernel_C.isb
+C Kernel_C.invalidateLocalTLB 3 0 Kernel_C.dsb
+C Kernel_C.invalidateLocalTLB 4 0 asm_instruction'mcr_p15,_0,_%0,_c8,_c7,_0
+C Kernel_C.invalidateLocalTLB 5 0 Kernel_C.dsb
+C Kernel_C.isb 2 0 asm_instruction'isb
+C Kernel_C.dsb 2 0 asm_instruction'dsb
+C Kernel_C.dsb 2 1 asm_instruction'dsb
+C Kernel_C.isb 2 1 asm_instruction'isb
+C Kernel_C.dsb 2 2 asm_instruction'dsb
+C Kernel_C.dsb 2 3 asm_instruction'dsb
+EndInlineScript
+}
+Problem (Pairing (handleUnknownSyscall (ASM) <= Kernel_C.handleUnknownSyscall (C))) {
+InlineScript
+C Kernel_C.handleUnknownSyscall 10 0 Kernel_C.seL4_Fault_UnknownSyscall_new
+EndInlineScript
+}
+Problem (Pairing (restart (ASM) <= Kernel_C.restart (C))) {
+InlineScript
+C Kernel_C.restart 9 0 Kernel_C.isStopped
+C Kernel_C.isStopped 8 0 Kernel_C.thread_state_get_tsType
+EndInlineScript
+}
+Problem (Pairing (handleInterruptEntry (ASM) <= Kernel_C.handleInterruptEntry (C))) {
+InlineScript
+C Kernel_C.handleInterruptEntry 7 0 Kernel_C.handleSpuriousIRQ
+C Kernel_C.handleInterruptEntry 10 0 Kernel_C.getActiveIRQ
+EndInlineScript
+}
+Problem (Pairing (loadHWASID (ASM) <= Kernel_C.loadHWASID (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (setMCPriority (ASM) <= Kernel_C.setMCPriority (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (cleanCacheRange_PoU (ASM) <= Kernel_C.cleanCacheRange_PoU (C))) {
+InlineScript
+ASM cleanCacheRange_PoU 7 0 instruction'mcr_15_0_r3_cr7_cr11_1_E001215C
+ASM cleanCacheRange_PoU 9 0 instruction'dmb_sy_E0012160
+C Kernel_C.cleanCacheRange_PoU 8 0 Kernel_C.cleanByVA_PoU
+C Kernel_C.cleanByVA_PoU 2 0 Kernel_C.dmb
+C Kernel_C.cleanByVA_PoU 3 0 asm_instruction'mcr_p15,_0,_%0,_c7,_c11,_1
+C Kernel_C.dmb 2 0 asm_instruction'dmb
+EndInlineScript
+}
+Problem (Pairing (cpu_iface_init (ASM) <= Kernel_C.cpu_iface_init (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (handleUserLevelFault (ASM) <= Kernel_C.handleUserLevelFault (C))) {
+InlineScript
+C Kernel_C.handleUserLevelFault 10 0 Kernel_C.seL4_Fault_UserException_new
+EndInlineScript
+}
+Problem (Pairing (provide_cap (ASM) <= Kernel_C.provide_cap (C))) {
+InlineScript
+C Kernel_C.provide_cap 8 0 Kernel_C.write_slot
+C Kernel_C.write_slot 9 0 Kernel_C.mdb_node_new
+C Kernel_C.write_slot 4 0 Kernel_C.mdb_node_ptr_set_mdbRevocable
+C Kernel_C.write_slot 2 0 Kernel_C.mdb_node_ptr_set_mdbFirstBadged
+EndInlineScript
+}
+Problem (Pairing (cap_get_capIsPhysical (ASM) <= Kernel_C.cap_get_capIsPhysical (C))) {
+InlineScript
+C Kernel_C.cap_get_capIsPhysical 15 0 Kernel_C.cap_get_archCapIsPhysical
+C Kernel_C.cap_get_capIsPhysical 29 0 Kernel_C.cap_get_capType
+C Kernel_C.cap_get_archCapIsPhysical 19 0 Kernel_C.cap_get_capType
+EndInlineScript
+}
+Problem (Pairing (tcbSchedEnqueue (ASM) <= Kernel_C.tcbSchedEnqueue (C))) {
+InlineScript
+C Kernel_C.tcbSchedEnqueue 2 0 Kernel_C.thread_state_ptr_set_tcbQueued
+C Kernel_C.tcbSchedEnqueue 12 0 Kernel_C.addToBitmap
+C Kernel_C.tcbSchedEnqueue 21 0 Kernel_C.ready_queues_index
+C Kernel_C.tcbSchedEnqueue 28 0 Kernel_C.thread_state_get_tcbQueued
+C Kernel_C.addToBitmap 9 0 Kernel_C.invert_l1index
+C Kernel_C.addToBitmap 11 0 Kernel_C.prio_to_l1index
+EndInlineScript
+}
+Problem (Pairing (decodeSetSpace (ASM) <= Kernel_C.decodeSetSpace (C))) {
+InlineScript
+C Kernel_C.decodeSetSpace 7 0 Kernel_C.cap_null_cap_new
+C Kernel_C.decodeSetSpace 9 0 Kernel_C.cap_thread_cap_get_capTCBPtr
+C Kernel_C.decodeSetSpace 31 0 Kernel_C.cap_get_capType
+C Kernel_C.decodeSetSpace 50 0 Kernel_C.cap_thread_cap_get_capTCBPtr
+C Kernel_C.decodeSetSpace 58 0 Kernel_C.cap_thread_cap_get_capTCBPtr
+C Kernel_C.decodeSetSpace 74 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeSetSpace 76 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeSetSpace 78 0 Kernel_C.getSyscallArg
+C Kernel_C.getSyscallArg 7 0 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 1 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 2 Kernel_C.getRegister
+EndInlineScript
+}
+Problem (Pairing (getReceiveSlots (ASM) <= Kernel_C.getReceiveSlots (C))) {
+InlineScript
+C Kernel_C.getReceiveSlots 7 0 Kernel_C.cap_get_capType
+C Kernel_C.getReceiveSlots 21 0 Kernel_C.loadCapTransfer
+C Kernel_C.loadCapTransfer 6 0 Kernel_C.capTransferFromWords
+EndInlineScript
+}
+Problem (Pairing (copyGlobalMappings (ASM) <= Kernel_C.copyGlobalMappings (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (maskCapRights (ASM) <= Kernel_C.maskCapRights (C))) {
+InlineScript
+C Kernel_C.maskCapRights 6 0 Kernel_C.cap_endpoint_cap_set_capCanGrantReply
+C Kernel_C.maskCapRights 8 0 Kernel_C.seL4_CapRights_get_capAllowGrantReply
+C Kernel_C.maskCapRights 10 0 Kernel_C.cap_endpoint_cap_get_capCanGrantReply
+C Kernel_C.maskCapRights 12 0 Kernel_C.cap_endpoint_cap_set_capCanGrant
+C Kernel_C.maskCapRights 14 0 Kernel_C.seL4_CapRights_get_capAllowGrant
+C Kernel_C.maskCapRights 16 0 Kernel_C.cap_endpoint_cap_get_capCanGrant
+C Kernel_C.maskCapRights 18 0 Kernel_C.cap_endpoint_cap_set_capCanReceive
+C Kernel_C.maskCapRights 20 0 Kernel_C.seL4_CapRights_get_capAllowRead
+C Kernel_C.maskCapRights 22 0 Kernel_C.cap_endpoint_cap_get_capCanReceive
+C Kernel_C.maskCapRights 24 0 Kernel_C.cap_endpoint_cap_set_capCanSend
+C Kernel_C.maskCapRights 26 0 Kernel_C.seL4_CapRights_get_capAllowWrite
+C Kernel_C.maskCapRights 28 0 Kernel_C.cap_endpoint_cap_get_capCanSend
+C Kernel_C.maskCapRights 31 0 Kernel_C.cap_notification_cap_set_capNtfnCanReceive
+C Kernel_C.maskCapRights 33 0 Kernel_C.seL4_CapRights_get_capAllowRead
+C Kernel_C.maskCapRights 35 0 Kernel_C.cap_notification_cap_get_capNtfnCanReceive
+C Kernel_C.maskCapRights 37 0 Kernel_C.cap_notification_cap_set_capNtfnCanSend
+C Kernel_C.maskCapRights 39 0 Kernel_C.seL4_CapRights_get_capAllowWrite
+C Kernel_C.maskCapRights 41 0 Kernel_C.cap_notification_cap_get_capNtfnCanSend
+C Kernel_C.maskCapRights 44 0 Kernel_C.cap_reply_cap_set_capReplyCanGrant
+C Kernel_C.maskCapRights 46 0 Kernel_C.seL4_CapRights_get_capAllowGrant
+C Kernel_C.maskCapRights 48 0 Kernel_C.cap_reply_cap_get_capReplyCanGrant
+C Kernel_C.maskCapRights 58 0 Kernel_C.cap_get_capType
+C Kernel_C.maskCapRights 64 0 Kernel_C.isArchCap
+C Kernel_C.isArchCap 6 0 Kernel_C.cap_get_capType
+EndInlineScript
+}
+Problem (Pairing (sendIPC (ASM) <= Kernel_C.sendIPC (C))) {
+InlineScript
+C Kernel_C.sendIPC 2 0 Kernel_C.ep_ptr_set_queue
+C Kernel_C.sendIPC 3 0 Kernel_C.endpoint_ptr_set_state
+C Kernel_C.sendIPC 7 0 Kernel_C.ep_ptr_get_queue
+C Kernel_C.sendIPC 9 0 Kernel_C.thread_state_ptr_set_blockingIPCIsCall
+C Kernel_C.sendIPC 11 0 Kernel_C.thread_state_ptr_set_blockingIPCCanGrantReply
+C Kernel_C.sendIPC 13 0 Kernel_C.thread_state_ptr_set_blockingIPCCanGrant
+C Kernel_C.sendIPC 15 0 Kernel_C.thread_state_ptr_set_blockingIPCBadge
+C Kernel_C.sendIPC 17 0 Kernel_C.thread_state_ptr_set_blockingObject
+C Kernel_C.sendIPC 19 0 Kernel_C.thread_state_ptr_set_tsType
+C Kernel_C.sendIPC 30 0 Kernel_C.thread_state_ptr_get_blockingIPCCanGrant
+C Kernel_C.sendIPC 33 0 Kernel_C.endpoint_ptr_set_state
+C Kernel_C.sendIPC 35 0 Kernel_C.ep_ptr_set_queue
+C Kernel_C.sendIPC 40 0 Kernel_C.ep_ptr_get_queue
+C Kernel_C.sendIPC 45 0 Kernel_C.endpoint_ptr_get_state
+C Kernel_C.ep_ptr_set_queue 2 0 Kernel_C.endpoint_ptr_set_epQueue_tail
+C Kernel_C.ep_ptr_set_queue 3 0 Kernel_C.endpoint_ptr_set_epQueue_head
+C Kernel_C.ep_ptr_get_queue 6 0 Kernel_C.endpoint_ptr_get_epQueue_tail
+C Kernel_C.ep_ptr_get_queue 9 0 Kernel_C.endpoint_ptr_get_epQueue_head
+C Kernel_C.ep_ptr_set_queue 2 1 Kernel_C.endpoint_ptr_set_epQueue_tail
+C Kernel_C.ep_ptr_set_queue 3 1 Kernel_C.endpoint_ptr_set_epQueue_head
+C Kernel_C.ep_ptr_get_queue 6 1 Kernel_C.endpoint_ptr_get_epQueue_tail
+C Kernel_C.ep_ptr_get_queue 9 1 Kernel_C.endpoint_ptr_get_epQueue_head
+C Kernel_C.sendIPC 5 0 Kernel_C.tcbEPAppend
+EndInlineScript
+}
+Problem (Pairing (strlcat (ASM) <= Kernel_C.strlcat (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (decodeUntypedInvocation (ASM) <= Kernel_C.decodeUntypedInvocation (C))) {
+InlineScript
+C Kernel_C.decodeUntypedInvocation 9 0 Kernel_C.alignUp
+C Kernel_C.decodeUntypedInvocation 23 0 Kernel_C.cap_untyped_cap_get_capIsDevice
+C Kernel_C.decodeUntypedInvocation 34 0 Kernel_C.cap_untyped_cap_get_capBlockSize
+C Kernel_C.decodeUntypedInvocation 38 0 Kernel_C.cap_untyped_cap_get_capPtr
+C Kernel_C.decodeUntypedInvocation 42 0 Kernel_C.cap_untyped_cap_get_capFreeIndex
+C Kernel_C.decodeUntypedInvocation 62 0 Kernel_C.cap_cnode_cap_get_capCNodePtr
+C Kernel_C.decodeUntypedInvocation 90 0 Kernel_C.cap_cnode_cap_get_capCNodeRadix
+C Kernel_C.decodeUntypedInvocation 94 0 Kernel_C.lookup_fault_missing_capability_new
+C Kernel_C.decodeUntypedInvocation 101 0 Kernel_C.cap_get_capType
+C Kernel_C.decodeUntypedInvocation 150 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeUntypedInvocation 152 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeUntypedInvocation 154 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeUntypedInvocation 156 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeUntypedInvocation 158 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeUntypedInvocation 160 0 Kernel_C.getSyscallArg
+C Kernel_C.getSyscallArg 7 0 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 1 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 2 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 3 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 4 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 5 Kernel_C.getRegister
+EndInlineScript
+}
+Problem (Pairing (isValidVTableRoot (ASM) <= Kernel_C.isValidVTableRoot (C))) {
+InlineScript
+C Kernel_C.isValidVTableRoot 6 0 Kernel_C.cap_page_directory_cap_get_capPDIsMapped
+C Kernel_C.isValidVTableRoot 10 0 Kernel_C.cap_get_capType
+EndInlineScript
+}
+Problem (Pairing (initL2Cache (ASM) <= Kernel_C.initL2Cache (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (createObject (ASM) <= Kernel_C.createObject (C))) {
+InlineScript
+C Kernel_C.createObject 5 0 Kernel_C.cap_thread_cap_new
+C Kernel_C.createObject 11 0 Kernel_C.Arch_initContext
+C Kernel_C.createObject 19 0 Kernel_C.cap_endpoint_cap_new
+C Kernel_C.createObject 24 0 Kernel_C.cap_notification_cap_new
+C Kernel_C.createObject 29 0 Kernel_C.cap_cnode_cap_new
+C Kernel_C.createObject 36 0 Kernel_C.cap_untyped_cap_new
+EndInlineScript
+}
+Problem (Pairing (cap_get_capSizeBits (ASM) <= Kernel_C.cap_get_capSizeBits (C))) {
+InlineScript
+C Kernel_C.cap_get_capSizeBits 5 0 Kernel_C.cap_untyped_cap_get_capBlockSize
+C Kernel_C.cap_get_capSizeBits 10 0 Kernel_C.cap_cnode_cap_get_capCNodeRadix
+C Kernel_C.cap_get_capSizeBits 19 0 Kernel_C.cap_zombie_cap_get_capZombieType
+C Kernel_C.cap_get_capSizeBits 27 0 Kernel_C.cap_get_archCapSizeBits
+C Kernel_C.cap_get_capSizeBits 42 0 Kernel_C.cap_get_capType
+C Kernel_C.cap_get_archCapSizeBits 5 0 Kernel_C.pageBitsForSize
+C Kernel_C.cap_get_archCapSizeBits 7 0 Kernel_C.generic_frame_cap_get_capFSize
+C Kernel_C.cap_get_archCapSizeBits 21 0 Kernel_C.cap_get_capType
+C Kernel_C.generic_frame_cap_get_capFSize 6 0 Kernel_C.cap_frame_cap_get_capFSize
+C Kernel_C.generic_frame_cap_get_capFSize 13 0 Kernel_C.cap_get_capType
+EndInlineScript
+}
+Problem (Pairing (findPDForASID (ASM) <= Kernel_C.findPDForASID (C))) {
+InlineScript
+C Kernel_C.findPDForASID 11 0 Kernel_C.lookup_fault_invalid_root_new
+C Kernel_C.findPDForASID 20 0 Kernel_C.lookup_fault_invalid_root_new
+EndInlineScript
+}
+Problem (Pairing (Arch_sameRegionAs (ASM) <= Kernel_C.Arch_sameRegionAs (C))) {
+InlineScript
+C Kernel_C.Arch_sameRegionAs 8 0 Kernel_C.pageBitsForSize
+C Kernel_C.Arch_sameRegionAs 10 0 Kernel_C.generic_frame_cap_get_capFSize
+C Kernel_C.Arch_sameRegionAs 14 0 Kernel_C.pageBitsForSize
+C Kernel_C.Arch_sameRegionAs 16 0 Kernel_C.generic_frame_cap_get_capFSize
+C Kernel_C.Arch_sameRegionAs 18 0 Kernel_C.generic_frame_cap_get_capFBasePtr
+C Kernel_C.Arch_sameRegionAs 20 0 Kernel_C.generic_frame_cap_get_capFBasePtr
+C Kernel_C.Arch_sameRegionAs 24 0 Kernel_C.cap_get_capType
+C Kernel_C.Arch_sameRegionAs 28 0 Kernel_C.cap_get_capType
+C Kernel_C.Arch_sameRegionAs 31 0 Kernel_C.cap_page_table_cap_get_capPTBasePtr
+C Kernel_C.Arch_sameRegionAs 33 0 Kernel_C.cap_page_table_cap_get_capPTBasePtr
+C Kernel_C.Arch_sameRegionAs 36 0 Kernel_C.cap_get_capType
+C Kernel_C.Arch_sameRegionAs 39 0 Kernel_C.cap_page_directory_cap_get_capPDBasePtr
+C Kernel_C.Arch_sameRegionAs 41 0 Kernel_C.cap_page_directory_cap_get_capPDBasePtr
+C Kernel_C.Arch_sameRegionAs 44 0 Kernel_C.cap_get_capType
+C Kernel_C.Arch_sameRegionAs 48 0 Kernel_C.cap_get_capType
+C Kernel_C.Arch_sameRegionAs 51 0 Kernel_C.cap_asid_pool_cap_get_capASIDPool
+C Kernel_C.Arch_sameRegionAs 53 0 Kernel_C.cap_asid_pool_cap_get_capASIDPool
+C Kernel_C.Arch_sameRegionAs 56 0 Kernel_C.cap_get_capType
+C Kernel_C.Arch_sameRegionAs 64 0 Kernel_C.cap_get_capType
+C Kernel_C.generic_frame_cap_get_capFSize 6 0 Kernel_C.cap_frame_cap_get_capFSize
+C Kernel_C.generic_frame_cap_get_capFSize 13 0 Kernel_C.cap_get_capType
+C Kernel_C.generic_frame_cap_get_capFSize 6 1 Kernel_C.cap_frame_cap_get_capFSize
+C Kernel_C.generic_frame_cap_get_capFSize 13 1 Kernel_C.cap_get_capType
+C Kernel_C.generic_frame_cap_get_capFBasePtr 5 0 Kernel_C.cap_small_frame_cap_get_capFBasePtr
+C Kernel_C.generic_frame_cap_get_capFBasePtr 8 0 Kernel_C.cap_frame_cap_get_capFBasePtr
+C Kernel_C.generic_frame_cap_get_capFBasePtr 15 0 Kernel_C.cap_get_capType
+C Kernel_C.generic_frame_cap_get_capFBasePtr 5 1 Kernel_C.cap_small_frame_cap_get_capFBasePtr
+C Kernel_C.generic_frame_cap_get_capFBasePtr 8 1 Kernel_C.cap_frame_cap_get_capFBasePtr
+C Kernel_C.generic_frame_cap_get_capFBasePtr 15 1 Kernel_C.cap_get_capType
+EndInlineScript
+}
+Problem (Pairing (write_slot (ASM) <= Kernel_C.write_slot (C))) {
+InlineScript
+C Kernel_C.write_slot 2 0 Kernel_C.mdb_node_ptr_set_mdbFirstBadged
+C Kernel_C.write_slot 4 0 Kernel_C.mdb_node_ptr_set_mdbRevocable
+C Kernel_C.write_slot 9 0 Kernel_C.mdb_node_new
+EndInlineScript
+}
+Problem (Pairing (arm_errata (ASM) <= Kernel_C.arm_errata (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (cteDeleteOne (ASM) <= Kernel_C.cteDeleteOne (C))) {
+InlineScript
+C Kernel_C.cteDeleteOne 4 0 Kernel_C.cap_null_cap_new
+C Kernel_C.cteDeleteOne 15 0 Kernel_C.cap_get_capType
+EndInlineScript
+}
+Problem (Pairing (doIPCTransfer (ASM) <= Kernel_C.doIPCTransfer (C))) {
+InlineScript
+C Kernel_C.doIPCTransfer 9 0 Kernel_C.seL4_Fault_get_seL4_FaultType
+EndInlineScript
+}
+Problem (Pairing (flushPage (ASM) <= Kernel_C.flushPage (C))) {
+InlineScript
+ASM flushPage 13 0 instruction'dsb_sy_E00113A0
+ASM flushPage 15 0 instruction'mcr_15_0_r3_cr8_cr7_1_E00113B0
+ASM flushPage 17 0 instruction'dsb_sy_E00113B4
+ASM flushPage 19 0 instruction'isb_sy_E00113B8
+C Kernel_C.flushPage 5 0 Kernel_C.invalidateTranslationSingle
+C Kernel_C.flushPage 7 0 Kernel_C.pde_pde_invalid_get_stored_hw_asid
+C Kernel_C.flushPage 12 0 Kernel_C.pde_pde_invalid_get_stored_asid_valid
+C Kernel_C.invalidateTranslationSingle 2 0 Kernel_C.invalidateTranslationSingleLocal
+C Kernel_C.invalidateTranslationSingleLocal 2 0 Kernel_C.invalidateLocalTLB_VAASID
+C Kernel_C.invalidateLocalTLB_VAASID 2 0 Kernel_C.invalidateLocalTLB
+C Kernel_C.invalidateLocalTLB_VAASID 3 0 Kernel_C.isb
+C Kernel_C.invalidateLocalTLB_VAASID 4 0 Kernel_C.dsb
+C Kernel_C.invalidateLocalTLB_VAASID 5 0 asm_instruction'mcr_p15,_0,_%0,_c8,_c7,_1
+C Kernel_C.invalidateLocalTLB_VAASID 6 0 Kernel_C.dsb
+C Kernel_C.invalidateLocalTLB 2 0 Kernel_C.isb
+C Kernel_C.invalidateLocalTLB 3 0 Kernel_C.dsb
+C Kernel_C.invalidateLocalTLB 4 0 asm_instruction'mcr_p15,_0,_%0,_c8,_c7,_0
+C Kernel_C.invalidateLocalTLB 5 0 Kernel_C.dsb
+C Kernel_C.isb 2 0 asm_instruction'isb
+C Kernel_C.dsb 2 0 asm_instruction'dsb
+C Kernel_C.dsb 2 1 asm_instruction'dsb
+C Kernel_C.isb 2 1 asm_instruction'isb
+C Kernel_C.dsb 2 2 asm_instruction'dsb
+C Kernel_C.dsb 2 3 asm_instruction'dsb
+EndInlineScript
+}
+Problem (Pairing (Arch_finaliseCap (ASM) <= Kernel_C.Arch_finaliseCap (C))) {
+InlineScript
+C Kernel_C.Arch_finaliseCap 6 0 Kernel_C.cap_null_cap_new
+C Kernel_C.Arch_finaliseCap 9 0 Kernel_C.cap_null_cap_new
+C Kernel_C.Arch_finaliseCap 12 0 Kernel_C.cap_asid_pool_cap_get_capASIDPool
+C Kernel_C.Arch_finaliseCap 14 0 Kernel_C.cap_asid_pool_cap_get_capASIDBase
+C Kernel_C.Arch_finaliseCap 18 0 Kernel_C.cap_page_directory_cap_get_capPDBasePtr
+C Kernel_C.Arch_finaliseCap 20 0 Kernel_C.cap_page_directory_cap_get_capPDMappedASID
+C Kernel_C.Arch_finaliseCap 24 0 Kernel_C.cap_page_directory_cap_get_capPDIsMapped
+C Kernel_C.Arch_finaliseCap 29 0 Kernel_C.cap_page_table_cap_get_capPTBasePtr
+C Kernel_C.Arch_finaliseCap 31 0 Kernel_C.cap_page_table_cap_get_capPTMappedAddress
+C Kernel_C.Arch_finaliseCap 33 0 Kernel_C.cap_page_table_cap_get_capPTMappedASID
+C Kernel_C.Arch_finaliseCap 37 0 Kernel_C.cap_page_table_cap_get_capPTIsMapped
+C Kernel_C.Arch_finaliseCap 42 0 Kernel_C.cap_small_frame_cap_get_capFBasePtr
+C Kernel_C.Arch_finaliseCap 44 0 Kernel_C.cap_small_frame_cap_get_capFMappedAddress
+C Kernel_C.Arch_finaliseCap 46 0 Kernel_C.cap_small_frame_cap_get_capFMappedASID
+C Kernel_C.Arch_finaliseCap 49 0 Kernel_C.cap_small_frame_cap_get_capFMappedASID
+C Kernel_C.Arch_finaliseCap 52 0 Kernel_C.cap_frame_cap_get_capFBasePtr
+C Kernel_C.Arch_finaliseCap 54 0 Kernel_C.cap_frame_cap_get_capFMappedAddress
+C Kernel_C.Arch_finaliseCap 56 0 Kernel_C.cap_frame_cap_get_capFMappedASID
+C Kernel_C.Arch_finaliseCap 58 0 Kernel_C.cap_frame_cap_get_capFSize
+C Kernel_C.Arch_finaliseCap 61 0 Kernel_C.cap_frame_cap_get_capFMappedASID
+C Kernel_C.Arch_finaliseCap 69 0 Kernel_C.cap_get_capType
+C Kernel_C.cap_small_frame_cap_get_capFMappedASID 6 0 Kernel_C.cap_small_frame_cap_get_capFMappedASIDLow
+C Kernel_C.cap_small_frame_cap_get_capFMappedASID 8 0 Kernel_C.cap_small_frame_cap_get_capFMappedASIDHigh
+C Kernel_C.cap_small_frame_cap_get_capFMappedASID 6 1 Kernel_C.cap_small_frame_cap_get_capFMappedASIDLow
+C Kernel_C.cap_small_frame_cap_get_capFMappedASID 8 1 Kernel_C.cap_small_frame_cap_get_capFMappedASIDHigh
+C Kernel_C.cap_frame_cap_get_capFMappedASID 6 0 Kernel_C.cap_frame_cap_get_capFMappedASIDLow
+C Kernel_C.cap_frame_cap_get_capFMappedASID 8 0 Kernel_C.cap_frame_cap_get_capFMappedASIDHigh
+C Kernel_C.cap_frame_cap_get_capFMappedASID 6 1 Kernel_C.cap_frame_cap_get_capFMappedASIDLow
+C Kernel_C.cap_frame_cap_get_capFMappedASID 8 1 Kernel_C.cap_frame_cap_get_capFMappedASIDHigh
+EndInlineScript
+}
+Problem (Pairing (invokeTCB_CopyRegisters (ASM) <= Kernel_C.invokeTCB_CopyRegisters (C))) {
+InlineScript
+C Kernel_C.invokeTCB_CopyRegisters 15 0 Kernel_C.setRegister
+C Kernel_C.invokeTCB_CopyRegisters 18 0 Kernel_C.getRegister
+C Kernel_C.invokeTCB_CopyRegisters 30 0 Kernel_C.setRegister
+C Kernel_C.invokeTCB_CopyRegisters 33 0 Kernel_C.getRegister
+C Kernel_C.invokeTCB_CopyRegisters 24 0 Kernel_C.getRestartPC
+C Kernel_C.getRestartPC 5 0 Kernel_C.getRegister
+C Kernel_C.invokeTCB_CopyRegisters 22 0 Kernel_C.setNextPC
+C Kernel_C.setNextPC 2 0 Kernel_C.setRegister
+C Kernel_C.invokeTCB_CopyRegisters 9 0 Kernel_C.Arch_postModifyRegisters
+C Kernel_C.invokeTCB_CopyRegisters 5 0 Kernel_C.Arch_performTransfer
+EndInlineScript
+}
+Problem (Pairing (armv_init_user_access (ASM) <= Kernel_C.armv_init_user_access (C))) {
+InlineScript
+ASM armv_init_user_access 1 0 instruction'mrc_15_0_r3_cr0_cr1_2_E0011FC0
+ASM armv_init_user_access 3 0 instruction'mrc_15_0_r3_cr0_cr1_1_E0011FC4
+ASM armv_init_user_access 11 0 instruction'mcr_15_0_r3_cr14_cr1_0_E0011FD4
+C Kernel_C.armv_init_user_access 2 0 Kernel_C.check_export_arch_timer
+C Kernel_C.armv_init_user_access 5 0 asm_instruction'mrc___p15,_0,__%0,__c0,__c1,_1
+C Kernel_C.armv_init_user_access 6 0 Kernel_C.check_export_pmu
+C Kernel_C.armv_init_user_access 9 0 asm_instruction'mrc___p15,_0,__%0,__c0,__c1,_2
+C Kernel_C.check_export_arch_timer 6 0 asm_instruction'mcr___p15,_0,__%0,_c14,__c1,_0
+C Kernel_C.check_export_arch_timer 8 0 asm_instruction'mcr___p15,_0,__%0,_c14,__c1,_0
+EndInlineScript
+}
+Problem (Pairing (ensureNoChildren (ASM) <= Kernel_C.ensureNoChildren (C))) {
+InlineScript
+C Kernel_C.ensureNoChildren 12 0 Kernel_C.mdb_node_get_mdbNext
+C Kernel_C.ensureNoChildren 16 0 Kernel_C.mdb_node_get_mdbNext
+EndInlineScript
+}
+Problem (Pairing (cteMove (ASM) <= Kernel_C.cteMove (C))) {
+InlineScript
+C Kernel_C.cteMove 2 0 Kernel_C.mdb_node_ptr_set_mdbPrev
+C Kernel_C.cteMove 7 0 Kernel_C.mdb_node_get_mdbNext
+C Kernel_C.cteMove 8 0 Kernel_C.mdb_node_ptr_set_mdbNext
+C Kernel_C.cteMove 13 0 Kernel_C.mdb_node_get_mdbPrev
+C Kernel_C.cteMove 17 0 Kernel_C.mdb_node_new
+C Kernel_C.cteMove 23 0 Kernel_C.cap_null_cap_new
+EndInlineScript
+}
+Problem (Pairing (flushSpace (ASM) <= Kernel_C.flushSpace (C))) {
+InlineScript
+ASM flushSpace 13 0 instruction'dsb_sy_E00126E8
+ASM flushSpace 15 0 instruction'mcr_15_0_r4_cr8_cr7_2_E00126F0
+ASM flushSpace 17 0 instruction'dsb_sy_E00126F4
+ASM flushSpace 19 0 instruction'isb_sy_E00126F8
+C Kernel_C.flushSpace 2 0 Kernel_C.invalidateTranslationASID
+C Kernel_C.flushSpace 4 0 Kernel_C.pde_pde_invalid_get_stored_hw_asid
+C Kernel_C.flushSpace 7 0 Kernel_C.pde_pde_invalid_get_stored_asid_valid
+C Kernel_C.invalidateTranslationASID 2 0 Kernel_C.invalidateTranslationASIDLocal
+C Kernel_C.invalidateTranslationASIDLocal 2 0 Kernel_C.invalidateLocalTLB_ASID
+C Kernel_C.invalidateLocalTLB_ASID 2 0 Kernel_C.invalidateLocalTLB
+C Kernel_C.invalidateLocalTLB_ASID 3 0 Kernel_C.isb
+C Kernel_C.invalidateLocalTLB_ASID 4 0 Kernel_C.dsb
+C Kernel_C.invalidateLocalTLB_ASID 5 0 asm_instruction'mcr_p15,_0,_%0,_c8,_c7,_2
+C Kernel_C.invalidateLocalTLB_ASID 6 0 Kernel_C.dsb
+C Kernel_C.invalidateLocalTLB 2 0 Kernel_C.isb
+C Kernel_C.invalidateLocalTLB 3 0 Kernel_C.dsb
+C Kernel_C.invalidateLocalTLB 4 0 asm_instruction'mcr_p15,_0,_%0,_c8,_c7,_0
+C Kernel_C.invalidateLocalTLB 5 0 Kernel_C.dsb
+C Kernel_C.isb 2 0 asm_instruction'isb
+C Kernel_C.dsb 2 0 asm_instruction'dsb
+C Kernel_C.dsb 2 1 asm_instruction'dsb
+C Kernel_C.isb 2 1 asm_instruction'isb
+C Kernel_C.dsb 2 2 asm_instruction'dsb
+C Kernel_C.dsb 2 3 asm_instruction'dsb
+EndInlineScript
+}
+Problem (Pairing (completeSignal (ASM) <= Kernel_C.completeSignal (C))) {
+InlineScript
+C Kernel_C.completeSignal 2 0 Kernel_C.notification_ptr_set_state
+C Kernel_C.completeSignal 3 0 Kernel_C.setRegister
+C Kernel_C.completeSignal 6 0 Kernel_C.notification_ptr_get_ntfnMsgIdentifier
+C Kernel_C.completeSignal 13 0 Kernel_C.notification_ptr_get_state
+EndInlineScript
+}
+Problem (Pairing (Arch_isFrameType (ASM) <= Kernel_C.Arch_isFrameType (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (create_it_asid_pool (ASM) <= Kernel_C.create_it_asid_pool (C))) {
+InlineScript
+C Kernel_C.create_it_asid_pool 8 0 Kernel_C.cap_asid_control_cap_new
+C Kernel_C.create_it_asid_pool 17 0 Kernel_C.cap_asid_pool_cap_new
+C Kernel_C.create_it_asid_pool 12 0 Kernel_C.write_slot
+C Kernel_C.write_slot 9 0 Kernel_C.mdb_node_new
+C Kernel_C.write_slot 4 0 Kernel_C.mdb_node_ptr_set_mdbRevocable
+C Kernel_C.write_slot 2 0 Kernel_C.mdb_node_ptr_set_mdbFirstBadged
+C Kernel_C.create_it_asid_pool 5 0 Kernel_C.write_slot
+C Kernel_C.write_slot 9 1 Kernel_C.mdb_node_new
+C Kernel_C.write_slot 4 1 Kernel_C.mdb_node_ptr_set_mdbRevocable
+C Kernel_C.write_slot 2 1 Kernel_C.mdb_node_ptr_set_mdbFirstBadged
+EndInlineScript
+}
+Problem (Pairing (create_untypeds_for_region (ASM) <= Kernel_C.create_untypeds_for_region (C))) {
+InlineScript
+C Kernel_C.create_untypeds_for_region 9 0 Kernel_C.is_reg_empty
+C Kernel_C.create_untypeds_for_region 15 0 Kernel_C.provide_untyped_cap
+C Kernel_C.create_untypeds_for_region 21 0 Kernel_C.ctzl
+C Kernel_C.create_untypeds_for_region 27 0 Kernel_C.clzl
+C Kernel_C.create_untypeds_for_region 29 0 Kernel_C.is_reg_empty
+C Kernel_C.provide_untyped_cap 7 0 Kernel_C.cap_untyped_cap_new
+C Kernel_C.provide_untyped_cap 14 0 Kernel_C.addrFromPPtr
+C Kernel_C.provide_untyped_cap 23 0 Kernel_C.pptr_in_kernel_window
+C Kernel_C.provide_untyped_cap 31 0 Kernel_C.pptr_in_kernel_window
+C Kernel_C.addrFromPPtr 5 0 Kernel_C.physBase
+EndInlineScript
+}
+Problem (Pairing (invokeTCB_NotificationControl (ASM) <= Kernel_C.invokeTCB_NotificationControl (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (map_kernel_devices (ASM) <= Kernel_C.map_kernel_devices (C))) {
+InlineScript
+C Kernel_C.map_kernel_devices 16 0 Kernel_C.vm_attributes_new
+EndInlineScript
+}
+Problem (Pairing (lockTLBEntry (ASM) <= Kernel_C.lockTLBEntry (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (Arch_handleFaultReply (ASM) <= Kernel_C.Arch_handleFaultReply (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (tcbEPAppend (ASM) <= Kernel_C.tcbEPAppend (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (invokeTCB_Resume (ASM) <= Kernel_C.invokeTCB_Resume (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (tcbEPDequeue (ASM) <= Kernel_C.tcbEPDequeue (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (c_handle_interrupt (ASM) <= Kernel_C.c_handle_interrupt (C))) {
+InlineScript
+ASM c_handle_interrupt 5 0 instruction'mrc_15_0_r2_cr13_cr0_2_E0010130
+ASM c_handle_interrupt 9 0 instruction'mrc_15_0_r2_cr13_cr0_3_E0010138
+C Kernel_C.c_handle_interrupt 4 0 Kernel_C.c_entry_hook
+C Kernel_C.c_entry_hook 2 0 Kernel_C.arch_c_entry_hook
+C Kernel_C.arch_c_entry_hook 2 0 Kernel_C.arm_save_thread_id
+C Kernel_C.arm_save_thread_id 2 0 Kernel_C.setRegister
+C Kernel_C.arm_save_thread_id 4 0 Kernel_C.readTPIDRURO
+C Kernel_C.arm_save_thread_id 5 0 Kernel_C.setRegister
+C Kernel_C.arm_save_thread_id 7 0 Kernel_C.readTPIDRURW
+C Kernel_C.readTPIDRURO 4 0 asm_instruction'mrc_p15,_0,_%0,_c13,_c0,_3
+C Kernel_C.readTPIDRURW 4 0 asm_instruction'mrc_p15,_0,_%0,_c13,_c0,_2
+EndInlineScript
+}
+Problem (Pairing (deriveCap (ASM) <= Kernel_C.deriveCap (C))) {
+InlineScript
+C Kernel_C.deriveCap 6 0 Kernel_C.cap_null_cap_new
+C Kernel_C.deriveCap 10 0 Kernel_C.cap_null_cap_new
+C Kernel_C.deriveCap 14 0 Kernel_C.cap_null_cap_new
+C Kernel_C.deriveCap 22 0 Kernel_C.cap_null_cap_new
+C Kernel_C.deriveCap 32 0 Kernel_C.cap_get_capType
+C Kernel_C.deriveCap 38 0 Kernel_C.isArchCap
+C Kernel_C.isArchCap 6 0 Kernel_C.cap_get_capType
+EndInlineScript
+}
+Problem (Pairing (strnlen (ASM) <= Kernel_C.strnlen (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (timerTick (ASM) <= Kernel_C.timerTick (C))) {
+InlineScript
+C Kernel_C.timerTick 25 0 Kernel_C.thread_state_get_tsType
+EndInlineScript
+}
+Problem (Pairing (invokeUntyped_Retype (ASM) <= Kernel_C.invokeUntyped_Retype (C))) {
+InlineScript
+C Kernel_C.invokeUntyped_Retype 8 0 Kernel_C.cap_untyped_cap_set_capFreeIndex
+C Kernel_C.invokeUntyped_Retype 18 0 Kernel_C.resetUntypedCap
+C Kernel_C.invokeUntyped_Retype 22 0 Kernel_C.cap_untyped_cap_get_capPtr
+C Kernel_C.resetUntypedCap 7 0 Kernel_C.cap_untyped_cap_set_capFreeIndex
+C Kernel_C.resetUntypedCap 8 0 Kernel_C.clearMemory
+C Kernel_C.resetUntypedCap 24 0 Kernel_C.cap_untyped_cap_set_capFreeIndex
+C Kernel_C.resetUntypedCap 26 0 Kernel_C.clearMemory
+C Kernel_C.resetUntypedCap 39 0 Kernel_C.cap_untyped_cap_get_capIsDevice
+C Kernel_C.resetUntypedCap 43 0 Kernel_C.cap_untyped_cap_get_capFreeIndex
+C Kernel_C.resetUntypedCap 47 0 Kernel_C.cap_untyped_cap_get_capPtr
+C Kernel_C.resetUntypedCap 50 0 Kernel_C.cap_untyped_cap_get_capBlockSize
+C Kernel_C.clearMemory 5 0 Kernel_C.addrFromPPtr
+C Kernel_C.clearMemory 5 1 Kernel_C.addrFromPPtr
+C Kernel_C.addrFromPPtr 5 0 Kernel_C.physBase
+C Kernel_C.addrFromPPtr 5 1 Kernel_C.physBase
+EndInlineScript
+}
+Problem (Pairing (deleteASID (ASM) <= Kernel_C.deleteASID (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (isIRQActive (ASM) <= Kernel_C.isIRQActive (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (Arch_decodeIRQControlInvocation (ASM) <= Kernel_C.Arch_decodeIRQControlInvocation (C))) {
+InlineScript
+C Kernel_C.Arch_decodeIRQControlInvocation 5 0 Kernel_C.Arch_invokeIRQControl
+C Kernel_C.Arch_decodeIRQControlInvocation 26 0 Kernel_C.Arch_checkIRQ
+C Kernel_C.Arch_decodeIRQControlInvocation 32 0 Kernel_C.getSyscallArg
+C Kernel_C.Arch_decodeIRQControlInvocation 34 0 Kernel_C.getSyscallArg
+C Kernel_C.Arch_decodeIRQControlInvocation 37 0 Kernel_C.getSyscallArg
+C Kernel_C.Arch_decodeIRQControlInvocation 40 0 Kernel_C.getSyscallArg
+C Kernel_C.getSyscallArg 7 0 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 1 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 2 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 3 Kernel_C.getRegister
+C Kernel_C.Arch_decodeIRQControlInvocation 22 0 Kernel_C.isIRQActive
+EndInlineScript
+}
+Problem (Pairing (handleSyscall (ASM) <= Kernel_C.handleSyscall (C))) {
+InlineScript
+C Kernel_C.handleSyscall 9 0 Kernel_C.getActiveIRQ
+C Kernel_C.handleSyscall 16 0 Kernel_C.getActiveIRQ
+C Kernel_C.handleSyscall 23 0 Kernel_C.getActiveIRQ
+C Kernel_C.handleSyscall 32 0 Kernel_C.handleYield
+EndInlineScript
+}
+Problem (Pairing (cancelAllIPC (ASM) <= Kernel_C.cancelAllIPC (C))) {
+InlineScript
+C Kernel_C.cancelAllIPC 11 0 Kernel_C.endpoint_ptr_set_epQueue_tail
+C Kernel_C.cancelAllIPC 12 0 Kernel_C.endpoint_ptr_set_epQueue_head
+C Kernel_C.cancelAllIPC 13 0 Kernel_C.endpoint_ptr_set_state
+C Kernel_C.cancelAllIPC 16 0 Kernel_C.endpoint_ptr_get_epQueue_head
+C Kernel_C.cancelAllIPC 20 0 Kernel_C.endpoint_ptr_get_state
+EndInlineScript
+}
+Problem (Pairing (unbindMaybeNotification (ASM) <= Kernel_C.unbindMaybeNotification (C))) {
+InlineScript
+C Kernel_C.unbindMaybeNotification 2 0 Kernel_C.doUnbindNotification
+C Kernel_C.unbindMaybeNotification 6 0 Kernel_C.notification_ptr_get_ntfnBoundTCB
+C Kernel_C.doUnbindNotification 4 0 Kernel_C.notification_ptr_set_ntfnBoundTCB
+EndInlineScript
+}
+Problem (Pairing (invokeTCB_ReadRegisters (ASM) <= Kernel_C.invokeTCB_ReadRegisters (C))) {
+InlineScript
+C Kernel_C.invokeTCB_ReadRegisters 5 0 Kernel_C.setRegister
+C Kernel_C.invokeTCB_ReadRegisters 7 0 Kernel_C.wordFromMessageInfo
+C Kernel_C.invokeTCB_ReadRegisters 9 0 Kernel_C.seL4_MessageInfo_new
+C Kernel_C.invokeTCB_ReadRegisters 18 0 Kernel_C.getRegister
+C Kernel_C.invokeTCB_ReadRegisters 26 0 Kernel_C.setRegister
+C Kernel_C.invokeTCB_ReadRegisters 29 0 Kernel_C.getRegister
+C Kernel_C.invokeTCB_ReadRegisters 41 0 Kernel_C.getRegister
+C Kernel_C.invokeTCB_ReadRegisters 49 0 Kernel_C.setRegister
+C Kernel_C.invokeTCB_ReadRegisters 52 0 Kernel_C.getRegister
+C Kernel_C.invokeTCB_ReadRegisters 55 0 Kernel_C.setRegister
+C Kernel_C.invokeTCB_ReadRegisters 62 0 Kernel_C.Arch_performTransfer
+EndInlineScript
+}
+Problem (Pairing (calculate_extra_bi_size_bits (ASM) <= Kernel_C.calculate_extra_bi_size_bits (C))) {
+InlineScript
+C Kernel_C.calculate_extra_bi_size_bits 10 0 Kernel_C.clzl
+EndInlineScript
+}
+Problem (Pairing (write_it_asid_pool (ASM) <= Kernel_C.write_it_asid_pool (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (cpu_initLocalIRQController (ASM) <= Kernel_C.cpu_initLocalIRQController (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (create_unmapped_it_frame_cap (ASM) <= Kernel_C.create_unmapped_it_frame_cap (C))) {
+InlineScript
+C Kernel_C.create_unmapped_it_frame_cap 5 0 Kernel_C.create_it_frame_cap
+C Kernel_C.create_it_frame_cap 5 0 Kernel_C.cap_frame_cap_new
+C Kernel_C.create_it_frame_cap 8 0 Kernel_C.wordFromVMRights
+C Kernel_C.create_it_frame_cap 11 0 Kernel_C.cap_small_frame_cap_new
+C Kernel_C.create_it_frame_cap 14 0 Kernel_C.wordFromVMRights
+EndInlineScript
+}
+Problem (Pairing (setupCallerCap (ASM) <= Kernel_C.setupCallerCap (C))) {
+InlineScript
+C Kernel_C.setupCallerCap 4 0 Kernel_C.cap_reply_cap_new
+EndInlineScript
+}
+Problem (Pairing (arch_clean_invalidate_L1_caches (ASM) <= Kernel_C.arch_clean_invalidate_L1_caches (C))) {
+InlineScript
+ASM arch_clean_invalidate_L1_caches 3 0 instruction'dsb_sy_E00129E8
+ASM arch_clean_invalidate_L1_caches 15 0 instruction'mcr_15_0_r3_cr7_cr5_0_E0012A00
+ASM arch_clean_invalidate_L1_caches 17 0 instruction'isb_sy_E0012A04
+ASM arch_clean_invalidate_L1_caches 19 0 instruction'dsb_sy_E0012A08
+ASM arch_clean_invalidate_L1_caches 21 0 instruction'isb_sy_E0012A0C
+ASM arch_clean_invalidate_L1_caches 27 0 instruction'dsb_sy_E0012A18
+C Kernel_C.arch_clean_invalidate_L1_caches 2 0 Kernel_C.isb
+C Kernel_C.arch_clean_invalidate_L1_caches 3 0 Kernel_C.dsb
+C Kernel_C.arch_clean_invalidate_L1_caches 4 0 Kernel_C.invalidate_I_PoU
+C Kernel_C.arch_clean_invalidate_L1_caches 7 0 Kernel_C.dsb
+C Kernel_C.arch_clean_invalidate_L1_caches 11 0 Kernel_C.dsb
+C Kernel_C.isb 2 0 asm_instruction'isb
+C Kernel_C.dsb 2 0 asm_instruction'dsb
+C Kernel_C.invalidate_I_PoU 2 0 Kernel_C.isb
+C Kernel_C.invalidate_I_PoU 3 0 asm_instruction'mcr_p15,_0,_%0,_c7,_c5,_0
+C Kernel_C.dsb 2 1 asm_instruction'dsb
+C Kernel_C.dsb 2 2 asm_instruction'dsb
+C Kernel_C.isb 2 1 asm_instruction'isb
+EndInlineScript
+}
+Problem (Pairing (decodeWriteRegisters (ASM) <= Kernel_C.decodeWriteRegisters (C))) {
+InlineScript
+C Kernel_C.decodeWriteRegisters 16 0 Kernel_C.cap_thread_cap_get_capTCBPtr
+C Kernel_C.decodeWriteRegisters 25 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeWriteRegisters 27 0 Kernel_C.getSyscallArg
+C Kernel_C.getSyscallArg 7 0 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 1 Kernel_C.getRegister
+C Kernel_C.decodeWriteRegisters 18 0 Kernel_C.Arch_decodeTransfer
+EndInlineScript
+}
+Problem (Pairing (Arch_updateCapData (ASM) <= Kernel_C.Arch_updateCapData (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (bindNotification (ASM) <= Kernel_C.bindNotification (C))) {
+InlineScript
+C Kernel_C.bindNotification 4 0 Kernel_C.notification_ptr_set_ntfnBoundTCB
+EndInlineScript
+}
+Problem (Pairing (alloc_rootserver_obj (ASM) <= Kernel_C.alloc_rootserver_obj (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (create_domain_cap (ASM) <= Kernel_C.create_domain_cap (C))) {
+InlineScript
+C Kernel_C.create_domain_cap 8 0 Kernel_C.cap_domain_cap_new
+C Kernel_C.create_domain_cap 3 0 Kernel_C.write_slot
+C Kernel_C.write_slot 9 0 Kernel_C.mdb_node_new
+C Kernel_C.write_slot 4 0 Kernel_C.mdb_node_ptr_set_mdbRevocable
+C Kernel_C.write_slot 2 0 Kernel_C.mdb_node_ptr_set_mdbFirstBadged
+EndInlineScript
+}
+Problem (Pairing (lookupCap (ASM) <= Kernel_C.lookupCap (C))) {
+InlineScript
+C Kernel_C.lookupCap 10 0 Kernel_C.cap_null_cap_new
+EndInlineScript
+}
+Problem (Pairing (chooseThread (ASM) <= Kernel_C.chooseThread (C))) {
+InlineScript
+C Kernel_C.chooseThread 7 0 Kernel_C.ready_queues_index
+C Kernel_C.chooseThread 9 0 Kernel_C.getHighestPrio
+C Kernel_C.getHighestPrio 5 0 Kernel_C.l1index_to_prio
+C Kernel_C.getHighestPrio 9 0 Kernel_C.clzl
+C Kernel_C.getHighestPrio 13 0 Kernel_C.invert_l1index
+C Kernel_C.getHighestPrio 17 0 Kernel_C.clzl
+EndInlineScript
+}
+Problem (Pairing (invalidateTLBByASID (ASM) <= Kernel_C.invalidateTLBByASID (C))) {
+InlineScript
+ASM invalidateTLBByASID 11 0 instruction'dsb_sy_E0011480
+ASM invalidateTLBByASID 13 0 instruction'mcr_15_0_r0_cr8_cr7_2_E0011488
+ASM invalidateTLBByASID 15 0 instruction'dsb_sy_E001148C
+ASM invalidateTLBByASID 17 0 instruction'isb_sy_E0011490
+C Kernel_C.invalidateTLBByASID 2 0 Kernel_C.invalidateTranslationASID
+C Kernel_C.invalidateTLBByASID 4 0 Kernel_C.pde_pde_invalid_get_stored_hw_asid
+C Kernel_C.invalidateTLBByASID 7 0 Kernel_C.pde_pde_invalid_get_stored_asid_valid
+C Kernel_C.invalidateTranslationASID 2 0 Kernel_C.invalidateTranslationASIDLocal
+C Kernel_C.invalidateTranslationASIDLocal 2 0 Kernel_C.invalidateLocalTLB_ASID
+C Kernel_C.invalidateLocalTLB_ASID 2 0 Kernel_C.invalidateLocalTLB
+C Kernel_C.invalidateLocalTLB_ASID 3 0 Kernel_C.isb
+C Kernel_C.invalidateLocalTLB_ASID 4 0 Kernel_C.dsb
+C Kernel_C.invalidateLocalTLB_ASID 5 0 asm_instruction'mcr_p15,_0,_%0,_c8,_c7,_2
+C Kernel_C.invalidateLocalTLB_ASID 6 0 Kernel_C.dsb
+C Kernel_C.invalidateLocalTLB 2 0 Kernel_C.isb
+C Kernel_C.invalidateLocalTLB 3 0 Kernel_C.dsb
+C Kernel_C.invalidateLocalTLB 4 0 asm_instruction'mcr_p15,_0,_%0,_c8,_c7,_0
+C Kernel_C.invalidateLocalTLB 5 0 Kernel_C.dsb
+C Kernel_C.isb 2 0 asm_instruction'isb
+C Kernel_C.dsb 2 0 asm_instruction'dsb
+C Kernel_C.dsb 2 1 asm_instruction'dsb
+C Kernel_C.isb 2 1 asm_instruction'isb
+C Kernel_C.dsb 2 2 asm_instruction'dsb
+C Kernel_C.dsb 2 3 asm_instruction'dsb
+EndInlineScript
+}
+Problem (Pairing (initTimer (ASM) <= Kernel_C.initTimer (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (setupReplyMaster (ASM) <= Kernel_C.setupReplyMaster (C))) {
+InlineScript
+C Kernel_C.setupReplyMaster 2 0 Kernel_C.mdb_node_ptr_set_mdbFirstBadged
+C Kernel_C.setupReplyMaster 4 0 Kernel_C.mdb_node_ptr_set_mdbRevocable
+C Kernel_C.setupReplyMaster 9 0 Kernel_C.mdb_node_new
+C Kernel_C.setupReplyMaster 13 0 Kernel_C.cap_reply_cap_new
+C Kernel_C.setupReplyMaster 16 0 Kernel_C.cap_get_capType
+EndInlineScript
+}
+Problem (Pairing (plat_cleanCache (ASM) <= Kernel_C.plat_cleanCache (C))) {
+InlineScript
+ASM plat_cleanCache 9 0 instruction'dmb_sy_E0012A8C
+C Kernel_C.plat_cleanCache 2 0 Kernel_C.L2_cacheSync
+C Kernel_C.L2_cacheSync 10 0 Kernel_C.dmb
+C Kernel_C.dmb 2 0 asm_instruction'dmb
+EndInlineScript
+}
+Problem (Pairing (getHWASID (ASM) <= Kernel_C.getHWASID (C))) {
+InlineScript
+C Kernel_C.getHWASID 5 0 Kernel_C.pde_pde_invalid_get_stored_hw_asid
+C Kernel_C.getHWASID 7 0 Kernel_C.storeHWASID
+C Kernel_C.getHWASID 12 0 Kernel_C.pde_pde_invalid_get_stored_asid_valid
+C Kernel_C.storeHWASID 8 0 Kernel_C.pde_pde_invalid_new
+EndInlineScript
+}
+Problem (Pairing (updateCapData (ASM) <= Kernel_C.updateCapData (C))) {
+InlineScript
+C Kernel_C.updateCapData 5 0 Kernel_C.cap_endpoint_cap_set_capEPBadge
+C Kernel_C.updateCapData 8 0 Kernel_C.cap_null_cap_new
+C Kernel_C.updateCapData 12 0 Kernel_C.cap_endpoint_cap_get_capEPBadge
+C Kernel_C.updateCapData 17 0 Kernel_C.cap_notification_cap_set_capNtfnBadge
+C Kernel_C.updateCapData 20 0 Kernel_C.cap_null_cap_new
+C Kernel_C.updateCapData 24 0 Kernel_C.cap_notification_cap_get_capNtfnBadge
+C Kernel_C.updateCapData 29 0 Kernel_C.cap_null_cap_new
+C Kernel_C.updateCapData 32 0 Kernel_C.cap_cnode_cap_set_capCNodeGuardSize
+C Kernel_C.updateCapData 34 0 Kernel_C.cap_cnode_cap_set_capCNodeGuard
+C Kernel_C.updateCapData 38 0 Kernel_C.seL4_CNode_CapData_get_guard
+C Kernel_C.updateCapData 42 0 Kernel_C.cap_cnode_cap_get_capCNodeRadix
+C Kernel_C.updateCapData 45 0 Kernel_C.seL4_CNode_CapData_get_guardSize
+C Kernel_C.updateCapData 53 0 Kernel_C.cap_get_capType
+C Kernel_C.updateCapData 59 0 Kernel_C.isArchCap
+C Kernel_C.isArchCap 6 0 Kernel_C.cap_get_capType
+C Kernel_C.updateCapData 56 0 Kernel_C.Arch_updateCapData
+EndInlineScript
+}
+Problem (Pairing (unbindNotification (ASM) <= Kernel_C.unbindNotification (C))) {
+InlineScript
+C Kernel_C.unbindNotification 2 0 Kernel_C.doUnbindNotification
+C Kernel_C.doUnbindNotification 4 0 Kernel_C.notification_ptr_set_ntfnBoundTCB
+EndInlineScript
+}
+Problem (Pairing (invokeIRQHandler_ClearIRQHandler (ASM) <= Kernel_C.invokeIRQHandler_ClearIRQHandler (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (lookupSlot (ASM) <= Kernel_C.lookupSlot (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (handleVMFault (ASM) <= Kernel_C.handleVMFault (C))) {
+InlineScript
+ASM handleVMFault 13 0 instruction'mrc_15_0_r1_cr6_cr0_0_E0011324
+ASM handleVMFault 15 0 instruction'mrc_15_0_r3_cr5_cr0_0_E0011328
+ASM handleVMFault 25 0 instruction'mrc_15_0_r3_cr5_cr0_1_E0011350
+C Kernel_C.handleVMFault 6 0 Kernel_C.seL4_Fault_VMFault_new
+C Kernel_C.handleVMFault 8 0 Kernel_C.getDFSR
+C Kernel_C.handleVMFault 10 0 Kernel_C.getFAR
+C Kernel_C.handleVMFault 14 0 Kernel_C.seL4_Fault_VMFault_new
+C Kernel_C.handleVMFault 16 0 Kernel_C.getIFSR
+C Kernel_C.getDFSR 4 0 asm_instruction'mrc_p15,_0,_%0,_c5,_c0,_0
+C Kernel_C.getFAR 4 0 asm_instruction'mrc_p15,_0,_%0,_c6,_c0,_0
+C Kernel_C.getIFSR 4 0 asm_instruction'mrc_p15,_0,_%0,_c5,_c0,_1
+C Kernel_C.handleVMFault 18 0 Kernel_C.getRestartPC
+C Kernel_C.getRestartPC 5 0 Kernel_C.getRegister
+EndInlineScript
+}
+Problem (Pairing (decodeReadRegisters (ASM) <= Kernel_C.decodeReadRegisters (C))) {
+InlineScript
+C Kernel_C.decodeReadRegisters 8 0 Kernel_C.cap_thread_cap_get_capTCBPtr
+C Kernel_C.decodeReadRegisters 18 0 Kernel_C.cap_thread_cap_get_capTCBPtr
+C Kernel_C.decodeReadRegisters 33 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeReadRegisters 35 0 Kernel_C.getSyscallArg
+C Kernel_C.getSyscallArg 7 0 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 1 Kernel_C.getRegister
+C Kernel_C.decodeReadRegisters 20 0 Kernel_C.Arch_decodeTransfer
+EndInlineScript
+}
+Problem (Pairing (hasCancelSendRights (ASM) <= Kernel_C.hasCancelSendRights (C))) {
+InlineScript
+C Kernel_C.hasCancelSendRights 6 0 Kernel_C.cap_endpoint_cap_get_capCanGrant
+C Kernel_C.hasCancelSendRights 10 0 Kernel_C.cap_endpoint_cap_get_capCanGrantReply
+C Kernel_C.hasCancelSendRights 14 0 Kernel_C.cap_endpoint_cap_get_capCanReceive
+C Kernel_C.hasCancelSendRights 18 0 Kernel_C.cap_endpoint_cap_get_capCanSend
+C Kernel_C.hasCancelSendRights 23 0 Kernel_C.cap_get_capType
+EndInlineScript
+}
+Problem (Pairing (Arch_postModifyRegisters (ASM) <= Kernel_C.Arch_postModifyRegisters (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (slotCapLongRunningDelete (ASM) <= Kernel_C.slotCapLongRunningDelete (C))) {
+InlineScript
+C Kernel_C.slotCapLongRunningDelete 8 0 Kernel_C.cap_get_capType
+C Kernel_C.slotCapLongRunningDelete 17 0 Kernel_C.cap_get_capType
+EndInlineScript
+}
+Problem (Pairing (invokeTCB_ThreadControl (ASM) <= Kernel_C.invokeTCB_ThreadControl (C))) {
+InlineScript
+C Kernel_C.invokeTCB_ThreadControl 73 0 Kernel_C.cap_thread_cap_new
+C Kernel_C.invokeTCB_ThreadControl 67 0 Kernel_C.setMCPriority
+EndInlineScript
+}
+Problem (Pairing (preemptionPoint (ASM) <= Kernel_C.preemptionPoint (C))) {
+InlineScript
+C Kernel_C.preemptionPoint 7 0 Kernel_C.isIRQPending
+EndInlineScript
+}
+Problem (Pairing (rescheduleRequired (ASM) <= Kernel_C.rescheduleRequired (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (doNormalTransfer (ASM) <= Kernel_C.doNormalTransfer (C))) {
+InlineScript
+C Kernel_C.doNormalTransfer 2 0 Kernel_C.setRegister
+C Kernel_C.doNormalTransfer 3 0 Kernel_C.setRegister
+C Kernel_C.doNormalTransfer 5 0 Kernel_C.wordFromMessageInfo
+C Kernel_C.doNormalTransfer 7 0 Kernel_C.seL4_MessageInfo_set_length
+C Kernel_C.doNormalTransfer 9 0 Kernel_C.transferCaps
+C Kernel_C.doNormalTransfer 13 0 Kernel_C.seL4_MessageInfo_get_length
+C Kernel_C.doNormalTransfer 25 0 Kernel_C.messageInfoFromWord
+C Kernel_C.doNormalTransfer 27 0 Kernel_C.getRegister
+C Kernel_C.transferCaps 5 0 Kernel_C.seL4_MessageInfo_set_extraCaps
+C Kernel_C.transferCaps 18 0 Kernel_C.seL4_MessageInfo_set_capsUnwrapped
+C Kernel_C.transferCaps 21 0 Kernel_C.seL4_MessageInfo_get_capsUnwrapped
+C Kernel_C.transferCaps 24 0 Kernel_C.cap_endpoint_cap_get_capEPBadge
+C Kernel_C.transferCaps 29 0 Kernel_C.cap_get_capType
+C Kernel_C.transferCaps 37 0 Kernel_C.cap_endpoint_cap_get_capEPPtr
+C Kernel_C.transferCaps 41 0 Kernel_C.cap_get_capType
+C Kernel_C.transferCaps 61 0 Kernel_C.seL4_MessageInfo_set_capsUnwrapped
+C Kernel_C.transferCaps 63 0 Kernel_C.seL4_MessageInfo_set_extraCaps
+C Kernel_C.messageInfoFromWord 5 0 Kernel_C.seL4_MessageInfo_set_length
+C Kernel_C.messageInfoFromWord 9 0 Kernel_C.seL4_MessageInfo_get_length
+C Kernel_C.transferCaps 22 0 Kernel_C.setExtraBadge
+EndInlineScript
+}
+Problem (Pairing (unmapPageTable (ASM) <= Kernel_C.unmapPageTable (C))) {
+InlineScript
+ASM unmapPageTable 13 0 instruction'mcr_15_0_r2_cr7_cr11_1_E0011454
+ASM unmapPageTable 15 0 instruction'dmb_sy_E0011458
+C Kernel_C.unmapPageTable 3 0 Kernel_C.cleanByVA_PoU
+C Kernel_C.unmapPageTable 5 0 Kernel_C.addrFromPPtr
+C Kernel_C.unmapPageTable 9 0 Kernel_C.pde_pde_invalid_new
+C Kernel_C.cleanByVA_PoU 2 0 Kernel_C.dmb
+C Kernel_C.cleanByVA_PoU 3 0 asm_instruction'mcr_p15,_0,_%0,_c7,_c11,_1
+C Kernel_C.addrFromPPtr 5 0 Kernel_C.physBase
+C Kernel_C.dmb 2 0 asm_instruction'dmb
+EndInlineScript
+}
+Problem (Pairing (invalidateCacheRange_I (ASM) <= Kernel_C.invalidateCacheRange_I (C))) {
+InlineScript
+ASM invalidateCacheRange_I 7 0 instruction'mcr_15_0_r3_cr7_cr5_1_E0012594
+ASM invalidateCacheRange_I 9 0 instruction'isb_sy_E0012598
+C Kernel_C.invalidateCacheRange_I 8 0 Kernel_C.invalidateByVA_I
+C Kernel_C.invalidateByVA_I 2 0 Kernel_C.isb
+C Kernel_C.invalidateByVA_I 3 0 asm_instruction'mcr_p15,_0,_%0,_c7,_c5,_1
+C Kernel_C.isb 2 0 asm_instruction'isb
+EndInlineScript
+}
+Problem (Pairing (Arch_setMRs_fault (ASM) <= Kernel_C.Arch_setMRs_fault (C))) {
+InlineScript
+C Kernel_C.Arch_setMRs_fault 5 0 Kernel_C.setMR
+C Kernel_C.Arch_setMRs_fault 7 0 Kernel_C.seL4_Fault_VMFault_get_FSR
+C Kernel_C.Arch_setMRs_fault 9 0 Kernel_C.setMR
+C Kernel_C.Arch_setMRs_fault 11 0 Kernel_C.seL4_Fault_VMFault_get_instructionFault
+C Kernel_C.Arch_setMRs_fault 13 0 Kernel_C.setMR
+C Kernel_C.Arch_setMRs_fault 15 0 Kernel_C.seL4_Fault_VMFault_get_address
+C Kernel_C.Arch_setMRs_fault 17 0 Kernel_C.setMR
+C Kernel_C.setMR 9 0 Kernel_C.setRegister
+C Kernel_C.setMR 9 1 Kernel_C.setRegister
+C Kernel_C.setMR 9 2 Kernel_C.setRegister
+C Kernel_C.setMR 9 3 Kernel_C.setRegister
+C Kernel_C.Arch_setMRs_fault 19 0 Kernel_C.getRestartPC
+C Kernel_C.getRestartPC 5 0 Kernel_C.getRegister
+EndInlineScript
+}
+Problem (Pairing (receiveSignal (ASM) <= Kernel_C.receiveSignal (C))) {
+InlineScript
+C Kernel_C.receiveSignal 2 0 Kernel_C.ntfn_ptr_set_queue
+C Kernel_C.receiveSignal 3 0 Kernel_C.notification_ptr_set_state
+C Kernel_C.receiveSignal 7 0 Kernel_C.ntfn_ptr_get_queue
+C Kernel_C.receiveSignal 9 0 Kernel_C.thread_state_ptr_set_blockingObject
+C Kernel_C.receiveSignal 11 0 Kernel_C.thread_state_ptr_set_tsType
+C Kernel_C.receiveSignal 15 0 Kernel_C.notification_ptr_set_state
+C Kernel_C.receiveSignal 16 0 Kernel_C.setRegister
+C Kernel_C.receiveSignal 18 0 Kernel_C.notification_ptr_get_ntfnMsgIdentifier
+C Kernel_C.receiveSignal 23 0 Kernel_C.notification_ptr_get_state
+C Kernel_C.receiveSignal 26 0 Kernel_C.cap_notification_cap_get_capNtfnPtr
+C Kernel_C.ntfn_ptr_set_queue 2 0 Kernel_C.notification_ptr_set_ntfnQueue_tail
+C Kernel_C.ntfn_ptr_set_queue 3 0 Kernel_C.notification_ptr_set_ntfnQueue_head
+C Kernel_C.ntfn_ptr_get_queue 6 0 Kernel_C.notification_ptr_get_ntfnQueue_tail
+C Kernel_C.ntfn_ptr_get_queue 9 0 Kernel_C.notification_ptr_get_ntfnQueue_head
+C Kernel_C.receiveSignal 13 0 Kernel_C.doNBRecvFailedTransfer
+C Kernel_C.receiveSignal 5 0 Kernel_C.tcbEPAppend
+C Kernel_C.doNBRecvFailedTransfer 2 0 Kernel_C.setRegister
+EndInlineScript
+}
+Problem (Pairing (finaliseCap (ASM) <= Kernel_C.finaliseCap (C))) {
+InlineScript
+C Kernel_C.finaliseCap 6 0 Kernel_C.cap_null_cap_new
+C Kernel_C.finaliseCap 9 0 Kernel_C.cap_null_cap_new
+C Kernel_C.finaliseCap 13 0 Kernel_C.cap_null_cap_new
+C Kernel_C.finaliseCap 16 0 Kernel_C.Zombie_new
+C Kernel_C.finaliseCap 19 0 Kernel_C.cap_cnode_cap_get_capCNodePtr
+C Kernel_C.finaliseCap 21 0 Kernel_C.cap_cnode_cap_get_capCNodeRadix
+C Kernel_C.finaliseCap 23 0 Kernel_C.cap_cnode_cap_get_capCNodeRadix
+C Kernel_C.finaliseCap 28 0 Kernel_C.cap_null_cap_new
+C Kernel_C.finaliseCap 31 0 Kernel_C.Zombie_new
+C Kernel_C.finaliseCap 40 0 Kernel_C.cap_thread_cap_get_capTCBPtr
+C Kernel_C.finaliseCap 45 0 Kernel_C.cap_null_cap_new
+C Kernel_C.finaliseCap 51 0 Kernel_C.cap_null_cap_new
+C Kernel_C.finaliseCap 55 0 Kernel_C.cap_irq_handler_cap_get_capIRQ
+C Kernel_C.finaliseCap 63 0 Kernel_C.cap_get_capType
+C Kernel_C.finaliseCap 71 0 Kernel_C.cap_null_cap_new
+C Kernel_C.finaliseCap 74 0 Kernel_C.cap_null_cap_new
+C Kernel_C.finaliseCap 77 0 Kernel_C.cap_endpoint_cap_get_capEPPtr
+C Kernel_C.finaliseCap 82 0 Kernel_C.cap_null_cap_new
+C Kernel_C.finaliseCap 85 0 Kernel_C.cap_null_cap_new
+C Kernel_C.finaliseCap 90 0 Kernel_C.cap_notification_cap_get_capNtfnPtr
+C Kernel_C.finaliseCap 95 0 Kernel_C.cap_null_cap_new
+C Kernel_C.finaliseCap 98 0 Kernel_C.cap_null_cap_new
+C Kernel_C.finaliseCap 104 0 Kernel_C.cap_get_capType
+C Kernel_C.finaliseCap 110 0 Kernel_C.isArchCap
+C Kernel_C.Zombie_new 5 0 Kernel_C.cap_zombie_cap_new
+C Kernel_C.Zombie_new 5 1 Kernel_C.cap_zombie_cap_new
+C Kernel_C.isArchCap 6 0 Kernel_C.cap_get_capType
+C Kernel_C.finaliseCap 33 0 Kernel_C.Arch_prepareThreadDelete
+EndInlineScript
+}
+Problem (Pairing (lookupSlotForCNodeOp (ASM) <= Kernel_C.lookupSlotForCNodeOp (C))) {
+InlineScript
+C Kernel_C.lookupSlotForCNodeOp 10 0 Kernel_C.lookup_fault_depth_mismatch_new
+C Kernel_C.lookupSlotForCNodeOp 43 0 Kernel_C.lookup_fault_invalid_root_new
+C Kernel_C.lookupSlotForCNodeOp 50 0 Kernel_C.cap_get_capType
+EndInlineScript
+}
+Problem (Pairing (decodeSetMCPriority (ASM) <= Kernel_C.decodeSetMCPriority (C))) {
+InlineScript
+C Kernel_C.decodeSetMCPriority 7 0 Kernel_C.cap_null_cap_new
+C Kernel_C.decodeSetMCPriority 9 0 Kernel_C.cap_null_cap_new
+C Kernel_C.decodeSetMCPriority 11 0 Kernel_C.cap_null_cap_new
+C Kernel_C.decodeSetMCPriority 13 0 Kernel_C.cap_thread_cap_get_capTCBPtr
+C Kernel_C.decodeSetMCPriority 19 0 Kernel_C.checkPrio
+C Kernel_C.decodeSetMCPriority 22 0 Kernel_C.cap_thread_cap_get_capTCBPtr
+C Kernel_C.decodeSetMCPriority 30 0 Kernel_C.cap_get_capType
+C Kernel_C.decodeSetMCPriority 36 0 Kernel_C.getSyscallArg
+C Kernel_C.getSyscallArg 7 0 Kernel_C.getRegister
+EndInlineScript
+}
+Problem (Pairing (lookupPivotSlot (ASM) <= Kernel_C.lookupPivotSlot (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (Arch_createObject (ASM) <= Kernel_C.Arch_createObject (C))) {
+InlineScript
+C Kernel_C.Arch_createObject 5 0 Kernel_C.cap_small_frame_cap_new
+C Kernel_C.Arch_createObject 18 0 Kernel_C.cap_frame_cap_new
+C Kernel_C.Arch_createObject 31 0 Kernel_C.cap_frame_cap_new
+C Kernel_C.Arch_createObject 44 0 Kernel_C.cap_frame_cap_new
+C Kernel_C.Arch_createObject 57 0 Kernel_C.cap_page_table_cap_new
+C Kernel_C.Arch_createObject 62 0 Kernel_C.cap_page_directory_cap_new
+C Kernel_C.Arch_createObject 66 0 Kernel_C.addrFromPPtr
+C Kernel_C.addrFromPPtr 5 0 Kernel_C.physBase
+EndInlineScript
+}
+Problem (Pairing (invokeIRQControl (ASM) <= Kernel_C.invokeIRQControl (C))) {
+InlineScript
+C Kernel_C.invokeIRQControl 6 0 Kernel_C.cap_irq_handler_cap_new
+EndInlineScript
+}
+Problem (Pairing (Arch_decodeTransfer (ASM) <= Kernel_C.Arch_decodeTransfer (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (performInvocation_Reply (ASM) <= Kernel_C.performInvocation_Reply (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (schedule (ASM) <= Kernel_C.schedule (C))) {
+InlineScript
+C Kernel_C.schedule 24 0 Kernel_C.isHighestPrio
+C Kernel_C.schedule 47 0 Kernel_C.isRunnable
+C Kernel_C.isHighestPrio 6 0 Kernel_C.getHighestPrio
+C Kernel_C.isRunnable 8 0 Kernel_C.thread_state_get_tsType
+C Kernel_C.getHighestPrio 5 0 Kernel_C.l1index_to_prio
+C Kernel_C.getHighestPrio 9 0 Kernel_C.clzl
+C Kernel_C.getHighestPrio 13 0 Kernel_C.invert_l1index
+C Kernel_C.getHighestPrio 17 0 Kernel_C.clzl
+EndInlineScript
+}
+Problem (Pairing (decodeCNodeInvocation (ASM) <= Kernel_C.decodeCNodeInvocation (C))) {
+InlineScript
+C Kernel_C.decodeCNodeInvocation 14 0 Kernel_C.cap_get_capType
+C Kernel_C.decodeCNodeInvocation 20 0 Kernel_C.cap_get_capType
+C Kernel_C.decodeCNodeInvocation 30 0 Kernel_C.lookup_fault_missing_capability_new
+C Kernel_C.decodeCNodeInvocation 37 0 Kernel_C.cap_get_capType
+C Kernel_C.decodeCNodeInvocation 42 0 Kernel_C.lookup_fault_missing_capability_new
+C Kernel_C.decodeCNodeInvocation 49 0 Kernel_C.cap_get_capType
+C Kernel_C.decodeCNodeInvocation 79 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeCNodeInvocation 81 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeCNodeInvocation 83 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeCNodeInvocation 85 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeCNodeInvocation 87 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeCNodeInvocation 89 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeCNodeInvocation 154 0 Kernel_C.cap_get_capType
+C Kernel_C.decodeCNodeInvocation 165 0 Kernel_C.rightsFromWord
+C Kernel_C.decodeCNodeInvocation 167 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeCNodeInvocation 184 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeCNodeInvocation 186 0 Kernel_C.rightsFromWord
+C Kernel_C.decodeCNodeInvocation 188 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeCNodeInvocation 201 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeCNodeInvocation 215 0 Kernel_C.lookup_fault_missing_capability_new
+C Kernel_C.decodeCNodeInvocation 222 0 Kernel_C.cap_get_capType
+C Kernel_C.decodeCNodeInvocation 238 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeCNodeInvocation 240 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeCNodeInvocation 257 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeCNodeInvocation 259 0 Kernel_C.getSyscallArg
+C Kernel_C.getSyscallArg 7 0 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 1 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 2 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 3 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 4 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 5 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 6 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 7 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 8 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 9 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 10 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 11 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 12 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 13 Kernel_C.getRegister
+C Kernel_C.decodeCNodeInvocation 136 0 Kernel_C.invokeCNodeRevoke
+C Kernel_C.decodeCNodeInvocation 142 0 Kernel_C.invokeCNodeMove
+C Kernel_C.decodeCNodeInvocation 145 0 Kernel_C.invokeCNodeInsert
+EndInlineScript
+}
+Problem (Pairing (cleanInvalidateCacheRange_RAM (ASM) <= Kernel_C.cleanInvalidateCacheRange_RAM (C))) {
+InlineScript
+ASM cleanInvalidateCacheRange_RAM 7 0 instruction'mcr_15_0_lr_cr7_cr10_1_E0012000
+ASM cleanInvalidateCacheRange_RAM 9 0 instruction'dmb_sy_E0012004
+ASM cleanInvalidateCacheRange_RAM 15 0 instruction'dsb_sy_E0012018
+ASM cleanInvalidateCacheRange_RAM 23 0 instruction'dmb_sy_E0012044
+ASM cleanInvalidateCacheRange_RAM 31 0 instruction'dmb_sy_E0012058
+ASM cleanInvalidateCacheRange_RAM 45 0 instruction'mcr_15_0_r3_cr7_cr14_1_E001208C
+ASM cleanInvalidateCacheRange_RAM 47 0 instruction'dsb_sy_E0012090
+ASM cleanInvalidateCacheRange_RAM 53 0 instruction'dsb_sy_E00120A4
+C Kernel_C.cleanInvalidateCacheRange_RAM 2 0 Kernel_C.dsb
+C Kernel_C.cleanInvalidateCacheRange_RAM 9 0 Kernel_C.cleanInvalByVA
+C Kernel_C.cleanInvalidateCacheRange_RAM 15 0 Kernel_C.plat_cleanInvalidateL2Range
+C Kernel_C.cleanInvalidateCacheRange_RAM 16 0 Kernel_C.dsb
+C Kernel_C.cleanInvalidateCacheRange_RAM 17 0 Kernel_C.cleanCacheRange_PoC
+C Kernel_C.dsb 2 0 asm_instruction'dsb
+C Kernel_C.cleanInvalByVA 2 0 Kernel_C.dsb
+C Kernel_C.cleanInvalByVA 3 0 asm_instruction'mcr_p15,_0,_%0,_c7,_c14,_1
+C Kernel_C.plat_cleanInvalidateL2Range 2 0 Kernel_C.L2_cacheSync
+C Kernel_C.plat_cleanInvalidateL2Range 12 0 Kernel_C.dmb
+C Kernel_C.dsb 2 1 asm_instruction'dsb
+C Kernel_C.cleanCacheRange_PoC 8 0 Kernel_C.cleanByVA
+C Kernel_C.dsb 2 2 asm_instruction'dsb
+C Kernel_C.L2_cacheSync 10 0 Kernel_C.dmb
+C Kernel_C.dmb 2 0 asm_instruction'dmb
+C Kernel_C.cleanByVA 2 0 Kernel_C.dmb
+C Kernel_C.cleanByVA 3 0 asm_instruction'mcr_p15,_0,_%0,_c7,_c10,_1
+C Kernel_C.dmb 2 1 asm_instruction'dmb
+C Kernel_C.dmb 2 2 asm_instruction'dmb
+EndInlineScript
+}
+Problem (Pairing (checkValidIPCBuffer (ASM) <= Kernel_C.checkValidIPCBuffer (C))) {
+InlineScript
+C Kernel_C.checkValidIPCBuffer 14 0 Kernel_C.generic_frame_cap_get_capFIsDevice
+C Kernel_C.checkValidIPCBuffer 21 0 Kernel_C.cap_get_capType
+C Kernel_C.checkValidIPCBuffer 25 0 Kernel_C.cap_get_capType
+C Kernel_C.generic_frame_cap_get_capFIsDevice 5 0 Kernel_C.cap_small_frame_cap_get_capFIsDevice
+C Kernel_C.generic_frame_cap_get_capFIsDevice 8 0 Kernel_C.cap_frame_cap_get_capFIsDevice
+C Kernel_C.generic_frame_cap_get_capFIsDevice 12 0 Kernel_C.cap_get_capType
+EndInlineScript
+}
+Problem (Pairing (initIRQController (ASM) <= Kernel_C.initIRQController (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (makeUserPDE (ASM) <= Kernel_C.makeUserPDE (C))) {
+InlineScript
+C Kernel_C.makeUserPDE 5 0 Kernel_C.pde_pde_section_new
+C Kernel_C.makeUserPDE 8 0 Kernel_C.pde_pde_section_new
+EndInlineScript
+}
+Problem (Pairing (handleInvocation (ASM) <= Kernel_C.handleInvocation (C))) {
+InlineScript
+C Kernel_C.handleInvocation 9 0 Kernel_C.thread_state_get_tsType
+C Kernel_C.handleInvocation 20 0 Kernel_C.seL4_MessageInfo_get_label
+C Kernel_C.handleInvocation 25 0 Kernel_C.seL4_MessageInfo_get_length
+C Kernel_C.handleInvocation 39 0 Kernel_C.seL4_Fault_CapFault_new
+C Kernel_C.handleInvocation 44 0 Kernel_C.getRegister
+C Kernel_C.handleInvocation 46 0 Kernel_C.messageInfoFromWord
+C Kernel_C.handleInvocation 48 0 Kernel_C.getRegister
+C Kernel_C.messageInfoFromWord 5 0 Kernel_C.seL4_MessageInfo_set_length
+C Kernel_C.messageInfoFromWord 9 0 Kernel_C.seL4_MessageInfo_get_length
+C Kernel_C.handleInvocation 5 0 Kernel_C.replyFromKernel_success_empty
+C Kernel_C.replyFromKernel_success_empty 7 0 Kernel_C.setRegister
+C Kernel_C.replyFromKernel_success_empty 6 0 Kernel_C.seL4_MessageInfo_new
+C Kernel_C.replyFromKernel_success_empty 4 0 Kernel_C.wordFromMessageInfo
+C Kernel_C.replyFromKernel_success_empty 2 0 Kernel_C.setRegister
+EndInlineScript
+}
+Problem (Pairing (flushTable (ASM) <= Kernel_C.flushTable (C))) {
+InlineScript
+ASM flushTable 13 0 instruction'dsb_sy_E00113F8
+ASM flushTable 15 0 instruction'mcr_15_0_r0_cr8_cr7_2_E0011400
+ASM flushTable 17 0 instruction'dsb_sy_E0011404
+ASM flushTable 19 0 instruction'isb_sy_E0011408
+C Kernel_C.flushTable 5 0 Kernel_C.invalidateTranslationASID
+C Kernel_C.flushTable 7 0 Kernel_C.pde_pde_invalid_get_stored_hw_asid
+C Kernel_C.flushTable 10 0 Kernel_C.pde_pde_invalid_get_stored_asid_valid
+C Kernel_C.invalidateTranslationASID 2 0 Kernel_C.invalidateTranslationASIDLocal
+C Kernel_C.invalidateTranslationASIDLocal 2 0 Kernel_C.invalidateLocalTLB_ASID
+C Kernel_C.invalidateLocalTLB_ASID 2 0 Kernel_C.invalidateLocalTLB
+C Kernel_C.invalidateLocalTLB_ASID 3 0 Kernel_C.isb
+C Kernel_C.invalidateLocalTLB_ASID 4 0 Kernel_C.dsb
+C Kernel_C.invalidateLocalTLB_ASID 5 0 asm_instruction'mcr_p15,_0,_%0,_c8,_c7,_2
+C Kernel_C.invalidateLocalTLB_ASID 6 0 Kernel_C.dsb
+C Kernel_C.invalidateLocalTLB 2 0 Kernel_C.isb
+C Kernel_C.invalidateLocalTLB 3 0 Kernel_C.dsb
+C Kernel_C.invalidateLocalTLB 4 0 asm_instruction'mcr_p15,_0,_%0,_c8,_c7,_0
+C Kernel_C.invalidateLocalTLB 5 0 Kernel_C.dsb
+C Kernel_C.isb 2 0 asm_instruction'isb
+C Kernel_C.dsb 2 0 asm_instruction'dsb
+C Kernel_C.dsb 2 1 asm_instruction'dsb
+C Kernel_C.isb 2 1 asm_instruction'isb
+C Kernel_C.dsb 2 2 asm_instruction'dsb
+C Kernel_C.dsb 2 3 asm_instruction'dsb
+EndInlineScript
+}
+Problem (Pairing (lookupIPCBuffer (ASM) <= Kernel_C.lookupIPCBuffer (C))) {
+InlineScript
+C Kernel_C.lookupIPCBuffer 7 0 Kernel_C.pageBitsForSize
+C Kernel_C.lookupIPCBuffer 9 0 Kernel_C.generic_frame_cap_get_capFSize
+C Kernel_C.lookupIPCBuffer 11 0 Kernel_C.generic_frame_cap_get_capFBasePtr
+C Kernel_C.lookupIPCBuffer 15 0 Kernel_C.generic_frame_cap_get_capFVMRights
+C Kernel_C.lookupIPCBuffer 19 0 Kernel_C.generic_frame_cap_get_capFIsDevice
+C Kernel_C.lookupIPCBuffer 24 0 Kernel_C.cap_get_capType
+C Kernel_C.lookupIPCBuffer 28 0 Kernel_C.cap_get_capType
+C Kernel_C.generic_frame_cap_get_capFSize 6 0 Kernel_C.cap_frame_cap_get_capFSize
+C Kernel_C.generic_frame_cap_get_capFSize 13 0 Kernel_C.cap_get_capType
+C Kernel_C.generic_frame_cap_get_capFBasePtr 5 0 Kernel_C.cap_small_frame_cap_get_capFBasePtr
+C Kernel_C.generic_frame_cap_get_capFBasePtr 8 0 Kernel_C.cap_frame_cap_get_capFBasePtr
+C Kernel_C.generic_frame_cap_get_capFBasePtr 15 0 Kernel_C.cap_get_capType
+C Kernel_C.generic_frame_cap_get_capFVMRights 5 0 Kernel_C.cap_small_frame_cap_get_capFVMRights
+C Kernel_C.generic_frame_cap_get_capFVMRights 8 0 Kernel_C.cap_frame_cap_get_capFVMRights
+C Kernel_C.generic_frame_cap_get_capFVMRights 15 0 Kernel_C.cap_get_capType
+C Kernel_C.generic_frame_cap_get_capFIsDevice 5 0 Kernel_C.cap_small_frame_cap_get_capFIsDevice
+C Kernel_C.generic_frame_cap_get_capFIsDevice 8 0 Kernel_C.cap_frame_cap_get_capFIsDevice
+C Kernel_C.generic_frame_cap_get_capFIsDevice 12 0 Kernel_C.cap_get_capType
+EndInlineScript
+}
+Problem (Pairing (decodeDomainInvocation (ASM) <= Kernel_C.decodeDomainInvocation (C))) {
+InlineScript
+C Kernel_C.decodeDomainInvocation 6 0 Kernel_C.cap_thread_cap_get_capTCBPtr
+C Kernel_C.decodeDomainInvocation 16 0 Kernel_C.cap_get_capType
+C Kernel_C.decodeDomainInvocation 37 0 Kernel_C.getSyscallArg
+C Kernel_C.getSyscallArg 7 0 Kernel_C.getRegister
+EndInlineScript
+}
+Problem (Pairing (lookupCapAndSlot (ASM) <= Kernel_C.lookupCapAndSlot (C))) {
+InlineScript
+C Kernel_C.lookupCapAndSlot 11 0 Kernel_C.cap_null_cap_new
+EndInlineScript
+}
+Problem (Pairing (create_it_address_space (ASM) <= Kernel_C.create_it_address_space (C))) {
+InlineScript
+C Kernel_C.create_it_address_space 18 0 Kernel_C.cap_null_cap_new
+C Kernel_C.create_it_address_space 23 0 Kernel_C.create_it_page_table_cap
+C Kernel_C.create_it_address_space 25 0 Kernel_C.it_alloc_paging
+C Kernel_C.create_it_address_space 36 0 Kernel_C.cap_page_directory_cap_new
+C Kernel_C.create_it_address_space 42 0 Kernel_C.addrFromPPtr
+C Kernel_C.create_it_page_table_cap 4 0 Kernel_C.map_it_pt_cap
+C Kernel_C.create_it_page_table_cap 7 0 Kernel_C.cap_page_table_cap_new
+C Kernel_C.addrFromPPtr 5 0 Kernel_C.physBase
+C Kernel_C.map_it_pt_cap 5 0 Kernel_C.pde_pde_coarse_new
+C Kernel_C.map_it_pt_cap 7 0 Kernel_C.addrFromPPtr
+C Kernel_C.map_it_pt_cap 11 0 Kernel_C.pageBitsForSize
+C Kernel_C.map_it_pt_cap 14 0 Kernel_C.cap_page_table_cap_get_capPTMappedAddress
+C Kernel_C.map_it_pt_cap 17 0 Kernel_C.cap_page_table_cap_get_capPTBasePtr
+C Kernel_C.map_it_pt_cap 20 0 Kernel_C.cap_page_directory_cap_get_capPDBasePtr
+C Kernel_C.addrFromPPtr 5 1 Kernel_C.physBase
+C Kernel_C.create_it_address_space 29 0 Kernel_C.write_slot
+C Kernel_C.write_slot 9 0 Kernel_C.mdb_node_new
+C Kernel_C.write_slot 4 0 Kernel_C.mdb_node_ptr_set_mdbRevocable
+C Kernel_C.write_slot 2 0 Kernel_C.mdb_node_ptr_set_mdbFirstBadged
+EndInlineScript
+}
+Problem (Pairing (branchFlushRange (ASM) <= Kernel_C.branchFlushRange (C))) {
+InlineScript
+ASM branchFlushRange 7 0 instruction'mcr_15_0_r3_cr7_cr5_7_E00125C8
+C Kernel_C.branchFlushRange 8 0 Kernel_C.branchFlush
+C Kernel_C.branchFlush 2 0 asm_instruction'mcr_p15,_0,_%0,_c7,_c5,_7
+EndInlineScript
+}
+Problem (Pairing (strlcpy (ASM) <= Kernel_C.strlcpy (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (performInvocation_Notification (ASM) <= Kernel_C.performInvocation_Notification (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (cleanInvalidateL1Caches (ASM) <= Kernel_C.cleanInvalidateL1Caches (C))) {
+InlineScript
+ASM cleanInvalidateL1Caches 3 0 instruction'dsb_sy_E0012914
+ASM cleanInvalidateL1Caches 7 0 instruction'dsb_sy_E001291C
+ASM cleanInvalidateL1Caches 9 0 instruction'mcr_15_0_r3_cr7_cr5_0_E0012924
+ASM cleanInvalidateL1Caches 11 0 instruction'isb_sy_E0012928
+ASM cleanInvalidateL1Caches 13 0 instruction'dsb_sy_E001292C
+C Kernel_C.cleanInvalidateL1Caches 2 0 Kernel_C.dsb
+C Kernel_C.cleanInvalidateL1Caches 3 0 Kernel_C.invalidate_I_PoU
+C Kernel_C.cleanInvalidateL1Caches 4 0 Kernel_C.dsb
+C Kernel_C.cleanInvalidateL1Caches 6 0 Kernel_C.dsb
+C Kernel_C.dsb 2 0 asm_instruction'dsb
+C Kernel_C.invalidate_I_PoU 2 0 Kernel_C.isb
+C Kernel_C.invalidate_I_PoU 3 0 asm_instruction'mcr_p15,_0,_%0,_c7,_c5,_0
+C Kernel_C.dsb 2 1 asm_instruction'dsb
+C Kernel_C.dsb 2 2 asm_instruction'dsb
+C Kernel_C.isb 2 0 asm_instruction'isb
+EndInlineScript
+}
+Problem (Pairing (deletingIRQHandler (ASM) <= Kernel_C.deletingIRQHandler (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (handleRecv (ASM) <= Kernel_C.handleRecv (C))) {
+InlineScript
+C Kernel_C.handleRecv 10 0 Kernel_C.seL4_Fault_CapFault_new
+C Kernel_C.handleRecv 13 0 Kernel_C.lookup_fault_missing_capability_new
+C Kernel_C.handleRecv 16 0 Kernel_C.cap_endpoint_cap_get_capCanReceive
+C Kernel_C.handleRecv 23 0 Kernel_C.seL4_Fault_CapFault_new
+C Kernel_C.handleRecv 26 0 Kernel_C.lookup_fault_missing_capability_new
+C Kernel_C.handleRecv 30 0 Kernel_C.cap_notification_cap_get_capNtfnCanReceive
+C Kernel_C.handleRecv 33 0 Kernel_C.notification_ptr_get_ntfnBoundTCB
+C Kernel_C.handleRecv 36 0 Kernel_C.cap_notification_cap_get_capNtfnPtr
+C Kernel_C.handleRecv 41 0 Kernel_C.seL4_Fault_CapFault_new
+C Kernel_C.handleRecv 44 0 Kernel_C.lookup_fault_missing_capability_new
+C Kernel_C.handleRecv 49 0 Kernel_C.cap_get_capType
+C Kernel_C.handleRecv 54 0 Kernel_C.seL4_Fault_CapFault_new
+C Kernel_C.handleRecv 60 0 Kernel_C.getRegister
+EndInlineScript
+}
+Problem (Pairing (tcbSchedAppend (ASM) <= Kernel_C.tcbSchedAppend (C))) {
+InlineScript
+C Kernel_C.tcbSchedAppend 2 0 Kernel_C.thread_state_ptr_set_tcbQueued
+C Kernel_C.tcbSchedAppend 12 0 Kernel_C.addToBitmap
+C Kernel_C.tcbSchedAppend 21 0 Kernel_C.ready_queues_index
+C Kernel_C.tcbSchedAppend 28 0 Kernel_C.thread_state_get_tcbQueued
+C Kernel_C.addToBitmap 9 0 Kernel_C.invert_l1index
+C Kernel_C.addToBitmap 11 0 Kernel_C.prio_to_l1index
+EndInlineScript
+}
+Problem (Pairing (APFromVMRights (ASM) <= Kernel_C.APFromVMRights (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (init_core_state (ASM) <= Kernel_C.init_core_state (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (setIRQState (ASM) <= Kernel_C.setIRQState (C))) {
+InlineScript
+C Kernel_C.setIRQState 2 0 Kernel_C.maskInterrupt
+C Kernel_C.maskInterrupt 2 0 Kernel_C.dist_enable_clr
+C Kernel_C.maskInterrupt 3 0 Kernel_C.dist_enable_set
+EndInlineScript
+}
+Problem (Pairing (getExtraCPtr (ASM) <= Kernel_C.getExtraCPtr (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (ensureEmptySlot (ASM) <= Kernel_C.ensureEmptySlot (C))) {
+InlineScript
+C Kernel_C.ensureEmptySlot 9 0 Kernel_C.cap_get_capType
+EndInlineScript
+}
+Problem (Pairing (cteRevoke (ASM) <= Kernel_C.cteRevoke (C))) {
+InlineScript
+C Kernel_C.cteRevoke 15 0 Kernel_C.mdb_node_get_mdbNext
+C Kernel_C.cteRevoke 32 0 Kernel_C.mdb_node_get_mdbNext
+EndInlineScript
+}
+Problem (Pairing (doFaultTransfer (ASM) <= Kernel_C.doFaultTransfer (C))) {
+InlineScript
+C Kernel_C.doFaultTransfer 2 0 Kernel_C.setRegister
+C Kernel_C.doFaultTransfer 3 0 Kernel_C.setRegister
+C Kernel_C.doFaultTransfer 5 0 Kernel_C.wordFromMessageInfo
+C Kernel_C.doFaultTransfer 7 0 Kernel_C.seL4_MessageInfo_new
+C Kernel_C.doFaultTransfer 9 0 Kernel_C.seL4_Fault_get_seL4_FaultType
+EndInlineScript
+}
+Problem (Pairing (sendSignal (ASM) <= Kernel_C.sendSignal (C))) {
+InlineScript
+C Kernel_C.sendSignal 3 0 Kernel_C.setRegister
+C Kernel_C.sendSignal 6 0 Kernel_C.ntfn_set_active
+C Kernel_C.sendSignal 9 0 Kernel_C.thread_state_ptr_get_tsType
+C Kernel_C.sendSignal 11 0 Kernel_C.ntfn_set_active
+C Kernel_C.sendSignal 15 0 Kernel_C.notification_ptr_get_ntfnBoundTCB
+C Kernel_C.sendSignal 17 0 Kernel_C.setRegister
+C Kernel_C.sendSignal 19 0 Kernel_C.notification_ptr_set_state
+C Kernel_C.sendSignal 21 0 Kernel_C.ntfn_ptr_set_queue
+C Kernel_C.sendSignal 26 0 Kernel_C.ntfn_ptr_get_queue
+C Kernel_C.sendSignal 27 0 Kernel_C.notification_ptr_set_ntfnMsgIdentifier
+C Kernel_C.sendSignal 31 0 Kernel_C.notification_ptr_get_ntfnMsgIdentifier
+C Kernel_C.sendSignal 37 0 Kernel_C.notification_ptr_get_state
+C Kernel_C.ntfn_set_active 2 0 Kernel_C.notification_ptr_set_ntfnMsgIdentifier
+C Kernel_C.ntfn_set_active 3 0 Kernel_C.notification_ptr_set_state
+C Kernel_C.ntfn_set_active 2 1 Kernel_C.notification_ptr_set_ntfnMsgIdentifier
+C Kernel_C.ntfn_set_active 3 1 Kernel_C.notification_ptr_set_state
+C Kernel_C.ntfn_ptr_set_queue 2 0 Kernel_C.notification_ptr_set_ntfnQueue_tail
+C Kernel_C.ntfn_ptr_set_queue 3 0 Kernel_C.notification_ptr_set_ntfnQueue_head
+C Kernel_C.ntfn_ptr_get_queue 6 0 Kernel_C.notification_ptr_get_ntfnQueue_tail
+C Kernel_C.ntfn_ptr_get_queue 9 0 Kernel_C.notification_ptr_get_ntfnQueue_head
+EndInlineScript
+}
+Problem (Pairing (invalidateCacheRange_RAM (ASM) <= Kernel_C.invalidateCacheRange_RAM (C))) {
+InlineScript
+ASM invalidateCacheRange_RAM 25 0 instruction'dmb_sy_E001251C
+ASM invalidateCacheRange_RAM 39 0 instruction'mcr_15_0_r3_cr7_cr6_1_E001255C
+ASM invalidateCacheRange_RAM 41 0 instruction'dmb_sy_E0012560
+ASM invalidateCacheRange_RAM 47 0 instruction'dsb_sy_E0012574
+C Kernel_C.invalidateCacheRange_RAM 2 0 Kernel_C.dsb
+C Kernel_C.invalidateCacheRange_RAM 9 0 Kernel_C.invalidateByVA
+C Kernel_C.invalidateCacheRange_RAM 17 0 Kernel_C.plat_invalidateL2Range
+C Kernel_C.dsb 2 0 asm_instruction'dsb
+C Kernel_C.invalidateByVA 2 0 Kernel_C.dmb
+C Kernel_C.invalidateByVA 3 0 asm_instruction'mcr_p15,_0,_%0,_c7,_c6,_1
+C Kernel_C.plat_invalidateL2Range 2 0 Kernel_C.L2_cacheSync
+C Kernel_C.dmb 2 0 asm_instruction'dmb
+C Kernel_C.L2_cacheSync 10 0 Kernel_C.dmb
+C Kernel_C.dmb 2 1 asm_instruction'dmb
+EndInlineScript
+}
+Problem (Pairing (activateThread (ASM) <= Kernel_C.activateThread (C))) {
+InlineScript
+C Kernel_C.activateThread 19 0 Kernel_C.thread_state_get_tsType
+C Kernel_C.activateThread 7 0 Kernel_C.getRestartPC
+C Kernel_C.getRestartPC 5 0 Kernel_C.getRegister
+C Kernel_C.activateThread 4 0 Kernel_C.setNextPC
+C Kernel_C.setNextPC 2 0 Kernel_C.setRegister
+C Kernel_C.activateThread 9 0 Kernel_C.Arch_activateIdleThread
+EndInlineScript
+}
+Problem (Pairing (strncmp (ASM) <= Kernel_C.strncmp (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (isCapRevocable (ASM) <= Kernel_C.isCapRevocable (C))) {
+InlineScript
+C Kernel_C.isCapRevocable 5 0 Kernel_C.cap_endpoint_cap_get_capEPBadge
+C Kernel_C.isCapRevocable 7 0 Kernel_C.cap_endpoint_cap_get_capEPBadge
+C Kernel_C.isCapRevocable 10 0 Kernel_C.cap_notification_cap_get_capNtfnBadge
+C Kernel_C.isCapRevocable 12 0 Kernel_C.cap_notification_cap_get_capNtfnBadge
+C Kernel_C.isCapRevocable 15 0 Kernel_C.cap_get_capType
+C Kernel_C.isCapRevocable 24 0 Kernel_C.cap_get_capType
+C Kernel_C.isCapRevocable 27 0 Kernel_C.Arch_isCapRevocable
+C Kernel_C.isCapRevocable 30 0 Kernel_C.isArchCap
+C Kernel_C.isArchCap 6 0 Kernel_C.cap_get_capType
+EndInlineScript
+}
+Problem (Pairing (bi_finalise (ASM) <= Kernel_C.bi_finalise (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (memcpy (ASM) <= Kernel_C.memcpy (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (getRestartPC (ASM) <= Kernel_C.getRestartPC (C))) {
+InlineScript
+C Kernel_C.getRestartPC 5 0 Kernel_C.getRegister
+EndInlineScript
+}
+Problem (Pairing (setMRs_syscall_error (ASM) <= Kernel_C.setMRs_syscall_error (C))) {
+InlineScript
+C Kernel_C.setMRs_syscall_error 5 0 Kernel_C.setMR
+C Kernel_C.setMRs_syscall_error 9 0 Kernel_C.setMR
+C Kernel_C.setMRs_syscall_error 14 0 Kernel_C.setMR
+C Kernel_C.setMRs_syscall_error 16 0 Kernel_C.setMR
+C Kernel_C.setMRs_syscall_error 21 0 Kernel_C.setMRs_lookup_failure
+C Kernel_C.setMRs_syscall_error 23 0 Kernel_C.setMR
+C Kernel_C.setMRs_syscall_error 28 0 Kernel_C.setMR
+C Kernel_C.setMR 9 0 Kernel_C.setRegister
+C Kernel_C.setMR 9 1 Kernel_C.setRegister
+C Kernel_C.setMR 9 2 Kernel_C.setRegister
+C Kernel_C.setMR 9 3 Kernel_C.setRegister
+C Kernel_C.setMRs_lookup_failure 6 0 Kernel_C.setMR
+C Kernel_C.setMRs_lookup_failure 8 0 Kernel_C.lookup_fault_missing_capability_get_bitsLeft
+C Kernel_C.setMRs_lookup_failure 11 0 Kernel_C.setMR
+C Kernel_C.setMRs_lookup_failure 13 0 Kernel_C.lookup_fault_depth_mismatch_get_bitsFound
+C Kernel_C.setMRs_lookup_failure 14 0 Kernel_C.setMR
+C Kernel_C.setMRs_lookup_failure 16 0 Kernel_C.lookup_fault_depth_mismatch_get_bitsLeft
+C Kernel_C.setMRs_lookup_failure 19 0 Kernel_C.setMR
+C Kernel_C.setMRs_lookup_failure 21 0 Kernel_C.lookup_fault_guard_mismatch_get_bitsFound
+C Kernel_C.setMRs_lookup_failure 22 0 Kernel_C.setMR
+C Kernel_C.setMRs_lookup_failure 24 0 Kernel_C.lookup_fault_guard_mismatch_get_guardFound
+C Kernel_C.setMRs_lookup_failure 25 0 Kernel_C.setMR
+C Kernel_C.setMRs_lookup_failure 27 0 Kernel_C.lookup_fault_guard_mismatch_get_bitsLeft
+C Kernel_C.setMRs_lookup_failure 39 0 Kernel_C.setMR
+C Kernel_C.setMRs_lookup_failure 42 0 Kernel_C.lookup_fault_get_lufType
+C Kernel_C.setMR 9 4 Kernel_C.setRegister
+C Kernel_C.setMR 9 5 Kernel_C.setRegister
+C Kernel_C.setMR 9 6 Kernel_C.setRegister
+C Kernel_C.setMR 9 7 Kernel_C.setRegister
+C Kernel_C.setMR 9 8 Kernel_C.setRegister
+C Kernel_C.setMR 9 9 Kernel_C.setRegister
+C Kernel_C.setMR 9 10 Kernel_C.setRegister
+C Kernel_C.setMR 9 11 Kernel_C.setRegister
+C Kernel_C.setMR 9 12 Kernel_C.setRegister
+EndInlineScript
+}
+Problem (Pairing (maskVMRights (ASM) <= Kernel_C.maskVMRights (C))) {
+InlineScript
+C Kernel_C.maskVMRights 7 0 Kernel_C.seL4_CapRights_get_capAllowWrite
+C Kernel_C.maskVMRights 11 0 Kernel_C.seL4_CapRights_get_capAllowRead
+C Kernel_C.maskVMRights 18 0 Kernel_C.seL4_CapRights_get_capAllowWrite
+C Kernel_C.maskVMRights 22 0 Kernel_C.seL4_CapRights_get_capAllowRead
+C Kernel_C.maskVMRights 29 0 Kernel_C.seL4_CapRights_get_capAllowRead
+EndInlineScript
+}
+Problem (Pairing (pageTableMapped (ASM) <= Kernel_C.pageTableMapped (C))) {
+InlineScript
+C Kernel_C.pageTableMapped 8 0 Kernel_C.ptrFromPAddr
+C Kernel_C.pageTableMapped 10 0 Kernel_C.pde_pde_coarse_get_address
+C Kernel_C.pageTableMapped 14 0 Kernel_C.pde_get_pdeType
+C Kernel_C.ptrFromPAddr 5 0 Kernel_C.physBase
+EndInlineScript
+}
+Problem (Pairing (Arch_performTransfer (ASM) <= Kernel_C.Arch_performTransfer (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (decodeIRQControlInvocation (ASM) <= Kernel_C.decodeIRQControlInvocation (C))) {
+InlineScript
+C Kernel_C.decodeIRQControlInvocation 26 0 Kernel_C.Arch_checkIRQ
+C Kernel_C.decodeIRQControlInvocation 32 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeIRQControlInvocation 34 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeIRQControlInvocation 37 0 Kernel_C.getSyscallArg
+C Kernel_C.getSyscallArg 7 0 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 1 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 2 Kernel_C.getRegister
+C Kernel_C.decodeIRQControlInvocation 22 0 Kernel_C.isIRQActive
+EndInlineScript
+}
+Problem (Pairing (performInvocation_Endpoint (ASM) <= Kernel_C.performInvocation_Endpoint (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (decodeTCBConfigure (ASM) <= Kernel_C.decodeTCBConfigure (C))) {
+InlineScript
+C Kernel_C.decodeTCBConfigure 7 0 Kernel_C.cap_thread_cap_get_capTCBPtr
+C Kernel_C.decodeTCBConfigure 29 0 Kernel_C.cap_get_capType
+C Kernel_C.decodeTCBConfigure 48 0 Kernel_C.cap_thread_cap_get_capTCBPtr
+C Kernel_C.decodeTCBConfigure 56 0 Kernel_C.cap_thread_cap_get_capTCBPtr
+C Kernel_C.decodeTCBConfigure 90 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeTCBConfigure 92 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeTCBConfigure 94 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeTCBConfigure 96 0 Kernel_C.getSyscallArg
+C Kernel_C.getSyscallArg 7 0 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 1 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 2 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 3 Kernel_C.getRegister
+EndInlineScript
+}
+Problem (Pairing (Arch_configureIdleThread (ASM) <= Kernel_C.Arch_configureIdleThread (C))) {
+InlineScript
+C Kernel_C.Arch_configureIdleThread 2 0 Kernel_C.setRegister
+C Kernel_C.Arch_configureIdleThread 3 0 Kernel_C.setRegister
+EndInlineScript
+}
+Problem (Pairing (doFlush (ASM) <= Kernel_C.doFlush (C))) {
+InlineScript
+ASM doFlush 91 0 instruction'dsb_sy_E001267C
+ASM doFlush 97 0 instruction'isb_sy_E00126A0
+C Kernel_C.doFlush 5 0 Kernel_C.isb
+C Kernel_C.doFlush 8 0 Kernel_C.dsb
+C Kernel_C.doFlush 20 0 Kernel_C.ptrFromPAddr
+C Kernel_C.doFlush 23 0 Kernel_C.ptrFromPAddr
+C Kernel_C.isb 2 0 asm_instruction'isb
+C Kernel_C.dsb 2 0 asm_instruction'dsb
+C Kernel_C.ptrFromPAddr 5 0 Kernel_C.physBase
+C Kernel_C.ptrFromPAddr 5 1 Kernel_C.physBase
+EndInlineScript
+}
+Problem (Pairing (decodeSetSchedParams (ASM) <= Kernel_C.decodeSetSchedParams (C))) {
+InlineScript
+C Kernel_C.decodeSetSchedParams 7 0 Kernel_C.cap_null_cap_new
+C Kernel_C.decodeSetSchedParams 9 0 Kernel_C.cap_null_cap_new
+C Kernel_C.decodeSetSchedParams 11 0 Kernel_C.cap_null_cap_new
+C Kernel_C.decodeSetSchedParams 13 0 Kernel_C.cap_thread_cap_get_capTCBPtr
+C Kernel_C.decodeSetSchedParams 19 0 Kernel_C.checkPrio
+C Kernel_C.decodeSetSchedParams 23 0 Kernel_C.checkPrio
+C Kernel_C.decodeSetSchedParams 26 0 Kernel_C.cap_thread_cap_get_capTCBPtr
+C Kernel_C.decodeSetSchedParams 34 0 Kernel_C.cap_get_capType
+C Kernel_C.decodeSetSchedParams 40 0 Kernel_C.getSyscallArg
+C Kernel_C.decodeSetSchedParams 42 0 Kernel_C.getSyscallArg
+C Kernel_C.getSyscallArg 7 0 Kernel_C.getRegister
+C Kernel_C.getSyscallArg 7 1 Kernel_C.getRegister
+EndInlineScript
+}
+Problem (Pairing (decodeIRQHandlerInvocation (ASM) <= Kernel_C.decodeIRQHandlerInvocation (C))) {
+InlineScript
+C Kernel_C.decodeIRQHandlerInvocation 18 0 Kernel_C.cap_get_capType
+C Kernel_C.decodeIRQHandlerInvocation 22 0 Kernel_C.cap_notification_cap_get_capNtfnCanSend
+C Kernel_C.decodeIRQHandlerInvocation 26 0 Kernel_C.cap_get_capType
+EndInlineScript
+}
+Problem (Pairing (insertNewCap (ASM) <= Kernel_C.insertNewCap (C))) {
+InlineScript
+C Kernel_C.insertNewCap 2 0 Kernel_C.mdb_node_ptr_set_mdbNext
+C Kernel_C.insertNewCap 4 0 Kernel_C.mdb_node_ptr_set_mdbPrev
+C Kernel_C.insertNewCap 10 0 Kernel_C.mdb_node_new
+C Kernel_C.insertNewCap 15 0 Kernel_C.mdb_node_get_mdbNext
+EndInlineScript
+}
+Problem (Pairing (Arch_activateIdleThread (ASM) <= Kernel_C.Arch_activateIdleThread (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (switchToIdleThread (ASM) <= Kernel_C.switchToIdleThread (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (sameRegionAs (ASM) <= Kernel_C.sameRegionAs (C))) {
+InlineScript
+C Kernel_C.sameRegionAs 12 0 Kernel_C.cap_untyped_cap_get_capBlockSize
+C Kernel_C.sameRegionAs 18 0 Kernel_C.cap_untyped_cap_get_capPtr
+C Kernel_C.sameRegionAs 24 0 Kernel_C.cap_endpoint_cap_get_capEPPtr
+C Kernel_C.sameRegionAs 26 0 Kernel_C.cap_endpoint_cap_get_capEPPtr
+C Kernel_C.sameRegionAs 29 0 Kernel_C.cap_get_capType
+C Kernel_C.sameRegionAs 32 0 Kernel_C.cap_notification_cap_get_capNtfnPtr
+C Kernel_C.sameRegionAs 34 0 Kernel_C.cap_notification_cap_get_capNtfnPtr
+C Kernel_C.sameRegionAs 37 0 Kernel_C.cap_get_capType
+C Kernel_C.sameRegionAs 41 0 Kernel_C.cap_cnode_cap_get_capCNodeRadix
+C Kernel_C.sameRegionAs 43 0 Kernel_C.cap_cnode_cap_get_capCNodeRadix
+C Kernel_C.sameRegionAs 47 0 Kernel_C.cap_cnode_cap_get_capCNodePtr
+C Kernel_C.sameRegionAs 49 0 Kernel_C.cap_cnode_cap_get_capCNodePtr
+C Kernel_C.sameRegionAs 52 0 Kernel_C.cap_get_capType
+C Kernel_C.sameRegionAs 55 0 Kernel_C.cap_thread_cap_get_capTCBPtr
+C Kernel_C.sameRegionAs 57 0 Kernel_C.cap_thread_cap_get_capTCBPtr
+C Kernel_C.sameRegionAs 60 0 Kernel_C.cap_get_capType
+C Kernel_C.sameRegionAs 63 0 Kernel_C.cap_reply_cap_get_capTCBPtr
+C Kernel_C.sameRegionAs 65 0 Kernel_C.cap_reply_cap_get_capTCBPtr
+C Kernel_C.sameRegionAs 68 0 Kernel_C.cap_get_capType
+C Kernel_C.sameRegionAs 72 0 Kernel_C.cap_get_capType
+C Kernel_C.sameRegionAs 77 0 Kernel_C.cap_get_capType
+C Kernel_C.sameRegionAs 81 0 Kernel_C.cap_get_capType
+C Kernel_C.sameRegionAs 84 0 Kernel_C.cap_irq_handler_cap_get_capIRQ
+C Kernel_C.sameRegionAs 86 0 Kernel_C.cap_irq_handler_cap_get_capIRQ
+C Kernel_C.sameRegionAs 89 0 Kernel_C.cap_get_capType
+C Kernel_C.sameRegionAs 96 0 Kernel_C.isArchCap
+C Kernel_C.sameRegionAs 100 0 Kernel_C.isArchCap
+C Kernel_C.sameRegionAs 112 0 Kernel_C.cap_get_capType
+C Kernel_C.isArchCap 6 0 Kernel_C.cap_get_capType
+C Kernel_C.isArchCap 6 1 Kernel_C.cap_get_capType
+EndInlineScript
+}
+Problem (Pairing (cancelBadgedSends (ASM) <= Kernel_C.cancelBadgedSends (C))) {
+InlineScript
+C Kernel_C.cancelBadgedSends 3 0 Kernel_C.endpoint_ptr_set_state
+C Kernel_C.cancelBadgedSends 5 0 Kernel_C.ep_ptr_set_queue
+C Kernel_C.cancelBadgedSends 20 0 Kernel_C.thread_state_ptr_get_blockingIPCBadge
+C Kernel_C.cancelBadgedSends 23 0 Kernel_C.endpoint_ptr_set_epQueue_tail
+C Kernel_C.cancelBadgedSends 24 0 Kernel_C.endpoint_ptr_set_epQueue_head
+C Kernel_C.cancelBadgedSends 25 0 Kernel_C.endpoint_ptr_set_state
+C Kernel_C.cancelBadgedSends 27 0 Kernel_C.ep_ptr_get_queue
+C Kernel_C.cancelBadgedSends 35 0 Kernel_C.endpoint_ptr_get_state
+C Kernel_C.ep_ptr_set_queue 2 0 Kernel_C.endpoint_ptr_set_epQueue_tail
+C Kernel_C.ep_ptr_set_queue 3 0 Kernel_C.endpoint_ptr_set_epQueue_head
+C Kernel_C.ep_ptr_get_queue 6 0 Kernel_C.endpoint_ptr_get_epQueue_tail
+C Kernel_C.ep_ptr_get_queue 9 0 Kernel_C.endpoint_ptr_get_epQueue_head
+EndInlineScript
+}
+Problem (Pairing (possibleSwitchTo (ASM) <= Kernel_C.possibleSwitchTo (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (populate_bi_frame (ASM) <= Kernel_C.populate_bi_frame (C))) {
+InlineScript
+C Kernel_C.populate_bi_frame 24 0 Kernel_C.clearMemory
+C Kernel_C.populate_bi_frame 29 0 Kernel_C.clearMemory
+C Kernel_C.clearMemory 5 0 Kernel_C.addrFromPPtr
+C Kernel_C.clearMemory 5 1 Kernel_C.addrFromPPtr
+C Kernel_C.addrFromPPtr 5 0 Kernel_C.physBase
+C Kernel_C.addrFromPPtr 5 1 Kernel_C.physBase
+EndInlineScript
+}
+Problem (Pairing (setNextPC (ASM) <= Kernel_C.setNextPC (C))) {
+InlineScript
+C Kernel_C.setNextPC 2 0 Kernel_C.setRegister
+EndInlineScript
+}
+Problem (Pairing (setVMRootForFlush (ASM) <= Kernel_C.setVMRootForFlush (C))) {
+InlineScript
+ASM setVMRootForFlush 21 0 instruction'dsb_sy_E001126C
+ASM setVMRootForFlush 23 0 instruction'mcr_15_0_r3_cr2_cr0_0_E0011280
+ASM setVMRootForFlush 25 0 instruction'isb_sy_E0011284
+ASM setVMRootForFlush 27 0 instruction'mcr_15_0_r0_cr13_cr0_1_E0011288
+ASM setVMRootForFlush 29 0 instruction'isb_sy_E001128C
+ASM setVMRootForFlush 31 0 instruction'mcr_15_0_r0_cr2_cr0_0_E00112A0
+ASM setVMRootForFlush 33 0 instruction'isb_sy_E00112A4
+C Kernel_C.setVMRootForFlush 4 0 Kernel_C.armv_contextSwitch
+C Kernel_C.setVMRootForFlush 9 0 Kernel_C.cap_page_directory_cap_get_capPDBasePtr
+C Kernel_C.setVMRootForFlush 13 0 Kernel_C.cap_page_directory_cap_get_capPDIsMapped
+C Kernel_C.setVMRootForFlush 17 0 Kernel_C.cap_get_capType
+C Kernel_C.armv_contextSwitch 2 0 Kernel_C.armv_contextSwitch_HWASID
+C Kernel_C.armv_contextSwitch_HWASID 2 0 Kernel_C.isb
+C Kernel_C.armv_contextSwitch_HWASID 3 0 Kernel_C.writeTTBR0Ptr
+C Kernel_C.armv_contextSwitch_HWASID 5 0 Kernel_C.addrFromPPtr
+C Kernel_C.armv_contextSwitch_HWASID 6 0 Kernel_C.setHardwareASID
+C Kernel_C.armv_contextSwitch_HWASID 7 0 Kernel_C.isb
+C Kernel_C.armv_contextSwitch_HWASID 8 0 Kernel_C.writeTTBR0Ptr
+C Kernel_C.armv_contextSwitch_HWASID 10 0 Kernel_C.addrFromKPPtr
+C Kernel_C.armv_contextSwitch_HWASID 12 0 Kernel_C.dsb
+C Kernel_C.isb 2 0 asm_instruction'isb
+C Kernel_C.writeTTBR0Ptr 2 0 Kernel_C.writeTTBR0
+C Kernel_C.addrFromPPtr 5 0 Kernel_C.physBase
+C Kernel_C.setHardwareASID 2 0 Kernel_C.writeContextID
+C Kernel_C.isb 2 1 asm_instruction'isb
+C Kernel_C.writeTTBR0Ptr 2 1 Kernel_C.writeTTBR0
+C Kernel_C.addrFromKPPtr 6 0 Kernel_C.physBase
+C Kernel_C.addrFromKPPtr 8 0 Kernel_C.physBase
+C Kernel_C.dsb 2 0 asm_instruction'dsb
+C Kernel_C.writeTTBR0 2 0 asm_instruction'mcr_p15,_0,_%0,_c2,_c0,_0
+C Kernel_C.writeContextID 2 0 Kernel_C.writeContextIDPL2
+C Kernel_C.writeContextID 3 0 Kernel_C.isb
+C Kernel_C.writeContextID 4 0 asm_instruction'mcr_p15,_0,_%0,_c13,_c0,_1
+C Kernel_C.writeTTBR0 2 1 asm_instruction'mcr_p15,_0,_%0,_c2,_c0,_0
+C Kernel_C.isb 2 2 asm_instruction'isb
+EndInlineScript
+}
+Problem (Pairing (invokeCNodeRotate (ASM) <= Kernel_C.invokeCNodeRotate (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (setExtraBadge (ASM) <= Kernel_C.setExtraBadge (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (cleanCaches_PoU (ASM) <= Kernel_C.cleanCaches_PoU (C))) {
+InlineScript
+ASM cleanCaches_PoU 3 0 instruction'dsb_sy_E00126B0
+ASM cleanCaches_PoU 7 0 instruction'dsb_sy_E00126B8
+ASM cleanCaches_PoU 9 0 instruction'mcr_15_0_r3_cr7_cr5_0_E00126C0
+ASM cleanCaches_PoU 11 0 instruction'isb_sy_E00126C4
+ASM cleanCaches_PoU 13 0 instruction'dsb_sy_E00126C8
+C Kernel_C.cleanCaches_PoU 2 0 Kernel_C.dsb
+C Kernel_C.cleanCaches_PoU 3 0 Kernel_C.invalidate_I_PoU
+C Kernel_C.cleanCaches_PoU 4 0 Kernel_C.dsb
+C Kernel_C.cleanCaches_PoU 6 0 Kernel_C.dsb
+C Kernel_C.dsb 2 0 asm_instruction'dsb
+C Kernel_C.invalidate_I_PoU 2 0 Kernel_C.isb
+C Kernel_C.invalidate_I_PoU 3 0 asm_instruction'mcr_p15,_0,_%0,_c7,_c5,_0
+C Kernel_C.dsb 2 1 asm_instruction'dsb
+C Kernel_C.dsb 2 2 asm_instruction'dsb
+C Kernel_C.isb 2 0 asm_instruction'isb
+EndInlineScript
+}
+Problem (Pairing (invalidateASIDEntry (ASM) <= Kernel_C.invalidateASIDEntry (C))) {
+InlineScript
+C Kernel_C.invalidateASIDEntry 2 0 Kernel_C.invalidateASID
+C Kernel_C.invalidateASIDEntry 7 0 Kernel_C.pde_pde_invalid_get_stored_hw_asid
+C Kernel_C.invalidateASIDEntry 10 0 Kernel_C.pde_pde_invalid_get_stored_asid_valid
+C Kernel_C.invalidateASID 5 0 Kernel_C.pde_pde_invalid_new
+EndInlineScript
+}
+Problem (Pairing (deleteASIDPool (ASM) <= Kernel_C.deleteASIDPool (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (receiveIPC (ASM) <= Kernel_C.receiveIPC (C))) {
+InlineScript
+C Kernel_C.receiveIPC 3 0 Kernel_C.ep_ptr_set_queue
+C Kernel_C.receiveIPC 4 0 Kernel_C.endpoint_ptr_set_state
+C Kernel_C.receiveIPC 8 0 Kernel_C.ep_ptr_get_queue
+C Kernel_C.receiveIPC 10 0 Kernel_C.thread_state_ptr_set_blockingIPCCanGrant
+C Kernel_C.receiveIPC 13 0 Kernel_C.cap_endpoint_cap_get_capCanGrant
+C Kernel_C.receiveIPC 14 0 Kernel_C.thread_state_ptr_set_blockingObject
+C Kernel_C.receiveIPC 16 0 Kernel_C.thread_state_ptr_set_tsType
+C Kernel_C.receiveIPC 22 0 Kernel_C.cap_endpoint_cap_get_capCanGrant
+C Kernel_C.receiveIPC 30 0 Kernel_C.thread_state_ptr_get_blockingIPCIsCall
+C Kernel_C.receiveIPC 35 0 Kernel_C.thread_state_ptr_get_blockingIPCCanGrantReply
+C Kernel_C.receiveIPC 39 0 Kernel_C.thread_state_ptr_get_blockingIPCCanGrant
+C Kernel_C.receiveIPC 43 0 Kernel_C.thread_state_ptr_get_blockingIPCBadge
+C Kernel_C.receiveIPC 45 0 Kernel_C.endpoint_ptr_set_state
+C Kernel_C.receiveIPC 47 0 Kernel_C.ep_ptr_set_queue
+C Kernel_C.receiveIPC 52 0 Kernel_C.ep_ptr_get_queue
+C Kernel_C.receiveIPC 57 0 Kernel_C.endpoint_ptr_get_state
+C Kernel_C.receiveIPC 61 0 Kernel_C.notification_ptr_get_state
+C Kernel_C.receiveIPC 68 0 Kernel_C.cap_endpoint_cap_get_capEPPtr
+C Kernel_C.ep_ptr_set_queue 2 0 Kernel_C.endpoint_ptr_set_epQueue_tail
+C Kernel_C.ep_ptr_set_queue 3 0 Kernel_C.endpoint_ptr_set_epQueue_head
+C Kernel_C.ep_ptr_get_queue 6 0 Kernel_C.endpoint_ptr_get_epQueue_tail
+C Kernel_C.ep_ptr_get_queue 9 0 Kernel_C.endpoint_ptr_get_epQueue_head
+C Kernel_C.ep_ptr_set_queue 2 1 Kernel_C.endpoint_ptr_set_epQueue_tail
+C Kernel_C.ep_ptr_set_queue 3 1 Kernel_C.endpoint_ptr_set_epQueue_head
+C Kernel_C.ep_ptr_get_queue 6 1 Kernel_C.endpoint_ptr_get_epQueue_tail
+C Kernel_C.ep_ptr_get_queue 9 1 Kernel_C.endpoint_ptr_get_epQueue_head
+C Kernel_C.receiveIPC 18 0 Kernel_C.doNBRecvFailedTransfer
+C Kernel_C.receiveIPC 6 0 Kernel_C.tcbEPAppend
+C Kernel_C.doNBRecvFailedTransfer 2 0 Kernel_C.setRegister
+EndInlineScript
+}
+Problem (Pairing (memset (ASM) <= Kernel_C.memset (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (decodeCopyRegisters (ASM) <= Kernel_C.decodeCopyRegisters (C))) {
+InlineScript
+C Kernel_C.decodeCopyRegisters 8 0 Kernel_C.cap_thread_cap_get_capTCBPtr
+C Kernel_C.decodeCopyRegisters 13 0 Kernel_C.cap_thread_cap_get_capTCBPtr
+C Kernel_C.decodeCopyRegisters 21 0 Kernel_C.cap_get_capType
+C Kernel_C.decodeCopyRegisters 30 0 Kernel_C.getSyscallArg
+C Kernel_C.getSyscallArg 7 0 Kernel_C.getRegister
+C Kernel_C.decodeCopyRegisters 27 0 Kernel_C.Arch_decodeTransfer
+EndInlineScript
+}
+Problem (Pairing (arch_get_n_paging (ASM) <= Kernel_C.arch_get_n_paging (C))) {
+InlineScript
+C Kernel_C.arch_get_n_paging 5 0 Kernel_C.get_n_paging
+EndInlineScript
+}
+Problem (Pairing (handleFaultReply (ASM) <= Kernel_C.handleFaultReply (C))) {
+InlineScript
+C Kernel_C.handleFaultReply 5 0 Kernel_C.copyMRsFaultReply
+C Kernel_C.handleFaultReply 7 0 Kernel_C.copyMRsFaultReply
+C Kernel_C.handleFaultReply 12 0 Kernel_C.seL4_Fault_get_seL4_FaultType
+C Kernel_C.handleFaultReply 18 0 Kernel_C.seL4_Fault_get_seL4_FaultType
+C Kernel_C.handleFaultReply 23 0 Kernel_C.seL4_MessageInfo_get_length
+C Kernel_C.handleFaultReply 26 0 Kernel_C.seL4_MessageInfo_get_label
+C Kernel_C.handleFaultReply 28 0 Kernel_C.messageInfoFromWord
+C Kernel_C.handleFaultReply 30 0 Kernel_C.getRegister
+C Kernel_C.copyMRsFaultReply 7 0 Kernel_C.setRegister
+C Kernel_C.copyMRsFaultReply 9 0 Kernel_C.sanitiseRegister
+C Kernel_C.copyMRsFaultReply 23 0 Kernel_C.setRegister
+C Kernel_C.copyMRsFaultReply 25 0 Kernel_C.sanitiseRegister
+C Kernel_C.copyMRsFaultReply 27 0 Kernel_C.getRegister
+C Kernel_C.copyMRsFaultReply 33 0 Kernel_C.Arch_getSanitiseRegisterInfo
+C Kernel_C.copyMRsFaultReply 7 1 Kernel_C.setRegister
+C Kernel_C.copyMRsFaultReply 9 1 Kernel_C.sanitiseRegister
+C Kernel_C.copyMRsFaultReply 23 1 Kernel_C.setRegister
+C Kernel_C.copyMRsFaultReply 25 1 Kernel_C.sanitiseRegister
+C Kernel_C.copyMRsFaultReply 27 1 Kernel_C.getRegister
+C Kernel_C.copyMRsFaultReply 33 1 Kernel_C.Arch_getSanitiseRegisterInfo
+C Kernel_C.messageInfoFromWord 5 0 Kernel_C.seL4_MessageInfo_set_length
+C Kernel_C.messageInfoFromWord 9 0 Kernel_C.seL4_MessageInfo_get_length
+C Kernel_C.handleFaultReply 10 0 Kernel_C.Arch_handleFaultReply
+EndInlineScript
+}
+Problem (Pairing (handleFault (ASM) <= Kernel_C.handleFault (C))) {
+InlineScript
+C Kernel_C.handleFault 2 0 Kernel_C.handleDoubleFault
+EndInlineScript
+}
+Problem (Pairing (replyFromKernel_error (ASM) <= Kernel_C.replyFromKernel_error (C))) {
+InlineScript
+C Kernel_C.replyFromKernel_error 2 0 Kernel_C.setRegister
+C Kernel_C.replyFromKernel_error 4 0 Kernel_C.wordFromMessageInfo
+C Kernel_C.replyFromKernel_error 6 0 Kernel_C.seL4_MessageInfo_new
+C Kernel_C.replyFromKernel_error 10 0 Kernel_C.setRegister
+EndInlineScript
+}
+Problem (Pairing (lookupTargetSlot (ASM) <= Kernel_C.lookupTargetSlot (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (tcbSchedDequeue (ASM) <= Kernel_C.tcbSchedDequeue (C))) {
+InlineScript
+C Kernel_C.tcbSchedDequeue 2 0 Kernel_C.thread_state_ptr_set_tcbQueued
+C Kernel_C.tcbSchedDequeue 15 0 Kernel_C.removeFromBitmap
+C Kernel_C.tcbSchedDequeue 26 0 Kernel_C.ready_queues_index
+C Kernel_C.tcbSchedDequeue 33 0 Kernel_C.thread_state_get_tcbQueued
+C Kernel_C.removeFromBitmap 12 0 Kernel_C.invert_l1index
+C Kernel_C.removeFromBitmap 14 0 Kernel_C.prio_to_l1index
+EndInlineScript
+}
+Problem (Pairing (cleanCacheRange_RAM (ASM) <= Kernel_C.cleanCacheRange_RAM (C))) {
+InlineScript
+ASM cleanCacheRange_RAM 7 0 instruction'mcr_15_0_ip_cr7_cr10_1_E00120C8
+ASM cleanCacheRange_RAM 9 0 instruction'dmb_sy_E00120CC
+ASM cleanCacheRange_RAM 15 0 instruction'dsb_sy_E00120E0
+ASM cleanCacheRange_RAM 27 0 instruction'dmb_sy_E0012118
+C Kernel_C.cleanCacheRange_RAM 2 0 Kernel_C.plat_cleanL2Range
+C Kernel_C.cleanCacheRange_RAM 5 0 Kernel_C.dsb
+C Kernel_C.cleanCacheRange_RAM 6 0 Kernel_C.cleanCacheRange_PoC
+C Kernel_C.plat_cleanL2Range 2 0 Kernel_C.L2_cacheSync
+C Kernel_C.dsb 2 0 asm_instruction'dsb
+C Kernel_C.cleanCacheRange_PoC 8 0 Kernel_C.cleanByVA
+C Kernel_C.L2_cacheSync 10 0 Kernel_C.dmb
+C Kernel_C.cleanByVA 2 0 Kernel_C.dmb
+C Kernel_C.cleanByVA 3 0 asm_instruction'mcr_p15,_0,_%0,_c7,_c10,_1
+C Kernel_C.dmb 2 0 asm_instruction'dmb
+C Kernel_C.dmb 2 1 asm_instruction'dmb
+EndInlineScript
+}
+Problem (Pairing (lookupPTSlot (ASM) <= Kernel_C.lookupPTSlot (C))) {
+InlineScript
+C Kernel_C.lookupPTSlot 8 0 Kernel_C.lookup_fault_missing_capability_new
+C Kernel_C.lookupPTSlot 19 0 Kernel_C.ptrFromPAddr
+C Kernel_C.lookupPTSlot 21 0 Kernel_C.pde_pde_coarse_ptr_get_address
+C Kernel_C.lookupPTSlot 24 0 Kernel_C.pde_ptr_get_pdeType
+C Kernel_C.ptrFromPAddr 5 0 Kernel_C.physBase
+C Kernel_C.lookupPTSlot 26 0 Kernel_C.lookupPDSlot
+EndInlineScript
+}
+Problem (Pairing (handleReply (ASM) <= Kernel_C.handleReply (C))) {
+InlineScript
+C Kernel_C.handleReply 8 0 Kernel_C.cap_reply_cap_get_capReplyCanGrant
+C Kernel_C.handleReply 11 0 Kernel_C.cap_reply_cap_get_capTCBPtr
+C Kernel_C.handleReply 14 0 Kernel_C.cap_reply_cap_get_capReplyMaster
+C Kernel_C.handleReply 19 0 Kernel_C.cap_get_capType
+EndInlineScript
+}
+Problem (Pairing (Arch_switchToIdleThread (ASM) <= Kernel_C.Arch_switchToIdleThread (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (insert_region (ASM) <= Kernel_C.insert_region (C))) {
+InlineScript
+C Kernel_C.insert_region 16 0 Kernel_C.pptr_to_paddr_reg
+C Kernel_C.insert_region 19 0 Kernel_C.is_reg_empty
+C Kernel_C.insert_region 27 0 Kernel_C.is_reg_empty
+C Kernel_C.pptr_to_paddr_reg 5 0 Kernel_C.addrFromPPtr
+C Kernel_C.pptr_to_paddr_reg 7 0 Kernel_C.addrFromPPtr
+C Kernel_C.addrFromPPtr 5 0 Kernel_C.physBase
+C Kernel_C.addrFromPPtr 5 1 Kernel_C.physBase
+EndInlineScript
+}
+Problem (Pairing (memzero (ASM) <= Kernel_C.memzero (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (map_kernel_frame (ASM) <= Kernel_C.map_kernel_frame (C))) {
+InlineScript
+C Kernel_C.map_kernel_frame 5 0 Kernel_C.pte_pte_small_new
+C Kernel_C.map_kernel_frame 12 0 Kernel_C.vm_attributes_get_armPageCacheable
+C Kernel_C.map_kernel_frame 16 0 Kernel_C.pageBitsForSize
+C Kernel_C.map_kernel_frame 18 0 Kernel_C.pageBitsForSize
+EndInlineScript
+}
+Problem (Pairing (suspend (ASM) <= Kernel_C.suspend (C))) {
+InlineScript
+C Kernel_C.suspend 4 0 Kernel_C.updateRestartPC
+C Kernel_C.suspend 7 0 Kernel_C.thread_state_get_tsType
+C Kernel_C.updateRestartPC 2 0 Kernel_C.setRegister
+C Kernel_C.updateRestartPC 4 0 Kernel_C.getRegister
+EndInlineScript
+}
+Problem (Pairing (create_bi_frame_cap (ASM) <= Kernel_C.create_bi_frame_cap (C))) {
+InlineScript
+C Kernel_C.create_bi_frame_cap 3 0 Kernel_C.write_slot
+C Kernel_C.write_slot 9 0 Kernel_C.mdb_node_new
+C Kernel_C.write_slot 4 0 Kernel_C.mdb_node_ptr_set_mdbRevocable
+C Kernel_C.write_slot 2 0 Kernel_C.mdb_node_ptr_set_mdbFirstBadged
+EndInlineScript
+}
+Problem (Pairing (decodeBindNotification (ASM) <= Kernel_C.decodeBindNotification (C))) {
+InlineScript
+C Kernel_C.decodeBindNotification 14 0 Kernel_C.notification_ptr_get_ntfnBoundTCB
+C Kernel_C.decodeBindNotification 18 0 Kernel_C.notification_ptr_get_ntfnQueue_head
+C Kernel_C.decodeBindNotification 24 0 Kernel_C.cap_notification_cap_get_capNtfnCanReceive
+C Kernel_C.decodeBindNotification 27 0 Kernel_C.cap_notification_cap_get_capNtfnPtr
+C Kernel_C.decodeBindNotification 33 0 Kernel_C.cap_get_capType
+C Kernel_C.decodeBindNotification 45 0 Kernel_C.cap_thread_cap_get_capTCBPtr
+EndInlineScript
+}
+Problem (Pairing (str_to_long (ASM) <= Kernel_C.str_to_long (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (emptySlot (ASM) <= Kernel_C.emptySlot (C))) {
+InlineScript
+C Kernel_C.emptySlot 2 0 Kernel_C.postCapDeletion
+C Kernel_C.emptySlot 6 0 Kernel_C.mdb_node_new
+C Kernel_C.emptySlot 10 0 Kernel_C.cap_null_cap_new
+C Kernel_C.emptySlot 11 0 Kernel_C.mdb_node_ptr_set_mdbFirstBadged
+C Kernel_C.emptySlot 15 0 Kernel_C.mdb_node_get_mdbFirstBadged
+C Kernel_C.emptySlot 19 0 Kernel_C.mdb_node_get_mdbFirstBadged
+C Kernel_C.emptySlot 22 0 Kernel_C.mdb_node_ptr_set_mdbPrev
+C Kernel_C.emptySlot 25 0 Kernel_C.mdb_node_ptr_set_mdbNext
+C Kernel_C.emptySlot 30 0 Kernel_C.mdb_node_get_mdbNext
+C Kernel_C.emptySlot 33 0 Kernel_C.mdb_node_get_mdbPrev
+C Kernel_C.emptySlot 38 0 Kernel_C.cap_get_capType
+C Kernel_C.postCapDeletion 5 0 Kernel_C.cap_irq_handler_cap_get_capIRQ
+C Kernel_C.postCapDeletion 6 0 Kernel_C.Arch_postCapDeletion
+C Kernel_C.postCapDeletion 9 0 Kernel_C.isArchCap
+C Kernel_C.postCapDeletion 12 0 Kernel_C.cap_get_capType
+C Kernel_C.isArchCap 6 0 Kernel_C.cap_get_capType
+EndInlineScript
+}
+Problem (Pairing (loadCapTransfer (ASM) <= Kernel_C.loadCapTransfer (C))) {
+InlineScript
+C Kernel_C.loadCapTransfer 6 0 Kernel_C.capTransferFromWords
+EndInlineScript
+}
+Problem (Pairing (replyFromKernel_success_empty (ASM) <= Kernel_C.replyFromKernel_success_empty (C))) {
+InlineScript
+C Kernel_C.replyFromKernel_success_empty 2 0 Kernel_C.setRegister
+C Kernel_C.replyFromKernel_success_empty 4 0 Kernel_C.wordFromMessageInfo
+C Kernel_C.replyFromKernel_success_empty 6 0 Kernel_C.seL4_MessageInfo_new
+C Kernel_C.replyFromKernel_success_empty 7 0 Kernel_C.setRegister
+EndInlineScript
+}
+Problem (Pairing (Arch_sameObjectAs (ASM) <= Kernel_C.Arch_sameObjectAs (C))) {
+InlineScript
+C Kernel_C.Arch_sameObjectAs 9 0 Kernel_C.cap_frame_cap_get_capFIsDevice
+C Kernel_C.Arch_sameObjectAs 11 0 Kernel_C.cap_frame_cap_get_capFIsDevice
+C Kernel_C.Arch_sameObjectAs 15 0 Kernel_C.cap_frame_cap_get_capFSize
+C Kernel_C.Arch_sameObjectAs 17 0 Kernel_C.cap_frame_cap_get_capFSize
+C Kernel_C.Arch_sameObjectAs 21 0 Kernel_C.cap_frame_cap_get_capFBasePtr
+C Kernel_C.Arch_sameObjectAs 23 0 Kernel_C.cap_frame_cap_get_capFBasePtr
+C Kernel_C.Arch_sameObjectAs 27 0 Kernel_C.cap_get_capType
+C Kernel_C.Arch_sameObjectAs 30 0 Kernel_C.cap_get_capType
+C Kernel_C.Arch_sameObjectAs 33 0 Kernel_C.cap_get_capType
+C Kernel_C.Arch_sameObjectAs 37 0 Kernel_C.cap_small_frame_cap_get_capFIsDevice
+C Kernel_C.Arch_sameObjectAs 39 0 Kernel_C.cap_small_frame_cap_get_capFIsDevice
+C Kernel_C.Arch_sameObjectAs 43 0 Kernel_C.cap_small_frame_cap_get_capFBasePtr
+C Kernel_C.Arch_sameObjectAs 45 0 Kernel_C.cap_small_frame_cap_get_capFBasePtr
+C Kernel_C.Arch_sameObjectAs 49 0 Kernel_C.cap_get_capType
+C Kernel_C.Arch_sameObjectAs 52 0 Kernel_C.cap_get_capType
+C Kernel_C.Arch_sameObjectAs 55 0 Kernel_C.cap_get_capType
+EndInlineScript
+}
+Problem (Pairing (arch_clean_invalidate_caches (ASM) <= Kernel_C.arch_clean_invalidate_caches (C))) {
+InlineScript
+ASM arch_clean_invalidate_caches 13 0 instruction'dmb_sy_E0012960
+ASM arch_clean_invalidate_caches 31 0 instruction'dmb_sy_E00129AC
+ASM arch_clean_invalidate_caches 43 0 instruction'isb_sy_E00129D8
+C Kernel_C.arch_clean_invalidate_caches 2 0 Kernel_C.isb
+C Kernel_C.arch_clean_invalidate_caches 4 0 Kernel_C.plat_cleanInvalidateL2Cache
+C Kernel_C.isb 2 0 asm_instruction'isb
+C Kernel_C.plat_cleanInvalidateL2Cache 2 0 Kernel_C.L2_cacheSync
+C Kernel_C.plat_cleanInvalidateL2Cache 11 0 Kernel_C.L2_cacheSync
+C Kernel_C.L2_cacheSync 10 0 Kernel_C.dmb
+C Kernel_C.L2_cacheSync 10 1 Kernel_C.dmb
+C Kernel_C.dmb 2 0 asm_instruction'dmb
+C Kernel_C.dmb 2 1 asm_instruction'dmb
+EndInlineScript
+}
+Problem (Pairing (createNewObjects (ASM) <= Kernel_C.createNewObjects (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (scheduleTCB (ASM) <= Kernel_C.scheduleTCB (C))) {
+InlineScript
+C Kernel_C.scheduleTCB 6 0 Kernel_C.isRunnable
+C Kernel_C.isRunnable 8 0 Kernel_C.thread_state_get_tsType
+EndInlineScript
+}
+Problem (Pairing (cteInsert (ASM) <= Kernel_C.cteInsert (C))) {
+InlineScript
+C Kernel_C.cteInsert 2 0 Kernel_C.mdb_node_ptr_set_mdbPrev
+C Kernel_C.cteInsert 5 0 Kernel_C.mdb_node_get_mdbNext
+C Kernel_C.cteInsert 8 0 Kernel_C.mdb_node_get_mdbNext
+C Kernel_C.cteInsert 9 0 Kernel_C.mdb_node_ptr_set_mdbNext
+C Kernel_C.cteInsert 15 0 Kernel_C.setUntypedCapAsFull
+C Kernel_C.cteInsert 17 0 Kernel_C.mdb_node_set_mdbFirstBadged
+C Kernel_C.cteInsert 19 0 Kernel_C.mdb_node_set_mdbRevocable
+C Kernel_C.cteInsert 21 0 Kernel_C.mdb_node_set_mdbPrev
+C Kernel_C.setUntypedCapAsFull 2 0 Kernel_C.cap_untyped_cap_ptr_set_capFreeIndex
+C Kernel_C.setUntypedCapAsFull 5 0 Kernel_C.cap_untyped_cap_get_capBlockSize
+C Kernel_C.setUntypedCapAsFull 9 0 Kernel_C.cap_untyped_cap_get_capBlockSize
+C Kernel_C.setUntypedCapAsFull 11 0 Kernel_C.cap_untyped_cap_get_capBlockSize
+C Kernel_C.setUntypedCapAsFull 15 0 Kernel_C.cap_untyped_cap_get_capPtr
+C Kernel_C.setUntypedCapAsFull 17 0 Kernel_C.cap_untyped_cap_get_capPtr
+C Kernel_C.setUntypedCapAsFull 21 0 Kernel_C.cap_get_capType
+C Kernel_C.setUntypedCapAsFull 25 0 Kernel_C.cap_get_capType
+EndInlineScript
+}
+Problem (Pairing (create_mapped_it_frame_cap (ASM) <= Kernel_C.create_mapped_it_frame_cap (C))) {
+InlineScript
+C Kernel_C.create_mapped_it_frame_cap 4 0 Kernel_C.map_it_frame_cap
+C Kernel_C.create_mapped_it_frame_cap 6 0 Kernel_C.create_it_frame_cap
+C Kernel_C.map_it_frame_cap 5 0 Kernel_C.pte_pte_small_new
+C Kernel_C.map_it_frame_cap 9 0 Kernel_C.addrFromPPtr
+C Kernel_C.map_it_frame_cap 13 0 Kernel_C.pageBitsForSize
+C Kernel_C.map_it_frame_cap 15 0 Kernel_C.pageBitsForSize
+C Kernel_C.map_it_frame_cap 18 0 Kernel_C.ptrFromPAddr
+C Kernel_C.map_it_frame_cap 20 0 Kernel_C.pde_pde_coarse_ptr_get_address
+C Kernel_C.map_it_frame_cap 24 0 Kernel_C.pageBitsForSize
+C Kernel_C.map_it_frame_cap 26 0 Kernel_C.generic_frame_cap_get_capFMappedAddress
+C Kernel_C.map_it_frame_cap 29 0 Kernel_C.generic_frame_cap_get_capFBasePtr
+C Kernel_C.map_it_frame_cap 32 0 Kernel_C.cap_page_directory_cap_get_capPDBasePtr
+C Kernel_C.create_it_frame_cap 5 0 Kernel_C.cap_frame_cap_new
+C Kernel_C.create_it_frame_cap 8 0 Kernel_C.wordFromVMRights
+C Kernel_C.create_it_frame_cap 11 0 Kernel_C.cap_small_frame_cap_new
+C Kernel_C.create_it_frame_cap 14 0 Kernel_C.wordFromVMRights
+C Kernel_C.addrFromPPtr 5 0 Kernel_C.physBase
+C Kernel_C.ptrFromPAddr 5 0 Kernel_C.physBase
+C Kernel_C.generic_frame_cap_get_capFMappedAddress 5 0 Kernel_C.cap_small_frame_cap_get_capFMappedAddress
+C Kernel_C.generic_frame_cap_get_capFMappedAddress 8 0 Kernel_C.cap_frame_cap_get_capFMappedAddress
+C Kernel_C.generic_frame_cap_get_capFMappedAddress 12 0 Kernel_C.cap_get_capType
+C Kernel_C.generic_frame_cap_get_capFBasePtr 5 0 Kernel_C.cap_small_frame_cap_get_capFBasePtr
+C Kernel_C.generic_frame_cap_get_capFBasePtr 8 0 Kernel_C.cap_frame_cap_get_capFBasePtr
+C Kernel_C.generic_frame_cap_get_capFBasePtr 15 0 Kernel_C.cap_get_capType
+EndInlineScript
+}
+Problem (Pairing (invokeCNodeDelete (ASM) <= Kernel_C.invokeCNodeDelete (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (cancelSignal (ASM) <= Kernel_C.cancelSignal (C))) {
+InlineScript
+C Kernel_C.cancelSignal 3 0 Kernel_C.notification_ptr_set_state
+C Kernel_C.cancelSignal 5 0 Kernel_C.ntfn_ptr_set_queue
+C Kernel_C.cancelSignal 9 0 Kernel_C.ntfn_ptr_get_queue
+C Kernel_C.ntfn_ptr_set_queue 2 0 Kernel_C.notification_ptr_set_ntfnQueue_tail
+C Kernel_C.ntfn_ptr_set_queue 3 0 Kernel_C.notification_ptr_set_ntfnQueue_head
+C Kernel_C.ntfn_ptr_get_queue 6 0 Kernel_C.notification_ptr_get_ntfnQueue_tail
+C Kernel_C.ntfn_ptr_get_queue 9 0 Kernel_C.notification_ptr_get_ntfnQueue_head
+EndInlineScript
+}
+Problem (Pairing (maybe_alloc_extra_bi (ASM) <= Kernel_C.maybe_alloc_extra_bi (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (create_frames_of_region (ASM) <= Kernel_C.create_frames_of_region (C))) {
+InlineScript
+C Kernel_C.create_frames_of_region 19 0 Kernel_C.addrFromPPtr
+C Kernel_C.addrFromPPtr 5 0 Kernel_C.physBase
+C Kernel_C.create_frames_of_region 21 0 Kernel_C.create_unmapped_it_frame_cap
+C Kernel_C.create_unmapped_it_frame_cap 5 0 Kernel_C.create_it_frame_cap
+C Kernel_C.create_it_frame_cap 14 0 Kernel_C.wordFromVMRights
+C Kernel_C.create_it_frame_cap 11 0 Kernel_C.cap_small_frame_cap_new
+EndInlineScript
+}
+Problem (Pairing (deleteCallerCap (ASM) <= Kernel_C.deleteCallerCap (C))) {
+InlineScript
+EndInlineScript
+}
+Problem (Pairing (decodeSetIPCBuffer (ASM) <= Kernel_C.decodeSetIPCBuffer (C))) {
+InlineScript
+C Kernel_C.decodeSetIPCBuffer 7 0 Kernel_C.cap_null_cap_new
+C Kernel_C.decodeSetIPCBuffer 9 0 Kernel_C.cap_null_cap_new
+C Kernel_C.decodeSetIPCBuffer 11 0 Kernel_C.cap_thread_cap_get_capTCBPtr
+C Kernel_C.decodeSetIPCBuffer 33 0 Kernel_C.getSyscallArg
+C Kernel_C.getSyscallArg 7 0 Kernel_C.getRegister
+EndInlineScript
+}
+Problem (Pairing (decodeUnbindNotification (ASM) <= Kernel_C.decodeUnbindNotification (C))) {
+InlineScript
+C Kernel_C.decodeUnbindNotification 15 0 Kernel_C.cap_thread_cap_get_capTCBPtr
+EndInlineScript
+}
+Problem (Pairing (cteDelete (ASM) <= Kernel_C.cteDelete (C))) {
+InlineScript
+C Kernel_C.cteDelete 9 0 Kernel_C.finaliseSlot
+C Kernel_C.finaliseSlot 6 0 Kernel_C.cap_null_cap_new
+C Kernel_C.finaliseSlot 14 0 Kernel_C.cap_get_capType
+C Kernel_C.finaliseSlot 19 0 Kernel_C.cap_null_cap_new
+C Kernel_C.finaliseSlot 28 0 Kernel_C.cap_null_cap_new
+C Kernel_C.finaliseSlot 33 0 Kernel_C.reduceZombie
+C Kernel_C.finaliseSlot 41 0 Kernel_C.capCyclicZombie
+C Kernel_C.finaliseSlot 52 0 Kernel_C.capRemovable
+C Kernel_C.finaliseSlot 59 0 Kernel_C.cap_get_capType
+C Kernel_C.reduceZombie 7 0 Kernel_C.cap_zombie_cap_set_capZombieNumber
+C Kernel_C.reduceZombie 12 0 Kernel_C.cap_zombie_cap_get_capZombieType
+C Kernel_C.reduceZombie 17 0 Kernel_C.cap_zombie_cap_get_capZombieNumber
+C Kernel_C.reduceZombie 23 0 Kernel_C.cap_zombie_cap_get_capZombiePtr
+C Kernel_C.reduceZombie 32 0 Kernel_C.cap_get_capType
+C Kernel_C.reduceZombie 43 0 Kernel_C.cap_get_capType
+C Kernel_C.reduceZombie 48 0 Kernel_C.cap_zombie_cap_get_capZombieType
+C Kernel_C.reduceZombie 51 0 Kernel_C.cap_zombie_cap_get_capZombieNumber
+C Kernel_C.reduceZombie 55 0 Kernel_C.cap_zombie_cap_get_capZombiePtr
+C Kernel_C.capCyclicZombie 6 0 Kernel_C.cap_zombie_cap_get_capZombiePtr
+C Kernel_C.capCyclicZombie 10 0 Kernel_C.cap_get_capType
+C Kernel_C.capRemovable 7 0 Kernel_C.cap_zombie_cap_get_capZombiePtr
+C Kernel_C.capRemovable 9 0 Kernel_C.cap_zombie_cap_get_capZombieNumber
+C Kernel_C.capRemovable 17 0 Kernel_C.cap_get_capType
+C Kernel_C.cap_zombie_cap_set_capZombieNumber 5 0 Kernel_C.cap_zombie_cap_set_capZombieID
+C Kernel_C.cap_zombie_cap_set_capZombieNumber 10 0 Kernel_C.cap_zombie_cap_get_capZombieID
+C Kernel_C.cap_zombie_cap_set_capZombieNumber 12 0 Kernel_C.cap_zombie_cap_get_capZombieBits
+C Kernel_C.cap_zombie_cap_get_capZombieNumber 6 0 Kernel_C.cap_zombie_cap_get_capZombieID
+C Kernel_C.cap_zombie_cap_get_capZombieNumber 8 0 Kernel_C.cap_zombie_cap_get_capZombieBits
+C Kernel_C.cap_zombie_cap_get_capZombiePtr 6 0 Kernel_C.cap_zombie_cap_get_capZombieID
+C Kernel_C.cap_zombie_cap_get_capZombiePtr 8 0 Kernel_C.cap_zombie_cap_get_capZombieBits
+C Kernel_C.cap_zombie_cap_get_capZombieNumber 6 1 Kernel_C.cap_zombie_cap_get_capZombieID
+C Kernel_C.cap_zombie_cap_get_capZombieNumber 8 1 Kernel_C.cap_zombie_cap_get_capZombieBits
+C Kernel_C.cap_zombie_cap_get_capZombiePtr 6 1 Kernel_C.cap_zombie_cap_get_capZombieID
+C Kernel_C.cap_zombie_cap_get_capZombiePtr 8 1 Kernel_C.cap_zombie_cap_get_capZombieBits
+C Kernel_C.cap_zombie_cap_get_capZombiePtr 6 2 Kernel_C.cap_zombie_cap_get_capZombieID
+C Kernel_C.cap_zombie_cap_get_capZombiePtr 8 2 Kernel_C.cap_zombie_cap_get_capZombieBits
+C Kernel_C.cap_zombie_cap_get_capZombiePtr 6 3 Kernel_C.cap_zombie_cap_get_capZombieID
+C Kernel_C.cap_zombie_cap_get_capZombiePtr 8 3 Kernel_C.cap_zombie_cap_get_capZombieBits
+C Kernel_C.cap_zombie_cap_get_capZombieNumber 6 2 Kernel_C.cap_zombie_cap_get_capZombieID
+C Kernel_C.cap_zombie_cap_get_capZombieNumber 8 2 Kernel_C.cap_zombie_cap_get_capZombieBits
+C Kernel_C.cap_zombie_cap_get_capZombieBits 10 0 Kernel_C.cap_zombie_cap_get_capZombieType
+C Kernel_C.cap_zombie_cap_get_capZombieBits 10 1 Kernel_C.cap_zombie_cap_get_capZombieType
+C Kernel_C.cap_zombie_cap_get_capZombieBits 10 2 Kernel_C.cap_zombie_cap_get_capZombieType
+C Kernel_C.cap_zombie_cap_get_capZombieBits 10 3 Kernel_C.cap_zombie_cap_get_capZombieType
+C Kernel_C.cap_zombie_cap_get_capZombieBits 10 4 Kernel_C.cap_zombie_cap_get_capZombieType
+C Kernel_C.cap_zombie_cap_get_capZombieBits 10 5 Kernel_C.cap_zombie_cap_get_capZombieType
+C Kernel_C.cap_zombie_cap_get_capZombieBits 10 6 Kernel_C.cap_zombie_cap_get_capZombieType
+C Kernel_C.cap_zombie_cap_get_capZombieBits 10 7 Kernel_C.cap_zombie_cap_get_capZombieType
+EndInlineScript
+}
+Problem (Pairing (dist_init (ASM) <= Kernel_C.dist_init (C))) {
+InlineScript
+C Kernel_C.dist_init 32 0 Kernel_C.infer_cpu_gic_id
+EndInlineScript
+}
+Problem (Pairing (get_p_reg_kernel_img (ASM) <= Kernel_C.get_p_reg_kernel_img (C))) {
+InlineScript
+C Kernel_C.get_p_reg_kernel_img 5 0 Kernel_C.addrFromKPPtr
+C Kernel_C.get_p_reg_kernel_img 8 0 Kernel_C.addrFromKPPtr
+C Kernel_C.get_p_reg_kernel_img 11 0 Kernel_C.physBase
+C Kernel_C.addrFromKPPtr 6 0 Kernel_C.physBase
+C Kernel_C.addrFromKPPtr 8 0 Kernel_C.physBase
+C Kernel_C.addrFromKPPtr 6 1 Kernel_C.physBase
+C Kernel_C.addrFromKPPtr 8 1 Kernel_C.physBase
+EndInlineScript
+}
+Problem (Pairing (copyMRs (ASM) <= Kernel_C.copyMRs (C))) {
+InlineScript
+C Kernel_C.copyMRs 18 0 Kernel_C.setRegister
+C Kernel_C.copyMRs 21 0 Kernel_C.getRegister
+EndInlineScript
+}
+Problem (Pairing (setVMRoot (ASM) <= Kernel_C.setVMRoot (C))) {
+InlineScript
+ASM setVMRoot 15 0 instruction'dsb_sy_E001112C
+ASM setVMRoot 17 0 instruction'mcr_15_0_r3_cr2_cr0_0_E0011140
+ASM setVMRoot 19 0 instruction'isb_sy_E0011144
+ASM setVMRoot 47 0 instruction'dsb_sy_E0011198
+ASM setVMRoot 49 0 instruction'mcr_15_0_r3_cr2_cr0_0_E00111AC
+ASM setVMRoot 51 0 instruction'isb_sy_E00111B0
+ASM setVMRoot 53 0 instruction'mcr_15_0_r0_cr13_cr0_1_E00111B4
+ASM setVMRoot 55 0 instruction'isb_sy_E00111B8
+ASM setVMRoot 57 0 instruction'mcr_15_0_r3_cr2_cr0_0_E00111C4
+ASM setVMRoot 59 0 instruction'isb_sy_E00111C8
+ASM setVMRoot 63 0 instruction'dsb_sy_E00111D4
+ASM setVMRoot 65 0 instruction'mcr_15_0_r3_cr2_cr0_0_E00111E8
+ASM setVMRoot 67 0 instruction'isb_sy_E00111EC
+C Kernel_C.setVMRoot 2 0 Kernel_C.armv_contextSwitch
+C Kernel_C.setVMRoot 3 0 Kernel_C.setCurrentPD
+C Kernel_C.setVMRoot 5 0 Kernel_C.addrFromKPPtr
+C Kernel_C.setVMRoot 12 0 Kernel_C.cap_page_directory_cap_get_capPDMappedASID
+C Kernel_C.setVMRoot 15 0 Kernel_C.cap_page_directory_cap_get_capPDBasePtr
+C Kernel_C.setVMRoot 16 0 Kernel_C.setCurrentPD
+C Kernel_C.setVMRoot 18 0 Kernel_C.addrFromKPPtr
+C Kernel_C.setVMRoot 23 0 Kernel_C.cap_page_directory_cap_get_capPDIsMapped
+C Kernel_C.setVMRoot 27 0 Kernel_C.cap_get_capType
+C Kernel_C.armv_contextSwitch 2 0 Kernel_C.armv_contextSwitch_HWASID
+C Kernel_C.setCurrentPD 2 0 Kernel_C.setCurrentPDPL2
+C Kernel_C.setCurrentPD 3 0 Kernel_C.isb
+C Kernel_C.setCurrentPD 4 0 Kernel_C.writeTTBR0Ptr
+C Kernel_C.setCurrentPD 5 0 Kernel_C.dsb
+C Kernel_C.addrFromKPPtr 6 0 Kernel_C.physBase
+C Kernel_C.addrFromKPPtr 8 0 Kernel_C.physBase
+C Kernel_C.setCurrentPD 2 1 Kernel_C.setCurrentPDPL2
+C Kernel_C.setCurrentPD 3 1 Kernel_C.isb
+C Kernel_C.setCurrentPD 4 1 Kernel_C.writeTTBR0Ptr
+C Kernel_C.setCurrentPD 5 1 Kernel_C.dsb
+C Kernel_C.addrFromKPPtr 6 1 Kernel_C.physBase
+C Kernel_C.addrFromKPPtr 8 1 Kernel_C.physBase
+C Kernel_C.armv_contextSwitch_HWASID 2 0 Kernel_C.isb
+C Kernel_C.armv_contextSwitch_HWASID 3 0 Kernel_C.writeTTBR0Ptr
+C Kernel_C.armv_contextSwitch_HWASID 5 0 Kernel_C.addrFromPPtr
+C Kernel_C.armv_contextSwitch_HWASID 6 0 Kernel_C.setHardwareASID
+C Kernel_C.armv_contextSwitch_HWASID 7 0 Kernel_C.isb
+C Kernel_C.armv_contextSwitch_HWASID 8 0 Kernel_C.writeTTBR0Ptr
+C Kernel_C.armv_contextSwitch_HWASID 10 0 Kernel_C.addrFromKPPtr
+C Kernel_C.armv_contextSwitch_HWASID 12 0 Kernel_C.dsb
+C Kernel_C.isb 2 0 asm_instruction'isb
+C Kernel_C.writeTTBR0Ptr 2 0 Kernel_C.writeTTBR0
+C Kernel_C.dsb 2 0 asm_instruction'dsb
+C Kernel_C.isb 2 1 asm_instruction'isb
+C Kernel_C.writeTTBR0Ptr 2 1 Kernel_C.writeTTBR0
+C Kernel_C.dsb 2 1 asm_instruction'dsb
+C Kernel_C.isb 2 2 asm_instruction'isb
+C Kernel_C.writeTTBR0Ptr 2 2 Kernel_C.writeTTBR0
+C Kernel_C.addrFromPPtr 5 0 Kernel_C.physBase
+C Kernel_C.setHardwareASID 2 0 Kernel_C.writeContextID
+C Kernel_C.isb 2 3 asm_instruction'isb
+C Kernel_C.writeTTBR0Ptr 2 3 Kernel_C.writeTTBR0
+C Kernel_C.addrFromKPPtr 6 2 Kernel_C.physBase
+C Kernel_C.addrFromKPPtr 8 2 Kernel_C.physBase
+C Kernel_C.dsb 2 2 asm_instruction'dsb
+C Kernel_C.writeTTBR0 2 0 asm_instruction'mcr_p15,_0,_%0,_c2,_c0,_0
+C Kernel_C.writeTTBR0 2 1 asm_instruction'mcr_p15,_0,_%0,_c2,_c0,_0
+C Kernel_C.writeTTBR0 2 2 asm_instruction'mcr_p15,_0,_%0,_c2,_c0,_0
+C Kernel_C.writeContextID 2 0 Kernel_C.writeContextIDPL2
+C Kernel_C.writeContextID 3 0 Kernel_C.isb
+C Kernel_C.writeContextID 4 0 asm_instruction'mcr_p15,_0,_%0,_c13,_c0,_1
+C Kernel_C.writeTTBR0 2 3 asm_instruction'mcr_p15,_0,_%0,_c2,_c0,_0
+C Kernel_C.isb 2 4 asm_instruction'isb
+EndInlineScript
+}
+Problem (Pairing (handleInterrupt (ASM) <= Kernel_C.handleInterrupt (C))) {
+InlineScript
+C Kernel_C.handleInterrupt 2 0 Kernel_C.ackInterrupt
+C Kernel_C.handleInterrupt 3 0 Kernel_C.maskInterrupt
+C Kernel_C.handleInterrupt 6 0 Kernel_C.cap_notification_cap_get_capNtfnBadge
+C Kernel_C.handleInterrupt 8 0 Kernel_C.cap_notification_cap_get_capNtfnPtr
+C Kernel_C.handleInterrupt 12 0 Kernel_C.cap_notification_cap_get_capNtfnCanSend
+C Kernel_C.handleInterrupt 16 0 Kernel_C.cap_get_capType
+C Kernel_C.handleInterrupt 19 0 Kernel_C.resetTimer
+C Kernel_C.handleInterrupt 21 0 Kernel_C.handleReservedIRQ
+C Kernel_C.handleInterrupt 22 0 Kernel_C.maskInterrupt
+C Kernel_C.handleInterrupt 37 0 Kernel_C.ackInterrupt
+C Kernel_C.handleInterrupt 38 0 Kernel_C.maskInterrupt
+C Kernel_C.maskInterrupt 2 0 Kernel_C.dist_enable_clr
+C Kernel_C.maskInterrupt 3 0 Kernel_C.dist_enable_set
+C Kernel_C.maskInterrupt 2 1 Kernel_C.dist_enable_clr
+C Kernel_C.maskInterrupt 3 1 Kernel_C.dist_enable_set
+C Kernel_C.maskInterrupt 2 2 Kernel_C.dist_enable_clr
+C Kernel_C.maskInterrupt 3 2 Kernel_C.dist_enable_set
+EndInlineScript
+}
+Problem (Pairing (isFinalCapability (ASM) <= Kernel_C.isFinalCapability (C))) {
+InlineScript
+C Kernel_C.isFinalCapability 11 0 Kernel_C.mdb_node_get_mdbNext
+C Kernel_C.isFinalCapability 14 0 Kernel_C.mdb_node_get_mdbNext
+C Kernel_C.isFinalCapability 22 0 Kernel_C.mdb_node_get_mdbPrev
+C Kernel_C.isFinalCapability 25 0 Kernel_C.mdb_node_get_mdbPrev
+EndInlineScript
+}
