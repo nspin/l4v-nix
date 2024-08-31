@@ -30,6 +30,8 @@ create_untyped:
         - all deps pass
         - proof found, checking hasn't finished yet
 
-    O2, split at "/* There is a part of the kernel (code/data) that is only needed for the"
-        just above works
-        just below doesn't work
+    O2
+      split at "/* There is a part of the kernel (code/data) that is only needed for the"
+          just above works
+          just below doesn't work
+      just "convert remaining freemem into UT objects and provide the caps" loop fails (requires NO_INLINE for _for_region)
