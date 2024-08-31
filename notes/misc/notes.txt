@@ -22,3 +22,5 @@ Missing nodes after calls to instruction'ldr_pc_pc_20_e0010038_arm_vector_table_
   in ['arm_vector_table']
 
 NORETURN functions don't make sense (including slowpath)
+
+adding VISIBLE to slowpath doesn't work
