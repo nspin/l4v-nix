@@ -256,7 +256,7 @@ with self; {
         "verbose"
       ];
       # stackBounds = ../../../notes/runs/this.allScopes.arm.legacy.o1.gcc6.graphRefine.a/copy/StackBounds.txt;
-      # stackBounds = ../../../result/StackBounds.txt;
+      stackBounds = ../../../result/StackBounds.txt;
     };
 
     zz = graphRefineWith {
