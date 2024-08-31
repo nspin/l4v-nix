@@ -34,4 +34,5 @@ create_untyped:
       split at "/* There is a part of the kernel (code/data) that is only needed for the"
           just above works
           just below doesn't work
-      just "convert remaining freemem into UT objects and provide the caps" loop fails (requires NO_INLINE for _for_region)
+      just "convert remaining freemem into UT objects and provide the caps" [minus REG_EMPTY and printf] loop fails (requires NO_INLINE for _for_region)
+        but passes with #pragma GCC optimize ("O0")
