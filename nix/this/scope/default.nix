@@ -78,6 +78,8 @@ with self; {
   justSimplExport = l4vWith {
     name = "simpl-export";
     simplExport = scopeConfig.bvSupport;
+    # TODO
+    numJobs = "$NIX_BUILD_CORES";
   };
 
   minimalBinaryVerificationInputs = l4vWith {
@@ -234,7 +236,38 @@ with self; {
         # "Kernel_C.slowpath"
       ];
       # stackBounds = ../../../notes/runs/this.allScopes.arm.legacy.o1.gcc6.graphRefine.a/copy/StackBounds.txt;
-      stackBounds = ../../../result/StackBounds.txt;
+      # stackBounds = ../../../result/StackBounds.txt;
+    };
+
+    zz = graphRefineWith {
+      name = "x";
+      args = infoArgs ++ [
+        # "deps:Kernel_C.cancelAllIPC"
+        # "Kernel_C.decodeARMMMUInvocation"
+        # "deps:Kernel_C.create_untypeds"
+        # "-exclude"
+        # "Kernel_C.create_untypeds"
+        # "-end-exclude"
+        # "Kernel_C.init_freemem"
+        # "Kernel_C.slowpath"
+
+        # "Kernel_C.cap_get_capPtr"
+        # # "Kernel_C.create_untypeds"
+        # "Kernel_C.create_untypeds_for_region"
+        # "Kernel_C.get_p_reg_kernel_img_boot"
+        # "Kernel_C.provide_cap"
+        # "Kernel_C.write_slot"
+
+        "Kernel_C.cap_get_capPtr"
+        # "Kernel_C.create_untypeds"
+        "Kernel_C.create_untypeds_for_region"
+        "Kernel_C.get_p_reg_kernel_img_boot"
+        "Kernel_C.paddr_to_pptr_reg"
+        "Kernel_C.provide_cap"
+        "Kernel_C.write_slot"
+      ];
+      # stackBounds = ../../../notes/runs/this.allScopes.arm.legacy.o1.gcc6.graphRefine.a/copy/StackBounds.txt;
+      # stackBounds = ../../../result/StackBounds.txt;
     };
 
     u = graphRefineWith {

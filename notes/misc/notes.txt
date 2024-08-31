@@ -24,3 +24,12 @@ Missing nodes after calls to instruction'ldr_pc_pc_20_e0010038_arm_vector_table_
 NORETURN functions don't make sense (including slowpath)
 
 adding VISIBLE to slowpath doesn't work
+
+create_untyped:
+    #pragma GCC optimize ("O0")
+        - all deps pass
+        - proof found, checking hasn't finished yet
+
+    O2, split at "/* There is a part of the kernel (code/data) that is only needed for the"
+        just above works
+        just below doesn't work
