@@ -215,11 +215,13 @@ with self; {
         "save-inline-scripts:inline-scripts.txt"
         "save-problems:problems.txt"
         "save-proofs:proofs.txt"
-        "Kernel_C.handleInterruptEntry"
+        # "Kernel_C.handleInterruptEntry"
         # "Kernel_C.invokeCNodeMove"
+        "Kernel_C.slowpath"
       ];
       keepSMTDumps = true;
-      stackBounds = ../../../notes/runs/this.allScopes.arm.legacy.o1.gcc6.graphRefine.a/copy/StackBounds.txt;
+      # stackBounds = ../../../notes/runs/this.allScopes.arm.legacy.o1.gcc6.graphRefine.a/copy/StackBounds.txt;
+      stackBounds = ../../../result/StackBounds.txt;
     };
   
     z = graphRefineWith {
@@ -227,11 +229,12 @@ with self; {
       args = infoArgs ++ [
         # "deps:Kernel_C.cancelAllIPC"
         # "Kernel_C.decodeARMMMUInvocation"
-        # "Kernel_C.create_untypeds"
+        "Kernel_C.create_untypeds"
         # "Kernel_C.init_freemem"
-        "Kernel_C.slowpath"
+        # "Kernel_C.slowpath"
       ];
-      stackBounds = ../../../notes/runs/this.allScopes.arm.legacy.o1.gcc6.graphRefine.a/copy/StackBounds.txt;
+      # stackBounds = ../../../notes/runs/this.allScopes.arm.legacy.o1.gcc6.graphRefine.a/copy/StackBounds.txt;
+      stackBounds = ../../../result/StackBounds.txt;
     };
 
     u = graphRefineWith {

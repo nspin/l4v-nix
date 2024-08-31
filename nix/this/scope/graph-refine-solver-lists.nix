@@ -58,11 +58,11 @@ lib.makeScope newScope (self: with self;
     };
 
     onlineCommands = {
-      # cvc4 = offlineCommands.cvc4 ++ [ "--incremental" "--tlimit=${cvc4TLimit}" ];
-      # cvc5 = offlineCommands.cvc5 ++ [ "--incremental" "--tlimit=${cvc5TLimit}" ];
-      # z3 = offlineCommands.z3;
+      cvc4 = offlineCommands.cvc4 ++ [ "--incremental" "--tlimit=${cvc4TLimit}" ];
+      cvc5 = offlineCommands.cvc5 ++ [ "--incremental" "--tlimit=${cvc5TLimit}" ];
+      z3 = offlineCommands.z3;
       yices = offlineCommands.yices ++ [ "--incremental" ];
-      # bitwuzla = offlineCommands.bitwuzla;
+      bitwuzla = offlineCommands.bitwuzla;
     };
 
     cvc4TLimit = "120";
