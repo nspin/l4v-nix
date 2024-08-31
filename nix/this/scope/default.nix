@@ -229,12 +229,9 @@ with self; {
         # "Kernel_C.decodeARMMMUInvocation"
         # "Kernel_C.create_untypeds"
         # "Kernel_C.init_freemem"
-        "Kernel_C.getActiveIRQ"
-        "Kernel_C.handleInterruptEntry"
-        "Kernel_C.handleSyscall"
-        "Kernel_C.isIRQPending"
+        "Kernel_C.slowpath"
       ];
-      # stackBounds = ../../../../tmp/target/StackBounds.txt;
+      stackBounds = ../../../notes/runs/this.allScopes.arm.legacy.o1.gcc6.graphRefine.a/copy/StackBounds.txt;
     };
 
     u = graphRefineWith {
