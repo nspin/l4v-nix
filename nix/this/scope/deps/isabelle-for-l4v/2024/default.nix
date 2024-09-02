@@ -15,6 +15,6 @@ let
 in
 nixpkgs.isabelle.overrideAttrs (attrs: {
   patches = (attrs.patches or []) ++ [
-    # ./permissions.patch
+    ./permissions.patch
   ];
 })
