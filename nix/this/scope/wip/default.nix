@@ -92,6 +92,13 @@ in rec {
   # z = axel.graphRefine.all.preTargetDir;
   z = scopes.riscv64.mcs.o1.graphRefine.all.preTargetDir;
 
+  zz = graphRefineWith {
+    name = "wip";
+    args = graphRefine.defaultArgs ++ [
+      "create_untypeds"
+    ];
+  };
+
   d = graphRefineWith rec {
     source = tmpSource;
     # keepSMTDumps = true;
