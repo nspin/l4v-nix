@@ -184,6 +184,7 @@ with self; {
 
   isabelle2020ForL4v = withMLton mlton20180207 (callPackage ./deps/isabelle-for-l4v/2020 {});
   isabelle2023ForL4v = withMLton mlton20210107 (callPackage ./deps/isabelle-for-l4v/2023 {});
+  isabelle2024ForL4v = withMLton mlton20210107 (callPackage ./deps/isabelle-for-l4v/2024 {});
 
   polyml58ForHol4 = callPackage ./deps/polyml-5.8-for-hol4.nix {};
 
@@ -213,6 +214,7 @@ with self; {
   isabelleForL4v = {
     "2020" = isabelle2020ForL4v;
     "2023" = isabelle2023ForL4v;
+    "2024" = isabelle2024ForL4v;
   }.${scopeConfig.isabelleVersion};
 
   ghcWithPackagesForL4v = ghcWithPackagesForL4vByLTS.${scopeConfig.stackLTSAttr};
