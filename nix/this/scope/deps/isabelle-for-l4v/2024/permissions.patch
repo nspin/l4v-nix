@@ -1,6 +1,6 @@
---- a/src/Pure/Thy/latex.scala  2023-12-02 08:04:53.854220811 +0000
-+++ b/src/Pure/Thy/latex.scala  2023-12-02 08:06:45.989309365 +0000
-@@ -160,6 +160,7 @@
+--- a/src/Pure/Thy/latex.scala
++++ b/src/Pure/Thy/latex.scala
+@@ -157,6 +157,7 @@
      val pos = init_position(file_pos).mkString
      if (pos.nonEmpty) {
        val sep = if (File.read(path).endsWith("\n")) "" else "\n"
