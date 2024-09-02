@@ -99,6 +99,15 @@ in rec {
     ];
   };
 
+  cc = l4vWith {
+    name = "all";
+    tests = [
+      "-f"
+      # "CRefine"
+    ];
+    buildStandaloneCParser = true;
+  };
+
   d = graphRefineWith rec {
     source = tmpSource;
     # keepSMTDumps = true;
