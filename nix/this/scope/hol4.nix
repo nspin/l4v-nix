@@ -48,7 +48,7 @@ stdenvForHol4.mkDerivation {
     cd $holdir
 
     poly < tools/smart-configure.sml
-    bin/build
+    bin/build -j $NIX_BUILD_CORES
     (cd examples/machine-code/graph && $holdir/bin/Holmake)
   '';
 }
