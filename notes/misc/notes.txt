@@ -36,3 +36,7 @@ create_untyped:
           just below doesn't work
       just "convert remaining freemem into UT objects and provide the caps" [minus REG_EMPTY and printf] loop fails (requires NO_INLINE for _for_region)
         but passes with #pragma GCC optimize ("O0")
+
+init_freemem:
+  align_reg optimized away in some reductions with 'static'
+  consider using old patch to remove array accesses in if conditions
