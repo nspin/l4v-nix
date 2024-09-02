@@ -18,3 +18,33 @@ adding VISIBLE to slowpath doesn't work
 init_freemem:
   align_reg optimized away in some reductions with 'static'
   consider using old patch to remove array accesses in if conditions
+
+allowed to skip:
+  projects/l4v/proof/asmrefine/SEL4GraphRefine.thy
+    broken:
+      - Kernel_C.reserve_region
+      - Kernel_C.merge_regions
+      - Kernel_C.arch_init_freemem
+    slow:
+      - Kernel_C.init_freemem
+  projects/graph-refine/seL4-example/target.py
+    skip parsing ASM:
+      - fastpath_call
+      - fastpath_reply_recv
+      - c_handle_syscall
+      - arm_swi_syscall
+  projects/graph-refine/seL4-example/Makefile
+    tell decompiler to ignore:
+      - restore_user_context
+      - c_handle_fastpath_call
+      - c_handle_fastpath_reply_recv
+  nix/this/scope/decompilation.nix
+    tell decompiler to ignore:
+      - _start
+
+maybe:
+  NORETURN + UNREACHABLE()
+    slowpath
+    c_handle_data_fault
+    c_handle_instruction_fault
+    c_handle_undefined_instruction
