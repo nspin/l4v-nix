@@ -92,6 +92,37 @@ in rec {
   # z = axel.graphRefine.all.preTargetDir;
   z = scopes.riscv64.mcs.o1.graphRefine.all.preTargetDir;
 
+  o2 = scopes.arm.legacy.o2;
+
+  stackBounds = graphRefineWith {
+    name = "stackb-bounds";
+    args = graphRefine.saveArgs;
+  };
+
+  o1bad = graphRefineWith {
+    name = "wip";
+    args = graphRefine.saveArgs ++ [
+      # "verbose"
+      "trace-to:report.txt"
+      "init_freemem"
+    ];
+    # stackBounds = ../../../../../tmp/sb/StackBounds.txt;
+  };
+
+  o2wip = graphRefineWith {
+    name = "wip";
+    args = graphRefine.saveArgs ++ [
+      # "verbose"
+      "trace-to:report.txt"
+      "-exclude"
+      "init_freemem"
+      "decodeARMMMUInvocation"
+      "-end-exclude"
+      "coverage"
+    ];
+    # stackBounds = ../../../../../tmp/sb/StackBounds.txt;
+  };
+
   d = graphRefineWith rec {
     source = tmpSource;
     # keepSMTDumps = true;
