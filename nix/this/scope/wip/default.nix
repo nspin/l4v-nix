@@ -109,6 +109,16 @@ in rec {
     # stackBounds = ../../../../../tmp/sb/StackBounds.txt;
   };
 
+  i = graphRefineWith {
+    name = "wip";
+    args = graphRefine.saveArgs ++ [
+      # "verbose"
+      "trace-to:report.txt"
+      "init_freemem_1"
+    ];
+    # stackBounds = ../../../../../tmp/sb/StackBounds.txt;
+  };
+
   o2wip = graphRefineWith {
     name = "wip";
     args = graphRefine.saveArgs ++ [
