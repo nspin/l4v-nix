@@ -173,7 +173,8 @@ stdenv.mkDerivation {
         -j ${toString numJobs} \
         ${lib.concatMapStringsSep " " (test: "-x ${test}") exclude} \
         ${lib.concatMapStringsSep " " (test: "-r ${test}") remove} \
-        ${lib.concatStringsSep " " tests}
+        ${lib.concatStringsSep " " tests} \
+        2>&1 | tee log.txt
 
       rm -rf spec/abstract/output/document
     ''}
