@@ -141,7 +141,22 @@ in rec {
     # stackBounds = ../../../../../tmp/sb/StackBounds.txt;
   };
 
-  o2wip = with o2; graphRefineWith {
+  o2c = with o2; graphRefineWith {
+    name = "wip";
+    args = graphRefine.saveArgs ++ [
+      # "verbose"
+      "trace-to:report.txt"
+      "-exclude"
+      "init_freemem"
+      "decodeARMMMUInvocation"
+      "-end-exclude"
+      "coverage"
+    ];
+    # stackBounds = ../../../../../tmp/sb/StackBounds.txt;
+  };
+
+
+  o2x = with o2; graphRefineWith {
     name = "wip";
     args = graphRefine.saveArgs ++ [
       # "verbose"
