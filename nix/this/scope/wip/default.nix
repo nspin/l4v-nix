@@ -114,9 +114,9 @@ in rec {
     args = graphRefine.saveArgs ++ [
       # "verbose"
       "trace-to:report.txt"
-      # "init_freemem_2"
       "init_freemem_1"
-      # "init_freemem"
+      "init_freemem_2"
+      "init_freemem"
     ];
     # stackBounds = ../../../../../tmp/sb/StackBounds.txt;
   };
