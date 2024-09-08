@@ -95,9 +95,41 @@ in rec {
   o2 = scopes.arm.legacy.o2;
 
   stackBounds = graphRefineWith {
-    name = "stackb-bounds";
+    name = "stack-bounds";
     args = graphRefine.saveArgs;
   };
+
+  f = graphRefineWith {
+    name = "wip";
+    args = graphRefine.saveArgs ++ [
+      # "verbose"
+      "trace-to:report.txt"
+      "setExtraBadge"
+    ];
+    stackBounds = "${stackBounds}/StackBounds.txt";
+    solverList = xsolverList;
+  };
+
+  xsolverList =
+    let
+      # chosen = "yices";
+      # chosen = "bitwuzla";
+      scope = graphRefineSolverLists.overrideScope (self: super: {
+        executables = lib.flip lib.mapAttrs super.executables (lib.const (old: [ wrap "trace" ] ++ old));
+        # executables = lib.flip lib.mapAttrs super.executables (k: v:
+        #   (if k == chosen then [ wrap "trace" ] else []) ++ v
+        # );
+        # onlineSolver = {
+        #   command = self.onlineCommands.${chosen};
+        #   inherit (super.onlineSolver) config;
+        # };
+        # offlineSolverKey = {
+        #   attr = chosen;
+        #   inherit (super.offlineSolverKey) granularity;
+        # };
+      });
+    in
+      scope.solverList;
 
   o1bad = graphRefineWith {
     name = "wip";
@@ -189,7 +221,7 @@ in rec {
       # chosen = "yices";
       # chosen = "bitwuzla";
       scope = graphRefineSolverLists.overrideScope (self: super: {
-        # executables = lib.flip lib.mapAttrs super.executables (lib.const (old: [ wrap "trace" ] ++ old));
+        executables = lib.flip lib.mapAttrs super.executables (lib.const (old: [ wrap "trace" ] ++ old));
         # executables = lib.flip lib.mapAttrs super.executables (k: v:
         #   (if k == chosen then [ wrap "trace" ] else []) ++ v
         # );
