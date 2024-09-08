@@ -150,7 +150,8 @@ in rec {
       "init_freemem"
       "decodeARMMMUInvocation"
       "-end-exclude"
-      "coverage"
+      # "coverage"
+      "all"
     ];
     # stackBounds = ../../../../../tmp/sb/StackBounds.txt;
   };
