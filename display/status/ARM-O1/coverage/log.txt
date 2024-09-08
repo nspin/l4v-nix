@@ -1,0 +1,2137 @@
+Loading syntax from ./CFunctions.txt
+Loaded 847 functions, 74 structs, 0 globals.
+Loading syntax from ./ASMFunctions.txt
+Missing nodes after calls to instruction'isb_sy_E0000540
+  in ['fpsimd_HWCapTest']
+Missing nodes after calls to halt
+  in ['handleReply', 'Arch_createObject', 'completeSignal', 'unmapPage', 'doFlush', 'maskCapRights', 'decodeInvocation', 'cteDelete', 'Arch_setMRs_fault', 'handleInterrupt', 'Arch_deriveCap', 'invokeCNodeSaveCaller', 'handleSyscall', 'arm_reset_exception', 'createObject', 'Arch_handleFaultReply']
+Missing nodes after calls to idle_thread
+  in ['halt']
+Missing nodes after calls to restore_user_context
+  in ['c_handle_data_fault', 'c_handle_undefined_instruction', 'c_handle_interrupt']
+Missing nodes after calls to slowpath
+  in ['c_handle_syscall']
+Missing nodes after calls to instruction'ldr_pc_pc_20_e0010038_arm_vector_table_0x38_E001001C
+  in ['arm_vector_table']
+Warning: dead arc in arm_fiq_exception: 7 -> 3758162208
+  (follows Basic node!)
+Warning: dead arc in arm_fiq_exception: 9 -> 3758162208
+  (follows Basic node!)
+Warning: dead arc in c_handle_instruction_fault: 3758162396 -> 3758162400
+  (follows Basic node!)
+Loaded 470 functions, 0 structs, 0 globals.
+Pseudo-Compiling.
+Doing stack/inst logic.
+Computing stack bounds.
+Doing recursion analysis for function group:
+  ['Kernel_C.deletingIRQHandler', 'Kernel_C.finaliseCap', 'Kernel_C.suspend', 'Kernel_C.cancelIPC', 'Kernel_C.cteDeleteOne']
+Doing recursion analysis for function group:
+  ['Kernel_C.reduceZombie', 'Kernel_C.cteDelete', 'Kernel_C.finaliseSlot']
+Computed recursion limits.
+Doing stack analysis for 'APFromVMRights'. (1 of 423)
+Doing stack analysis for 'Arch_activateIdleThread'. (2 of 423)
+Doing stack analysis for 'Arch_configureIdleThread'. (3 of 423)
+Doing stack analysis for 'Arch_createObject'. (4 of 423)
+Doing stack analysis for 'Arch_decodeIRQControlInvocation'. (5 of 423)
+Doing stack analysis for 'Arch_decodeInvocation'. (6 of 423)
+Doing stack analysis for 'Arch_decodeTransfer'. (7 of 423)
+Doing stack analysis for 'Arch_deriveCap'. (8 of 423)
+Doing stack analysis for 'Arch_finaliseCap'. (9 of 423)
+Doing stack analysis for 'Arch_getObjectSize'. (10 of 423)
+Doing stack analysis for 'Arch_handleFaultReply'. (11 of 423)
+Doing stack analysis for 'Arch_isFrameType'. (12 of 423)
+Doing stack analysis for 'Arch_maskCapRights'. (13 of 423)
+Doing stack analysis for 'Arch_performTransfer'. (14 of 423)
+Doing stack analysis for 'Arch_postModifyRegisters'. (15 of 423)
+Doing stack analysis for 'Arch_prepareThreadDelete'. (16 of 423)
+Doing stack analysis for 'Arch_sameObjectAs'. (17 of 423)
+Doing stack analysis for 'Arch_sameRegionAs'. (18 of 423)
+Doing stack analysis for 'Arch_setMRs_fault'. (19 of 423)
+Doing stack analysis for 'Arch_switchToIdleThread'. (20 of 423)
+Doing stack analysis for 'Arch_switchToThread'. (21 of 423)
+Doing stack analysis for 'Arch_updateCapData'. (22 of 423)
+Doing stack analysis for 'activateThread'. (23 of 423)
+Doing stack analysis for 'activate_kernel_vspace'. (24 of 423)
+Doing stack analysis for 'alloc_rootserver_obj'. (25 of 423)
+Doing stack analysis for 'arch_clean_invalidate_L1_caches'. (26 of 423)
+Doing stack analysis for 'arch_clean_invalidate_caches'. (27 of 423)
+Doing stack analysis for 'arch_get_n_paging'. (28 of 423)
+Doing stack analysis for 'arm_errata'. (29 of 423)
+Doing stack analysis for 'armv_init_user_access'. (30 of 423)
+Doing stack analysis for 'bi_finalise'. (31 of 423)
+Doing stack analysis for 'bindNotification'. (32 of 423)
+Doing stack analysis for 'branchFlushRange'. (33 of 423)
+Doing stack analysis for 'c_handle_data_fault'. (34 of 423)
+Doing stack analysis for 'c_handle_fastpath_call'. (35 of 423)
+Doing stack analysis for 'c_handle_fastpath_reply_recv'. (36 of 423)
+Doing stack analysis for 'c_handle_instruction_fault'. (37 of 423)
+Doing stack analysis for 'c_handle_interrupt'. (38 of 423)
+Doing stack analysis for 'c_handle_undefined_instruction'. (39 of 423)
+Doing stack analysis for 'calculate_extra_bi_size_bits'. (40 of 423)
+Doing stack analysis for 'cancelAllIPC'. (41 of 423)
+Doing stack analysis for 'cancelAllSignals'. (42 of 423)
+Doing stack analysis for 'cancelBadgedSends'. (43 of 423)
+Doing stack analysis for 'cancelIPC'. (44 of 423)
+Doing stack analysis for 'cancelSignal'. (45 of 423)
+Doing stack analysis for 'capSwapForDelete'. (46 of 423)
+Doing stack analysis for 'cap_get_capIsPhysical'. (47 of 423)
+Doing stack analysis for 'cap_get_capPtr'. (48 of 423)
+Doing stack analysis for 'cap_get_capSizeBits'. (49 of 423)
+Doing stack analysis for 'char_to_long'. (50 of 423)
+Doing stack analysis for 'checkValidIPCBuffer'. (51 of 423)
+Doing stack analysis for 'chooseThread'. (52 of 423)
+Doing stack analysis for 'cleanCacheRange_PoU'. (53 of 423)
+Doing stack analysis for 'cleanCacheRange_RAM'. (54 of 423)
+Doing stack analysis for 'cleanCaches_PoU'. (55 of 423)
+Doing stack analysis for 'cleanInvalidateCacheRange_RAM'. (56 of 423)
+Doing stack analysis for 'cleanInvalidateL1Caches'. (57 of 423)
+Doing stack analysis for 'cleanInvalidate_D_PoC'. (58 of 423)
+Aborting Problem (Function (cleanInvalidate_D_PoC)), complex loop
+Doing stack analysis for 'cleanInvalidate_L1D'. (59 of 423)
+Aborting Problem (Function (cleanInvalidate_L1D)), complex loop
+Doing stack analysis for 'clean_D_PoU'. (60 of 423)
+Aborting Problem (Function (clean_D_PoU)), complex loop
+Doing stack analysis for 'completeSignal'. (61 of 423)
+Doing stack analysis for 'configureIdleThread'. (62 of 423)
+Doing stack analysis for 'copyGlobalMappings'. (63 of 423)
+Doing stack analysis for 'copyMRs'. (64 of 423)
+Doing stack analysis for 'cpu_iface_init'. (65 of 423)
+Doing stack analysis for 'cpu_initLocalIRQController'. (66 of 423)
+Doing stack analysis for 'createNewObjects'. (67 of 423)
+Doing stack analysis for 'createObject'. (68 of 423)
+Doing stack analysis for 'create_bi_frame_cap'. (69 of 423)
+Doing stack analysis for 'create_domain_cap'. (70 of 423)
+Doing stack analysis for 'create_frames_of_region'. (71 of 423)
+Doing stack analysis for 'create_idle_thread'. (72 of 423)
+Doing stack analysis for 'create_initial_thread'. (73 of 423)
+Doing stack analysis for 'create_ipcbuf_frame_cap'. (74 of 423)
+Doing stack analysis for 'create_it_address_space'. (75 of 423)
+Doing stack analysis for 'create_it_asid_pool'. (76 of 423)
+Doing stack analysis for 'create_mapped_it_frame_cap'. (77 of 423)
+Doing stack analysis for 'create_root_cnode'. (78 of 423)
+Doing stack analysis for 'create_unmapped_it_frame_cap'. (79 of 423)
+Doing stack analysis for 'create_untypeds'. (80 of 423)
+Doing stack analysis for 'create_untypeds_for_region'. (81 of 423)
+Doing stack analysis for 'cteDelete'. (82 of 423)
+Doing stack analysis for 'cteDeleteOne'. (83 of 423)
+Doing stack analysis for 'cteInsert'. (84 of 423)
+Doing stack analysis for 'cteMove'. (85 of 423)
+Doing stack analysis for 'cteRevoke'. (86 of 423)
+Doing stack analysis for 'cteSwap'. (87 of 423)
+Doing stack analysis for 'decodeARMMMUInvocation'. (88 of 423)
+Doing stack analysis for 'decodeBindNotification'. (89 of 423)
+Doing stack analysis for 'decodeCNodeInvocation'. (90 of 423)
+Doing stack analysis for 'decodeCopyRegisters'. (91 of 423)
+Doing stack analysis for 'decodeDomainInvocation'. (92 of 423)
+Doing stack analysis for 'decodeIRQControlInvocation'. (93 of 423)
+Doing stack analysis for 'decodeIRQHandlerInvocation'. (94 of 423)
+Doing stack analysis for 'decodeInvocation'. (95 of 423)
+Doing stack analysis for 'decodeReadRegisters'. (96 of 423)
+Doing stack analysis for 'decodeSetIPCBuffer'. (97 of 423)
+Doing stack analysis for 'decodeSetMCPriority'. (98 of 423)
+Doing stack analysis for 'decodeSetPriority'. (99 of 423)
+Doing stack analysis for 'decodeSetSchedParams'. (100 of 423)
+Doing stack analysis for 'decodeSetSpace'. (101 of 423)
+Doing stack analysis for 'decodeTCBConfigure'. (102 of 423)
+Doing stack analysis for 'decodeTCBInvocation'. (103 of 423)
+Doing stack analysis for 'decodeUnbindNotification'. (104 of 423)
+Doing stack analysis for 'decodeUntypedInvocation'. (105 of 423)
+Doing stack analysis for 'decodeWriteRegisters'. (106 of 423)
+Doing stack analysis for 'deleteASID'. (107 of 423)
+Doing stack analysis for 'deleteASIDPool'. (108 of 423)
+Doing stack analysis for 'deleteCallerCap'. (109 of 423)
+Doing stack analysis for 'deletedIRQHandler'. (110 of 423)
+Doing stack analysis for 'deletingIRQHandler'. (111 of 423)
+Doing stack analysis for 'deriveCap'. (112 of 423)
+Doing stack analysis for 'dist_init'. (113 of 423)
+Doing stack analysis for 'doFaultTransfer'. (114 of 423)
+Doing stack analysis for 'doFlush'. (115 of 423)
+Doing stack analysis for 'doIPCTransfer'. (116 of 423)
+Doing stack analysis for 'doNBRecvFailedTransfer'. (117 of 423)
+Doing stack analysis for 'doNormalTransfer'. (118 of 423)
+Doing stack analysis for 'doReplyTransfer'. (119 of 423)
+Doing stack analysis for 'emptySlot'. (120 of 423)
+Doing stack analysis for 'ensureEmptySlot'. (121 of 423)
+Doing stack analysis for 'ensureNoChildren'. (122 of 423)
+Doing stack analysis for 'finaliseCap'. (123 of 423)
+cvc5 interrupted by SIGTERM.
+cvc5 interrupted by SIGTERM.
+cvc5 interrupted by SIGTERM.
+cvc5 interrupted by SIGTERM.
+Doing stack analysis for 'findFreeHWASID'. (124 of 423)
+Doing stack analysis for 'findPDForASID'. (125 of 423)
+Doing stack analysis for 'flushPage'. (126 of 423)
+Doing stack analysis for 'flushSpace'. (127 of 423)
+Doing stack analysis for 'flushTable'. (128 of 423)
+Doing stack analysis for 'fpsimd_HWCapTest'. (129 of 423)
+Doing stack analysis for 'getExtraCPtr'. (130 of 423)
+Doing stack analysis for 'getHWASID'. (131 of 423)
+Doing stack analysis for 'getObjectSize'. (132 of 423)
+Doing stack analysis for 'getReceiveSlots'. (133 of 423)
+Doing stack analysis for 'getRestartPC'. (134 of 423)
+Doing stack analysis for 'get_p_reg_kernel_img'. (135 of 423)
+Doing stack analysis for 'get_p_reg_kernel_img_boot'. (136 of 423)
+Doing stack analysis for 'halt'. (137 of 423)
+Doing stack analysis for 'handleDoubleFault'. (138 of 423)
+Doing stack analysis for 'handleFault'. (139 of 423)
+Doing stack analysis for 'handleFaultReply'. (140 of 423)
+Doing stack analysis for 'handleInterrupt'. (141 of 423)
+Doing stack analysis for 'handleInterruptEntry'. (142 of 423)
+Doing stack analysis for 'handleInvocation'. (143 of 423)
+Doing stack analysis for 'handleRecv'. (144 of 423)
+Doing stack analysis for 'handleReply'. (145 of 423)
+Doing stack analysis for 'handleSyscall'. (146 of 423)
+Doing stack analysis for 'handleUnknownSyscall'. (147 of 423)
+Doing stack analysis for 'handleUserLevelFault'. (148 of 423)
+Doing stack analysis for 'handleVMFault'. (149 of 423)
+Doing stack analysis for 'handleVMFaultEvent'. (150 of 423)
+Doing stack analysis for 'hasCancelSendRights'. (151 of 423)
+Doing stack analysis for 'idle_thread'. (152 of 423)
+Doing stack analysis for 'initIRQController'. (153 of 423)
+Doing stack analysis for 'initL2Cache'. (154 of 423)
+Doing stack analysis for 'initTimer'. (155 of 423)
+Doing stack analysis for 'init_core_state'. (156 of 423)
+Doing stack analysis for 'init_freemem'. (157 of 423)
+Doing stack analysis for 'init_kernel'. (158 of 423)
+Aborting Problem (Function (init_kernel)), complex loop
+Doing stack analysis for 'insertNewCap'. (159 of 423)
+Doing stack analysis for 'insert_region'. (160 of 423)
+Doing stack analysis for "instruction'cpsid_aif_E0010920". (161 of 423)
+Doing stack analysis for "instruction'dmb_sy_E0011428". (162 of 423)
+Doing stack analysis for "instruction'dmb_sy_E0011FAC". (163 of 423)
+Doing stack analysis for "instruction'dmb_sy_E0011FEC". (164 of 423)
+Doing stack analysis for "instruction'dmb_sy_E0012000". (165 of 423)
+Doing stack analysis for "instruction'dmb_sy_E0012074". (166 of 423)
+Doing stack analysis for "instruction'dmb_sy_E00120C0". (167 of 423)
+Doing stack analysis for "instruction'dmb_sy_E0012108". (168 of 423)
+Doing stack analysis for "instruction'dmb_sy_E00121B4". (169 of 423)
+Doing stack analysis for "instruction'dmb_sy_E0012288". (170 of 423)
+Doing stack analysis for "instruction'dmb_sy_E00124C4". (171 of 423)
+Doing stack analysis for "instruction'dmb_sy_E0012508". (172 of 423)
+Doing stack analysis for "instruction'dmb_sy_E0012908". (173 of 423)
+Doing stack analysis for "instruction'dmb_sy_E0012954". (174 of 423)
+Doing stack analysis for "instruction'dmb_sy_E0012A34". (175 of 423)
+Doing stack analysis for "instruction'dmb_sy_E00195F0". (176 of 423)
+Doing stack analysis for "instruction'dsb_sy_E000057C". (177 of 423)
+Doing stack analysis for "instruction'dsb_sy_E0000598". (178 of 423)
+Doing stack analysis for "instruction'dsb_sy_E00005A4". (179 of 423)
+Doing stack analysis for "instruction'dsb_sy_E00021F8". (180 of 423)
+Doing stack analysis for "instruction'dsb_sy_E0002200". (181 of 423)
+Doing stack analysis for "instruction'dsb_sy_E001104C". (182 of 423)
+Doing stack analysis for "instruction'dsb_sy_E0011054". (183 of 423)
+Doing stack analysis for "instruction'dsb_sy_E00110FC". (184 of 423)
+Doing stack analysis for "instruction'dsb_sy_E0011168". (185 of 423)
+Doing stack analysis for "instruction'dsb_sy_E00111A4". (186 of 423)
+Doing stack analysis for "instruction'dsb_sy_E001123C". (187 of 423)
+Doing stack analysis for "instruction'dsb_sy_E0011370". (188 of 423)
+Doing stack analysis for "instruction'dsb_sy_E0011384". (189 of 423)
+Doing stack analysis for "instruction'dsb_sy_E00113C8". (190 of 423)
+Doing stack analysis for "instruction'dsb_sy_E00113D4". (191 of 423)
+Doing stack analysis for "instruction'dsb_sy_E0011450". (192 of 423)
+Doing stack analysis for "instruction'dsb_sy_E001145C". (193 of 423)
+Doing stack analysis for "instruction'dsb_sy_E0011FC0". (194 of 423)
+Doing stack analysis for "instruction'dsb_sy_E0012038". (195 of 423)
+Doing stack analysis for "instruction'dsb_sy_E001204C". (196 of 423)
+Doing stack analysis for "instruction'dsb_sy_E0012088". (197 of 423)
+Doing stack analysis for "instruction'dsb_sy_E001251C". (198 of 423)
+Doing stack analysis for "instruction'dsb_sy_E0012624". (199 of 423)
+Doing stack analysis for "instruction'dsb_sy_E0012658". (200 of 423)
+Doing stack analysis for "instruction'dsb_sy_E0012660". (201 of 423)
+Doing stack analysis for "instruction'dsb_sy_E0012670". (202 of 423)
+Doing stack analysis for "instruction'dsb_sy_E0012690". (203 of 423)
+Doing stack analysis for "instruction'dsb_sy_E001269C". (204 of 423)
+Doing stack analysis for "instruction'dsb_sy_E00128BC". (205 of 423)
+Doing stack analysis for "instruction'dsb_sy_E00128C4". (206 of 423)
+Doing stack analysis for "instruction'dsb_sy_E00128D4". (207 of 423)
+Doing stack analysis for "instruction'dsb_sy_E0012990". (208 of 423)
+Doing stack analysis for "instruction'dsb_sy_E00129B0". (209 of 423)
+Doing stack analysis for "instruction'dsb_sy_E00129C0". (210 of 423)
+Doing stack analysis for "instruction'isb_sy_E0000540". (211 of 423)
+Doing stack analysis for "instruction'isb_sy_E0000594". (212 of 423)
+Doing stack analysis for "instruction'isb_sy_E00005A8". (213 of 423)
+Doing stack analysis for "instruction'isb_sy_E0002204". (214 of 423)
+Doing stack analysis for "instruction'isb_sy_E0011058". (215 of 423)
+Doing stack analysis for "instruction'isb_sy_E0011114". (216 of 423)
+Doing stack analysis for "instruction'isb_sy_E0011180". (217 of 423)
+Doing stack analysis for "instruction'isb_sy_E0011188". (218 of 423)
+Doing stack analysis for "instruction'isb_sy_E0011198". (219 of 423)
+Doing stack analysis for "instruction'isb_sy_E00111BC". (220 of 423)
+Doing stack analysis for "instruction'isb_sy_E0011254". (221 of 423)
+Doing stack analysis for "instruction'isb_sy_E001125C". (222 of 423)
+Doing stack analysis for "instruction'isb_sy_E0011274". (223 of 423)
+Doing stack analysis for "instruction'isb_sy_E0011388". (224 of 423)
+Doing stack analysis for "instruction'isb_sy_E00113D8". (225 of 423)
+Doing stack analysis for "instruction'isb_sy_E0011460". (226 of 423)
+Doing stack analysis for "instruction'isb_sy_E0012540". (227 of 423)
+Doing stack analysis for "instruction'isb_sy_E0012648". (228 of 423)
+Doing stack analysis for "instruction'isb_sy_E001266C". (229 of 423)
+Doing stack analysis for "instruction'isb_sy_E00126A0". (230 of 423)
+Doing stack analysis for "instruction'isb_sy_E00128D0". (231 of 423)
+Doing stack analysis for "instruction'isb_sy_E0012980". (232 of 423)
+Doing stack analysis for "instruction'isb_sy_E00129AC". (233 of 423)
+Doing stack analysis for "instruction'isb_sy_E00129B4". (234 of 423)
+Doing stack analysis for "instruction'mcr_15_0_ip_cr7_cr10_1_E0012070". (235 of 423)
+Doing stack analysis for "instruction'mcr_15_0_ip_cr8_cr7_2_E0011050". (236 of 423)
+Doing stack analysis for "instruction'mcr_15_0_lr_cr7_cr10_1_E0011FA8". (237 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r0_cr13_cr0_1_E0011184". (238 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r0_cr13_cr0_1_E0011258". (239 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r0_cr2_cr0_0_E0011270". (240 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r0_cr7_cr11_1_E0012284". (241 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r0_cr8_cr7_2_E00113D0". (242 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r0_cr8_cr7_2_E0011458". (243 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r1_cr7_cr10_2_E0011D48". (244 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r1_cr7_cr14_2_E0011E28". (245 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r1_cr7_cr14_2_E0011F28". (246 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r2_cr7_cr11_1_E0011424". (247 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r2_cr7_cr11_1_E00121B0". (248 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr13_cr0_4_E0001D2C". (249 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr14_cr1_0_E0011F7C". (250 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr1_cr0_2_E000053C". (251 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr2_cr0_0_E0000590". (252 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr2_cr0_0_E0011110". (253 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr2_cr0_0_E001117C". (254 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr2_cr0_0_E0011194". (255 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr2_cr0_0_E00111B8". (256 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr2_cr0_0_E0011250". (257 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr7_cr11_1_E0012104". (258 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr7_cr11_1_E00195EC". (259 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr7_cr14_1_E0012034". (260 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr7_cr5_0_E0012668". (261 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr7_cr5_0_E00128CC". (262 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr7_cr5_0_E00129A8". (263 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr7_cr5_1_E001253C". (264 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr7_cr5_7_E0012570". (265 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr7_cr6_1_E0012504". (266 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr8_cr7_0_E00005A0". (267 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r3_cr8_cr7_1_E0011380". (268 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r4_cr8_cr7_0_E00021FC". (269 of 423)
+Doing stack analysis for "instruction'mcr_15_0_r4_cr8_cr7_2_E0012698". (270 of 423)
+Doing stack analysis for "instruction'mcr_15_2_r2_cr0_cr0_0_E0011DBC". (271 of 423)
+Doing stack analysis for "instruction'mcr_15_2_r2_cr0_cr0_0_E0011E98". (272 of 423)
+Doing stack analysis for "instruction'mcr_15_2_r2_cr0_cr0_0_E0011EEC". (273 of 423)
+Doing stack analysis for "instruction'mcr_15_2_r3_cr0_cr0_0_E0011EE4". (274 of 423)
+Doing stack analysis for "instruction'mcr_15_2_r9_cr0_cr0_0_E0011DB4". (275 of 423)
+Doing stack analysis for "instruction'mcr_15_2_r9_cr0_cr0_0_E0011E90". (276 of 423)
+Doing stack analysis for "instruction'mrc_15_0_r1_cr6_cr0_0_E00112F4". (277 of 423)
+Doing stack analysis for "instruction'mrc_15_0_r2_cr13_cr0_2_E0010130". (278 of 423)
+Doing stack analysis for "instruction'mrc_15_0_r2_cr13_cr0_2_E0010158". (279 of 423)
+Doing stack analysis for "instruction'mrc_15_0_r2_cr13_cr0_2_E0010188". (280 of 423)
+Doing stack analysis for "instruction'mrc_15_0_r2_cr13_cr0_2_E00101B4". (281 of 423)
+Doing stack analysis for "instruction'mrc_15_0_r2_cr13_cr0_3_E0010138". (282 of 423)
+Doing stack analysis for "instruction'mrc_15_0_r2_cr13_cr0_3_E0010160". (283 of 423)
+Doing stack analysis for "instruction'mrc_15_0_r2_cr13_cr0_3_E0010190". (284 of 423)
+Doing stack analysis for "instruction'mrc_15_0_r2_cr13_cr0_3_E00101BC". (285 of 423)
+Doing stack analysis for "instruction'mrc_15_0_r3_cr0_cr1_1_E0011F6C". (286 of 423)
+Doing stack analysis for "instruction'mrc_15_0_r3_cr0_cr1_2_E0011F68". (287 of 423)
+Doing stack analysis for "instruction'mrc_15_0_r3_cr1_cr0_2_E0000534". (288 of 423)
+Doing stack analysis for "instruction'mrc_15_0_r3_cr5_cr0_0_E00112F8". (289 of 423)
+Doing stack analysis for "instruction'mrc_15_0_r3_cr5_cr0_1_E0011320". (290 of 423)
+Doing stack analysis for "instruction'mrc_15_1_fp_cr0_cr0_1_E0011E00". (291 of 423)
+Doing stack analysis for "instruction'mrc_15_1_r3_cr0_cr0_0_E0011DB8". (292 of 423)
+Doing stack analysis for "instruction'mrc_15_1_r3_cr0_cr0_0_E0011E94". (293 of 423)
+Doing stack analysis for "instruction'mrc_15_1_r3_cr0_cr0_0_E0011EE8". (294 of 423)
+Doing stack analysis for "instruction'mrc_15_1_r3_cr0_cr0_1_E0011D18". (295 of 423)
+Doing stack analysis for "instruction'mrc_15_2_r2_cr0_cr0_0_E0011DAC". (296 of 423)
+Doing stack analysis for "instruction'mrc_15_2_r2_cr0_cr0_0_E0011E88". (297 of 423)
+Doing stack analysis for "instruction'mrc_15_2_r2_cr0_cr0_0_E0011EDC". (298 of 423)
+Doing stack analysis for "instruction'strex_r0_r1_r3_E00111D8". (299 of 423)
+Doing stack analysis for "instruction'vmrs_r3_fpexc_E0000554". (300 of 423)
+Doing stack analysis for "instruction'vmrs_r3_fpexc_E0000560". (301 of 423)
+Doing stack analysis for "instruction'vmrs_r3_fpexc_E0001D94". (302 of 423)
+Doing stack analysis for "instruction'vmsr_fpexc_r3_E000055C". (303 of 423)
+Doing stack analysis for "instruction'vmsr_fpexc_r3_E0001D9C". (304 of 423)
+Doing stack analysis for "instruction'wfi_E0010870". (305 of 423)
+Doing stack analysis for 'invalidateASIDEntry'. (306 of 423)
+Doing stack analysis for 'invalidateCacheRange_I'. (307 of 423)
+Doing stack analysis for 'invalidateCacheRange_RAM'. (308 of 423)
+Doing stack analysis for 'invalidateTLBByASID'. (309 of 423)
+Doing stack analysis for 'invokeCNodeCancelBadgedSends'. (310 of 423)
+Doing stack analysis for 'invokeCNodeDelete'. (311 of 423)
+Doing stack analysis for 'invokeCNodeInsert'. (312 of 423)
+Doing stack analysis for 'invokeCNodeMove'. (313 of 423)
+Doing stack analysis for 'invokeCNodeRevoke'. (314 of 423)
+Doing stack analysis for 'invokeCNodeRotate'. (315 of 423)
+Doing stack analysis for 'invokeCNodeSaveCaller'. (316 of 423)
+Doing stack analysis for 'invokeIRQControl'. (317 of 423)
+Doing stack analysis for 'invokeIRQHandler_AckIRQ'. (318 of 423)
+Doing stack analysis for 'invokeIRQHandler_ClearIRQHandler'. (319 of 423)
+Doing stack analysis for 'invokeIRQHandler_SetIRQHandler'. (320 of 423)
+Doing stack analysis for 'invokeTCB_CopyRegisters'. (321 of 423)
+cvc5 interrupted by SIGTERM.
+Doing stack analysis for 'invokeTCB_NotificationControl'. (322 of 423)
+Doing stack analysis for 'invokeTCB_ReadRegisters'. (323 of 423)
+Doing stack analysis for 'invokeTCB_Resume'. (324 of 423)
+Doing stack analysis for 'invokeTCB_Suspend'. (325 of 423)
+Doing stack analysis for 'invokeTCB_ThreadControl'. (326 of 423)
+Doing stack analysis for 'invokeTCB_WriteRegisters'. (327 of 423)
+Doing stack analysis for 'invokeUntyped_Retype'. (328 of 423)
+Doing stack analysis for 'isCapRevocable'. (329 of 423)
+Doing stack analysis for 'isFinalCapability'. (330 of 423)
+Doing stack analysis for 'isIOSpaceFrameCap'. (331 of 423)
+Doing stack analysis for 'isIRQActive'. (332 of 423)
+Doing stack analysis for 'isMDBParentOf'. (333 of 423)
+Doing stack analysis for 'isValidVTableRoot'. (334 of 423)
+Doing stack analysis for 'loadCapTransfer'. (335 of 423)
+Doing stack analysis for 'loadHWASID'. (336 of 423)
+Doing stack analysis for 'lockTLBEntry'. (337 of 423)
+Doing stack analysis for 'lookupCap'. (338 of 423)
+Doing stack analysis for 'lookupCapAndSlot'. (339 of 423)
+Doing stack analysis for 'lookupExtraCaps'. (340 of 423)
+Doing stack analysis for 'lookupIPCBuffer'. (341 of 423)
+Doing stack analysis for 'lookupPDSlot'. (342 of 423)
+Doing stack analysis for 'lookupPTSlot'. (343 of 423)
+Doing stack analysis for 'lookupPivotSlot'. (344 of 423)
+Doing stack analysis for 'lookupSlot'. (345 of 423)
+Doing stack analysis for 'lookupSlotForCNodeOp'. (346 of 423)
+Doing stack analysis for 'lookupSourceSlot'. (347 of 423)
+Doing stack analysis for 'lookupTargetSlot'. (348 of 423)
+Doing stack analysis for 'makeUserPDE'. (349 of 423)
+Doing stack analysis for 'map_kernel_devices'. (350 of 423)
+Doing stack analysis for 'map_kernel_frame'. (351 of 423)
+Doing stack analysis for 'map_kernel_window'. (352 of 423)
+Aborting Problem (Function (map_kernel_window)), complex loop
+Doing stack analysis for 'maskCapRights'. (353 of 423)
+Doing stack analysis for 'maskVMRights'. (354 of 423)
+Doing stack analysis for 'maybe_alloc_extra_bi'. (355 of 423)
+Doing stack analysis for 'memcpy'. (356 of 423)
+Doing stack analysis for 'memset'. (357 of 423)
+Doing stack analysis for 'memzero'. (358 of 423)
+Doing stack analysis for 'merge_regions'. (359 of 423)
+Aborting Problem (Function (merge_regions)), complex loop
+Doing stack analysis for 'pageTableMapped'. (360 of 423)
+Doing stack analysis for 'performInvocation_Endpoint'. (361 of 423)
+Doing stack analysis for 'performInvocation_Notification'. (362 of 423)
+Doing stack analysis for 'performInvocation_Reply'. (363 of 423)
+Doing stack analysis for 'plat_cleanCache'. (364 of 423)
+Doing stack analysis for 'populate_bi_frame'. (365 of 423)
+Doing stack analysis for 'possibleSwitchTo'. (366 of 423)
+Doing stack analysis for 'preemptionPoint'. (367 of 423)
+Doing stack analysis for 'provide_cap'. (368 of 423)
+Doing stack analysis for 'receiveIPC'. (369 of 423)
+Doing stack analysis for 'receiveSignal'. (370 of 423)
+Doing stack analysis for 'replyFromKernel_error'. (371 of 423)
+Doing stack analysis for 'replyFromKernel_success_empty'. (372 of 423)
+Doing stack analysis for 'rescheduleRequired'. (373 of 423)
+Doing stack analysis for 'reserve_region'. (374 of 423)
+Doing stack analysis for 'resolveAddressBits'. (375 of 423)
+Doing stack analysis for 'restart'. (376 of 423)
+Doing stack analysis for 'restore_user_context'. (377 of 423)
+Doing stack analysis for 'sameObjectAs'. (378 of 423)
+Doing stack analysis for 'sameRegionAs'. (379 of 423)
+Doing stack analysis for 'schedule'. (380 of 423)
+Doing stack analysis for 'scheduleChooseNewThread'. (381 of 423)
+Doing stack analysis for 'scheduleTCB'. (382 of 423)
+Doing stack analysis for 'sendFaultIPC'. (383 of 423)
+Doing stack analysis for 'sendIPC'. (384 of 423)
+Doing stack analysis for 'sendSignal'. (385 of 423)
+Doing stack analysis for 'setDomain'. (386 of 423)
+Doing stack analysis for 'setExtraBadge'. (387 of 423)
+Doing stack analysis for 'setIRQState'. (388 of 423)
+Doing stack analysis for 'setIRQTrigger'. (389 of 423)
+Doing stack analysis for 'setMCPriority'. (390 of 423)
+Doing stack analysis for 'setMRs_fault'. (391 of 423)
+Doing stack analysis for 'setMRs_syscall_error'. (392 of 423)
+Doing stack analysis for 'setNextPC'. (393 of 423)
+Doing stack analysis for 'setPriority'. (394 of 423)
+Doing stack analysis for 'setThreadState'. (395 of 423)
+Doing stack analysis for 'setVMRoot'. (396 of 423)
+Doing stack analysis for 'setVMRootForFlush'. (397 of 423)
+Doing stack analysis for 'setupCallerCap'. (398 of 423)
+Doing stack analysis for 'setupReplyMaster'. (399 of 423)
+Doing stack analysis for 'slotCapLongRunningDelete'. (400 of 423)
+Doing stack analysis for 'slowpath'. (401 of 423)
+Doing stack analysis for 'str_to_long'. (402 of 423)
+Doing stack analysis for 'strlcat'. (403 of 423)
+Doing stack analysis for 'strlcpy'. (404 of 423)
+Doing stack analysis for 'strncmp'. (405 of 423)
+Doing stack analysis for 'strnlen'. (406 of 423)
+Doing stack analysis for 'suspend'. (407 of 423)
+Doing stack analysis for 'switchToIdleThread'. (408 of 423)
+Doing stack analysis for 'switchToThread'. (409 of 423)
+Doing stack analysis for 'tcbEPAppend'. (410 of 423)
+Doing stack analysis for 'tcbEPDequeue'. (411 of 423)
+Doing stack analysis for 'tcbSchedAppend'. (412 of 423)
+Doing stack analysis for 'tcbSchedDequeue'. (413 of 423)
+Doing stack analysis for 'tcbSchedEnqueue'. (414 of 423)
+Doing stack analysis for 'tcb_queue_remove'. (415 of 423)
+Doing stack analysis for 'timerTick'. (416 of 423)
+Doing stack analysis for 'unbindMaybeNotification'. (417 of 423)
+Doing stack analysis for 'unbindNotification'. (418 of 423)
+Doing stack analysis for 'unmapPage'. (419 of 423)
+Doing stack analysis for 'unmapPageTable'. (420 of 423)
+Doing stack analysis for 'updateCapData'. (421 of 423)
+Doing stack analysis for 'write_it_asid_pool'. (422 of 423)
+Doing stack analysis for 'write_slot'. (423 of 423)
+Computed stack bounds.
+Warning: asm instruction name: formatting: "asm_instruction'.word_0xeef00a10__\\nmov_%0,_r0________\\n"
+Warning: asm instruction name: formatting: "asm_instruction'.word_0xeef00a10__\\nmov_%0,_r0________\\n"
+Function 'init_kernel' contains unhandled instructions:
+  ["instruction'vmrs_r3_fpexc_E0001D94", "instruction'vmsr_fpexc_r3_E0001D9C"]
+Function 'Arch_switchToThread' contains unhandled instructions:
+  ["instruction'strex_r0_r1_r3_E00111D8"]
+Function 'Kernel_C.fpsimd_HWCapTest' contains unhandled instructions:
+  ["asm_instruction'.word_0xeef00a10__\\nmov_%0,_r0________\\n"]
+Function 'arm_vector_table' contains unhandled instructions:
+  ["instruction'ldr_pc_pc_24_e0010020_arm_vector_table_0x20_E0010000", "instruction'ldr_pc_pc_24_e001002c_arm_vector_table_0x2c_E001000C", "instruction'ldr_pc_pc_20_e0010038_arm_vector_table_0x38_E001001C", "instruction'ldr_pc_pc_24_e0010024_arm_vector_table_0x24_E0010004", "instruction'ldr_pc_pc_24_e0010030_arm_vector_table_0x30_E0010010", "instruction'ldr_pc_pc_24_e0010028_arm_vector_table_0x28_E0010008", "instruction'ldr_pc_pc_20_e0010034_arm_vector_table_0x34_E0010018", "instruction'ldr_pc_pc_4_e0010020_arm_vector_table_0x20_E0010014"]
+Function 'arm_undefined_inst_exception' contains unhandled instructions:
+  ["instruction'cps_19_E0010040", "instruction'srsia_sp_19_E001003C", "instruction'stmdb_sp_r0_r1_r2_r3_r4_r5_r6_r7_r8_r9_sl_fp_ip_sp_lr_E0010044"]
+Function 'arm_data_abort_exception' contains unhandled instructions:
+  ["instruction'cps_19_E00100BC", "instruction'stmdb_sp_r0_r1_r2_r3_r4_r5_r6_r7_r8_r9_sl_fp_ip_sp_lr_E00100C0", "instruction'srsia_sp_19_E00100B8"]
+Function 'Kernel_C.supportsAsyncExceptions' contains unhandled instructions:
+  ["asm_instruction'.fpu_vfp\\nvmsr_fpexc,_%0", "asm_instruction'.fpu_vfp\\nvmrs_%0,_fpexc"]
+Function 'Kernel_C.clearEnFPEXC' contains unhandled instructions:
+  ["asm_instruction'.fpu_vfp\\nvmsr_fpexc,_%0", "asm_instruction'.fpu_vfp\\nvmrs_%0,_fpexc"]
+Function 'arm_irq_exception' contains unhandled instructions:
+  ["instruction'stmdb_sp_r0_r1_r2_r3_r4_r5_r6_r7_r8_r9_sl_fp_ip_sp_lr_E00100F4", "instruction'cps_19_E00100F0", "instruction'srsia_sp_19_E00100EC"]
+Function 'fpsimd_HWCapTest' contains unhandled instructions:
+  ["instruction'vmrs_r3_fpexc_E0000560", "instruction'vmsr_fpexc_r3_E000055C", "instruction'vmrs_r3_fpexc_E0000554"]
+Function 'arm_prefetch_abort_exception' contains unhandled instructions:
+  ["instruction'cps_19_E001008C", "instruction'stmdb_sp_r0_r1_r2_r3_r4_r5_r6_r7_r8_r9_sl_fp_ip_sp_lr_E0010090", "instruction'srsia_sp_19_E0010088"]
+Function 'halt' contains unhandled instructions:
+  ["instruction'cpsid_aif_E0010920"]
+Checking.
+Saving Kernel_C.pdeCheckIfMapped
+Saving Kernel_C.lookupTargetSlot
+Saving Kernel_C.fastpath_reply_cap_check
+Saving Kernel_C.clean_D_PoU
+Saving Kernel_C.reduceZombie
+Saving Kernel_C.branchFlush
+Saving instruction'vmsr_fpexc_r3_E000055C
+Saving deletedIRQHandler
+Saving suspend
+Saving Kernel_C.readTPIDRPRW
+Saving setMRs_fault
+Saving Kernel_C.invalidateTLBByASID
+Saving instruction'dsb_sy_E001104C
+Saving write_slot
+Saving Kernel_C.get_n_paging
+Saving Kernel_C.cap_small_frame_cap_get_capFIsDevice
+Saving setNextPC
+Saving Kernel_C.setACTLR
+Saving Kernel_C.decodeUnbindNotification
+Saving Kernel_C.populate_bi_frame
+Saving instruction'mcr_15_0_r0_cr8_cr7_2_E0011458
+Saving Arch_activateIdleThread
+Saving Kernel_C.seL4_Fault_VMFault_get_instructionFault
+Saving Kernel_C.cap_notification_cap_new
+Saving instruction'mcr_15_0_r3_cr7_cr5_0_E0012668
+Saving idle_thread
+Saving Kernel_C.handleYield
+Saving Kernel_C.removeFromBitmap
+Saving isFinalCapability
+Saving Kernel_C.invokeUntyped_Retype
+Saving Kernel_C.Arch_isFrameType
+Saving Kernel_C.fastpath_call
+Saving bindNotification
+Saving handleReply
+Saving asm_instruction'mrc__p15,_0,_%0,_c0,_c0,_0
+Saving Kernel_C.c_handle_vm_fault
+Saving instruction'dsb_sy_E00021F8
+Saving Kernel_C.plat_cleanL2Range
+Saving Kernel_C.replyFromKernel_success_empty
+Saving map_kernel_devices
+Saving Kernel_C.ctz64
+Saving create_untypeds_for_region
+Saving decodeInvocation
+Saving Kernel_C.seL4_Fault_get_seL4_FaultType
+Saving Kernel_C.endpoint_ptr_get_epQueue_tail
+Saving instruction'mcr_15_0_r3_cr8_cr7_0_E00005A0
+Saving Kernel_C.create_it_pd_pts
+Saving instruction'dsb_sy_E00113C8
+Saving c_handle_data_fault
+Saving Kernel_C.cap_notification_cap_get_capNtfnCanSend
+Saving instruction'dsb_sy_E0011FC0
+Saving Kernel_C.mdb_node_get_mdbRevocable
+Saving Kernel_C.handleInvocation
+Saving Kernel_C.lookupPivotSlot
+Saving Kernel_C.doReplyTransfer
+Saving Kernel_C.dsb
+Saving Kernel_C.cap_untyped_cap_ptr_set_capFreeIndex
+Saving Kernel_C.doNBRecvFailedTransfer
+Saving decodeBindNotification
+Saving Kernel_C.cap_cnode_cap_get_capCNodeGuardSize
+Saving unbindMaybeNotification
+Saving Kernel_C.getAIFSR
+Saving getRestartPC
+Saving Kernel_C.infer_cpu_gic_id
+Saving asm_instruction'mrc_p15,_0,_%0,_c0,_c0,_5
+Saving Kernel_C.decodeBindNotification
+Saving Kernel_C.invokeIRQControl
+Saving lookupCap
+Saving Kernel_C.Arch_handleFaultReply
+Saving Kernel_C.scheduleTCB
+Saving decodeARMMMUInvocation
+Saving Kernel_C.lookupSlot
+Saving arm_fiq_exception
+Saving Kernel_C.copyMRs
+Saving Kernel_C.invalidateTranslationSingleLocal
+Saving cleanInvalidate_D_PoC
+Saving mode_reserved_region
+Saving Kernel_C.decodeSetSchedParams
+Saving Kernel_C.invokeTCB_Resume
+Saving Kernel_C.capSwapForDelete
+Saving arm_errata
+Saving Kernel_C.create_initial_thread
+Saving Kernel_C.wordFromVMRights
+Saving Arch_sameObjectAs
+Saving Kernel_C.performPageTableInvocationMap
+Saving findPDForASID
+Saving resolveAddressBits
+Saving Kernel_C.cap_zombie_cap_get_capZombiePtr
+Saving Kernel_C.isArchCap
+Saving Kernel_C.mdb_node_get_mdbNext
+Saving invokeTCB_WriteRegisters
+Saving Kernel_C.cap_irq_control_cap_new
+Saving instruction'stmdb_sp_r0_r1_r2_r3_r4_r5_r6_r7_r8_r9_sl_fp_ip_sp_lr_E0010068
+Saving Kernel_C.mdb_node_new
+Saving Kernel_C.lookup_fault_guard_mismatch_get_guardFound
+Saving instruction'dmb_sy_E0012508
+Saving Kernel_C.vm_attributes_get_armParityEnabled
+Saving calculate_extra_bi_size_bits
+Saving doIPCTransfer
+Saving Kernel_C.init_irqs
+Saving strlcat
+Saving Kernel_C.cap_page_directory_cap_get_capPDMappedASID
+Saving instruction'mrc_15_0_r1_cr13_cr0_2_E0010858
+Saving instruction'mcr_15_0_r3_cr7_cr5_1_E001253C
+Saving finaliseCap
+Saving Kernel_C.performPDFlush
+Saving Kernel_C.lookup_fault_guard_mismatch_get_bitsLeft
+Saving Kernel_C.handleUserLevelFault
+Saving Kernel_C.init_freemem
+Saving decodeSetIPCBuffer
+Saving Kernel_C.lookup_fault_guard_mismatch_get_bitsFound
+Saving Kernel_C.cancelSignal
+Saving instruction'mcr_15_0_r3_cr2_cr0_0_E00111B8
+Saving instruction'mcr_15_0_r3_cr14_cr1_0_E0011F7C
+Saving instruction'dmb_sy_E0012074
+Saving Kernel_C.cap_cnode_cap_set_capCNodeGuard
+Saving Kernel_C.cap_endpoint_cap_get_capCanReceive
+Saving asm_instruction'dsb_ishst
+Saving Kernel_C.dist_init
+Saving instruction'mrc_15_2_r2_cr0_cr0_0_E0011DAC
+Saving instruction'dsb_sy_E00128BC
+Saving instruction'dsb_sy_E0012038
+Saving Kernel_C.emptySlot
+Saving Kernel_C.init_plat
+Saving instruction'mcr_15_0_r0_cr7_cr11_1_E0012284
+Saving cpu_initLocalIRQController
+Saving cteDeleteOne
+Saving Kernel_C.setIRQState
+Saving Kernel_C.cap_small_frame_cap_get_capFMappedAddress
+Saving l_impl'mcr
+Saving lookupCapAndSlot
+Saving create_frames_of_region
+Saving Kernel_C.cap_zombie_cap_set_capZombieNumber
+Saving Kernel_C.pte_ptr_get_pteType
+Saving setExtraBadge
+Saving activate_kernel_vspace
+Saving Kernel_C.seL4_MessageInfo_set_length
+Saving Kernel_C.fastpath_restore
+Saving asm_instruction'mcr_p15,_0,_%0,_c13,_c0,_4
+Saving asm_instruction'mcr_p15,_0,_%0,_c13,_c0,_2
+Saving asm_instruction'mcr_p15,_0,_%0,_c13,_c0,_3
+Saving Kernel_C.lookupIPCBuffer
+Saving instruction'ldr_pc_pc_24_e0010030_arm_vector_table_0x30_E0010010
+Saving Kernel_C.cap_endpoint_cap_set_capCanReceive
+Saving Kernel_C.decodeSetPriority
+Saving arm_prefetch_abort_exception
+Saving Kernel_C.Arch_finaliseCap
+Saving Kernel_C.Arch_sameRegionAs
+Saving provide_cap
+Saving Kernel_C.cteDelete
+Saving Kernel_C.lockTLBEntry
+Saving Kernel_C.writeTPIDRURW
+Saving Kernel_C.enableFpuInstInHyp
+Saving Kernel_C.cteDeleteOne
+Saving isIOSpaceFrameCap
+Saving instruction'vmrs_r3_fpexc_E0000554
+Saving Kernel_C.performASIDControlInvocation
+Saving scheduleChooseNewThread
+Saving instruction'vmrs_r3_fpexc_E0000560
+Saving Kernel_C.char_to_long
+Saving handleVMFault
+Saving setupReplyMaster
+Saving rescheduleRequired
+Saving Kernel_C.isIOSpaceFrameCap
+Saving Kernel_C.writeTPIDRURO
+Saving instruction'dsb_sy_E001251C
+Saving Kernel_C.provide_untyped_cap
+Saving decodeReadRegisters
+Saving Kernel_C.configureIdleThread
+Saving Kernel_C.thread_state_get_tsType
+Saving Kernel_C.ctz32
+Saving instruction'mrc_15_0_sp_cr13_cr0_4_E0010054
+Saving Kernel_C.completeSignal
+Saving Kernel_C.capCyclicZombie
+Saving Arch_maskCapRights
+Saving Kernel_C.cap_endpoint_cap_get_capCanGrantReply
+Saving setPriority
+Saving Kernel_C.cpu_iface_init
+Saving instruction'dsb_sy_E00005A4
+Saving isCapRevocable
+Saving invokeTCB_CopyRegisters
+Saving _start
+Saving Kernel_C.checkVPAlignment
+Saving Kernel_C.loadCapTransfer
+Saving r_impl'dsb
+Saving Kernel_C.arch_clean_invalidate_caches
+Saving Kernel_C.ntfn_ptr_get_queue
+Saving cancelBadgedSends
+Saving arch_get_n_paging
+Saving arm_undefined_inst_exception
+Saving instruction'isb_sy_E0011460
+Saving Kernel_C.invalidateTranslationASIDLocal
+Saving Kernel_C.it_alloc_paging
+Saving emptySlot
+Saving Kernel_C.flushPage
+Saving Kernel_C.addrFromKPPtr
+Saving Kernel_C.setCurrentPD
+Saving Kernel_C.decodeDomainInvocation
+Saving Kernel_C.clzl
+Saving lookupPTSlot
+Saving Kernel_C.maskVMRights
+Saving Kernel_C.cap_frame_cap_set_capFMappedASIDHigh
+Saving Kernel_C.doFlush
+Saving Kernel_C.receiveIPC
+Saving instruction'mrc_15_0_r3_cr0_cr1_1_E0011F6C
+Saving setVMRootForFlush
+Saving Kernel_C.cap_asid_pool_cap_get_capASIDBase
+Saving setVMRoot
+Saving halt
+Saving Kernel_C.mdb_node_ptr_set_mdbPrev_np
+Saving asm_instruction'mcr_p15,_0,_%0,_c7,_c5,_0
+Saving Kernel_C.pde_pde_invalid_new
+Saving Kernel_C.clearIOPageDirectory
+Saving Kernel_C.performPageInvocationMapPDE
+Saving instruction'dsb_sy_E0012088
+Saving Kernel_C.pte_pte_large_get_reserved
+Saving Kernel_C.decodeCNodeInvocation
+Saving instruction'dmb_sy_E0012288
+Saving Kernel_C.Arch_sameObjectAs
+Saving Kernel_C.getProcessorID
+Saving handleInterrupt
+Saving Kernel_C.cap_small_frame_cap_get_capFMappedASID
+Saving Kernel_C.Arch_getObjectSize
+Saving loadCapTransfer
+Saving getExtraCPtr
+Saving Arch_setMRs_fault
+Saving Kernel_C.cap_page_directory_cap_get_capPDIsMapped
+Saving create_unmapped_it_frame_cap
+Saving Kernel_C.insert_region
+Saving instruction'ldr_pc_pc_24_e001002c_arm_vector_table_0x2c_E001000C
+Saving Kernel_C.readMPIDR
+Saving Kernel_C.create_it_frame_cap
+Saving Kernel_C.messageInfoFromWord
+Saving Kernel_C.wfi
+Saving Arch_deriveCap
+Saving decodeSetMCPriority
+Saving Kernel_C.ntfn_ptr_set_queue
+Saving Kernel_C.setAIFSR
+Saving Kernel_C.switchToThread_fp
+Saving Kernel_C.cap_notification_cap_get_capNtfnCanReceive
+Saving Kernel_C.doUnbindNotification
+Saving Kernel_C.writeContextIDAndPD
+Saving Kernel_C.handleInterrupt
+Saving Kernel_C.cap_zombie_cap_get_capZombieType
+Saving Kernel_C.seL4_Fault_CapFault_get_address
+Saving create_it_asid_pool
+Saving cancelAllIPC
+Saving Kernel_C.notification_ptr_set_ntfnMsgIdentifier
+Saving Kernel_C.invokeIRQHandler_ClearIRQHandler
+Saving unmapPage
+Saving Kernel_C.write_it_pd_pts
+Saving Kernel_C.notification_ptr_set_ntfnQueue_tail
+Saving Kernel_C.notification_ptr_get_ntfnBoundTCB
+Saving Kernel_C.doIPCTransfer
+Saving instruction'mcr_15_2_r2_cr0_cr0_0_E0011EEC
+Saving instruction'mrc_15_0_r2_cr13_cr0_3_E0010138
+Saving Kernel_C.lookupCapAndSlot
+Saving Kernel_C.handleInterruptEntry
+Saving setIRQTrigger
+Saving Kernel_C.endpoint_ptr_mset_epQueue_tail_state
+Saving Kernel_C.cteMove
+Saving Kernel_C.seL4_MessageInfo_set_capsUnwrapped
+Saving Kernel_C.thread_state_ptr_set_tcbQueued
+Saving map_kernel_frame
+Saving Kernel_C.arch_clean_invalidate_L1_caches
+Saving Kernel_C.tcb_queue_remove
+Saving Kernel_C.cap_frame_cap_set_capFMappedASIDLow
+Saving Kernel_C.isIRQActive
+Saving instruction'dsb_sy_E001123C
+Saving sameObjectAs
+Saving Kernel_C.Arch_postModifyRegisters
+Saving Kernel_C.performPageFlush
+Saving Kernel_C.createSafeMappingEntries_PDE
+Saving Kernel_C.cap_endpoint_cap_set_capCanGrantReply
+Saving instruction'dsb_sy_E00129C0
+Saving Kernel_C.flushTable
+Saving instruction'mrc_15_0_r9_cr5_cr0_0_E00100E0
+Saving Kernel_C.cap_page_directory_cap_ptr_set_capPDIsMapped
+Saving instruction'mrc_15_1_r3_cr0_cr0_0_E0011EE8
+Saving instruction'mcr_15_2_r9_cr0_cr0_0_E0011E90
+Saving Arch_decodeTransfer
+Saving init_freemem
+Saving instruction'mcr_15_0_r0_cr13_cr0_1_E0011258
+Saving doNBRecvFailedTransfer
+Saving branchFlushRange
+Saving Kernel_C.lookup_fault_depth_mismatch_get_bitsFound
+Saving Kernel_C.Arch_setTLSRegister
+Saving instruction'stmdb_sp_r0_r1_r2_r3_r4_r5_r6_r7_r8_r9_sl_fp_ip_sp_lr_E0010044
+Saving instruction'mcr_15_0_r3_cr2_cr0_0_E0000590
+Saving setMRs_syscall_error
+Saving isValidVTableRoot
+Saving instruction'mcr_15_0_r4_cr8_cr7_0_E00021FC
+Saving Kernel_C.memcpy
+Saving Kernel_C.check_reserved_memory
+Saving Kernel_C.postCapDeletion
+Saving instruction'dsb_sy_E00113D4
+Saving Kernel_C.seL4_CapRights_get_capAllowGrant
+Saving Kernel_C.cap_page_table_cap_ptr_set_capPTIsMapped
+Saving Kernel_C.cleanInvalByVA
+Saving Kernel_C.pde_pde_coarse_new
+Saving Kernel_C.ptrFromPAddr
+Saving Kernel_C.sameRegionAs
+Saving Kernel_C.invalidateByVA_I
+Saving Kernel_C.seL4_CapRights_get_capAllowGrantReply
+Saving Kernel_C.possibleSwitchTo
+Saving instruction'dmb_sy_E00121B4
+Saving Kernel_C.resetUntypedCap
+Saving Kernel_C.thread_state_ptr_set_blockingIPCCanGrant
+Saving instruction'isb_sy_E0012648
+Saving Kernel_C.seL4_MessageInfo_new
+Saving preemptionPoint
+Saving get_p_reg_kernel_img
+Saving instruction'dsb_sy_E00111A4
+Saving Kernel_C.cleanInvalidate_L1D
+Saving Kernel_C.notification_ptr_get_state
+Saving instruction'cpsid_aif_E0010920
+Saving Kernel_C.physBase
+Saving instruction'ldr_pc_pc_24_e0010024_arm_vector_table_0x24_E0010004
+Saving asm_instruction'mrc___p15,_0,__%0,__c0,__c1,_1
+Saving Kernel_C.lookup_fp
+Saving Kernel_C.ctzl
+Saving lookupIPCBuffer
+Saving Kernel_C.invokeTCB_ThreadControl
+Saving asm_instruction'mrc_p15,_2,_%0,_c0,_c0,_0
+Saving Kernel_C.try_init_kernel
+Saving Kernel_C.writeContextIDPL2
+Saving instruction'dsb_sy_E001145C
+Saving Kernel_C.makeUserPTE
+Saving Kernel_C.Arch_getSanitiseRegisterInfo
+Saving asm_instruction'.fpu_vfp\nvmrs_%0,_fpexc
+Saving Kernel_C.rootserver_max_size_bits
+Saving Kernel_C.generic_frame_cap_get_capFMappedAddress
+Saving Kernel_C.thread_state_ptr_get_blockingObject
+Saving Kernel_C.calculate_extra_bi_size_bits
+Saving Kernel_C.pde_pde_invalid_get_stored_asid_valid
+Saving Kernel_C.cap_notification_cap_get_capNtfnBadge
+Saving Kernel_C.cap_get_capSizeBits
+Saving Kernel_C.ep_ptr_get_queue
+Saving invokeIRQHandler_AckIRQ
+Saving Kernel_C.insertNewCap
+Saving Kernel_C.handleReservedIRQ
+Saving asm_instruction'mrc_p15,_0,_%0,_c5,_c0,_0
+Saving Kernel_C.wordFromRights
+Saving instruction'mrc_15_0_r2_cr13_cr0_3_E00101BC
+Saving instruction'stmdb_sp_r0_r1_r2_r3_r4_r5_r6_r7_r8_r9_sl_fp_ip_sp_lr_E0010090
+Saving instruction'dsb_sy_E001204C
+Saving Kernel_C.seL4_CapRights_get_capAllowWrite
+Saving Kernel_C.cap_get_capIsPhysical
+Saving instruction'dmb_sy_E00195F0
+Saving Kernel_C.sanitiseRegister
+Saving Kernel_C.cap_page_table_cap_get_capPTMappedASID
+Saving Kernel_C.seL4_Fault_VMFault_new
+Saving handleInterruptEntry
+Saving APFromVMRights
+Saving Kernel_C.setExtraBadge
+Saving memcpy
+Saving Kernel_C.receiveSignal
+Saving tcbSchedEnqueue
+Saving insertNewCap
+Saving plat_cleanCache
+Saving Kernel_C.decodeReadRegisters
+Saving Kernel_C.updateCapData
+Saving Kernel_C.endpoint_ptr_set_epQueue_head_np
+Saving Kernel_C.invokeCNodeRotate
+Saving Arch_prepareThreadDelete
+Saving Kernel_C.unmapIOPage
+Saving instruction'mcr_15_0_r0_cr13_cr0_1_E0011184
+Saving instruction'ldr_pc_pc_20_e0010034_arm_vector_table_0x34_E0010018
+Saving Kernel_C.messageInfoFromWord_raw
+Saving deleteASIDPool
+Saving Kernel_C.cap_zombie_cap_get_capZombieNumber
+Saving Kernel_C.thread_state_get_tcbQueued
+Saving handleSyscall
+Saving Kernel_C.cap_page_table_cap_set_capPTMappedASID
+Saving Kernel_C.init_core_state
+Saving asm_instruction'mrc__p15,_0,_%0,_c1,_c0,_1
+Saving Kernel_C.APFromVMRights
+Saving Kernel_C.lookupPDSlot
+Saving instruction'dsb_sy_E00110FC
+Saving Kernel_C.c_handle_data_fault
+Saving Kernel_C.isStopped
+Saving handleVMFaultEvent
+Saving deletingIRQHandler
+Saving Kernel_C.handleSpuriousIRQ
+Saving Kernel_C.is_reg_empty
+Saving instruction'mrc_15_0_r1_cr13_cr0_3_E0010860
+Saving cleanCaches_PoU
+Saving Kernel_C.handleFault
+Saving Kernel_C.c_handle_undefined_instruction
+Saving Kernel_C.pte_get_pteSize
+Saving Kernel_C.decodeSetTLSBase
+Saving findFreeHWASID
+Saving Kernel_C.cpu_initLocalIRQController
+Saving Kernel_C.c_handle_fastpath_reply_recv
+Saving flushTable
+Saving Kernel_C.clearExMonitor_fp
+Saving Kernel_C.getActiveIRQ
+Saving Kernel_C.createObject
+Saving Kernel_C.cap_reply_cap_new
+Saving Kernel_C.pde_get_pdeType
+Saving instruction'mcr_15_0_r1_cr7_cr10_2_E0011D48
+Saving Arch_postModifyRegisters
+Saving Kernel_C.mdb_node_set_mdbRevocable
+Saving instruction'mcr_15_0_r3_cr7_cr5_0_E00129A8
+Saving invokeIRQHandler_ClearIRQHandler
+Saving Kernel_C.getNMRR
+Saving Kernel_C.isMDBParentOf
+Saving Kernel_C.tcb_queue_empty
+Saving Kernel_C.suspend
+Saving Kernel_C.cap_page_table_cap_get_capPTMappedAddress
+Saving Kernel_C.pde_pde_coarse_ptr_get_address
+Saving Kernel_C.cap_reply_cap_get_capReplyCanGrant
+Saving instruction'mrc_15_1_r3_cr0_cr0_1_E0011D18
+Saving Kernel_C.arch_init_freemem
+Saving copyMRs
+Saving Kernel_C.cap_frame_cap_get_capFMappedASIDLow
+Saving getObjectSize
+Saving bi_finalise
+Saving Kernel_C.invokeCNodeInsert
+Saving Kernel_C.cancelAllSignals
+Saving Kernel_C.cap_frame_cap_get_capFMappedASID
+Saving Kernel_C.restart
+Saving Kernel_C.sameObjectAs
+Saving Kernel_C.flushSpace
+Saving Kernel_C.invalidateCacheRange_I
+Saving asm_instruction'.word_0xeef00a10__\nmov_%0,_r0________\n
+Saving Kernel_C.check_export_pmu
+Saving Kernel_C.setupReplyMaster
+Saving Kernel_C.tcbEPDequeue
+Saving decodeUnbindNotification
+Saving strlcpy
+Saving Kernel_C.rescheduleRequired
+Saving Kernel_C.pptr_in_kernel_window
+Saving Kernel_C.cap_small_frame_cap_get_capFBasePtr
+Saving Kernel_C.c_handle_syscall
+Saving instruction'cps_19_E0010040
+Saving Kernel_C.Arch_isCapRevocable
+Saving Arch_getObjectSize
+Saving instruction'dmb_sy_E0012108
+Saving instruction'mcr_15_0_r3_cr7_cr5_0_E00128CC
+Saving decodeTCBInvocation
+Saving Kernel_C.c_handle_interrupt
+Saving Kernel_C.strncmp
+Saving Kernel_C.arm_save_thread_id
+Saving Kernel_C.decodeCopyRegisters
+Saving create_domain_cap
+Saving Kernel_C.updateRestartPC
+Saving sendFaultIPC
+Saving Kernel_C.performPageInvocationUnmapIO
+Saving Kernel_C.unmapPage
+Saving Kernel_C.pageBitsForSize
+Saving Kernel_C.doFaultTransfer
+Saving Kernel_C.invalidateLocalTLB
+Saving instruction'ldr_pc_pc_24_e0010020_arm_vector_table_0x20_E0010000
+Saving Kernel_C.generic_frame_cap_get_capFMappedASID
+Saving instruction'dsb_sy_E0012660
+Saving l_impl'isb
+Saving Kernel_C.writeHTPIDR
+Saving Kernel_C.Arch_updateCapData
+Saving doNormalTransfer
+Saving merge_regions
+Saving invokeCNodeDelete
+Saving Kernel_C.setCurrentPDPL2
+Saving instruction'mcr_15_0_r1_cr7_cr14_2_E0011F28
+Saving Kernel_C.ackInterrupt
+Saving maybe_alloc_extra_bi
+Saving Kernel_C.cap_notification_cap_get_capNtfnPtr
+Saving instruction'mrc_15_0_r3_cr5_cr0_1_E0011320
+Saving asm_instruction'mcr_p15,_0,_%0,_c7,_c5,_1
+Saving Kernel_C.tcb_queue_insert
+Saving instruction'dmb_sy_E0012954
+Saving Kernel_C.fpsimd_HWCapTest
+Saving asm_instruction'mcr_p15,_0,_%0,_c7,_c5,_7
+Saving asm_instruction'mcr_p15,_0,_%0,_c7,_c5,_6
+Saving Kernel_C.cap_get_archCapPtr
+Saving Kernel_C.pte_pte_invalid_new
+Saving maskVMRights
+Saving create_mapped_it_frame_cap
+Saving lookupSlot
+Saving asm_instruction'mcr_p15,_0,_%0,_c10,_c2,_0
+Saving Kernel_C.Arch_switchToThread
+Saving Kernel_C.decodeInvocation
+Saving cancelIPC
+Saving Kernel_C.cleanInvalidateL1Caches
+Saving Kernel_C.sendIPC
+Saving Kernel_C.seL4_Fault_UserException_get_number
+Saving Kernel_C.flushBTAC
+Saving instruction'mcr_15_0_ip_cr7_cr10_1_E0012070
+Saving Kernel_C.seL4_Fault_UnknownSyscall_new
+Saving asm_instruction'mcr_p15,_0,_%0,_c7,_c10,_1
+Saving asm_instruction'mcr_p15,_0,_%0,_c7,_c10,_2
+Saving Kernel_C.doNormalTransfer
+Saving Kernel_C.invalidateTranslationAll
+Saving Kernel_C.cap_frame_cap_set_capFMappedAddress
+Saving instruction'mcr_15_2_r2_cr0_cr0_0_E0011DBC
+Saving Kernel_C.readTTBCR
+Saving instruction'dsb_sy_E00128C4
+Saving Kernel_C.switchToIdleThread
+Saving receiveIPC
+Saving instruction'isb_sy_E0011058
+Saving Kernel_C.tcbEPAppend
+Saving replyFromKernel_error
+Saving slotCapLongRunningDelete
+Saving invalidateASIDEntry
+Saving Kernel_C.invalidateTranslationAllLocal
+Saving instruction'srsia_sp_19_E00100B8
+Saving Kernel_C.setMRs_syscall_error
+Saving Kernel_C.arch_c_entry_hook
+Saving getReceiveSlots
+Saving instruction'isb_sy_E0011274
+Saving lookupPivotSlot
+Saving Kernel_C.prio_to_l1index
+Saving cleanInvalidateL1Caches
+Saving Kernel_C.decodeSetMCPriority
+Saving instruction'srsia_sp_19_E0010088
+Saving Kernel_C.cap_page_directory_cap_ptr_set_capPDMappedASID
+Saving Kernel_C.loadHWASID
+Saving Arch_performTransfer
+Saving Kernel_C.cleanCacheRange_RAM
+Saving Kernel_C.cleanInvalidateCacheRange_RAM
+Saving Kernel_C.memzero
+Saving performInvocation_Notification
+Saving Kernel_C.cap_asid_pool_cap_get_capASIDPool
+Saving Kernel_C.cleanInvalidateByWSL
+Saving Kernel_C.notification_ptr_get_ntfnMsgIdentifier
+Saving activateThread
+Saving Kernel_C.Arch_configureIdleThread
+Saving Kernel_C.decodeTCBInvocation
+Saving Kernel_C.preemptionPoint
+Saving instruction'isb_sy_E00129AC
+Saving Kernel_C.setThreadState
+Saving Kernel_C.seL4_MessageInfo_set_extraCaps
+Saving Kernel_C.bi_finalise
+Saving instruction'dmb_sy_E0011FEC
+Saving memset
+Saving Kernel_C.handleDoubleFault
+Saving makeUserPDE
+Saving Kernel_C.thread_state_ptr_set_blockingObject
+Saving restore_user_context
+Saving create_idle_thread
+Saving Kernel_C.cap_zombie_cap_set_capZombieID
+Saving Kernel_C.lookupPTSlot
+Saving updateCapData
+Saving Arch_handleFaultReply
+Saving Kernel_C.cap_small_frame_cap_set_capFMappedAddress
+Saving Kernel_C.Arch_decodeTransfer
+Saving Kernel_C.scheduleChooseNewThread
+Saving Kernel_C.activateThread
+Saving Kernel_C.pde_pde_section_ptr_get_size
+Saving Kernel_C.thread_state_ptr_set_blockingIPCIsCall
+Saving Kernel_C.cap_frame_cap_get_capFVMRights
+Saving Kernel_C.nextDomain
+Saving Kernel_C.ensureEmptySlot
+Saving Kernel_C.copyMRsFault
+Saving Kernel_C.addressTranslateS1
+Saving Kernel_C.cap_endpoint_cap_set_capCanGrant
+Saving Kernel_C.getObjectSize
+Saving Kernel_C.invokeCNodeMove
+Saving Kernel_C.getHWASID
+Saving instruction'isb_sy_E001266C
+Saving Kernel_C.create_bi_frame_cap
+Saving invokeIRQControl
+Saving instruction'mcr_15_0_r1_cr7_cr14_2_E0011E28
+Saving Kernel_C.cap_frame_cap_get_capFBasePtr
+Saving Kernel_C.vmAttributesFromWord
+Saving Kernel_C.invalidateLocalTLB_ASID
+Saving Kernel_C.provide_cap
+Saving instruction'mcr_15_0_r3_cr1_cr0_2_E000053C
+Saving Kernel_C.cap_reply_cap_ptr_new_np
+Saving Kernel_C.cap_frame_cap_get_capFIsDevice
+Saving Kernel_C.getPRRR
+Saving r_impl'wfi
+Saving performInvocation_Reply
+Saving dist_init
+Saving Kernel_C.endpoint_ptr_get_state
+Saving Kernel_C.setDFSR
+Saving Kernel_C.seL4_MessageInfo_get_label
+Saving Kernel_C.getFAR
+Saving Kernel_C.deleteASIDPool
+Saving isIRQActive
+Saving instruction'mrc_15_1_r3_cr0_cr0_0_E0011DB8
+Saving instruction'isb_sy_E0000594
+Saving instruction'mrc_15_0_r3_cr1_cr0_2_E0000534
+Saving Kernel_C.deriveCap
+Saving Kernel_C.cap_reply_cap_get_capTCBPtr
+Saving Kernel_C.arch_get_n_paging
+Saving Kernel_C.decodeUntypedInvocation
+Saving Kernel_C.cap_untyped_cap_set_capFreeIndex
+Saving Kernel_C.cap_frame_cap_get_capFMappedASIDHigh
+Saving strnlen
+Saving Kernel_C.cap_small_frame_cap_get_capFMappedASIDLow
+Saving asm_instruction'mrc_p15,_0,_%0,_c6,_c0,_2
+Saving asm_instruction'mcr_p15,_0,_%0,_c3,_c0,_0
+Saving asm_instruction'mrc_p15,_0,_%0,_c6,_c0,_0
+Saving Kernel_C.cap_endpoint_cap_set_capCanSend
+Saving Kernel_C.tcbSchedAppend
+Saving Kernel_C.checkPrio
+Saving create_root_cnode
+Saving Kernel_C.isRunnable
+Saving memzero
+Saving Kernel_C.seL4_Fault_CapFault_new
+Saving Arch_decodeInvocation
+Saving Arch_decodeIRQControlInvocation
+Saving Kernel_C.transferCaps
+Saving instruction'mcr_15_0_r3_cr13_cr0_4_E0001D2C
+Saving Kernel_C.setMCPriority
+Saving instruction'mcr_15_0_r3_cr7_cr6_1_E0012504
+Saving Kernel_C.performInvocation_Notification
+Saving instruction'mcr_15_0_r3_cr7_cr5_7_E0012570
+Saving Kernel_C.cleanByWSL
+Saving Kernel_C.decodeWriteRegisters
+Saving Kernel_C.map_it_pt_cap
+Saving avail_p_regs
+Saving get_p_reg_kernel_img_boot
+Saving Kernel_C.strlcpy
+Saving Kernel_C.unbindNotification
+Saving Kernel_C.cap_endpoint_cap_set_capEPBadge
+Saving instruction'dmb_sy_E0011428
+Saving cancelAllSignals
+Saving instruction'dmb_sy_E0012000
+Saving instruction'dsb_sy_E0012670
+Saving instruction'dsb_sy_E0012624
+Saving instruction'isb_sy_E0011388
+Saving Kernel_C.decodeARMPageTableInvocation
+Saving Kernel_C.setIRQTrigger
+Saving Kernel_C.cap_endpoint_cap_get_capCanGrant
+Saving Kernel_C.performPageGetAddress
+Saving Kernel_C.cleanCacheRange_PoU
+Saving Kernel_C.map_it_frame_cap
+Saving handleDoubleFault
+Saving asm_instruction'mrc_p15,_1,_%0,_c0,_c0,_0
+Saving asm_instruction'mrc_p15,_1,_%0,_c0,_c0,_1
+Saving Kernel_C.initTimer
+Saving instruction'mcr_15_0_r0_cr8_cr7_2_E00113D0
+Saving invokeIRQHandler_SetIRQHandler
+Saving Kernel_C.getADFSR
+Saving Kernel_C.cleanCacheRange_PoC
+Saving Kernel_C.Arch_performTransfer
+Saving Kernel_C.lookupExtraCaps
+Saving Kernel_C.timerTick
+Saving Kernel_C.bindNotification
+Saving initIRQController
+Saving Kernel_C.mdb_node_set_mdbPrev
+Saving Kernel_C.setMRs_lookup_failure
+Saving instruction'mrc_15_0_sp_cr13_cr0_4_E001006C
+Saving Kernel_C.cleanInvalidate_D_by_level
+Saving Kernel_C.endpoint_ptr_get_epQueue_head
+Saving initL2Cache
+Saving asm_instruction'mcr_p15,_0,_%0,_c6,_c0,_0
+Saving Kernel_C.Arch_checkIRQ
+Saving Kernel_C.performInvocation_Endpoint
+Saving Kernel_C.pageTableMapped
+Saving c_handle_instruction_fault
+Saving Kernel_C.writeContextID
+Saving instruction'dsb_sy_E00129B0
+Saving Kernel_C.pte_pte_small_ptr_get_address
+Saving Kernel_C.sendSignal
+Saving Kernel_C.generic_frame_cap_get_capFIsMapped
+Saving Kernel_C.cap_irq_handler_cap_new
+Saving Kernel_C.setNMRR
+Saving Kernel_C.readHTPIDR
+Saving instruction'mrc_15_1_r3_cr0_cr0_0_E0011E94
+Saving Kernel_C.setMR
+Saving instruction'mrc_15_0_r9_cr5_cr0_1_E00100B0
+Saving Kernel_C.cap_get_archCapIsPhysical
+Saving asm_instruction'dmb
+Saving decodeSetSpace
+Saving Kernel_C.pageBase
+Saving Kernel_C.invokeCNodeCancelBadgedSends
+Saving invokeCNodeRotate
+Saving Kernel_C.dmb
+Saving getHWASID
+Saving Kernel_C.mdb_node_ptr_mset_mdbNext_mdbRevocable_mdbFirstBadged
+Saving Kernel_C.create_untypeds
+Saving capSwapForDelete
+Saving Kernel_C.fastpath_mi_check
+Saving Kernel_C.invokeTCB_CopyRegisters
+Saving Kernel_C.isFinalCapability
+Saving decodeUntypedInvocation
+Saving Kernel_C.create_it_asid_pool
+Saving Kernel_C.getIFSR
+Saving Kernel_C.create_iospace_caps
+Saving arch_clean_invalidate_caches
+Saving Kernel_C.decodeARMIOMapInvocation
+Saving decodeCopyRegisters
+Saving instruction'mcr_15_0_r3_cr2_cr0_0_E0011194
+Saving Arch_switchToIdleThread
+Saving ensureNoChildren
+Saving asm_instruction'mcr_p15,_0,_%0,_c6,_c0,_2
+Saving l_impl'dsb
+Saving Kernel_C.writeDACR
+Saving Kernel_C.maybe_alloc_extra_bi
+Saving Kernel_C.lockTLBEntryCritical
+Saving Kernel_C.mdb_node_ptr_set_mdbRevocable
+Saving instruction'srsia_sp_19_E001003C
+Saving Kernel_C.setDFAR
+Saving Kernel_C.tcbSchedDequeue
+Saving Kernel_C.findPDForASID
+Saving Kernel_C.Arch_decodeIRQControlInvocation
+Saving create_it_address_space
+Saving instruction'ldr_pc_pc_4_e0010020_arm_vector_table_0x20_E0010014
+Saving Kernel_C.Arch_initContext
+Saving Kernel_C.cap_untyped_cap_get_capFreeIndex
+Saving l_impl'wfi
+Saving instruction'dsb_sy_E0012990
+Saving Kernel_C.cap_cnode_cap_get_capCNodeRadix
+Saving instruction'mcr_15_0_ip_cr8_cr7_2_E0011050
+Saving Kernel_C.checkValidIPCBuffer
+Saving Kernel_C.memset
+Saving asm_instruction'mrc_p15,_0,_%0,_c2,_c0,_2
+Saving asm_instruction'mrc_p15,_0,_%0,_c2,_c0,_1
+Saving asm_instruction'mrc_p15,_0,_%0,_c2,_c0,_0
+Saving Kernel_C.setHardwareASID
+Saving Kernel_C.tcb_queue_append
+Saving Kernel_C.fastpath_reply_recv
+Saving Kernel_C.invalidateTranslationSingle
+Saving Kernel_C.notification_ptr_set_ntfnBoundTCB
+Saving Kernel_C.seL4_CNode_CapData_get_guardSize
+Saving Kernel_C.deleteASID
+Saving invokeCNodeCancelBadgedSends
+Saving Kernel_C.lookupCap
+Saving Kernel_C.pde_pde_section_get_size
+Saving Kernel_C.cap_frame_cap_new
+Saving restart
+Saving invokeTCB_NotificationControl
+Saving Kernel_C.readSystemControlRegister
+Saving cancelSignal
+Saving Kernel_C.isCapRevocable
+Saving instruction'isb_sy_E0000540
+Saving Kernel_C.Arch_activateIdleThread
+Saving instruction'mrc_15_0_sl_cr6_cr0_0_E00100E4
+Saving Kernel_C.generic_frame_cap_get_capFBasePtr
+Saving invalidateCacheRange_I
+Saving unmapPageTable
+Saving Kernel_C.cap_notification_cap_set_capNtfnBadge
+Saving instruction'isb_sy_E00111BC
+Saving lookupSlotForCNodeOp
+Saving instruction'wfi_E0010870
+Saving Kernel_C.cap_page_directory_cap_get_capPDBasePtr
+Saving arm_irq_exception
+Saving Kernel_C.cap_untyped_cap_new
+Saving Kernel_C.cap_get_archCapSizeBits
+Saving Kernel_C.decodeSetSpace
+Saving invokeCNodeInsert
+Saving instruction'mrc_15_0_r2_cr13_cr0_3_E0010160
+Saving Kernel_C.setUntypedCapAsFull
+Saving strncmp
+Saving Kernel_C.lookupPTSlot_nofail
+Saving deleteCallerCap
+Saving Arch_finaliseCap
+Saving Kernel_C.deleteCallerCap
+Saving Kernel_C.cap_page_table_cap_set_capPTMappedAddress
+Saving map_kernel_window
+Saving Kernel_C.seL4_MessageInfo_get_capsUnwrapped
+Saving Kernel_C.replyFromKernel_error
+Saving Kernel_C.isHighestPrio
+Saving handleUserLevelFault
+Saving asm_instruction'mcr_p15,_0,_%0,_c5,_c1,_1
+Saving asm_instruction'mcr_p15,_0,_%0,_c5,_c1,_0
+Saving Kernel_C.endpoint_ptr_set_epQueue_tail
+Saving sendIPC
+Saving Kernel_C.dsb_ishst
+Saving Kernel_C.setNextPC
+Saving asm_instruction'mrc_p15,_0,_%0,_c10,_c2,_1
+Saving asm_instruction'mrc_p15,_0,_%0,_c10,_c2,_0
+Saving Kernel_C.alloc_rootserver_obj
+Saving Kernel_C.create_mapped_it_frame_cap
+Saving Kernel_C.armv_contextSwitch_HWASID
+Saving instruction'vmrs_r3_fpexc_E0001D94
+Saving Kernel_C.cap_small_frame_cap_set_capFMappedASIDLow
+Saving handleInvocation
+Saving Kernel_C.getReceiveSlots
+Saving asm_instruction'mcr_p15,_0,_%0,_c7,_c11,_1
+Saving instruction'srsia_sp_19_E00100EC
+Saving asm_instruction'mrc_p15,_0,_%0,_c3,_c0,_0
+Saving Kernel_C.invokeIRQHandler_SetIRQHandler
+Saving Kernel_C.Arch_decodeInvocation
+Saving Kernel_C.invalidateCacheRange_RAM
+Saving invokeCNodeSaveCaller
+Saving Kernel_C.vm_attributes_get_armPageCacheable
+Saving Kernel_C.setADFSR
+Saving Kernel_C.ctzll
+Saving Kernel_C.addrFromPPtr
+Saving instruction'mcr_15_2_r2_cr0_cr0_0_E0011E98
+Saving lookupExtraCaps
+Saving tcbSchedAppend
+Saving arm_reset_exception
+Saving instruction'mrc_15_2_r2_cr0_cr0_0_E0011EDC
+Saving Kernel_C.seL4_Fault_UnknownSyscall_get_syscallNumber
+Saving r_impl'dmb
+Saving l_impl'dmb
+Saving Kernel_C.copyMRsFaultReply
+Saving instruction'dmb_sy_E0011FAC
+Saving Kernel_C.create_rootserver_objects
+Saving Kernel_C.invalidateASIDEntry
+Saving fpsimd_HWCapTest
+Saving Kernel_C.plat_cleanCache
+Saving switchToIdleThread
+Saving cap_get_capSizeBits
+Saving Kernel_C.copyGlobalMappings
+Saving Kernel_C.mdb_node_ptr_set_mdbFirstBadged
+Saving Arch_switchToThread
+Saving instruction'stmdb_sp_r0_r1_r2_r3_r4_r5_r6_r7_r8_r9_sl_fp_ip_sp_lr_E00100C0
+Saving Kernel_C.tcbSchedEnqueue
+Saving Kernel_C.invokeTCB_Suspend
+Saving cteSwap
+Saving instruction'isb_sy_E0011114
+Saving instruction'srsia_sp_19_E001005C
+Saving asm_instruction'mcr_p15,_0,_%0,_c2,_c0,_1
+Saving Kernel_C.decodeTCBConfigure
+Saving doFaultTransfer
+Saving asm_instruction'mcr_p15,_0,_%0,_c2,_c0,_2
+Saving Kernel_C.invalidateByVA
+Saving cteRevoke
+Saving Kernel_C.getIFAR
+Saving lookupTargetSlot
+Saving Kernel_C.maskCapRights
+Saving Kernel_C.c_handle_fastpath_signal
+Saving Kernel_C.plat_cleanInvalidateL2Range
+Saving Kernel_C.getCIDR
+Saving Kernel_C.invokeCNodeDelete
+Saving instruction'dsb_sy_E0011054
+Saving Kernel_C.cleanByVA_PoU
+Saving Kernel_C.create_root_cnode
+Saving Kernel_C.pde_pde_section_ptr_get_address
+Saving Kernel_C.unmapPageTable
+Saving Kernel_C.maskInterrupt
+Saving Kernel_C.decodeIRQHandlerInvocation
+Saving create_untypeds
+Saving asm_instruction'mcr_p15,_0,_%0,_c13,_c0,_1
+Saving Kernel_C.cap_reply_cap_set_capReplyCanGrant
+Saving Kernel_C.cap_null_cap_new
+Saving instruction'isb_sy_E0012540
+Saving instruction'mcr_15_0_lr_cr7_cr10_1_E0011FA8
+Saving Kernel_C.handleReply
+Saving Kernel_C.cap_untyped_cap_get_capIsDevice
+Saving Kernel_C.clz64
+Saving instruction'isb_sy_E0012980
+Saving instruction'mcr_15_0_r4_cr8_cr7_2_E0012698
+Saving Kernel_C.cancelAllIPC
+Saving Kernel_C.pte_pte_large_ptr_get_reserved
+Saving Kernel_C.performPageInvocationUnmap
+Saving Kernel_C.Arch_setMRs_fault
+Saving Kernel_C.alignUp
+Saving Kernel_C.clearExMonitor
+Saving decodeSetSchedParams
+Saving populate_bi_frame
+Saving Kernel_C.decodeARMMMUInvocation
+Saving Kernel_C.dist_enable_set
+Saving Kernel_C.writeTTBR0Ptr
+Saving instruction'isb_sy_E0011188
+Saving instruction'mcr_15_0_r3_cr2_cr0_0_E0011250
+Saving invokeCNodeMove
+Saving invalidateTLBByASID
+Saving unbindNotification
+Saving Kernel_C.pde_ptr_get_pdeType
+Saving instruction'mrc_15_0_r1_cr6_cr0_0_E00112F4
+Saving instruction'isb_sy_E0011180
+Saving Kernel_C.invokeTCB_NotificationControl
+Saving cap_get_capIsPhysical
+Saving asm_instruction'mcr_p15,_2,_%0,_c0,_c0,_0
+Saving Kernel_C.setVMRootForFlush
+Saving instruction'dmb_sy_E00124C4
+Saving Kernel_C.arm_load_thread_id
+Saving Kernel_C.StrictC'__clzsi2
+Saving write_it_asid_pool
+Saving copyGlobalMappings
+Saving Kernel_C.strlcat
+Saving Kernel_C.clearMemory_PT
+Saving Kernel_C.performPageInvocationMapPTE
+Saving instruction'mcr_15_0_r3_cr8_cr7_1_E0011380
+Saving asm_instruction'mrc__p15,_0,_%0,_c1,_c0,_0
+Saving Kernel_C.reserve_region
+Saving Kernel_C.cap_cnode_cap_get_capCNodeGuard
+Saving Kernel_C.performInvocation_Reply
+Saving instruction'mcr_15_0_r2_cr7_cr11_1_E0011424
+Saving instruction'mcr_15_2_r9_cr0_cr0_0_E0011DB4
+Saving c_handle_fastpath_call
+Saving Kernel_C.decodeARMPageDirectoryInvocation
+Saving flushPage
+Saving tcbEPAppend
+Saving asm_instruction'mcr_p15,_0,_%0,_c1,_c0,_1
+Saving Kernel_C.check_export_arch_timer
+Saving asm_instruction'mcr_p15,_0,_%0,_c10,_c2,_1
+Saving Kernel_C.getSyscallArg
+Saving Kernel_C.StrictC'__builtin_unreachable
+Saving invalidateCacheRange_RAM
+Saving Kernel_C.thread_state_ptr_get_blockingIPCCanGrantReply
+Saving deriveCap
+Saving Kernel_C.decodeSetIPCBuffer
+Saving asm_instruction'dsb
+Saving instruction'dmb_sy_E00120C0
+Saving instruction'dsb_sy_E0012690
+Saving Kernel_C.create_unmapped_it_frame_cap
+Saving Kernel_C.merge_regions
+Saving Kernel_C.pde_pde_invalid_get_stored_hw_asid
+Saving Arch_updateCapData
+Saving Kernel_C.handleVMFault
+Saving Kernel_C.seL4_MessageInfo_get_extraCaps
+Saving Kernel_C.invokeCNodeSaveCaller
+Saving Kernel_C.fastpath_copy_mrs
+Saving Kernel_C.handleSyscall
+Saving Kernel_C.lookup_fault_missing_capability_get_bitsLeft
+Saving Kernel_C.lookup_fault_missing_capability_new
+Saving Kernel_C.getRegister
+Saving Kernel_C.cap_cnode_cap_set_capCNodeGuardSize
+Saving Kernel_C.activate_kernel_vspace
+Saving Kernel_C.isBlocked
+Saving Kernel_C.seL4_Fault_CapFault_get_inReceivePhase
+Saving instruction'mrc_15_1_fp_cr0_cr0_1_E0011E00
+Saving Kernel_C.cap_thread_cap_new
+Saving Kernel_C.generic_frame_cap_ptr_set_capFMappedAddress
+Saving instruction'dsb_sy_E00128D4
+Saving Kernel_C.thread_state_ptr_set_blockingIPCCanGrantReply
+Saving Kernel_C.lookup_fault_get_lufType
+Saving Kernel_C.armv_init_user_access
+Saving Kernel_C.seL4_CNode_CapData_get_guard
+Saving setDomain
+Saving Kernel_C.seL4_Fault_NullFault_new
+Saving createObject
+Saving c_handle_fastpath_reply_recv
+Saving Kernel_C.supportsAsyncExceptions
+Saving Kernel_C.cap_page_table_cap_get_capPTBasePtr
+Saving Kernel_C.isIRQPending
+Saving Kernel_C.invalidateLocalTLB_VAASID
+Saving create_initial_thread
+Saving Kernel_C.cap_notification_cap_set_capNtfnCanReceive
+Saving receiveSignal
+Saving Kernel_C.arch_c_exit_hook
+Saving Kernel_C.cleanInvalidate_D_PoC
+Saving asm_instruction'isb
+Saving Kernel_C.branchFlushRange
+Saving performInvocation_Endpoint
+Saving Kernel_C.StrictC'__builtin_popcountl
+Saving Kernel_C.vm_attributes_new
+Saving asm_instruction'mcr_p15,_0,_%0,_c2,_c0,_0
+Saving instruction'dmb_sy_E0012908
+Saving instruction'isb_sy_E0002204
+Saving invokeTCB_Suspend
+Saving Kernel_C.cap_small_frame_cap_set_capFMappedASID
+Saving instruction'stmdb_sp_r0_r1_r2_r3_r4_r5_r6_r7_r8_r9_sl_fp_ip_sp_lr_E00100F4
+Saving Kernel_C.invalidateHypTLB
+Saving Kernel_C.setIFSR
+Saving Kernel_C.pte_pte_large_new
+Saving decodeWriteRegisters
+Saving Kernel_C.cteSwap
+Saving Kernel_C.resolveAddressBits
+Saving r_impl'mrc
+Saving Kernel_C.cap_endpoint_cap_get_capEPBadge
+Saving Kernel_C.setPRRR
+Saving checkValidIPCBuffer
+Saving Kernel_C.lookupSlotForCNodeOp
+Saving Kernel_C.deletedIRQHandler
+Saving Kernel_C.pde_pde_coarse_get_address
+Saving instruction'mrc_15_0_sp_cr13_cr0_4_E0010108
+Saving handleFault
+Saving Kernel_C.createSafeMappingEntries_PTE
+Saving Kernel_C.cap_zombie_cap_get_capZombieID
+Saving Kernel_C.map_kernel_devices
+Saving Kernel_C.mdb_node_ptr_set_mdbNext
+Saving Kernel_C.setRegister
+Saving Kernel_C.dist_enable_clr
+Saving Arch_sameRegionAs
+Saving maskCapRights
+Saving Kernel_C.cap_untyped_cap_get_capPtr
+Saving Kernel_C.decodeARMIOSpaceInvocation
+Saving arm_vector_table
+Saving Kernel_C.create_frames_of_region
+Saving Arch_isFrameType
+Saving Kernel_C.pteCheckIfMapped
+Saving Kernel_C.handleRecv
+Saving invokeUntyped_Retype
+Saving Kernel_C.resolveVAddr
+Saving decodeIRQControlInvocation
+Saving setThreadState
+Saving slowpath
+Saving Kernel_C.str_to_long
+Saving Kernel_C.Arch_deriveCap
+Saving isMDBParentOf
+Saving setupCallerCap
+Saving Kernel_C.isValidVTableRoot
+Saving Kernel_C.writeTTBCR
+Saving cap_get_capPtr
+Saving Kernel_C.isValidVTableRoot_fp
+Saving Kernel_C.invalidateASID
+Saving instruction'dsb_sy_E0011450
+Saving Kernel_C.getRestartPC
+Saving sameRegionAs
+Saving scheduleTCB
+Saving Kernel_C.thread_state_ptr_get_blockingIPCIsCall
+Saving decodeSetPriority
+Saving instruction'mcr_15_0_r3_cr7_cr11_1_E00195EC
+Saving Kernel_C.cap_cnode_cap_get_capCNodePtr
+Saving Kernel_C.cap_endpoint_cap_new
+Saving Kernel_C.trapFpuInstToHyp
+Saving Kernel_C.cteRevoke
+Saving Kernel_C.readTTBR1
+Saving Kernel_C.readTTBR0
+Saving Kernel_C.invokeSetTLSBase
+Saving create_ipcbuf_frame_cap
+Saving cteDelete
+Saving Kernel_C.cap_page_table_cap_new
+Saving Kernel_C.paddr_to_pptr_reg
+Saving Kernel_C.seL4_Fault_UserException_new
+Saving instruction'dmb_sy_E0012A34
+Saving Kernel_C.setIFAR
+Saving Kernel_C.cap_small_frame_cap_get_capFVMRights
+Saving Kernel_C.create_ipcbuf_frame_cap
+Saving Kernel_C.clzll
+Saving Kernel_C.handleFaultReply
+Saving instruction'mrc_15_0_r2_cr13_cr0_2_E0010158
+Saving Kernel_C.thread_state_ptr_set_blockingIPCBadge
+Saving Kernel_C.write_slot
+Saving hasCancelSendRights
+Saving instruction'dsb_sy_E0002200
+Saving handleRecv
+Saving Kernel_C.resetTimer
+Saving Kernel_C.seL4_MessageInfo_get_length
+Saving Kernel_C.StrictC'__ctzsi2
+Saving Kernel_C.map_kernel_frame
+Saving cleanInvalidateCacheRange_RAM
+Saving Kernel_C.ep_ptr_set_queue
+Saving Kernel_C.notification_ptr_get_ntfnQueue_head
+Saving pageTableMapped
+Saving Kernel_C.Arch_createObject
+Saving Kernel_C.ready_queues_index
+Saving Kernel_C.lookup_fault_invalid_root_new
+Saving Kernel_C.notification_ptr_get_ntfnQueue_tail
+Saving instruction'dsb_sy_E0011370
+Saving asm_instruction'mcr_p15,_0,_%0,_c5,_c0,_0
+Saving asm_instruction'mcr_p15,_0,_%0,_c5,_c0,_1
+Saving chooseThread
+Saving instruction'mcr_15_0_r3_cr2_cr0_0_E001117C
+Saving cpu_iface_init
+Saving instruction'mcr_15_0_r2_cr7_cr11_1_E00121B0
+Saving Kernel_C.fpsimd_init
+Saving instruction'mrc_15_0_sp_cr13_cr0_4_E00100A8
+Saving Kernel_C.cap_zombie_cap_new
+Saving Kernel_C.Arch_prepareThreadDelete
+Saving decodeDomainInvocation
+Saving Kernel_C.restore_user_context
+Saving Kernel_C.cap_cnode_cap_new
+Saving Kernel_C.pte_pte_small_new
+Saving Kernel_C.cap_endpoint_cap_get_capCanSend
+Saving Kernel_C.wordFromMessageInfo
+Saving Kernel_C.ntfn_set_active
+Saving cteInsert
+Saving Kernel_C.Zombie_new
+Saving instruction'mrc_15_0_r2_cr13_cr0_2_E0010188
+Saving Kernel_C.rightsFromWord
+Saving Kernel_C.arm_errata
+Saving doReplyTransfer
+Saving Kernel_C.clz32
+Saving ensureEmptySlot
+Saving Kernel_C.cap_page_table_cap_get_capPTIsMapped
+Saving Kernel_C.getHighestPrio
+Saving Kernel_C.halt
+Saving Kernel_C.init_cpu
+Saving asm_instruction'mrc_p15,_0,_%0,_c5,_c1,_1
+Saving Kernel_C.invokeIRQHandler_AckIRQ
+Saving instruction'isb_sy_E00128D0
+Saving r_impl'mcr
+Saving instruction'mcr_15_0_r3_cr7_cr14_1_E0012034
+Saving asm_instruction'mrc_p15,_0,_%0,_c1,_c0,_1
+Saving Kernel_C.Arch_switchToIdleThread
+Saving instruction'isb_sy_E00005A8
+Saving Kernel_C.thread_state_ptr_get_blockingIPCCanGrant
+Saving Kernel_C.getACTLR
+Saving asm_instruction'mrc_p15,_0,_%0,_c5,_c1,_0
+Saving initTimer
+Saving cleanCacheRange_RAM
+Saving Kernel_C.calculate_rootserver_size
+Saving flushSpace
+Saving Kernel_C.lookupSourceSlot
+Saving Kernel_C.switchToThread
+Saving Kernel_C.seL4_Fault_VMFault_get_address
+Saving decodeIRQHandlerInvocation
+Saving Kernel_C.readCLID
+Saving lockTLBEntry
+Saving Kernel_C.cap_small_frame_cap_set_capFVMRights
+Saving r_impl'isb
+Saving Kernel_C.setKernelStack
+Saving Kernel_C.get_p_reg_kernel_img
+Saving instruction'mcr_15_2_r3_cr0_cr0_0_E0011EE4
+Saving Kernel_C.cap_frame_cap_get_capFMappedAddress
+Saving Kernel_C.handleVMFaultEvent
+Saving Kernel_C.invert_l1index
+Saving Kernel_C.generic_frame_cap_get_capFIsDevice
+Saving Kernel_C.init_kernel
+Saving instruction'mcr_15_0_r3_cr2_cr0_0_E0011110
+Saving Kernel_C.StrictC'__clzdi2
+Saving Kernel_C.strnlen
+Saving instruction'strex_r0_r1_r3_E00111D8
+Saving Arch_configureIdleThread
+Saving asm_instruction'mcr__p15,_0,_%0,_c1,_c0,_0
+Saving asm_instruction'mcr__p15,_0,_%0,_c1,_c0,_1
+Saving deleteASID
+Saving Kernel_C.mdb_node_set_mdbFirstBadged
+Saving reserve_region
+Saving Kernel_C.getDFAR
+Saving Kernel_C.clearMemory
+Saving l_impl'mrc
+Saving Kernel_C.notification_ptr_set_state
+Saving lookupPDSlot
+Saving Kernel_C.performASIDPoolInvocation
+Saving Kernel_C.seL4_Fault_UserException_get_code
+Saving init_kernel
+Saving alloc_rootserver_obj
+Saving Kernel_C.map_kernel_window
+Saving instruction'mrc_15_0_r2_cr13_cr0_2_E0010130
+Saving Kernel_C.createNewObjects
+Saving Kernel_C.cap_get_capType
+Saving Kernel_C.cleanCaches_PoU
+Saving possibleSwitchTo
+Saving Kernel_C.tcb_queue_prepend
+Saving Kernel_C.writeAuxiliaryControlRegister
+Saving instruction'mrc_15_2_r2_cr0_cr0_0_E0011E88
+Saving Kernel_C.create_domain_cap
+Saving armv_init_user_access
+Saving cteMove
+Saving schedule
+Saving Kernel_C.mdb_node_ptr_set_mdbPrev
+Saving setMCPriority
+Saving Kernel_C.unbindMaybeNotification
+Saving Kernel_C.pde_pde_section_new
+Saving Kernel_C.StrictC'__ctzdi2
+Saving Kernel_C.makeUserPDE
+Saving instruction'mcr_15_0_r3_cr7_cr11_1_E0012104
+Saving Kernel_C.getDFSR
+Saving Kernel_C.readAuxiliaryControlRegister
+Saving Kernel_C.pptr_to_paddr_reg
+Saving setIRQState
+Saving Kernel_C.ceiling_kernel_window
+Saving Kernel_C.invalidate_I_PoU
+Saving str_to_long
+Saving Kernel_C.initL2Cache
+Saving instruction'dsb_sy_E0000598
+Saving Kernel_C.cap_frame_cap_set_capFVMRights
+Saving Kernel_C.cap_asid_control_cap_new
+Saving init_core_state
+Saving Kernel_C.vmRightsFromWord
+Saving Kernel_C.getKernelStack
+Saving asm_instruction'mrc_p15,_0,_%0,_c13,_c0,_4
+Saving instruction'mcr_15_0_r0_cr2_cr0_0_E0011270
+Saving Kernel_C.cap_reply_cap_get_capReplyMaster
+Saving Kernel_C.vm_attributes_get_armExecuteNever
+Saving asm_instruction'mcr___p15,_0,__%0,_c14,__c1,_0
+Saving asm_instruction'mrc_p15,_0,_%0,_c13,_c0,_1
+Saving asm_instruction'mrc_p15,_0,_%0,_c13,_c0,_2
+Saving asm_instruction'mrc_p15,_0,_%0,_c13,_c0,_3
+Saving lookupSourceSlot
+Saving sendSignal
+Saving Kernel_C.performPageTableInvocationUnmap
+Saving Kernel_C.handleUnknownSyscall
+Saving Kernel_C.check_available_memory
+Saving instruction'dsb_sy_E001269C
+Saving c_handle_undefined_instruction
+Saving cleanInvalidate_L1D
+Saving Kernel_C.cap_notification_cap_set_capNtfnCanSend
+Saving Kernel_C.deleteIOPageTable
+Saving Kernel_C.create_it_page_table_cap
+Saving Kernel_C.cap_zombie_cap_get_capZombieBits
+Saving Kernel_C.cancelIPC
+Saving Kernel_C.cap_irq_handler_cap_get_capIRQ
+Saving Kernel_C.setVMRoot
+Saving instruction'mrc_15_0_r2_cr13_cr0_3_E0010190
+Saving Kernel_C.getExtraCPtr
+Saving Kernel_C.cap_page_directory_cap_new
+Saving Kernel_C.cap_small_frame_cap_set_capFMappedASIDHigh
+Saving Kernel_C.lookup_fault_guard_mismatch_new
+Saving Kernel_C.writeTTBR0
+Saving Kernel_C.thread_state_ptr_set_tsType
+Saving asm_instruction'mcr_p15,_0,_%0,_c7,_c14,_1
+Saving asm_instruction'mcr_p15,_0,_%0,_c7,_c14,_2
+Saving Kernel_C.pte_get_pteType
+Saving Kernel_C.plat_invalidateL2Range
+Saving Kernel_C.l1index_to_prio
+Saving asm_instruction'mrc_p15,_0,_%0,_c5,_c0,_1
+Saving Kernel_C.c_handle_instruction_fault
+Saving c_handle_interrupt
+Saving Kernel_C.popcountl
+Saving instruction'cps_19_E00100BC
+Saving tcbSchedDequeue
+Saving Kernel_C.mdb_node_get_mdbFirstBadged
+Saving Kernel_C.chooseThread
+Saving Kernel_C.c_exit_hook
+Saving Kernel_C.cap_capType_equals
+Saving instruction'mrc_15_0_r3_cr5_cr0_0_E00112F8
+Saving Kernel_C.generic_frame_cap_get_capFVMRights
+Saving Kernel_C.invokeTCB_ReadRegisters
+Saving Kernel_C.c_handle_fastpath_call
+Saving Kernel_C.seL4_Fault_VMFault_get_FSR
+Saving Kernel_C.invokeTCB_WriteRegisters
+Saving Kernel_C.lookup_fault_depth_mismatch_get_bitsLeft
+Saving Kernel_C.VGICMaintenance
+Saving Kernel_C.generic_frame_cap_set_capFMappedAddress
+Saving arch_clean_invalidate_L1_caches
+Saving instruction'ldr_pc_pc_24_e0010028_arm_vector_table_0x28_E0010008
+Saving Kernel_C.create_it_address_space
+Saving Kernel_C.cleanByVA
+Saving Kernel_C.mdb_node_get_mdbPrev
+Saving invokeTCB_ReadRegisters
+Saving Kernel_C.invalidateTranslationASID
+Saving Kernel_C.thread_state_ptr_get_tsType
+Saving Kernel_C.sendFaultIPC
+Saving asm_instruction'.fpu_vfp\nvmsr_fpexc,_%0
+Saving handleFaultReply
+Saving Kernel_C.cap_small_frame_cap_new
+Saving Kernel_C.seL4_CapRights_get_capAllowRead
+Saving asm_instruction'wfi
+Saving Kernel_C.cap_small_frame_cap_get_capFMappedASIDHigh
+Saving Kernel_C.slotCapLongRunningDelete
+Saving Kernel_C.cap_frame_cap_get_capFSize
+Saving Kernel_C.decodeARMIOPTInvocation
+Saving Kernel_C.thread_state_ptr_get_blockingIPCBadge
+Saving kernel_device_frames
+Saving tcbEPDequeue
+Saving Kernel_C.capTransferFromWords
+Saving instruction'isb_sy_E00129B4
+Saving Kernel_C.finaliseCap
+Saving instruction'dsb_sy_E0012658
+Saving completeSignal
+Saving instruction'dsb_sy_E0011168
+Saving Kernel_C.isb
+Saving Kernel_C.deletingIRQHandler
+Saving Kernel_C.readTPIDRURO
+Saving instruction'isb_sy_E00113D8
+Saving kernel_prefetch_fault
+Saving Kernel_C.setMRs_fault
+Saving loadHWASID
+Saving instruction'ldr_pc_pc_20_e0010038_arm_vector_table_0x38_E001001C
+Saving Kernel_C.readTPIDRURW
+Saving Kernel_C.armv_contextSwitch
+Saving Kernel_C.decodeARMFrameInvocation
+Saving cleanCacheRange_PoU
+Saving Kernel_C.cap_untyped_cap_get_capBlockSize
+Saving clean_D_PoU
+Saving Kernel_C.writeTPIDRPRW
+Saving Kernel_C.cap_endpoint_cap_get_capEPPtr
+Saving Kernel_C.cap_page_table_cap_set_capPTIsMapped
+Saving Kernel_C.readCacheSize
+Saving Kernel_C.notification_ptr_set_ntfnQueue_head
+Saving Kernel_C.Arch_maskCapRights
+Saving create_bi_frame_cap
+Saving Kernel_C.cap_asid_pool_cap_new
+Saving asm_instruction'mrc___p15,_0,__%0,__c0,__c1,_2
+Saving Kernel_C.plat_cleanInvalidateL2Cache
+Saving invokeTCB_ThreadControl
+Saving Kernel_C.thread_state_ptr_set_tsType_np
+Saving instruction'mrc_15_0_r2_cr13_cr0_2_E00101B4
+Saving Kernel_C.slowpath
+Saving Kernel_C.findFreeHWASID
+Saving Kernel_C.cap_get_capPtr
+Saving instruction'mrc_15_0_r3_cr0_cr1_2_E0011F68
+Saving insert_region
+Saving invokeCNodeRevoke
+Saving Kernel_C.thread_state_ptr_mset_blockingObject_tsType
+Saving Kernel_C.storeHWASID
+Saving instruction'dsb_sy_E0011384
+Saving instruction'mrc_15_0_sp_cr13_cr0_4_E00100D8
+Saving Kernel_C.decodeIRQControlInvocation
+Saving doFlush
+Saving decodeTCBConfigure
+Saving Kernel_C.writeTTBR1
+Saving switchToThread
+Saving Kernel_C.get_p_reg_kernel_img_boot
+Saving asm_instruction'mcr_p15,_0,_%0,_c8,_c7,_2
+Saving Kernel_C.cancelBadgedSends
+Saving Kernel_C.invokeCNodeRevoke
+Saving decodeCNodeInvocation
+Saving Arch_createObject
+Saving Kernel_C.cap_thread_cap_get_capTCBPtr
+Saving Kernel_C.generic_frame_cap_get_capFSize
+Saving asm_instruction'mrc___p15,_0,__%0,__c1,__c0,_2
+Saving Kernel_C.Arch_invokeIRQControl
+Saving replyFromKernel_success_empty
+Saving arm_data_abort_exception
+Saving Kernel_C.clearEnFPEXC
+Saving Kernel_C.pte_pte_large_ptr_get_address
+Saving instruction'dsb_sy_E000057C
+Saving Kernel_C.finaliseSlot
+Saving tcb_queue_remove
+Saving instruction'isb_sy_E0011198
+Saving instruction'isb_sy_E0011254
+Saving invokeTCB_Resume
+Saving char_to_long
+Saving Kernel_C.hasCancelSendRights
+Saving Kernel_C.setupCallerCap
+Saving Kernel_C.capRemovable
+Saving Kernel_C.write_it_asid_pool
+Saving timerTick
+Saving instruction'isb_sy_E001125C
+Saving instruction'vmsr_fpexc_r3_E0001D9C
+Saving configureIdleThread
+Saving Kernel_C.create_untypeds_for_region
+Saving Kernel_C.endpoint_ptr_set_state
+Saving kernel_data_fault
+Saving Kernel_C.schedule
+Saving Kernel_C.cap_frame_cap_set_capFMappedASID
+Saving createNewObjects
+Saving Kernel_C.setPriority
+Saving asm_instruction'mcr_p15,_0,_%0,_c7,_c6,_1
+Saving handleUnknownSyscall
+Saving Kernel_C.idle_thread
+Saving Kernel_C.pte_ptr_get_pteSize
+Saving Kernel_C.Arch_postCapDeletion
+Saving Kernel_C.L2_cacheSync
+Saving instruction'cps_19_E001008C
+Saving Kernel_C.cteInsert
+Saving Kernel_C.initIRQController
+Saving Kernel_C.setCIDR
+Saving Kernel_C.addToBitmap
+Saving Kernel_C.create_idle_thread
+Saving instruction'isb_sy_E00126A0
+Saving asm_instruction'mcr___p15,_0,__%0,__c1,__c0,_2
+Saving instruction'cps_19_E00100F0
+Saving Kernel_C.cap_domain_cap_new
+Saving Kernel_C.writeSystemControlRegister
+Saving asm_instruction'mcr_p15,_0,_%0,_c8,_c7,_0
+Saving asm_instruction'mcr_p15,_0,_%0,_c8,_c7,_1
+Saving Kernel_C.c_entry_hook
+Saving Kernel_C.setDomain
+Saving Kernel_C.ensureNoChildren
+Saving Kernel_C.endpoint_ptr_set_epQueue_head
+Saving Kernel_C.lookup_fault_depth_mismatch_new
+Saving Kernel_C.readDACR
+Saving Kernel_C.disableFpu
+Saving Pairing (l_impl'isb (ASM) <= r_impl'isb (C))
+Saving Pairing (Arch_switchToThread (ASM) <= Kernel_C.Arch_switchToThread (C))
+Saving Pairing (setupCallerCap (ASM) <= Kernel_C.setupCallerCap (C))
+Saving Pairing (suspend (ASM) <= Kernel_C.suspend (C))
+Saving Pairing (decodeSetSchedParams (ASM) <= Kernel_C.decodeSetSchedParams (C))
+Saving Pairing (ensureNoChildren (ASM) <= Kernel_C.ensureNoChildren (C))
+Saving Pairing (hasCancelSendRights (ASM) <= Kernel_C.hasCancelSendRights (C))
+Saving Pairing (deriveCap (ASM) <= Kernel_C.deriveCap (C))
+Saving Pairing (deletedIRQHandler (ASM) <= Kernel_C.deletedIRQHandler (C))
+Saving Pairing (bi_finalise (ASM) <= Kernel_C.bi_finalise (C))
+Saving Pairing (APFromVMRights (ASM) <= Kernel_C.APFromVMRights (C))
+Saving Pairing (c_handle_fastpath_reply_recv (ASM) <= Kernel_C.c_handle_fastpath_reply_recv (C))
+Saving Pairing (cancelIPC (ASM) <= Kernel_C.cancelIPC (C))
+Saving Pairing (map_kernel_window (ASM) <= Kernel_C.map_kernel_window (C))
+Saving Pairing (fpsimd_HWCapTest (ASM) <= Kernel_C.fpsimd_HWCapTest (C))
+Saving Pairing (decodeSetPriority (ASM) <= Kernel_C.decodeSetPriority (C))
+Saving Pairing (loadCapTransfer (ASM) <= Kernel_C.loadCapTransfer (C))
+Saving Pairing (cpu_iface_init (ASM) <= Kernel_C.cpu_iface_init (C))
+Saving Pairing (setMRs_fault (ASM) <= Kernel_C.setMRs_fault (C))
+Saving Pairing (handleInterruptEntry (ASM) <= Kernel_C.handleInterruptEntry (C))
+Saving Pairing (invokeCNodeRevoke (ASM) <= Kernel_C.invokeCNodeRevoke (C))
+Saving Pairing (cteDeleteOne (ASM) <= Kernel_C.cteDeleteOne (C))
+Saving Pairing (Arch_configureIdleThread (ASM) <= Kernel_C.Arch_configureIdleThread (C))
+Saving Pairing (Arch_getObjectSize (ASM) <= Kernel_C.Arch_getObjectSize (C))
+Saving Pairing (setThreadState (ASM) <= Kernel_C.setThreadState (C))
+Saving Pairing (slotCapLongRunningDelete (ASM) <= Kernel_C.slotCapLongRunningDelete (C))
+Saving Pairing (plat_cleanCache (ASM) <= Kernel_C.plat_cleanCache (C))
+Saving Pairing (Arch_deriveCap (ASM) <= Kernel_C.Arch_deriveCap (C))
+Saving Pairing (tcbSchedEnqueue (ASM) <= Kernel_C.tcbSchedEnqueue (C))
+Saving Pairing (isValidVTableRoot (ASM) <= Kernel_C.isValidVTableRoot (C))
+Saving Pairing (possibleSwitchTo (ASM) <= Kernel_C.possibleSwitchTo (C))
+Saving Pairing (deleteASIDPool (ASM) <= Kernel_C.deleteASIDPool (C))
+Saving Pairing (isCapRevocable (ASM) <= Kernel_C.isCapRevocable (C))
+Saving Pairing (pageTableMapped (ASM) <= Kernel_C.pageTableMapped (C))
+Saving Pairing (strnlen (ASM) <= Kernel_C.strnlen (C))
+Saving Pairing (cancelAllIPC (ASM) <= Kernel_C.cancelAllIPC (C))
+Saving Pairing (makeUserPDE (ASM) <= Kernel_C.makeUserPDE (C))
+Saving Pairing (cap_get_capSizeBits (ASM) <= Kernel_C.cap_get_capSizeBits (C))
+Saving Pairing (getHWASID (ASM) <= Kernel_C.getHWASID (C))
+Saving Pairing (cpu_initLocalIRQController (ASM) <= Kernel_C.cpu_initLocalIRQController (C))
+Saving Pairing (memset (ASM) <= Kernel_C.memset (C))
+Saving Pairing (finaliseCap (ASM) <= Kernel_C.finaliseCap (C))
+Saving Pairing (Arch_performTransfer (ASM) <= Kernel_C.Arch_performTransfer (C))
+Saving Pairing (handleRecv (ASM) <= Kernel_C.handleRecv (C))
+Saving Pairing (arch_clean_invalidate_caches (ASM) <= Kernel_C.arch_clean_invalidate_caches (C))
+Saving Pairing (performInvocation_Notification (ASM) <= Kernel_C.performInvocation_Notification (C))
+Saving Pairing (isIRQActive (ASM) <= Kernel_C.isIRQActive (C))
+Saving Pairing (cleanInvalidateCacheRange_RAM (ASM) <= Kernel_C.cleanInvalidateCacheRange_RAM (C))
+Saving Pairing (armv_init_user_access (ASM) <= Kernel_C.armv_init_user_access (C))
+Saving Pairing (cteInsert (ASM) <= Kernel_C.cteInsert (C))
+Saving Pairing (create_domain_cap (ASM) <= Kernel_C.create_domain_cap (C))
+Saving Pairing (cancelSignal (ASM) <= Kernel_C.cancelSignal (C))
+Saving Pairing (decodeCNodeInvocation (ASM) <= Kernel_C.decodeCNodeInvocation (C))
+Saving Pairing (configureIdleThread (ASM) <= Kernel_C.configureIdleThread (C))
+Saving Pairing (maybe_alloc_extra_bi (ASM) <= Kernel_C.maybe_alloc_extra_bi (C))
+Saving Pairing (invokeTCB_Resume (ASM) <= Kernel_C.invokeTCB_Resume (C))
+Saving Pairing (lookupPTSlot (ASM) <= Kernel_C.lookupPTSlot (C))
+Saving Pairing (arch_clean_invalidate_L1_caches (ASM) <= Kernel_C.arch_clean_invalidate_L1_caches (C))
+Saving Pairing (activate_kernel_vspace (ASM) <= Kernel_C.activate_kernel_vspace (C))
+Saving Pairing (invokeUntyped_Retype (ASM) <= Kernel_C.invokeUntyped_Retype (C))
+Saving Pairing (cleanInvalidateL1Caches (ASM) <= Kernel_C.cleanInvalidateL1Caches (C))
+Saving Pairing (handleInvocation (ASM) <= Kernel_C.handleInvocation (C))
+Saving Pairing (getObjectSize (ASM) <= Kernel_C.getObjectSize (C))
+Saving Pairing (lookupIPCBuffer (ASM) <= Kernel_C.lookupIPCBuffer (C))
+Saving Pairing (deleteASID (ASM) <= Kernel_C.deleteASID (C))
+Saving Pairing (populate_bi_frame (ASM) <= Kernel_C.populate_bi_frame (C))
+Saving Pairing (sameRegionAs (ASM) <= Kernel_C.sameRegionAs (C))
+Saving Pairing (createNewObjects (ASM) <= Kernel_C.createNewObjects (C))
+Saving Pairing (resolveAddressBits (ASM) <= Kernel_C.resolveAddressBits (C))
+Saving Pairing (isFinalCapability (ASM) <= Kernel_C.isFinalCapability (C))
+Saving Pairing (invokeIRQControl (ASM) <= Kernel_C.invokeIRQControl (C))
+Saving Pairing (Arch_sameRegionAs (ASM) <= Kernel_C.Arch_sameRegionAs (C))
+Saving Pairing (sendSignal (ASM) <= Kernel_C.sendSignal (C))
+Saving Pairing (halt (ASM) <= Kernel_C.halt (C))
+Saving Pairing (invokeCNodeRotate (ASM) <= Kernel_C.invokeCNodeRotate (C))
+Saving Pairing (cteSwap (ASM) <= Kernel_C.cteSwap (C))
+Saving Pairing (decodeSetMCPriority (ASM) <= Kernel_C.decodeSetMCPriority (C))
+Saving Pairing (decodeSetIPCBuffer (ASM) <= Kernel_C.decodeSetIPCBuffer (C))
+Saving Pairing (replyFromKernel_success_empty (ASM) <= Kernel_C.replyFromKernel_success_empty (C))
+Saving Pairing (invokeCNodeDelete (ASM) <= Kernel_C.invokeCNodeDelete (C))
+Saving Pairing (invokeCNodeInsert (ASM) <= Kernel_C.invokeCNodeInsert (C))
+Saving Pairing (invokeIRQHandler_SetIRQHandler (ASM) <= Kernel_C.invokeIRQHandler_SetIRQHandler (C))
+Saving Pairing (deleteCallerCap (ASM) <= Kernel_C.deleteCallerCap (C))
+Saving Pairing (getReceiveSlots (ASM) <= Kernel_C.getReceiveSlots (C))
+Saving Pairing (doNBRecvFailedTransfer (ASM) <= Kernel_C.doNBRecvFailedTransfer (C))
+Saving Pairing (schedule (ASM) <= Kernel_C.schedule (C))
+Saving Pairing (Arch_updateCapData (ASM) <= Kernel_C.Arch_updateCapData (C))
+Saving Pairing (handleReply (ASM) <= Kernel_C.handleReply (C))
+Saving Pairing (cleanCacheRange_PoU (ASM) <= Kernel_C.cleanCacheRange_PoU (C))
+Saving Pairing (calculate_extra_bi_size_bits (ASM) <= Kernel_C.calculate_extra_bi_size_bits (C))
+Saving Pairing (doFlush (ASM) <= Kernel_C.doFlush (C))
+Saving Pairing (invokeTCB_ReadRegisters (ASM) <= Kernel_C.invokeTCB_ReadRegisters (C))
+Saving Pairing (invalidateASIDEntry (ASM) <= Kernel_C.invalidateASIDEntry (C))
+Saving Pairing (Arch_decodeInvocation (ASM) <= Kernel_C.Arch_decodeInvocation (C))
+Saving Pairing (Arch_finaliseCap (ASM) <= Kernel_C.Arch_finaliseCap (C))
+Saving Pairing (receiveIPC (ASM) <= Kernel_C.receiveIPC (C))
+Saving Pairing (getRestartPC (ASM) <= Kernel_C.getRestartPC (C))
+Saving Pairing (create_untypeds (ASM) <= Kernel_C.create_untypeds (C))
+Saving Pairing (unbindNotification (ASM) <= Kernel_C.unbindNotification (C))
+Saving Pairing (invokeCNodeCancelBadgedSends (ASM) <= Kernel_C.invokeCNodeCancelBadgedSends (C))
+Saving Pairing (Arch_sameObjectAs (ASM) <= Kernel_C.Arch_sameObjectAs (C))
+Saving Pairing (l_impl'mrc (ASM) <= r_impl'mrc (C))
+Saving Pairing (unbindMaybeNotification (ASM) <= Kernel_C.unbindMaybeNotification (C))
+Saving Pairing (cancelAllSignals (ASM) <= Kernel_C.cancelAllSignals (C))
+Saving Pairing (provide_cap (ASM) <= Kernel_C.provide_cap (C))
+Saving Pairing (copyMRs (ASM) <= Kernel_C.copyMRs (C))
+Saving Pairing (lookupSlot (ASM) <= Kernel_C.lookupSlot (C))
+Saving Pairing (l_impl'wfi (ASM) <= r_impl'wfi (C))
+Saving Pairing (updateCapData (ASM) <= Kernel_C.updateCapData (C))
+Saving Pairing (Arch_isFrameType (ASM) <= Kernel_C.Arch_isFrameType (C))
+Saving Pairing (invalidateCacheRange_RAM (ASM) <= Kernel_C.invalidateCacheRange_RAM (C))
+Saving Pairing (lookupSourceSlot (ASM) <= Kernel_C.lookupSourceSlot (C))
+Saving Pairing (slowpath (ASM) <= Kernel_C.slowpath (C))
+Saving Pairing (idle_thread (ASM) <= Kernel_C.idle_thread (C))
+Saving Pairing (handleUserLevelFault (ASM) <= Kernel_C.handleUserLevelFault (C))
+Saving Pairing (handleSyscall (ASM) <= Kernel_C.handleSyscall (C))
+Saving Pairing (Arch_maskCapRights (ASM) <= Kernel_C.Arch_maskCapRights (C))
+Saving Pairing (c_handle_fastpath_call (ASM) <= Kernel_C.c_handle_fastpath_call (C))
+Saving Pairing (lookupCapAndSlot (ASM) <= Kernel_C.lookupCapAndSlot (C))
+Saving Pairing (isMDBParentOf (ASM) <= Kernel_C.isMDBParentOf (C))
+Saving Pairing (l_impl'mcr (ASM) <= r_impl'mcr (C))
+Saving Pairing (invalidateCacheRange_I (ASM) <= Kernel_C.invalidateCacheRange_I (C))
+Saving Pairing (cleanCaches_PoU (ASM) <= Kernel_C.cleanCaches_PoU (C))
+Saving Pairing (cleanInvalidate_L1D (ASM) <= Kernel_C.cleanInvalidate_L1D (C))
+Saving Pairing (invokeCNodeMove (ASM) <= Kernel_C.invokeCNodeMove (C))
+Saving Pairing (findFreeHWASID (ASM) <= Kernel_C.findFreeHWASID (C))
+Saving Pairing (maskVMRights (ASM) <= Kernel_C.maskVMRights (C))
+Saving Pairing (decodeSetSpace (ASM) <= Kernel_C.decodeSetSpace (C))
+Saving Pairing (create_initial_thread (ASM) <= Kernel_C.create_initial_thread (C))
+Saving Pairing (create_it_address_space (ASM) <= Kernel_C.create_it_address_space (C))
+Saving Pairing (invokeIRQHandler_ClearIRQHandler (ASM) <= Kernel_C.invokeIRQHandler_ClearIRQHandler (C))
+Saving Pairing (doNormalTransfer (ASM) <= Kernel_C.doNormalTransfer (C))
+Saving Pairing (decodeCopyRegisters (ASM) <= Kernel_C.decodeCopyRegisters (C))
+Saving Pairing (cancelBadgedSends (ASM) <= Kernel_C.cancelBadgedSends (C))
+Saving Pairing (tcbEPDequeue (ASM) <= Kernel_C.tcbEPDequeue (C))
+Saving Pairing (lockTLBEntry (ASM) <= Kernel_C.lockTLBEntry (C))
+Saving Pairing (cteRevoke (ASM) <= Kernel_C.cteRevoke (C))
+Saving Pairing (write_it_asid_pool (ASM) <= Kernel_C.write_it_asid_pool (C))
+Saving Pairing (lookupCap (ASM) <= Kernel_C.lookupCap (C))
+Saving Pairing (l_impl'dsb (ASM) <= r_impl'dsb (C))
+Saving Pairing (copyGlobalMappings (ASM) <= Kernel_C.copyGlobalMappings (C))
+Saving Pairing (create_ipcbuf_frame_cap (ASM) <= Kernel_C.create_ipcbuf_frame_cap (C))
+Saving Pairing (replyFromKernel_error (ASM) <= Kernel_C.replyFromKernel_error (C))
+Saving Pairing (doReplyTransfer (ASM) <= Kernel_C.doReplyTransfer (C))
+Saving Pairing (init_kernel (ASM) <= Kernel_C.init_kernel (C))
+Saving Pairing (write_slot (ASM) <= Kernel_C.write_slot (C))
+Saving Pairing (doFaultTransfer (ASM) <= Kernel_C.doFaultTransfer (C))
+Saving Pairing (Arch_activateIdleThread (ASM) <= Kernel_C.Arch_activateIdleThread (C))
+Saving Pairing (ensureEmptySlot (ASM) <= Kernel_C.ensureEmptySlot (C))
+Saving Pairing (str_to_long (ASM) <= Kernel_C.str_to_long (C))
+Saving Pairing (init_core_state (ASM) <= Kernel_C.init_core_state (C))
+Saving Pairing (deletingIRQHandler (ASM) <= Kernel_C.deletingIRQHandler (C))
+Saving Pairing (lookupExtraCaps (ASM) <= Kernel_C.lookupExtraCaps (C))
+Saving Pairing (performInvocation_Endpoint (ASM) <= Kernel_C.performInvocation_Endpoint (C))
+Saving Pairing (handleDoubleFault (ASM) <= Kernel_C.handleDoubleFault (C))
+Saving Pairing (strncmp (ASM) <= Kernel_C.strncmp (C))
+Saving Pairing (handleVMFaultEvent (ASM) <= Kernel_C.handleVMFaultEvent (C))
+Saving Pairing (create_unmapped_it_frame_cap (ASM) <= Kernel_C.create_unmapped_it_frame_cap (C))
+Saving Pairing (get_p_reg_kernel_img_boot (ASM) <= Kernel_C.get_p_reg_kernel_img_boot (C))
+Saving Pairing (invokeTCB_NotificationControl (ASM) <= Kernel_C.invokeTCB_NotificationControl (C))
+Saving Pairing (flushSpace (ASM) <= Kernel_C.flushSpace (C))
+Saving Pairing (Arch_decodeIRQControlInvocation (ASM) <= Kernel_C.Arch_decodeIRQControlInvocation (C))
+Saving Pairing (lookupSlotForCNodeOp (ASM) <= Kernel_C.lookupSlotForCNodeOp (C))
+Saving Pairing (decodeBindNotification (ASM) <= Kernel_C.decodeBindNotification (C))
+Saving Pairing (initL2Cache (ASM) <= Kernel_C.initL2Cache (C))
+Saving Pairing (decodeTCBInvocation (ASM) <= Kernel_C.decodeTCBInvocation (C))
+Saving Pairing (map_kernel_devices (ASM) <= Kernel_C.map_kernel_devices (C))
+Saving Pairing (setDomain (ASM) <= Kernel_C.setDomain (C))
+Saving Pairing (invokeTCB_CopyRegisters (ASM) <= Kernel_C.invokeTCB_CopyRegisters (C))
+Saving Pairing (map_kernel_frame (ASM) <= Kernel_C.map_kernel_frame (C))
+Saving Pairing (reserve_region (ASM) <= Kernel_C.reserve_region (C))
+Saving Pairing (decodeIRQHandlerInvocation (ASM) <= Kernel_C.decodeIRQHandlerInvocation (C))
+Saving Pairing (create_frames_of_region (ASM) <= Kernel_C.create_frames_of_region (C))
+Saving Pairing (sameObjectAs (ASM) <= Kernel_C.sameObjectAs (C))
+Saving Pairing (sendIPC (ASM) <= Kernel_C.sendIPC (C))
+Saving Pairing (activateThread (ASM) <= Kernel_C.activateThread (C))
+Saving Pairing (create_root_cnode (ASM) <= Kernel_C.create_root_cnode (C))
+Saving Pairing (unmapPage (ASM) <= Kernel_C.unmapPage (C))
+Saving Pairing (handleFaultReply (ASM) <= Kernel_C.handleFaultReply (C))
+Saving Pairing (memzero (ASM) <= Kernel_C.memzero (C))
+Saving Pairing (scheduleChooseNewThread (ASM) <= Kernel_C.scheduleChooseNewThread (C))
+Saving Pairing (invokeTCB_ThreadControl (ASM) <= Kernel_C.invokeTCB_ThreadControl (C))
+Saving Pairing (cteDelete (ASM) <= Kernel_C.cteDelete (C))
+Saving Pairing (cleanCacheRange_RAM (ASM) <= Kernel_C.cleanCacheRange_RAM (C))
+Saving Pairing (lookupPDSlot (ASM) <= Kernel_C.lookupPDSlot (C))
+Saving Pairing (Arch_decodeTransfer (ASM) <= Kernel_C.Arch_decodeTransfer (C))
+Saving Pairing (init_freemem (ASM) <= Kernel_C.init_freemem (C))
+Saving Pairing (doIPCTransfer (ASM) <= Kernel_C.doIPCTransfer (C))
+Saving Pairing (decodeIRQControlInvocation (ASM) <= Kernel_C.decodeIRQControlInvocation (C))
+Saving Pairing (setNextPC (ASM) <= Kernel_C.setNextPC (C))
+Saving Pairing (c_handle_interrupt (ASM) <= Kernel_C.c_handle_interrupt (C))
+Saving Pairing (unmapPageTable (ASM) <= Kernel_C.unmapPageTable (C))
+Saving Pairing (tcbEPAppend (ASM) <= Kernel_C.tcbEPAppend (C))
+Saving Pairing (emptySlot (ASM) <= Kernel_C.emptySlot (C))
+Saving Pairing (decodeDomainInvocation (ASM) <= Kernel_C.decodeDomainInvocation (C))
+Saving Pairing (branchFlushRange (ASM) <= Kernel_C.branchFlushRange (C))
+Saving Pairing (handleUnknownSyscall (ASM) <= Kernel_C.handleUnknownSyscall (C))
+Saving Pairing (insert_region (ASM) <= Kernel_C.insert_region (C))
+Saving Pairing (c_handle_undefined_instruction (ASM) <= Kernel_C.c_handle_undefined_instruction (C))
+Saving Pairing (setIRQState (ASM) <= Kernel_C.setIRQState (C))
+Saving Pairing (decodeUnbindNotification (ASM) <= Kernel_C.decodeUnbindNotification (C))
+Saving Pairing (alloc_rootserver_obj (ASM) <= Kernel_C.alloc_rootserver_obj (C))
+Saving Pairing (Arch_switchToIdleThread (ASM) <= Kernel_C.Arch_switchToIdleThread (C))
+Saving Pairing (setVMRoot (ASM) <= Kernel_C.setVMRoot (C))
+Saving Pairing (checkValidIPCBuffer (ASM) <= Kernel_C.checkValidIPCBuffer (C))
+Saving Pairing (dist_init (ASM) <= Kernel_C.dist_init (C))
+Saving Pairing (create_bi_frame_cap (ASM) <= Kernel_C.create_bi_frame_cap (C))
+Saving Pairing (tcbSchedDequeue (ASM) <= Kernel_C.tcbSchedDequeue (C))
+Saving Pairing (create_mapped_it_frame_cap (ASM) <= Kernel_C.create_mapped_it_frame_cap (C))
+Saving Pairing (rescheduleRequired (ASM) <= Kernel_C.rescheduleRequired (C))
+Saving Pairing (setPriority (ASM) <= Kernel_C.setPriority (C))
+Saving Pairing (findPDForASID (ASM) <= Kernel_C.findPDForASID (C))
+Saving Pairing (strlcat (ASM) <= Kernel_C.strlcat (C))
+Saving Pairing (setupReplyMaster (ASM) <= Kernel_C.setupReplyMaster (C))
+Saving Pairing (cleanInvalidate_D_PoC (ASM) <= Kernel_C.cleanInvalidate_D_PoC (C))
+Saving Pairing (c_handle_instruction_fault (ASM) <= Kernel_C.c_handle_instruction_fault (C))
+Saving Pairing (decodeWriteRegisters (ASM) <= Kernel_C.decodeWriteRegisters (C))
+Saving Pairing (invokeIRQHandler_AckIRQ (ASM) <= Kernel_C.invokeIRQHandler_AckIRQ (C))
+Saving Pairing (setMCPriority (ASM) <= Kernel_C.setMCPriority (C))
+Saving Pairing (invokeCNodeSaveCaller (ASM) <= Kernel_C.invokeCNodeSaveCaller (C))
+Saving Pairing (tcb_queue_remove (ASM) <= Kernel_C.tcb_queue_remove (C))
+Saving Pairing (maskCapRights (ASM) <= Kernel_C.maskCapRights (C))
+Saving Pairing (flushTable (ASM) <= Kernel_C.flushTable (C))
+Saving Pairing (isIOSpaceFrameCap (ASM) <= Kernel_C.isIOSpaceFrameCap (C))
+Saving Pairing (initIRQController (ASM) <= Kernel_C.initIRQController (C))
+Saving Pairing (arch_get_n_paging (ASM) <= Kernel_C.arch_get_n_paging (C))
+Saving Pairing (lookupTargetSlot (ASM) <= Kernel_C.lookupTargetSlot (C))
+Saving Pairing (c_handle_data_fault (ASM) <= Kernel_C.c_handle_data_fault (C))
+Saving Pairing (insertNewCap (ASM) <= Kernel_C.insertNewCap (C))
+Saving Pairing (invalidateTLBByASID (ASM) <= Kernel_C.invalidateTLBByASID (C))
+Saving Pairing (Arch_setMRs_fault (ASM) <= Kernel_C.Arch_setMRs_fault (C))
+Saving Pairing (handleVMFault (ASM) <= Kernel_C.handleVMFault (C))
+Saving Pairing (get_p_reg_kernel_img (ASM) <= Kernel_C.get_p_reg_kernel_img (C))
+Saving Pairing (cap_get_capIsPhysical (ASM) <= Kernel_C.cap_get_capIsPhysical (C))
+Saving Pairing (receiveSignal (ASM) <= Kernel_C.receiveSignal (C))
+Saving Pairing (switchToIdleThread (ASM) <= Kernel_C.switchToIdleThread (C))
+Saving Pairing (Arch_prepareThreadDelete (ASM) <= Kernel_C.Arch_prepareThreadDelete (C))
+Saving Pairing (setIRQTrigger (ASM) <= Kernel_C.setIRQTrigger (C))
+Saving Pairing (create_untypeds_for_region (ASM) <= Kernel_C.create_untypeds_for_region (C))
+Saving Pairing (initTimer (ASM) <= Kernel_C.initTimer (C))
+Saving Pairing (flushPage (ASM) <= Kernel_C.flushPage (C))
+Saving Pairing (restore_user_context (ASM) <= Kernel_C.restore_user_context (C))
+Saving Pairing (Arch_handleFaultReply (ASM) <= Kernel_C.Arch_handleFaultReply (C))
+Saving Pairing (cap_get_capPtr (ASM) <= Kernel_C.cap_get_capPtr (C))
+Saving Pairing (completeSignal (ASM) <= Kernel_C.completeSignal (C))
+Saving Pairing (memcpy (ASM) <= Kernel_C.memcpy (C))
+Saving Pairing (handleFault (ASM) <= Kernel_C.handleFault (C))
+Saving Pairing (arm_errata (ASM) <= Kernel_C.arm_errata (C))
+Saving Pairing (cteMove (ASM) <= Kernel_C.cteMove (C))
+Saving Pairing (setExtraBadge (ASM) <= Kernel_C.setExtraBadge (C))
+Saving Pairing (timerTick (ASM) <= Kernel_C.timerTick (C))
+Saving Pairing (strlcpy (ASM) <= Kernel_C.strlcpy (C))
+Saving Pairing (bindNotification (ASM) <= Kernel_C.bindNotification (C))
+Saving Pairing (switchToThread (ASM) <= Kernel_C.switchToThread (C))
+Saving Pairing (scheduleTCB (ASM) <= Kernel_C.scheduleTCB (C))
+Saving Pairing (chooseThread (ASM) <= Kernel_C.chooseThread (C))
+Saving Pairing (createObject (ASM) <= Kernel_C.createObject (C))
+Saving Pairing (create_it_asid_pool (ASM) <= Kernel_C.create_it_asid_pool (C))
+Saving Pairing (setMRs_syscall_error (ASM) <= Kernel_C.setMRs_syscall_error (C))
+Saving Pairing (sendFaultIPC (ASM) <= Kernel_C.sendFaultIPC (C))
+Saving Pairing (decodeUntypedInvocation (ASM) <= Kernel_C.decodeUntypedInvocation (C))
+Saving Pairing (merge_regions (ASM) <= Kernel_C.merge_regions (C))
+Saving Pairing (getExtraCPtr (ASM) <= Kernel_C.getExtraCPtr (C))
+Saving Pairing (handleInterrupt (ASM) <= Kernel_C.handleInterrupt (C))
+Saving Pairing (capSwapForDelete (ASM) <= Kernel_C.capSwapForDelete (C))
+Saving Pairing (loadHWASID (ASM) <= Kernel_C.loadHWASID (C))
+Saving Pairing (decodeReadRegisters (ASM) <= Kernel_C.decodeReadRegisters (C))
+Saving Pairing (tcbSchedAppend (ASM) <= Kernel_C.tcbSchedAppend (C))
+Saving Pairing (invokeTCB_Suspend (ASM) <= Kernel_C.invokeTCB_Suspend (C))
+Saving Pairing (preemptionPoint (ASM) <= Kernel_C.preemptionPoint (C))
+Saving Pairing (char_to_long (ASM) <= Kernel_C.char_to_long (C))
+Saving Pairing (restart (ASM) <= Kernel_C.restart (C))
+Saving Pairing (decodeTCBConfigure (ASM) <= Kernel_C.decodeTCBConfigure (C))
+Saving Pairing (decodeInvocation (ASM) <= Kernel_C.decodeInvocation (C))
+Saving Pairing (decodeARMMMUInvocation (ASM) <= Kernel_C.decodeARMMMUInvocation (C))
+Saving Pairing (setVMRootForFlush (ASM) <= Kernel_C.setVMRootForFlush (C))
+Saving Pairing (l_impl'dmb (ASM) <= r_impl'dmb (C))
+Saving Pairing (Arch_postModifyRegisters (ASM) <= Kernel_C.Arch_postModifyRegisters (C))
+Saving Pairing (Arch_createObject (ASM) <= Kernel_C.Arch_createObject (C))
+Saving Pairing (clean_D_PoU (ASM) <= Kernel_C.clean_D_PoU (C))
+Saving Pairing (lookupPivotSlot (ASM) <= Kernel_C.lookupPivotSlot (C))
+Saving Pairing (performInvocation_Reply (ASM) <= Kernel_C.performInvocation_Reply (C))
+Saving Pairing (invokeTCB_WriteRegisters (ASM) <= Kernel_C.invokeTCB_WriteRegisters (C))
+Saving Pairing (create_idle_thread (ASM) <= Kernel_C.create_idle_thread (C))
+Checking 284 function pair problems
+Skipping Pairing (l_impl'dmb (ASM) <= r_impl'dmb (C)), underspecified C
+Aborting Problem (Pairing (slowpath (ASM) <= Kernel_C.slowpath (C))): underspecified Kernel_C.StrictC'__builtin_unreachable
+Skipping Pairing (restore_user_context (ASM) <= Kernel_C.restore_user_context (C)), underspecified C
+Aborting Problem (Pairing (clean_D_PoU (ASM) <= Kernel_C.clean_D_PoU (C))), complex loop
+Skipping Pairing (l_impl'mcr (ASM) <= r_impl'mcr (C)), underspecified C
+Aborting Problem (Pairing (fpsimd_HWCapTest (ASM) <= Kernel_C.fpsimd_HWCapTest (C))): underspecified asm_instruction'.word_0xeef00a10__\nmov_%0,_r0________\n
+Skipping Pairing (l_impl'isb (ASM) <= r_impl'isb (C)), underspecified C
+Skipping Pairing (l_impl'dsb (ASM) <= r_impl'dsb (C)), underspecified C
+Aborting Problem (Pairing (cleanInvalidate_D_PoC (ASM) <= Kernel_C.cleanInvalidate_D_PoC (C))), complex loop
+Skipping Pairing (l_impl'mrc (ASM) <= r_impl'mrc (C)), underspecified C
+Skipping Pairing (c_handle_fastpath_reply_recv (ASM) <= Kernel_C.c_handle_fastpath_reply_recv (C)), underspecified ASM
+Aborting Problem (Pairing (c_handle_data_fault (ASM) <= Kernel_C.c_handle_data_fault (C))): underspecified Kernel_C.StrictC'__builtin_unreachable
+Aborting Problem (Pairing (cleanInvalidate_L1D (ASM) <= Kernel_C.cleanInvalidate_L1D (C))), complex loop
+Skipping Pairing (l_impl'wfi (ASM) <= r_impl'wfi (C)), underspecified C
+Aborting Problem (Pairing (map_kernel_window (ASM) <= Kernel_C.map_kernel_window (C))), complex loop
+Aborting Problem (Pairing (init_kernel (ASM) <= Kernel_C.init_kernel (C))): underspecified instruction'vmrs_r3_fpexc_E0001D94
+Aborting Problem (Pairing (c_handle_undefined_instruction (ASM) <= Kernel_C.c_handle_undefined_instruction (C))): underspecified Kernel_C.StrictC'__builtin_unreachable
+Aborting Problem (Pairing (c_handle_instruction_fault (ASM) <= Kernel_C.c_handle_instruction_fault (C))): underspecified Kernel_C.StrictC'__builtin_unreachable
+Skipping Pairing (c_handle_fastpath_call (ASM) <= Kernel_C.c_handle_fastpath_call (C)), underspecified ASM
+Aborting Problem (Pairing (Arch_switchToThread (ASM) <= Kernel_C.Arch_switchToThread (C))): underspecified instruction'strex_r0_r1_r3_E00111D8
+Skipping Pairing (halt (ASM) <= Kernel_C.halt (C)), underspecified C
+Aborting Problem (Pairing (merge_regions (ASM) <= Kernel_C.merge_regions (C))), complex loop
+Result summary:
+  - 262 problems build
+  - 22 proofs skipped
+  - 94.78% instructions covered
+  - largest skipped functions:
+      init_kernel (2.86%), clean_D_PoU (0.46%), cleanInvalidate_D_PoC (0.45%)
+  - failures: []
+
+real	4m45.210s
+user	4m14.042s
+sys	0m43.258s

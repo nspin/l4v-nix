@@ -1,0 +1,30 @@
+Checking 284 function pair problems
+Skipping Pairing (l_impl'dmb (ASM) <= r_impl'dmb (C)), underspecified C
+Aborting Problem (Pairing (slowpath (ASM) <= Kernel_C.slowpath (C))): underspecified Kernel_C.StrictC'__builtin_unreachable
+Skipping Pairing (restore_user_context (ASM) <= Kernel_C.restore_user_context (C)), underspecified C
+Aborting Problem (Pairing (clean_D_PoU (ASM) <= Kernel_C.clean_D_PoU (C))), complex loop
+Skipping Pairing (l_impl'mcr (ASM) <= r_impl'mcr (C)), underspecified C
+Aborting Problem (Pairing (fpsimd_HWCapTest (ASM) <= Kernel_C.fpsimd_HWCapTest (C))): underspecified asm_instruction'.word_0xeef00a10__\nmov_%0,_r0________\n
+Skipping Pairing (l_impl'isb (ASM) <= r_impl'isb (C)), underspecified C
+Skipping Pairing (l_impl'dsb (ASM) <= r_impl'dsb (C)), underspecified C
+Aborting Problem (Pairing (cleanInvalidate_D_PoC (ASM) <= Kernel_C.cleanInvalidate_D_PoC (C))), complex loop
+Skipping Pairing (l_impl'mrc (ASM) <= r_impl'mrc (C)), underspecified C
+Skipping Pairing (c_handle_fastpath_reply_recv (ASM) <= Kernel_C.c_handle_fastpath_reply_recv (C)), underspecified ASM
+Aborting Problem (Pairing (c_handle_data_fault (ASM) <= Kernel_C.c_handle_data_fault (C))): underspecified Kernel_C.StrictC'__builtin_unreachable
+Aborting Problem (Pairing (cleanInvalidate_L1D (ASM) <= Kernel_C.cleanInvalidate_L1D (C))), complex loop
+Skipping Pairing (l_impl'wfi (ASM) <= r_impl'wfi (C)), underspecified C
+Aborting Problem (Pairing (map_kernel_window (ASM) <= Kernel_C.map_kernel_window (C))), complex loop
+Aborting Problem (Pairing (init_kernel (ASM) <= Kernel_C.init_kernel (C))): underspecified instruction'vmrs_r3_fpexc_E0001D94
+Aborting Problem (Pairing (c_handle_undefined_instruction (ASM) <= Kernel_C.c_handle_undefined_instruction (C))): underspecified Kernel_C.StrictC'__builtin_unreachable
+Aborting Problem (Pairing (c_handle_instruction_fault (ASM) <= Kernel_C.c_handle_instruction_fault (C))): underspecified Kernel_C.StrictC'__builtin_unreachable
+Skipping Pairing (c_handle_fastpath_call (ASM) <= Kernel_C.c_handle_fastpath_call (C)), underspecified ASM
+Aborting Problem (Pairing (Arch_switchToThread (ASM) <= Kernel_C.Arch_switchToThread (C))): underspecified instruction'strex_r0_r1_r3_E00111D8
+Skipping Pairing (halt (ASM) <= Kernel_C.halt (C)), underspecified C
+Aborting Problem (Pairing (merge_regions (ASM) <= Kernel_C.merge_regions (C))), complex loop
+Result summary:
+  - 262 problems build
+  - 22 proofs skipped
+  - 94.78% instructions covered
+  - largest skipped functions:
+      init_kernel (2.86%), clean_D_PoU (0.46%), cleanInvalidate_D_PoC (0.45%)
+  - failures: []

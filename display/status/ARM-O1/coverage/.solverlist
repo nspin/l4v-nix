@@ -1,0 +1,40 @@
+strategy: bitwuzla-machine-word all, bitwuzla-machine-word hyp, bitwuzla-byte all, bitwuzla-byte hyp, cvc4-machine-word all, cvc4-machine-word hyp, cvc4-byte all, cvc4-byte hyp, cvc5-machine-word all, cvc5-machine-word hyp, cvc5-byte all, cvc5-byte hyp, mathsat5-machine-word all, mathsat5-machine-word hyp, mathsat5-byte all, mathsat5-byte hyp, sonolar-machine-word all, sonolar-machine-word hyp, sonolar-byte all, sonolar-byte hyp, yices-machine-word all, yices-machine-word hyp, yices-byte all, yices-byte hyp, z3-machine-word all, z3-machine-word hyp, z3-byte all, z3-byte hyp
+the-online-solver: online: /nix/store/pny1ggfwnndhg1a4bs9d5nhchk0kmasn-yices-2.6.4/bin/yices-smt2 --incremental
+
+
+bitwuzla-byte: offline: /nix/store/vr1rcbcnad9n03n2vyiw1mldr7mmr65j-bitwuzla-static-x86_64-unknown-linux-musl-0.2.0/bin/bitwuzla
+config: mem_mode=8
+
+bitwuzla-machine-word: offline: /nix/store/vr1rcbcnad9n03n2vyiw1mldr7mmr65j-bitwuzla-static-x86_64-unknown-linux-musl-0.2.0/bin/bitwuzla
+
+cvc4-byte: offline: /nix/store/20gdsfszrzn7a9fbhlzwmda3gg7ciswz-cvc4-binary-from-isabelle-1.5-3/bin/cvc4 --lang smt
+config: mem_mode=8
+
+cvc4-machine-word: offline: /nix/store/20gdsfszrzn7a9fbhlzwmda3gg7ciswz-cvc4-binary-from-isabelle-1.5-3/bin/cvc4 --lang smt
+
+cvc5-byte: offline: /nix/store/l6fg9jmrcrp2hdca7yn8qswb91vxs281-cvc5-binary/bin/cvc5 --lang smt
+config: mem_mode=8
+
+cvc5-machine-word: offline: /nix/store/l6fg9jmrcrp2hdca7yn8qswb91vxs281-cvc5-binary/bin/cvc5 --lang smt
+
+mathsat5-byte: offline: /nix/store/s8vz71vpk7pywkpnn0sgl6lblh6pvc3b-mathsat5-binary/bin/mathsat -input=smt2
+config: mem_mode=8
+
+mathsat5-machine-word: offline: /nix/store/s8vz71vpk7pywkpnn0sgl6lblh6pvc3b-mathsat5-binary/bin/mathsat -input=smt2
+
+sonolar-byte: offline: /nix/store/bwjp36a2ad84ppdhx3014jg6i6jgyyg1-sonolar-binary/bin/sonolar --input-format=smtlib2
+config: mem_mode=8
+
+sonolar-machine-word: offline: /nix/store/bwjp36a2ad84ppdhx3014jg6i6jgyyg1-sonolar-binary/bin/sonolar --input-format=smtlib2
+
+yices-byte: offline: /nix/store/pny1ggfwnndhg1a4bs9d5nhchk0kmasn-yices-2.6.4/bin/yices-smt2
+config: mem_mode=8
+
+yices-machine-word: offline: /nix/store/pny1ggfwnndhg1a4bs9d5nhchk0kmasn-yices-2.6.4/bin/yices-smt2
+
+z3-byte: offline: /nix/store/pc611vpabd864pfwh2xnp2j3d196s9h3-z3-4.8.17/bin/z3 -smt2 -in
+config: mem_mode=8
+
+z3-machine-word: offline: /nix/store/pc611vpabd864pfwh2xnp2j3d196s9h3-z3-4.8.17/bin/z3 -smt2 -in
+
+
