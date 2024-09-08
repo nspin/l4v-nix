@@ -141,7 +141,7 @@ in rec {
     # stackBounds = ../../../../../tmp/sb/StackBounds.txt;
   };
 
-  o2wip = graphRefineWith {
+  o2wip = with o2; graphRefineWith {
     name = "wip";
     args = graphRefine.saveArgs ++ [
       # "verbose"
