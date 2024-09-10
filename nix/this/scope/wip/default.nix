@@ -93,6 +93,7 @@ in rec {
   z = scopes.riscv64.mcs.o1.graphRefine.all.preTargetDir;
 
   o2 = scopes.arm.legacy.o2;
+  w2 = o2.wip;
 
   stackBounds = graphRefineWith {
     name = "stack-bounds";
@@ -141,9 +142,9 @@ in rec {
     # stackBounds = ../../../../../tmp/sb/StackBounds.txt;
   };
 
-  o2c = with o2; graphRefineWith {
+  o2c = o2.graphRefineWith {
     name = "wip";
-    args = graphRefine.saveArgs ++ [
+    args = o2.graphRefine.saveArgs ++ [
       # "verbose"
       "trace-to:report.txt"
       "-exclude"
@@ -156,9 +157,9 @@ in rec {
   };
 
 
-  o2x = with o2; graphRefineWith {
+  o2x = o2.graphRefineWith {
     name = "wip";
-    args = graphRefine.saveArgs ++ [
+    args = o2.graphRefine.saveArgs ++ [
       # "verbose"
       "trace-to:report.txt"
       "-exclude"
@@ -169,6 +170,18 @@ in rec {
       "all"
     ];
     # stackBounds = ../../../../../tmp/sb/StackBounds.txt;
+  };
+
+  es = w2.es1;
+  es1 = graphRefineWith {
+    name = "wip";
+    args = graphRefine.saveArgs ++ [
+      "verbose"
+      # "trace-to:report.txt"
+      # "emptySlot"
+      "loadCapTransfer"
+    ];
+    stackBounds = "${stackBounds}/StackBounds.txt";
   };
 
   d = graphRefineWith rec {
