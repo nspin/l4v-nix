@@ -141,7 +141,7 @@ e0017ee4:	e7e224d5 	ubfx	r2, r5, #9, #3
 e0017ee8:	e3a01001 	mov	r1, #1
 e0017eec:	e1822711 	orr	r2, r2, r1, lsl r7
 e0017ef0:	e1a03220 	lsr	r3, r0, #4
-e0017ef4:	e7cb5492 	bfi	r5, r2, #9, #3
+e0017ef4:	e7df5292 	bfi	r5, r2, #5, #27
 e0017ef8:	e5843000 	str	r3, [r4]
 e0017efc:	eaffffec 	b	e0017eb4 <doNormalTransfer+0x1f8>
 e0017f00:	e1a03387 	lsl	r3, r7, #7

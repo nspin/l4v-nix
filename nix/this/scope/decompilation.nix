@@ -30,7 +30,8 @@ let
     s = ok;
   };
 
-  a = a1;
+  # a = a1;
+  a = a2;
 
   kernel = runCommand "x" {} ''
     mkdir $out
