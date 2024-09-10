@@ -363,12 +363,17 @@ in rec {
       after = f "2446310e6cffcf46249b7706d5ceffc0a1c49b33";
     };
 
-  h = lib.mapAttrs (_: rev:
+  h = lib.mapAttrs (_: attrs:
     let
-      s = scopeWithHOL4Rev { inherit rev; };
+      s = scopeWithHOL4Rev attrs;
     in
       s.decompilation
   ) {
-    a = "4cd817283c1abdb8aa9105e3a75d7e4b10c8eb15";
+    a = { rev = "4cd817283c1abdb8aa9105e3a75d7e4b10c8eb15"; }; # should be good: https://github.com/HOL-Theorem-Prover/HOL/commit/578492a789f09542ed6c74cdf9316d309ef660fb
+    b = { rev = "6d809bfa2ef8cbcb75d63317c4f8f2e1a6a836ed"; }; # bad above
+    c = rec {
+      rev = "39606aea49bbfef131fcad2af088800e4b048da3";
+      ref = "refs/tags/keep/${builtins.substring 0 32 rev}";
+    }; # cg
   };
 }

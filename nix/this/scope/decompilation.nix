@@ -4,14 +4,14 @@
 , git
 
 , hol4
-# , kernel
+, kernel
 }:
 
 # TODO
 # prefix with "time" invocation
 
 let
-  kernel = "${hol4}/examples/machine-code/graph/seL4-kernel/arm";
+  # kernel = "${hol4}/examples/machine-code/graph/seL4-kernel/arm";
 
   # NOTE only change to this list since seL4-12.0.0 is the addition of "_start"
   # ignoreList = [
@@ -30,7 +30,15 @@ let
   #   cat ${kernel}/kernel.sigs | cut -d ' ' -f 2 | grep -v memzero | tr '\n' ',' | sed 's/,$/\n/' > $out
   # '';
 
-  ignoreFile = writeText "ignore" (lib.concatStringsSep "," ignoreList);
+  # only = "dist_init";
+  only = "doNormalTransfer";
+
+  ignoreFile = runCommand "ignore" {} ''
+    echo -n '${lib.concatStringsSep "," ignoreList}' > $out
+    cat ${kernel}/kernel.sigs | cut -d ' ' -f 2 | grep -v ${only} | tr '\n' ',' | sed 's/,$/\n/' >> $out
+  '';
+
+  # ignoreFile = writeText "ignore" (lib.concatStringsSep "," ignoreList);
 
   scriptIn = writeText "x.sml" ''
     load "decompileLib";
@@ -54,7 +62,8 @@ let
 
     cd ${hol4}/examples/machine-code/graph
     echo "decompiling..."
-    ${hol4}/bin/hol < $script | tee $target_dir/log.txt | grep 'Export FAILED'
+    ${hol4}/bin/hol < $script | tee $target_dir/log.txt
+    #  | grep 'Export FAILED'
     cp -r $target_dir $out
   '';
 in
