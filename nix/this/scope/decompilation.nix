@@ -11,6 +11,32 @@
 # prefix with "time" invocation
 
 let
+  hk = "${hol4}/examples/machine-code/graph/seL4-kernel/arm";
+  ok = kernel;
+  # x = runCommand "x" {} ''
+  #   cp -rL ${kernel} $out
+  #   substituteInPlace $out/kernel.elf.txt \
+  #     --replace 'bfi	r5, r2, #9, #3' 'bfi	r0, r0, #16, #16'
+  # '';
+in
+let
+  a1 = {
+    k = ./k1.txt;
+    s = hk;
+  };
+
+  a2 = {
+    k = ./k2.txt;
+    s = ok;
+  };
+
+  a = a1;
+
+  kernel = runCommand "x" {} ''
+    mkdir $out
+    cp ${a.k} $out/kernel.elf.txt
+    cp ${a.s}/kernel.sigs $out
+  '';
   # kernel = "${hol4}/examples/machine-code/graph/seL4-kernel/arm";
 
   # NOTE only change to this list since seL4-12.0.0 is the addition of "_start"

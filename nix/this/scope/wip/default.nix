@@ -365,7 +365,7 @@ in rec {
 
   h = lib.mapAttrs (_: attrs:
     let
-      s = scopeWithHOL4Rev attrs;
+      s = o2.wip.scopeWithHOL4Rev attrs;
     in
       s.decompilation
   ) {
