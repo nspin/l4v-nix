@@ -27,24 +27,35 @@ let
     val _ = decompileLib.decomp "@path@" true "@ignore@";
   '';
 
+  unchecked = runCommand "decompilation" {
+    nativeBuildInputs = [
+      git
+    ];
+  }''
+    target_dir=$(pwd)/target
+    script=$(pwd)/script
+
+    mkdir $target_dir
+    cp ${kernel}/{kernel.elf.txt,kernel.sigs} target
+
+    substitute ${scriptIn} $script \
+      --subst-var-by path $target_dir/kernel \
+      --subst-var-by ignore $(cat ${ignoreFile})
+
+    cd ${hol4}/examples/machine-code/graph
+    echo "decompiling..."
+    ${hol4}/bin/hol < $script > $target_dir/log.txt
+    cp -r $target_dir $out
+  '';
 in
-runCommand "decompilation" {
-  nativeBuildInputs = [
-    git
-  ];
-}''
-  target_dir=$(pwd)/target
-  script=$(pwd)/script
+runCommand "decompilation-checked" {
+  passthru = {
+    inherit unchecked;
+  };
+} ''
+  if grep 'Export FAILED' ${unchecked}/log.txt; then
+    false
+  fi
 
-  mkdir $target_dir
-  cp ${kernel}/{kernel.elf.txt,kernel.sigs} target
-
-  substitute ${scriptIn} $script \
-    --subst-var-by path $target_dir/kernel \
-    --subst-var-by ignore $(cat ${ignoreFile})
-
-  cd ${hol4}/examples/machine-code/graph
-  echo "decompiling..."
-  ${hol4}/bin/hol < $script > $target_dir/log.txt
-  cp -r $target_dir $out
+  cp -r ${unchecked} $out
 ''
