@@ -363,4 +363,12 @@ in rec {
       after = f "2446310e6cffcf46249b7706d5ceffc0a1c49b33";
     };
 
+  h = lib.mapAttrs (_: rev:
+    let
+      s = scopeWithHOL4Rev { inherit rev; };
+    in
+      s.decompilation
+  ) {
+    a = "4cd817283c1abdb8aa9105e3a75d7e4b10c8eb15";
+  };
 }

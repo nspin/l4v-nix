@@ -36,6 +36,13 @@ stdenvForHol4.mkDerivation {
 
   postPatch = ''
     patchShebangs .
+
+    substituteInPlace tools/Holmake/Holmake_types.sml \
+      --replace /bin/cp cp \
+      --replace /bin/mv mv
+
+    substituteInPlace examples/machine-code/graph/file_readerLib.sml \
+      --replace /bin/rm rm
   '';
 
   buildPhase = ''
