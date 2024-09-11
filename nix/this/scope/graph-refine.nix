@@ -25,7 +25,7 @@
 , commands ? lib.flip lib.concatMapStrings argLists (argList: ''
     ${decorateCommand "python ${source}/graph-refine.py . ${lib.concatStringsSep " " argList}"}
   '')
-, keepSMTDumps ? false
+, keepBigLogs ? false
 , stackBounds ? null
 }:
 
@@ -73,8 +73,8 @@ runCommand "graph-refine${lib.optionalString (name != null) "-${name}"}" {
 
   rm -f target.pyc
 
-  ${lib.optionalString (!keepSMTDumps) ''
-    rm -rf smt2
+  ${lib.optionalString (!keepBigLogs) ''
+    rm -rf trace
   ''}
 
   cp -r . $out

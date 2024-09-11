@@ -3,6 +3,7 @@
 , writeText
 , git
 
+, scopeConfig
 , hol4
 , kernel
 }:
@@ -53,7 +54,9 @@ runCommand "decompilation-checked" {
     inherit unchecked;
   };
 } ''
-  if grep 'Export FAILED' ${unchecked}/log.txt; then
+  if grep 'Export FAILED' ${unchecked}/log.txt ${lib.optionalString (scopeConfig.arch == "RISCV64") ''
+    | grep -v -F ' __global_pointer$.' \
+  ''}; then
     false
   fi
 

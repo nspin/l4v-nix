@@ -21,5 +21,3 @@ def run(args):
         print("syntax errors")
     else:
         print("syntax ok")
-        # vinterp = VisitorInterp()
-        # vinterp.visit(tree)

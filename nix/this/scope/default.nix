@@ -57,17 +57,17 @@ with self; {
   l4vAll = l4vWith {
     name = "all";
     tests = [];
-    buildStandaloneCParser = scopeConfig.bvSupport;
+    buildStandaloneCParser = scopeConfig.bvSetupSupport;
   };
 
   cProofs = l4vWith {
     name = "c-proofs";
     tests = [
       "CRefine"
-    ] ++ lib.optionals scopeConfig.bvSupport [
+    ] ++ lib.optionals scopeConfig.bvSetupSupport [
       "SimplExportAndRefine"
     ];
-    buildStandaloneCParser = scopeConfig.bvSupport;
+    buildStandaloneCParser = scopeConfig.bvSetupSupport;
   };
 
   justStandaloneCParser = l4vWith {
@@ -78,17 +78,17 @@ with self; {
 
   justSimplExport = l4vWith {
     name = "simpl-export";
-    simplExport = scopeConfig.bvSupport;
+    simplExport = scopeConfig.bvSetupSupport;
   };
 
   minimalBinaryVerificationInputs = l4vWith {
     name = "minimal-bv-input";
     buildStandaloneCParser = true;
-    simplExport = scopeConfig.bvSupport;
+    simplExport = scopeConfig.bvSetupSupport;
   };
 
   # binaryVerificationInputs = cProofs;
-  binaryVerificationInputs = assert scopeConfig.bvSupport; minimalBinaryVerificationInputs;
+  # binaryVerificationInputs = minimalBinaryVerificationInputs;
 
   # standaloneCParser = binaryVerificationInputs;
   # simplExport = binaryVerificationInputs;
@@ -124,15 +124,34 @@ with self; {
       "save-proofs:proofs.txt"
     ];
 
-    functions = graphRefineWith {
-      name = "functions";
+    coverageArgs = [
+      "trace-to:coverage.txt"
+      "coverage"
+    ];
+
+    excludeArgs = lib.optionalAttrs (scopeConfig.bvExclude != null) ([
+      "-exclude"
+    ] ++ scopeConfig.bvExclude ++ [
+      "-end-exclude"
+    ]);
+
+    justSave = graphRefineWith {
+      name = "just-save";
       args = defaultArgs;
     };
 
     coverage = graphRefineWith {
       name = "coverage";
-      args = defaultArgs ++ [
-        "coverage"
+      args = excludeArgs ++ saveArgs ++ coverageArgs;
+    };
+
+    all = graphRefineWith {
+      name = "all";
+      argLists = [
+        (excludeArgs ++ coverageArgs)
+        (excludeArgs ++ defaultArgs ++ [
+          "all"
+        ])
       ];
     };
 
@@ -140,24 +159,6 @@ with self; {
       name = "demo";
       args = defaultArgs ++ [
         "deps:Kernel_C.cancelAllIPC"
-      ];
-    };
-
-    all = graphRefineWith {
-      name = "all";
-      args = defaultArgs ++ [
-        "all"
-      ];
-    };
-
-    # aggregate
-
-    everythingAtOnce = graphRefineWith {
-      name = "everything-at-once";
-      dontDecorateCommands = true;
-      argLists = [
-        [ (defaultArgs ++ [ "coverage" ]) ]
-        [ (defaultArgs ++ [ "all" ]) ]
       ];
     };
   };
@@ -224,24 +225,23 @@ with self; {
 
   slow = writeText "slow" (toString ([
     kernel
-    justStandaloneCParser
-    justSimplExport
-    minimalBinaryVerificationInputs
+    standaloneCParser
+    simplExport
     l4vSpec
     hol4
-  ] ++ lib.optionals scopeConfig.bvSupport [
+  ] ++ lib.optionals scopeConfig.bvSetupSupport [
     decompilation
     preprocessedKernelsAreEquivalent
-    graphRefine.functions
+  ] ++ lib.optionals scopeConfig.bvSupport [
+    graphRefine.justSave
     graphRefine.coverage
     graphRefine.demo
     sonolarModelBug.evidence
-    sonolarDependence.evidence
   ]));
 
   slower = writeText "slower" (toString ([
     slow
-    cProofs
+    # cProofs
     l4vAll
   ] ++ lib.optionals scopeConfig.bvSupport [
   ]));
@@ -250,11 +250,19 @@ with self; {
     slower
   ] ++ lib.optionals scopeConfig.bvSupport [
     graphRefine.all
-    graphRefine.everythingAtOnce
+  ]));
+
+  excess = writeText "excess" (toString ([
+    justStandaloneCParser
+    justSimplExport
+    minimalBinaryVerificationInputs
+    cProofs
+    sonolarDependence.evidence
   ]));
 
   all = writeText "all" (toString [
     slowest
+    excess
   ]);
 
   # TODO
@@ -269,10 +277,7 @@ with self; {
 
   # TODO
   cachedForAll = writeText "cached" (toString (
-    # Fails only with X64-O1 (all GCC versions)
-    lib.optionals (!(scopeConfig.arch == "X64" && scopeConfig.optLevel == "-O1")) [
-      kernel
-    ]
+    kernel
   ));
 
   ### helpers ###

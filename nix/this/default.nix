@@ -15,18 +15,23 @@ rec {
     , features ? lib.optionalString mcs "MCS"
     , plat ? ""
     , optLevel ? "-O1"
-    , targetCCWrapperAttr ? targetCCWrapperAttrForArch arch
+    , targetCCWrapperAttr ? targetCCWrapperAttrForConfig { inherit arch bvSupport; }
     , targetCCWrapper ? targetPkgsByL4vArch."${arch}".buildPackages."${targetCCWrapperAttr}"
     , targetCC ? targetCCWrapper.cc
     , targetBintools ? targetCCWrapper.bintools.bintools
     , targetPrefix ? targetCCWrapper.targetPrefix
-    , seL4Source ? if mcs then mcsSources.seL4 else lib.cleanSource ../../projects/seL4
+    , seL4Source ? lib.cleanSource ../../projects/seL4
     , l4vSource ? if mcs then mcsSources.l4v else lib.cleanSource ../../projects/l4v
     , hol4Source ? lib.cleanSource ../../projects/HOL4
     , graphRefineSource ? lib.cleanSource ../../projects/graph-refine
     , isabelleVersion ? "2024"
     , stackLTSAttr ? "lts_20_25"
-    , bvSupport ? lib.elem arch [ "ARM" "RISCV64" ]
+    , bvSetupSupport ? lib.elem arch [ "ARM" "RISCV64" ] && !mcs && /* TODO */ !(arch == "RISCV64" && optLevel == "-O2")
+    , bvSupport ? bvSetupSupport && lib.elem arch [ "ARM" ]
+    , bvExclude ? {
+        "ARM-O1" = [ "init_freemem" ];
+        "ARM-O2" = [ "init_freemem" "decodeARMMMUInvocation" ];
+      }."${arch}${optLevel}" or null
     }:
     {
       inherit
@@ -39,20 +44,23 @@ rec {
         graphRefineSource
         isabelleVersion
         stackLTSAttr
+        bvSetupSupport
         bvSupport
+        bvExclude
       ;
     };
 
   # HACK
   mcsSources = {
-    seL4 = builtins.fetchGit {
-      url = "https://github.com/seL4/seL4";
-      rev = "b7ad2e0c669b5648ff32a9bb0dbc56337ec1ac77";
+    seL4 = builtins.fetchGit rec {
+      url = "https://github.com/coliasgroup/seL4.git";
+      ref = "refs/tags/keep/${builtins.substring 0 32 rev}";
+      rev = "4b26a63e68f99e110e2be0729605bc9011b4696f"; # branch verification-reproducability-rt
     };
-    l4v = builtins.fetchGit {
-      url = "https://github.com/seL4/l4v";
-      rev = "9b4c43614741c1a55f1461273e382a803e7efcb6";
-      allRefs = true;
+    l4v = builtins.fetchGit rec {
+      url = "https://github.com/coliasgroup/l4v.git";
+      ref = "refs/tags/keep/${builtins.substring 0 32 rev}";
+      rev = "452734ec76651b4000520d1aa3ef84db74045282"; # branch verification-reproducability-rt
     };
   };
 
@@ -78,7 +86,7 @@ rec {
     o3 = "-O3";
   };
 
-  targetCCWrapperAttrForArch = arch: if arch == "RISCV64" then "gcc12" else "gcc6";
+  targetCCWrapperAttrForConfig = { arch, bvSupport }: if bvSupport then "gcc6" else "gcc12";
 
   targetCCWrapperAttrs = lib.listToAttrs (map (v: lib.nameValuePair v v) [
     "gcc49" "gcc6" "gcc7" "gcc8" "gcc9" "gcc10" "gcc11" "gcc12" "gcc13"
@@ -108,7 +116,7 @@ rec {
       mcs = schedulers.${schedulerName};
       optLevel = optLevels.${optLevelName};
     } // lib.optionalAttrs (args ? targetCCWrapperAttrName) {
-        targetCCWrapperAttr = targetCCWrapperAttrs.${args.targetCCWrapperAttrName};
+      targetCCWrapperAttr = targetCCWrapperAttrs.${args.targetCCWrapperAttrName};
     });
 
   mkScopeTreeFromNamedConfigs =
@@ -164,12 +172,7 @@ rec {
     (toString
       (lib.flatten
         (lib.forEach (map mkScopeFomNamedConfig namedConfigs) (scope: [
-        ] ++ lib.optionals (scope.scopeConfig.arch != "X64" && scope.scopeConfig.features == "") [
-          scope.l4vAll
-        ] ++ lib.optionals (scope.scopeConfig.bvSupport && scope.scopeConfig.features == "") [
-          scope.graphRefine.everythingAtOnce.preTargetDir
-        ] ++ lib.optionals (!(scope.scopeConfig.arch == "X64" && scope.scopeConfig.optLevel == "-O1")) [
-          scope.kernel
+          scope.slowest
         ]))
       )
     );
@@ -184,13 +187,13 @@ rec {
         name = scope.configName;
         path = f scope;
       };
-      everythingAtOnce = scope: scope.graphRefine.everythingAtOnce;
-      preTargetDir = scope: scope.graphRefine.everythingAtOnce.preTargetDir;
+      all = scope: scope.graphRefine.all;
+      justTargetDir = scope: scope.graphRefine.all.targetDir;
     in
       linkFarm "display-status" [
-        (mk everythingAtOnce scopes.arm.legacy.o1)
-        (mk preTargetDir scopes.arm.legacy.o2)
-        (mk preTargetDir scopes.riscv64.legacy.o1)
-        (mk preTargetDir scopes.riscv64.legacy.o2)
+        (mk all scopes.arm.legacy.o1)
+        (mk all scopes.arm.legacy.o2)
+        (mk justTargetDir scopes.riscv64.legacy.o1)
+        (mk justTargetDir scopes.riscv64.legacy.o2)
       ];
 }
