@@ -34,12 +34,6 @@ stdenvForHol4.mkDerivation {
 
   # FONTCONFIG_FILE = makeFontsConf { fontDirectories = [ ]; };
 
-    # substituteInPlace tools/Holmake/Holmake_types.sml \
-    #   --replace /bin/cp cp \
-    #   --replace /bin/mv mv
-
-    # substituteInPlace examples/machine-code/graph/file_readerLib.sml \
-    #   --replace /bin/rm rm
   postPatch = ''
     patchShebangs .
   '';
@@ -58,19 +52,19 @@ stdenvForHol4.mkDerivation {
     (cd examples/machine-code/graph && $holdir/bin/Holmake -j $NIX_BUILD_CORES)
   '';
 
-  # shellHook = ''
-  #   holdir=$PWD
+  shellHook = ''
+    holdir=$PWD
 
-  #   c() {
-  #     poly < tools/smart-configure.sml
-  #   }
+    c() {
+      poly < tools/smart-configure.sml
+    }
 
-  #   b() {
-  #     bin/build -j$(nproc)
-  #   }
+    b() {
+      bin/build -j$(nproc)
+    }
 
-  #   be() {
-  #     (cd examples/machine-code/graph && $holdir/bin/Holmake -j$(nproc))
-  #   }
-  # '';
+    be() {
+      (cd examples/machine-code/graph && $holdir/bin/Holmake -j$(nproc))
+    }
+  '';
 }
