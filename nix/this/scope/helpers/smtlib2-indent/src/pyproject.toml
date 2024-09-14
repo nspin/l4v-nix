@@ -1,0 +1,9 @@
+[project]
+name = "smtlib2-indent"
+version = "0.0.1"
+dependencies = [
+    "antlr4-python3-runtime",
+]
+
+[project.scripts]
+smtlib2-indent = "smtlib2_indent:main"

@@ -5,6 +5,7 @@
 , writeText
 , gcc9Stdenv
 , texlive
+, python3Packages
 , python2
 , polyml
 , mlton
@@ -273,6 +274,10 @@ with self; {
       kernel
     ]
   ));
+
+  ### helpers ###
+
+  smtlib2-indent = python3Packages.callPackage ./helpers/smtlib2-indent {};
 
   ### wip ###
 
