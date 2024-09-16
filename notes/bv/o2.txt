@@ -1,0 +1,8 @@
+emptySlot (ASM) <= Kernel_C.emptySlot (C)
+setupCallerCap (ASM) <= Kernel_C.setupCallerCap (C)
+invokeTCB_WriteRegisters (ASM) <= Kernel_C.invokeTCB_WriteRegisters (C)
+makeUserPDE (ASM) <= Kernel_C.makeUserPDE (C)
+lookupSourceSlot (ASM) <= Kernel_C.lookupSourceSlot (C) x
+loadCapTransfer (ASM) <= Kernel_C.loadCapTransfer (C) x
+Arch_maskCapRights (ASM) <= Kernel_C.Arch_maskCapRights (C) x
+map_kernel_frame (ASM) <= Kernel_C.map_kernel_frame (C)

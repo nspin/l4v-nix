@@ -46,3 +46,8 @@ maybe:
     c_handle_data_fault
     c_handle_instruction_fault
     c_handle_undefined_instruction
+
+arm cc:
+https://github.com/ARM-software/abi-aa/blob/main/aapcs32/aapcs32.rst
+
+tail -f -n +0 tmp/1.log
