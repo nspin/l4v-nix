@@ -172,7 +172,7 @@ rec {
     (toString
       (lib.flatten
         (lib.forEach (map mkScopeFomNamedConfig namedConfigs) (scope: [
-          scope.slowest
+          (if scope.scopeConfig.mcs then scope.slow else scope.slowest)
         ]))
       )
     );
