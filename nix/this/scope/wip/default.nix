@@ -41,24 +41,12 @@ let
 in rec {
 
   keep = writeText "keep" (toString (lib.flatten [
-    this.scopes.arm.legacy.o1.all
-    this.displayStatus
+    # this.scopes.arm.legacy.o1.all
+    # this.displayStatus
 
     (lib.forEach (map this.mkScopeFomNamedConfig this.namedConfigs) (scope:
       [
-      ] ++ lib.optionals (
-        !(scope.scopeConfig.arch == "X64" && scope.scopeConfig.optLevel == "-O1")
-      ) [
-        scope.kernel
-      ] ++ lib.optionals (
-        # scope.scopeConfig.arch != "X64" && scope.scopeConfig.features == ""
-        true
-      ) [
-        scope.l4vAll
-      ] ++ lib.optionals (
-        scope.scopeConfig.bvSetupSupport
-      ) [
-        scope.graphRefine.all.targetDir
+        (if scope.scopeConfig.mcs || lib.elem scope.scopeConfig.arch [ "AARCH64" "X64" ] then scope.slow else scope.slower)
       ]
     ))
   ]));
