@@ -36,7 +36,7 @@ with self; {
 
   ### sources ###
 
-  inherit (scopeConfig) hol4Source graphRefineSource;
+  inherit (scopeConfig) hol4Source graphRefineSource bvSandboxSource;
 
   patchedSeL4Source = callPackage ./patched-sel4-source {};
   patchedL4vSource = callPackage ./patched-l4v-source {};
@@ -105,6 +105,8 @@ with self; {
   cFunctionsTxt = "${simplExport}/proof/asmrefine/export/${scopeConfig.arch}/CFunDump.txt";
 
   asmFunctionsTxt = "${decompilation}/kernel_mc_graph.txt";
+
+  bvSandbox = callPackage ./bv-sandbox.nix {};
 
   graphRefineSolverLists = callPackage ./graph-refine-solver-lists.nix {};
 

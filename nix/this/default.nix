@@ -24,6 +24,7 @@ rec {
     , l4vSource ? if mcs then mcsSources.l4v else lib.cleanSource ../../projects/l4v
     , hol4Source ? lib.cleanSource ../../projects/HOL4
     , graphRefineSource ? lib.cleanSource ../../projects/graph-refine
+    , bvSandboxSource ? lib.cleanSource ../../projects/bv-sandbox
     , isabelleVersion ? "2024"
     , stackLTSAttr ? "lts_20_25"
     , bvSetupSupport ? lib.elem arch [ "ARM" "RISCV64" ] && !mcs && /* TODO */ !(arch == "RISCV64" && optLevel == "-O2")
@@ -42,6 +43,7 @@ rec {
         l4vSource
         hol4Source
         graphRefineSource
+        bvSandboxSource
         isabelleVersion
         stackLTSAttr
         bvSetupSupport
