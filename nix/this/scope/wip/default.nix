@@ -66,7 +66,7 @@ in rec {
   a = writeText "a" (toString (lib.flatten [
     (lib.forEach (map this.mkScopeFomNamedConfig this.namedConfigs) (scope:
       [
-        (if scope.scopeConfig.mcs then scope.slow else scope.slowest)
+        (if scope.scopeConfig.mcs || lib.elem scope.scopeConfig.arch [ "AARCH64" "X64" ] then scope.slow else scope.slower)
       ]
     ))
   ]));
