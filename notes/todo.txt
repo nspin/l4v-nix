@@ -1,1 +1,3 @@
-bump nixpkgs
+- bump nixpkgs
+- config name in derivation name for graph-refine, decompile, and l4v
+- '-j' to individual isabelle jobs in (for example) simplexport case

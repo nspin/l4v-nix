@@ -1,9 +1,0 @@
-nix-build -A scopes.riscv64.legacy.o2.decompilation fails:
-
-Export FAILED for activateThread.
-Export FAILED for cap_get_capSizeBits.
-Export FAILED for restart.
-
-3 like this:
-
-FAILED to translate term: var_word "r15" s >> w2n (w2w (w2w (var_word "r13" s && 63w)))
