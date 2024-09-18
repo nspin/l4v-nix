@@ -13,9 +13,12 @@ NORETURN functions don't make sense (including slowpath)
 
 adding VISIBLE to slowpath doesn't work
 
-init_freemem:
+init_freemem -O1:
   align_reg optimized away in some reductions with 'static'
   consider using old patch to remove array accesses in if conditions
+
+  more recent:
+    splitting and limiting problematic section to -O0 works
 
 allowed to skip:
   projects/l4v/proof/asmrefine/SEL4GraphRefine.thy
