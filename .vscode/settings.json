@@ -1,0 +1,5 @@
+{
+    "rust-analyzer.linkedProjects": [
+        "projects/bv-sandbox/Cargo.toml",
+    ]
+}
