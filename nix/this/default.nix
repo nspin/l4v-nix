@@ -38,6 +38,7 @@ rec {
       inherit
         arch features plat
         optLevel
+        mcs
         targetCC targetBintools targetPrefix
         seL4Source
         l4vSource
