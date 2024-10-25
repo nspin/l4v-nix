@@ -14,10 +14,6 @@ stdenv.mkDerivation {
     python3
   ];
 
-  patches = [
-    ./improve-psutil-check.patch
-  ];
-
   postPatch = ''
     patchShebangs .
 
