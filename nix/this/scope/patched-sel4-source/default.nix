@@ -16,8 +16,6 @@ stdenv.mkDerivation {
   ];
 
   postPatch = ''
-    sed -i 's,#!/usr/bin/env -S cmake -P,#!${cmake}/bin/cmake -P,' configs/*_verified.cmake
-
     patchShebangs .
   '';
 
