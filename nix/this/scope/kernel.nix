@@ -11,10 +11,6 @@
 , isabelleForL4v
 }:
 
-# NOTE
-# CONFIG_OPTIMISATION is more correct but KERNEL_CMAKE_EXTRA_OPTIONS is more
-# backwards-compatible.
-
 let
   files = [
     "kernel_all.c_pp"
@@ -49,7 +45,7 @@ runCommand "kernel" {
   L4V_REPO_PATH = standaloneCParser;
   SOURCE_ROOT = patchedSeL4Source;
 
-  KERNEL_CMAKE_EXTRA_OPTIONS = "-DKernelOptimisation=${scopeConfig.optLevel}";
+  CONFIG_OPTIMISATION = scopeConfig.optLevel;
 
 } ''
   export HOME=$(mktemp -d --suffix=-home)
