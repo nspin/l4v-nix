@@ -21,10 +21,6 @@ stdenv.mkDerivation {
   postPatch = ''
     patchShebangs .
 
-    for x in tools/c-parser/tools/{mllex,mlyacc}/Makefile; do
-      substituteInPlace $x --replace /bin/echo echo
-    done
-
     sed -i -E 's/^(license: +)GPL$/\1GPL-2.0-only/' spec/haskell/SEL4.cabal
 
     substituteInPlace spec/haskell/Makefile \

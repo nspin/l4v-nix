@@ -1,6 +1,7 @@
 { lib, stdenv
 , runCommand
 , writeText
+, linkFarm
 , makeFontsConf
 , python3Packages
 , haskellPackages
@@ -63,6 +64,10 @@ let
     ISABELLE_BUILD_JAVA_OPTIONS="-Xms2048m -Xmx6096m -Xss4m"
   '';
 
+  cppLink = linkFarm "cpp-link" {
+    "bin/cpp" = "${scopeConfig.targetCC}/bin/${scopeConfig.targetPrefix}cpp";
+  };
+
 in
 stdenv.mkDerivation {
   name = "l4v${lib.optionalString (name != null) "-${name}"}";
@@ -81,6 +86,8 @@ stdenv.mkDerivation {
 
     scopeConfig.targetCC
     scopeConfig.targetBintools
+
+    cppLink
 
     # breakpointHook bashInteractive
     # strace
@@ -115,18 +122,6 @@ stdenv.mkDerivation {
   '';
 
   postPatch = ''
-    cpp_files="
-      tools/c-parser/isar_install.ML
-      tools/c-parser/standalone-parser/tokenizer.sml
-      tools/c-parser/standalone-parser/main.sml
-      tools/c-parser/testfiles/jiraver313.thy
-      "
-    for x in $cpp_files; do
-      substituteInPlace $x --replace \
-        /usr/bin/cpp \
-        ${scopeConfig.targetCC}/bin/${scopeConfig.targetPrefix}cpp
-    done
-
     substituteInPlace spec/Makefile --replace \
       '$(ASPEC_GITREV_FILE): .FORCE' \
       '$(ASPEC_GITREV_FILE):'
