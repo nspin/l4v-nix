@@ -3,6 +3,7 @@
 , pkgsStatic
 , runCommand
 , writeText
+, linkFarm
 , gcc9Stdenv
 , texlive
 , python3Packages
@@ -285,6 +286,14 @@ with self; {
   ### helpers ###
 
   smtlib2-indent = python3Packages.callPackage ./helpers/smtlib2-indent {};
+
+  cppLink = linkFarm "cpp-link" {
+    "bin/cpp" = "${scopeConfig.targetCC}/bin/${scopeConfig.targetPrefix}cpp";
+  };
+
+  containerXauthority = callPackage ./container-xauthority {};
+
+  l4vEnv = callPackage ./l4v-env.nix {};
 
   ### wip ###
 

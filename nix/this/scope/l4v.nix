@@ -1,7 +1,6 @@
 { lib, stdenv
 , runCommand
 , writeText
-, linkFarm
 , makeFontsConf
 , python3Packages
 , haskellPackages
@@ -13,6 +12,7 @@
 , isabelleForL4v
 , texliveEnv
 , ghcWithPackagesForL4v
+, cppLink
 
 , breakpointHook, bashInteractive
 , strace
@@ -63,10 +63,6 @@ let
     ML_OPTIONS="-H 1000 --maxheap 10000 --stackspace 64"
     ISABELLE_BUILD_JAVA_OPTIONS="-Xms2048m -Xmx6096m -Xss4m"
   '';
-
-  cppLink = linkFarm "cpp-link" {
-    "bin/cpp" = "${scopeConfig.targetCC}/bin/${scopeConfig.targetPrefix}cpp";
-  };
 
 in
 stdenv.mkDerivation {
