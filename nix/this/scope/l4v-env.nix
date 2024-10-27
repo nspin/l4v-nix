@@ -15,6 +15,8 @@
 , firefox
 , cacert
 
+, git
+
 , scopeConfig
 , isabelleForL4v
 , texliveEnv
@@ -67,6 +69,8 @@ mkShell {
     xdg-utils
     firefox
     cacert
+
+    git
   ];
 
   L4V_ARCH = scopeConfig.arch;
