@@ -175,7 +175,11 @@ rec {
     (toString
       (lib.flatten
         (lib.forEach (map mkScopeFomNamedConfig namedConfigs) (scope: [
-          (if scope.scopeConfig.mcs then scope.slow else scope.slowest)
+          (
+            if scope.scopeConfig.mcs || scope.scopeConfig.arch == "AARCH64" || scope.scopeConfig.arch == "X64"
+            then scope.slow
+            else scope.slower
+          )
         ]))
       )
     );
