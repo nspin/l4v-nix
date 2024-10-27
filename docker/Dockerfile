@@ -9,6 +9,8 @@ RUN apt-get update && apt-get install -y \
     less \
     vim \
     bash-completion \
+    # only until l4v cpp change upstreamed
+    build-essential \
     && rm -rf /var/lib/apt/lists/*
 
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
