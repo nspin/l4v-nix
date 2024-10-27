@@ -1,6 +1,6 @@
 A ?= l4vEnv
 W ?= ../projects
-P ?= 0
+P ?= 1
 
 work_local_path := $(W)
 work_remote_path:= /work
