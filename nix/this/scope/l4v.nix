@@ -24,7 +24,7 @@
 , exclude ? []
 , remove ? []
 , verbose ? false
-, numJobs ? "$NIX_BUILD_CORES"
+, numJobs ? 1 # "$NIX_BUILD_CORES" # TODO
 , timeouts ? false
 , timeoutScale ? null
 
