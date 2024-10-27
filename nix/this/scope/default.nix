@@ -11,7 +11,7 @@
 , polyml
 , mlton
 , mlton20180207
-, mlton20210107
+, mlton20210117
 }:
 
 { scopeConfig
@@ -187,11 +187,7 @@ with self; {
 
   withMLton = mlton: lib.extendDerivation true { inherit mlton; };
 
-  isabelle2020ForL4v = withMLton mlton20180207 (callPackage ./deps/isabelle-for-l4v/2020 {});
-  isabelle2023ForL4v = withMLton mlton20210107 (callPackage ./deps/isabelle-for-l4v/2023 {});
-  isabelle2024ForL4v = withMLton mlton20210107 (callPackage ./deps/isabelle-for-l4v/2024 {});
-
-  polyml58ForHol4 = callPackage ./deps/polyml-5.8-for-hol4.nix {};
+  isabelle2024ForL4v = withMLton mlton20210117 (callPackage ./deps/isabelle-for-l4v/2024 {});
 
   polyml59ForHol4 = lib.overrideDerivation polyml (attrs: {
     configureFlags = [ "--enable-shared" ];
@@ -210,15 +206,10 @@ with self; {
 
   stdenvForHol4 = gcc9Stdenv;
 
-  # polymlForHol4 = polyml58ForHol4;
-  # mltonForHol4 = mlton20180207;
-
   polymlForHol4 = polyml59ForHol4;
-  mltonForHol4 = mlton20210107;
+  mltonForHol4 = mlton20210117;
 
   isabelleForL4v = {
-    "2020" = isabelle2020ForL4v;
-    "2023" = isabelle2023ForL4v;
     "2024" = isabelle2024ForL4v;
   }.${scopeConfig.isabelleVersion};
 
