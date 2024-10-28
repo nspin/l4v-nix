@@ -2,3 +2,4 @@
 - '-j' to individual isabelle jobs in (for example) simplexport case
 
 - substituteStream() in derivation l4v-spec: WARNING: '--replace' is deprecated, use --replace-{fail,warn,quiet}. (file 'spec/Makefile')
+- use seL4/isabelle
