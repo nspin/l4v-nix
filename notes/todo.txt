@@ -1,3 +1,4 @@
-- bump nixpkgs
 - config name in derivation name for graph-refine, decompile, and l4v
 - '-j' to individual isabelle jobs in (for example) simplexport case
+
+- substituteStream() in derivation l4v-spec: WARNING: '--replace' is deprecated, use --replace-{fail,warn,quiet}. (file 'spec/Makefile')
