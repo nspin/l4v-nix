@@ -51,6 +51,23 @@ in rec {
     ))
   ]));
 
+  xxx = writeText "x"
+    (toString
+      (lib.flatten
+        (lib.forEach (map this.mkScopeFomNamedConfig this.namedConfigs) (scope: [
+          (
+            lib.optionals (!scope.scopeConfig.mcs) [
+              (
+                if scope.scopeConfig.arch == "AARCH64" || scope.scopeConfig.arch == "X64"
+                then scope.slower
+                else scope.slow
+              )
+            ]
+          )
+        ]))
+      )
+    );
+
   a = writeText "a" (toString (lib.flatten [
     (lib.forEach (map this.mkScopeFomNamedConfig this.namedConfigs) (scope:
       [
