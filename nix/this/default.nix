@@ -25,6 +25,7 @@ rec {
     , hol4Source ? lib.cleanSource ../../projects/HOL4
     , graphRefineSource ? lib.cleanSource ../../projects/graph-refine
     , bvSandboxSource ? lib.cleanSource ../../projects/bv-sandbox
+    , isabelleSource ? seL4IsabelleSource
     , isabelleVersion ? "2024"
     , stackLTSAttr ? "lts_20_25"
     , bvSetupSupport ? lib.elem arch [ "ARM" "RISCV64" ] && !mcs && /* TODO */ !(arch == "RISCV64" && optLevel == "-O2")
@@ -45,6 +46,7 @@ rec {
         hol4Source
         graphRefineSource
         bvSandboxSource
+        isabelleSource
         isabelleVersion
         stackLTSAttr
         bvSetupSupport
@@ -52,6 +54,12 @@ rec {
         bvExclude
       ;
     };
+
+  seL4IsabelleSource = builtins.fetchGit {
+    url = "https://github.com/seL4/isabelle.git";
+    ref = "ts-2024";
+    rev = "e0dd5a6d89d2c0b37e7f1ffe0105050189136b75";
+  };
 
   # HACK
   mcsSources = {
