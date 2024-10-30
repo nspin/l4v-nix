@@ -20,8 +20,8 @@ rec {
     , targetCC ? targetCCWrapper.cc
     , targetBintools ? targetCCWrapper.bintools.bintools
     , targetPrefix ? targetCCWrapper.targetPrefix
-    , seL4Source ? lib.cleanSource ../../projects/seL4
-    , l4vSource ? if mcs then mcsSources.l4v else lib.cleanSource ../../projects/l4v
+    , seL4Source ? kernelPairs.local.seL4
+    , l4vSource ? kernelPairs.local.l4v
     , hol4Source ? lib.cleanSource ../../projects/HOL4
     , graphRefineSource ? lib.cleanSource ../../projects/graph-refine
     , bvSandboxSource ? lib.cleanSource ../../projects/bv-sandbox
@@ -34,6 +34,12 @@ rec {
         "ARM-O1" = [ "init_freemem" ];
         "ARM-O2" = [ "init_freemem" "decodeARMMMUInvocation" ];
       }."${arch}${optLevel}" or null
+    , l4vName ? "${arch}${
+        lib.optionalString (features != "") "-${features}"
+      }${
+        lib.optionalString (plat != "") "-${plat}"
+      }"
+    , bvName ? "${l4vName}${optLevel}-${targetCC.name}"
     }:
     {
       inherit
@@ -61,19 +67,61 @@ rec {
     rev = "e0dd5a6d89d2c0b37e7f1ffe0105050189136b75";
   };
 
-  # HACK
-  mcsSources = {
-    seL4 = builtins.fetchGit rec {
-      url = "https://github.com/coliasgroup/seL4.git";
-      ref = "refs/tags/keep/${builtins.substring 0 32 rev}";
-      rev = "4b26a63e68f99e110e2be0729605bc9011b4696f"; # branch verification-reproducability-rt
-    };
-    l4v = builtins.fetchGit rec {
-      url = "https://github.com/coliasgroup/l4v.git";
-      ref = "refs/tags/keep/${builtins.substring 0 32 rev}";
-      rev = "452734ec76651b4000520d1aa3ef84db74045282"; # branch verification-reproducability-rt
-    };
+  mkKeepRef = rev: "keep/${builtins.substring 0 32 rev}";
+
+  fetchGitFromColiasGroup = { repo, rev }: builtins.fetchGit rec {
+    url = "https://github.com/coliasgroup/${repo}.git";
+    ref = mkKeepRef rev;
+    inherit rev;
   };
+
+  kernelPairs =
+    let
+      f = lib.mapAttrs (repo: rev: fetchGitFromColiasGroup {
+        inherit repo rev;
+      });
+    in {
+      local = {
+        seL4Source = lib.cleanSource ../../projects/seL4;
+        l4vSource = lib.cleanSource ../../projects/l4v;
+      };
+      release = rec {
+        upstream = {
+          legacy = f {
+            seL4 = "cd6d3b8c25d49be2b100b0608cf0613483a6fffa"; # seL4/seL4:13.0.0
+            l4v = "205306814b6311b4781af1eb9534f674733a9735"; # direct downstream of seL4/l4v:seL4-13.0.0
+          };
+        };
+        downstream = {
+          legacy = f {
+            seL4 = "fef10c54376af898eaf26e38e2c79b2bf156ac40"; # coliasgroup:verification-reproducability
+            l4v = throw "todo";
+          };
+        };
+      };
+      tip = rec {
+        upstream = rec {
+          legacy = f {
+            seL4 = "c5b23791ea9f65efc4312c161dd173b7238c5e80"; # ancestor of u/master
+            l4v = "4f0706ef42cb205f534462faf787b6b6a076888d";
+          };
+          mcs = f {
+            seL4 = legacy.seL4;
+            l4v = "a232dc70c3bc5222af89ca7791cfd68651a74610";
+          };
+        };
+        downstream = rec {
+          legacy = f {
+            seL4 = "d0a377dcfa518f67e6818d82a8254cf7f75ad87a"; # direct downstream of upstream.legacy.seL4
+            l4v = throw "todo";
+          };
+          mcs = f {
+            seL4 = legacy.seL4;
+            l4v = throw "todo";
+          };
+        };
+      };
+    };
 
   archs = {
     arm = "ARM";

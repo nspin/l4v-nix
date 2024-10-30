@@ -45,7 +45,7 @@ let
   '');
 
 in
-runCommand "graph-refine${lib.optionalString (name != null) "-${name}"}" {
+runCommand "graph-refine${lib.optionalString (name != null) "-${name}"}-${scopeConfig.bvName}" {
   nativeBuildInputs = [
     python2Packages.python
     python2Packages.typing
