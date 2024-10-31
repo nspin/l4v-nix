@@ -71,7 +71,7 @@ self: super: with self;
       sha256 = "sha256-ubSn2l3Zd2xH4k2+brPNwn53hdfi4Qtbt4qzxB7Zsic=";
     };
     postPatch = ''
-      substituteInPlace setup.py --replace bs4 beautifulsoup4
+      substituteInPlace setup.py --replace-fail bs4 beautifulsoup4
     '';
     propagatedBuildInputs = [
       six

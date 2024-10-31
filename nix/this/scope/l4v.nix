@@ -118,7 +118,7 @@ stdenv.mkDerivation {
   '';
 
   postPatch = ''
-    substituteInPlace spec/ROOT --replace \
+    substituteInPlace spec/ROOT --replace-fail \
       'document=pdf' \
       'document=pdf, document_output="output"'
   '';

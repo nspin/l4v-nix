@@ -18,10 +18,8 @@ stdenv.mkDerivation {
     patchShebangs .
 
     substituteInPlace spec/haskell/Makefile \
-      --replace 'sandbox: .stack-work' 'sandbox:' \
-      --replace 'CABAL=stack exec -- ./stack-path cabal' 'CABAL=cabal' \
-      --replace 'CABAL_SANDBOX=$(CABAL) v1-sandbox' 'CABAL_SANDBOX=true' \
-      --replace 'CABAL_UPDATE=$(CABAL) v1-update' 'CABAL_UPDATE=true'
+      --replace-fail 'sandbox: .stack-work' 'sandbox:' \
+      --replace-fail 'CABAL=stack exec -- ./stack-path cabal' 'CABAL=cabal'
   '';
 
   installPhase = ''
