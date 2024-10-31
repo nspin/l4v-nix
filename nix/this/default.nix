@@ -20,8 +20,8 @@ rec {
     , targetCC ? targetCCWrapper.cc
     , targetBintools ? targetCCWrapper.bintools.bintools
     , targetPrefix ? targetCCWrapper.targetPrefix
-    , seL4Source ? kernelPairs.local.seL4
-    , l4vSource ? kernelPairs.local.l4v
+    , seL4Source ? kernelPairs.local.sources.seL4
+    , l4vSource ? kernelPairs.local.sources.l4v
     , hol4Source ? lib.cleanSource ../../projects/HOL4
     , graphRefineSource ? lib.cleanSource ../../projects/graph-refine
     , bvSandboxSource ? lib.cleanSource ../../projects/bv-sandbox
@@ -58,6 +58,8 @@ rec {
         bvSetupSupport
         bvSupport
         bvExclude
+        l4vName
+        bvName
       ;
     };
 
@@ -77,23 +79,30 @@ rec {
 
   kernelPairs =
     let
-      f = lib.mapAttrs (repo: rev: fetchGitFromColiasGroup {
+      fetchPair = revs: mkPair (lib.flip lib.mapAttrs revs (repo: rev: fetchGitFromColiasGroup {
         inherit repo rev;
-      });
+      }));
+      mkPair = sources: {
+        inherit sources;
+        scopes = mkScopeTreeFromNamedConfigs (lib.forEach namedConfigs (config: config // {
+          seL4Source = sources.seL4Source;
+          l4vSource = sources.l4vSource;
+        }));
+      };
     in {
-      local = {
-        seL4Source = lib.cleanSource ../../projects/seL4;
-        l4vSource = lib.cleanSource ../../projects/l4v;
+      local = mkPair {
+        seL4 = lib.cleanSource ../../projects/seL4;
+        l4v = lib.cleanSource ../../projects/l4v;
       };
       release = rec {
         upstream = {
-          legacy = f {
+          legacy = fetchPair {
             seL4 = "cd6d3b8c25d49be2b100b0608cf0613483a6fffa"; # seL4/seL4:13.0.0
             l4v = "205306814b6311b4781af1eb9534f674733a9735"; # direct downstream of seL4/l4v:seL4-13.0.0
           };
         };
         downstream = {
-          legacy = f {
+          legacy = fetchPair {
             seL4 = "fef10c54376af898eaf26e38e2c79b2bf156ac40"; # coliasgroup:verification-reproducability
             l4v = throw "todo";
           };
@@ -101,21 +110,21 @@ rec {
       };
       tip = rec {
         upstream = rec {
-          legacy = f {
+          legacy = fetchPair {
             seL4 = "c5b23791ea9f65efc4312c161dd173b7238c5e80"; # ancestor of u/master
             l4v = "4f0706ef42cb205f534462faf787b6b6a076888d";
           };
-          mcs = f {
+          mcs = fetchPair {
             seL4 = legacy.seL4;
             l4v = "a232dc70c3bc5222af89ca7791cfd68651a74610";
           };
         };
         downstream = rec {
-          legacy = f {
+          legacy = fetchPair {
             seL4 = "d0a377dcfa518f67e6818d82a8254cf7f75ad87a"; # direct downstream of upstream.legacy.seL4
             l4v = throw "todo";
           };
-          mcs = f {
+          mcs = fetchPair {
             seL4 = legacy.seL4;
             l4v = throw "todo";
           };
