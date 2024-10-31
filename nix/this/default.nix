@@ -22,9 +22,9 @@ rec {
     , targetPrefix ? targetCCWrapper.targetPrefix
     , seL4Source ? kernelPairs.local.sources.seL4
     , l4vSource ? kernelPairs.local.sources.l4v
-    , hol4Source ? lib.cleanSource ../../projects/HOL4
-    , graphRefineSource ? lib.cleanSource ../../projects/graph-refine
-    , bvSandboxSource ? lib.cleanSource ../../projects/bv-sandbox
+    , hol4Source ? gitignoreSource ../../projects/HOL4
+    , graphRefineSource ? gitignoreSource ../../projects/graph-refine
+    , bvSandboxSource ? gitignoreSource ../../projects/bv-sandbox
     # , isabelleSource ? seL4IsabelleSource
     , isabelleSource ? null # TODO
     , isabelleVersion ? "2024"
@@ -64,6 +64,8 @@ rec {
       ;
     };
 
+  gitignoreSource = callPackage ./gitignore.nix {};
+
   seL4IsabelleSource = builtins.fetchGit {
     url = "https://github.com/seL4/isabelle.git";
     ref = "ts-2024";
@@ -92,8 +94,8 @@ rec {
       };
     in {
       local = mkPair {
-        seL4 = lib.cleanSource ../../projects/seL4;
-        l4v = lib.cleanSource ../../projects/l4v;
+        seL4 = gitignoreSource ../../projects/seL4;
+        l4v = gitignoreSource ../../projects/l4v;
       };
       release = rec {
         upstream = {
