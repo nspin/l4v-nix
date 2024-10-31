@@ -118,14 +118,6 @@ stdenv.mkDerivation {
   '';
 
   postPatch = ''
-    substituteInPlace spec/Makefile --replace \
-      '$(ASPEC_GITREV_FILE): .FORCE' \
-      '$(ASPEC_GITREV_FILE):'
-
-    pwd | tr -d '\n' > spec/abstract/document/git-root.tex
-
-    echo -n unknown > spec/abstract/document/gitrev.tex
-
     substituteInPlace spec/ROOT --replace \
       'document=pdf' \
       'document=pdf, document_output="output"'
