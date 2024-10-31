@@ -25,15 +25,16 @@ rec {
     , hol4Source ? lib.cleanSource ../../projects/HOL4
     , graphRefineSource ? lib.cleanSource ../../projects/graph-refine
     , bvSandboxSource ? lib.cleanSource ../../projects/bv-sandbox
-    , isabelleSource ? seL4IsabelleSource
+    # , isabelleSource ? seL4IsabelleSource
+    , isabelleSource ? null # TODO
     , isabelleVersion ? "2024"
     , stackLTSAttr ? "lts_20_25"
     , bvSetupSupport ? lib.elem arch [ "ARM" "RISCV64" ] && !mcs && /* TODO */ !(arch == "RISCV64" && optLevel == "-O2")
     , bvSupport ? bvSetupSupport && lib.elem arch [ "ARM" ]
-    , bvExclude ? {
+    , bvExclude ? ({
         "ARM-O1" = [ "init_freemem" ];
         "ARM-O2" = [ "init_freemem" "decodeARMMMUInvocation" ];
-      }."${arch}${optLevel}" or null
+      }."${arch}${optLevel}" or null)
     , l4vName ? "${arch}${
         lib.optionalString (features != "") "-${features}"
       }${

@@ -68,6 +68,16 @@ in rec {
       )
     );
 
+  yyy = writeText "y"
+    (toString
+      (lib.flatten
+        [
+          this.kernelPairs.tip.upstream.legacy.scopes.aarch64.legacy.o1.cProofs
+          this.kernelPairs.tip.upstream.legacy.scopes.x64.legacy.o1.cProofs
+        ]
+      )
+    );
+
   a = writeText "a" (toString (lib.flatten [
     (lib.forEach (map this.mkScopeFomNamedConfig this.namedConfigs) (scope:
       [
