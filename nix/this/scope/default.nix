@@ -14,26 +14,9 @@
 , mlton20210117
 }:
 
-{ scopeConfig
-}:
-
-# scopeConfig gymnastics allow for overriding
-
-let
-  origScopeConifig = scopeConfig;
-in
-
 self:
 
-let
-  scopeConfig = self.scopeConfig;
-in
-
 with self; {
-
-  scopeConfig = origScopeConifig;
-
-  configName = "${scopeConfig.arch}${lib.optionalString (scopeConfig.features != "") "_${scopeConfig.features}"}${scopeConfig.optLevel}";
 
   ### sources ###
 
@@ -132,7 +115,7 @@ with self; {
       "coverage"
     ];
 
-    excludeArgs = lib.optionalAttrs (scopeConfig.bvExclude != null) ([
+    excludeArgs = lib.optionals (scopeConfig.bvExclude != null) ([
       "-exclude"
     ] ++ scopeConfig.bvExclude ++ [
       "-end-exclude"
@@ -187,7 +170,11 @@ with self; {
 
   ghcWithPackagesForL4v = callPackage  ./deps/ghc-with-packages-for-l4v {};
 
-  isabelleForL4v = callPackage ./deps/isabelle-for-l4v {};
+  mkIsabelleForL4v = callPackage ./deps/isabelle-for-l4v {};
+  upstreamIsabelleForL4v = mkIsabelleForL4v false;
+  seL4IsabelleForL4v = mkIsabelleForL4v true;
+
+  isabelleForL4v = if scopeConfig.useSeL4Isabelle then seL4IsabelleForL4v else upstreamIsabelleForL4v;
 
   stdenvForHol4 = gcc9Stdenv;
 
@@ -271,6 +258,7 @@ with self; {
   };
 
   l4vEnv = callPackage ./l4v-env.nix {};
+  setupEnv = callPackage ./setup-env.nix {};
 
   containerXauthority = callPackage ./helpers/container-xauthority {};
 

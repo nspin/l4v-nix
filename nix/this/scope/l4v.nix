@@ -10,6 +10,7 @@
 , patchedL4vSource
 , scopeConfig
 , isabelleForL4v
+, mltonForL4v
 , texliveEnv
 , ghcWithPackagesForL4v
 , cppLink
@@ -60,19 +61,19 @@ let
   # Selected from l4v/misc/etc/settings
   # TODO tune
   settings = writeText "settings" ''
-    ML_OPTIONS="-H 2048 --maxheap 20000 --stackspace 64"
+    ML_OPTIONS="-H 2048 --maxheap 10000 --stackspace 64"
     ISABELLE_BUILD_JAVA_OPTIONS="-Xms2048m -Xmx6096m -Xss4m"
     ISABELLE_BUILD_OPTIONS=threads=$(expr $NIX_BUILD_CORES / ${toString numJobs})
   '';
 
 in
 stdenv.mkDerivation {
-  name = "l4v${lib.optionalString (name != null) "-${name}"}-${scopeConfig.l4vName}";
+  name = "l4v${lib.optionalString (name != null) "-${name}"}${lib.optionalString (!excludeSeL4Source) "-${scopeConfig.l4vName}"}";
 
   nativeBuildInputs = [
     rsync git perl hostname which cmake ninja dtc libxml2
 
-    isabelleForL4v.mlton
+    mltonForL4v
 
     ghcWithPackagesForL4v
     haskellPackages.cabal-install

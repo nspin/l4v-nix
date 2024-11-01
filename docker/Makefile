@@ -12,7 +12,7 @@ endif
 
 nix_expr_path := ..
 nix_shell_attr := $(A)
-nix_isabelle_attr := isabelleForL4v
+nix_isabelle_attr := seL4IsabelleForL4v
 
 id := sel4-verification-reproducibility
 image_tag := $(id)
@@ -36,7 +36,7 @@ build:
 
 .PHONY: run
 run: build | $(isabelle_home_user_local_path)
-	docker run -d \
+	docker run -d --rm \
 		--name $(container_name) \
 		--tmpfs /tmp \
 		--tmpfs /run \
@@ -49,7 +49,7 @@ run: build | $(isabelle_home_user_local_path)
 		--mount type=bind,src=$(abspath $(work_local_path))/seL4,dst=$(work_remote_path)/seL4,ro \
 		--mount type=bind,src=$(abspath $(work_local_path))/l4v,dst=$(work_remote_path)/l4v \
 		$(image_tag) \
-		sleep inf
+		$$(nix-build $(nix_expr_path) -A setupEnv --no-out-link)
 
 .PHONY: exec
 exec:

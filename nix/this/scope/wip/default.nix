@@ -17,6 +17,7 @@
 , cntr
 
 , scopeConfig
+, overrideConfig
 , l4vWith
 , graphRefine
 , graphRefineWith
@@ -33,12 +34,28 @@ let
   tmpSourceDir = ../../../../tmp/src;
 
   tmpSource = {
-    seL4 = lib.cleanSource (tmpSourceDir + "/seL4");
-    HOL = lib.cleanSource (tmpSourceDir + "/HOL");
-    graph-refine = lib.cleanSource (tmpSourceDir + "/graph-refine");
+    seL4 = tmpSourceDir + "/seL4";
+    HOL = tmpSourceDir + "/HOL";
+    graph-refine = tmpSourceDir + "/graph-refine";
   };
 
 in rec {
+
+  x = writeText "y" (toString (lib.flatten [
+    scopes.ARM.withChannel.tip.upstream.cProofs
+    scopes.ARM_HYP.withChannel.tip.upstream.cProofs
+    scopes.AARCH64.withChannel.tip.upstream.cProofs
+    scopes.RISCV64.withChannel.tip.upstream.cProofs
+    scopes.RISCV64-MCS.withChannel.tip.upstream.cProofs
+    scopes.X64.withChannel.tip.upstream.cProofs
+
+    scopes.ARM.withChannel.release.upstream.cProofs
+    scopes.ARM_HYP.withChannel.release.upstream.cProofs
+    scopes.AARCH64.withChannel.release.upstream.cProofs
+    scopes.RISCV64.withChannel.release.upstream.cProofs
+    # scopes.RISCV64-MCS.withChannel.release.upstream.cProofs
+    scopes.X64.withChannel.release.upstream.cProofs
+  ]));
 
   keep = writeText "keep" (toString (lib.flatten [
     # this.scopes.arm.legacy.o1.all
@@ -51,45 +68,9 @@ in rec {
     ))
   ]));
 
-  xxx = writeText "x"
-    (toString
-      (lib.flatten
-        (lib.forEach (map this.mkScopeFomNamedConfig this.namedConfigs) (scope: [
-          (
-            lib.optionals (!scope.scopeConfig.mcs) [
-              (
-                if scope.scopeConfig.arch == "AARCH64" || scope.scopeConfig.arch == "X64"
-                then scope.slower
-                else scope.slow
-              )
-            ]
-          )
-        ]))
-      )
-    );
-
-  yyy = writeText "y"
-    (toString
-      (lib.flatten
-        [
-          this.kernelPairs.tip.upstream.legacy.scopes.aarch64.legacy.o1.cProofs
-          # this.kernelPairs.tip.upstream.legacy.scopes.x64.legacy.o1.cProofs
-          # this.kernelPairs.release.upstream.legacy.scopes.aarch64.legacy.o1.cProofs
-        ]
-      )
-    );
-
-  a = writeText "a" (toString (lib.flatten [
-    (lib.forEach (map this.mkScopeFomNamedConfig this.namedConfigs) (scope:
-      [
-        (if scope.scopeConfig.mcs || lib.elem scope.scopeConfig.arch [ "AARCH64" "X64" ] then scope.slow else scope.slower)
-      ]
-    ))
-  ]));
-
-  o2 = scopes.arm.legacy.o2;
+  o2 = scopes.ARM.o2.withChannel.release.upstream;
   o2w = o2.wip;
-  rm = scopes.riscv64.mcs.o1;
+  rm = scopes.RISCV64_MCS.o1.release.upstream;
   rmt = rm.graphRefine.all.targetDir;
 
   stackBounds = graphRefineWith {
@@ -223,14 +204,10 @@ in rec {
     '';
   };
 
-  scopeWithHOL4Rev = { rev, ref ? "HEAD" }: overrideScope (self: super: {
-    scopeConfig = super.scopeConfig.override {
-      hol4Source = lib.cleanSource (builtins.fetchGit {
-        url = "https://github.com/coliasgroup/HOL";
-        inherit rev ref;
-      });
-    };
-    hol4Rev = rev;
-  });
-
+  scopeWithHol4Rev = { rev, ref ? "HEAD" }: overrideConfig {
+    hol4Source = lib.cleanSource (builtins.fetchGit {
+      url = "https://github.com/coliasgroup/HOL";
+      inherit rev ref;
+    });
+  };
 }

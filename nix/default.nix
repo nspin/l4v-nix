@@ -29,9 +29,9 @@ let
 
 in
 
-this.defaultScope //
+this.defaultScope // # TODO consider dropping
 this.scopes //
 this //
 {
-  inherit pkgs this;
+  inherit this pkgs;
 }
