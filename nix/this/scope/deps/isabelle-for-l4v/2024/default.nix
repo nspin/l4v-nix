@@ -20,6 +20,7 @@ isabelle.overrideAttrs (attrs:
       ./permissions.patch
     ];
   } // lib.optionalAttrs (scopeConfig.isabelleSource != null) {
+    name = "${attrs.name}-for-seL4";
     src = scopeConfig.isabelleSource;
     sourceRoot = null;
     postUnpack = ''
