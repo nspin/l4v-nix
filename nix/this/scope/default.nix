@@ -183,11 +183,19 @@ with self; {
     ;
   };
 
-  withMLton = mlton: lib.extendDerivation true { inherit mlton; };
+  mltonForL4v = mlton20210117;
 
-  polyml59ForHol4 = lib.overrideDerivation polyml (attrs: {
+  ghcWithPackagesForL4v = callPackage  ./deps/ghc-with-packages-for-l4v {};
+
+  isabelleForL4v = callPackage ./deps/isabelle-for-l4v {};
+
+  stdenvForHol4 = gcc9Stdenv;
+
+  polymlForHol4 = lib.overrideDerivation polyml (attrs: {
     configureFlags = [ "--enable-shared" ];
   });
+
+  mltonForHol4 = mlton20210117;
 
   sonolarBinary = callPackage ./deps/solvers-for-graph-refine/sonolar-binary.nix {};
   cvc4BinariesFromIsabelle = callPackage ./deps/solvers-for-graph-refine/cvc4-binaries-from-isabelle.nix {};
@@ -197,15 +205,6 @@ with self; {
   bitwuzla_0_2_0 = pkgsStatic.callPackage ./deps/solvers-for-graph-refine/bitwuzla-0.2.0.nix {
     pkgsDynamic = pkgs;
   };
-
-  ### choices ###
-
-  isabelleForL4v = withMLton mlton20210117 (callPackage ./deps/isabelle-for-l4v {});
-  ghcWithPackagesForL4v = callPackage  ./deps/ghc-with-packages-for-l4v {};
-
-  stdenvForHol4 = gcc9Stdenv;
-  polymlForHol4 = polyml59ForHol4;
-  mltonForHol4 = mlton20210117;
 
   ### aggregate ###
 
@@ -267,16 +266,15 @@ with self; {
   ));
 
   ### helpers ###
-
-  smtlib2-indent = python3Packages.callPackage ./helpers/smtlib2-indent {};
-
   cppLink = linkFarm "cpp-link" {
     "bin/cpp" = "${scopeConfig.targetCC}/bin/${scopeConfig.targetPrefix}cpp";
   };
 
-  containerXauthority = callPackage ./container-xauthority {};
-
   l4vEnv = callPackage ./l4v-env.nix {};
+
+  containerXauthority = callPackage ./helpers/container-xauthority {};
+
+  smtlib2-indent = python3Packages.callPackage ./helpers/smtlib2-indent {};
 
   ### wip ###
 

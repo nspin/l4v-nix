@@ -2,9 +2,12 @@
 , stdenv
 , isabelle
 , scopeConfig
+, mltonForL4v
 }:
 
-isabelle.overrideAttrs (attrs:
+lib.extendDerivation true {
+  mlton = mltonForL4v;
+} (isabelle.overrideAttrs (attrs:
   let
     origSrc = stdenv.mkDerivation {
       name = "isabelle-src";
@@ -39,4 +42,4 @@ isabelle.overrideAttrs (attrs:
       touch heaps
     '';
   }
-)
+))
