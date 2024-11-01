@@ -73,7 +73,8 @@ in rec {
       (lib.flatten
         [
           this.kernelPairs.tip.upstream.legacy.scopes.aarch64.legacy.o1.cProofs
-          this.kernelPairs.tip.upstream.legacy.scopes.x64.legacy.o1.cProofs
+          # this.kernelPairs.tip.upstream.legacy.scopes.x64.legacy.o1.cProofs
+          # this.kernelPairs.release.upstream.legacy.scopes.aarch64.legacy.o1.cProofs
         ]
       )
     );

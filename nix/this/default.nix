@@ -114,7 +114,7 @@ rec {
       tip = rec {
         upstream = rec {
           legacy = fetchPair {
-            seL4 = "c5b23791ea9f65efc4312c161dd173b7238c5e80"; # ancestor of u/master
+            seL4 = "caa2cd03ee2b48e44efc52a620b9a5a79df9de46"; # ancestor of u/master
             l4v = "4f0706ef42cb205f534462faf787b6b6a076888d";
           };
           mcs = fetchPair {
