@@ -183,11 +183,7 @@ with self; {
     ;
   };
 
-  ghcWithPackagesForL4vByLTS = callPackage  ./deps/ghc-with-packages-for-l4v {};
-
   withMLton = mlton: lib.extendDerivation true { inherit mlton; };
-
-  isabelle2024ForL4v = withMLton mlton20210117 (callPackage ./deps/isabelle-for-l4v/2024 {});
 
   polyml59ForHol4 = lib.overrideDerivation polyml (attrs: {
     configureFlags = [ "--enable-shared" ];
@@ -204,16 +200,12 @@ with self; {
 
   ### choices ###
 
-  stdenvForHol4 = gcc9Stdenv;
+  isabelleForL4v = withMLton mlton20210117 (callPackage ./deps/isabelle-for-l4v {});
+  ghcWithPackagesForL4v = callPackage  ./deps/ghc-with-packages-for-l4v {};
 
+  stdenvForHol4 = gcc9Stdenv;
   polymlForHol4 = polyml59ForHol4;
   mltonForHol4 = mlton20210117;
-
-  isabelleForL4v = {
-    "2024" = isabelle2024ForL4v;
-  }.${scopeConfig.isabelleVersion};
-
-  ghcWithPackagesForL4v = ghcWithPackagesForL4vByLTS.${scopeConfig.stackLTSAttr};
 
   ### aggregate ###
 

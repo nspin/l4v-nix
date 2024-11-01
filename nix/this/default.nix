@@ -27,8 +27,6 @@ rec {
     , bvSandboxSource ? gitignoreSource ../../projects/bv-sandbox
     # , isabelleSource ? seL4IsabelleSource
     , isabelleSource ? null # TODO
-    , isabelleVersion ? "2024"
-    , stackLTSAttr ? "lts_20_25"
     , bvSetupSupport ? lib.elem arch [ "ARM" "RISCV64" ] && !mcs && /* TODO */ !(arch == "RISCV64" && optLevel == "-O2")
     , bvSupport ? bvSetupSupport && lib.elem arch [ "ARM" ]
     , bvExclude ? ({
@@ -54,8 +52,6 @@ rec {
         graphRefineSource
         bvSandboxSource
         isabelleSource
-        isabelleVersion
-        stackLTSAttr
         bvSetupSupport
         bvSupport
         bvExclude
