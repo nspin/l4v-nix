@@ -72,9 +72,19 @@ in rec {
     (toString
       (lib.flatten
         [
+          this.kernelPairs.tip.upstream.legacy.scopes.arm.legacy.o1.cProofs
+          this.kernelPairs.tip.upstream.legacy.scopes.armHyp.legacy.o1.cProofs
+          this.kernelPairs.tip.upstream.legacy.scopes.riscv64.legacy.o1.cProofs
+          this.kernelPairs.tip.upstream.mcs.scopes.riscv64.mcs.o1.cProofs
           this.kernelPairs.tip.upstream.legacy.scopes.aarch64.legacy.o1.cProofs
-          # this.kernelPairs.tip.upstream.legacy.scopes.x64.legacy.o1.cProofs
+          this.kernelPairs.tip.upstream.legacy.scopes.x64.legacy.o1.cProofs
+
+          # this.kernelPairs.release.upstream.legacy.scopes.arm.legacy.o1.cProofs
+          # this.kernelPairs.release.upstream.legacy.scopes.armHyp.legacy.o1.cProofs
+          # this.kernelPairs.release.upstream.legacy.scopes.riscv64.legacy.o1.cProofs
+          # this.kernelPairs.release.upstream.legacy.scopes.riscv64.mcs.o1.cProofs
           # this.kernelPairs.release.upstream.legacy.scopes.aarch64.legacy.o1.cProofs
+          # this.kernelPairs.release.upstream.legacy.scopes.x64.legacy.o1.cProofs
         ]
       )
     );
