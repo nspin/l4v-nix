@@ -23,7 +23,7 @@ lib.extendDerivation true {
       ./permissions.patch
     ];
   } // lib.optionalAttrs (scopeConfig.isabelleSource != null) {
-    name = "${attrs.name}-for-seL4";
+    name = "${attrs.pname}-${attrs.version}-for-seL4";
     src = scopeConfig.isabelleSource;
     sourceRoot = null;
     postUnpack = ''

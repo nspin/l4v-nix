@@ -51,6 +51,12 @@ in rec {
     ))
   ]));
 
+  withSeL4Isabelle = overrideScope (self: super: {
+    scopeConfig = super.scopeConfig.override {
+      isabelleSource = this.seL4IsabelleSource;
+    };
+  });
+
   xxx = writeText "x"
     (toString
       (lib.flatten
