@@ -1,10 +1,10 @@
-{ stdenv
+{ stdenvNoCC
 , python3
 , cmake
 , scopeConfig
 }:
 
-stdenv.mkDerivation {
+stdenvNoCC.mkDerivation {
   name = "sel4-source";
 
   src = scopeConfig.seL4Source;

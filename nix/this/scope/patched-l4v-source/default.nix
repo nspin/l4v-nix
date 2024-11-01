@@ -1,9 +1,9 @@
-{ stdenv
+{ stdenvNoCC
 , python3
 , scopeConfig
 }:
 
-stdenv.mkDerivation {
+stdenvNoCC.mkDerivation {
   name = "l4v-source";
 
   src = scopeConfig.l4vSource;
