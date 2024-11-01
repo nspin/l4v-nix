@@ -25,20 +25,19 @@ rec {
     , hol4Source ? gitignoreSource ../../projects/HOL4
     , graphRefineSource ? gitignoreSource ../../projects/graph-refine
     , bvSandboxSource ? gitignoreSource ../../projects/bv-sandbox
-    # , isabelleSource ? seL4IsabelleSource
     , isabelleSource ? null # TODO
-    , bvSetupSupport ? lib.elem arch [ "ARM" "RISCV64" ] && !mcs && /* TODO */ !(arch == "RISCV64" && optLevel == "-O2")
-    , bvSupport ? bvSetupSupport && lib.elem arch [ "ARM" ]
-    , bvExclude ? ({
-        "ARM-O1" = [ "init_freemem" ];
-        "ARM-O2" = [ "init_freemem" "decodeARMMMUInvocation" ];
-      }."${arch}${optLevel}" or null)
     , l4vName ? "${arch}${
         lib.optionalString (features != "") "-${features}"
       }${
         lib.optionalString (plat != "") "-${plat}"
       }"
     , bvName ? "${l4vName}${optLevel}-${targetCC.name}"
+    , bvSetupSupport ? lib.elem arch [ "ARM" "RISCV64" ] && !mcs && /* TODO */ !(arch == "RISCV64" && optLevel == "-O2")
+    , bvSupport ? bvSetupSupport && lib.elem arch [ "ARM" ]
+    , bvExclude ? ({
+        "ARM-O1" = [ "init_freemem" ];
+        "ARM-O2" = [ "init_freemem" "decodeARMMMUInvocation" ];
+      }."${arch}${optLevel}" or null)
     }:
     {
       inherit
