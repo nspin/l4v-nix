@@ -334,7 +334,7 @@ rec {
       )
     );
 
-  defaultScope = scopes.ARM;
+  defaultScope = scopes.ARM.o1;
 
   tests = writeText "aggregate-tests" (toString (lib.flatten [
     (lib.forEach (lib.attrValues scopesWithOptLevels) (scope: lib.optionals (scope.scopeConfig.plat == "") [
