@@ -90,17 +90,22 @@ rec {
 
   schedulerNameFromWhetherMCS = mcs: if mcs then "mcs" else "legacy";
 
-  archSupportsVerifiedMCS = arch: lib.elem arch [ "ARM" "RISCV64" ];
+  isMCSVerifiedForArch = lib.hasAttr {
+    arm = null;
+    riscv64 = null;
+  };
 
-  platsForArch = arch: {
-    AARCH64 = [
+  verifiedSchedulersForArch = archName: [ "legacy" ] ++ lib.optional (isMCSVerifiedForArch archName) "mcs";
+
+  platsForArch = archName: {
+    aarch64 = [
       "bcm2711"
       "hikey"
       "odroidc2"
       "odroidc4"
       "zynqmp"
     ];
-    ARM = [
+    arm = [
       "exynos4"
       "exynos5410"
       "exynos5422"
@@ -110,11 +115,11 @@ rec {
       "zynqmp"
       "imx8mm"
     ];
-    ARM_HYP = [
+    armHyp = [
       "exynos5"
       "exynos5410"
     ];
-  }.${arch} or [];
+  }.${archName} or [];
 
   optLevels = {
     o0 = "-O0";
@@ -274,14 +279,28 @@ rec {
           );
     });
 
-  x = {
-    arch = lib.attrValues archs;
-    mcs = lib.attrValues schedulers;
-    plat = [
-      ""
+  # namedConfigs' =
+  #   lib.flip lib.concatMap (lib.attrNames archs) (archName:
+  #     lib.flip lib.concatMap (verifiedSchedulersForArch archName) (schedulerName:
+  #       lib.flip lib.concatMap (platsForArch archName ++ [ "" ]) (plat:
+  #         # lib.flip lib.concatMap [ null "o1" "o2" ] (optLevel:
+  #           {
+  #             arch = archs.${archName};
+  #             mcs = schedulers.${schedulerName};
+  #             inherit plat;
+  #             # inherit optLevel;
+  #           }
+  #         # )
+  #       )
+  #     )
+  #   );
 
-    ]
-  };
+  # namedScopes' = lib.listToAttrs (lib.forEach namedConfigs' (config: rec {
+  #   name = value.l4vName;
+  #   value = mkScope config;
+  # }));
+ 
+  # x = namedScopes';
 
   # TODO
   # mkScopeTreeBy = argChoices: commonArgs:
@@ -334,7 +353,7 @@ rec {
       lib.flip lib.concatMap (lib.attrNames schedulers) (schedulerName:
         lib.flip lib.concatMap (lib.attrNames optLevels) (optLevelName:
           lib.optional
-            (lib.elem optLevelName [ "o1" "o2" ] && (schedulerName == "legacy" || archSupportsVerifiedMCS archs.${archName}))
+            (lib.elem optLevelName [ "o1" "o2" ] && (schedulerName == "legacy" || isMCSVerifiedForArch archName))
             {
               inherit archName schedulerName optLevelName;
             }
