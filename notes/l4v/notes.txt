@@ -1,5 +1,6 @@
 -j3 --cores 1 for l4vAll works well
 
 l4v seems to consume ~3gb per --core
+-j2 --cores 6 has good utlilzation
 
 for shell: USER_HOME
