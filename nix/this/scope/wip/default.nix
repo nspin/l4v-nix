@@ -40,6 +40,18 @@ let
 
 in rec {
 
+  withSeL4Isabelle = overrideScope (self: super: {
+    scopeConfig = super.scopeConfig.override {
+      useSeL4Isabelle = true;
+    };
+  });
+
+  withoutSeL4Isabelle = overrideScope (self: super: {
+    scopeConfig = super.scopeConfig.override {
+      useSeL4Isabelle = false;
+    };
+  });
+
   keep = writeText "keep" (toString (lib.flatten [
     # this.scopes.arm.legacy.o1.all
     # this.displayStatus
@@ -51,11 +63,6 @@ in rec {
     ))
   ]));
 
-  withSeL4Isabelle = overrideScope (self: super: {
-    scopeConfig = super.scopeConfig.override {
-      useSeL4Isabelle = true;
-    };
-  });
 
   xxx = writeText "x"
     (toString

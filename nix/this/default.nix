@@ -27,11 +27,7 @@ rec {
     , bvSandboxSource ? gitignoreSource ../../projects/bv-sandbox
     , seL4IsabelleSource ? defaultSeL4IsabelleSource
     , useSeL4Isabelle ? true
-    , l4vName ? "${arch}${
-        lib.optionalString (features != "") "-${features}"
-      }${
-        lib.optionalString (plat != "") "-${plat}"
-      }"
+    , l4vName ? "${arch}${nameModification features}${nameModification plat}"
     , bvName ? "${l4vName}${optLevel}-${targetCC.name}"
     , bvSetupSupport ? lib.elem arch [ "ARM" "RISCV64" ] && !mcs && /* TODO */ !(arch == "RISCV64" && optLevel == "-O2")
     , bvSupport ? bvSetupSupport && lib.elem arch [ "ARM" ]
@@ -42,9 +38,8 @@ rec {
     }:
     {
       inherit
-        arch features plat
+        arch mcs features plat
         optLevel
-        mcs
         targetCC targetBintools targetPrefix
         seL4Source
         l4vSource
@@ -60,6 +55,8 @@ rec {
         bvName
       ;
     };
+
+  nameModification = tag: lib.optionalString (tag != "") "-${tag}";
 
   gitignore = callPackage ./gitignore.nix {};
 
@@ -80,6 +77,7 @@ rec {
 
   defaultSeL4IsabelleSource = builtins.fetchGit {
     url = "https://github.com/seL4/isabelle.git";
+    # TODO
     # ref = "ts-2024";
     # rev = "e0dd5a6d89d2c0b37e7f1ffe0105050189136b75";
     ref = "Isabelle2024";
