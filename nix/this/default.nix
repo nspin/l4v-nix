@@ -7,7 +7,17 @@
 
 rec {
 
-  mkScope = args: lib.makeScope newScope (callPackage ./scope {} args);
+  mkScope = scopeConfigArgs: lib.makeScope newScope
+    (self:
+      ((callPackage ./scope {} self) // {
+        scopeConfig = lib.makeOverridable mkScopeConfig scopeConfigArgs;
+        overrideConfig = f: self.overrideScope (self: super: {
+          scopeConfig = super.scopeConfig.override f;
+        });
+      } // mkScopeExtension {
+        inherit (self) overrideConfig;
+        superScopeConfig = self.scopeConfig;
+      }));
 
   mkScopeConfig =
     { arch
@@ -15,26 +25,36 @@ rec {
     , features ? lib.optionalString mcs "MCS"
     , plat ? ""
     , optLevel ? "-O1"
+
     , targetCCWrapperAttr ? targetCCWrapperAttrForConfig { inherit arch bvSupport; }
     , targetCCWrapper ? targetPkgsByL4vArch."${arch}".buildPackages."${targetCCWrapperAttr}"
     , targetCC ? targetCCWrapper.cc
     , targetBintools ? targetCCWrapper.bintools.bintools
     , targetPrefix ? targetCCWrapper.targetPrefix
-    , seL4Source ? kernelPairs.local.sources.seL4
-    , l4vSource ? kernelPairs.local.sources.l4v
-    , hol4Source ? localHol4Source
-    , graphRefineSource ? gitignoreSource ../../projects/graph-refine
-    , bvSandboxSource ? gitignoreSource ../../projects/bv-sandbox
+
+    , localSeL4Source ? ../../projects/seL4
+    , seL4Source ? gitignoreSource localSeL4Source
+    , localL4vSource ? ../../projects/l4v
+    , l4vSource ? gitignore.gitignoreSource localL4vSource
+    , localHol4Source ? ../../projects/HOL4
+    , hol4Source ? cleanHol4Source localHol4Source
+    , localGraphRefineSource ? ../../projects/graph-refine
+    , graphRefineSource ? gitignoreSource localGraphRefineSource
+    , localBVSandboxSource ? ../../projects/bv-sandbox
+    , bvSandboxSource ? gitignoreSource localBVSandboxSource
     , seL4IsabelleSource ? defaultSeL4IsabelleSource
     , useSeL4Isabelle ? true
+
+    , configName ? bvName
     , l4vName ? "${arch}${nameModification features}${nameModification plat}"
     , bvName ? "${l4vName}${optLevel}-${targetCC.name}"
+
     , bvSetupSupport ? lib.elem arch [ "ARM" "RISCV64" ] && !mcs && /* TODO */ !(arch == "RISCV64" && optLevel == "-O2")
     , bvSupport ? bvSetupSupport && lib.elem arch [ "ARM" ]
     , bvExclude ? ({
-        "ARM-O1" = [ "init_freemem" ];
-        "ARM-O2" = [ "init_freemem" "decodeARMMMUInvocation" ];
-      }."${arch}${optLevel}" or null)
+        "ARM-O1-arm-none-eabi-gcc-6.5.0" = [ "init_freemem" ];
+        "ARM-O2-arm-none-eabi-gcc-6.5.0" = [ "init_freemem" "decodeARMMMUInvocation" ];
+      }."${bvName}" or (lib.warn "bvExclude not specified for ${bvName}" null))
     }:
     {
       inherit
@@ -51,100 +71,10 @@ rec {
         bvSetupSupport
         bvSupport
         bvExclude
+        configName
         l4vName
         bvName
       ;
-    };
-
-  nameModification = tag: lib.optionalString (tag != "") "-${tag}";
-
-  gitignore = callPackage ./gitignore.nix {};
-
-  inherit (gitignore) gitignoreSource;
-
-  localSeL4Source = gitignore.gitignoreSource ../../projects/seL4;
-  localL4vSource = gitignore.gitignoreSource ../../projects/l4v;
-
-  localHol4Source = lib.cleanSourceWith rec {
-    src = ../../projects/HOL4;
-    filter = gitignore.gitignoreFilterWith {
-      basePath = src;
-      extraRules = ''
-        !/sigobj/*
-      '';
-    };
-  };
-
-  defaultSeL4IsabelleSource = builtins.fetchGit {
-    url = "https://github.com/seL4/isabelle.git";
-    # TODO
-    # ref = "ts-2024";
-    # rev = "e0dd5a6d89d2c0b37e7f1ffe0105050189136b75";
-    ref = "Isabelle2024";
-    rev = "74b2d1278b57797572abe5842e318d17ed131c55";
-  };
-
-  mkKeepRef = rev: "keep/${builtins.substring 0 32 rev}";
-
-  fetchGitFromColiasGroup = { repo, rev }: builtins.fetchGit rec {
-    url = "https://github.com/coliasgroup/${repo}.git";
-    ref = mkKeepRef rev;
-    inherit rev;
-  };
-
-  kernelPairs =
-    let
-      fetchPair = revs: mkPair (lib.flip lib.mapAttrs revs (repo: rev: fetchGitFromColiasGroup {
-        inherit repo rev;
-      }));
-      mkPair = sources: {
-        inherit sources;
-        scopes = mkScopeTreeFromNamedConfigs (lib.forEach namedConfigs (config: config // {
-          seL4Source = sources.seL4Source;
-          l4vSource = sources.l4vSource;
-        }));
-      };
-    in {
-      local = mkPair {
-        seL4 = gitignoreSource ../../projects/seL4;
-        l4v = localL4vSource;
-      };
-      release = rec {
-        upstream = {
-          legacy = fetchPair {
-            seL4 = "cd6d3b8c25d49be2b100b0608cf0613483a6fffa"; # seL4/seL4:13.0.0
-            l4v = "f4054b0649446fb4ea03115f4b18160472964026"; # direct downstream of seL4/l4v:seL4-13.0.0
-          };
-        };
-        downstream = {
-          legacy = fetchPair {
-            seL4 = "fef10c54376af898eaf26e38e2c79b2bf156ac40"; # coliasgroup:verification-reproducability
-            l4v = throw "todo";
-          };
-        };
-      };
-      tip = rec {
-        upstream = rec {
-          legacy = fetchPair {
-            seL4 = "caa2cd03ee2b48e44efc52a620b9a5a79df9de46"; # ancestor of u/master
-            l4v = "6ec3e2c701bf066aac85eba67e894191e3fcacb7";
-          };
-          mcs = fetchPair {
-            seL4 = legacy.seL4;
-            l4v = "79039b0e26e6abd93e083d23b5e54a6a0cf2d494";
-          };
-        };
-        downstream = rec {
-          legacy = fetchPair {
-            seL4 = throw "todo"; # direct downstream of upstream.legacy.seL4
-            l4v = throw "todo";
-          };
-          mcs = fetchPair {
-            seL4 = legacy.seL4;
-            l4v = throw "todo";
-          };
-        };
-      };
     };
 
   archs = {
@@ -159,6 +89,8 @@ rec {
     legacy = false;
     mcs = true;
   };
+
+  schedulerNameFromWhetherMCS = mcs: if mcs then "mcs" else "legacy";
 
   archSupportsVerifiedMCS = arch: lib.elem arch [ "ARM" "RISCV64" ];
 
@@ -188,27 +120,176 @@ rec {
   riscv64Pkgs = pkgsCross.riscv64-embedded;
   x64Pkgs = pkgs;
 
-  mkOverridableScopeFromConfigArgs = scopeConfigArgs: mkScope {
-    scopeConfig = lib.makeOverridable mkScopeConfig scopeConfigArgs;
+  nameModification = tag: lib.optionalString (tag != "") "-${tag}";
+
+  gitignore = callPackage ./gitignore.nix {};
+
+  inherit (gitignore) gitignoreSource;
+
+  cleanHol4Source = src: lib.cleanSourceWith {
+    inherit src;
+    filter = gitignore.gitignoreFilterWith {
+      basePath = src;
+      extraRules = ''
+        !/sigobj/*
+      '';
+    };
   };
 
+  # TODO
+  # defaultSeL4IsabelleSource = downstreamGitIsabelleSource;
+  defaultSeL4IsabelleSource = upstreamGitIsabelleSource;
+
+  downstreamGitIsabelleSource = builtins.fetchGit {
+    url = "https://github.com/seL4/isabelle.git";
+    ref = "ts-2024";
+    rev = "e0dd5a6d89d2c0b37e7f1ffe0105050189136b75";
+  };
+
+  upstreamGitIsabelleSource = builtins.fetchGit {
+    url = "https://github.com/seL4/isabelle.git";
+    ref = "Isabelle2024";
+    rev = "74b2d1278b57797572abe5842e318d17ed131c55";
+  };
+
+  mkKeepRef = rev: "refs/tags/keep/${builtins.substring 0 32 rev}";
+
+  fetchGitFromColiasGroup = { repo, rev }: builtins.fetchGit rec {
+    url = "https://github.com/coliasgroup/${repo}.git";
+    ref = mkKeepRef rev;
+    inherit rev;
+  };
+
+  channelSources =
+    let
+      mkSources = revs:
+        let
+          fetched = lib.flip lib.mapAttrs revs (repo: rev: fetchGitFromColiasGroup {
+            inherit repo rev;
+          });
+        in {
+          seL4Source = fetched.seL4;
+          l4vSource = fetched.l4v;
+        };
+    in {
+      release = {
+        upstream = {
+          legacy = mkSources {
+            seL4 = "cd6d3b8c25d49be2b100b0608cf0613483a6fffa"; # seL4/seL4:13.0.0
+            l4v = "f4054b0649446fb4ea03115f4b18160472964026"; # direct downstream of seL4/l4v:seL4-13.0.0
+          };
+        };
+        downstream = {
+          legacy = mkSources {
+            seL4 = "fef10c54376af898eaf26e38e2c79b2bf156ac40"; # coliasgroup:verification-reproducability
+            l4v = throw "todo";
+          };
+        };
+      };
+      tip = {
+        upstream =
+          let
+            seL4 = "caa2cd03ee2b48e44efc52a620b9a5a79df9de46"; # ancestor of u/master
+          in {
+            legacy = mkSources {
+              inherit seL4;
+              l4v = "6ec3e2c701bf066aac85eba67e894191e3fcacb7";
+            };
+            mcs = mkSources {
+              inherit seL4;
+              l4v = "79039b0e26e6abd93e083d23b5e54a6a0cf2d494";
+            };
+          };
+        downstream =
+          let
+            seL4 = throw "todo"; # direct downstream of upstream.legacy.seL4
+          in {
+            legacy = mkSources {
+              inherit seL4;
+              l4v = throw "todo";
+            };
+            mcs = mkSources {
+              inherit seL4;
+              l4v = throw "todo";
+            };
+          };
+      };
+    };
+
+
+  mkScopeExtension = { overrideConfig, superScopeConfig }:
+    let
+    in {
+      withOptLevel = lib.flip lib.mapAttrs optLevels (_: optLevel:
+        overrideConfig {
+          inherit optLevel;
+        }
+      );
+
+      withGCC = lib.flip lib.mapAttrs targetCCWrapperAttrs (_: targetCCWrapperAttr:
+        overrideConfig {
+          inherit targetCCWrapperAttr;
+        }
+      );
+
+      withSeL4Isabelle = overrideConfig {
+        useSeL4Isabelle = true;
+      };
+
+      withoutSeL4Isabelle = overrideConfig {
+        useSeL4Isabelle = false;
+      };
+
+      withChannel =
+        let
+          schedulerName = schedulerNameFromWhetherMCS superScopeConfig.mcs;
+        in
+          lib.flip lib.mapAttrs channelSources (_isRelease: isReleaseAttrs:
+            lib.flip lib.mapAttrs isReleaseAttrs (_isUpstream: isUpstreamAttrs:
+              overrideConfig (isUpstreamAttrs.${schedulerName})
+            )
+          );
+    };
+
+  # TODO
+  # mkScopeTreeBy = argChoices: commonArgs:
+  #   let
+  #     x = lib.cartesianProduct (lib.mapAttrs (_: choices: lib.attrNames choices) argChoices);
+  #     y = lib.forEach x (choices:
+  #     );
+  #   in
+  # ;
+
+  byChannel =
+    lib.flip lib.mapAttrs channelSources (_isRelease: isReleaseAttrs:
+      lib.flip lib.mapAttrs isReleaseAttrs (_isUpstream: isUpstreamAttrs:
+        lib.flip lib.mapAttrs isUpstreamAttrs (_isLegacy: isLegacyAttrs:
+          mkScopeTreeFromNamedConfigsWith (scope:
+            scope.overrideConfig isLegacyAttrs
+          ) namedConfigs
+        )
+      )
+    );
+
   mkScopeFomNamedConfig =
-    { archName, schedulerName, optLevelName, ... } @ args:
-    mkOverridableScopeFromConfigArgs ({
+    { archName, schedulerName, optLevelName, targetCCWrapperAttrName ? null } @ args:
+    mkScope ({
       arch = archs.${archName};
       mcs = schedulers.${schedulerName};
       optLevel = optLevels.${optLevelName};
-    } // lib.optionalAttrs (args ? targetCCWrapperAttrName) {
-      targetCCWrapperAttr = targetCCWrapperAttrs.${args.targetCCWrapperAttrName};
+    } // lib.optionalAttrs (targetCCWrapperAttrName != null) {
+      targetCCWrapperAttr = targetCCWrapperAttrs.${targetCCWrapperAttrName};
     });
 
-  mkScopeTreeFromNamedConfigs =
+  mkScopeTreeFromNamedConfigs = mkScopeTreeFromNamedConfigsWith lib.id;
+
+  mkScopeTreeFromNamedConfigsWith = modifyScope:
     let
       f =
-        { archName, schedulerName, optLevelName, ... } @ args:
+        { archName, schedulerName, optLevelName, targetCCWrapperAttrName ? null } @ args:
         lib.setAttrByPath
-          ([ archName schedulerName optLevelName ] ++ lib.optionals (args ? targetCCWrapperAttrName) [ args.targetCCWrapperAttrName ])
-          (mkScopeFomNamedConfig args);
+          ([ archName schedulerName optLevelName ] ++ lib.optionals (targetCCWrapperAttrName != null) [ targetCCWrapperAttrName ])
+          (modifyScope (mkScopeFomNamedConfig args));
     in
       namedConfigs': lib.fold lib.recursiveUpdate {} (map f namedConfigs');
 
@@ -271,7 +352,7 @@ rec {
   displayStatus =
     let
       mk = f: scope: {
-        name = scope.configName;
+        name = scope.scopeConfig.configName;
         path = f scope;
       };
       all = scope: scope.graphRefine.all;

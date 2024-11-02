@@ -14,26 +14,9 @@
 , mlton20210117
 }:
 
-{ scopeConfig
-}:
-
-# scopeConfig gymnastics allow for overriding
-
-let
-  origScopeConifig = scopeConfig;
-in
-
 self:
 
-let
-  scopeConfig = self.scopeConfig;
-in
-
 with self; {
-
-  scopeConfig = origScopeConifig;
-
-  configName = "${scopeConfig.arch}${lib.optionalString (scopeConfig.features != "") "_${scopeConfig.features}"}${scopeConfig.optLevel}";
 
   ### sources ###
 

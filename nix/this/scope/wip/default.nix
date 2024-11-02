@@ -40,18 +40,6 @@ let
 
 in rec {
 
-  withSeL4Isabelle = overrideScope (self: super: {
-    scopeConfig = super.scopeConfig.override {
-      useSeL4Isabelle = true;
-    };
-  });
-
-  withoutSeL4Isabelle = overrideScope (self: super: {
-    scopeConfig = super.scopeConfig.override {
-      useSeL4Isabelle = false;
-    };
-  });
-
   keep = writeText "keep" (toString (lib.flatten [
     # this.scopes.arm.legacy.o1.all
     # this.displayStatus
@@ -62,7 +50,6 @@ in rec {
       ]
     ))
   ]));
-
 
   xxx = writeText "x"
     (toString
@@ -85,19 +72,19 @@ in rec {
     (toString
       (lib.flatten
         [
-          # this.kernelPairs.tip.upstream.legacy.scopes.arm.legacy.o1.cProofs
-          # this.kernelPairs.tip.upstream.legacy.scopes.armHyp.legacy.o1.cProofs
-          # this.kernelPairs.tip.upstream.legacy.scopes.riscv64.legacy.o1.cProofs
-          this.kernelPairs.tip.upstream.mcs.scopes.riscv64.mcs.o1.cProofs
-          # this.kernelPairs.tip.upstream.legacy.scopes.aarch64.legacy.o1.cProofs
-          # this.kernelPairs.tip.upstream.legacy.scopes.x64.legacy.o1.cProofs
+          this.byChannel.tip.upstream.legacy.arm.legacy.o1.cProofs
+          this.byChannel.tip.upstream.legacy.armHyp.legacy.o1.cProofs
+          this.byChannel.tip.upstream.legacy.aarch64.legacy.o1.cProofs
+          this.byChannel.tip.upstream.legacy.riscv64.legacy.o1.cProofs
+          this.byChannel.tip.upstream.mcs.riscv64.mcs.o1.cProofs
+          this.byChannel.tip.upstream.legacy.x64.legacy.o1.cProofs
 
-          # this.kernelPairs.release.upstream.legacy.scopes.arm.legacy.o1.cProofs
-          # this.kernelPairs.release.upstream.legacy.scopes.armHyp.legacy.o1.cProofs
-          # this.kernelPairs.release.upstream.legacy.scopes.riscv64.legacy.o1.cProofs
-          # this.kernelPairs.release.upstream.legacy.scopes.riscv64.mcs.o1.cProofs
-          # this.kernelPairs.release.upstream.legacy.scopes.aarch64.legacy.o1.cProofs
-          # this.kernelPairs.release.upstream.legacy.scopes.x64.legacy.o1.cProofs
+          this.byChannel.release.upstream.legacy.arm.legacy.o1.cProofs
+          this.byChannel.release.upstream.legacy.armHyp.legacy.o1.cProofs
+          this.byChannel.release.upstream.legacy.aarch64.legacy.o1.cProofs
+          this.byChannel.release.upstream.legacy.riscv64.legacy.o1.cProofs
+          this.byChannel.release.upstream.mcs.riscv64.mcs.o1.cProofs
+          this.byChannel.release.upstream.legacy.x64.legacy.o1.cProofs
         ]
       )
     );
