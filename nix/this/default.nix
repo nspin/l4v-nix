@@ -288,17 +288,12 @@ rec {
         let
           mcs = schedulers.${schedulerName};
         in
-        lib.flip lib.concatMap (platsForArchAndScheduler {
-          inherit arch mcs; 
-        } ++ [ "" ]) (plat:
-          # lib.flip lib.concatMap [ null "o1" "o2" ] (optLevel:
-            [
-              {
-                inherit arch mcs plat;
-                # inherit optLevel;
-              }
-            ]
-          # )
+        lib.flip lib.concatMap (platsForArchAndScheduler { inherit arch mcs; } ++ [ "" ]) (plat:
+          [
+            {
+              inherit arch mcs plat;
+            }
+          ]
         )
       )
     );
