@@ -21,7 +21,6 @@ let
     ISABELLE_HEAPS=$ISABELLE_HOME_USER/$L4V_NAME
   '';
 
-  # TODO jedit_reset_font_size : int = 18
   jeditProperties = writeText "jedit-properties" ''
     view.fontsize=17
   '';

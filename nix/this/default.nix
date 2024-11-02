@@ -147,7 +147,7 @@ rec {
   riscv64Pkgs = pkgsCross.riscv64-embedded;
   x64Pkgs = pkgs;
 
-  # TODO "_"
+  # TODO(next) "_"
   nameModification = tag: lib.optionalString (tag != "") "-${tag}";
 
   gitignore = callPackage ./gitignore.nix {};
@@ -164,7 +164,7 @@ rec {
     };
   };
 
-  # TODO
+  # TODO(next)
   # defaultSeL4IsabelleSource = downstreamGitIsabelleSource;
   defaultSeL4IsabelleSource = upstreamGitIsabelleSource;
 
