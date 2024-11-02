@@ -284,7 +284,7 @@ rec {
     value = mkScope config;
   }));
 
-  namedConfigs_ =
+  namedConfigs =
     lib.flip lib.concatMap (lib.attrNames archs) (archName:
       let
         arch = archs.${archName};
@@ -303,107 +303,28 @@ rec {
       )
     );
 
-  namedScopes_ = mkScopes namedConfigs_;
-
-  x = namedScopes_;
-
-  allConfigs = lib.flip lib.concatMap namedConfigs_ (config:
-    lib.flip lib.concatMap (lib.attrValues optLevels) (optLevel:
-      lib.flip lib.concatMap (lib.attrValues targetCCWrapperAttrs) (targetCCWrapperAttr:
-        lib.singleton (config // {
-          inherit optLevel targetCCWrapperAttr;
-        })
-      )
-    )
-  );
-
-  all = writeText "aggregate-all" (toString (lib.flatten [
-    displayStatus
-    (lib.forEach (map mkScope allConfigs) (scope:
-      scope.all
-    ))
-  ]));
+  scopes = mkScopes namedConfigs;
 
   byChannel =
-    lib.flip lib.mapAttrs channelSources (_isRelease: isReleaseAttrs:
-      lib.flip lib.mapAttrs isReleaseAttrs (_isUpstream: isUpstreamAttrs:
-        lib.flip lib.mapAttrs isUpstreamAttrs (_isLegacy: isLegacyAttrs:
-          mkScopeTreeFromNamedConfigsWith (scope:
-            scope.overrideConfig isLegacyAttrs
-          ) namedConfigs
+    lib.flip lib.mapAttrs channelSources (_:
+      lib.mapAttrs (_:
+        lib.mapAttrs (_: configAttrs:
+          mkScopes (lib.forEach namedConfigs (config: config // configAttrs))
         )
       )
     );
 
-  mkScopeFomNamedConfig =
-    { archName, schedulerName, optLevelName, targetCCWrapperAttrName ? null } @ args:
-    mkScope ({
-      arch = archs.${archName};
-      mcs = schedulers.${schedulerName};
-      optLevel = optLevels.${optLevelName};
-    } // lib.optionalAttrs (targetCCWrapperAttrName != null) {
-      targetCCWrapperAttr = targetCCWrapperAttrs.${targetCCWrapperAttrName};
-    });
+  defaultScope = scopes.ARM;
 
-  mkScopeTreeFromNamedConfigs = mkScopeTreeFromNamedConfigsWith lib.id;
-
-  mkScopeTreeFromNamedConfigsWith = modifyScope:
-    let
-      f =
-        { archName, schedulerName, optLevelName, targetCCWrapperAttrName ? null } @ args:
-        lib.setAttrByPath
-          ([ archName schedulerName optLevelName ] ++ lib.optionals (targetCCWrapperAttrName != null) [ targetCCWrapperAttrName ])
-          (modifyScope (mkScopeFomNamedConfig args));
-    in
-      namedConfigs': lib.fold lib.recursiveUpdate {} (map f namedConfigs');
-
-  scopes = mkScopeTreeFromNamedConfigs namedConfigs;
-
-  allScopes = mkScopeTreeFromNamedConfigs allNamedConfigs;
-
-  namedConfigs =
-    lib.flip lib.concatMap (lib.attrNames archs) (archName:
-      lib.flip lib.concatMap (lib.attrNames schedulers) (schedulerName:
-        lib.flip lib.concatMap (lib.attrNames optLevels) (optLevelName:
-          lib.optional
-            (lib.elem optLevelName [ "o1" "o2" ] && (schedulerName == "legacy" || isMCSVerifiedForArch archName))
-            {
-              inherit archName schedulerName optLevelName;
-            }
-        )
-      )
-    );
-
-  allNamedConfigs =
-    lib.flip lib.concatMap (lib.attrNames archs) (archName:
-      lib.flip lib.concatMap (lib.attrNames schedulers) (schedulerName:
-        lib.flip lib.concatMap (lib.attrNames optLevels) (optLevelName:
-          lib.flip lib.concatMap (lib.attrNames targetCCWrapperAttrs) (targetCCWrapperAttrName:
-            lib.singleton {
-              inherit archName schedulerName optLevelName targetCCWrapperAttrName;
-            }
-          )
-        )
-      )
-    );
-
-  defaultScope = scopes.arm.legacy.o1;
-
-  # all = writeText "aggregate-all" (toString (lib.flatten [
-  #   displayStatus
-  #   (lib.forEach (map mkScopeFomNamedConfig namedConfigs) (scope:
-  #     scope.all
-  #   ))
-  # ]));
-
-  tests = writeText "tests" (toString (lib.flatten [
-    (lib.forEach (map mkScopeFomNamedConfig namedConfigs) (scope: [
-      (
-        if scope.scopeConfig.mcs || scope.scopeConfig.arch == "AARCH64" || scope.scopeConfig.arch == "X64"
-        then scope.slow
-        else scope.slower
-      )
-    ]))
+  tests = writeText "aggregate-tests" (toString (lib.flatten [
+    # TODO
+    # (lib.forEach (map mkScopeFomNamedConfig namedConfigs) (scope: [
+    #   (
+    #     if scope.scopeConfig.mcs || scope.scopeConfig.arch == "AARCH64" || scope.scopeConfig.arch == "X64"
+    #     then scope.slow
+    #     else scope.slower
+    #   )
+    # ]))
   ]));
 
   cached = writeText "aggregate-cached" (toString (lib.flatten [
@@ -420,9 +341,27 @@ rec {
       justTargetDir = scope: scope.graphRefine.all.targetDir;
     in
       linkFarm "display-status" [
-        (mk all namedScopes_.ARM.o1.withChannel.release.upstream)
-        (mk all namedScopes_.ARM.o2.withChannel.release.upstream)
-        (mk justTargetDir namedScopes_.RISCV64.o1.withChannel.release.upstream)
-        (mk justTargetDir namedScopes_.RISCV64.o2.withChannel.release.upstream)
+        (mk all scopes.ARM.o1.withChannel.release.upstream)
+        (mk all scopes.ARM.o2.withChannel.release.upstream)
+        (mk justTargetDir scopes.RISCV64.o1.withChannel.release.upstream)
+        (mk justTargetDir scopes.RISCV64.o2.withChannel.release.upstream)
       ];
+
+  allConfigs = lib.flip lib.concatMap namedConfigs (config:
+    lib.flip lib.concatMap (lib.attrValues optLevels) (optLevel:
+      lib.flip lib.concatMap (lib.attrValues targetCCWrapperAttrs) (targetCCWrapperAttr:
+        lib.singleton (config // {
+          inherit optLevel targetCCWrapperAttr;
+        })
+      )
+    )
+  );
+
+  all = writeText "aggregate-all" (toString (lib.flatten [
+    displayStatus
+    (lib.forEach (map mkScope allConfigs) (scope:
+      scope.all
+    ))
+  ]));
+
 }
