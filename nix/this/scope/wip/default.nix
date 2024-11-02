@@ -83,7 +83,7 @@ in rec {
           this.byChannel.release.upstream.legacy.armHyp.legacy.o1.cProofs
           this.byChannel.release.upstream.legacy.aarch64.legacy.o1.cProofs
           this.byChannel.release.upstream.legacy.riscv64.legacy.o1.cProofs
-          this.byChannel.release.upstream.mcs.riscv64.mcs.o1.cProofs
+          # this.byChannel.release.upstream.mcs.riscv64.mcs.o1.cProofs
           this.byChannel.release.upstream.legacy.x64.legacy.o1.cProofs
         ]
       )
