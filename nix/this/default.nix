@@ -279,7 +279,7 @@ rec {
           );
     });
 
-  namedConfigs' =
+  namedConfigs_ =
     lib.flip lib.concatMap (lib.attrNames archs) (archName:
       let
         arch = archs.${archName};
@@ -298,12 +298,12 @@ rec {
       )
     );
 
-  namedScopes' = lib.listToAttrs (lib.forEach namedConfigs' (config: rec {
+  namedScopes_ = lib.listToAttrs (lib.forEach namedConfigs_ (config: rec {
     name = value.scopeConfig.l4vName;
     value = mkScope config;
   }));
  
-  x = namedScopes';
+  x = namedScopes_;
 
   # TODO
   # mkScopeTreeBy = argChoices: commonArgs:

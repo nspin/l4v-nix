@@ -72,19 +72,19 @@ in rec {
     (toString
       (lib.flatten
         [
-          this.byChannel.tip.upstream.legacy.arm.legacy.o1.cProofs
-          this.byChannel.tip.upstream.legacy.armHyp.legacy.o1.cProofs
-          this.byChannel.tip.upstream.legacy.aarch64.legacy.o1.cProofs
-          this.byChannel.tip.upstream.legacy.riscv64.legacy.o1.cProofs
-          this.byChannel.tip.upstream.mcs.riscv64.mcs.o1.cProofs
-          this.byChannel.tip.upstream.legacy.x64.legacy.o1.cProofs
+          this.namedScopes_.ARM.withChannel.tip.upstream.cProofs
+          this.namedScopes_.ARM_HYP.withChannel.tip.upstream.cProofs
+          this.namedScopes_.AARCH64.withChannel.tip.upstream.cProofs
+          this.namedScopes_.RISCV64.withChannel.tip.upstream.cProofs
+          this.namedScopes_.RISCV64-MCS.withChannel.tip.upstream.cProofs
+          this.namedScopes_.X64.withChannel.tip.upstream.cProofs
 
-          this.byChannel.release.upstream.legacy.arm.legacy.o1.cProofs
-          this.byChannel.release.upstream.legacy.armHyp.legacy.o1.cProofs
-          this.byChannel.release.upstream.legacy.aarch64.legacy.o1.cProofs
-          this.byChannel.release.upstream.legacy.riscv64.legacy.o1.cProofs
-          # this.byChannel.release.upstream.mcs.riscv64.mcs.o1.cProofs
-          this.byChannel.release.upstream.legacy.x64.legacy.o1.cProofs
+          this.namedScopes_.ARM.withChannel.release.upstream.cProofs
+          this.namedScopes_.ARM_HYP.withChannel.release.upstream.cProofs
+          this.namedScopes_.AARCH64.withChannel.release.upstream.cProofs
+          this.namedScopes_.RISCV64.withChannel.release.upstream.cProofs
+          # this.namedScopes_.RISCV64-MCS.withChannel.release.upstream.cProofs
+          this.namedScopes_.X64.withChannel.release.upstream.cProofs
         ]
       )
     );
