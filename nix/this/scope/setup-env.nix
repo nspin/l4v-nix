@@ -22,7 +22,7 @@ let
   '';
 
   jeditProperties = writeText "jedit-properties" ''
-    view.fontsize=17
+    view.fontsize=18
   '';
 
 in
