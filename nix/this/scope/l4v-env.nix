@@ -75,7 +75,7 @@ mkShell {
       i jedit -d .
     }
 
-    ijb() {
+    ijr() {
       ij -R $1
     }
   '';
