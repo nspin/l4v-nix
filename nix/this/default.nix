@@ -90,7 +90,7 @@ rec {
 
   schedulerNameFromWhetherMCS = mcs: if mcs then "mcs" else "legacy";
 
-  isMCSVerifiedForArch = lib.hasAttr {
+  isMCSVerifiedForArch = lib.flip lib.hasAttr {
     arm = null;
     riscv64 = null;
   };
