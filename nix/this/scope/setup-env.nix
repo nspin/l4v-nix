@@ -18,6 +18,9 @@ let
     # Show bracket syntax for implications
     ISABELLE_JEDIT_OPTIONS="-m brackets"
 
+    echo foo >&2
+    exit 1
+
     USER_HEAPS=$ISABELLE_USER_HOME/$L4V_NAME
     ISABELLE_OUTPUT=$USER_HEAPS
     ISABELLE_PATH=$USER_HEAPS

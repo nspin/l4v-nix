@@ -72,11 +72,11 @@ mkShell {
     }
 
     ij() {
-      i jedit -d . -v
+      i jedit -d .
     }
 
     ijb() {
-      ij -b $1
+      ij -R $1
     }
   '';
 }
