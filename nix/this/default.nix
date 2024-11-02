@@ -216,7 +216,6 @@ rec {
       };
     };
 
-
   mkScopeExtension = { overrideConfig, superScopeConfig }:
     let
     in {
