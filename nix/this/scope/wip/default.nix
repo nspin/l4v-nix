@@ -17,6 +17,7 @@
 , cntr
 
 , scopeConfig
+, overrideConfig
 , l4vWith
 , graphRefine
 , graphRefineWith
@@ -40,6 +41,27 @@ let
 
 in rec {
 
+  x = writeText "x"
+    (toString
+      (lib.flatten
+        [
+          this.scopes.ARM.withChannel.tip.upstream.cProofs
+          this.scopes.ARM_HYP.withChannel.tip.upstream.cProofs
+          this.scopes.AARCH64.withChannel.tip.upstream.cProofs
+          this.scopes.RISCV64.withChannel.tip.upstream.cProofs
+          this.scopes.RISCV64-MCS.withChannel.tip.upstream.cProofs
+          this.scopes.X64.withChannel.tip.upstream.cProofs
+
+          this.scopes.ARM.withChannel.release.upstream.cProofs
+          this.scopes.ARM_HYP.withChannel.release.upstream.cProofs
+          this.scopes.AARCH64.withChannel.release.upstream.cProofs
+          this.scopes.RISCV64.withChannel.release.upstream.cProofs
+          # this.scopes.RISCV64-MCS.withChannel.release.upstream.cProofs
+          this.scopes.X64.withChannel.release.upstream.cProofs
+        ]
+      )
+    );
+
   keep = writeText "keep" (toString (lib.flatten [
     # this.scopes.arm.legacy.o1.all
     # this.displayStatus
@@ -51,43 +73,19 @@ in rec {
     ))
   ]));
 
-  xxx = writeText "x"
-    (toString
-      (lib.flatten
-        (lib.forEach (map this.mkScopeFomNamedConfig this.namedConfigs) (scope: [
+  xxx = writeText "x" (toString (lib.flatten [
+    (lib.forEach (map this.mkScopeFomNamedConfig this.namedConfigs) (scope: [
+      (
+        lib.optionals (!scope.scopeConfig.mcs) [
           (
-            lib.optionals (!scope.scopeConfig.mcs) [
-              (
-                if scope.scopeConfig.arch == "AARCH64" || scope.scopeConfig.arch == "X64"
-                then scope.slower
-                else scope.slow
-              )
-            ]
+            if scope.scopeConfig.arch == "AARCH64" || scope.scopeConfig.arch == "X64"
+            then scope.slower
+            else scope.slow
           )
-        ]))
-      )
-    );
-
-  yyy = writeText "y"
-    (toString
-      (lib.flatten
-        [
-          this.namedScopes_.ARM.withChannel.tip.upstream.cProofs
-          this.namedScopes_.ARM_HYP.withChannel.tip.upstream.cProofs
-          this.namedScopes_.AARCH64.withChannel.tip.upstream.cProofs
-          this.namedScopes_.RISCV64.withChannel.tip.upstream.cProofs
-          this.namedScopes_.RISCV64-MCS.withChannel.tip.upstream.cProofs
-          this.namedScopes_.X64.withChannel.tip.upstream.cProofs
-
-          this.namedScopes_.ARM.withChannel.release.upstream.cProofs
-          this.namedScopes_.ARM_HYP.withChannel.release.upstream.cProofs
-          this.namedScopes_.AARCH64.withChannel.release.upstream.cProofs
-          this.namedScopes_.RISCV64.withChannel.release.upstream.cProofs
-          # this.namedScopes_.RISCV64-MCS.withChannel.release.upstream.cProofs
-          this.namedScopes_.X64.withChannel.release.upstream.cProofs
         ]
       )
-    );
+    ]))
+  ]));
 
   a = writeText "a" (toString (lib.flatten [
     (lib.forEach (map this.mkScopeFomNamedConfig this.namedConfigs) (scope:
@@ -233,14 +231,10 @@ in rec {
     '';
   };
 
-  scopeWithHOL4Rev = { rev, ref ? "HEAD" }: overrideScope (self: super: {
-    scopeConfig = super.scopeConfig.override {
-      hol4Source = lib.cleanSource (builtins.fetchGit {
-        url = "https://github.com/coliasgroup/HOL";
-        inherit rev ref;
-      });
-    };
-    hol4Rev = rev;
-  });
-
+  scopeWithHol4Rev = { rev, ref ? "HEAD" }: overrideConfig {
+    hol4Source = lib.cleanSource (builtins.fetchGit {
+      url = "https://github.com/coliasgroup/HOL";
+      inherit rev ref;
+    });
+  };
 }
