@@ -62,8 +62,7 @@ mkShell {
     scopeConfig.targetCC
     scopeConfig.targetBintools
 
-    isabelleForL4v
-    isabelleForL4v.mlton
+    mltonForL4v
 
     texliveEnv
     cppLink
