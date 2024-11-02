@@ -97,15 +97,15 @@ rec {
 
   verifiedSchedulersForArch = archName: [ "legacy" ] ++ lib.optional (isMCSVerifiedForArch archName) "mcs";
 
-  platsForArch = archName: {
-    aarch64 = [
+  platsForArchAndScheduler = { arch, mcs }: {
+    AARCH64 = lib.optionals (!mcs) [
       "bcm2711"
       "hikey"
       "odroidc2"
       "odroidc4"
       "zynqmp"
     ];
-    arm = [
+    ARM = lib.optionals (!mcs) [
       "exynos4"
       "exynos5410"
       "exynos5422"
@@ -115,11 +115,11 @@ rec {
       "zynqmp"
       "imx8mm"
     ];
-    armHyp = [
+    ARM_HYP = [
       "exynos5"
       "exynos5410"
     ];
-  }.${archName} or [];
+  }.${arch} or [];
 
   optLevels = {
     o0 = "-O0";
@@ -279,28 +279,36 @@ rec {
           );
     });
 
-  # namedConfigs' =
-  #   lib.flip lib.concatMap (lib.attrNames archs) (archName:
-  #     lib.flip lib.concatMap (verifiedSchedulersForArch archName) (schedulerName:
-  #       lib.flip lib.concatMap (platsForArch archName ++ [ "" ]) (plat:
-  #         # lib.flip lib.concatMap [ null "o1" "o2" ] (optLevel:
-  #           {
-  #             arch = archs.${archName};
-  #             mcs = schedulers.${schedulerName};
-  #             inherit plat;
-  #             # inherit optLevel;
-  #           }
-  #         # )
-  #       )
-  #     )
-  #   );
+  namedConfigs' =
+    lib.flip lib.concatMap (lib.attrNames archs) (archName:
+      let
+        arch = archs.${archName};
+      in
+      lib.flip lib.concatMap (verifiedSchedulersForArch archName) (schedulerName:
+        let
+          mcs = schedulers.${schedulerName};
+        in
+        lib.flip lib.concatMap (platsForArchAndScheduler {
+          inherit arch mcs; 
+        } ++ [ "" ]) (plat:
+          # lib.flip lib.concatMap [ null "o1" "o2" ] (optLevel:
+            [
+              {
+                inherit arch mcs plat;
+                # inherit optLevel;
+              }
+            ]
+          # )
+        )
+      )
+    );
 
-  # namedScopes' = lib.listToAttrs (lib.forEach namedConfigs' (config: rec {
-  #   name = value.l4vName;
-  #   value = mkScope config;
-  # }));
+  namedScopes' = lib.listToAttrs (lib.forEach namedConfigs' (config: rec {
+    name = value.scopeConfig.l4vName;
+    value = mkScope config;
+  }));
  
-  # x = namedScopes';
+  x = namedScopes';
 
   # TODO
   # mkScopeTreeBy = argChoices: commonArgs:
