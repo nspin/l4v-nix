@@ -25,7 +25,8 @@ rec {
     , hol4Source ? localHol4Source
     , graphRefineSource ? gitignoreSource ../../projects/graph-refine
     , bvSandboxSource ? gitignoreSource ../../projects/bv-sandbox
-    , isabelleSource ? null # TODO
+    , seL4IsabelleSource ? defaultSeL4IsabelleSource
+    , useSeL4Isabelle ? true
     , l4vName ? "${arch}${
         lib.optionalString (features != "") "-${features}"
       }${
@@ -50,7 +51,8 @@ rec {
         hol4Source
         graphRefineSource
         bvSandboxSource
-        isabelleSource
+        seL4IsabelleSource
+        useSeL4Isabelle
         bvSetupSupport
         bvSupport
         bvExclude
@@ -58,7 +60,6 @@ rec {
         bvName
       ;
     };
-
 
   gitignore = callPackage ./gitignore.nix {};
 
@@ -77,10 +78,12 @@ rec {
     };
   };
 
-  seL4IsabelleSource = builtins.fetchGit {
+  defaultSeL4IsabelleSource = builtins.fetchGit {
     url = "https://github.com/seL4/isabelle.git";
-    ref = "ts-2024";
-    rev = "e0dd5a6d89d2c0b37e7f1ffe0105050189136b75";
+    # ref = "ts-2024";
+    # rev = "e0dd5a6d89d2c0b37e7f1ffe0105050189136b75";
+    ref = "Isabelle2024";
+    rev = "74b2d1278b57797572abe5842e318d17ed131c55";
   };
 
   mkKeepRef = rev: "keep/${builtins.substring 0 32 rev}";

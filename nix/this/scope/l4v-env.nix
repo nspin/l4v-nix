@@ -42,6 +42,10 @@ let
     ISABELLE_JEDIT_OPTIONS="-m brackets"
   '';
 
+  # TODO jedit_reset_font_size : int = 18
+  jeditProperties = writeText "jedit-properties" ''
+  '';
+
 in
 mkShell {
   name = "l4v-env";

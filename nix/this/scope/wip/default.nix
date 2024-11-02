@@ -53,7 +53,7 @@ in rec {
 
   withSeL4Isabelle = overrideScope (self: super: {
     scopeConfig = super.scopeConfig.override {
-      isabelleSource = this.seL4IsabelleSource;
+      useSeL4Isabelle = true;
     };
   });
 

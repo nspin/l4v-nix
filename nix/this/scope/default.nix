@@ -187,7 +187,11 @@ with self; {
 
   ghcWithPackagesForL4v = callPackage  ./deps/ghc-with-packages-for-l4v {};
 
-  isabelleForL4v = callPackage ./deps/isabelle-for-l4v {};
+  mkIsabelleForL4v = callPackage ./deps/isabelle-for-l4v {};
+  upstreamIsabelleForL4v = mkIsabelleForL4v false;
+  seL4IsabelleForL4v = mkIsabelleForL4v true;
+
+  isabelleForL4v = if scopeConfig.useSeL4Isabelle then seL4IsabelleForL4v else upstreamIsabelleForL4v;
 
   stdenvForHol4 = gcc9Stdenv;
 
