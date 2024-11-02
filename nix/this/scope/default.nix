@@ -115,7 +115,7 @@ with self; {
       "coverage"
     ];
 
-    excludeArgs = lib.optionalAttrs (scopeConfig.bvExclude != null) ([
+    excludeArgs = lib.optionals (scopeConfig.bvExclude != null) ([
       "-exclude"
     ] ++ scopeConfig.bvExclude ++ [
       "-end-exclude"

@@ -53,7 +53,7 @@ rec {
     , bvExclude ? ({
         "ARM-O1-arm-none-eabi-gcc-6.5.0" = [ "init_freemem" ];
         "ARM-O2-arm-none-eabi-gcc-6.5.0" = [ "init_freemem" "decodeARMMMUInvocation" ];
-      }."${bvName}" or (lib.warn "bvExclude not specified for ${bvName}" null))
+      }."${bvName}-${targetCC.name}" or (lib.warn "bvExclude not specified for ${bvName}" null))
     }:
     {
       inherit
@@ -279,6 +279,11 @@ rec {
           );
     });
 
+  mkScopes = configs: lib.listToAttrs (lib.forEach configs (config: rec {
+    name = value.scopeConfig.l4vName;
+    value = mkScope config;
+  }));
+
   namedConfigs_ =
     lib.flip lib.concatMap (lib.attrNames archs) (archName:
       let
@@ -298,12 +303,26 @@ rec {
       )
     );
 
-  namedScopes_ = lib.listToAttrs (lib.forEach namedConfigs_ (config: rec {
-    name = value.scopeConfig.l4vName;
-    value = mkScope config;
-  }));
- 
+  namedScopes_ = mkScopes namedConfigs_;
+
   x = namedScopes_;
+ 
+  allConfigs = lib.flip lib.concatMap namedConfigs_ (config:
+    lib.flip lib.concatMap (lib.attrValues optLevels) (optLevel:
+      lib.flip lib.concatMap (lib.attrValues targetCCWrapperAttrs) (targetCCWrapperAttr:
+        lib.singleton (config // {
+          inherit optLevel targetCCWrapperAttr;
+        })
+      )
+    )
+  );
+
+  all = writeText "aggregate-all" (toString (lib.flatten [
+    displayStatus
+    (lib.forEach (map mkScope allConfigs) (scope:
+      scope.all
+    ))
+  ]));
 
   # TODO
   # mkScopeTreeBy = argChoices: commonArgs:
@@ -379,25 +398,22 @@ rec {
 
   defaultScope = scopes.arm.legacy.o1;
 
-  all = writeText "aggregate-all" (toString (lib.flatten [
-    displayStatus
-    (lib.forEach (map mkScopeFomNamedConfig namedConfigs) (scope:
-      scope.all
-    ))
-  ]));
+  # all = writeText "aggregate-all" (toString (lib.flatten [
+  #   displayStatus
+  #   (lib.forEach (map mkScopeFomNamedConfig namedConfigs) (scope:
+  #     scope.all
+  #   ))
+  # ]));
 
-  tests = writeText "tests"
-    (toString
-      (lib.flatten
-        (lib.forEach (map mkScopeFomNamedConfig namedConfigs) (scope: [
-          (
-            if scope.scopeConfig.mcs || scope.scopeConfig.arch == "AARCH64" || scope.scopeConfig.arch == "X64"
-            then scope.slow
-            else scope.slower
-          )
-        ]))
+  tests = writeText "tests" (toString (lib.flatten [
+    (lib.forEach (map mkScopeFomNamedConfig namedConfigs) (scope: [
+      (
+        if scope.scopeConfig.mcs || scope.scopeConfig.arch == "AARCH64" || scope.scopeConfig.arch == "X64"
+        then scope.slow
+        else scope.slower
       )
-    );
+    ]))
+  ]));
 
   cached = writeText "aggregate-cached" (toString (lib.flatten [
     # TODO
@@ -413,9 +429,9 @@ rec {
       justTargetDir = scope: scope.graphRefine.all.targetDir;
     in
       linkFarm "display-status" [
-        (mk all scopes.arm.legacy.o1)
-        (mk all scopes.arm.legacy.o2)
-        (mk justTargetDir scopes.riscv64.legacy.o1)
-        (mk justTargetDir scopes.riscv64.legacy.o2)
+        (mk all namedScopes_.ARM.o1.withChannel.release.upstream)
+        (mk all namedScopes_.ARM.o2.withChannel.release.upstream)
+        (mk justTargetDir namedScopes_.RISCV64.o1.withChannel.release.upstream)
+        (mk justTargetDir namedScopes_.RISCV64.o2.withChannel.release.upstream)
       ];
 }
