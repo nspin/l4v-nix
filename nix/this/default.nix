@@ -70,7 +70,6 @@ rec {
         bvSetupSupport
         bvSupport
         bvExclude
-        configName
         l4vName
         bvName
       ;

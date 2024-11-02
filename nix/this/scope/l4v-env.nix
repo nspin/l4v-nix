@@ -19,23 +19,20 @@
 
 , scopeConfig
 , isabelleForL4v
+, mltonForL4v
 , texliveEnv
 , cppLink
 }:
 
 let
   isabelleSettings = writeText "isabelle-settings" ''
-    # Setup components.
-    init_components "$USER_HOME/.isabelle/contrib" "$ISABELLE_HOME/Admin/components/main"
-    init_components "$USER_HOME/.isabelle/contrib" "$ISABELLE_HOME/Admin/components/bundled"
-
-    # 10GB should be enough, even for large C proofs
     ML_OPTIONS="-H 2048 --maxheap 10000 --stackspace 64"
+
+    ISABELLE_BUILD_JAVA_OPTIONS="-Xms2048m -Xmx6096m -Xss4m"
 
     ISABELLE_BUILD_OPTIONS="threads=4"
 
     # Also increase memory for Java and Scala frontends.
-    ISABELLE_BUILD_JAVA_OPTIONS="-Xms2048m -Xmx6096m -Xss4m"
     JEDIT_JAVA_OPTIONS="-Xms128m -Xmx4096m -Xss4m"
 
     # Show bracket syntax for implications
@@ -91,8 +88,8 @@ mkShell {
 
   shellHook = ''
     ensure_file() {
-      src=$0
-      dst=$1
+      src=$1
+      dst=$2
 
       if [ -f "$dst" ]; then
         if ! diff -q "$src" "$dst"; then
