@@ -45,9 +45,8 @@ rec {
     , seL4IsabelleSource ? defaultSeL4IsabelleSource
     , useSeL4Isabelle ? true
 
-    , configName ? bvName
     , l4vName ? "${arch}${nameModification features}${nameModification plat}"
-    , bvName ? "${l4vName}${optLevel}-${targetCC.name}"
+    , bvName ? "${l4vName}${optLevel}"
 
     , bvSetupSupport ? lib.elem arch [ "ARM" "RISCV64" ] && !mcs && /* TODO */ !(arch == "RISCV64" && optLevel == "-O2")
     , bvSupport ? bvSetupSupport && lib.elem arch [ "ARM" ]
@@ -120,7 +119,7 @@ rec {
   riscv64Pkgs = pkgsCross.riscv64-embedded;
   x64Pkgs = pkgs;
 
-  nameModification = tag: lib.optionalString (tag != "") "-${tag}";
+  nameModification = tag: lib.optionalString (tag != "") "_${tag}";
 
   gitignore = callPackage ./gitignore.nix {};
 
@@ -351,7 +350,7 @@ rec {
   displayStatus =
     let
       mk = f: scope: {
-        name = scope.scopeConfig.configName;
+        name = scope.scopeConfig.bvName;
         path = f scope;
       };
       all = scope: scope.graphRefine.all;
