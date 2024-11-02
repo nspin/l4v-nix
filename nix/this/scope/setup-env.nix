@@ -17,6 +17,11 @@ let
 
     # Show bracket syntax for implications
     ISABELLE_JEDIT_OPTIONS="-m brackets"
+
+    USER_HEAPS=$ISABELLE_USER_HOME/$L4V_NAME
+    ISABELLE_OUTPUT=$USER_HEAPS
+    ISABELLE_PATH=$USER_HEAPS
+    ISABELLE_HEAPS=$ISABELLE_OUTPUT
   '';
 
   # TODO jedit_reset_font_size : int = 18

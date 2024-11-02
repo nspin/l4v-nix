@@ -55,6 +55,7 @@ mkShell {
   L4V_ARCH = scopeConfig.arch;
   L4V_FEATURES = scopeConfig.features;
   L4V_PLAT = scopeConfig.plat;
+  L4V_NAME = scopeConfig.l4vName;
   TOOLPREFIX = scopeConfig.targetPrefix;
 
   # TODO
