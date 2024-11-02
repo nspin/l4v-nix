@@ -258,6 +258,7 @@ with self; {
   };
 
   l4vEnv = callPackage ./l4v-env.nix {};
+  setupEnv = callPackage ./setup-env.nix {};
 
   containerXauthority = callPackage ./helpers/container-xauthority {};
 
