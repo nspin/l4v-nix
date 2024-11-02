@@ -337,14 +337,11 @@ rec {
   defaultScope = scopes.ARM;
 
   tests = writeText "aggregate-tests" (toString (lib.flatten [
-    # TODO
-    # (lib.forEach (map mkScopeFomNamedConfig namedConfigs) (scope: [
-    #   (
-    #     if scope.scopeConfig.mcs || scope.scopeConfig.arch == "AARCH64" || scope.scopeConfig.arch == "X64"
-    #     then scope.slow
-    #     else scope.slower
-    #   )
-    # ]))
+    (lib.forEach (lib.attrValues scopesWithOptLevels) (scope: [
+      (
+        scope.slower
+      )
+    ]))
   ]));
 
   cached = writeText "aggregate-cached" (toString (lib.flatten [
