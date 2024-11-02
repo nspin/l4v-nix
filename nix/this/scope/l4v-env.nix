@@ -90,15 +90,21 @@ mkShell {
   FONTCONFIG_FILE = makeFontsConf { fontDirectories = [ ]; };
 
   shellHook = ''
-    settings_path=$HOME/.isabelle/etc/settings
-    if [ -f "$settings_path" ]; then
-      if ! diff -q ${isabelleSettings} $settings_path; then
-        echo "unexpected contents in $settings_path" >&2
-        exit 1
+    ensure_file() {
+      src=$0
+      dst=$1
+
+      if [ -f "$dst" ]; then
+        if ! diff -q "$src" "$dst"; then
+          echo "unexpected contents in $dst" >&2
+          exit 1
+        fi
+      else
+        mkdir -p "$(dirname "$dst")"
+        cp --no-preserve=mode,ownership "$src" "$dst"
       fi
-    else
-      mkdir -p $(dirname $settings_path)
-      cp --no-preserve=mode,ownership ${isabelleSettings} $settings_path
-    fi
+    }
+
+    ensure_file ${isabelleSettings} "$HOME/.isabelle/etc/settings"
   '';
 }
