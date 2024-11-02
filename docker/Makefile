@@ -12,7 +12,7 @@ endif
 
 nix_expr_path := ..
 nix_shell_attr := $(A)
-nix_isabelle_attr := isabelleForL4v
+nix_isabelle_attr := seL4IsabelleForL4v
 
 id := sel4-verification-reproducibility
 image_tag := $(id)
