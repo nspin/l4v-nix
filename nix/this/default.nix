@@ -306,7 +306,7 @@ rec {
   namedScopes_ = mkScopes namedConfigs_;
 
   x = namedScopes_;
- 
+
   allConfigs = lib.flip lib.concatMap namedConfigs_ (config:
     lib.flip lib.concatMap (lib.attrValues optLevels) (optLevel:
       lib.flip lib.concatMap (lib.attrValues targetCCWrapperAttrs) (targetCCWrapperAttr:
