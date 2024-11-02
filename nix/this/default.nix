@@ -22,7 +22,7 @@ rec {
     , targetPrefix ? targetCCWrapper.targetPrefix
     , seL4Source ? kernelPairs.local.sources.seL4
     , l4vSource ? kernelPairs.local.sources.l4v
-    , hol4Source ? gitignoreSource ../../projects/HOL4
+    , hol4Source ? localHol4Source
     , graphRefineSource ? gitignoreSource ../../projects/graph-refine
     , bvSandboxSource ? gitignoreSource ../../projects/bv-sandbox
     , isabelleSource ? null # TODO
@@ -59,7 +59,23 @@ rec {
       ;
     };
 
-  gitignoreSource = callPackage ./gitignore.nix {};
+
+  gitignore = callPackage ./gitignore.nix {};
+
+  inherit (gitignore) gitignoreSource;
+
+  localSeL4Source = gitignore.gitignoreSource ../../projects/seL4;
+  localL4vSource = gitignore.gitignoreSource ../../projects/l4v;
+
+  localHol4Source = lib.cleanSourceWith rec {
+    src = ../../projects/HOL4;
+    filter = gitignore.gitignoreFilterWith {
+      basePath = src;
+      extraRules = ''
+        !/sigobj/*
+      '';
+    };
+  };
 
   seL4IsabelleSource = builtins.fetchGit {
     url = "https://github.com/seL4/isabelle.git";
@@ -90,13 +106,13 @@ rec {
     in {
       local = mkPair {
         seL4 = gitignoreSource ../../projects/seL4;
-        l4v = gitignoreSource ../../projects/l4v;
+        l4v = localL4vSource;
       };
       release = rec {
         upstream = {
           legacy = fetchPair {
             seL4 = "cd6d3b8c25d49be2b100b0608cf0613483a6fffa"; # seL4/seL4:13.0.0
-            l4v = "205306814b6311b4781af1eb9534f674733a9735"; # direct downstream of seL4/l4v:seL4-13.0.0
+            l4v = "f4054b0649446fb4ea03115f4b18160472964026"; # direct downstream of seL4/l4v:seL4-13.0.0
           };
         };
         downstream = {
@@ -110,16 +126,16 @@ rec {
         upstream = rec {
           legacy = fetchPair {
             seL4 = "caa2cd03ee2b48e44efc52a620b9a5a79df9de46"; # ancestor of u/master
-            l4v = "4f0706ef42cb205f534462faf787b6b6a076888d";
+            l4v = "6ec3e2c701bf066aac85eba67e894191e3fcacb7";
           };
           mcs = fetchPair {
             seL4 = legacy.seL4;
-            l4v = "a232dc70c3bc5222af89ca7791cfd68651a74610";
+            l4v = "79039b0e26e6abd93e083d23b5e54a6a0cf2d494";
           };
         };
         downstream = rec {
           legacy = fetchPair {
-            seL4 = "d0a377dcfa518f67e6818d82a8254cf7f75ad87a"; # direct downstream of upstream.legacy.seL4
+            seL4 = throw "todo"; # direct downstream of upstream.legacy.seL4
             l4v = throw "todo";
           };
           mcs = fetchPair {
