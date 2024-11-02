@@ -92,6 +92,30 @@ rec {
 
   archSupportsVerifiedMCS = arch: lib.elem arch [ "ARM" "RISCV64" ];
 
+  platsForArch = arch: {
+    AARCH64 = [
+      "bcm2711"
+      "hikey"
+      "odroidc2"
+      "odroidc4"
+      "zynqmp"
+    ];
+    ARM = [
+      "exynos4"
+      "exynos5410"
+      "exynos5422"
+      "hikey"
+      "tk1"
+      "zynq7000"
+      "zynqmp"
+      "imx8mm"
+    ];
+    ARM_HYP = [
+      "exynos5"
+      "exynos5410"
+    ];
+  }.${arch} or [];
+
   optLevels = {
     o0 = "-O0";
     o1 = "-O1";
@@ -249,6 +273,15 @@ rec {
             )
           );
     });
+
+  x = {
+    arch = lib.attrValues archs;
+    mcs = lib.attrValues schedulers;
+    plat = [
+      ""
+
+    ]
+  };
 
   # TODO
   # mkScopeTreeBy = argChoices: commonArgs:
