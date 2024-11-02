@@ -223,6 +223,8 @@ rec {
         }
       );
 
+      inherit (self.withOptLevel) o0 o1 o2 o3;
+
       withGCC = lib.flip lib.mapAttrs targetCCWrapperAttrs (_: targetCCWrapperAttr:
         overrideConfig {
           inherit targetCCWrapperAttr;
@@ -246,7 +248,7 @@ rec {
               overrideConfig (isUpstreamAttrs.${schedulerName})
             )
           );
-    } // self.withOptLevel);
+    });
 
   # TODO
   # mkScopeTreeBy = argChoices: commonArgs:
