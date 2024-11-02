@@ -128,6 +128,10 @@ rec {
     o3 = "-O3";
   };
 
+  relevantOptLevels = {
+    inherit (optLevels) o1 o2;
+  };
+
   targetCCWrapperAttrForConfig = { arch, bvSupport }: if bvSupport then "gcc6" else "gcc12";
 
   targetCCWrapperAttrs = lib.listToAttrs (map (v: lib.nameValuePair v v) [
@@ -279,10 +283,14 @@ rec {
           );
     });
 
-  mkScopes = configs: lib.listToAttrs (lib.forEach configs (config: rec {
-    name = value.scopeConfig.l4vName;
+  mkScopesWith = getName: configs: lib.listToAttrs (lib.forEach configs (config: rec {
+    name = getName value.scopeConfig;
     value = mkScope config;
   }));
+
+  mkL4vScopes = mkScopesWith (scopeConfig: scopeConfig.l4vName);
+
+  mkBVScopes = mkScopesWith (scopeConfig: scopeConfig.bvName);
 
   namedConfigs =
     lib.flip lib.concatMap (lib.attrNames archs) (archName:
@@ -303,13 +311,25 @@ rec {
       )
     );
 
-  scopes = mkScopes namedConfigs;
+  scopes = mkL4vScopes namedConfigs;
+
+  scopesWithOptLevels =
+    let
+      configs = lib.flip lib.concatMap namedConfigs (config:
+        lib.flip lib.concatMap (lib.attrValues relevantOptLevels) (optLevel:
+          lib.singleton (config // {
+            inherit optLevel;
+          })
+        )
+      );
+    in
+      mkBVScopes configs;
 
   byChannel =
     lib.flip lib.mapAttrs channelSources (_:
       lib.mapAttrs (_:
         lib.mapAttrs (_: configAttrs:
-          mkScopes (lib.forEach namedConfigs (config: config // configAttrs))
+          mkL4vScopes (lib.forEach namedConfigs (config: config // configAttrs))
         )
       )
     );
