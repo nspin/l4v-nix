@@ -24,7 +24,7 @@ rec {
     , mcs ? false
     , features ? lib.optionalString mcs "MCS"
     , plat ? ""
-    , optLevel ? "-O1"
+    , optLevel ? null
 
     , targetCCWrapperAttr ? targetCCWrapperAttrForConfig { inherit arch bvSupport; }
     , targetCCWrapper ? targetPkgsByL4vArch."${arch}".buildPackages."${targetCCWrapperAttr}"
@@ -216,8 +216,7 @@ rec {
     };
 
   mkScopeExtension = { overrideConfig, superScopeConfig }:
-    let
-    in {
+    lib.fix (self: {
       withOptLevel = lib.flip lib.mapAttrs optLevels (_: optLevel:
         overrideConfig {
           inherit optLevel;
@@ -247,7 +246,7 @@ rec {
               overrideConfig (isUpstreamAttrs.${schedulerName})
             )
           );
-    };
+    } // self.withOptLevel);
 
   # TODO
   # mkScopeTreeBy = argChoices: commonArgs:

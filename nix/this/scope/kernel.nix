@@ -12,6 +12,8 @@
 , mltonForL4v
 }:
 
+assert scopeConfig.optLevel != null;
+
 let
   files = [
     "kernel_all.c_pp"
