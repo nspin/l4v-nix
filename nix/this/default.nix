@@ -324,15 +324,6 @@ rec {
     ))
   ]));
 
-  # TODO
-  # mkScopeTreeBy = argChoices: commonArgs:
-  #   let
-  #     x = lib.cartesianProduct (lib.mapAttrs (_: choices: lib.attrNames choices) argChoices);
-  #     y = lib.forEach x (choices:
-  #     );
-  #   in
-  # ;
-
   byChannel =
     lib.flip lib.mapAttrs channelSources (_isRelease: isReleaseAttrs:
       lib.flip lib.mapAttrs isReleaseAttrs (_isUpstream: isUpstreamAttrs:
