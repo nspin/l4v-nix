@@ -118,7 +118,6 @@ let
     src = seL4IsabelleSource;
     phases = [ "unpackPhase" "installPhase" ];
     installPhase = ''
-      rm -r Admin
       cat ${bundleList} >> etc/components
       mkdir contrib
       ${lib.concatStrings (lib.forEach bundle ({ name, value }: ''
@@ -127,6 +126,7 @@ let
       cp -r . $out
     '';
   };
+      # rm -r Admin
 
   diff = runCommand "x" {} ''
     diff -rq ${unpackedUpstreamSrc} ${preparedSeL4Src}
