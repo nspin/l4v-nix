@@ -41,26 +41,21 @@ let
 
 in rec {
 
-  x = writeText "y"
-    (toString
-      (lib.flatten
-        [
-          this.scopes.ARM.withChannel.tip.upstream.cProofs
-          this.scopes.ARM_HYP.withChannel.tip.upstream.cProofs
-          this.scopes.AARCH64.withChannel.tip.upstream.cProofs
-          this.scopes.RISCV64.withChannel.tip.upstream.cProofs
-          this.scopes.RISCV64-MCS.withChannel.tip.upstream.cProofs
-          this.scopes.X64.withChannel.tip.upstream.cProofs
+  x = writeText "y" (toString (lib.flatten [
+    this.scopes.ARM.withChannel.tip.upstream.cProofs
+    this.scopes.ARM_HYP.withChannel.tip.upstream.cProofs
+    this.scopes.AARCH64.withChannel.tip.upstream.cProofs
+    this.scopes.RISCV64.withChannel.tip.upstream.cProofs
+    this.scopes.RISCV64-MCS.withChannel.tip.upstream.cProofs
+    this.scopes.X64.withChannel.tip.upstream.cProofs
 
-          this.scopes.ARM.withChannel.release.upstream.cProofs
-          this.scopes.ARM_HYP.withChannel.release.upstream.cProofs
-          this.scopes.AARCH64.withChannel.release.upstream.cProofs
-          this.scopes.RISCV64.withChannel.release.upstream.cProofs
-          # this.scopes.RISCV64-MCS.withChannel.release.upstream.cProofs
-          this.scopes.X64.withChannel.release.upstream.cProofs
-        ]
-      )
-    );
+    this.scopes.ARM.withChannel.release.upstream.cProofs
+    this.scopes.ARM_HYP.withChannel.release.upstream.cProofs
+    this.scopes.AARCH64.withChannel.release.upstream.cProofs
+    this.scopes.RISCV64.withChannel.release.upstream.cProofs
+    # this.scopes.RISCV64-MCS.withChannel.release.upstream.cProofs
+    this.scopes.X64.withChannel.release.upstream.cProofs
+  ]));
 
   keep = writeText "keep" (toString (lib.flatten [
     # this.scopes.arm.legacy.o1.all
