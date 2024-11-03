@@ -68,7 +68,7 @@ let
 
 in
 stdenv.mkDerivation {
-  name = "l4v${lib.optionalString (name != null) "-${name}"}${lib.optionalString (!excludeSeL4Source) "-${scopeConfig.l4vName}"}";
+  name = "l4v${lib.optionalString (name != null) "-${name}"}-${scopeConfig.l4vName}";
 
   nativeBuildInputs = [
     rsync git perl hostname which cmake ninja dtc libxml2
