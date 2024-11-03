@@ -221,15 +221,14 @@ rec {
       tip = {
         upstream =
           let
-            seL4 = "caa2cd03ee2b48e44efc52a620b9a5a79df9de46"; # ancestor of u/master
           in {
             legacy = mkSources {
-              inherit seL4;
-              l4v = "6ec3e2c701bf066aac85eba67e894191e3fcacb7";
+              seL4 = "c5b23791ea9f65efc4312c161dd173b7238c5e80"; # ancestor of u/master
+              l4v = "da9ac959588d5a2bd0a3827d669a4c9dad3c9fff";
             };
             mcs = mkSources {
-              inherit seL4;
-              l4v = "79039b0e26e6abd93e083d23b5e54a6a0cf2d494";
+              seL4 = "5dd34db6298a476a57b89cf24176dd15e674eae5"; # ancestor of u/master
+              l4v = "6a3be6eceb9ffd517ba5d9fc44c20c74e61f447f";
             };
           };
         downstream =
