@@ -8,15 +8,14 @@ let
   isabelleSettings = writeText "isabelle-settings" ''
     ML_OPTIONS="-H 2048 --maxheap 10000 --stackspace 64"
 
-    ISABELLE_BUILD_JAVA_OPTIONS="-Xms2048m -Xmx6096m -Xss4m"
-
-    ISABELLE_BUILD_OPTIONS="threads=4"
-
     # Also increase memory for Java and Scala frontends.
+    ISABELLE_BUILD_JAVA_OPTIONS="-Xms2048m -Xmx6096m -Xss4m"
     JEDIT_JAVA_OPTIONS="-Xms128m -Xmx4096m -Xss4m"
 
     # Show bracket syntax for implications
     ISABELLE_JEDIT_OPTIONS="-m brackets"
+
+    ISABELLE_BUILD_OPTIONS=''${OVERRIDE_ISABELLE_BUILD_OPTIONS:-"threads=6"}
 
     ISABELLE_HEAPS=$ISABELLE_HOME_USER/heaps/by-config/$L4V_NAME
   '';
