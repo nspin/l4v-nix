@@ -34,27 +34,27 @@ let
   tmpSourceDir = ../../../../tmp/src;
 
   tmpSource = {
-    seL4 = lib.cleanSource (tmpSourceDir + "/seL4");
-    HOL = lib.cleanSource (tmpSourceDir + "/HOL");
-    graph-refine = lib.cleanSource (tmpSourceDir + "/graph-refine");
+    seL4 = tmpSourceDir + "/seL4";
+    HOL = tmpSourceDir + "/HOL";
+    graph-refine = tmpSourceDir + "/graph-refine";
   };
 
 in rec {
 
   x = writeText "y" (toString (lib.flatten [
-    this.scopes.ARM.withChannel.tip.upstream.cProofs
-    this.scopes.ARM_HYP.withChannel.tip.upstream.cProofs
-    this.scopes.AARCH64.withChannel.tip.upstream.cProofs
-    this.scopes.RISCV64.withChannel.tip.upstream.cProofs
-    this.scopes.RISCV64-MCS.withChannel.tip.upstream.cProofs
-    this.scopes.X64.withChannel.tip.upstream.cProofs
+    scopes.ARM.withChannel.tip.upstream.cProofs
+    scopes.ARM_HYP.withChannel.tip.upstream.cProofs
+    scopes.AARCH64.withChannel.tip.upstream.cProofs
+    scopes.RISCV64.withChannel.tip.upstream.cProofs
+    scopes.RISCV64-MCS.withChannel.tip.upstream.cProofs
+    scopes.X64.withChannel.tip.upstream.cProofs
 
-    this.scopes.ARM.withChannel.release.upstream.cProofs
-    this.scopes.ARM_HYP.withChannel.release.upstream.cProofs
-    this.scopes.AARCH64.withChannel.release.upstream.cProofs
-    this.scopes.RISCV64.withChannel.release.upstream.cProofs
-    # this.scopes.RISCV64-MCS.withChannel.release.upstream.cProofs
-    this.scopes.X64.withChannel.release.upstream.cProofs
+    scopes.ARM.withChannel.release.upstream.cProofs
+    scopes.ARM_HYP.withChannel.release.upstream.cProofs
+    scopes.AARCH64.withChannel.release.upstream.cProofs
+    scopes.RISCV64.withChannel.release.upstream.cProofs
+    # scopes.RISCV64-MCS.withChannel.release.upstream.cProofs
+    scopes.X64.withChannel.release.upstream.cProofs
   ]));
 
   keep = writeText "keep" (toString (lib.flatten [
