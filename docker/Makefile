@@ -1,16 +1,16 @@
+# For run
 W ?= ../projects
-C ?= ARM
-P ?= 1
-
+H ?= isabelle-home-user
 UPSTREAM_ISABELLE ?= 0
+
+# For exec
+C ?= ARM
+A ?= $(C).l4vEnv
+P ?= 1
+ID ?= sel4-verification-reproducibility
 
 work_local_path := $(W)
 work_remote_path:= /work
-isabelle_home_user_local_path := isabelle-home-user
-
-ifeq ($(P),1)
-	nix_shell_pure_arg := --pure
-endif
 
 ifeq ($(UPSTREAM_ISABELLE),1)
 	nix_isabelle_attr := upstreamIsabelleForL4v
@@ -18,10 +18,16 @@ else
 	nix_isabelle_attr := seL4IsabelleForL4v
 endif
 
-nix_expr_path := ..
-nix_shell_attr := $(C).l4vEnv
+isabelle_home_user_local_path := $(H)
 
-id := sel4-verification-reproducibility
+nix_expr_path := ..
+nix_shell_attr := $(A)
+
+ifeq ($(P),1)
+	nix_shell_pure_arg := --pure
+endif
+
+id := $(ID)
 image_tag := $(id)
 container_name := $(id)
 
