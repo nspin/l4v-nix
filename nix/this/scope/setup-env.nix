@@ -5,6 +5,8 @@
 }:
 
 let
+  # TODO(next) maxheap = 20000 ?
+  # TODO(next) threads= not observed in jedit plugin options
   isabelleSettings = writeText "isabelle-settings" ''
     ML_OPTIONS="-H 2048 --maxheap 10000 --stackspace 64"
 
