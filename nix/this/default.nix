@@ -151,8 +151,7 @@ rec {
   riscv64Pkgs = pkgsCross.riscv64-embedded;
   x64Pkgs = pkgs;
 
-  # TODO(next) "_"
-  nameModification = tag: lib.optionalString (tag != "") "-${tag}";
+  nameModification = tag: lib.optionalString (tag != "") "_${tag}";
 
   gitignore = callPackage ./gitignore.nix {};
 

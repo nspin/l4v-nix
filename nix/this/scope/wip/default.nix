@@ -46,7 +46,7 @@ in rec {
     scopes.ARM_HYP.withChannel.tip.upstream.cProofs
     scopes.AARCH64.withChannel.tip.upstream.cProofs
     scopes.RISCV64.withChannel.tip.upstream.cProofs
-    scopes.RISCV64-MCS.withChannel.tip.upstream.cProofs
+    scopes.RISCV64_MCS.withChannel.tip.upstream.cProofs
     scopes.X64.withChannel.tip.upstream.cProofs
   ]));
 
