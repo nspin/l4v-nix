@@ -14,17 +14,6 @@
 
 assert scopeConfig.optLevel != null;
 
-let
-  files = [
-    "kernel_all.c_pp"
-    "kernel.elf"
-    "kernel.elf.rodata"
-    "kernel.elf.txt"
-    "kernel.elf.symtab"
-    "kernel.sigs"
-  ];
-
-in
 runCommand "kernel" {
 
   nativeBuildInputs = [
@@ -55,8 +44,9 @@ runCommand "kernel" {
 
   export ISABELLE_HOME=$(isabelle env sh -c 'echo $ISABELLE_HOME')
 
-  export KERNEL_BUILD_ROOT=$out
+  export KERNEL_BUILD_ROOT=build
 
-  make -f $L4V_REPO_PATH/spec/cspec/c/kernel.mk \
-    ${lib.concatMapStringsSep " " (file: "$KERNEL_BUILD_ROOT/${file}") files}
+  export KERNEL_EXPORT_DIR=$out
+
+  make -f $L4V_REPO_PATH/spec/cspec/c/kernel.mk kernel_export
 ''
