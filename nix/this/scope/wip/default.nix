@@ -41,14 +41,16 @@ let
 
 in rec {
 
-  x = writeText "y" (toString (lib.flatten [
+  tip = writeText "x" (toString (lib.flatten [
     scopes.ARM.withChannel.tip.upstream.cProofs
     scopes.ARM_HYP.withChannel.tip.upstream.cProofs
     scopes.AARCH64.withChannel.tip.upstream.cProofs
     scopes.RISCV64.withChannel.tip.upstream.cProofs
     scopes.RISCV64-MCS.withChannel.tip.upstream.cProofs
     scopes.X64.withChannel.tip.upstream.cProofs
+  ]));
 
+  release = writeText "x" (toString (lib.flatten [
     scopes.ARM.withChannel.release.upstream.cProofs
     scopes.ARM_HYP.withChannel.release.upstream.cProofs
     scopes.AARCH64.withChannel.release.upstream.cProofs
