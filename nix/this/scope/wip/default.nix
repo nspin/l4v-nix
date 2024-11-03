@@ -68,31 +68,9 @@ in rec {
     ))
   ]));
 
-  xxx = writeText "x" (toString (lib.flatten [
-    (lib.forEach (map this.mkScopeFomNamedConfig this.namedConfigs) (scope: [
-      (
-        lib.optionals (!scope.scopeConfig.mcs) [
-          (
-            if scope.scopeConfig.arch == "AARCH64" || scope.scopeConfig.arch == "X64"
-            then scope.slower
-            else scope.slow
-          )
-        ]
-      )
-    ]))
-  ]));
-
-  a = writeText "a" (toString (lib.flatten [
-    (lib.forEach (map this.mkScopeFomNamedConfig this.namedConfigs) (scope:
-      [
-        (if scope.scopeConfig.mcs || lib.elem scope.scopeConfig.arch [ "AARCH64" "X64" ] then scope.slow else scope.slower)
-      ]
-    ))
-  ]));
-
-  o2 = scopes.arm.legacy.o2;
+  o2 = scopes.ARM.o2.withChannel.release.upstream;
   o2w = o2.wip;
-  rm = scopes.riscv64.mcs.o1;
+  rm = scopes.RISCV64_MCS.o1;
   rmt = rm.graphRefine.all.targetDir;
 
   stackBounds = graphRefineWith {
