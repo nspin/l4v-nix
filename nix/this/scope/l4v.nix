@@ -67,7 +67,7 @@ let
   '';
 
 in
-stdenv.mkDerivation {
+stdenv.mkDerivation (finalAttrs: {
   name = "l4v${lib.optionalString (name != null) "-${name}"}-${scopeConfig.l4vName}";
 
   nativeBuildInputs = [
@@ -173,4 +173,8 @@ stdenv.mkDerivation {
   '';
 
   dontFixup = true;
-}
+
+  passthru = lib.optionalAttrs buildStandaloneCParser {
+    standaloneCParserExe = "${finalAttrs.finalPackage}/tools/c-parser/standalone-parser/${finalAttrs.L4V_ARCH}/c-parser";
+  };
+})
