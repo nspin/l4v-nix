@@ -1,6 +1,8 @@
-A ?= l4vEnv
 W ?= ../projects
+C ?= ARM
 P ?= 1
+
+UPSTREAM_ISABELLE ?= 0
 
 work_local_path := $(W)
 work_remote_path:= /work
@@ -10,9 +12,14 @@ ifeq ($(P),1)
 	nix_shell_pure_arg := --pure
 endif
 
+ifeq ($(UPSTREAM_ISABELLE),1)
+	nix_isabelle_attr := upstreamIsabelleForL4v
+else
+	nix_isabelle_attr := seL4IsabelleForL4v
+endif
+
 nix_expr_path := ..
-nix_shell_attr := $(A)
-nix_isabelle_attr := seL4IsabelleForL4v
+nix_shell_attr := $(C).l4vEnv
 
 id := sel4-verification-reproducibility
 image_tag := $(id)
