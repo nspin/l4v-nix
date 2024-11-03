@@ -18,7 +18,7 @@ let
     # Show bracket syntax for implications
     ISABELLE_JEDIT_OPTIONS="-m brackets"
 
-    ISABELLE_HEAPS=$ISABELLE_HOME_USER/$L4V_NAME
+    ISABELLE_HEAPS=$ISABELLE_HOME_USER/heaps/by-config/$L4V_NAME
   '';
 
   jeditProperties = writeText "jedit-properties" ''
