@@ -226,7 +226,7 @@ rec {
             };
             mcs = mkSources {
               seL4 = "5dd34db6298a476a57b89cf24176dd15e674eae5"; # ancestor of u/master
-              l4v = "6a3be6eceb9ffd517ba5d9fc44c20c74e61f447f";
+              l4v = "1dc929f0193e3c55e849365171f589b79d245a2e";
             };
           };
         downstream =
