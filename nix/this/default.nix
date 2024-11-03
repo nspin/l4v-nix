@@ -23,7 +23,7 @@ rec {
     { arch
     , mcs ? false
     , features ? lib.optionalString mcs "MCS"
-    , plat ? ""
+    , plat ? "" # TODO none should be null
     , optLevel ? null
 
     , targetCCWrapperAttr ? targetCCWrapperAttrForConfig { inherit arch bvSupport; }
