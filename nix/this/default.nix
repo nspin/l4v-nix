@@ -167,9 +167,8 @@ rec {
     };
   };
 
-  # TODO(next)
-  # defaultSeL4IsabelleSource = downstreamGitIsabelleSource;
-  defaultSeL4IsabelleSource = upstreamGitIsabelleSource;
+  defaultSeL4IsabelleSource = downstreamGitIsabelleSource;
+  # defaultSeL4IsabelleSource = upstreamGitIsabelleSource;
 
   downstreamGitIsabelleSource = builtins.fetchGit {
     url = "https://github.com/seL4/isabelle.git";
