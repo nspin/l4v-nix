@@ -70,7 +70,7 @@ in rec {
 
   o2 = scopes.ARM.o2.withChannel.release.upstream;
   o2w = o2.wip;
-  rm = scopes.RISCV64_MCS.o1;
+  rm = scopes.RISCV64_MCS.o1.release.upstream;
   rmt = rm.graphRefine.all.targetDir;
 
   stackBounds = graphRefineWith {
