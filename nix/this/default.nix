@@ -231,11 +231,11 @@ rec {
           };
         downstream =
           let
-            seL4 = throw "todo"; # direct downstream of upstream.legacy.seL4
+            seL4 = "4086a2b93186ba14fa7fe05216dd351687915dbe"; # direct downstream of upstream.legacy.seL4
           in {
             legacy = mkSources {
               inherit seL4;
-              l4v = throw "todo";
+              l4v = "61a1e90096a917e1f6aabec0cc8d84a40118f5e4";
             };
             mcs = mkSources {
               inherit seL4;
