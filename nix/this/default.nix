@@ -235,7 +235,7 @@ rec {
           in {
             legacy = mkSources {
               inherit seL4;
-              l4v = "61a1e90096a917e1f6aabec0cc8d84a40118f5e4";
+              l4v = "0464c75de3f5bb8b9c6c7ed4c167bf30e6330d5a";
             };
             mcs = mkSources {
               inherit seL4;
