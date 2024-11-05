@@ -138,9 +138,16 @@ stdenv.mkDerivation (finalAttrs: {
     mkdir -p $HOME/.cabal
     touch $HOME/.cabal/config
 
-  '' + lib.optionalString (scopeConfig.arch != "X64" && overlay != null) ''
-    cp ${overlay} spec/cspec/c/overlays/${scopeConfig.arch}/overlay.dts
-  '';
+  '' + lib.optionalString (scopeConfig.arch != "X64") (
+    let
+      overlayDir = "spec/cspec/c/overlays/${scopeConfig.arch}";
+      overlayOrDefault = if overlay != null then overlay else "${overlayDir}/default-overlay.dts";
+    in ''
+      if [ -e ${overlayDir} ]; then
+        cp ${overlayOrDefault} ${overlayDir}/overlay.dts
+      fi
+    ''
+  );
 
   buildPhase = ''
     ${lib.optionalString (tests != null) ''
