@@ -190,60 +190,66 @@ rec {
     inherit rev;
   };
 
-  channelSources =
-    let
-      mkSources = revs:
-        let
-          fetched = lib.flip lib.mapAttrs revs (repo: rev: fetchGitFromColiasGroup {
-            inherit repo rev;
-          });
-        in {
-          seL4Source = fetched.seL4;
-          l4vSource = fetched.l4v;
+  mkSourceAttrsFromRevs =
+    { seL4 ? null
+    , l4v ? null
+    , hol4 ? null
+    , graphRefine ? null
+    , bvSandbox ? null
+    , seL4Isabelle ? null
+    } @ revs:
+    lib.listToAttrs
+      (lib.concatLists
+        (lib.flip lib.mapAttrsToList revs (repo: rev:
+          lib.optional
+            (rev != null)
+            (lib.nameValuePair "${repo}Source" (fetchGitFromColiasGroup {
+              inherit repo rev;
+            })))));
+
+  channelSources = {
+    release = {
+      upstream = {
+        legacy = mkSourceAttrsFromRevs {
+          seL4 = "cd6d3b8c25d49be2b100b0608cf0613483a6fffa"; # seL4/seL4:13.0.0
+          l4v = "f4054b0649446fb4ea03115f4b18160472964026"; # direct downstream of seL4/l4v:seL4-13.0.0
         };
-    in {
-      release = {
-        upstream = {
-          legacy = mkSources {
-            seL4 = "cd6d3b8c25d49be2b100b0608cf0613483a6fffa"; # seL4/seL4:13.0.0
-            l4v = "f4054b0649446fb4ea03115f4b18160472964026"; # direct downstream of seL4/l4v:seL4-13.0.0
+      };
+      downstream = {
+        legacy = mkSourceAttrsFromRevs {
+          seL4 = "fef10c54376af898eaf26e38e2c79b2bf156ac40"; # coliasgroup:verification-reproducability
+          l4v = throw "todo";
+        };
+      };
+    };
+    tip = {
+      upstream =
+        let
+        in {
+          legacy = mkSourceAttrsFromRevs {
+            seL4 = "c5b23791ea9f65efc4312c161dd173b7238c5e80"; # ancestor of u/master
+            l4v = "da9ac959588d5a2bd0a3827d669a4c9dad3c9fff";
+          };
+          mcs = mkSourceAttrsFromRevs {
+            seL4 = "5dd34db6298a476a57b89cf24176dd15e674eae5"; # ancestor of u/master
+            l4v = "1dc929f0193e3c55e849365171f589b79d245a2e";
           };
         };
-        downstream = {
-          legacy = mkSources {
-            seL4 = "fef10c54376af898eaf26e38e2c79b2bf156ac40"; # coliasgroup:verification-reproducability
+      downstream =
+        let
+          seL4 = "4086a2b93186ba14fa7fe05216dd351687915dbe"; # direct downstream of upstream.legacy.seL4
+        in {
+          legacy = mkSourceAttrsFromRevs {
+            inherit seL4;
+            l4v = "0464c75de3f5bb8b9c6c7ed4c167bf30e6330d5a";
+          };
+          mcs = mkSourceAttrsFromRevs {
+            inherit seL4;
             l4v = throw "todo";
           };
         };
-      };
-      tip = {
-        upstream =
-          let
-          in {
-            legacy = mkSources {
-              seL4 = "c5b23791ea9f65efc4312c161dd173b7238c5e80"; # ancestor of u/master
-              l4v = "da9ac959588d5a2bd0a3827d669a4c9dad3c9fff";
-            };
-            mcs = mkSources {
-              seL4 = "5dd34db6298a476a57b89cf24176dd15e674eae5"; # ancestor of u/master
-              l4v = "1dc929f0193e3c55e849365171f589b79d245a2e";
-            };
-          };
-        downstream =
-          let
-            seL4 = "4086a2b93186ba14fa7fe05216dd351687915dbe"; # direct downstream of upstream.legacy.seL4
-          in {
-            legacy = mkSources {
-              inherit seL4;
-              l4v = "0464c75de3f5bb8b9c6c7ed4c167bf30e6330d5a";
-            };
-            mcs = mkSources {
-              inherit seL4;
-              l4v = throw "todo";
-            };
-          };
-      };
     };
+  };
 
   mkScopeExtension = { overrideConfig, superScopeConfig }:
     lib.fix (self: {
@@ -278,6 +284,11 @@ rec {
               overrideConfig (isUpstreamAttrs.${schedulerName})
             )
           );
+
+      withRevs = revs: overrideConfig (mkSourceAttrsFromRevs revs);
+
+      # HACK
+      inherit fetchGitFromColiasGroup;
     });
 
   mkScopesWith = getName: configs: lib.listToAttrs (lib.forEach configs (config: rec {
