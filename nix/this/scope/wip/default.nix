@@ -41,7 +41,7 @@ let
 
 in rec {
 
-  rm-unreachable =
+  rmUnreachable =
     let
       f = scope: scope.withRevs {
         seL4 = "2bb4da53d4a9e42d1ffc8b6fb5dd43d669375b2e";
@@ -50,7 +50,7 @@ in rec {
     in
       (f this.scopes.ARM).cProofs;
 
-  x64-initialize-vars =
+  x64InitializeVars =
     let
       f = scope: scope.withRevs {
         seL4 = "4086a2b93186ba14fa7fe05216dd351687915dbe";
@@ -58,6 +58,27 @@ in rec {
       };
     in
       (f this.scopes.X64).cProofs;
+
+  irqInvalidScopes =
+    lib.flip lib.mapAttrs (lib.const (scope: scope.withRevs {
+      seL4 = "2bb4da53d4a9e42d1ffc8b6fb5dd43d669375b2e";
+      l4v = "aa337966acce97651ad58609dcb63a3d719dc873";
+    }));
+
+  getActiveIRQ = graphRefineWith {
+    name = "x";
+    args = defaultArgs ++ [
+      "deps:Kernel_C.getActiveIRQ"
+    ];
+  };
+
+  x = writeText "x" (toString (lib.flatten [
+    irqInvalidScopes.ARM.cProofs
+    irqInvalidScopes.ARM_HYP.cProofs
+    irqInvalidScopes.AARCH64.cProofs
+    irqInvalidScopes.ARM.o1.wip.getActiveIRQ
+    irqInvalidScopes.ARM.o2.wip.getActiveIRQ
+  ]));
 
   tip = writeText "x" (toString (lib.flatten [
     scopes.ARM.withChannel.tip.upstream.cProofs
