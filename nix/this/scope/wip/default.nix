@@ -61,8 +61,8 @@ in rec {
 
   irqInvalidScopes =
     lib.flip lib.mapAttrs this.scopes (lib.const (scope: scope.withRevs {
-      seL4 = "2bb4da53d4a9e42d1ffc8b6fb5dd43d669375b2e";
-      l4v = "aa337966acce97651ad58609dcb63a3d719dc873";
+      seL4 = "aa337966acce97651ad58609dcb63a3d719dc873";
+      l4v = "da9ac959588d5a2bd0a3827d669a4c9dad3c9fff";
     }));
 
   getActiveIRQ = graphRefineWith {
