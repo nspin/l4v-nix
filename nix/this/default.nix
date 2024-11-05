@@ -217,7 +217,7 @@ rec {
       };
       downstream = {
         legacy = mkSourceAttrsFromRevs {
-          seL4 = "fef10c54376af898eaf26e38e2c79b2bf156ac40"; # coliasgroup:verification-reproducability
+          seL4 = "954b98b253abdbe14bcf6ffb41dcc24e52e51e9f"; # coliasgroup:verification-reproducability
           l4v = throw "todo";
         };
       };
@@ -227,21 +227,20 @@ rec {
         let
         in {
           legacy = mkSourceAttrsFromRevs {
-            seL4 = "c5b23791ea9f65efc4312c161dd173b7238c5e80"; # ancestor of u/master
+            seL4 = "c5b23791ea9f65efc4312c161dd173b7238c5e80"; # tracks u/master
             l4v = "da9ac959588d5a2bd0a3827d669a4c9dad3c9fff";
           };
           mcs = mkSourceAttrsFromRevs {
-            seL4 = "5dd34db6298a476a57b89cf24176dd15e674eae5"; # ancestor of u/master
-            l4v = "1dc929f0193e3c55e849365171f589b79d245a2e";
+            seL4 = "5dd34db6298a476a57b89cf24176dd15e674eae5"; # behind u/master
+            l4v = "8f115eb0a8ecd21e80e2f6580e6400086831e5d5";
           };
         };
       downstream =
         let
-          seL4 = "4086a2b93186ba14fa7fe05216dd351687915dbe"; # direct downstream of upstream.legacy.seL4
         in {
           legacy = mkSourceAttrsFromRevs {
-            inherit seL4;
-            l4v = "0464c75de3f5bb8b9c6c7ed4c167bf30e6330d5a";
+            seL4 = "e125c3b55385edca57bce14450e6ef661a3cf115"; # direct downstream of upstream.legacy.seL4
+            l4v = "56f9bb206167d078b1368240a15cead2f016e850";
           };
           mcs = mkSourceAttrsFromRevs {
             inherit seL4;
