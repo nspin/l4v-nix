@@ -9,6 +9,10 @@ A ?= $(C).l4vEnv
 P ?= 1
 ID ?= sel4-verification-reproducibility
 
+ifeq ($(ID),)
+	$(error foo)
+endif
+
 work_local_path := $(W)
 work_remote_path:= /work
 
