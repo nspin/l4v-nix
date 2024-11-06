@@ -1,0 +1,1 @@
+nix-build -A wip.irqInvalid -j2 --cores 6  2>&1 | tee tmp/21.log
