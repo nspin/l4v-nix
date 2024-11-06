@@ -237,10 +237,9 @@ rec {
         };
       downstream =
         let
-          seL4 = "e125c3b55385edca57bce14450e6ef661a3cf115"; # direct downstream of upstream.legacy.seL4
         in {
           legacy = mkSourceAttrsFromRevs {
-            inherit seL4;
+            seL4 = "e125c3b55385edca57bce14450e6ef661a3cf115"; # direct downstream of upstream.legacy.seL4
             l4v = "56f9bb206167d078b1368240a15cead2f016e850";
           };
           mcs = mkSourceAttrsFromRevs {
