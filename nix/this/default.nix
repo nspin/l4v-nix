@@ -243,7 +243,7 @@ rec {
             l4v = "56f9bb206167d078b1368240a15cead2f016e850";
           };
           mcs = mkSourceAttrsFromRevs {
-            inherit seL4;
+            seL4 = throw "todo";
             l4v = throw "todo";
           };
         };
