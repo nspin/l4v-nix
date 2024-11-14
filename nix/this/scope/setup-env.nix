@@ -8,7 +8,7 @@ let
   # TODO(next) maxheap = 20000 ?
   # TODO(next) threads= not observed in jedit plugin options
   isabelleSettings = writeText "isabelle-settings" ''
-    ML_OPTIONS="-H 2048 --maxheap 10000 --stackspace 64"
+    ML_OPTIONS="-H 2048 --maxheap 20480 --stackspace 64"
 
     # Also increase memory for Java and Scala frontends.
     ISABELLE_BUILD_JAVA_OPTIONS="-Xms2048m -Xmx6096m -Xss4m"
