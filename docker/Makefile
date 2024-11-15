@@ -7,7 +7,7 @@ UPSTREAM_ISABELLE ?= 0
 C ?= ARM
 A ?= $(C).l4vEnv
 P ?= 1
-ID ?= sel4-verification-reproducibility
+ID ?= sel4-verification-reproducibility-mcs-sorry-legacy-reference
 
 ifeq ($(ID),)
 	$(error foo)
