@@ -4,7 +4,7 @@ H ?= isabelle-home-user
 UPSTREAM_ISABELLE ?= 0
 
 # For exec
-C ?= ARM
+C ?= RISCV64_MCS
 A ?= $(C).l4vEnv
 P ?= 1
 ID ?= sel4-verification-reproducibility-mcs-sorry
