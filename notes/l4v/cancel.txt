@@ -2,3 +2,45 @@ tools:
 
 ccorres_gen_asm
 ccorres_gen_asm2
+
+ccorres_guard_imp{2}
+
+?
+ccorres_gen_asm{2}
+ccorres_guard_imp{2}
+hoare_post_imp
+ccorres_symb_exec_r_known_rv_UNIV
+hoare_strengthen_postE_R
+ccorres_inst
+hoare_vcg_conj_lift
+ccorres_from_vcg
+
+see in Finalise_C.thy:
+    apply (rule_tac P="invs' and (\<lambda>s. sym_refs (state_refs_of' s)) and ko_at' ntfn ntfnptr" and P'=UNIV
+             in ccorres_split_nothrow_novcg)
+
+see in Delete_C.thy:
+        apply (rule_tac A="λs. invs' s ∧ cte_wp_at' ((=) rv) slot' s
+                                ∧ (expo ∨ ex_cte_cap_to' slot' s)
+                                ∧ (final_matters' (cteCap rv) ⟶ rva = isFinal (cteCap rv) slot' (cteCaps_of s))"
+                    and A'=UNIV
+                     in ccorres_guard_imp2)
+
+NOTES:
+- cthread_state_relation_lifted relates H and C thread state
+
+-- -- --
+
+apply (strengthen  invs_pspace_bounded')
+
+see lemma replyUnlink_valid_objs'[wp]
+see lemma sts_invs_minor'
+see lemma map_to_scs_Some_scRefs_nonzero
+    
+see:
+       apply (rule_tac Q'="λrv. invs' and cte_at' slot and valid_cap' cap" in hoare_strengthen_postE_R)
+        apply (wp cteDelete_invs'')
+
+see lemma cteDelete_invs''
+
+apply (rule_tac Q'="λrv. invs' and tcb_at' thread and reply_at' foo and (λs. weak_sch_act_wf (ksSchedulerAction s) s)" in hoare_post_imp)
