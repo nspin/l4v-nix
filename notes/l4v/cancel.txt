@@ -26,6 +26,37 @@ see in Delete_C.thy:
                     and A'=UNIV
                      in ccorres_guard_imp2)
 
+see in Finalise_C.thy:
+
+    apply (rule_tac xf'=ret__unsigned_longlong_'
+            and val="thread_state_to_tsType threadState"
+            and R="st_tcb_at' ((=) threadState) thread"
+            and R'=UNIV
+            in
+            ccorres_symb_exec_r_known_rv)
+
+see in IpcCancel_C.thy:
+
+      apply (rule_tac xf'=ret__int_'
+                  and val="from_bool (scPtrOpt \<noteq> None)"
+                  and R="\<lambda>s. obj_at' (\<lambda>tcb. tcbSchedContext tcb = scPtrOpt) tcbPtr s
+                             \<and> valid_tcbs' s \<and> no_0_obj' s"
+                  and R'=UNIV
+                   in ccorres_symb_exec_r_known_rv)
+
+   apply (rule_tac val="from_bool (\<exists>scPtr. scOpt = Some scPtr)"
+               and xf'=ret__int_'
+               and R="tcb_at' t and bound_sc_tcb_at' ((=) scOpt) t and valid_objs' and no_0_obj'"
+               and R'=UNIV
+                in ccorres_symb_exec_r_known_rv)
+
+    apply (rule_tac P="tcb_at' thread" in ccorres_cross_over_guard)
+
+
+investigate:
+    ? ctcb_relation_blockingIPCCanGrantReplyD
+    ! threadSet_ccorres_lemma{4,*}
+
 NOTES:
 - cthread_state_relation_lifted relates H and C thread state
 
