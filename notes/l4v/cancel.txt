@@ -60,6 +60,8 @@ investigate:
     state_refs_of'_upd
     map_to_ko_at_updI'
 
+    threadSet_pred_tcb_no_state
+
 NOTES:
 - cthread_state_relation_lifted relates H and C thread state
 
