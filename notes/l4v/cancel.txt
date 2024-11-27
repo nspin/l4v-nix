@@ -62,6 +62,36 @@ investigate:
 
     threadSet_pred_tcb_no_state
 
+!!!
+sym_ref_Receive_or_Reply_replyTCB'
+sym_ref_Receive_or_Reply_replyTCB'
+
+Reply_or_Receive_reply_at
+
+      apply (rule_tac A="λs. sym_refs_asrt s" in ccorres_guard_imp2[where A'=UNIV])
+
+      apply (rule_tac A="λs. bound ro ⟶ obj_at' (λr. replyTCB r = Some thread) (the ro) s" in ccorres_guard_imp2[where A'=UNIV])
+
+
+
+
+see in IpcCancel_R.thy:
+
+       \<comment>\<open>drop sym_refs assumtions; add reply_tcb link\<close>
+      apply (rule_tac P="?abs_guard and (\<lambda>s. bound reply_opt \<longrightarrow> reply_tcb_reply_at ((=) (Some t)) (the reply_opt) s)
+                         and valid_ep rv
+                         and (\<lambda>_. (st = Structures_A.BlockedOnSend epPtr p
+                                      \<longrightarrow> (\<exists>list. rv = Structures_A.SendEP list))
+                                \<and> (st = Structures_A.thread_state.BlockedOnReceive epPtr reply_opt p'
+                                     \<longrightarrow> (\<exists>list. rv = Structures_A.RecvEP list)))"
+                  and P'="valid_objs' and st_tcb_at' ((=) st') t and valid_ep' ep
+                          and pspace_aligned' and pspace_distinct'"
+                   in corres_inst)
+      \<comment>\<open>cross over replyTCB\<close>
+      apply (rule_tac Q'="\<lambda>s. bound reply_opt \<longrightarrow> obj_at' (\<lambda>r. replyTCB r = Some t) (the reply_opt) s"
+                      in corres_cross_add_guard)
+
+
 NOTES:
 - cthread_state_relation_lifted relates H and C thread state
 
