@@ -110,3 +110,18 @@ see:
 see lemma cteDelete_invs''
 
 apply (rule_tac Q'="λrv. invs' and tcb_at' thread and reply_at' foo and (λs. weak_sch_act_wf (ksSchedulerAction s) s)" in hoare_post_imp)
+
+
+tools:
+
+             apply (rule_tac P="..." in ccorres_cross_over_guard)
+
+corres_inst?
+ccorres_gen_asm{2}
+ccorres_guard_imp{2}
+
+
+hoare_pre
+wp_pre
+hoare_weaken_pre
+ccorres_assume_pre
