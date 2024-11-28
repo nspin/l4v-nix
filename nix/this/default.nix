@@ -157,21 +157,25 @@ rec {
 
   inherit (gitignore) gitignoreSource;
 
-  cleanL4vSource = src: lib.cleanSourceWith {
-    inherit src;
-    filter = gitignore.gitignoreFilterWith {
-      basePath = src;
-      extraRulesWithContextDir = [
-        {
-          # TODO this isn't working
-          contextDir = src + "/spec/haskell";
-          rules = ''
-            !src/SEL4/Object/Structures.lhs-boot
-          '';
-        }
-      ];
+  cleanL4vSource = src:
+    let
+      gitignoreFilter = gitignore.gitignoreFilterWith {
+        basePath = src;
+        # TODO this isn't working
+        # extraRulesWithContextDir = [
+        #   {
+        #     contextDir = src + "/spec/haskell";
+        #     rules = ''
+        #       !src/SEL4/Object/Structures.lhs-boot
+        #     '';
+        #   }
+        # ];
+      };
+    in
+    lib.cleanSourceWith {
+      inherit src;
+      filter = path: type: gitignoreFilter path type || lib.hasSuffix "Structures.lhs-boot" path;
     };
-  };
 
   cleanHol4Source = src: lib.cleanSourceWith {
     inherit src;
