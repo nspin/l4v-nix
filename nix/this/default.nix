@@ -178,7 +178,7 @@ rec {
     filter = gitignore.gitignoreFilterWith {
       basePath = src;
       extraRules = ''
-        !/sigobj/*
+        !/sigobj/README
       '';
     };
   };
