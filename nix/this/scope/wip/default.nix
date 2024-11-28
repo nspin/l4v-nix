@@ -109,13 +109,58 @@ in rec {
   ]));
 
   o2 = scopes.ARM.o2.withChannel.release.upstream;
+  o1 = scopes.ARM.o1.withChannel.release.upstream;
   o2w = o2.wip;
+  o1w = o1.wip;
   rm = scopes.RISCV64_MCS.o1.release.upstream;
   rmt = rm.graphRefine.all.targetDir;
 
   stackBounds = graphRefineWith {
     name = "stack-bounds";
     args = graphRefine.saveArgs;
+  };
+
+  g = o2.wip.g_;
+  g_ = graphRefineWith {
+    args = graphRefine.saveArgs ++ [
+      "trace-to:report.txt"
+      # "coverage"
+      "loadCapTransfer"
+    ];
+    stackBounds = "${stackBounds}/StackBounds.txt";
+    # solverList = debugSolverList;
+    # keepBigLogs = true;
+    # source = tmpSource.graph-refine;
+  };
+
+  h = o2.wip.h_;
+  h_ = graphRefineWith {
+    args = graphRefine.saveArgs ++ [
+      "trace-to:report.txt"
+      # "verbose"
+      # "coverage"
+      "use-proofs-of:${g_}/proofs.txt"
+      "use-inline-scripts-of:${g_}/inline-scripts.txt"
+      "loadCapTransfer"
+    ];
+    stackBounds = "${stackBounds}/StackBounds.txt";
+    solverList = debugSolverList;
+    keepBigLogs = true;
+    source = tmpSource.graph-refine;
+  };
+
+  bvWip = o2.wip.bvWip_;
+
+  bvWip_ = graphRefineWith {
+    args = graphRefine.saveArgs ++ [
+      "trace-to:report.txt"
+      # "coverage"
+      "loadCapTransfer"
+    ];
+    stackBounds = "${stackBounds}/StackBounds.txt";
+    solverList = debugSolverList;
+    keepBigLogs = true;
+    source = tmpSource.graph-refine;
   };
 
   o1bad = graphRefineWith {
@@ -149,7 +194,8 @@ in rec {
     ];
   };
 
-  es = o2w.es_;
+  es2 = o2w.es_;
+  es1 = o1w.es_;
   es_ = graphRefineWith {
     args = graphRefine.saveArgs ++ [
       "verbose"
@@ -159,9 +205,10 @@ in rec {
       # "setupCallerCap"
       # "invokeTCB_WriteRegisters"
       # "makeUserPDE"
-      "lookupSourceSlot" # x
+      # "lookupSourceSlot" # x
       # "loadCapTransfer" # x
       # "Arch_maskCapRights" # x
+      "setupCallerCap"
       # "map_kernel_frame"
     ];
     solverList = debugSolverList;
@@ -213,14 +260,14 @@ in rec {
 
     mkdir -p $d
 
-    echo $t >&2
+    echo "solver trace: $t" >&2
 
     echo $$ > $d/wrapper-pid.txt
     echo "$@" > $d/args.txt
 
     exec < <(tee $d/in.smt2) > >(tee $d/out.smt2) 2> >(tee $d/err.log >&2)
 
-    bash -c 'echo $$ > solver-pid.txt && exec "$@"' -- "$@"
+    bash -c 'echo $$ > '"$d/solver-pid.txt"' && exec "$@"' -- "$@"
 
     ret=$?
 
