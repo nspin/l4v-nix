@@ -1,6 +1,7 @@
 { lib, stdenv
 , runCommand
 , writeText
+, writeShellApplication
 , makeFontsConf
 , python3Packages
 , haskellPackages
@@ -66,6 +67,19 @@ let
     ISABELLE_BUILD_OPTIONS=threads=$(expr $NIX_BUILD_CORES / ${toString numJobs})
   '';
 
+  stackHack = writeShellApplication {
+    name = "stack";
+    text = ''
+      if [ "$1" != 'exec' ] || [ "$2" != '--' ]; then
+        echo "$0: unexpected args: $*" >&2
+        exit 1
+      fi
+      shift
+      shift
+      exec "$@"
+    '';
+  };
+
 in
 stdenv.mkDerivation (finalAttrs: {
   name = "l4v${lib.optionalString (name != null) "-${name}"}-${scopeConfig.l4vName}";
@@ -77,6 +91,7 @@ stdenv.mkDerivation (finalAttrs: {
 
     ghcWithPackagesForL4v
     haskellPackages.cabal-install
+    stackHack
 
     python3Packages.sel4-deps
 
@@ -137,6 +152,7 @@ stdenv.mkDerivation (finalAttrs: {
 
     mkdir -p $HOME/.cabal
     touch $HOME/.cabal/config
+    touch spec/haskell/.stack-work
 
   '' + lib.optionalString (scopeConfig.arch != "X64") (
     let

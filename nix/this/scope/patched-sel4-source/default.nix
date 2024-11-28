@@ -13,6 +13,7 @@ stdenvNoCC.mkDerivation {
 
   nativeBuildInputs = [
     python3
+    cmake
   ];
 
   postPatch = ''

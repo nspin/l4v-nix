@@ -9,6 +9,8 @@
 , stack
 
 , strace
+, gmp
+, zlib
 
 , xdg-utils
 , firefox
@@ -31,7 +33,10 @@ mkShell {
     perl
     which
     rsync
+
     stack
+    gmp
+    zlib
 
     python3Packages.sel4-deps
 

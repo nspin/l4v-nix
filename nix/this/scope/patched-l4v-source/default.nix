@@ -16,10 +16,6 @@ stdenvNoCC.mkDerivation {
 
   postPatch = ''
     patchShebangs .
-
-    substituteInPlace spec/haskell/Makefile \
-      --replace-fail 'sandbox: .stack-work' 'sandbox:' \
-      --replace-fail 'CABAL=stack exec -- ./stack-path cabal' 'CABAL=cabal'
   '';
 
   installPhase = ''

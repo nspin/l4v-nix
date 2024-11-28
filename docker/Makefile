@@ -55,14 +55,13 @@ build:
 run: build | $(isabelle_home_user_local_path)
 	docker run -d --rm \
 		--name $(container_name) \
-		--tmpfs /tmp \
-		--tmpfs /run \
+		--tmpfs /tmp:exec \
 		--mount type=bind,src=/nix/store,dst=/nix/store,ro \
 		--mount type=bind,src=/nix/var/nix/db,dst=/nix/var/nix/db,ro \
 		--mount type=bind,src=/nix/var/nix/daemon-socket,dst=/nix/var/nix/daemon-socket,ro \
 		--mount type=bind,src=/tmp/.X11-unix,dst=/tmp/.X11-unix,ro \
 		--mount type=bind,src=$(abspath $(isabelle_home_user_local_path)),dst=/home/x/.isabelle \
-		--mount type=bind,src=$$(nix-build $(nix_expr_path) -A $(nix_isabelle_attr) --no-out-link),dst=$(work_remote_path)/isabelle,ro \
+		--mount type=bind,src=$$(echo $$(nix-build $(nix_expr_path) -A $(nix_isabelle_attr) --no-out-link)/Isabelle*),dst=$(work_remote_path)/isabelle,ro \
 		--mount type=bind,src=$(abspath $(work_local_path))/seL4,dst=$(work_remote_path)/seL4,ro \
 		--mount type=bind,src=$(abspath $(work_local_path))/l4v,dst=$(work_remote_path)/l4v \
 		$(image_tag) \

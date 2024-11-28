@@ -10,4 +10,9 @@ let
     sha256 = "sha256-HG2cCnktfHsKV0s4XW83gU3F57gaTljL9KNSuG6bnQs=";
   };
 in
+
+# let
+#   gitignoreSrc = ../../tmp/gitignore.nix;
+# in
+
 import gitignoreSrc { inherit lib; }

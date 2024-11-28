@@ -35,7 +35,7 @@ rec {
     , localSeL4Source ? ../../projects/seL4
     , seL4Source ? gitignoreSource localSeL4Source
     , localL4vSource ? ../../projects/l4v
-    , l4vSource ? gitignore.gitignoreSource localL4vSource
+    , l4vSource ? cleanL4vSource localL4vSource
     , localHol4Source ? ../../projects/HOL4
     , hol4Source ? cleanHol4Source localHol4Source
     , localGraphRefineSource ? ../../projects/graph-refine
@@ -157,12 +157,32 @@ rec {
 
   inherit (gitignore) gitignoreSource;
 
+  cleanL4vSource = src:
+    let
+      gitignoreFilter = gitignore.gitignoreFilterWith {
+        basePath = src;
+        # TODO this isn't working
+        # extraRulesWithContextDir = [
+        #   {
+        #     contextDir = src + "/spec/haskell";
+        #     rules = ''
+        #       !src/SEL4/Object/Structures.lhs-boot
+        #     '';
+        #   }
+        # ];
+      };
+    in
+    lib.cleanSourceWith {
+      inherit src;
+      filter = path: type: gitignoreFilter path type || lib.hasSuffix "Structures.lhs-boot" path;
+    };
+
   cleanHol4Source = src: lib.cleanSourceWith {
     inherit src;
     filter = gitignore.gitignoreFilterWith {
       basePath = src;
       extraRules = ''
-        !/sigobj/*
+        !/sigobj/README
       '';
     };
   };
@@ -212,7 +232,7 @@ rec {
       upstream = {
         legacy = mkSourceAttrsFromRevs {
           seL4 = "cd6d3b8c25d49be2b100b0608cf0613483a6fffa"; # seL4/seL4:13.0.0
-          l4v = "f4054b0649446fb4ea03115f4b18160472964026"; # direct downstream of seL4/l4v:seL4-13.0.0
+          l4v = "205306814b6311b4781af1eb9534f674733a9735"; # direct downstream of seL4/l4v:seL4-13.0.0
         };
       };
       downstream = {
@@ -228,11 +248,11 @@ rec {
         in {
           legacy = mkSourceAttrsFromRevs {
             seL4 = "c5b23791ea9f65efc4312c161dd173b7238c5e80"; # tracks u/master
-            l4v = "da9ac959588d5a2bd0a3827d669a4c9dad3c9fff";
+            l4v = "3370365c879423236fb43338403224341204d575";
           };
           mcs = mkSourceAttrsFromRevs {
             seL4 = "5dd34db6298a476a57b89cf24176dd15e674eae5"; # behind u/master
-            l4v = "8f115eb0a8ecd21e80e2f6580e6400086831e5d5";
+            l4v = "e16ea558bedb1177c9ed9d65e4bde86f2e304687";
           };
         };
       downstream =
@@ -240,7 +260,7 @@ rec {
         in {
           legacy = mkSourceAttrsFromRevs {
             seL4 = "e125c3b55385edca57bce14450e6ef661a3cf115"; # direct downstream of upstream.legacy.seL4
-            l4v = "56f9bb206167d078b1368240a15cead2f016e850";
+            l4v = "dd5c8f88a07ada43aa4f7b2bbd22cbef276f484d";
           };
           mcs = mkSourceAttrsFromRevs {
             seL4 = throw "todo";
