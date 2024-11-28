@@ -55,8 +55,7 @@ build:
 run: build | $(isabelle_home_user_local_path)
 	docker run -d --rm \
 		--name $(container_name) \
-		--tmpfs /tmp \
-		--tmpfs /run \
+		--tmpfs /tmp:exec \
 		--mount type=bind,src=/nix/store,dst=/nix/store,ro \
 		--mount type=bind,src=/nix/var/nix/db,dst=/nix/var/nix/db,ro \
 		--mount type=bind,src=/nix/var/nix/daemon-socket,dst=/nix/var/nix/daemon-socket,ro \
