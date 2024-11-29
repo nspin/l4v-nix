@@ -131,3 +131,20 @@ ccorres_assume_pre
 
 rf_sr_tcb_update_no_queue
 pdate_tcb_map_tos
+
+-    \<comment> \<open>Post wp proofs\<close>
++     \<comment> \<open>Post wp proofs\<close>
++        \<comment> \<open>BlockedOnReply case\<close>
++           \<comment> \<open>BlockedOnNotification\<close>
++          \<comment> \<open>Running, Inactive, and Idle\<close>
++       \<comment> \<open>BlockedOnSend\<close>
++       \<comment> \<open>clag\<close>
+-      \<comment> \<open>BlockedOnSend\<close>
+-      \<comment> \<open>clag\<close>
+
+-          \<comment> \<open>BlockedOnReply case\<close>
++       \<comment> \<open>BlockedOnReply case\<close>
+
+
+-          \<comment> \<open>BlockedOnReply case\<close>
++         \<comment> \<open>BlockedOnReply case\<close>
