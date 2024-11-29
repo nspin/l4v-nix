@@ -102,7 +102,7 @@ apply (strengthen  invs_pspace_bounded')
 see lemma replyUnlink_valid_objs'[wp]
 see lemma sts_invs_minor'
 see lemma map_to_scs_Some_scRefs_nonzero
-    
+
 see:
        apply (rule_tac Q'="λrv. invs' and cte_at' slot and valid_cap' cap" in hoare_strengthen_postE_R)
         apply (wp cteDelete_invs'')
