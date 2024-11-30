@@ -3,7 +3,7 @@
 }:
 
 let
-  gitignoreSrc = fetchFromGitHub {
+  gitignoreSrc = fetchFromGitHub { 
     owner = "hercules-ci";
     repo = "gitignore.nix";
     rev = "637db329424fd7e46cf4185293b9cc8c88c95394";
