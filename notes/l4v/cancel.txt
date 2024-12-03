@@ -1,3 +1,8 @@
+vscode:
+
+./projects/seL4,./projects/l4v/spec/haskell,./projects/l4v/
+**/ARM/**,**/ARM_HYP/**,**/AARCH64/**,**/X64/**,**/invariant-abstract/**,**/access-control/**,*.thy~,*.thy#
+
 tools:
 
 ccorres_gen_asm
