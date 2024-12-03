@@ -148,3 +148,9 @@ pdate_tcb_map_tos
 
 -          \<comment> \<open>BlockedOnReply case\<close>
 +         \<comment> \<open>BlockedOnReply case\<close>
+
+################## replyUnlink
+
+getObject_return
+
+ccorres_assume_pre
