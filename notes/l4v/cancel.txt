@@ -158,4 +158,8 @@ pdate_tcb_map_tos
 
 getObject_return
 
+ccorres_updateCap
+threadSet_domain_ccorres
+setObjectASID_Basic_ccorres
+
 ccorres_assume_pre
