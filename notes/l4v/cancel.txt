@@ -163,3 +163,10 @@ threadSet_domain_ccorres
 setObjectASID_Basic_ccorres
 
 ccorres_assume_pre
+
+threadGet_stateAssert_gets
+
+
+
+! ccorres_updateCap
+! ccorres_updateMDB_const
