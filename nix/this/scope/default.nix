@@ -263,6 +263,9 @@ with self; {
 
   containerXauthority = callPackage ./helpers/container-xauthority {};
 
+  smtfmt = callPackage ./helpers/smtfmt {};
+  smtfmt-in-place = callPackage ./helpers/smtfmt/in-place.nix {};
+
   smtlib2-indent = python3Packages.callPackage ./helpers/smtlib2-indent {};
 
   ### wip ###

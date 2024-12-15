@@ -12,6 +12,7 @@
 , asmFunctionsTxt
 , graphRefineSolverLists
 , graphRefineSource
+, smtfmt-in-place
 }:
 
 { name ? null
@@ -52,6 +53,8 @@ runCommand "graph-refine${lib.optionalString (name != null) "-${name}"}-${scopeC
     python2Packages.enum
     python2Packages.psutilForPython2
     git
+  ] ++ lib.optionals keepBigLogs [
+    smtfmt-in-place
   ] ++ extraNativeBuildInputs;
 
   # avoid warnings from solvers
@@ -73,7 +76,9 @@ runCommand "graph-refine${lib.optionalString (name != null) "-${name}"}-${scopeC
 
   rm -f target.pyc
 
-  ${lib.optionalString (!keepBigLogs) ''
+  ${if keepBigLogs then ''
+    PYTHONPATH= find trace -name 'in.smt2' -exec smtfmt-in-place '{}' ';'
+  '' else ''
     rm -rf trace
   ''}
 
