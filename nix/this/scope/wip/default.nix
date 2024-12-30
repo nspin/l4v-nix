@@ -126,6 +126,8 @@ in rec {
       "trace-to:report.txt"
       # "coverage"
       "loadCapTransfer"
+      "copyMRs"
+      "branchFlushRange"
     ];
     stackBounds = "${stackBounds}/StackBounds.txt";
     # solverList = debugSolverList;
@@ -136,16 +138,22 @@ in rec {
   h = o2.wip.h_;
   h_ = graphRefineWith {
     args = graphRefine.saveArgs ++ [
-      "trace-to:report.txt"
-      # "verbose"
+      # "trace-to:report.txt"
+      "verbose"
       # "coverage"
+      "save-proof-checks:proof-checks.txt"
       "use-proofs-of:${g_}/proofs.txt"
       "use-inline-scripts-of:${g_}/inline-scripts.txt"
+
       "loadCapTransfer"
+      "Arch_switchToIdleThread"
+      "sameRegionAs"
+      # "copyMRs"
+      # "branchFlushRange"
     ];
     stackBounds = "${stackBounds}/StackBounds.txt";
-    solverList = debugSolverList;
-    keepBigLogs = true;
+    # solverList = debugSolverList;
+    # keepBigLogs = true;
     source = tmpSource.graph-refine;
   };
 
