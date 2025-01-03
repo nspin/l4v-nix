@@ -1,5 +1,6 @@
 {
-    "rust-analyzer.linkedProjects": [
-        "projects/bv-sandbox/Cargo.toml",
-    ]
+  "rust-analyzer.linkedProjects": [
+    "projects/bv-sandbox/Cargo.toml",
+  ],
+  "haskell.formattingProvider": "stylish-haskell",
 }
