@@ -27,6 +27,7 @@
     ${decorateCommand "python ${source}/graph-refine.py . ${lib.concatStringsSep " " argList}"}
   '')
 , keepBigLogs ? false
+, prettifyBigLogs ? false
 , stackBounds ? null
 }:
 
@@ -77,7 +78,9 @@ runCommand "graph-refine${lib.optionalString (name != null) "-${name}"}-${scopeC
   rm -f target.pyc
 
   ${if keepBigLogs then ''
-    PYTHONPATH= find trace -name 'in.smt2' -exec smtfmt-in-place '{}' ';'
+    ${lib.optionalString prettifyBigLogs ''
+      PYTHONPATH= find trace -name 'in.smt2' -exec smtfmt-in-place '{}' ';'
+    ''}
   '' else ''
     rm -rf trace
   ''}

@@ -25,6 +25,8 @@
         - https://reasonablypolymorphic.com/blog/freer-monads/
         - https://okmij.org/ftp/Haskell/extensible/
         - https://okmij.org/ftp/Haskell/extensible/more.pdf
+    - fused-effects (https://hackage.haskell.org/package/fused-effects)
+        - performant
     - capability (few users)
 
 - create:

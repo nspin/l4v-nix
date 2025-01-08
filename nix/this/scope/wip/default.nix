@@ -112,12 +112,50 @@ in rec {
   bigProofs_ = with graphRefine; graphRefineWith {
     name = "all";
     argLists = [
-      (excludeArgs ++ coverageArgs)
+      (excludeArgs ++ coverageArgs) # TODO (will force rebuild) remove (will force rebuild)
       (excludeArgs ++ defaultArgs ++ [
-        "save-proof-checks:proof-checks.txt"
+        "save-proof-checks:proof-checks.txt" # TODO (will force rebuild) .txt -> .json
         "all"
       ])
     ];
+  };
+
+  bigChecks = scopes.ARM.o1.withChannel.release.upstream.wip.bigChecks_;
+  bigChecks_ = with graphRefine; graphRefineWith {
+    name = "all";
+    argLists = [
+      (excludeArgs ++ defaultArgs ++ [
+        "use-proofs-of:${bigProofs_}/proofs.txt"
+        "use-inline-scripts-of:${bigProofs_}/inline-scripts.txt"
+        "all"
+      ])
+    ];
+    stackBounds = "${bigProofs_}/StackBounds.txt";
+  };
+
+  aaa = scopes.ARM.o1.withChannel.release.upstream.wip.aaa_;
+  aaa_ = with graphRefine; graphRefineWith {
+    name = "all";
+    argLists = [
+      (excludeArgs ++ defaultArgs ++ [
+        "use-inline-scripts-of:${bigProofs_}/inline-scripts.txt"
+        "use-proofs-of:${bigProofs_}/proofs.txt"
+
+        "save-smt-proof-checks:smt-proof-checks.json"
+        "hack-skip-smt-proof-checks"
+        # "hack-offline-solvers-only"
+
+        "loadCapTransfer"
+        "copyMRs"
+        "branchFlushRange"
+
+        # "all"
+      ])
+    ];
+    stackBounds = "${bigProofs_}/StackBounds.txt";
+    source = tmpSource.graph-refine;
+    # solverList = debugSolverList;
+    # keepBigLogs = true;
   };
 
   o2 = scopes.ARM.o2.withChannel.release.upstream;
