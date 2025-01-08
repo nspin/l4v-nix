@@ -108,6 +108,18 @@ in rec {
     ))
   ]));
 
+  bigProofs = scopes.ARM.o1.withChannel.release.upstream.wip.bigProofs_;
+  bigProofs_ = with graphRefine; graphRefineWith {
+    name = "all";
+    argLists = [
+      (excludeArgs ++ coverageArgs)
+      (excludeArgs ++ defaultArgs ++ [
+        "save-proof-checks:proof-checks.txt"
+        "all"
+      ])
+    ];
+  };
+
   o2 = scopes.ARM.o2.withChannel.release.upstream;
   o1 = scopes.ARM.o1.withChannel.release.upstream;
   o2w = o2.wip;
