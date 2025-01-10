@@ -141,21 +141,44 @@ in rec {
         "use-inline-scripts-of:${bigProofs_}/inline-scripts.txt"
         "use-proofs-of:${bigProofs_}/proofs.txt"
 
-        "save-smt-proof-checks:smt-proof-checks.json"
+        "save-smt-proof-checks:smt-proof-checks.txt"
         "hack-skip-smt-proof-checks"
         # "hack-offline-solvers-only"
 
-        "loadCapTransfer"
-        "copyMRs"
-        "branchFlushRange"
+        # "loadCapTransfer"
+        # "copyMRs"
+        # "branchFlushRange"
 
-        # "all"
+        "all"
       ])
     ];
     stackBounds = "${bigProofs_}/StackBounds.txt";
     source = tmpSource.graph-refine;
     # solverList = debugSolverList;
     # keepBigLogs = true;
+  };
+
+  bbb = scopes.ARM.o1.withChannel.release.upstream.wip.bbb_;
+  bbb_ = with graphRefine; graphRefineWith {
+    name = "all";
+    argLists = [
+      (excludeArgs ++ defaultArgs ++ [
+        "use-inline-scripts-of:${bigProofs_}/inline-scripts.txt"
+        "use-proofs-of:${bigProofs_}/proofs.txt"
+
+        "save-smt-proof-checks:smt-proof-checks.json"
+        "hack-skip-smt-proof-checks"
+        # "hack-offline-solvers-only"
+
+        "memzero"
+
+        # "all"
+      ])
+    ];
+    stackBounds = "${bigProofs_}/StackBounds.txt";
+    source = tmpSource.graph-refine;
+    solverList = debugSolverList;
+    keepBigLogs = true;
   };
 
   o2 = scopes.ARM.o2.withChannel.release.upstream;
