@@ -112,25 +112,73 @@ in rec {
   bigProofs_ = with graphRefine; graphRefineWith {
     name = "all";
     argLists = [
-      (excludeArgs ++ coverageArgs) # TODO (will force rebuild) remove (will force rebuild)
       (excludeArgs ++ defaultArgs ++ [
-        "save-proof-checks:proof-checks.txt" # TODO (will force rebuild) .txt -> .json
+        "save-proof-checks:proof-checks.txt"
+        "save-smt-proof-checks:smt-proof-checks.txt"
         "all"
       ])
     ];
   };
 
-  bigChecks = scopes.ARM.o1.withChannel.release.upstream.wip.bigChecks_;
-  bigChecks_ = with graphRefine; graphRefineWith {
-    name = "all";
-    argLists = [
-      (excludeArgs ++ defaultArgs ++ [
-        "use-proofs-of:${bigProofs_}/proofs.txt"
-        "use-inline-scripts-of:${bigProofs_}/inline-scripts.txt"
-        "all"
-      ])
+  mkHs = { args, extra }:
+    with graphRefine; graphRefineWith ({
+      name = "hs";
+      argLists = [
+        (excludeArgs ++ defaultArgs ++ [
+          "use-inline-scripts-of:${bigProofs_}/inline-scripts.txt"
+          "use-proofs-of:${bigProofs_}/proofs.txt"
+          "save-proof-checks:proof-checks.txt"
+          "save-smt-proof-checks:smt-proof-checks.txt"
+          "hack-skip-smt-proof-checks"
+        ] ++ args)
+      ];
+      stackBounds = "${bigProofs_}/StackBounds.txt";
+    } // extra);
+
+  big = scopes.ARM.o1.withChannel.release.upstream.wip.big_;
+  big_ = mkHs {
+    args = [
+      "all"
     ];
-    stackBounds = "${bigProofs_}/StackBounds.txt";
+    extra = {
+      source = tmpSource.graph-refine;
+    };
+  };
+
+  small = scopes.ARM.o1.withChannel.release.upstream.wip.small_;
+  small_ = mkHs {
+    args = [
+      "loadCapTransfer"
+      "copyMRs"
+      "branchFlushRange"
+    ];
+    extra = {
+      source = tmpSource.graph-refine;
+    };
+  };
+
+  smallTrace = scopes.ARM.o1.withChannel.release.upstream.wip.smallTrace_;
+  smallTrace_ = mkHs {
+    args = [
+      "loadCapTransfer"
+      "copyMRs"
+      "branchFlushRange"
+    ];
+    extra = {
+      source = tmpSource.graph-refine;
+      solverList = debugSolverList;
+      keepBigLogs = true;
+    };
+  };
+
+  focused = scopes.ARM.o1.withChannel.release.upstream.wip.focused_;
+  focused_ = mkHs {
+    args = [
+      "loadCapTransfer"
+    ];
+    extra = {
+      source = tmpSource.graph-refine;
+    };
   };
 
   aaa = scopes.ARM.o1.withChannel.release.upstream.wip.aaa_;
@@ -141,6 +189,7 @@ in rec {
         "use-inline-scripts-of:${bigProofs_}/inline-scripts.txt"
         "use-proofs-of:${bigProofs_}/proofs.txt"
 
+        "save-proof-checks:proof-checks.txt"
         "save-smt-proof-checks:smt-proof-checks.txt"
         "hack-skip-smt-proof-checks"
         # "hack-offline-solvers-only"
