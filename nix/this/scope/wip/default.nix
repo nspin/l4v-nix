@@ -129,7 +129,6 @@ in rec {
           "use-proofs-of:${bigProofs_}/proofs.txt"
           "save-proof-checks:proof-checks.txt"
           "save-smt-proof-checks:smt-proof-checks.txt"
-          "hack-skip-smt-proof-checks"
         ] ++ args)
       ];
       stackBounds = "${bigProofs_}/StackBounds.txt";
@@ -138,6 +137,7 @@ in rec {
   big = scopes.ARM.o1.withChannel.release.upstream.wip.big_;
   big_ = mkHs {
     args = [
+      "hack-skip-smt-proof-checks"
       "all"
     ];
     extra = {
@@ -148,6 +148,7 @@ in rec {
   small = scopes.ARM.o1.withChannel.release.upstream.wip.small_;
   small_ = mkHs {
     args = [
+      "hack-skip-smt-proof-checks"
       "loadCapTransfer"
       "copyMRs"
       "branchFlushRange"
