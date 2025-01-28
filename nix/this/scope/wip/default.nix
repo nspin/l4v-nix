@@ -108,15 +108,21 @@ in rec {
     ))
   ]));
 
+  bigProofsAll = [
+    "all"
+    # "loadCapTransfer"
+    # "copyMRs"
+    # "branchFlushRange"
+  ];
+
   bigProofs = scopes.ARM.o1.withChannel.release.upstream.wip.bigProofs_;
   bigProofs_ = with graphRefine; graphRefineWith {
     name = "all";
     argLists = [
       (excludeArgs ++ defaultArgs ++ [
-        "save-proof-checks:proof-checks.txt"
-        "save-smt-proof-checks:smt-proof-checks.txt"
-        "all"
-      ])
+        "save-proof-checks:proof-checks.json"
+        "save-smt-proof-checks:smt-proof-checks.json"
+      ] ++ bigProofsAll)
     ];
   };
 
@@ -125,10 +131,10 @@ in rec {
       name = "hs";
       argLists = [
         (excludeArgs ++ defaultArgs ++ [
-          "use-inline-scripts-of:${bigProofs_}/inline-scripts.txt"
-          "use-proofs-of:${bigProofs_}/proofs.txt"
-          "save-proof-checks:proof-checks.txt"
-          "save-smt-proof-checks:smt-proof-checks.txt"
+          "use-inline-scripts-of:${bigProofs_}/inline-scripts.json"
+          "use-proofs-of:${bigProofs_}/proofs.json"
+          "save-proof-checks:proof-checks.json"
+          "save-smt-proof-checks:smt-proof-checks.json"
         ] ++ args)
       ];
       stackBounds = "${bigProofs_}/StackBounds.txt";
@@ -138,8 +144,7 @@ in rec {
   big_ = mkHs {
     args = [
       "hack-skip-smt-proof-checks"
-      "all"
-    ];
+    ] ++ bigProofsAll;
     extra = {
       source = tmpSource.graph-refine;
     };
