@@ -20,7 +20,7 @@ let
   };
 
   src = lib.cleanSourceWith rec {
-    src = bvSandboxSource;
+    src = bvSandboxSource + "/rust";
     filter = name: type:
       let
         root = src.origSrc or src;
@@ -36,7 +36,7 @@ let
 
 in
 rustPlatform.buildRustPackage {
-  name = "bv-sandbox";
+  name = "bv-sandbox-rust";
   inherit src;
   cargoLock.lockFile = src + "/Cargo.lock";
   doCheck = false;
