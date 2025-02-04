@@ -151,6 +151,7 @@ with self; {
 
   ### notes ###
 
+  yicesCVC5Discrepancy = callPackage ./notes/yices-cvc5-discrepancy {};
   sonolarModelBug = callPackage ./notes/sonolar-model-bug {};
   sonolarDependence = callPackage ./notes/sonolar-dependence {};
 

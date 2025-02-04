@@ -177,17 +177,50 @@ in rec {
     };
   };
 
+  smallTraceOfflineOnly = scopes.ARM.o1.withChannel.release.upstream.wip.smallTraceOfflineOnly_;
+  smallTraceOfflineOnly_ = mkHs {
+    args = [
+      "hack-offline-solvers-only"
+      "loadCapTransfer"
+      "copyMRs"
+      "branchFlushRange"
+    ];
+    extra = {
+      source = tmpSource.graph-refine;
+      solverList = debugSolverList;
+      keepBigLogs = true;
+    };
+  };
+
   focused = scopes.ARM.o1.withChannel.release.upstream.wip.focused_;
   focused_ = mkHs {
     args = [
       # "loadCapTransfer"
+      "create_untypeds"
       # "sendIPC"
       # "branchFlushRange"
       # "copyMRs"
-      "strncmp"
+      # "strncmp"
     ];
     extra = {
       source = tmpSource.graph-refine;
+    };
+  };
+
+  focusedTrace = scopes.ARM.o1.withChannel.release.upstream.wip.focusedTrace_;
+  focusedTrace_ = mkHs {
+    args = [
+      # "loadCapTransfer"
+      "decodeSetSpace"
+      # "sendIPC"
+      # "branchFlushRange"
+      # "copyMRs"
+      # "strncmp"
+    ];
+    extra = {
+      source = tmpSource.graph-refine;
+      solverList = debugSolverList;
+      keepBigLogs = true;
     };
   };
 
