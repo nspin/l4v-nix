@@ -210,12 +210,14 @@ in rec {
   focusedTrace = scopes.ARM.o1.withChannel.release.upstream.wip.focusedTrace_;
   focusedTrace_ = mkHs {
     args = [
+      # "hack-offline-solvers-only"
       # "loadCapTransfer"
       "decodeSetSpace"
       # "sendIPC"
       # "branchFlushRange"
       # "copyMRs"
       # "strncmp"
+      # "handleSyscall" # sta
     ];
     extra = {
       source = tmpSource.graph-refine;
@@ -413,9 +415,12 @@ in rec {
         #   inherit (super.offlineSolverKey) granularity;
         # };
         offlineSolverFilter = attr: lib.optionals (attr == chosen) [
-          self.granularities.machineWord
           # self.granularities.byte
+          self.granularities.machineWord
         ];
+        # strategyFilter = attr: granularity: lib.optionals (attr == chosen) [
+        #   "all"
+        # ];
       });
     in
       scope.solverList;
