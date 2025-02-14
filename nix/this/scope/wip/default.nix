@@ -196,11 +196,12 @@ in rec {
   focused_ = mkHs {
     args = [
       # "loadCapTransfer"
-      "create_untypeds"
+      # "create_untypeds"
       # "sendIPC"
       # "branchFlushRange"
       # "copyMRs"
       # "strncmp"
+      "handleSyscall" # sat
     ];
     extra = {
       source = tmpSource.graph-refine;
@@ -217,7 +218,7 @@ in rec {
       # "branchFlushRange"
       # "copyMRs"
       # "strncmp"
-      # "handleSyscall" # sta
+      # "handleSyscall" # sat
     ];
     extra = {
       source = tmpSource.graph-refine;
