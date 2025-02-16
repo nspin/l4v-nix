@@ -195,13 +195,13 @@ in rec {
   focused = scopes.ARM.o1.withChannel.release.upstream.wip.focused_;
   focused_ = mkHs {
     args = [
-      # "loadCapTransfer"
+      "loadCapTransfer"
       # "create_untypeds"
       # "sendIPC"
       # "branchFlushRange"
       # "copyMRs"
       # "strncmp"
-      "handleSyscall" # sat
+      # "handleSyscall" # sat
     ];
     extra = {
       source = tmpSource.graph-refine;
